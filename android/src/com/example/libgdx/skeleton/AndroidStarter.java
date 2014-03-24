@@ -17,5 +17,6 @@ public class AndroidStarter extends AndroidApplication
 		cfg.useWakelock = true;
 		cfg.useGL20 = true;
 		initialize(new SkeletonMain(), cfg);
+        
 	}
 }

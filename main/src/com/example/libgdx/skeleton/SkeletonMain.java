@@ -7,5 +7,6 @@ public class SkeletonMain extends Game {
 	@Override
 	public void create() {
 		System.out.println("Application started");
+        
 	}
 }
