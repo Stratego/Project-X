@@ -40,6 +40,7 @@ public class Camara implements InputProcessor {
         this.boardWidth = maxWidth;
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
+
         this.camera = new OrthographicCamera(this.width, this.height);
         glViewport = new Rectangle(0, 0, this.width, this.height);
         this.camera.position.set(this.width,this.height,0);
