@@ -5,8 +5,20 @@ package com.partido;
  */
 public interface Entrada {
 
+    /**
+     * Indicamos el imput que se ha realizado y su posicion dentro del tablero
+     * Imput tipo de entrada
+     * posX eje x donde se ha realizado la acciion /entrada
+     * posY eje y donde se ha realizado la acciion /entrada
+     */
     public void accionEntrada(Imput imput,float posX, float posY);
+
+
     public void accionEntrada(Imput imput);
-    public void accionArrastre(float posX, float posY);
+
+
+    /**
+     * indicamos que el elemento se ha seleccionado y su posicion en el tablero
+     */
     public boolean esSeleccionado(float posX, float posY);
 }

@@ -44,7 +44,7 @@ public class Boton implements Entrada{
 
     @Override
     /**
-     * Obtenemos el imput que se ha realizado y su posicion dentro del tablero
+     * Indicamos el imput que se ha realizado y su posicion dentro del tablero
      * Imput tipo de entrada
      * posX eje x donde se ha realizado la acciion /entrada
      * posY eje y donde se ha realizado la acciion /entrada
@@ -57,22 +57,14 @@ public class Boton implements Entrada{
 
     @Override
     /**
-     * Obtenemos el imput que se ha realizado y su posicion dentro del tablero
+     * Indicamos el imput que se ha realizado
      * Imput tipo de entrada
      */
     public void accionEntrada(Imput imput) {
 
     }
 
-    @Override
-    /**
-     * Obtenemos  la posicion dentro del tablero donde se esta realizando el arrastre
-     * posX eje x donde se ha realizado la acciion /entrada
-     * posY eje y donde se ha realizado la acciion /entrada
-     */
-    public void accionArrastre(float posX, float posY) {
 
-    }
 
     @Override
     /**

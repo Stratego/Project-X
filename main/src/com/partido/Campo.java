@@ -20,7 +20,7 @@ public class Campo implements Entrada {
     private Casilla casilla;
 
     public Campo() {
-        dibujartablero();
+        dibujarTablero();
     }
 /*
     public Campo(float posX, float posY) {
@@ -44,8 +44,10 @@ public class Campo implements Entrada {
         this.posY = posY;
     }
 
-
-    public void dibujartablero(){
+    /**
+     * Dibujamos el tablero de juego
+     */
+    public void dibujarTablero(){
         if (casillas.size()==0){
             casilla = new Casilla(0,0);
             casillas.add(casilla);
@@ -53,6 +55,12 @@ public class Campo implements Entrada {
     }
 
     @Override
+    /**
+     * Indicamos el imput que se ha realizado y su posicion dentro del tablero
+     * Imput tipo de entrada
+     * posX eje x donde se ha realizado la acciion /entrada
+     * posY eje y donde se ha realizado la acciion /entrada
+     */
     public void accionEntrada(Imput imput, float posX, float posY) {
 
         if (imput==Imput.click){
@@ -63,6 +71,10 @@ public class Campo implements Entrada {
                     }
                 }
             }
+        }
+
+        if (imput==Imput.arrastre){
+            System.out.println("Arrastrandose por la posicion x: " + posX + " y: " +posY +" del campo");
         }
 
         if(imput==Imput.boton1){
@@ -91,17 +103,20 @@ public class Campo implements Entrada {
     }
 
     @Override
+    /**
+     * Indicamos el imput que se ha realizado
+     * Imput tipo de entrada
+     */
     public void accionEntrada(Imput imput) {
 
     }
 
-    @Override
-    public void accionArrastre(float posX, float posY) {
 
-        System.out.println("Arrastrandose por la posicion x: " + posX + " y: " +posY +" del campo");
-    }
 
     @Override
+    /**
+     * indicamos que el elemento se ha seleccionado y su posicion en el tablero
+     */
     public boolean esSeleccionado(float posX, float posY) {
         if (this.posX == posX && this.posY == posY){
             selecionado=true;

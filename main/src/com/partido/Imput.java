@@ -5,5 +5,5 @@ package com.partido;
  * Created by Victor on 24/03/14.
  */
 public enum Imput {
-    click, longclick, boton1,boton2,boton3, boton4
+    click, longclick,arrastre, boton1,boton2,boton3, boton4
 }

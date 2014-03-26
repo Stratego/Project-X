@@ -38,11 +38,21 @@ public class Casilla implements Entrada {
     }
 
     @Override
+    /**
+     * Indicamos el imput que se ha realizado y su posicion dentro del tablero
+     * Imput tipo de entrada
+     * posX eje x donde se ha realizado la acciion /entrada
+     * posY eje y donde se ha realizado la acciion /entrada
+     */
     public void accionEntrada(Imput imput, float posX, float posY) {
 
     }
 
     @Override
+    /**
+     * Indicamos el imput que se ha realizado
+     * Imput tipo de entrada
+     */
     public void accionEntrada(Imput imput) {
 
         if (imput==Imput.click){
@@ -51,12 +61,12 @@ public class Casilla implements Entrada {
 
     }
 
-    @Override
-    public void accionArrastre(float posX, float posY) {
 
-    }
 
     @Override
+    /**
+     * indicamos que el elemento se ha seleccionado y su posicion en el tablero
+     */
     public boolean esSeleccionado(float posX, float posY) {
         if (this.posX == posX && this.posY == posY){
             selecionado=true;
