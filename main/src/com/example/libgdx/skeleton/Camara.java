@@ -1,4 +1,4 @@
-package com.rugbysurvive.partida.gestores;
+package com.example.libgdx.skeleton;
 
 
 import com.badlogic.gdx.Gdx;
@@ -41,6 +41,7 @@ public class Camara implements InputProcessor {
         this.boardWidth = maxWidth;
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
+
         this.camera = new OrthographicCamera(this.width, this.height);
         this.camera.position.set(this.width/2,this.height/2,0);
 //        this.camera.apply(Gdx.graphics.getGL10());
