@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -14,33 +15,29 @@ import java.util.Map;
 /**
  * Created by aitor on 25/03/14.
  */
-public class GestorGrafico {
+public class GestorGrafico implements Dibujante{
 
+    protected int contador;
     protected AssetManager manager;
-
-    protected HashMap<String,InformacionTextura> texturasActivas;
+    protected HashMap<Integer,InformacionTextura> texturasActivas;
+    protected ArrayList<Dibujable> dibujables ;
     protected SpriteBatch sprite;
     protected Camara camara;
 
-    public GestorGrafico()
+    public GestorGrafico(ArrayList<String> nombresTexturas)
     {
+        this.contador = 0;
         this.camara =  new Camara(1000,1000);
         this.sprite = new SpriteBatch();
-        this.texturasActivas = new HashMap<String, InformacionTextura>();
+        this.texturasActivas = new HashMap<Integer, InformacionTextura>();
         this.manager =  new AssetManager();
-        // INTRODUCIR TODAS LAS TEXTURAS NECESARIAS PARA EL JUEGO A PARTIR DE LOS EQUIPOS
-        this.manager.load("jugador1.png",Texture.class);
-        this.manager.finishLoading();
+        this.dibujables = new ArrayList<Dibujable>();
+        this.generarTexturas(nombresTexturas);
+
     }
 
 
-    public void cargarTextura(String nombreTextura){
-        if(manager.isLoaded(nombreTextura))
-        {
-            //this.manager.lo
-        }
-    }
-    public void eliminarTextura(String nombreTextura){
+    public void eliminarTextura(String nombreTextura) {
         //Falta implementar
     }
 
@@ -49,35 +46,34 @@ public class GestorGrafico {
         this.sprite.dispose();
     }
 
+
+
+    public void generarTexturas(ArrayList<String> texturas) {
+
+
+        Iterator it = texturas.iterator();
+
+        while (it.hasNext()) {
+            String nombre =  (String)it.next();
+            this.manager.load(nombre,Texture.class);
+        }
+        this.manager.finishLoading();
+    }
+
     /*
 
      */
-    public void actualizar(String nombretextura ,int posicionX,int posicionY){
-        if(this.texturasActivas.containsKey(nombretextura)){
-            this.texturasActivas.remove(nombretextura);
-            InformacionTextura info = new InformacionTextura(nombretextura,posicionX,posicionY);
-            this.texturasActivas.put(nombretextura,info);
-        }
-    }
-
-    public void dibujar(){
+    public void dibujar() {
 
         this.sprite.begin();
+        Iterator it = this.dibujables.iterator();
 
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Iterator it = this.texturasActivas.entrySet().iterator();
 
-        this.sprite.draw(this.manager.get("jugador1.png",Texture.class),0,0);
-        System.out.print("HOLAAAAAAAAAAAAAAAa");
-       /* while (it.hasNext()) {
-            Map.Entry e = (Map.Entry)it.next();
-            InformacionTextura iTextura = (InformacionTextura)e.getValue();
-            Texture textura = this.manager.get(iTextura.nombretextura, Texture.class);
-            float posicionX = (float)iTextura.posicionX;
-            float posicionY = (float)iTextura.posicionY;
-            this.sprite.draw(textura,posicionX,posicionY);
-        }*/
+        while (it.hasNext()) {
+            Dibujable dibujable =  (Dibujable)it.next();
+            Texture textura = this.manager.get(dibujable.getTextura());
+            this.sprite.draw(textura,dibujable.getPosicionX(),dibujable.getPosicionY());
+        }
         this.camara.render(this.sprite);
         this.sprite.end();
     }
@@ -87,19 +83,15 @@ public class GestorGrafico {
     {
         return this.camara;
     }
-    private class InformacionTextura
+
+
+    @Override
+    public void añadirDibujable(Dibujable dibujable)
     {
-        public String nombretextura;
-        public int posicionX;
-        public int posicionY;
-
-        public InformacionTextura(String nombretextura ,int posicionX,int posicionY){
-            this.nombretextura = nombretextura;
-            this.posicionX = posicionX;
-            this.posicionY = posicionY;
-        }
-
+        this.dibujables.add(dibujable);
     }
+
+
 
 }
 

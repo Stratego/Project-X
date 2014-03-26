@@ -9,22 +9,35 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.rugbysurvive.partida.gestores.Camara;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
+import com.rugbysurvive.partida.gestores.Prueba;
+
+import java.util.ArrayList;
 
 public class SkeletonMain extends Game {
 
-<<<<<<< HEAD
+
     InputMultiplexer multiplexer;
     GestorGrafico gestorGrafico;
+    Prueba prueba ;
+    Prueba prueba2 ;
+    Prueba prueba3 ;
 
     @Override
     public void create() {
 
-        this.gestorGrafico = new GestorGrafico();
+        ArrayList<String> nombresTexturas = new ArrayList<String>();
+        nombresTexturas.add("jugador1.png");
+        this.gestorGrafico = new GestorGrafico(nombresTexturas);
        // this.gestorGrafico.cargarTextura("tablero/campo1.png");
         //this.gestorGrafico.actualizar("tablero/campo1.png",0,0);
         this.multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(this.gestorGrafico.getCamara());
         Gdx.input.setInputProcessor(multiplexer);
+        this.prueba = new Prueba(this.gestorGrafico,0,0);
+        this.prueba2 = new Prueba(this.gestorGrafico,30,0);
+        this.prueba3 = new Prueba(this.gestorGrafico,0,30);
+
+
     }
 
     @Override
@@ -51,13 +64,7 @@ public class SkeletonMain extends Game {
     @Override
     public void resume() {
     }
-=======
-	@Override
-	public void create() {
-		System.out.println("Application started");
-        
-	}
->>>>>>> a459603f127b7a7dcf20b4abc14450e01ea60686
+
 }
 
 

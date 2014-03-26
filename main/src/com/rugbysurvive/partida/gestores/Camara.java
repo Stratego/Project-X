@@ -42,15 +42,14 @@ public class Camara implements InputProcessor {
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
         this.camera = new OrthographicCamera(this.width, this.height);
-        glViewport = new Rectangle(0, 0, this.width, this.height);
-        this.camera.position.set(this.width,this.height,0);
+        this.camera.position.set(this.width/2,this.height/2,0);
 //        this.camera.apply(Gdx.graphics.getGL10());
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
 
-      /*  int variationX = Gdx.input.getDeltaX();
+        int variationX = Gdx.input.getDeltaX();
         int variationY = Gdx.input.getDeltaY();
 
         if(this.isCameraInsideBoard(variationX,variationY))
@@ -59,29 +58,28 @@ public class Camara implements InputProcessor {
             this.absoluteVariationY += variationY;
 
             this.camera.translate(-variationX,variationY);
-            this.camera.update();
+           // this.camera.update();
          // this.camera.apply(Gdx.graphics.getGL20());
             return true;
-        }*/
+        }
         return false;
     }
 
     public void render(SpriteBatch batch)
     {
 
-        GL20 gl = Gdx.graphics.getGL20();
-        System.out.println(gl.toString());
+       // GL10 gl = Gdx.graphics.getGL20();
+
 
         // Camera --------------------- /
-        gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gl.
-        gl.glViewport((int) glViewport.x, (int) glViewport.y,
-                (int) glViewport.width, (int) glViewport.height);
+        //   gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //gl.glViewport((int) glViewport.x, (int) glViewport.y,
+               // (int) glViewport.width, (int) glViewport.height);
 
-
-        this
-        batch.setProjectionMatrix(this.camera.combined);
         this.camera.update();
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.setProjectionMatrix(this.camera.combined);
+//        this.camera.apply(Gdx.gl10);
 
     }
 
