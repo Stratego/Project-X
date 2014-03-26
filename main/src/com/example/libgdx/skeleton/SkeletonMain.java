@@ -60,19 +60,19 @@ public class SkeletonMain extends Game {
 
 
 
-        Boton boton1 = new Boton(0,150);
+        Boton boton1 = new Boton(0,150,"boton1");
 
         botons.add(boton1);
 
-        Boton boton2 = new Boton(0, 350);
+        Boton boton2 = new Boton(0, 350,"boton2");
 
         botons.add(boton2);
 
-        Boton boton3 = new Boton(300, 150);
+        Boton boton3 = new Boton(300, 150,"boton3");
 
         botons.add(boton3);
 
-        Boton boton4 = new Boton(300, 350);
+        Boton boton4 = new Boton(300, 350,"boton4");
 
         botons.add(boton4);
 

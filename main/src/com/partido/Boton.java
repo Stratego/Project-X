@@ -8,10 +8,22 @@ public class Boton implements Entrada{
 
     private float posX;
     private float posY;
+    private String nombre;
 
-    public Boton(float posX, float posY) {
+    private boolean selecionado;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Boton(float posX, float posY, String nombre) {
         this.posY = posY;
         this.posX = posX;
+        this.nombre = nombre;
     }
 
     public float getPosX() {
@@ -39,7 +51,7 @@ public class Boton implements Entrada{
      */
     public void accionEntrada(Imput imput, float posX, float posY) {
         if (imput==Imput.click){
-            System.out.println("Boton en la posicion x: " + posX + " y: " +posY +" clicado");
+            System.out.println("Boton "+nombre +" en la posicion x: " + posX + " y: " +posY +" clicado");
         }
     }
 
@@ -67,6 +79,11 @@ public class Boton implements Entrada{
      * indicamos que el elemento se ha seleccionado y su posicion en el tablero
      */
     public boolean esSeleccionado(float posX, float posY) {
-        return false;
+        if (this.posX == posX && this.posY == posY){
+            selecionado=true;
+        }else {
+            selecionado=false;
+        }
+        return selecionado;
     }
 }

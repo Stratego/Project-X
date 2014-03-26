@@ -8,6 +8,8 @@ public class Casilla implements Entrada {
     private float posX;
     private float posY;
 
+    private boolean selecionado;
+
 
 
     public Casilla (float posX, float posY) {
@@ -56,8 +58,14 @@ public class Casilla implements Entrada {
 
     @Override
     public boolean esSeleccionado(float posX, float posY) {
-
+        if (this.posX == posX && this.posY == posY){
+            selecionado=true;
+        }else {
+            selecionado=false;
+        }
         System.out.println("Casilla en la posicion x: " + posX + " y: " +posY +" selecionada");
-        return false;
+        return selecionado;
+
+
     }
 }

@@ -10,6 +10,8 @@ public class Campo implements Entrada {
     private float posX;
     private float posY;
 
+    private boolean selecionado;
+
 
 
 
@@ -52,13 +54,38 @@ public class Campo implements Entrada {
 
     @Override
     public void accionEntrada(Imput imput, float posX, float posY) {
-        if (imput.equals(imput.click)){
+
+        if (imput==Imput.click){
             for (Casilla iterador : casillas){
                 if (iterador.getPosX()==posX && iterador.getPosY()==posY){
-                    iterador.accionEntrada(Imput.click);
-                    iterador.esSeleccionado(posX, posY);
+                    if(iterador.esSeleccionado(posX, posY)){
+                        iterador.accionEntrada(Imput.click);
+                    }
                 }
             }
+        }
+
+        if(imput==Imput.boton1){
+
+            System.out.println("Ejecucion de boton1 en campo");
+
+        }
+        if(imput==Imput.boton2){
+
+            System.out.println("Ejecucion de boton2 en campo");
+
+        }
+
+        if(imput==Imput.boton3){
+
+            System.out.println("Ejecucion de boton3 en campo");
+
+        }
+
+        if(imput==Imput.boton4){
+
+            System.out.println("Ejecucion de boton4 en campo");
+
         }
 
     }
@@ -71,10 +98,16 @@ public class Campo implements Entrada {
     @Override
     public void accionArrastre(float posX, float posY) {
 
+        System.out.println("Arrastrandose por la posicion x: " + posX + " y: " +posY +" del campo");
     }
 
     @Override
     public boolean esSeleccionado(float posX, float posY) {
-        return false;
+        if (this.posX == posX && this.posY == posY){
+            selecionado=true;
+        }else {
+            selecionado=false;
+        }
+        return selecionado;
     }
 }
