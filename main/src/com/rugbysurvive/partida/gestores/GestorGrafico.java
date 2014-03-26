@@ -3,6 +3,7 @@ package com.rugbysurvive.partida.gestores;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -28,7 +29,7 @@ public class GestorGrafico {
         this.texturasActivas = new HashMap<String, InformacionTextura>();
         this.manager =  new AssetManager();
         // INTRODUCIR TODAS LAS TEXTURAS NECESARIAS PARA EL JUEGO A PARTIR DE LOS EQUIPOS
-        this.manager.load("tablero/campo1.png",Texture.class);
+        this.manager.load("jugador1.png",Texture.class);
         this.manager.finishLoading();
     }
 
@@ -64,16 +65,19 @@ public class GestorGrafico {
         this.sprite.begin();
 
         Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Iterator it = this.texturasActivas.entrySet().iterator();
-        while (it.hasNext()) {
+
+        this.sprite.draw(this.manager.get("jugador1.png",Texture.class),0,0);
+        System.out.print("HOLAAAAAAAAAAAAAAAa");
+       /* while (it.hasNext()) {
             Map.Entry e = (Map.Entry)it.next();
             InformacionTextura iTextura = (InformacionTextura)e.getValue();
             Texture textura = this.manager.get(iTextura.nombretextura, Texture.class);
             float posicionX = (float)iTextura.posicionX;
             float posicionY = (float)iTextura.posicionY;
             this.sprite.draw(textura,posicionX,posicionY);
-        }
+        }*/
         this.camara.render(this.sprite);
         this.sprite.end();
     }

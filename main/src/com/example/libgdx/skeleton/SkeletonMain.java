@@ -12,6 +12,7 @@ import com.rugbysurvive.partida.gestores.GestorGrafico;
 
 public class SkeletonMain extends Game {
 
+<<<<<<< HEAD
     InputMultiplexer multiplexer;
     GestorGrafico gestorGrafico;
 
@@ -50,6 +51,13 @@ public class SkeletonMain extends Game {
     @Override
     public void resume() {
     }
+=======
+	@Override
+	public void create() {
+		System.out.println("Application started");
+        
+	}
+>>>>>>> a459603f127b7a7dcf20b4abc14450e01ea60686
 }
 
 
