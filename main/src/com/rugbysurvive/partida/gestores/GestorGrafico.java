@@ -3,7 +3,6 @@ package com.rugbysurvive.partida.gestores;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.example.libgdx.skeleton.Camara;
 
 import java.util.ArrayList;
 import java.util.HashMap;

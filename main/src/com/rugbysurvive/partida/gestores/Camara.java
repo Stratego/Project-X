@@ -1,4 +1,4 @@
-package com.example.libgdx.skeleton;
+package com.rugbysurvive.partida.gestores;
 
 
 import com.badlogic.gdx.Gdx;
