@@ -1,6 +1,95 @@
 package com.example.libgdx.skeleton;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+
+import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.rugbysurvive.partida.gestores.Camara;
+import com.rugbysurvive.partida.gestores.GestorGrafico;
+
+import com.partido.Boton;
+import com.partido.Campo;
+import com.partido.GestorImput;
+
+import java.util.ArrayList;
+
+
+public class SkeletonMain extends Game {
+
+    InputMultiplexer multiplexer;
+    GestorGrafico gestorGrafico;
+    GestorImput gestorImput;
+
+    Campo campo = new Campo();
+
+    private ArrayList<Boton> botons= new ArrayList <Boton>();
+
+    @Override
+    public void create() {
+
+        Boton boton1 = new Boton(0,150,"boton1");
+
+        botons.add(boton1);
+
+        Boton boton2 = new Boton(0, 350,"boton2");
+
+        botons.add(boton2);
+
+        Boton boton3 = new Boton(300, 150,"boton3");
+
+        botons.add(boton3);
+
+        Boton boton4 = new Boton(300, 350,"boton4");
+
+        botons.add(boton4);
+
+        //gestorImput = new GestorImput(,botons,campo);
+
+        this.gestorGrafico = new GestorGrafico();
+        // this.gestorGrafico.cargarTextura("tablero/campo1.png");
+        //this.gestorGrafico.actualizar("tablero/campo1.png",0,0);
+        this.multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(this.gestorGrafico.getCamara());
+        //multiplexer.addProcessor(new GestureDetector(gestorImput)  );
+        Gdx.input.setInputProcessor(multiplexer);
+    }
+
+    @Override
+    public void dispose() {
+        this.gestorGrafico.dispose();
+    }
+
+    @Override
+    public void render() {
+
+        this.gestorGrafico.dibujar();
+
+
+    }
+
+    @Override
+    public void resize(int width, int height) {
+    }
+
+    @Override
+    public void pause() {
+    }
+
+    @Override
+    public void resume() {
+    }
+}
+
+
+
+/*package com.example.libgdx.skeleton;
+
+import com.badlogic.gdx.Game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -130,4 +219,4 @@ public class SkeletonMain extends Game {
 
         return botons;
     }
-}
+}*/

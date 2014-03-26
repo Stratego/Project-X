@@ -3,20 +3,36 @@ package com.partido;
 import java.util.ArrayList;
 
 /**
+ * Clase que crea y define el comportamiente del terreno del juego
  * Created by Victor on 24/03/14.
  */
 public class Campo implements Entrada {
 
+    /**
+     * posicion x en el tablero
+     */
     private float posX;
+
+    /**
+     * posicion y en el tablero
+     */
     private float posY;
 
+
+    /**
+     * indicara si el elemento esta selecionado
+     */
     private boolean selecionado;
 
 
-
-
+    /**
+     *Coleccion de casillas que tenemos en nuestra pantalla
+     */
     ArrayList <Casilla> casillas= new ArrayList <Casilla>();
 
+    /**
+     * definicion del elemento casilla que compone nuestro tablero
+     */
     private Casilla casilla;
 
     public Campo() {
@@ -57,9 +73,9 @@ public class Campo implements Entrada {
     @Override
     /**
      * Indicamos el imput que se ha realizado y su posicion dentro del tablero
-     * Imput tipo de entrada
-     * posX eje x donde se ha realizado la acciion /entrada
-     * posY eje y donde se ha realizado la acciion /entrada
+     * @param Imput tipo de entrada
+     * @param posX eje x donde se ha realizado la acciion /entrada
+     * @param posY eje y donde se ha realizado la acciion /entrada
      */
     public void accionEntrada(Imput imput, float posX, float posY) {
 
@@ -75,6 +91,67 @@ public class Campo implements Entrada {
 
         if (imput==Imput.arrastre){
             System.out.println("Arrastrandose por la posicion x: " + posX + " y: " +posY +" del campo");
+            for (Casilla iterador : casillas){
+                if (iterador.getPosX()==posX && iterador.getPosY()==posY){
+                    if(iterador.esSeleccionado(posX, posY)){
+                        iterador.accionEntrada(Imput.arrastre);
+                    }
+                }
+            }
+        }
+
+        if (imput==Imput.longclick){
+            for (Casilla iterador : casillas){
+                if (iterador.getPosX()==posX && iterador.getPosY()==posY){
+                    if(iterador.esSeleccionado(posX, posY)){
+                        iterador.accionEntrada(Imput.longclick);
+                    }
+                }
+            }
+        }
+    /*
+        if(imput==Imput.boton1){
+
+            System.out.println("Ejecucion de boton1 en campo");
+
+        }
+        if(imput==Imput.boton2){
+
+            System.out.println("Ejecucion de boton2 en campo");
+
+        }
+
+        if(imput==Imput.boton3){
+
+            System.out.println("Ejecucion de boton3 en campo");
+
+        }
+
+        if(imput==Imput.boton4){
+
+            System.out.println("Ejecucion de boton4 en campo");
+
+        }
+*/
+    }
+
+    @Override
+    /**
+     * Indicamos el imput que se ha realizado
+     * @param Imput tipo de entrada
+     */
+    public void accionEntrada(Imput imput) {
+
+        if (imput==Imput.click){
+            System.out.println("Click en campo");
+        }
+
+        if (imput==Imput.arrastre){
+            System.out.println("Arrastre en campo");
+        }
+
+        if (imput==Imput.longclick){
+            System.out.println("Longclick en campo");
         }
 
         if(imput==Imput.boton1){
@@ -99,16 +176,6 @@ public class Campo implements Entrada {
             System.out.println("Ejecucion de boton4 en campo");
 
         }
-
-    }
-
-    @Override
-    /**
-     * Indicamos el imput que se ha realizado
-     * Imput tipo de entrada
-     */
-    public void accionEntrada(Imput imput) {
-
     }
 
 
@@ -116,12 +183,16 @@ public class Campo implements Entrada {
     @Override
     /**
      * indicamos que el elemento se ha seleccionado y su posicion en el tablero
+     * @param posX posicion x en el campo
+     * @param posY posicion y en el campo
      */
     public boolean esSeleccionado(float posX, float posY) {
-        if (this.posX == posX && this.posY == posY){
-            selecionado=true;
-        }else {
-            selecionado=false;
+        for (Casilla iterador : casillas){
+            if (iterador.getPosX() == posX && iterador.getPosY() == posY){
+                selecionado=true;
+            }else {
+                selecionado=false;
+            }
         }
         return selecionado;
     }
