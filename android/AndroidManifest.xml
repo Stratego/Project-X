@@ -32,6 +32,8 @@
                 <action android:name="android.intent.action.SCREEN_ON" />
             </intent-filter>
         </receiver>
+        <provider android:name="JugadoresProvider"
+                  android:authorities="com.example.PruebasManu"/>
     </application>
 
 </manifest>
