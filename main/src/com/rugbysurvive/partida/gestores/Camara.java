@@ -4,6 +4,7 @@ package com.rugbysurvive.partida.gestores;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -42,8 +43,7 @@ public class Camara implements InputProcessor {
         this.height = Gdx.graphics.getHeight();
 
         this.camera = new OrthographicCamera(this.width, this.height);
-        glViewport = new Rectangle(0, 0, this.width, this.height);
-        this.camera.position.set(this.width,this.height,0);
+        this.camera.position.set(this.width/2,this.height/2,0);
 //        this.camera.apply(Gdx.graphics.getGL10());
     }
 
@@ -59,8 +59,8 @@ public class Camara implements InputProcessor {
             this.absoluteVariationY += variationY;
 
             this.camera.translate(-variationX,variationY);
-            this.camera.update();
-            this.camera.apply(Gdx.graphics.getGL10());
+           // this.camera.update();
+         // this.camera.apply(Gdx.graphics.getGL20());
             return true;
         }
         return false;
@@ -69,17 +69,19 @@ public class Camara implements InputProcessor {
     public void render(SpriteBatch batch)
     {
 
-        /*GL10 gl = Gdx.graphics.getGL10();
-        System.out.println(gl.toString());
+       // GL10 gl = Gdx.graphics.getGL20();
+
 
         // Camera --------------------- /
-        gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-        gl.glViewport((int) glViewport.x, (int) glViewport.y,
-                (int) glViewport.width, (int) glViewport.height);*/
+        //   gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //gl.glViewport((int) glViewport.x, (int) glViewport.y,
+               // (int) glViewport.width, (int) glViewport.height);
 
-        batch.setProjectionMatrix(this.camera.combined);
         this.camera.update();
-        this.camera.apply(Gdx.graphics.getGL10());
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.setProjectionMatrix(this.camera.combined);
+//        this.camera.apply(Gdx.gl10);
+
     }
 
     private boolean isCameraInsideBoard(int variationX,int variationY)

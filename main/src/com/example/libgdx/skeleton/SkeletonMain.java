@@ -4,13 +4,10 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 
-import com.badlogic.gdx.input.GestureDetector;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.rugbysurvive.partida.gestores.Camara;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
+import com.rugbysurvive.partida.gestores.Prueba;
+
+import java.util.ArrayList;
 
 import com.partido.Boton;
 import com.partido.Campo;
@@ -21,42 +18,36 @@ import java.util.ArrayList;
 
 public class SkeletonMain extends Game {
 
+
     InputMultiplexer multiplexer;
     GestorGrafico gestorGrafico;
-    GestorImput gestorImput;
 
-    Campo campo = new Campo();
 
-    private ArrayList<Boton> botons= new ArrayList <Boton>();
+    Prueba prueba ;
+    Prueba prueba2 ;
+    Prueba prueba3 ;
+
 
     @Override
     public void create() {
 
-        Boton boton1 = new Boton(0,150,"boton1");
 
-        botons.add(boton1);
 
-        Boton boton2 = new Boton(0, 350,"boton2");
+        ArrayList<String> nombresTexturas = new ArrayList<String>();
+        nombresTexturas.add("jugador1.png");
+        this.gestorGrafico = new GestorGrafico(nombresTexturas);
+       // this.gestorGrafico.cargarTextura("tablero/campo1.png");
 
-        botons.add(boton2);
-
-        Boton boton3 = new Boton(300, 150,"boton3");
-
-        botons.add(boton3);
-
-        Boton boton4 = new Boton(300, 350,"boton4");
-
-        botons.add(boton4);
-
-        //gestorImput = new GestorImput(,botons,campo);
-
-        this.gestorGrafico = new GestorGrafico();
-        // this.gestorGrafico.cargarTextura("tablero/campo1.png");
         //this.gestorGrafico.actualizar("tablero/campo1.png",0,0);
         this.multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(this.gestorGrafico.getCamara());
         //multiplexer.addProcessor(new GestureDetector(gestorImput)  );
         Gdx.input.setInputProcessor(multiplexer);
+        this.prueba = new Prueba(this.gestorGrafico,0,0);
+        this.prueba2 = new Prueba(this.gestorGrafico,30,0);
+        this.prueba3 = new Prueba(this.gestorGrafico,0,30);
+
+
     }
 
     @Override
@@ -83,6 +74,7 @@ public class SkeletonMain extends Game {
     @Override
     public void resume() {
     }
+
 }
 
 
