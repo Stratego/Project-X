@@ -22,15 +22,13 @@ public class SkeletonMain extends Game {
 
         ArrayList<String> nombresTexturas = new ArrayList<String>();
         nombresTexturas.add("jugador1.png");
-        this.gestorGrafico = new GestorGrafico(nombresTexturas);
+        this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
        // this.gestorGrafico.cargarTextura("tablero/campo1.png");
         //this.gestorGrafico.actualizar("tablero/campo1.png",0,0);
         this.multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(this.gestorGrafico.getCamara());
         Gdx.input.setInputProcessor(multiplexer);
-        this.prueba = new Prueba(this.gestorGrafico,0,0);
-        this.prueba2 = new Prueba(this.gestorGrafico,30,0);
-        this.prueba3 = new Prueba(this.gestorGrafico,0,30);
+        this.prueba = new Prueba(this.gestorGrafico,0,0,100);
 
 
     }
@@ -42,7 +40,9 @@ public class SkeletonMain extends Game {
 
     @Override
     public void render() {
-
+    this.prueba.render();
+        this.prueba2.render();
+        this.prueba3.render();
     this.gestorGrafico.dibujar();
 
 
