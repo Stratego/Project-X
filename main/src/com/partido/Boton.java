@@ -74,11 +74,6 @@ public class Boton implements Entrada{
 
 
     @Override
-    /**
-     * indicamos que el elemento se ha seleccionado y su posicion en el tablero
-     * @param posX eje x donde se ha realizado la accion /entrada
-     * @param posY eje y donde se ha realizado la accion /entrada
-     */
     public boolean esSeleccionado(float posX, float posY) {
         if (this.posX >posX && this.posX<64){
             if (this.posX >posY && this.posY<64){
