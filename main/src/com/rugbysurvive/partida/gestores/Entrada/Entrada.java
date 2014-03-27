@@ -1,4 +1,4 @@
-package com.rugbysurvive.partida.gestores;
+package com.rugbysurvive.partida.gestores.Entrada;
 
 /**
  * Created by aitor on 25/03/14.

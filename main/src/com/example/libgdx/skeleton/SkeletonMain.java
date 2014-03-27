@@ -9,12 +9,6 @@ import com.rugbysurvive.partida.gestores.Prueba;
 
 import java.util.ArrayList;
 
-import com.partido.Boton;
-import com.partido.Campo;
-import com.partido.GestorImput;
-
-import java.util.ArrayList;
-
 
 public class SkeletonMain extends Game {
 

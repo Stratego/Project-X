@@ -1,15 +1,13 @@
-package com.partido;
+package com.rugbysurvive.partida.gestores.Entrada;
 
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-
-import java.util.ArrayList;
+import com.rugbysurvive.partida.tablero.Boton;
+import com.partido.Imput;
+import com.rugbysurvive.partida.tablero.Campo;
 
 import java.util.ArrayList;
 
@@ -17,7 +15,7 @@ import java.util.ArrayList;
  * Esta clase recibira nuestras acciones en la pantalla del telefono y en funcion de cada accion ejecuara lo que le hallamos definido
  * Created by Victor on 24/03/14.
  */
-public class GestorImput implements GestureDetector.GestureListener {
+public class GestorEntrada implements GestureDetector.GestureListener {
 
     /**
      * definimos un elemento camara que usaremos para hacer la traslación entre camara y terreno de juego
@@ -48,7 +46,7 @@ public class GestorImput implements GestureDetector.GestureListener {
      * @param botons coleccion de botones del juego
      * @param campo campo de nuestro juego
      */
-    public GestorImput(OrthographicCamera camera,ArrayList<Boton> botons,Campo campo) {
+    public GestorEntrada(OrthographicCamera camera, ArrayList<Boton> botons, Campo campo) {
 
         this.camera = camera;
         this.botons = botons;
@@ -72,35 +70,18 @@ public class GestorImput implements GestureDetector.GestureListener {
 
         //recorrer lista de botones
         for (Boton iterador : botons){
-            if (touchPos.x>iterador.getPosX() && touchPos.x < 64 ){
-                if (touchPos.y > iterador.getPosY() && touchPos.y < 64){
 
-                    if(iterador.getNombre().equals("boton1")){
-                        if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
-                            campo.accionEntrada(Imput.boton1);
-                        }
-                    }else if(iterador.getNombre().equals("boton2")){
-                        if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
-                            campo.accionEntrada(Imput.boton2);
-                        }
-                    }else if(iterador.getNombre().equals("boton3")){
-                        if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
-                            campo.accionEntrada(Imput.boton3);
-                        }
-                    }else if(iterador.getNombre().equals("boton4")){
-                        if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
-                            campo.accionEntrada(Imput.boton3);
-                        }
+                 if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
+
+                     campo.accionEntrada(iterador.obtenerEntrada iterador.obtenerEntrada()
+                                return
                     }
                 }
-            }else{
-                botonpulsado= false;
-            }
-        }
-        if (botonpulsado ==false) {
-            campo.accionEntrada(Imput.longclick,touchPos.x, touchPos.y );
-            botonpulsado = true;
-        }
+
+        !!!!! HAZLO FACIL!!! SSIMPLEMENTE HACIENDO UN RETURN YA ELIMINAS EL RESTO NO HACE FALTA LLENAR ESTO DE IF
+        campo.accionEntrada(Imput.click,touchPos.x, touchPos.y );
+
+
 
         return false;
     }
@@ -121,35 +102,18 @@ public class GestorImput implements GestureDetector.GestureListener {
 
         //recorrer lista de botones
         for (Boton iterador : botons){
-            if (touchPos.x>iterador.getPosX() && touchPos.x < 64 ){
-                if (touchPos.y > iterador.getPosY() && touchPos.y < 64){
 
-                    if(iterador.getNombre().equals("boton1")){
+
                         if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
-                            campo.accionEntrada(Imput.boton1);
+                            campo.accionEntrada(iterador.obtenerEntrada());
+                            return true;
                         }
-                    }else if(iterador.getNombre().equals("boton2")){
-                        if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
-                            campo.accionEntrada(Imput.boton2);
-                        }
-                    }else if(iterador.getNombre().equals("boton3")){
-                        if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
-                            campo.accionEntrada(Imput.boton3);
-                        }
-                    }else if(iterador.getNombre().equals("boton4")){
-                        if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
-                            campo.accionEntrada(Imput.boton3);
-                        }
-                    }
-                }
-            }else{
-                botonpulsado= false;
-            }
+
         }
-        if (botonpulsado ==false) {
+
+        !!!!! HAZLO FACIL!!! SSIMPLEMENTE HACIENDO UN RETURN YA ELIMINAS EL RESTO NO HACE FALTA LLENAR ESTO DE IF
             campo.accionEntrada(Imput.click,touchPos.x, touchPos.y );
-            botonpulsado = true;
-        }
+
 
 
         return false;

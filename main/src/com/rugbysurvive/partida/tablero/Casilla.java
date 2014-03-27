@@ -1,10 +1,13 @@
-package com.partido;
+package com.rugbysurvive.partida.tablero;
+
+import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
+import com.partido.Imput;
 
 /**
  * Definicion de la casilla, elemento basico del que se compone el tablero de juego
  * Created by Victor on 24/03/14.
  */
-public class Casilla implements Entrada {
+public class Casilla implements GestionEntrada {
     /**
      * posicion x en el tablero
      */
@@ -113,12 +116,10 @@ public class Casilla implements Entrada {
      * @param posY posicion y en el campo
      */
     public boolean esSeleccionado(float posX, float posY) {
-        if (this.posX >posX && this.posX<64){
-            if (this.posX >posY && this.posY<64){
-                selecionado=true;
-            }else {
-                selecionado=false;
-            }
+        if (this.posX == posX && this.posY == posY){
+            selecionado=true;
+        }else {
+            selecionado=false;
         }
         System.out.println("Casilla en la posicion x: " + posX + " y: " +posY +" selecionada");
         return selecionado;
