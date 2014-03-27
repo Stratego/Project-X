@@ -13,8 +13,7 @@ import com.uab.lis.rugby.service.MusicService;
 /**
  * Created by adria on 13/03/14.
  */
-public class Main extends Activity {
-    private static final String TAG ="Main";
+public class Main extends BaseActivity {
     private boolean state = true;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,21 +28,5 @@ public class Main extends Activity {
                 startActivity(new Intent(Main.this,AndroidStarter.class));
             }
         });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.e(TAG,"onResume");
-        Intent intent = new Intent(MusicService.IntentFilterMusicStart);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.e(TAG, "onDestroy");
-        Intent intent = new Intent(MusicService.IntentFilterMusicStop);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 }
