@@ -81,9 +81,11 @@ public class Campo implements Entrada {
 
         if (imput==Imput.click){
             for (Casilla iterador : casillas){
-                if (iterador.getPosX()==posX && iterador.getPosY()==posY){
-                    if(iterador.esSeleccionado(posX, posY)){
-                        iterador.accionEntrada(Imput.click);
+                if (iterador.getPosX() >posX && iterador.getPosX()<64){
+                    if (iterador.getPosY() >posY && iterador.getPosY()<64){
+                        if(iterador.esSeleccionado(posX, posY)){
+                            iterador.accionEntrada(Imput.longclick);
+                        }
                     }
                 }
             }
@@ -92,9 +94,11 @@ public class Campo implements Entrada {
         if (imput==Imput.arrastre){
             System.out.println("Arrastrandose por la posicion x: " + posX + " y: " +posY +" del campo");
             for (Casilla iterador : casillas){
-                if (iterador.getPosX()==posX && iterador.getPosY()==posY){
-                    if(iterador.esSeleccionado(posX, posY)){
-                        iterador.accionEntrada(Imput.arrastre);
+                if (iterador.getPosX() >posX && iterador.getPosX()<64){
+                    if (iterador.getPosY() >posY && iterador.getPosY()<64){
+                        if(iterador.esSeleccionado(posX, posY)){
+                            iterador.accionEntrada(Imput.arrastre);
+                        }
                     }
                 }
             }
@@ -102,9 +106,11 @@ public class Campo implements Entrada {
 
         if (imput==Imput.longclick){
             for (Casilla iterador : casillas){
-                if (iterador.getPosX()==posX && iterador.getPosY()==posY){
-                    if(iterador.esSeleccionado(posX, posY)){
-                        iterador.accionEntrada(Imput.longclick);
+                if (iterador.getPosX() >posX && iterador.getPosX()<64){
+                    if (iterador.getPosY() >posY && iterador.getPosY()<64){
+                        if(iterador.esSeleccionado(posX, posY)){
+                            iterador.accionEntrada(Imput.longclick);
+                        }
                     }
                 }
             }
@@ -188,11 +194,18 @@ public class Campo implements Entrada {
      */
     public boolean esSeleccionado(float posX, float posY) {
         for (Casilla iterador : casillas){
-            if (iterador.getPosX() == posX && iterador.getPosY() == posY){
+            if (iterador.esSeleccionado(posX,posY)){
                 selecionado=true;
-            }else {
+            }else{
                 selecionado=false;
             }
+            /*if (iterador.getPosX() >posX && iterador.getPosX()<64){
+                if (iterador.getPosY() >posY && iterador.getPosY()<64){
+                    selecionado=true;
+                }else {
+                    selecionado=false;
+                }
+            }*/
         }
         return selecionado;
     }

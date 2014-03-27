@@ -80,10 +80,12 @@ public class Boton implements Entrada{
      * @param posY eje y donde se ha realizado la accion /entrada
      */
     public boolean esSeleccionado(float posX, float posY) {
-        if (this.posX == posX && this.posY == posY){
-            selecionado=true;
-        }else {
-            selecionado=false;
+        if (this.posX >posX && this.posX<64){
+            if (this.posX >posY && this.posY<64){
+                selecionado=true;
+            }else {
+                selecionado=false;
+            }
         }
         return selecionado;
     }

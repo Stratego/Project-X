@@ -113,10 +113,12 @@ public class Casilla implements Entrada {
      * @param posY posicion y en el campo
      */
     public boolean esSeleccionado(float posX, float posY) {
-        if (this.posX == posX && this.posY == posY){
-            selecionado=true;
-        }else {
-            selecionado=false;
+        if (this.posX >posX && this.posX<64){
+            if (this.posX >posY && this.posY<64){
+                selecionado=true;
+            }else {
+                selecionado=false;
+            }
         }
         System.out.println("Casilla en la posicion x: " + posX + " y: " +posY +" selecionada");
         return selecionado;
