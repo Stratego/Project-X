@@ -8,7 +8,8 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
-    <uses-sdk android:minSdkVersion="14"/>
+
+    <uses-sdk android:minSdkVersion="17"/>
     <application
             android:icon="@drawable/icon"
             android:label="@string/app_name"
@@ -25,6 +26,12 @@
             </intent-filter>
         </activity>
         <service android:name=".service.MusicService" />
+        <receiver android:name=".service.SystemBrodcastReceiver" android:process=":remote">
+            <intent-filter>
+                <action android:name="android.intent.action.SCREEN_OFF" />
+                <action android:name="android.intent.action.SCREEN_ON" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

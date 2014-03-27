@@ -23,9 +23,10 @@ public class Main extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(state == true ? MusicService.IntentFilterMusicStop : MusicService.IntentFilterMusicStart);
+               /** Intent intent = new Intent(state == true ? MusicService.IntentFilterMusicStop : MusicService.IntentFilterMusicStart);
                 LocalBroadcastManager.getInstance(Main.this).sendBroadcast(intent);
-                state = !state;
+                state = !state;**/
+                startActivity(new Intent(Main.this,AndroidStarter.class));
             }
         });
     }

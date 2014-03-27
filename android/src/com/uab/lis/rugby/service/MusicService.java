@@ -37,6 +37,11 @@ public class MusicService extends Service {
         MusicBrodcastReceiver brodcast = new MusicBrodcastReceiver();
         LocalBroadcastManager.getInstance(this).registerReceiver(brodcast, new IntentFilter(IntentFilterMusicStart));
         LocalBroadcastManager.getInstance(this).registerReceiver(brodcast, new IntentFilter(IntentFilterMusicStop));
+
+
+        //registerReceiver(brodcast, new IntentFilter(Intent.ACTION_USER_BACKGROUND));
+        //registerReceiver(brodcast, new IntentFilter(Intent.ACTION_USER_FOREGROUND));
+
     }
 
     @Override
@@ -58,7 +63,7 @@ public class MusicService extends Service {
 
 
 
-    private class MusicBrodcastReceiver extends BroadcastReceiver {
+    public final class MusicBrodcastReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
