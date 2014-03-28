@@ -3,15 +3,14 @@ package com.example.libgdx.skeleton;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.input.GestureDetector;
 
+
+import com.rugbysurvive.partida.gestores.Entrada.Entrada;
+import com.rugbysurvive.partida.gestores.Entrada.GestorEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.gestores.Prueba;
-
-import java.util.ArrayList;
-
-import com.partido.Boton;
-import com.partido.Campo;
-import com.partido.GestorImput;
+import com.rugbysurvive.partida.tablero.Boton;
 
 import java.util.ArrayList;
 
@@ -21,6 +20,10 @@ public class SkeletonMain extends Game {
 
     InputMultiplexer multiplexer;
     GestorGrafico gestorGrafico;
+
+    GestorEntrada gestorEntrada;
+
+    private ArrayList<Boton> botons= new ArrayList <Boton>();
 
 
     Prueba prueba ;
@@ -34,13 +37,17 @@ public class SkeletonMain extends Game {
 
 
         ArrayList<String> nombresTexturas = new ArrayList<String>();
-        nombresTexturas.add("jugador1.png");
+        //nombresTexturas.add("jugador1.png");
+        nombresTexturas.add("campo1.png");
+        botons.add(new Boton(0,350, Entrada.finalizar));
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
+        this.gestorEntrada = new GestorEntrada(this.gestorGrafico.getCamara().getOrthographicCamera(),botons);
        // this.gestorGrafico.cargarTextura("tablero/campo1.png");
 
         //this.gestorGrafico.actualizar("tablero/campo1.png",0,0);
         this.multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(this.gestorGrafico.getCamara());
+        multiplexer.addProcessor(new GestureDetector(this.gestorEntrada));
         //multiplexer.addProcessor(new GestureDetector(gestorImput)  );
         Gdx.input.setInputProcessor(multiplexer);
         this.prueba = new Prueba(this.gestorGrafico,0,0,100);

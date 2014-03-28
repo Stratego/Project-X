@@ -32,7 +32,7 @@ public class Prueba implements Dibujable{
       }
     @Override
     public String getTextura() {
-        return "jugador1.png";
+        return "campo1.png";
     }
 
     @Override

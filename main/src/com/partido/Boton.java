@@ -4,28 +4,28 @@ package com.partido;
  * Clase que define la posicion y comportamiento de un boron dentro del tablero de juego
  * Created by Victor on 24/03/14.
  */
-public class Boton implements Entrada{
+public class Boton {
 
     /**
      * posicion x en el tablero
      */
-    private float posX;
+    //private float posX;
 
     /**
      * posicion y en el tablero
      */
-    private float posY;
+    //private float posY;
 
     /**
      * nombre del boton que nos servira para identificarlo
      */
-    private String nombre;
+    //private String nombre;
 
 
     /**
      * indicara si el elemento esta selecionado
      */
-    private boolean selecionado;
+    //private boolean selecionado;
 
 
     /**
@@ -35,7 +35,7 @@ public class Boton implements Entrada{
      * @param posY posicion y en el tablero
      * @param nombre nombre del boton
      */
-    public Boton(float posX, float posY, String nombre) {
+   /* public Boton(float posX, float posY, String nombre) {
         this.posY = posY;
         this.posX = posX;
         this.nombre = nombre;
@@ -50,29 +50,29 @@ public class Boton implements Entrada{
      * @param posX eje x donde se ha realizado la accion /entrada
      * @param posY eje y donde se ha realizado la accion /entrada
      */
-    public void accionEntrada(Imput imput, float posX, float posY) {
+    /*public void accionEntrada(Imput imput, float posX, float posY) {
         if (imput==Imput.click){
             System.out.println("Boton "+nombre +" en la posicion x: " + posX + " y: " +posY +" clicado");
         }else if(imput==Imput.longclick){
             System.out.println("Boton "+nombre +" en la posicion x: " + posX + " y: " +posY +" longpress");
         }
-    }
+    }*/
 
-    @Override
+    //@Override
     /**
      * Indicamos el imput que se ha realizado
      * @param Imput tipo de entrada
      */
-    public void accionEntrada(Imput imput) {
+    /*public void accionEntrada(Imput imput) {
         if (imput==Imput.click){
             System.out.println("Boton "+nombre+" clicado");
         }else if(imput==Imput.longclick){
             System.out.println("Boton "+nombre+" longpress");
         }
-    }
+    }*/
 
 
-
+/*
     @Override
     public boolean esSeleccionado(float posX, float posY) {
         if (this.posX >posX && this.posX<64){
@@ -111,4 +111,5 @@ public class Boton implements Entrada{
     public void setPosY(float posY) {
         this.posY = posY;
     }
+    */
 }

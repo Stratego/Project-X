@@ -11,13 +11,13 @@ public interface Entrada {
      * @param posX eje x donde se ha realizado la accion /entrada
      * @param posY eje y donde se ha realizado la accion /entrada
      */
-    public void accionEntrada(Imput imput,float posX, float posY);
+   // public void accionEntrada(Imput imput,float posX, float posY);
 
     /**
      * Indicamos el imput que se ha realizado
      * @param imput tipo de entrada
      */
-    public void accionEntrada(Imput imput);
+   // public void accionEntrada(Imput imput);
 
 
     /**
@@ -25,5 +25,5 @@ public interface Entrada {
      * @param posX eje x donde se ha realizado la accion /entrada
      * @param posY eje y donde se ha realizado la accion /entrada
      */
-    public boolean esSeleccionado(float posX, float posY);
+    //public boolean esSeleccionado(float posX, float posY);
 }
