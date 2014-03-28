@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.input.GestureDetector;
 
 
+import com.rugbysurvive.partida.Dibujables.CampoDibujable;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestorEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
@@ -31,17 +32,20 @@ public class SkeletonMain extends Game {
     Prueba prueba3 ;
 
 
+    CampoDibujable campoDibujable;
+
     @Override
     public void create() {
 
 
 
         ArrayList<String> nombresTexturas = new ArrayList<String>();
-        //nombresTexturas.add("jugador1.png");
+        nombresTexturas.add("jugador1.png");
         nombresTexturas.add("campo1.png");
+        nombresTexturas.add("casilla.png");
         botons.add(new Boton(0,350, Entrada.finalizar));
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
-        this.gestorEntrada = new GestorEntrada(this.gestorGrafico.getCamara().getOrthographicCamera(),botons);
+        this.gestorEntrada = new GestorEntrada(this.gestorGrafico.getCamara().getOrthographicCamera(),botons,this.gestorGrafico);
        // this.gestorGrafico.cargarTextura("tablero/campo1.png");
 
         //this.gestorGrafico.actualizar("tablero/campo1.png",0,0);
@@ -50,7 +54,7 @@ public class SkeletonMain extends Game {
         multiplexer.addProcessor(new GestureDetector(this.gestorEntrada));
         //multiplexer.addProcessor(new GestureDetector(gestorImput)  );
         Gdx.input.setInputProcessor(multiplexer);
-        this.prueba = new Prueba(this.gestorGrafico,0,0,100);
+        //this.prueba = new Prueba(this.gestorGrafico,0,0,100);
 
 
     }
@@ -63,7 +67,7 @@ public class SkeletonMain extends Game {
     @Override
     public void render() {
 
-
+     campoDibujable = new CampoDibujable(this.gestorGrafico,0,0);
      this.gestorGrafico.dibujar();
 
 

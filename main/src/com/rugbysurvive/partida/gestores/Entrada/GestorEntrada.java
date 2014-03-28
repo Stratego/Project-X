@@ -5,11 +5,15 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.rugbysurvive.partida.Dibujables.CasillaDibujable;
+import com.rugbysurvive.partida.gestores.Dibujante;
+import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.tablero.Boton;
-
 import com.rugbysurvive.partida.tablero.Campo;
 
 import java.util.ArrayList;
+
+
 
 /**
  * Esta clase recibira nuestras acciones en la pantalla del telefono y en funcion de cada accion ejecuara lo que le hallamos definido
@@ -26,7 +30,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
     /**
      * creamos el campo de juego
      */
-    Campo campo = new Campo();
+    Campo campo;
 
 
     /**
@@ -42,15 +46,22 @@ public class GestorEntrada implements GestureDetector.GestureListener {
      */
     private ArrayList<Boton> botons= new ArrayList <Boton>();
 
+
+    Dibujante dibujante;
+
+    CasillaDibujable casillaDibujable;
+
     /**
      * constructor del elemento GestorImput
      * @param camera camare que visualizara el juego
      * @param botons coleccion de botones del juego
      */
-    public GestorEntrada(OrthographicCamera camera, ArrayList<Boton> botons) {
+    public GestorEntrada(OrthographicCamera camera, ArrayList<Boton> botons,Dibujante dibujante) {
 
         this.camera = camera;
         this.botons = botons;
+        this.dibujante = dibujante;
+        campo = new Campo(dibujante);
 
     }
 
@@ -95,7 +106,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         camera.unproject(touchPos);
         System.out.println("Posicion tocada: x: " + screenX + " y: "+ screenY );
         System.out.println("Posicion mundo: x: " + touchPos.x + " y: "+ touchPos.y );
-
+        //casillaDibujable = new CasillaDibujable(dibujante,(int)touchPos.x,(int)touchPos.y);
         //recorrer lista de botones
         for (Boton iterador : botons){
 
