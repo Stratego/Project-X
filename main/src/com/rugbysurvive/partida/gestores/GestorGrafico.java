@@ -17,11 +17,11 @@ public class GestorGrafico implements Dibujante{
 
     protected int contador;
     protected AssetManager manager;
-    protected HashMap<Integer,InformacionTextura> texturasActivas;
     protected HashMap<Integer,Dibujable> dibujables ;
     protected SpriteBatch sprite;
     protected Camara camara;
     protected int tamañoCasilla;
+    protected ArrayList <Integer> listaDibujables;
 
 
 
@@ -30,11 +30,11 @@ public class GestorGrafico implements Dibujante{
         this.contador = 0;
         this.camara =  new Camara(1000,1000);
         this.sprite = new SpriteBatch();
-        this.texturasActivas = new HashMap<Integer, InformacionTextura>();
         this.manager =  new AssetManager();
         this.dibujables = new HashMap<Integer, Dibujable>();
         this.generarTexturas(nombresTexturas);
         this.tamañoCasilla = tamañoCasilla;
+        this.listaDibujables = new ArrayList<Integer>();
 
     }
 
@@ -48,7 +48,7 @@ public class GestorGrafico implements Dibujante{
 
         for(int i=0;i<this.dibujables.size();i++)
         {
-            Dibujable dibujable =  this.dibujables.get(i);
+            Dibujable dibujable =  this.dibujables.get(this.listaDibujables.get(i));
             Texture textura = this.manager.get(dibujable.getTextura());
             int posicionX = this.filtroX(dibujable.getPosicionX());
             int posicionY = this.filtroY(dibujable.getPosicionY());
@@ -69,20 +69,21 @@ public class GestorGrafico implements Dibujante{
 
     @Override
     public void eliminarTextura(int ID) {
+        this.listaDibujables.remove(this.dibujables.get(ID));
         this.dibujables.remove(ID);
     }
     @Override
     public int añadirDibujable(Dibujable dibujable)
     {
         this.dibujables.put(this.contador,dibujable);
+        this.listaDibujables.add(this.contador);
         this.contador++;
         return this.contador;
     }
 
     private void generarTexturas(ArrayList<String> texturas) {
 
-
-        Iterator it = texturas.iterator();
+         Iterator it = texturas.iterator();
 
         while (it.hasNext()) {
             String nombre =  (String)it.next();

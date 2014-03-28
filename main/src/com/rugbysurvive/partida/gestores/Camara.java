@@ -96,7 +96,7 @@ public class Camara implements InputProcessor {
     public int getVariationX(){return this.absoluteVariationX;}
     public int getVariationY(){return this.absoluteVariationY;}
 
-
+    public OrthographicCamera getOrthographicCamera(){return this.camera;}
 
 
 

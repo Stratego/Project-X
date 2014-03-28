@@ -12,7 +12,7 @@ public class Equipo {
 
 
 
-    public boolean desalojarCampo(Campo campo){}
+   /* public boolean desalojarCampo(Campo campo){}
     public boolean bloquear(){}
-    public boolean desbloquear(){}
+    public boolean desbloquear(){}*/
 }

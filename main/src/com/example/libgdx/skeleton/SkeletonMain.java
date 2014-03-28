@@ -3,9 +3,15 @@ package com.example.libgdx.skeleton;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.input.GestureDetector;
 
+
+import com.rugbysurvive.partida.Dibujables.CampoDibujable;
+import com.rugbysurvive.partida.gestores.Entrada.Entrada;
+import com.rugbysurvive.partida.gestores.Entrada.GestorEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.gestores.Prueba;
+import com.rugbysurvive.partida.tablero.Boton;
 
 import java.util.ArrayList;
 
@@ -16,11 +22,14 @@ public class SkeletonMain extends Game {
     InputMultiplexer multiplexer;
     GestorGrafico gestorGrafico;
 
+    GestorEntrada gestorEntrada;
 
-    Prueba prueba ;
-    Prueba prueba2 ;
-    Prueba prueba3 ;
+    private ArrayList<Boton> botons= new ArrayList <Boton>();
 
+
+
+
+    CampoDibujable campoDibujable;
 
     @Override
     public void create() {
@@ -29,16 +38,22 @@ public class SkeletonMain extends Game {
 
         ArrayList<String> nombresTexturas = new ArrayList<String>();
         nombresTexturas.add("jugador1.png");
+        nombresTexturas.add("campo1.png");
+        nombresTexturas.add("casilla.png");
+        botons.add(new Boton(0,350, Entrada.finalizar));
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
+        this.gestorEntrada = new GestorEntrada(this.gestorGrafico.getCamara().getOrthographicCamera(),botons,this.gestorGrafico);
        // this.gestorGrafico.cargarTextura("tablero/campo1.png");
 
         //this.gestorGrafico.actualizar("tablero/campo1.png",0,0);
         this.multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(this.gestorGrafico.getCamara());
+        multiplexer.addProcessor(new GestureDetector(this.gestorEntrada));
         //multiplexer.addProcessor(new GestureDetector(gestorImput)  );
         Gdx.input.setInputProcessor(multiplexer);
-        this.prueba = new Prueba(this.gestorGrafico,0,0,100);
 
+        //this.prueba = new Prueba(this.gestorGrafico,0,0,100);
+        campoDibujable = new CampoDibujable(this.gestorGrafico,0,0);
 
     }
 
@@ -49,7 +64,6 @@ public class SkeletonMain extends Game {
 
     @Override
     public void render() {
-
 
      this.gestorGrafico.dibujar();
 

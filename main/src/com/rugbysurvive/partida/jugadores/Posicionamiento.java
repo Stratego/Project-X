@@ -14,9 +14,9 @@ public class Posicionamiento {
      * @param lado Mitad del campo donde seran situados los jugadores
      *
      */
-    public static void generarSaqueCampo (Campo campo,Equipo equipo,Lado lado)
+  /*  public static void generarSaqueCampo (Campo campo,Equipo equipo,Lado lado)
     {
-    }
+    }*/
 
     /**
      * Coloca al equipo en posicion de saque determinado por las reglas
@@ -27,7 +27,7 @@ public class Posicionamiento {
      * @param lado Mitad del campo donde seran situados los jugadores
      *
      */
-    public static void generarSaquePredeterminado(Campo campo,Equipo equipo,Lado lado){}
+   /* public static void generarSaquePredeterminado(Campo campo,Equipo equipo,Lado lado){}*/
 
     /**
      * Coloca los dos equipos en posicion de mele en la posicion determinada
@@ -39,5 +39,5 @@ public class Posicionamiento {
      * @param posX posicion del eje x central de la mele
      * @param posY posicion del eje y central de lam ele
      */
-    public static void  generarMele(campo campo,Equipo equipo,Equipo equipo2,Lado lado,int posX,int posY){}
+    /*public static void  generarMele(campo campo,Equipo equipo,Equipo equipo2,Lado lado,int posX,int posY){}*/
 }
