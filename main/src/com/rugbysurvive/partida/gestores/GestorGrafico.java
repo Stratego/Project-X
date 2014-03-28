@@ -46,8 +46,9 @@ public class GestorGrafico implements Dibujante{
         Iterator it = this.dibujables.values().iterator();
 
 
-        while (it.hasNext()) {
-            Dibujable dibujable =  (Dibujable)it.next();
+        for(int i=0;i<this.dibujables.size();i++)
+        {
+            Dibujable dibujable =  this.dibujables.get(i);
             Texture textura = this.manager.get(dibujable.getTextura());
             int posicionX = this.filtroX(dibujable.getPosicionX());
             int posicionY = this.filtroY(dibujable.getPosicionY());
@@ -73,8 +74,8 @@ public class GestorGrafico implements Dibujante{
     @Override
     public int añadirDibujable(Dibujable dibujable)
     {
-        this.contador++;
         this.dibujables.put(this.contador,dibujable);
+        this.contador++;
         return this.contador;
     }
 
