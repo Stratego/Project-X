@@ -1,6 +1,6 @@
 package com.rugbysurvive.partida.gestores;
 
-import android.util.Log;
+//import android.util.Log;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -46,11 +46,11 @@ public class GestorGrafico implements Dibujante{
         this.camara.render(this.sprite);
         this.sprite.begin();
         this.vueltas++;
-        Log.i(TAG,"num iteraciones: "+this.vueltas);
+        //Log.i(TAG,"num iteraciones: "+this.vueltas);
         for(int i=0;i<this.listaDibujables.size();i++)
         {
             Dibujable dibujable =  this.dibujables.get(this.listaDibujables.get(i));
-            Log.i(TAG,dibujable.getTextura());
+            //Log.i(TAG,dibujable.getTextura());
             Texture textura = this.manager.get(dibujable.getTextura());
             int posicionX = this.filtroX(dibujable.getPosicionX());
             int posicionY = this.filtroY(dibujable.getPosicionY());
@@ -72,11 +72,11 @@ public class GestorGrafico implements Dibujante{
 
     @Override
     public void eliminarTextura(int ID) {
-        Log.i("BORRAR","BORRANDO antes depurar: "+ID);
+        //Log.i("BORRAR","BORRANDO antes depurar: "+ID);
         if(this.dibujables.containsKey(ID)){
             this.borrarElementoLista(ID);
             this.dibujables.remove(ID);
-            Log.i("BORRAR","BORRANDO");
+            //Log.i("BORRAR","BORRANDO");
         }
     }
     @Override
