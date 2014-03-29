@@ -61,7 +61,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         this.camera = camera;
         this.botons = botons;
         this.dibujante = dibujante;
-        campo = new Campo();
+        campo = new Campo(dibujante);
 
     }
 
