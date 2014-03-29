@@ -58,10 +58,11 @@ public class Casilla implements GestionEntrada {
 
     @Override
     public void accionEntrada(Entrada entrada) {
-        if (entrada==Entrada.clic){
-            //System.out.println("Casilla  clicada en x: " + posX + " y: " +posY);
+        System.out.println("Entrada: " + entrada);
 
-            casillaDibujable = new CasillaDibujable(dibujante,(int)this.posX,(int)this.posY);
+        if (entrada==Entrada.clic){
+            System.out.println("Casilla  clicada en x: " + posX + " y: " +posY);
+            dibujar();
 
         }
 
@@ -84,13 +85,11 @@ public class Casilla implements GestionEntrada {
             if (posY >= this.posY && posY <= this.posY+64){
                 System.out.println("Valores casilla x: " + this.posX + " y: " +this.posY);
                 System.out.println("Casilla en la posicion x: " + posX + " y: " +posY +" selecionada");
-                //casillaDibujable = new CasillaDibujable(dibujante,(int)posX,(int)posY);
-
+                selecionado=true;
             }else {
                 selecionado=false;
             }
         }
-        //System.out.println("Casilla en la posicion x: " + posX + " y: " +posY +" selecionada");
         return selecionado;
     }
 
