@@ -48,13 +48,13 @@ public class SkeletonMain extends Game {
 
         this.multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(this.gestorGrafico.getCamara());
-       // multiplexer.addProcessor(new GestureDetector(this.gestorEntrada));
+        multiplexer.addProcessor(new GestureDetector(this.gestorEntrada));
         Gdx.input.setInputProcessor(multiplexer);
 
      //   campoDibujable = new CampoDibujable(this.gestorGrafico,0,0);
-       this.prueba = new Prueba(this.gestorGrafico,1,1,10000,"campo1.png");
-        this.prueba2 = new Prueba(this.gestorGrafico,2,4,200,"jugador1.png");
-        this.prueba3 = new Prueba(this.gestorGrafico,1,4,300,"casilla.png");
+       //this.prueba = new Prueba(this.gestorGrafico,1,1,10000,"campo1.png");
+        //this.prueba2 = new Prueba(this.gestorGrafico,2,4,200,"jugador1.png");
+        //this.prueba3 = new Prueba(this.gestorGrafico,1,4,300,"casilla.png");
 
     }
 
@@ -67,9 +67,9 @@ public class SkeletonMain extends Game {
     public void render() {
 
      this.gestorGrafico.dibujar();
-        this.prueba3.render();;
-        this.prueba.render();;
-        this.prueba2.render();;
+        //this.prueba3.render();;
+        //this.prueba.render();;
+        //this.prueba2.render();;
     }
 
     @Override
