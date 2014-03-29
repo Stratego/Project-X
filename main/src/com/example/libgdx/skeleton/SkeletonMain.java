@@ -67,9 +67,9 @@ public class SkeletonMain extends Game {
     public void render() {
 
      this.gestorGrafico.dibujar();
-        this.prueba3.render();;
-        this.prueba.render();;
-        this.prueba2.render();;
+        this.prueba3.render();
+        this.prueba.render();
+        this.prueba2.render();
     }
 
     @Override
