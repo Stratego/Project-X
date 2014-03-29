@@ -3,6 +3,10 @@ package com.rugbysurvive.partida.tablero;
 import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
 import com.rugbysurvive.partida.gestores.Entrada.*;
 
+import com.rugbysurvive.partida.Dibujables.CasillaDibujable;
+import com.rugbysurvive.partida.gestores.Dibujante;
+import com.rugbysurvive.partida.Dibujables.*;
+
 import java.util.ArrayList;
 
 /**
@@ -14,12 +18,12 @@ public class Campo implements GestionEntrada {
     /**
      * posicion x en el tablero
      */
-    private float posX;
+    //private float posX;
 
     /**
      * posicion y en el tablero
      */
-    private float posY;
+    //private float posY;
 
 
     /**
@@ -40,15 +44,23 @@ public class Campo implements GestionEntrada {
      */
     //private Casilla casilla;
 
-    public Campo() {
-        dibujarTablero();
+    Dibujante dibujante;
+
+    CampoDibujable campoDibujable;
+
+
+    public Campo(Dibujante dibujante) {
+        this.dibujante = dibujante;
+        dibujarTablero(dibujante);
     }
-/*
+
+    /*
     public Campo(float posX, float posY) {
         this.posY = posY;
         this.posX = posX;
     }
 */
+    /*
     public float getPosX() {
         return posX;
     }
@@ -63,21 +75,25 @@ public class Campo implements GestionEntrada {
 
     public void setPosY(float posY) {
         this.posY = posY;
-    }
+    }*/
 
     /**
      * Dibujamos el tablero de juego
      */
-    public void dibujarTablero(){
+    public void dibujarTablero(Dibujante dibujante){
         float x = 0;
         float y = 0;
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 30; j++) {
+                casillas[i][j]=new Casilla(x,y,dibujante);
+                //System.out.println("X: "+casillas[i][j].getPosX()+" Y: "+casillas[i][j].getPosY());
+                //y= y+64;
+                x= x+64;
 
-                casillas[i][j]=new Casilla(x,y);
-                y= y+64;
             }
-            x=x+64;
+            x=0;
+            y= y+64;
+
         }
     }
 
@@ -85,12 +101,13 @@ public class Campo implements GestionEntrada {
     @Override
     public void accionEntrada(Entrada entrada, float posX, float posY) {
 
-        float x = 0;
-        float y = 0;
+
+        seleccion:
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 30; j++) {
                 if (casillas[i][j].esSeleccionado(posX, posY)){
                     casillas[i][j].accionEntrada(entrada);
+                    break seleccion;
                 }
 
             }

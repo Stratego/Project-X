@@ -6,7 +6,7 @@ import com.rugbysurvive.partida.gestores.Entrada.*;
  * Clase que define la posicion y comportamiento de un boron dentro del tablero de juego
  * Created by Victor on 24/03/14.
  */
-public class Boton {
+public class Boton implements GestionEntrada{
 
     /**
      * posicion x en el tablero
@@ -47,8 +47,8 @@ public class Boton {
      */
     public boolean esSeleccionado(float posX, float posY) {
 
-        if (this.posX >= posX && this.posX <= 64){
-            if (this.posX >= posY && this.posY <= 64){
+        if (posX >= this.posX && posX <= this.posX+64){
+            if (posY >= this.posY && posY <= this.posY+64){
                 selecionado=true;
             }else {
                 selecionado=false;
@@ -60,6 +60,16 @@ public class Boton {
        public Entrada obtenerEntrada()
        {
             return entrada;
+        }
+
+        @Override
+        public void accionEntrada(Entrada entrada, float posX, float posY) {
+
+        }
+
+        @Override
+        public void accionEntrada(Entrada entrada) {
+
         }
 
 
