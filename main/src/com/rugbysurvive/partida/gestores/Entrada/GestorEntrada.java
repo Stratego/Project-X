@@ -61,7 +61,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         this.camera = camera;
         this.botons = botons;
         this.dibujante = dibujante;
-        campo = new Campo(dibujante);
+        campo = new Campo();
 
     }
 
@@ -82,12 +82,12 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         //recorrer lista de botones
         for (Boton iterador : botons){
 
-                 if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
+            if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
 
-                     campo.accionEntrada(iterador.obtenerEntrada(),touchPos.x,touchPos.y);
-                     return false;
-                    }
-                }
+                campo.accionEntrada(iterador.obtenerEntrada(),touchPos.x,touchPos.y);
+                return false;
+            }
+        }
         campo.accionEntrada(Entrada.clicklargo,touchPos.x, touchPos.y );
 
         return false;
@@ -111,14 +111,14 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         for (Boton iterador : botons){
 
 
-                        if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
-                            campo.accionEntrada(iterador.obtenerEntrada());
-                            return true;
-                        }
+            if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
+                campo.accionEntrada(iterador.obtenerEntrada());
+                return true;
+            }
 
         }
 
-            campo.accionEntrada(Entrada.clic,touchPos.x, touchPos.y );
+        campo.accionEntrada(Entrada.clic,touchPos.x, touchPos.y );
 
 
 

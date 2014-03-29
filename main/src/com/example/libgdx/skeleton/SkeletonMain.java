@@ -27,7 +27,9 @@ public class SkeletonMain extends Game {
     private ArrayList<Boton> botons= new ArrayList <Boton>();
 
 
-
+    Prueba prueba;
+    Prueba prueba2;
+    Prueba prueba3;
 
     CampoDibujable campoDibujable;
 
@@ -43,17 +45,16 @@ public class SkeletonMain extends Game {
         botons.add(new Boton(0,350, Entrada.finalizar));
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
         this.gestorEntrada = new GestorEntrada(this.gestorGrafico.getCamara().getOrthographicCamera(),botons,this.gestorGrafico);
-       // this.gestorGrafico.cargarTextura("tablero/campo1.png");
 
-        //this.gestorGrafico.actualizar("tablero/campo1.png",0,0);
         this.multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(this.gestorGrafico.getCamara());
-        multiplexer.addProcessor(new GestureDetector(this.gestorEntrada));
-        //multiplexer.addProcessor(new GestureDetector(gestorImput)  );
+       // multiplexer.addProcessor(new GestureDetector(this.gestorEntrada));
         Gdx.input.setInputProcessor(multiplexer);
 
-        //this.prueba = new Prueba(this.gestorGrafico,0,0,100);
-        campoDibujable = new CampoDibujable(this.gestorGrafico,0,0);
+     //   campoDibujable = new CampoDibujable(this.gestorGrafico,0,0);
+       this.prueba = new Prueba(this.gestorGrafico,1,1,10000,"campo1.png");
+        this.prueba2 = new Prueba(this.gestorGrafico,2,4,200,"jugador1.png");
+        this.prueba3 = new Prueba(this.gestorGrafico,1,4,300,"casilla.png");
 
     }
 
@@ -66,9 +67,9 @@ public class SkeletonMain extends Game {
     public void render() {
 
      this.gestorGrafico.dibujar();
-
-
-
+        this.prueba3.render();;
+        this.prueba.render();;
+        this.prueba2.render();;
     }
 
     @Override

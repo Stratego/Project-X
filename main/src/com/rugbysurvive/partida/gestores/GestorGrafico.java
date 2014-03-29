@@ -1,5 +1,6 @@
 package com.rugbysurvive.partida.gestores;
 
+import android.util.Log;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -22,8 +23,8 @@ public class GestorGrafico implements Dibujante{
     protected Camara camara;
     protected int tamañoCasilla;
     protected ArrayList <Integer> listaDibujables;
-
-
+    protected String TAG = "GESTOR GRAFICO";
+    protected int vueltas = 0;
 
     public GestorGrafico(ArrayList<String> nombresTexturas,int tamañoCasilla)
     {
@@ -42,20 +43,22 @@ public class GestorGrafico implements Dibujante{
 
     public void dibujar() {
 
+        this.camara.render(this.sprite);
         this.sprite.begin();
-        Iterator it = this.dibujables.values().iterator();
-
-
-        for(int i=0;i<this.dibujables.size();i++)
+        this.vueltas++;
+        Log.i(TAG,"num iteraciones: "+this.vueltas);
+        for(int i=0;i<this.listaDibujables.size();i++)
         {
             Dibujable dibujable =  this.dibujables.get(this.listaDibujables.get(i));
+            Log.i(TAG,dibujable.getTextura());
             Texture textura = this.manager.get(dibujable.getTextura());
             int posicionX = this.filtroX(dibujable.getPosicionX());
             int posicionY = this.filtroY(dibujable.getPosicionY());
             this.sprite.draw(textura,posicionX,posicionY);
         }
-        this.camara.render(this.sprite);
         this.sprite.end();
+
+
     }
 
     public void dispose(){
@@ -69,16 +72,42 @@ public class GestorGrafico implements Dibujante{
 
     @Override
     public void eliminarTextura(int ID) {
-        this.listaDibujables.remove(this.dibujables.get(ID));
-        this.dibujables.remove(ID);
+        Log.i("BORRAR","BORRANDO antes depurar: "+ID);
+        if(this.dibujables.containsKey(ID)){
+            this.borrarElementoLista(ID);
+            this.dibujables.remove(ID);
+            Log.i("BORRAR","BORRANDO");
+        }
     }
     @Override
     public int añadirDibujable(Dibujable dibujable)
     {
+        this.contador++;
         this.dibujables.put(this.contador,dibujable);
         this.listaDibujables.add(this.contador);
-        this.contador++;
         return this.contador;
+    }
+
+    private void borrarElementoLista(int ID)
+    {
+        boolean encontrado = false;
+        int i = 0;
+        int valor = 0;
+
+
+        while(!encontrado && this.listaDibujables.size() > i ){
+            valor = this.listaDibujables.get(i);
+            if(valor == ID)
+            {
+                valor = i;
+                encontrado = true;
+            }
+            i++;
+        }
+        if(encontrado)
+        {
+            this.listaDibujables.remove(valor);
+        }
     }
 
     private void generarTexturas(ArrayList<String> texturas) {

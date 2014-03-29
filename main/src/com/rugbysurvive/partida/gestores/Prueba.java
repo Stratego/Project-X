@@ -11,28 +11,30 @@ public class Prueba implements Dibujable{
     int contador;
     int current_contador;
     Dibujante dibujante;
+    String textura;
 
-    public Prueba(Dibujante dibujante,int posicionX,int posicionY,int contador){
+    public Prueba(Dibujante dibujante,int posicionX,int posicionY,int contador,String textura){
         this.contador = contador;
         this.posicionX = posicionX;
         this.posicionY = posicionY;
         ID =  dibujante.añadirDibujable(this);
         this.current_contador = 0;
         this.dibujante = dibujante;
+        this.textura = textura;
     }
 
 
-      public void render()
-      {
+     public void render()
+     {
           this.current_contador++;
           if(this.current_contador == contador)
           {
-            this.dibujante.eliminarTextura(24);
+            this.dibujante.eliminarTextura(ID);
           }
-      }
+     }
     @Override
     public String getTextura() {
-        return "campo1.png";
+        return this.textura;
     }
 
     @Override
