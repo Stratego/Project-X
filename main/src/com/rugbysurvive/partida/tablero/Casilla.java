@@ -85,7 +85,7 @@ public class Casilla implements GestionEntrada {
                 System.out.println("Valores casilla x: " + this.posX + " y: " +this.posY);
                 System.out.println("Casilla en la posicion x: " + posX + " y: " +posY +" selecionada");
                 //casillaDibujable = new CasillaDibujable(dibujante,(int)posX,(int)posY);
-
+                selecionado= true;
             }else {
                 selecionado=false;
             }
