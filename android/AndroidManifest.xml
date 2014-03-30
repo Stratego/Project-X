@@ -25,6 +25,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.CreateUser"/>
+        <activity android:name=".ui.activity.MenuPrincipal"/>
         <service android:name=".service.MusicService" />
         <provider android:name=".database.JugadoresProvider"
                   android:authorities="com.example.PruebasManu"/>
