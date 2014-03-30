@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 import com.uab.lis.rugby.R;
 import com.uab.lis.rugby.utils.Utils;
 import org.json.JSONArray;
@@ -42,6 +44,7 @@ public class CreateUser extends Activity {
         escudo = (ViewPager)findViewById(R.id.vp_Escudos);
         Button aceptar = (Button)findViewById(R.id.btnAceptar);
         Button cancelar = (Button)findViewById(R.id.btnCancelar);
+
         aceptar.setOnClickListener(new OnClickButton());
         cancelar.setOnClickListener(new OnClickButton());
 
@@ -100,6 +103,7 @@ public class CreateUser extends Activity {
     private class Adapter extends PagerAdapter{
         private List<String> list;
         private Context ctx;
+        private int positionSelected = 1;
 
         public Adapter (Context ctx, List<String> list){
             this.ctx = ctx ;
@@ -115,10 +119,26 @@ public class CreateUser extends Activity {
             return view==arg1;
         } 
         @Override
-        public Object instantiateItem(ViewGroup collection, int position) {
+        public Object instantiateItem(ViewGroup collection, final int position) {
             ImageView view = new ImageView(ctx);
+
             Bitmap bitmap = Utils.getBitmapFromAssets(ctx,list.get(position));
+
+            if(positionSelected == position){
+                view.setBackgroundColor(Color.YELLOW);
+
+            }else{
+                view.setBackgroundColor(Color.TRANSPARENT);
+            }
+
             view.setImageBitmap(bitmap);
+            //TODO hacer un indicador de seleccionado
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setPositionSelected(position);
+                }
+            });
             ((ViewPager) collection).addView(view, 0);
 
             return view;
@@ -130,11 +150,17 @@ public class CreateUser extends Activity {
 
         @Override
         public float getPageWidth(final int position) {
-            // this will have 3 pages in a single view
             return 0.32f;
         }
 
+        public void setPositionSelected(int positionSelected) {
+            this.positionSelected = positionSelected;
+            Log.e("position",positionSelected+"");
+
+        }
     }
+
+
     private class OnClickButton implements View.OnClickListener{
 
 
