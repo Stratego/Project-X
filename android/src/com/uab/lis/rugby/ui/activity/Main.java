@@ -1,7 +1,9 @@
 package com.uab.lis.rugby.ui.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
@@ -17,16 +19,14 @@ public class Main extends BaseActivity {
     private boolean state = true;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Button button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               /** Intent intent = new Intent(state == true ? MusicService.IntentFilterMusicStop : MusicService.IntentFilterMusicStart);
-                LocalBroadcastManager.getInstance(Main.this).sendBroadcast(intent);
-                state = !state;**/
-                startActivity(new Intent(Main.this,AndroidStarter.class));
-            }
-        });
+        SharedPreferences preferencias = getSharedPreferences("firstEje", Context.MODE_PRIVATE);
+
+        boolean first = preferencias.getBoolean("first",true);
+
+        if(first){
+            startActivity(new Intent(this,CreateUser.class));
+        }else{
+            startActivity(new Intent(this,MenuPrincipal.class));
+        }
     }
 }

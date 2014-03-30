@@ -1,7 +1,9 @@
 package com.uab.lis.rugby.ui.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -39,6 +41,10 @@ public class CreateUser extends Activity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.btnAceptar:
+                    SharedPreferences preferencias = getSharedPreferences("firstEje", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor=preferencias.edit();
+                    editor.putBoolean("first", false);
+                    editor.commit();
                     startActivity(new Intent(CreateUser.this,MenuPrincipal.class));
                     break;
                 case R.id.btnCancelar:
