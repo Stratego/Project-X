@@ -18,7 +18,7 @@ public class Boton implements GestionEntrada{
      */
     private float posY;
 
-    private Entrada entrada;  // USA LA INFORMACION QUE YA DISPONES!!!
+    private Entrada entrada;
     /**
      * indicara si el elemento esta selecionado
      */
