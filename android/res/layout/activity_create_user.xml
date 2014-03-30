@@ -12,7 +12,7 @@
             android:inputType="textPersonName"
             android:text="@string/activity_create_user_nombre"
             android:ems="10"
-            android:id="@+id/editText"
+            android:id="@+id/edtNombreJugador"
             android:layout_gravity="center_horizontal" android:layout_alignParentLeft="true"
             android:layout_marginLeft="0dp" android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
     <EditText
@@ -21,13 +21,13 @@
             android:inputType="textPersonName"
             android:text="@string/activity_create_user_name_equipo"
             android:ems="10"
-            android:id="@+id/editText2"
-            android:layout_below="@+id/editText" android:layout_alignParentStart="true"/>
+            android:id="@+id/edtNombreEquipo"
+            android:layout_below="@+id/edtNombreJugador" android:layout_alignParentStart="true"/>
     <android.support.v4.view.ViewPager
             android:id="@+id/vp_Escudos"
             android:layout_width="match_parent"
             android:layout_height="79dp"
-            android:layout_below="@+id/editText2" android:layout_alignParentStart="true"/>
+            android:layout_below="@+id/edtNombreEquipo" android:layout_alignParentStart="true"/>
     <android.support.v4.view.ViewPager
             android:id="@+id/vp_Ropa"
             android:layout_width="match_parent"
