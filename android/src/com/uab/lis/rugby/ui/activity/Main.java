@@ -23,10 +23,18 @@ public class Main extends BaseActivity {
 
         boolean first = preferencias.getBoolean("first",true);
 
+        Class classe;
         if(first){
-            startActivity(new Intent(this,CreateUser.class));
+            classe = CreateUser.class;
         }else{
-            startActivity(new Intent(this,MenuPrincipal.class));
+            classe = MenuPrincipal.class;
         }
+
+        Intent intent = new Intent(this,classe);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
