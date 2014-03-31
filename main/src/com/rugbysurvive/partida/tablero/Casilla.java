@@ -58,8 +58,6 @@ public class Casilla implements GestionEntrada {
 
     @Override
     public void accionEntrada(Entrada entrada) {
-        System.out.println("Entrada: " + entrada);
-
         if (entrada==Entrada.clic){
             System.out.println("Casilla  clicada en x: " + posX + " y: " +posY);
             dibujar();

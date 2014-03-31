@@ -2,8 +2,6 @@ package com.rugbysurvive.partida.tablero;
 
 import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
 import com.rugbysurvive.partida.gestores.Entrada.*;
-
-import com.rugbysurvive.partida.Dibujables.CasillaDibujable;
 import com.rugbysurvive.partida.gestores.Dibujante;
 import com.rugbysurvive.partida.Dibujables.*;
 
@@ -17,10 +15,21 @@ public class Campo implements GestionEntrada {
 
 
 
+
+    /**
+     * indicara si el elemento esta selecionado
+     */
+    private boolean selecionado;
+
+
     /**
      *Coleccion de casillas que tenemos en nuestra pantalla
      */
+    //ArrayList <Casilla> casillas= new ArrayList <Casilla>();
+
     Casilla [][] casillas= new Casilla [20][30];
+
+
 
     Dibujante dibujante;
 
@@ -54,14 +63,10 @@ public class Campo implements GestionEntrada {
 
     @Override
     public void accionEntrada(Entrada entrada, float posX, float posY) {
-
-
-        seleccion:
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 30; j++) {
                 if (casillas[i][j].esSeleccionado(posX, posY)){
                     casillas[i][j].accionEntrada(entrada);
-                    break seleccion;
                 }
 
             }
@@ -72,6 +77,6 @@ public class Campo implements GestionEntrada {
     @Override
     public void accionEntrada(Entrada entrada) {
 
-
     }
 }
+
