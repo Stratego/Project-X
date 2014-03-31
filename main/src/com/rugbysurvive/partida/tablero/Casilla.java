@@ -2,7 +2,6 @@ package com.rugbysurvive.partida.tablero;
 
 import com.rugbysurvive.partida.Dibujables.CasillaDibujable;
 import com.rugbysurvive.partida.gestores.Dibujante;
-
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
 
@@ -58,18 +57,20 @@ public class Casilla implements GestionEntrada {
 
     @Override
     public void accionEntrada(Entrada entrada) {
+
+        System.out.println("entrada: "+ entrada);
         if (entrada==Entrada.clic){
-            System.out.println("Casilla  clicada en x: " + posX + " y: " +posY);
+            //System.out.println("Casilla  clicada en x: " + posX + " y: " +posY);
             dibujar();
 
         }
 
         if (entrada==Entrada.arrastrar){
-            System.out.println("Arrastre en casilla en x: " + posX + " y: " +posY);
+            //System.out.println("Arrastre en casilla en x: " + posX + " y: " +posY);
         }
 
         if (entrada==Entrada.clicklargo){
-            System.out.println("Longclick en casilla en x: " + posX + " y: " +posY);
+            //System.out.println("Longclick en casilla en x: " + posX + " y: " +posY);
         }
     }
 

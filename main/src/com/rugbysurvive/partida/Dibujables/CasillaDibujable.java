@@ -24,7 +24,7 @@ public class CasillaDibujable implements Dibujable {
 
     @Override
     public String getTextura() {
-        return "casilla.png";
+        return "casellalila.png";
     }
 
     @Override

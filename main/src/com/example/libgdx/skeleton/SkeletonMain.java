@@ -41,7 +41,7 @@ public class SkeletonMain extends Game {
         ArrayList<String> nombresTexturas = new ArrayList<String>();
         nombresTexturas.add("jugador1.png");
         nombresTexturas.add("campo.png");
-        nombresTexturas.add("casilla.png");
+        nombresTexturas.add("casellalila.png");
         botons.add(new Boton(0,350, Entrada.finalizar));
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
         this.gestorEntrada = new GestorEntrada(this.gestorGrafico.getCamara().getOrthographicCamera(),botons,this.gestorGrafico);
@@ -54,7 +54,7 @@ public class SkeletonMain extends Game {
      //   campoDibujable = new CampoDibujable(this.gestorGrafico,0,0);
         this.prueba = new Prueba(this.gestorGrafico,0,0,10000,"campo.png");
         this.prueba2 = new Prueba(this.gestorGrafico,2,4,200,"jugador1.png");
-        this.prueba3 = new Prueba(this.gestorGrafico,1,4,300,"casilla.png");
+        //this.prueba3 = new Prueba(this.gestorGrafico,1,4,300,"casilla.png");
 
     }
 
@@ -67,7 +67,7 @@ public class SkeletonMain extends Game {
     public void render() {
 
      this.gestorGrafico.dibujar();
-        this.prueba3.render();
+        //this.prueba3.render();
         this.prueba.render();
         this.prueba2.render();
     }

@@ -65,8 +65,8 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         Vector3 touchPos = new Vector3();
         touchPos.set(screenX, screenY,0);
         camera.unproject(touchPos);
-        System.out.println("Posicion tocada: x: " + screenX + " y: "+ screenY );
-        System.out.println("Posicion mundo: x: " + touchPos.x + " y: "+ touchPos.y );
+        //System.out.println("Posicion tocada: x: " + screenX + " y: "+ screenY );
+        //System.out.println("Posicion mundo: x: " + touchPos.x + " y: "+ touchPos.y );
 
         //recorrer lista de botones
         for (Boton iterador : botons){
@@ -87,6 +87,26 @@ public class GestorEntrada implements GestureDetector.GestureListener {
      * acciones que se ejecutaran al realizar un click en la pantalla
      */
     public boolean touchDown(float screenX, float screenY, int pointer, int button) {
+
+        /*Vector3 touchPos = new Vector3();
+        touchPos.set(screenX, screenY,0);
+        camera.unproject(touchPos);
+        //System.out.println("Posicion tocada: x: " + screenX + " y: "+ screenY );
+        //System.out.println("Posicion mundo: x: " + touchPos.x + " y: "+ touchPos.y );
+
+        for (Boton iterador : botons){
+            if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
+                campo.accionEntrada(iterador.obtenerEntrada());
+                return false;
+            }
+        }
+
+        campo.accionEntrada(Entrada.clic,touchPos.x, touchPos.y );*/
+        return false;
+    }
+
+    @Override
+    public boolean tap(float screenX, float screenY, int i, int i2) {
         Vector3 touchPos = new Vector3();
         touchPos.set(screenX, screenY,0);
         camera.unproject(touchPos);
@@ -101,11 +121,6 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         }
 
         campo.accionEntrada(Entrada.clic,touchPos.x, touchPos.y );
-        return false;
-    }
-
-    @Override
-    public boolean tap(float v, float v2, int i, int i2) {
         return false;
     }
 
@@ -124,8 +139,8 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         Vector3 touchPos = new Vector3();
         touchPos.set(screenX, screenY,0);
         camera.unproject(touchPos);
-        System.out.println("Posicion tocada: x: " + screenX + " y: "+ screenY );
-        System.out.println("Posicion mundo: x: " + touchPos.x + " y: "+ touchPos.y );
+        //System.out.println("Posicion tocada: x: " + screenX + " y: "+ screenY );
+        //System.out.println("Posicion mundo: x: " + touchPos.x + " y: "+ touchPos.y );
 
         campo.accionEntrada(Entrada.arrastrar, touchPos.x, touchPos.y);
         return false;
