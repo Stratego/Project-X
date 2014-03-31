@@ -4,8 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.Color;
+import android.graphics.*;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -25,6 +24,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -50,10 +50,6 @@ public class CreateUser extends Activity {
 
         escudo.setAdapter(new Adapter(this,getEscudos()));
         camiseta.setAdapter(new Adapter(this, getCamisetas()));
-
-
-
-
     }
 
     private List<String> getEscudos(){
@@ -103,11 +99,13 @@ public class CreateUser extends Activity {
     private class Adapter extends PagerAdapter{
         private List<String> list;
         private Context ctx;
-        private int positionSelected = 1;
+        private int positionSelect = -1;
+        private HashMap<Integer,View> elements;
 
         public Adapter (Context ctx, List<String> list){
             this.ctx = ctx ;
             this.list = list;
+            elements = new HashMap<Integer, View>();
         }
 
         @Override
@@ -122,24 +120,16 @@ public class CreateUser extends Activity {
         public Object instantiateItem(ViewGroup collection, final int position) {
             ImageView view = new ImageView(ctx);
 
+
             Bitmap bitmap = Utils.getBitmapFromAssets(ctx,list.get(position));
 
-            if(positionSelected == position){
-                view.setBackgroundColor(Color.YELLOW);
-
-            }else{
-                view.setBackgroundColor(Color.TRANSPARENT);
-            }
 
             view.setImageBitmap(bitmap);
-            //TODO hacer un indicador de seleccionado
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    setPositionSelected(position);
-                }
-            });
-            ((ViewPager) collection).addView(view, 0);
+            //view.setImageResource(R.drawable.selector_imagen);
+            view.setOnClickListener(new ClickItem(this,position));
+            ((ViewPager) collection).addView(view, position);
+            elements.put(position,view);
+
 
             return view;
         }
@@ -153,13 +143,41 @@ public class CreateUser extends Activity {
             return 0.32f;
         }
 
-        public void setPositionSelected(int positionSelected) {
-            this.positionSelected = positionSelected;
-            Log.e("position",positionSelected+"");
+        private void setSelectPosition(int position){
+            this.positionSelect = position;
+
+            for(int i = 0; i != elements.size();i++){
+                View view = elements.get(i);
+                if(positionSelect == i){
+                    view.setSelected(true);
+                }else{
+                    view.setSelected(false);
+                }
+                view.invalidate();
+            }
+
+        }
+        public int getPositionSelect(){
+            return this.positionSelect;
+        }
+
+    }
+
+    private class ClickItem implements View.OnClickListener{
+        private int position;
+        private Adapter padre;
+        public ClickItem(Adapter padre,int position){
+            this.position = position;
+            this.padre = padre;
+        }
+
+        @Override
+        public void onClick(View v) {
+            padre.setSelectPosition(position);
+            v.invalidate();
 
         }
     }
-
 
     private class OnClickButton implements View.OnClickListener{
 
@@ -168,6 +186,14 @@ public class CreateUser extends Activity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.btnAceptar:
+
+                    String nameE = nameEquipo.getText().toString();
+                    String nameU = nameUser.getText().toString();
+                    int selectedC = ((Adapter)camiseta.getAdapter()).getPositionSelect();
+                    int selectedE = ((Adapter)escudo.getAdapter()).getPositionSelect();
+
+                    //TODO BBDD
+
                     SharedPreferences preferencias = getSharedPreferences("firstEje", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor=preferencias.edit();
                     editor.putBoolean("first", false);
