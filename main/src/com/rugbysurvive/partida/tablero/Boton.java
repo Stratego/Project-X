@@ -18,7 +18,7 @@ public class Boton implements GestionEntrada{
      */
     private float posY;
 
-    private Entrada entrada;  // USA LA INFORMACION QUE YA DISPONES!!!
+    private Entrada entrada;
     /**
      * indicara si el elemento esta selecionado
      */
@@ -49,6 +49,7 @@ public class Boton implements GestionEntrada{
 
         if (posX >= this.posX && posX <= this.posX+64){
             if (posY >= this.posY && posY <= this.posY+64){
+
                 selecionado=true;
             }else {
                 selecionado=false;

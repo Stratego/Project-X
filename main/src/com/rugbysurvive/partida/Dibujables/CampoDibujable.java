@@ -1,30 +1,32 @@
 package com.rugbysurvive.partida.Dibujables;
 
+import android.util.Log;
 import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.gestores.Dibujante;
 
 /**
  * Created by Victor on 28/03/14.
  */
-public class CasillaDibujable implements Dibujable {
+public class CampoDibujable implements Dibujable {
 
     int posicionX;
     int posicionY;
     int ID;
     Dibujante dibujante;
 
-    public CasillaDibujable(Dibujante dibujante,int posicionX,int posicionY){
+    public CampoDibujable(Dibujante dibujante,int posicionX,int posicionY){
 
         this.posicionX = posicionX;
         this.posicionY = posicionY;
         ID =  dibujante.añadirDibujable(this);
         this.dibujante = dibujante;
+        Log.i("dibujable","AÑADIR TEXTURA");
     }
 
 
     @Override
     public String getTextura() {
-        return "casellalila.png";
+        return "campo1.png";
     }
 
     @Override
