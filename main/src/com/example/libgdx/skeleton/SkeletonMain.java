@@ -53,8 +53,8 @@ public class SkeletonMain extends Game {
 
      //   campoDibujable = new CampoDibujable(this.gestorGrafico,0,0);
        this.prueba = new Prueba(this.gestorGrafico,1,1,10000,"campo1.png");
-       this.prueba2 = new Prueba(this.gestorGrafico,2,4,200,"jugador1.png");
-       this.prueba3 = new Prueba(this.gestorGrafico,1,4,300,"casilla.png");
+       this.prueba2 = new Prueba(this.gestorGrafico,2,4,1000,"jugador1.png");
+       this.prueba3 = new Prueba(this.gestorGrafico,1,4,1000,"casilla.png");
 
     }
 

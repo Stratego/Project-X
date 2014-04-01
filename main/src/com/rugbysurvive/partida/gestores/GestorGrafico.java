@@ -1,6 +1,6 @@
 package com.rugbysurvive.partida.gestores;
 
-//import android.util.Log;
+import android.util.Log;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
