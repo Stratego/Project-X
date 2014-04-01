@@ -25,6 +25,7 @@ public class GestorGrafico implements Dibujante{
     protected ArrayList <Integer> listaDibujables;
     protected String TAG = "GESTOR GRAFICO";
     protected int vueltas = 0;
+    protected static Dibujante instancia = null;
 
     public GestorGrafico(ArrayList<String> nombresTexturas,int tamañoCasilla)
     {
@@ -36,11 +37,15 @@ public class GestorGrafico implements Dibujante{
         this.generarTexturas(nombresTexturas);
         this.tamañoCasilla = tamañoCasilla;
         this.listaDibujables = new ArrayList<Integer>();
+        instancia = (Dibujante)this;
 
     }
 
 
-
+    public static Dibujante generarDibujante()
+    {
+        return instancia;
+    }
     public void dibujar() {
 
         this.camara.render(this.sprite);

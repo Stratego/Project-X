@@ -52,15 +52,9 @@ public class SkeletonMain extends Game {
         Gdx.input.setInputProcessor(multiplexer);
 
      //   campoDibujable = new CampoDibujable(this.gestorGrafico,0,0);
-<<<<<<< HEAD
-       this.prueba = new Prueba(this.gestorGrafico,1,1,10000,"campo1.png");
-       this.prueba2 = new Prueba(this.gestorGrafico,2,4,1000,"jugador1.png");
-       this.prueba3 = new Prueba(this.gestorGrafico,1,4,1000,"casilla.png");
-=======
-        this.prueba = new Prueba(this.gestorGrafico,0,0,10000,"campo.png");
-        this.prueba2 = new Prueba(this.gestorGrafico,2,4,200,"jugador1.png");
+        this.prueba = new Prueba(0,0,10000,"campo.png");
+        this.prueba2 = new Prueba(2,4,200,"jugador1.png");
         //this.prueba3 = new Prueba(this.gestorGrafico,1,4,300,"casilla.png");
->>>>>>> 741a9af5bcb7ac2eff8e96ff87d6ed7741c36fbf
 
     }
 

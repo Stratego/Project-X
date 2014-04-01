@@ -10,16 +10,15 @@ public class Prueba implements Dibujable{
     int ID;
     int contador;
     int current_contador;
-    Dibujante dibujante;
     String textura;
 
-    public Prueba(Dibujante dibujante,int posicionX,int posicionY,int contador,String textura){
+    public Prueba(int posicionX,int posicionY,int contador,String textura){
         this.contador = contador;
         this.posicionX = posicionX;
         this.posicionY = posicionY;
-        ID =  dibujante.añadirDibujable(this);
         this.current_contador = 0;
-        this.dibujante = dibujante;
+        this.ID = GestorGrafico.generarDibujante().añadirDibujable(this);
+
         this.textura = textura;
     }
 
@@ -29,7 +28,7 @@ public class Prueba implements Dibujable{
           this.current_contador++;
           if(this.current_contador == contador)
           {
-            this.dibujante.eliminarTextura(ID);
+            GestorGrafico.generarDibujante().eliminarTextura(ID);
           }
      }
     @Override
