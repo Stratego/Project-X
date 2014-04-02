@@ -18,24 +18,30 @@ public class ConstantesJuego {
     protected  static final int TAMAÑO_BASE = 1;
     protected  static final int TAMAÑO_MEDIANO = 2;
     protected  static final int TAMAÑO_GRANDE = 3;
-    protected static ConstantesJuego constantes = new ConstantesJuego();
+    protected static ConstantesJuego constantes ;
     protected ResolucionPantalla resolucionPantalla;
+    protected double multiplicado = 1;
+
+
     public ConstantesJuego()
     {
-        resolucionPantalla = ResolucionPantalla.pequeña;;
+        this.resolucionPantalla = ResolucionPantalla.pequeña;
+        constantes = this;
     }
     public static ConstantesJuego variables(){return constantes;}
-    public void setResolucionPantalla(ResolucionPantalla resolucionPantalla){this.resolucionPantalla = resolucionPantalla;};
-    public int getAnchoCasilla(){return generarTamaño(ANCHO_CASILLA);}
-    public int getLargoCasilla(){return generarTamaño(ALTO_CASILLA);}
-
+    public void setResolucionPantalla(ResolucionPantalla resolucionPantalla){this.resolucionPantalla = resolucionPantalla;}
+    public double getAnchoCasilla(){return ANCHO_CASILLA * this.multiplicado;}
+    public double getLargoCasilla(){return (double)(ALTO_CASILLA* this.multiplicado);}
+    public void sumarMultiplicado(){this.multiplicado = this.multiplicado + 0.002;}
+    public void restarMultiplicado(){this.multiplicado = this.multiplicado - 0.002;}
+    public double getMultiplicado(){return this.multiplicado;}
     public int getAnchoBoton(){return generarTamaño(ANCHO_BOTON);}
     public int getAltoBoton(){return generarTamaño(ALTO_BOTON);}
-    public int getMultiplicador(){return this.multiplicador();}
+    public double getMultiplicador(){return this.multiplicado;}
 
     protected int generarTamaño(int tamaño)
     {
-        switch(resolucionPantalla)
+        switch(this.resolucionPantalla)
         {
            case pequeña:
             return tamaño * TAMAÑO_BASE;
@@ -50,7 +56,7 @@ public class ConstantesJuego {
     protected int multiplicador ()
     {
 
-        switch(resolucionPantalla)
+        switch(this.resolucionPantalla)
         {
             case pequeña:
                 return TAMAÑO_BASE;

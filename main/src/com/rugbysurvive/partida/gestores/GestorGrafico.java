@@ -64,7 +64,7 @@ public class GestorGrafico implements Dibujante{
         tiposDibujo.add(TipoDibujo.interficieUsuario);
 
         //Log.i(TAG,"num iteraciones: "+this.vueltas);
-
+        ConstantesJuego constantes = ConstantesJuego.variables();
         for(int i=0;i<3;i++)
         {
             for(TipoImagen imagen : this.dibujables)
@@ -74,21 +74,29 @@ public class GestorGrafico implements Dibujante{
                     Texture textura = this.manager.get(imagen.dibujable.getTextura());
 
 
-                    int posicionX = this.filtroX(imagen.dibujable.getPosicionX());
-                    int posicionY = this.filtroY(imagen.dibujable.getPosicionY());
 
                     if(TipoDibujo.interficieUsuario == tiposDibujo.get(i)){
+
+                        int posicionX = imagen.dibujable.getPosicionX();
+                        int posicionY = imagen.dibujable.getPosicionY();
                         posicionX = posicionX - this.camara.getVariationX();
                         posicionY = posicionY + this.camara.getVariationY();
+                        double ancho = textura.getWidth();
+                        double alto = textura.getHeight();
+                        this.sprite.draw(textura,posicionX,posicionY);
+
                     }
+                    else
+                    {
+                        double posicionX = this.filtroX(imagen.dibujable.getPosicionX());
+                        double posicionY = this.filtroY(imagen.dibujable.getPosicionY());
 
-                    ConstantesJuego constantes = ConstantesJuego.variables();
+                        double multiplicador = constantes.getMultiplicador();
+                        double ancho = textura.getWidth()*multiplicador;
+                        double alto = textura.getHeight()*multiplicador;
+                        this.sprite.draw(textura,(float)posicionX,(float)posicionY,(float)ancho,(float)alto);
 
-                    int multiplicador = constantes.getMultiplicador();
-                    int ancho = textura.getWidth()*multiplicador;
-                    int alto = textura.getHeight()*multiplicador;
-
-                    this.sprite.draw(textura,posicionX,posicionY,ancho,alto);
+                    }
 
                 }
 
@@ -142,17 +150,19 @@ public class GestorGrafico implements Dibujante{
         this.manager.finishLoading();
     }
 
-    private int filtroX(int posicionX)
+    private double filtroX(double posicionX)
     {
-        if(posicionX > 0 && posicionX < this.tamañoCasilla){
+        double tamañoCasilla = ConstantesJuego.variables().getAnchoCasilla();
+        if(posicionX > 0 && posicionX < tamañoCasilla){
             posicionX = posicionX * tamañoCasilla;
         }
         return posicionX;
     }
 
-    private int filtroY(int posicionY)
+    private double filtroY(double posicionY)
     {
-        if(posicionY > 0 && posicionY < this.tamañoCasilla){
+        double tamañoCasilla = ConstantesJuego.variables().getLargoCasilla();
+        if(posicionY > 0 && posicionY < tamañoCasilla){
             posicionY = posicionY * tamañoCasilla;
         }
         return posicionY;

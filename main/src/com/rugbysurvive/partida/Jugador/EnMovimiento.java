@@ -4,10 +4,7 @@ import com.rugbysurvive.partida.Simulador.Accion;
 import com.rugbysurvive.partida.Simulador.Simulador;
 
 import java.util.List;
-<<<<<<< HEAD
 
-=======
->>>>>>> 6c355688e8ef14893dd6b0fa0e567ff991c48511
 
 /**
  * Created by Victor on 27/03/14.
@@ -56,11 +53,10 @@ public class EnMovimiento implements Estado {
         return null;
     }
 
-<<<<<<< HEAD
-=======
+
     @Override
     public void setAccion(Accion accion) {
->>>>>>> 6c355688e8ef14893dd6b0fa0e567ff991c48511
+    }
 
   //  public void setAccion(Objects accion) {
 

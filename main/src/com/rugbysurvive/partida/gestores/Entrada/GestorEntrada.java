@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.gestores.Dibujante;
 import com.rugbysurvive.partida.tablero.Boton;
 import com.rugbysurvive.partida.tablero.Campo;
@@ -151,11 +152,28 @@ public class GestorEntrada implements GestureDetector.GestureListener {
 
     @Override
     public boolean zoom(float v, float v2) {
-        return false;
+        System.out.println("ZOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOM");
+        float distancia = (v2-v);
+        System.out.println("distancia : "+distancia );
+
+        if(distancia >= 0)
+        {
+             for(int i=0 ;i<distancia/100;i++){
+                    ConstantesJuego.variables().sumarMultiplicado();
+                }
+        }
+        else
+        {
+            for(int i=0 ;i<-(distancia/100);i++){
+                ConstantesJuego.variables().restarMultiplicado();
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean pinch(Vector2 vector2, Vector2 vector22, Vector2 vector23, Vector2 vector24) {
+
         return false;
     }
 
