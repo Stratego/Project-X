@@ -1,5 +1,6 @@
 package com.rugbysurvive.partida.tablero;
 
+import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
 import com.rugbysurvive.partida.gestores.Entrada.*;
@@ -33,7 +34,7 @@ public class Campo implements GestionEntrada,Dibujable {
     public Campo(Dibujante dibujante)  {
         this.dibujante = dibujante;
         dibujante.añadirDibujable(this,TipoDibujo.fondo);
-        this.dibujarTablero(dibujante);
+        this.dibujarTablero();
     }
 
 
@@ -41,16 +42,12 @@ public class Campo implements GestionEntrada,Dibujable {
     /**
      * Dibujamos el tablero de juego
      */
-    public void dibujarTablero(Dibujante dibujante){
-        float x = 0;
-        float y = 0;
+    protected void dibujarTablero(){
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 30; j++) {
-                casillas[i][j]=new Casilla(x,y,dibujante);
-                x= x+64;
+                casillas[i][j]=new Casilla(i,j);
             }
-            x=0;
-            y= y+64;
+
 
         }
     }
@@ -58,16 +55,16 @@ public class Campo implements GestionEntrada,Dibujable {
 
     @Override
     public void accionEntrada(Entrada entrada, float posX, float posY) {
-        for (int i = 0; i < 20; i++) {
+
+       int anchura = ConstantesJuego.variables().getAnchoCasilla();
+       int altura = ConstantesJuego.variables().getLargoCasilla();
+       for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 30; j++) {
-                if (casillas[i][j].esSeleccionado(posX, posY)){
-                    casillas[i][j].accionEntrada(entrada);
+                    casillas[i][j].accionEntrada(entrada,(int)(posX/anchura),(int)(posY/altura));
                 }
 
             }
-
         }
-    }
 
     @Override
     public void accionEntrada(Entrada entrada) {

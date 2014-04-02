@@ -3,7 +3,7 @@ package com.rugbysurvive.partida.Jugador;
 import com.rugbysurvive.partida.Simulador.*;
 
 import java.util.List;
-import java.util.Objects;
+
 
 /**
  * Created by Victor on 27/03/14.
@@ -52,10 +52,10 @@ public class EnMovimiento implements Estado {
         return null;
     }
 
-    @Override
-    public void setAccion(Objects accion) {
 
-    }
+  //  public void setAccion(Objects accion) {
+
+    //}
 
     @Override
     public void setJugador(Jugador jugador) {

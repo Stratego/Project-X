@@ -6,6 +6,8 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.input.GestureDetector;
 
 
+import com.rugbysurvive.partida.ConstantesJuego;
+import com.rugbysurvive.partida.ResolucionPantalla;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestorEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
@@ -24,7 +26,7 @@ public class SkeletonMain extends Game {
     GestorEntrada gestorEntrada;
 
     private ArrayList<Boton> botons= new ArrayList <Boton>();
-
+    ConstantesJuego constantes;
 
     Prueba prueba;
     Prueba prueba2;
@@ -36,7 +38,8 @@ public class SkeletonMain extends Game {
     public void create() {
 
 
-
+        this.constantes = new ConstantesJuego();
+        this.constantes.setResolucionPantalla(ResolucionPantalla.pequeña);
         ArrayList<String> nombresTexturas = new ArrayList<String>();
         nombresTexturas.add("jugador1.png");
         nombresTexturas.add("campo1.png");

@@ -2,7 +2,7 @@ package com.rugbysurvive.partida.Jugador;
 
 import com.rugbysurvive.partida.Simulador.*;
 
-import java.util.Objects;
+
 
 /**
  * Created by Victor on 27/03/14.
@@ -25,6 +25,6 @@ public interface Estado {
     public void setBloqueado(boolean bloqueado);
 
     public Accion getAccion();
-    public void setAccion(Objects accion);
+    //public void setAccion(Objects accion);
 
 }

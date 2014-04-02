@@ -3,6 +3,7 @@ package com.rugbysurvive.partida.gestores;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 
 import java.util.ArrayList;
@@ -81,7 +82,14 @@ public class GestorGrafico implements Dibujante{
                         posicionY = posicionY + this.camara.getVariationY();
                     }
 
-                    this.sprite.draw(textura,posicionX,posicionY);
+                    ConstantesJuego constantes = ConstantesJuego.variables();
+
+                    int multiplicador = constantes.getMultiplicador();
+                    int ancho = textura.getWidth()*multiplicador;
+                    int alto = textura.getHeight()*multiplicador;
+
+                    this.sprite.draw(textura,posicionX,posicionY,ancho,alto);
+
                 }
 
             }
