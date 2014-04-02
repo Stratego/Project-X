@@ -1,7 +1,9 @@
 package com.rugbysurvive.partida.tablero;
 
+
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.gestores.Dibujable;
+
 import com.rugbysurvive.partida.gestores.Dibujante;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
@@ -38,6 +40,8 @@ public class Casilla implements GestionEntrada {
     public Casilla (float posX, float posY) {
         this.posY = posY;
         this.posX = posX;
+
+
 
     }
 

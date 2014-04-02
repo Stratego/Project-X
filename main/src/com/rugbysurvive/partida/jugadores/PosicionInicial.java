@@ -1,9 +1,9 @@
 package com.rugbysurvive.partida.jugadores;
 
+import com.rugbysurvive.partida.Jugador.Jugador;
+
 /**
- * Created by aitor on 27/03/14.
- * Gestiona la informacion del posicionamiento de los jugadores
- * para las alineaciones
+ * Created by Victor on 2/04/14.
  */
 public class PosicionInicial {
 
