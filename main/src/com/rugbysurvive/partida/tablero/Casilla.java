@@ -1,6 +1,6 @@
 package com.rugbysurvive.partida.tablero;
 
-import com.rugbysurvive.partida.gestores.Dibujable;
+import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.gestores.Dibujante;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
@@ -21,6 +21,7 @@ public class Casilla implements GestionEntrada {
      */
     private float posY;
 
+    private Jugador jugador;
 
     /**
      * indicara si el elemento esta seleccionado
@@ -39,6 +40,9 @@ public class Casilla implements GestionEntrada {
         this.posY = posY;
         this.posX = posX;
         this.dibujante = dibujante;
+
+        /*Este objeto solo se usara para hacer pruebas*/
+        this.jugador = new Jugador(this);
     }
 
 

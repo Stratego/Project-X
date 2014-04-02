@@ -1,8 +1,6 @@
 package com.rugbysurvive.partida.Jugador;
 
-import com.rugbysurvive.partida.Simulador.*;
-
-import java.util.Objects;
+import com.rugbysurvive.partida.Simulador.Accion;
 
 /**
  * Created by Victor on 27/03/14.
@@ -47,7 +45,17 @@ public class SinPelota implements Estado {
     }
 
     @Override
-    public void setAccion(Objects accion) {
+    public void setAccion(Accion accion) {
+
+    }
+
+    @Override
+    public boolean getPaseOChute() {
+        return false;
+    }
+
+    @Override
+    public void setPaseOChute(boolean paseOChute) {
 
     }
 

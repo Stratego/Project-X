@@ -1,8 +1,7 @@
 package com.rugbysurvive.partida.Jugador;
 
-import com.rugbysurvive.partida.Simulador.*;
-
-import java.util.Objects;
+import com.rugbysurvive.partida.Simulador.Accion;
+import com.rugbysurvive.partida.Simulador.Simulador;
 
 /**
  * Created by Victor on 27/03/14.
@@ -52,9 +51,20 @@ public class ConPelota implements Estado {
     }
 
     @Override
-    public void setAccion(Objects accion) {
+    public void setAccion(Accion accion) {
 
     }
+
+    @Override
+    public boolean getPaseOChute() {
+        return false;
+    }
+
+    @Override
+    public void setPaseOChute(boolean paseOChute) {
+
+    }
+
 
     @Override
     public void setJugador(Jugador jugador) {
