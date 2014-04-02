@@ -1,9 +1,7 @@
 package com.rugbysurvive.partida.tablero;
 
-import android.util.Log;
-import com.rugbysurvive.partida.Dibujables.CasillaDibujable;
+import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.gestores.Dibujante;
-
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
 
@@ -31,7 +29,6 @@ public class Casilla implements GestionEntrada {
 
     Dibujante dibujante;
 
-    CasillaDibujable casillaDibujable;
 
     /**
      * Constructor de  casilla
@@ -59,19 +56,20 @@ public class Casilla implements GestionEntrada {
 
     @Override
     public void accionEntrada(Entrada entrada) {
+
+        System.out.println("entrada: "+ entrada);
         if (entrada==Entrada.clic){
-            System.out.println("Casilla  clicada en x: " + posX + " y: " +posY);
-            Log.i("dibujable", "clic recibido");
-            casillaDibujable = new CasillaDibujable(dibujante,(int)this.posX,(int)this.posY);
+            //System.out.println("Casilla  clicada en x: " + posX + " y: " +posY);
+
 
         }
 
         if (entrada==Entrada.arrastrar){
-            System.out.println("Arrastre en casilla en x: " + posX + " y: " +posY);
+            //System.out.println("Arrastre en casilla en x: " + posX + " y: " +posY);
         }
 
         if (entrada==Entrada.clicklargo){
-            System.out.println("Longclick en casilla en x: " + posX + " y: " +posY);
+            //System.out.println("Longclick en casilla en x: " + posX + " y: " +posY);
         }
     }
 
@@ -85,20 +83,15 @@ public class Casilla implements GestionEntrada {
             if (posY >= this.posY && posY <= this.posY+64){
                 System.out.println("Valores casilla x: " + this.posX + " y: " +this.posY);
                 System.out.println("Casilla en la posicion x: " + posX + " y: " +posY +" selecionada");
-                //casillaDibujable = new CasillaDibujable(dibujante,(int)posX,(int)posY);
-
+                selecionado=true;
             }else {
                 selecionado=false;
             }
         }
-        //System.out.println("Casilla en la posicion x: " + posX + " y: " +posY +" selecionada");
         return selecionado;
     }
 
 
-    public void dibujar (){
-        casillaDibujable = new CasillaDibujable(dibujante,(int)this.posX,(int)this.posY);
-    }
 
 
     public float getPosX() {
@@ -116,6 +109,7 @@ public class Casilla implements GestionEntrada {
     public void setPosY(float posY) {
         this.posY = posY;
     }
+
 
 
 }

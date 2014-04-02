@@ -1,5 +1,7 @@
 package com.rugbysurvive.partida.gestores;
 
+import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+
 /**
  * Created by aitor on 26/03/14.
  * La clase que contenga este interfaz debera gestionar todas las clases
@@ -18,7 +20,7 @@ public interface Dibujante {
      * @return identificar que debera ser usado para borrar la referencia
      *         posteriormente
      */
-    public int añadirDibujable(Dibujable dibujable);
+    public int añadirDibujable(Dibujable dibujable,TipoDibujo tipoDibujo);
 
     /**
      * Elimina la referencia de la clase que envia la identificacion

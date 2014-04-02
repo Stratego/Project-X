@@ -1,11 +1,12 @@
 package com.rugbysurvive.partida.gestores;
 
-import android.util.Log;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -18,14 +19,17 @@ public class GestorGrafico implements Dibujante{
 
     protected int contador;
     protected AssetManager manager;
-    protected HashMap<Integer,Dibujable> dibujables ;
+    protected ArrayList<TipoImagen> dibujables ;
     protected SpriteBatch sprite;
     protected Camara camara;
     protected int tamañoCasilla;
-    protected ArrayList <Integer> listaDibujables;
+
     protected String TAG = "GESTOR GRAFICO";
     protected int vueltas = 0;
     protected static Dibujante instancia = null;
+    protected int ultimaPosicionFondos ;
+
+
 
     public GestorGrafico(ArrayList<String> nombresTexturas,int tamañoCasilla)
     {
@@ -33,11 +37,13 @@ public class GestorGrafico implements Dibujante{
         this.camara =  new Camara(1000,1000);
         this.sprite = new SpriteBatch();
         this.manager =  new AssetManager();
-        this.dibujables = new HashMap<Integer, Dibujable>();
+        this.dibujables = new ArrayList<TipoImagen>();
         this.generarTexturas(nombresTexturas);
         this.tamañoCasilla = tamañoCasilla;
-        this.listaDibujables = new ArrayList<Integer>();
+
+
         instancia = (Dibujante)this;
+        this.ultimaPosicionFondos = 0;
 
     }
 
@@ -50,16 +56,35 @@ public class GestorGrafico implements Dibujante{
 
         this.camara.render(this.sprite);
         this.sprite.begin();
-        this.vueltas++;
+
+        ArrayList<TipoDibujo> tiposDibujo = new ArrayList<TipoDibujo>();
+        tiposDibujo.add(TipoDibujo.fondo);
+        tiposDibujo.add(TipoDibujo.elementosJuego);
+        tiposDibujo.add(TipoDibujo.interficieUsuario);
+
         //Log.i(TAG,"num iteraciones: "+this.vueltas);
-        for(int i=0;i<this.listaDibujables.size();i++)
+
+        for(int i=0;i<3;i++)
         {
-            Dibujable dibujable =  this.dibujables.get(this.listaDibujables.get(i));
-            //Log.i(TAG,dibujable.getTextura());
-            Texture textura = this.manager.get(dibujable.getTextura());
-            int posicionX = this.filtroX(dibujable.getPosicionX());
-            int posicionY = this.filtroY(dibujable.getPosicionY());
-            this.sprite.draw(textura,posicionX,posicionY);
+            for(TipoImagen imagen : this.dibujables)
+             {
+                if(imagen.tipoDibujo == tiposDibujo.get(i))
+                {
+                    Texture textura = this.manager.get(imagen.dibujable.getTextura());
+
+
+                    int posicionX = this.filtroX(imagen.dibujable.getPosicionX());
+                    int posicionY = this.filtroY(imagen.dibujable.getPosicionY());
+
+                    if(TipoDibujo.interficieUsuario == tiposDibujo.get(i)){
+                        posicionX = posicionX - this.camara.getVariationX();
+                        posicionY = posicionY + this.camara.getVariationY();
+                    }
+
+                    this.sprite.draw(textura,posicionX,posicionY);
+                }
+
+            }
         }
         this.sprite.end();
 
@@ -78,42 +103,25 @@ public class GestorGrafico implements Dibujante{
     @Override
     public void eliminarTextura(int ID) {
         //Log.i("BORRAR","BORRANDO antes depurar: "+ID);
-        if(this.dibujables.containsKey(ID)){
-            this.borrarElementoLista(ID);
-            this.dibujables.remove(ID);
-            //Log.i("BORRAR","BORRANDO");
+        for( TipoImagen tipoImagen:this.dibujables)
+        {
+            if(tipoImagen.ID == ID){
+                this.dibujables.remove(tipoImagen);
+            }
         }
+
+            //Log.i("BORRAR","BORRANDO");
+
     }
     @Override
-    public int añadirDibujable(Dibujable dibujable)
+    public int añadirDibujable(Dibujable dibujable,TipoDibujo tipoDibujo)
     {
         this.contador++;
-        this.dibujables.put(this.contador,dibujable);
-        this.listaDibujables.add(this.contador);
+        this.dibujables.add(new TipoImagen(tipoDibujo,dibujable,this.contador));
         return this.contador;
     }
 
-    private void borrarElementoLista(int ID)
-    {
-        boolean encontrado = false;
-        int i = 0;
-        int valor = 0;
 
-
-        while(!encontrado && this.listaDibujables.size() > i ){
-            valor = this.listaDibujables.get(i);
-            if(valor == ID)
-            {
-                valor = i;
-                encontrado = true;
-            }
-            i++;
-        }
-        if(encontrado)
-        {
-            this.listaDibujables.remove(valor);
-        }
-    }
 
     private void generarTexturas(ArrayList<String> texturas) {
 
@@ -142,5 +150,18 @@ public class GestorGrafico implements Dibujante{
         return posicionY;
     }
 
+    private class TipoImagen
+    {
+        public TipoDibujo tipoDibujo;
+        public Dibujable dibujable;
+        public int ID;
+
+        public TipoImagen(TipoDibujo tipoDibujo,Dibujable dibujable,int ID)
+        {
+            this.ID = ID;
+            this.tipoDibujo = tipoDibujo;
+            this.dibujable = dibujable;
+        }
+    }
 }
 

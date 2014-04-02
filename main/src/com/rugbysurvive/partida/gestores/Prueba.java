@@ -1,5 +1,7 @@
 package com.rugbysurvive.partida.gestores;
 
+import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+
 /**
  * Created by aitor on 26/03/14.
  */
@@ -17,7 +19,7 @@ public class Prueba implements Dibujable{
         this.posicionX = posicionX;
         this.posicionY = posicionY;
         this.current_contador = 0;
-        this.ID = GestorGrafico.generarDibujante().añadirDibujable(this);
+        this.ID = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
 
         this.textura = textura;
     }

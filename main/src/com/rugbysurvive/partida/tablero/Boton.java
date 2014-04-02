@@ -58,20 +58,20 @@ public class Boton implements GestionEntrada{
         return selecionado;
     }
 
-       public Entrada obtenerEntrada()
-       {
-            return entrada;
-        }
+    public Entrada obtenerEntrada()
+    {
+        return entrada;
+    }
 
-        @Override
-        public void accionEntrada(Entrada entrada, float posX, float posY) {
+    @Override
+    public void accionEntrada(Entrada entrada, float posX, float posY) {
 
-        }
+    }
 
-        @Override
-        public void accionEntrada(Entrada entrada) {
+    @Override
+    public void accionEntrada(Entrada entrada) {
 
-        }
+    }
 
 
 }

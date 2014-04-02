@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.rugbysurvive.partida.Dibujables.CasillaDibujable;
 import com.rugbysurvive.partida.gestores.Dibujante;
 import com.rugbysurvive.partida.tablero.Boton;
 import com.rugbysurvive.partida.tablero.Campo;
@@ -41,7 +40,6 @@ public class GestorEntrada implements GestureDetector.GestureListener {
 
     Dibujante dibujante;
 
-    CasillaDibujable casillaDibujable;
 
     /**
      * constructor del elemento GestorImput
