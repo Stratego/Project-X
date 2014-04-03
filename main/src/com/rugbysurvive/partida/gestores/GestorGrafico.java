@@ -150,6 +150,18 @@ public class GestorGrafico implements Dibujante{
         this.manager.finishLoading();
     }
 
+
+    public void bloquearCamara()
+    {
+        this.camara.bloquear();
+    }
+    public void desbloquearCamara(){
+        this.camara.desbloquear();
+    }
+
+
+
+
     private double filtroX(double posicionX)
     {
         double tamañoCasilla = ConstantesJuego.variables().getAnchoCasilla();

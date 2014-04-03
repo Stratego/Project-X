@@ -28,11 +28,7 @@ public class SkeletonMain extends Game {
     private ArrayList<Boton> botons= new ArrayList <Boton>();
     ConstantesJuego constantes;
 
-    Prueba prueba;
-    Prueba prueba2;
-    Prueba prueba3;
-
-
+    int contador = 0;
 
     @Override
     public void create() {
@@ -75,6 +71,7 @@ public class SkeletonMain extends Game {
     public void render() {
 
      this.gestorGrafico.dibujar();
+
         //this.prueba2.render();
     }
 
