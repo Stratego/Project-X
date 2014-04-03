@@ -49,7 +49,9 @@ public class SkeletonMain extends Game {
 
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
         botons.add(new Boton(450,0, Entrada.pase));
-
+        botons.add(new Boton(650,0, Entrada.objeto));
+        botons.add(new Boton(850,0, Entrada.cambiar));
+        botons.add(new Boton(1050,0, Entrada.finalizar));
         this.gestorEntrada = new GestorEntrada(this.gestorGrafico.getCamara().getOrthographicCamera(),botons,this.gestorGrafico);
 
         this.multiplexer = new InputMultiplexer();

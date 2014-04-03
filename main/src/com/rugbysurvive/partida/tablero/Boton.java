@@ -3,7 +3,7 @@ package com.rugbysurvive.partida.tablero;
 import com.badlogic.gdx.Gdx;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.gestores.Dibujable;
-import com.rugbysurvive.partida.gestores.Dibujante;
+import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.gestores.Entrada.*;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 
@@ -53,17 +53,17 @@ public class Boton implements GestionEntrada,Dibujable{
      * @param posY eje y donde se ha realizado la accion /entrada
      */
     public boolean esSeleccionado(float posX, float posY) {
-        System.out.println("X: " + this.posX + " Y: " + this.posY);
-        System.out.println(Gdx.graphics.getHeight());
-        if (posX >= this.posX && posX <= Gdx.graphics.getHeight()+128){
-            System.out.println("Entrada en bucle x del boton");
-            if (posY >= Gdx.graphics.getHeight()-128){
-                //System.out.println("Boton selecionado");
+        //System.out.println("X: " + this.posX + " Y: " + this.posY);
+        //System.out.println(Gdx.graphics.getHeight());
+        if (posX >= this.posX && posX <= this.posX+ConstantesJuego.variables().getAnchoBoton()){
+            if (posY >= Gdx.graphics.getHeight()-ConstantesJuego.variables().getAnchoBoton()){
+                accionEntrada(this.entrada);
+
                 selecionado=true;
-            }else {
-                //System.out.println("Boton no selecionado");
-                selecionado=false;
             }
+        }else {
+            //System.out.println("Boton no selecionado");
+            selecionado=false;
         }
         return selecionado;
     }
@@ -76,11 +76,19 @@ public class Boton implements GestionEntrada,Dibujable{
     @Override
     public void accionEntrada(Entrada entrada, float posX, float posY) {
 
+
+
     }
 
     @Override
     public void accionEntrada(Entrada entrada) {
 
+        System.out.println("Entrada: " + entrada);
+        if (entrada ==Entrada.pase){
+            this.entrada = Entrada.chute;
+        } else if (entrada ==Entrada.chute){
+            this.entrada = Entrada.pase;
+        }
     }
 
 

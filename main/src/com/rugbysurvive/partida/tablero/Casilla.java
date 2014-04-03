@@ -50,7 +50,7 @@ public class Casilla implements GestionEntrada {
     @Override
     public void accionEntrada(Entrada entrada, float posX, float posY) {
 
-           System.out.println("ENTRADAAAAAAA: "+posX+","+posY);
+           System.out.println("Entrada: "+entrada+", "+posX+","+posY);
 
     }
 
