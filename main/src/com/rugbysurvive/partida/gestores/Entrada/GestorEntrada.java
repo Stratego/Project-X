@@ -113,8 +113,9 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         System.out.println("Posicion mundo: x: " + touchPos.x + " y: "+ touchPos.y );
 
         for (Boton iterador : botons){
-            if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
-                campo.accionEntrada(iterador.obtenerEntrada());
+            //if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
+                //campo.accionEntrada(iterador.obtenerEntrada());
+            if (iterador.esSeleccionado(screenX,screenY)){
                 return false;
             }
         }

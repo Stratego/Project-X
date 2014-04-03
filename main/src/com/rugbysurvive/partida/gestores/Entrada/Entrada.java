@@ -5,5 +5,5 @@ package com.rugbysurvive.partida.gestores.Entrada;
  *
  */
 public enum Entrada {
-    clic,clicklargo,arrastrar,cambiar,objeto, minimapa, finalizar
+    clic,clicklargo,arrastrar,cambiar,objeto, minimapa, finalizar, chute, pase
 }
