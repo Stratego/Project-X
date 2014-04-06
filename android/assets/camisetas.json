@@ -1,8 +1,20 @@
 {
     "camisetas": [
-        "Jugador3E4.png",
-        "Jugador3E3.png",
-        "Jugador3E2.png",
-        "Jugador3E1.png"
+        {
+            "normal": "Jugador3E4.png",
+            "focus": "jugador3E4fitxatge.png"
+        },
+        {
+            "normal": "Jugador3E3.png",
+            "focus": "jugador3E3fitxatge.png"
+        },
+        {
+            "normal": "Jugador3E2.png",
+            "focus": "jugador3E2fitxatge.png"
+        },
+        {
+            "normal": "Jugador3E1.png",
+            "focus": "jugador3E1fitxatge.png"
+        }
     ]
 }

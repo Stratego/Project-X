@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.*;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -52,8 +55,8 @@ public class CreateUser extends Activity {
         camiseta.setAdapter(new Adapter(this, getCamisetas()));
     }
 
-    private List<String> getEscudos(){
-        ArrayList<String> list = new ArrayList<String>();
+    private List<String[]> getEscudos(){
+        ArrayList<String[]> list = new ArrayList<String[]>();
         try {
             InputStream input = getAssets().open("escudos.json");
             String content = Utils.getStringFromInputStream(input);
@@ -61,9 +64,11 @@ public class CreateUser extends Activity {
             JSONObject obj = new JSONObject(content);
             JSONArray arr = obj.getJSONArray("escudos");
             for(int i=0;i!=obj.getJSONArray("escudos").length();i++){
-                String path = (String) arr.get(i);
-                Log.e("path", path);
-                list.add(path);;
+                JSONObject element = (JSONObject) arr.get(i);
+                String normal = (String)element.get("normal");
+                String focus = (String)element.get("focus");
+
+                list.add(new String[]{normal,focus});;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,8 +77,8 @@ public class CreateUser extends Activity {
         }
         return list;
     }
-    private List<String> getCamisetas(){
-        ArrayList<String> list = new ArrayList<String>();
+    private List<String[]> getCamisetas(){
+        ArrayList<String[]> list = new ArrayList<String[]>();
         try {
             InputStream input = getAssets().open("camisetas.json");
             String content = Utils.getStringFromInputStream(input);
@@ -81,9 +86,11 @@ public class CreateUser extends Activity {
             JSONObject obj = new JSONObject(content);
             JSONArray arr = obj.getJSONArray("camisetas");
             for(int i=0;i!=obj.getJSONArray("camisetas").length();i++){
-                String path = (String) arr.get(i);
-                Log.e("path", path);
-                list.add(path);;
+                JSONObject element = (JSONObject) arr.get(i);
+                String normal = (String)element.get("normal");
+                String focus = (String)element.get("focus");
+
+                list.add(new String[]{normal,focus});;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -97,12 +104,12 @@ public class CreateUser extends Activity {
 
 
     private class Adapter extends PagerAdapter{
-        private List<String> list;
+        private List<String[]> list;
         private Context ctx;
         private int positionSelect = -1;
         private HashMap<Integer,View> elements;
 
-        public Adapter (Context ctx, List<String> list){
+        public Adapter (Context ctx, List<String[]> list){
             this.ctx = ctx ;
             this.list = list;
             elements = new HashMap<Integer, View>();
@@ -118,20 +125,33 @@ public class CreateUser extends Activity {
         } 
         @Override
         public Object instantiateItem(ViewGroup collection, final int position) {
-            ImageView view = new ImageView(ctx);
+            try{
+                ImageView view = new ImageView(ctx);
+
+                Log.e("focus",list.get(position)[1]);
+                Log.e("normal",list.get(position)[0]);
+
+                Drawable pressed = Utils.getDrawableFromAssets(ctx,list.get(position)[1]);
+                Drawable normal = Utils.getDrawableFromAssets(ctx,list.get(position)[0]);
+
+                StateListDrawable states = new StateListDrawable();
+                states.addState(new int[] {android.R.attr.state_pressed},pressed);
+                states.addState(new int[] {android.R.attr.state_focused},pressed);
+                states.addState(new int[] {android.R.attr.state_selected},pressed);
+                states.addState(new int[]{}, normal);
+
+                view.setImageDrawable(states);
+                //view.setImageResource(R.drawable.selector_imagen);
+                view.setOnClickListener(new ClickItem(this,position));
+                ((ViewPager) collection).addView(view, position);
+                elements.put(position,view);
 
 
-            Bitmap bitmap = Utils.getBitmapFromAssets(ctx,list.get(position));
+                return view;
+            }catch(IOException ex){
 
-
-            view.setImageBitmap(bitmap);
-            //view.setImageResource(R.drawable.selector_imagen);
-            view.setOnClickListener(new ClickItem(this,position));
-            ((ViewPager) collection).addView(view, position);
-            elements.put(position,view);
-
-
-            return view;
+            }
+            return null;
         }
         @Override
         public void destroyItem(ViewGroup collection, int position, Object view) {
