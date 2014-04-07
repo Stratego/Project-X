@@ -57,15 +57,19 @@ public class Campo implements GestionEntrada,Dibujable {
        double anchura = ConstantesJuego.variables().getAnchoCasilla();
        double altura = ConstantesJuego.variables().getLargoCasilla();
 
-       for (int i = 0; i < 20; i++)
-       {
-            for (int j = 0; j < 30; j++)
-            {
-                    casillas[i][j].accionEntrada(entrada,(int)(posX/anchura),(int)(posY/altura),casillas);
+       for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 30; j++) {
+                if (posX >=0 && posX <= ConstantesJuego.variables().getAnchoTablero() ){
+                    if (posY >=0 && posY <= ConstantesJuego.variables().getAltoTablero()){
+                        casillas[i][j].accionEntrada(entrada,(int)(posX/anchura),(int)(posY/altura), casillas);
+                    }
+                }
+
+                }
+
             }
 
        }
-    }
 
     @Override
     public void accionEntrada(Entrada entrada) {

@@ -1,18 +1,17 @@
 package com.rugbysurvive.partida.tablero;
 
 import com.badlogic.gdx.Gdx;
-import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.gestores.Dibujable;
-import com.rugbysurvive.partida.gestores.Entrada.Entrada;
-import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
+import com.rugbysurvive.partida.ConstantesJuego;
+import com.rugbysurvive.partida.gestores.Entrada.*;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 
 /**
  * Clase que define la posicion y comportamiento de un boron dentro del tablero de juego
  * Created by Victor on 24/03/14.
  */
-public class Boton implements GestionEntrada,Dibujable {
+public class Boton implements GestionEntrada,Dibujable{
 
     /**
      * posicion x en el tablero
@@ -56,8 +55,8 @@ public class Boton implements GestionEntrada,Dibujable {
     public boolean esSeleccionado(float posX, float posY) {
         //System.out.println("X: " + this.posX + " Y: " + this.posY);
         //System.out.println(Gdx.graphics.getHeight());
-        if (posX >= this.posX && posX <= this.posX+ ConstantesJuego.variables().getAnchoBoton()){
-            if (posY >= Gdx.graphics.getHeight()- ConstantesJuego.variables().getAnchoBoton()){
+        if (posX >= this.posX && posX <= this.posX+ConstantesJuego.variables().getAnchoBoton()){
+            if (posY >= Gdx.graphics.getHeight()-ConstantesJuego.variables().getAnchoBoton()){
                 accionEntrada(this.entrada);
 
                 selecionado=true;
@@ -85,9 +84,9 @@ public class Boton implements GestionEntrada,Dibujable {
     public void accionEntrada(Entrada entrada) {
 
         System.out.println("Entrada: " + entrada);
-        if (entrada == Entrada.pase){
+        if (entrada ==Entrada.pase){
             this.entrada = Entrada.chute;
-        } else if (entrada == Entrada.chute){
+        } else if (entrada ==Entrada.chute){
             this.entrada = Entrada.pase;
         }
     }

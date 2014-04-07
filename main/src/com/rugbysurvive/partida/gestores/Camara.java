@@ -31,7 +31,7 @@ public class Camara implements InputProcessor {
     private int absoluteVariationY; // Number of pixels the camera have been moved.
     private int absoluteVariationX;
     private Rectangle glViewport;
-
+    private boolean bloqueada;
 
     public Camara(int maxWidth, int maxHeight)
     {
@@ -44,24 +44,28 @@ public class Camara implements InputProcessor {
 
         this.camera = new OrthographicCamera(this.width, this.height);
         this.camera.position.set(this.width/2,this.height/2,0);
+        this.bloqueada = false;
 //        this.camera.apply(Gdx.graphics.getGL10());
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
 
-        int variationX = Gdx.input.getDeltaX();
-        int variationY = Gdx.input.getDeltaY();
-
-        if(this.isCameraInsideBoard(variationX,variationY))
+        if(!bloqueada)
         {
-            this.absoluteVariationX += variationX;
-            this.absoluteVariationY += variationY;
+             int variationX = Gdx.input.getDeltaX();
+              int variationY = Gdx.input.getDeltaY();
 
-            this.camera.translate(-variationX,variationY);
-           // this.camera.update();
-         // this.camera.apply(Gdx.graphics.getGL20());
-            return true;
+            if(this.isCameraInsideBoard(variationX,variationY))
+             {
+                this.absoluteVariationX += variationX;
+                this.absoluteVariationY += variationY;
+
+             this.camera.translate(-variationX,variationY);
+            // this.camera.update();
+             // this.camera.apply(Gdx.graphics.getGL20());
+               return true;
+             }
         }
         return false;
     }
@@ -91,6 +95,9 @@ public class Camara implements InputProcessor {
                 && variationY + this.camera.position.y < this.boardHeight
                 && (-variationX)+ this.camera.position.x < this.boardWidth);
     }
+
+    public void bloquear(){this.bloqueada = true;}
+    public void desbloquear(){this.bloqueada = false;}
 
 
     public int getVariationX(){return this.absoluteVariationX;}

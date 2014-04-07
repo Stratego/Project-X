@@ -38,6 +38,8 @@ public class ConstantesJuego {
     public int getAnchoBoton(){return generarTamaño(ANCHO_BOTON);}
     public int getAltoBoton(){return generarTamaño(ALTO_BOTON);}
     public double getMultiplicador(){return this.multiplicado;}
+    public int getAnchoTablero(){return ANCHO_TABLERO;}
+    public int getAltoTablero(){return ALTO_TABLERO;}
 
     protected int generarTamaño(int tamaño)
     {
