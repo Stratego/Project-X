@@ -1,13 +1,11 @@
 package com.rugbysurvive.partida.tablero;
 
 import com.rugbysurvive.partida.ConstantesJuego;
+import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.gestores.Dibujable;
-import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
-import com.rugbysurvive.partida.gestores.Entrada.*;
 import com.rugbysurvive.partida.gestores.Dibujante;
-import com.rugbysurvive.partida.Dibujables.*;
-
-import java.util.ArrayList;
+import com.rugbysurvive.partida.gestores.Entrada.Entrada;
+import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
 
 /**
  * Clase que crea y define el comportamiente del terreno del juego
@@ -45,7 +43,7 @@ public class Campo implements GestionEntrada,Dibujable {
     protected void dibujarTablero(){
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 30; j++) {
-                casillas[i][j]=new Casilla(i,j);
+                casillas[i][j]=new Casilla(j,i);
             }
 
 
@@ -59,13 +57,15 @@ public class Campo implements GestionEntrada,Dibujable {
        double anchura = ConstantesJuego.variables().getAnchoCasilla();
        double altura = ConstantesJuego.variables().getLargoCasilla();
 
-       for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 30; j++) {
-                    casillas[i][j].accionEntrada(entrada,(int)(posX/anchura),(int)(posY/altura));
-                }
-
+       for (int i = 0; i < 20; i++)
+       {
+            for (int j = 0; j < 30; j++)
+            {
+                    casillas[i][j].accionEntrada(entrada,(int)(posX/anchura),(int)(posY/altura),casillas);
             }
-        }
+
+       }
+    }
 
     @Override
     public void accionEntrada(Entrada entrada) {

@@ -31,7 +31,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
     /**
      * variable que nos indicara si se ha pulsado un boton
      */
-    boolean botonpulsado=true;
+    boolean botonpulsado=false;
 
     /**
      * colecion de botones que nuestro juego mostrara en pantalla
@@ -69,10 +69,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
 
         //recorrer lista de botones
         for (Boton iterador : botons){
-
-            if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
-
-                campo.accionEntrada(iterador.obtenerEntrada(),touchPos.x,touchPos.y);
+            if (iterador.esSeleccionado(screenX,screenY)){
                 return false;
             }
         }
@@ -113,13 +110,15 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         System.out.println("Posicion mundo: x: " + touchPos.x + " y: "+ touchPos.y );
 
         for (Boton iterador : botons){
-            if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
-                campo.accionEntrada(iterador.obtenerEntrada());
+            if (iterador.esSeleccionado(screenX,screenY)){
                 return false;
             }
         }
 
+
         campo.accionEntrada(Entrada.clic,touchPos.x, touchPos.y );
+
+
         return false;
     }
 
