@@ -22,7 +22,7 @@ public class GestorGrafico implements Dibujante{
     protected AssetManager manager;
     protected ArrayList<TipoImagen> dibujables ;
     protected SpriteBatch sprite;
-    protected Camara camara;
+    protected static Camara camara;
     protected int tamañoCasilla;
 
     protected String TAG = "GESTOR GRAFICO";
@@ -110,9 +110,9 @@ public class GestorGrafico implements Dibujante{
     public void dispose(){
         this.sprite.dispose();
     }
-    public Camara getCamara()
+    public static Camara getCamara()
     {
-        return this.camara;
+        return camara;
     }
 
 
@@ -148,15 +148,6 @@ public class GestorGrafico implements Dibujante{
             this.manager.load(nombre,Texture.class);
         }
         this.manager.finishLoading();
-    }
-
-
-    public void bloquearCamara()
-    {
-        this.camara.bloquear();
-    }
-    public void desbloquearCamara(){
-        this.camara.desbloquear();
     }
 
 

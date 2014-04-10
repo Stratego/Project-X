@@ -23,7 +23,7 @@ public class Casilla implements GestionEntrada {
     private float posY;
 
     private Jugador jugador = null;
-
+    private
     /**
      * indicara si el elemento esta seleccionado
      */

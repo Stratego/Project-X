@@ -125,6 +125,7 @@ public class Jugador implements GestionEntrada, Dibujable {
                 {
                     this.getEstado().setSeleccionado(false);
                     System.out.println("<---------Me deseleccionan------------->");
+
                 }
             }
             else
