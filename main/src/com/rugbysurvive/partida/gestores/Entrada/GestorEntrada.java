@@ -138,6 +138,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
      * acciones que se realizan al ejecutar un arrastre por la pantalla
      */
     public boolean pan(float screenX, float screenY, float v3, float v4) {
+
         Vector3 touchPos = new Vector3();
         touchPos.set(screenX, screenY,0);
         camera.unproject(touchPos);
