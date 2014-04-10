@@ -62,8 +62,10 @@ public class Campo implements GestionEntrada,Dibujable {
                         if (casillas[i][j].esSeleccionado((int)(posX/anchura),(int)(posY/altura))){
                             casillas[i][j].accionEntrada(entrada,(int)(posX/anchura),(int)(posY/altura), casillas);
                         }
+
                 }
             }
+
        }
 
     @Override

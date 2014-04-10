@@ -9,12 +9,8 @@ import com.rugbysurvive.partida.ResolucionPantalla;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestorEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
-import com.rugbysurvive.partida.gestores.Prueba;
 import com.rugbysurvive.partida.tablero.*;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 
 import java.util.ArrayList;
 
@@ -25,12 +21,13 @@ public class SkeletonMain extends Game {
     InputMultiplexer multiplexer;
     GestorGrafico gestorGrafico;
 
+    GestureDetector gestureDetector;
+
     GestorEntrada gestorEntrada;
 
     private ArrayList<Boton> botons= new ArrayList <Boton>();
     ConstantesJuego constantes;
 
-    GestureDetector gestureDetector;
 
     int contador = 0;
 

@@ -1,8 +1,10 @@
 package com.rugbysurvive.partida.tablero;
 
 
+
 import com.badlogic.gdx.Gdx;
 import com.rugbysurvive.partida.ConstantesJuego;
+
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.gestores.Dibujante;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
@@ -44,6 +46,7 @@ public class Casilla implements GestionEntrada {
 
         this.dibujante = dibujante;
 
+
         /*Este objeto solo se usara para hacer pruebas*/
         //if((posY == 1 || posY == 9 || posY==17) && ((2+posX)%4 == 0))
         if(posY == 10 && posX == 4)
@@ -62,6 +65,7 @@ public class Casilla implements GestionEntrada {
     {
         this.jugador = jugador;
     }
+
 
     public void accionEntrada(Entrada entrada, float posX, float posY, Casilla [][] casillas) {
         System.out.println(entrada + " x: "+ posX + "y: " + posY);
@@ -101,7 +105,6 @@ public class Casilla implements GestionEntrada {
         }
         return selecionado;
     }
-
 
     public Jugador getJugador()
     {
