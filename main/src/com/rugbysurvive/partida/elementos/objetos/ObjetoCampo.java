@@ -13,8 +13,5 @@ public abstract class ObjetoCampo {
 
 
     public abstract void efecto(Jugador jugador);
-    public void colocar(int x , int Y)
-    {
 
-    }
 }

@@ -137,6 +137,11 @@ public class GestorGrafico implements Dibujante{
         return this.contador;
     }
 
+    @Override
+    public int añadirDibujable(TextoDibujable dibujable)
+    {
+        return 0;
+    }
 
 
     private void generarTexturas(ArrayList<String> texturas) {

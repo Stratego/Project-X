@@ -2,6 +2,8 @@ package com.rugbysurvive.partida.tablero;
 
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.elementos.objetos.ObjetoCampo;
 import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.gestores.Dibujante;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
@@ -19,7 +21,7 @@ public class Campo implements GestionEntrada,Dibujable {
     private boolean selecionado;
 
 
-
+    private static Campo campo;
     Casilla [][] casillas= new Casilla [20][30];
 
 
@@ -33,6 +35,7 @@ public class Campo implements GestionEntrada,Dibujable {
         this.dibujante = dibujante;
         dibujante.añadirDibujable(this,TipoDibujo.fondo);
         this.dibujarTablero();
+        campo = this;
     }
 
 
@@ -70,6 +73,70 @@ public class Campo implements GestionEntrada,Dibujable {
             }
 
        }
+
+    /**
+     * Retorna la Instancia del campo
+     * @return instanca del campo
+     */
+    public static Campo getInstanciaCampo(){return campo;}
+
+    /**
+     *
+     * @param jugador
+     * @param posicionX
+     * @param posicionY
+     * @return
+     */
+    public boolean añadirElemento(Jugador jugador, int posicionX,int posicionY)
+    {
+        return this.casillas[posicionX][posicionY].añadirElemento(jugador);
+    }
+
+    /**
+     *
+     * @param objeto
+     * @param posicionX
+     * @param posicionY
+     * @return
+     */
+    public boolean añadirElemento(ObjetoCampo objeto,int posicionX,int posicionY)
+    {
+       return this.casillas[posicionX][posicionY].añadirElemento(objeto);
+    }
+
+    /**
+     *
+     * @param posicionX
+     * @param posicionY
+     */
+   public void eliminarElemento(int posicionX,int posicionY)
+   {
+       this.casillas[posicionX][posicionY].eliminarElemento();
+   }
+
+    /**
+     *
+     * @param posicionX
+     * @param posicionY
+     * @return
+     */
+    public Jugador getJugador(int posicionX,int posicionY)
+    {
+        return this.casillas[posicionX][posicionY].getJugador();
+    }
+
+    /**
+     *
+     * @param posicionX
+     * @param posicionY
+     * @return
+     */
+    public ObjetoCampo getObjeto(int posicionX,int posicionY)
+    {
+        return this.casillas[posicionX][posicionY].getObjeto();
+    }
+
+
 
     @Override
     public void accionEntrada(Entrada entrada) {
