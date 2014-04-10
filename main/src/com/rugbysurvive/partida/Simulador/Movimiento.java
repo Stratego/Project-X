@@ -1,5 +1,7 @@
 package com.rugbysurvive.partida.Simulador;
-import com.rugbysurvive.partida.Jugador.*;
+
+import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.Jugador.SinPelota;
 
 import java.util.List;
 

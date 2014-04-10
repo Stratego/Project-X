@@ -1,17 +1,21 @@
 package com.rugbysurvive.partida.Simulador;
 
-import com.rugbysurvive.partida.Jugador.*;
+import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.Jugador.SinPelota;
 
 /**
  * Created by Aleix on 31/03/14.
  */
 public class Chute implements Accion {
 
-    private String[][] objetivo;
+    int posXObjetivo;
+    int posYObjetivo;
     private Jugador jugador;
 
-    public Chute(String[][] objetivo, Jugador jugador) {
-        this.objetivo = objetivo;
+
+    public Chute(Jugador jugador, int posX, int posY) {
+        this.posXObjetivo = posX;
+        this.posYObjetivo = posY;
         this.jugador = jugador;
     }
 

@@ -1,25 +1,45 @@
 package com.rugbysurvive.partida.Jugador;
 
-
-import com.rugbysurvive.partida.Simulador.Accion;
+import com.rugbysurvive.partida.Simulador.Chute;
+import com.rugbysurvive.partida.Simulador.Pase;
 import com.rugbysurvive.partida.Simulador.Simulador;
-
 
 /**
  * Created by Victor on 27/03/14.
  */
 public class ConPelota implements Estado {
-    Jugador jugador = null;
-    boolean seleccionado = false;
-    boolean bloqueado = false;
+    public boolean seleccionado = false;
+    public boolean bloqueado = false;
+
+    public boolean generarAccion(Jugador jugador) {
+
+        Simulador.getInstance().addAccionesSimulador(jugador.getAccion());
+
+        return false;
+    }
 
     @Override
-    public Accion generarAccion(Jugador jugador) {
-        Simulador simulador = Simulador.getInstance();
+    public boolean generarAccion(Jugador jugador, int posX, int posY) {
+        if(jugador.getEstado().getPaseOChute() == true)
+        {
+            jugador.setAccion(new Pase(jugador, posX, posY));
+            System.out.println("La PASOOOOO!!!");
+        }
+        else
+        {
+            jugador.setAccion(new Chute(jugador, posX, posY));
+            System.out.println("La CHUTOOO!!!");
+        }
 
-        simulador.addAccionesSimulador(jugador.getAccion());
 
-        return null;
+        if(jugador.getAccion() != null)
+        {
+            Simulador.getInstance().addAccionesSimulador(jugador.getAccion());
+            jugador.getEstado().setBloqueado(true);
+            return true;
+        }
+
+        return false;
     }
 
     @Override
@@ -29,7 +49,7 @@ public class ConPelota implements Estado {
 
     @Override
     public boolean getSeleccionado() {
-        return false;
+        return this.seleccionado;
     }
 
     @Override
@@ -39,7 +59,7 @@ public class ConPelota implements Estado {
 
     @Override
     public boolean getBloqueado() {
-        return false;
+        return this.bloqueado;
     }
 
     @Override
@@ -48,24 +68,12 @@ public class ConPelota implements Estado {
     }
 
     @Override
-    public Accion getAccion() {
-        return null;
-    }
-
-
-    @Override
-    public void setAccion(Accion accion) {
-
-    }
-
-    @Override
     public boolean getPaseOChute() {
-        return false;
+        return true;
     }
 
     @Override
     public void setPaseOChute(boolean paseOChute) {
-
 
     }
 

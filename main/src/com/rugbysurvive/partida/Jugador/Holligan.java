@@ -1,16 +1,16 @@
 package com.rugbysurvive.partida.Jugador;
-
-import com.rugbysurvive.partida.Simulador.Accion;
-
-
-
 /**
  * Created by Victor on 27/03/14.
  */
 public class Holligan implements Estado {
+
+    public boolean generarAccion(Jugador jugador) {
+        return false;
+    }
+
     @Override
-    public Accion generarAccion(Jugador jugador) {
-        return null;
+    public boolean generarAccion(Jugador jugador, int posX, int posY) {
+        return false;
     }
 
     @Override
@@ -38,17 +38,6 @@ public class Holligan implements Estado {
 
     }
 
-    @Override
-    public Accion getAccion() {
-        return null;
-    }
-
-
-
-    @Override
-    public void setAccion(Accion accion) {
-
-    }
 
     @Override
     public boolean getPaseOChute() {
@@ -58,8 +47,7 @@ public class Holligan implements Estado {
     @Override
     public void setPaseOChute(boolean paseOChute) {
 
-
-   }
+    }
 
     @Override
     public void setJugador(Jugador jugador) {

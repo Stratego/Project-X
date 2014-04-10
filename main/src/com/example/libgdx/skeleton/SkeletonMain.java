@@ -4,15 +4,17 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.input.GestureDetector;
-
-
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.ResolucionPantalla;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestorEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.gestores.Prueba;
-import com.rugbysurvive.partida.tablero.Boton;
+import com.rugbysurvive.partida.tablero.*;
+
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 
 import java.util.ArrayList;
 
@@ -28,14 +30,14 @@ public class SkeletonMain extends Game {
     private ArrayList<Boton> botons= new ArrayList <Boton>();
     ConstantesJuego constantes;
 
-    Prueba prueba;
-    Prueba prueba2;
-    Prueba prueba3;
+    GestureDetector gestureDetector;
 
+    int contador = 0;
 
 
     @Override
     public void create() {
+
 
 
         this.constantes = new ConstantesJuego();
@@ -56,13 +58,18 @@ public class SkeletonMain extends Game {
 
         this.multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(this.gestorGrafico.getCamara());
-        multiplexer.addProcessor(new GestureDetector(this.gestorEntrada));
+        gestureDetector = new GestureDetector(20, 0.5f, 1, 0.15f,this.gestorEntrada);
+        multiplexer.addProcessor(gestureDetector);
         Gdx.input.setInputProcessor(multiplexer);
 
+
      //   campoDibujable = new CampoDibujable(this.gestorGrafico,0,0);
+
         //this.prueba2 = new Prueba(2,4,2000,"jugador1.png");
 
         //this.prueba3 = new Prueba(this.gestorGrafico,1,4,300,"casilla.png");
+
+        //Simulador.getInstance().simular();
 
     }
 
@@ -74,7 +81,9 @@ public class SkeletonMain extends Game {
     @Override
     public void render() {
 
+
      this.gestorGrafico.dibujar();
+
         //this.prueba2.render();
     }
 
