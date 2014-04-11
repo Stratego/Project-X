@@ -53,7 +53,7 @@ public class ConPelota implements Estado {
         if(jugador.getAccion() != null)
         {
             Simulador.getInstance().addAccionesSimulador(jugador.getAccion());
-            jugador.getEstado().setBloqueado(true);
+            jugador.setBloqueado(true);
             return true;
         }
 

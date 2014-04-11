@@ -1,7 +1,9 @@
 package com.rugbysurvive.partida.Jugador;
 
+import com.rugbysurvive.partida.Simulador.*;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
+
 
 /**
  * Created by Victor on 27/03/14.
@@ -78,9 +80,12 @@ public class EnMovimiento implements Estado {
                 System.out.println("Me muevo a "+movimientos[i][0]+"-"+movimientos[i][1]);
             }
             System.out.println("--------------FIN DEL MOVIMIENTO--------------");
+
+            jugador.setAccion(new Movimiento(jugador, movimientos));
+
             Simulador.getInstance().addAccionesSimulador(jugador.getAccion());
 
-            jugador.getEstado().setBloqueado(true);
+            jugador.setBloqueado(true);
 
             return true;
         }
