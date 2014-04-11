@@ -3,6 +3,7 @@ package com.rugbysurvive.partida.Jugador;
 import com.rugbysurvive.partida.Simulador.Chute;
 import com.rugbysurvive.partida.Simulador.Pase;
 import com.rugbysurvive.partida.Simulador.Simulador;
+import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 
 /**
  * Created by Victor on 27/03/14.
@@ -20,24 +21,42 @@ public class ConPelota implements Estado {
 
     @Override
     public boolean generarAccion(Jugador jugador, int posX, int posY) {
-        if(jugador.getEstado().getPaseOChute() == true)
+
+        return false;
+    }
+
+    @Override
+    public boolean generarAccion(Jugador jugador, int posX, int posY, Entrada entrada) {
+
+
+        if(entrada == Entrada.arrastrar)
         {
-            jugador.setAccion(new Pase(jugador, posX, posY));
-            System.out.println("La PASOOOOO!!!");
+            jugador.setEstado(new EnMovimiento(8));
+            System.out.println("<ME PONGO EN MOVIMIENTO>");
+            return false;
         }
         else
         {
-            jugador.setAccion(new Chute(jugador, posX, posY));
-            System.out.println("La CHUTOOO!!!");
+            if(jugador.getEstado().getPaseOChute() == true)
+            {
+                jugador.setAccion(new Pase(jugador, posX, posY));
+                System.out.println("La PASOOOOO!!!");
+            }
+            else
+            {
+                jugador.setAccion(new Chute(jugador, posX, posY));
+                System.out.println("La CHUTOOO!!!");
+            }
         }
 
 
         if(jugador.getAccion() != null)
         {
             Simulador.getInstance().addAccionesSimulador(jugador.getAccion());
-            jugador.getEstado().setBloqueado(true);
+            jugador.setBloqueado(true);
             return true;
         }
+
 
         return false;
     }

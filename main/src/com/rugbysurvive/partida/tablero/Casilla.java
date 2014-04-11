@@ -2,9 +2,6 @@ package com.rugbysurvive.partida.tablero;
 
 
 
-import com.badlogic.gdx.Gdx;
-import com.rugbysurvive.partida.ConstantesJuego;
-
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoCampo;
 import com.rugbysurvive.partida.gestores.Dibujante;
@@ -170,10 +167,10 @@ public class Casilla implements GestionEntrada {
 
 
     public void accionEntrada(Entrada entrada, float posX, float posY, Casilla [][] casillas) {
-        System.out.println(entrada + " x: "+ posX + "y: " + posY);
+        //System.out.println(entrada + " x: "+ posX + "y: " + posY);
         if(this.jugador != null)
         {
-            System.out.println("jugador "+entrada + "x: "+ posX + "y: " + posY);
+            //System.out.println("jugador "+entrada + "x: "+ posX + "y: " + posY);
             this.jugador.accionEntrada(entrada, posX, posY, casillas);
         }
 

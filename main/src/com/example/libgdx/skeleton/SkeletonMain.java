@@ -55,8 +55,9 @@ public class SkeletonMain extends Game {
         this.gestorEntrada = new GestorEntrada(this.gestorGrafico.getCamara().getOrthographicCamera(),botons,this.gestorGrafico);
 
         this.multiplexer = new InputMultiplexer();
+
         multiplexer.addProcessor(this.gestorGrafico.getCamara());
-        gestureDetector = new GestureDetector(20, 0.5f, 1, 0.15f,this.gestorEntrada);
+        gestureDetector = new GestureDetector(20, 0.5f, 1, 0.5f,this.gestorEntrada);
         multiplexer.addProcessor(gestureDetector);
         Gdx.input.setInputProcessor(multiplexer);
 

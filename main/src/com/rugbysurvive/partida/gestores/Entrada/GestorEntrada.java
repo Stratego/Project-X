@@ -108,8 +108,8 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         Vector3 touchPos = new Vector3();
         touchPos.set(screenX, screenY,0);
         camera.unproject(touchPos);
-        System.out.println("Posicion tocada: x: " + screenX + " y: "+ screenY );
-        System.out.println("Posicion mundo: x: " + touchPos.x + " y: "+ touchPos.y );
+        //System.out.println("Posicion tocada: x: " + screenX + " y: "+ screenY );
+        //System.out.println("Posicion mundo: x: " + touchPos.x + " y: "+ touchPos.y );
 
         for (Boton iterador : botons){
             if (iterador.esSeleccionado(screenX,screenY)){
@@ -138,6 +138,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
      * acciones que se realizan al ejecutar un arrastre por la pantalla
      */
     public boolean pan(float screenX, float screenY, float v3, float v4) {
+
         Vector3 touchPos = new Vector3();
         touchPos.set(screenX, screenY,0);
         camera.unproject(touchPos);
@@ -154,9 +155,9 @@ public class GestorEntrada implements GestureDetector.GestureListener {
 
     @Override
     public boolean zoom(float v, float v2) {
-        System.out.println("ZOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOM");
+        //System.out.println("ZOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOM");
         float distancia = (v2-v);
-        System.out.println("distancia : "+distancia );
+        //System.out.println("distancia : "+distancia );
 
         if(distancia >= 0)
         {
