@@ -29,7 +29,13 @@ public class Boton implements GestionEntrada,Dibujable{
      */
     private boolean selecionado;
 
+    /**
+     * identificador del boton para el gestor grafico
+     */
+    int ID;
 
+    String textura;
+    int posicion;
 
     /**
      * Constructor del elemento boton
@@ -38,11 +44,13 @@ public class Boton implements GestionEntrada,Dibujable{
      * @param posY posicion y en el tablero
      * @param entrada tipo de boton que sera
      */
-    public Boton(float posX, float posY, Entrada entrada) {
+    public Boton(float posX, float posY, Entrada entrada,String textura, int posicion) {
         this.posY = posY;
         this.posX = posX;
         this.entrada = entrada;
-        GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
+        this.textura = textura;
+        this.posicion = posicion;
+        ID=GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
     }
 
 
@@ -91,10 +99,17 @@ public class Boton implements GestionEntrada,Dibujable{
         }
     }
 
+    public int getID(){
+        return ID;
+    }
+
+    public int getPosicion(){
+        return this.posicion;
+    }
 
     @Override
     public String getTextura() {
-        return "boto.png";
+        return this.textura;
     }
 
     @Override

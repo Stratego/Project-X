@@ -201,7 +201,7 @@ public class GestorGrafico implements Dibujante{
     private void configurarFuente()
     {
         // Aqui se configura la fuente
-        //this.font.loqueuierasconfigurar
+        this.font.scale(2);
     }
 }
 

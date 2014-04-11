@@ -10,6 +10,7 @@ import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestorEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.gestores.Prueba;
+import com.rugbysurvive.partida.gestores.Texto;
 import com.rugbysurvive.partida.tablero.*;
 
 
@@ -48,10 +49,10 @@ public class SkeletonMain extends Game {
 
 
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
-        botons.add(new Boton(450,0, Entrada.pase));
-        botons.add(new Boton(650,0, Entrada.objeto));
-        botons.add(new Boton(850,0, Entrada.cambiar));
-        botons.add(new Boton(1050,0, Entrada.finalizar));
+        botons.add(new Boton(450,0, Entrada.pase,"boto.png",20));
+        botons.add(new Boton(650,0, Entrada.objeto,"boto.png",20));
+        botons.add(new Boton(850,0, Entrada.cambiar,"boto.png",20));
+        botons.add(new Boton(1050,0, Entrada.finalizar,"boto.png",20));
         this.gestorEntrada = new GestorEntrada(this.gestorGrafico.getCamara().getOrthographicCamera(),botons,this.gestorGrafico);
 
         this.multiplexer = new InputMultiplexer();
@@ -64,7 +65,7 @@ public class SkeletonMain extends Game {
 
      //   campoDibujable = new CampoDibujable(this.gestorGrafico,0,0);
 
-        this.prueba2 = new Prueba(2,4,2000,"jugador1.png");
+         //new Texto(20,40, "prueba");
 
         //this.prueba3 = new Prueba(this.gestorGrafico,1,4,300,"casilla.png");
 
@@ -83,7 +84,7 @@ public class SkeletonMain extends Game {
 
      this.gestorGrafico.dibujar();
 
-       this.prueba2.render();
+       //this.prueba2.render();
     }
 
     @Override
