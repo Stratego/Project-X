@@ -4,6 +4,7 @@ package com.rugbysurvive.partida.gestores;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -30,7 +31,7 @@ public class Camara implements InputProcessor {
     private int absoluteVariationY; // Number of pixels the camera have been moved.
     private int absoluteVariationX;
     private Rectangle glViewport;
-
+    private boolean bloqueada;
 
     public Camara(int maxWidth, int maxHeight)
     {
@@ -42,26 +43,32 @@ public class Camara implements InputProcessor {
         this.height = Gdx.graphics.getHeight();
 
         this.camera = new OrthographicCamera(this.width, this.height);
-        glViewport = new Rectangle(0, 0, this.width, this.height);
-        this.camera.position.set(this.width,this.height,0);
+        this.camera.position.set(this.width/2,this.height/2,0);
+        this.bloqueada = false;
 //        this.camera.apply(Gdx.graphics.getGL10());
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
 
-        int variationX = Gdx.input.getDeltaX();
-        int variationY = Gdx.input.getDeltaY();
-
-        if(this.isCameraInsideBoard(variationX,variationY))
+        if(!bloqueada)
         {
-            this.absoluteVariationX += variationX;
-            this.absoluteVariationY += variationY;
+            if(Gdx.input.isTouched(0) && !Gdx.input.isTouched(1))
+             {
+                    int variationX = Gdx.input.getDeltaX();
+                    int variationY = Gdx.input.getDeltaY();
 
-            this.camera.translate(-variationX,variationY);
-            this.camera.update();
-            this.camera.apply(Gdx.graphics.getGL10());
-            return true;
+                     if(this.isCameraInsideBoard(variationX,variationY))
+                     {
+                         this.absoluteVariationX += variationX;
+                         this.absoluteVariationY += variationY;
+
+                         this.camera.translate(-variationX,variationY);
+                        // this.camera.update();
+                         // this.camera.apply(Gdx.graphics.getGL20());
+               return true;
+             }
+            }
         }
         return false;
     }
@@ -69,17 +76,19 @@ public class Camara implements InputProcessor {
     public void render(SpriteBatch batch)
     {
 
-        /*GL10 gl = Gdx.graphics.getGL10();
-        System.out.println(gl.toString());
+       // GL10 gl = Gdx.graphics.getGL20();
+
 
         // Camera --------------------- /
-        gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-        gl.glViewport((int) glViewport.x, (int) glViewport.y,
-                (int) glViewport.width, (int) glViewport.height);*/
+        //   gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //gl.glViewport((int) glViewport.x, (int) glViewport.y,
+               // (int) glViewport.width, (int) glViewport.height);
 
-        batch.setProjectionMatrix(this.camera.combined);
         this.camera.update();
-        this.camera.apply(Gdx.graphics.getGL10());
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.setProjectionMatrix(this.camera.combined);
+//        this.camera.apply(Gdx.gl10);
+
     }
 
     private boolean isCameraInsideBoard(int variationX,int variationY)
@@ -90,11 +99,14 @@ public class Camara implements InputProcessor {
                 && (-variationX)+ this.camera.position.x < this.boardWidth);
     }
 
+    public void bloquear(){/*this.bloqueada = true;*/}
+    public void desbloquear(){this.bloqueada = false;}
+
 
     public int getVariationX(){return this.absoluteVariationX;}
     public int getVariationY(){return this.absoluteVariationY;}
 
-
+    public OrthographicCamera getOrthographicCamera(){return this.camera;}
 
 
 

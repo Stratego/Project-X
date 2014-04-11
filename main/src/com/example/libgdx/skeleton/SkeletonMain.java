@@ -3,27 +3,74 @@ package com.example.libgdx.skeleton;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.rugbysurvive.partida.gestores.Camara;
+import com.badlogic.gdx.input.GestureDetector;
+import com.rugbysurvive.partida.ConstantesJuego;
+import com.rugbysurvive.partida.ResolucionPantalla;
+import com.rugbysurvive.partida.gestores.Entrada.Entrada;
+import com.rugbysurvive.partida.gestores.Entrada.GestorEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
+import com.rugbysurvive.partida.gestores.Prueba;
+import com.rugbysurvive.partida.gestores.Texto;
+import com.rugbysurvive.partida.tablero.*;
+
+
+import java.util.ArrayList;
+
 
 public class SkeletonMain extends Game {
 
     InputMultiplexer multiplexer;
     GestorGrafico gestorGrafico;
 
+    GestureDetector gestureDetector;
+
+    GestorEntrada gestorEntrada;
+
+    private ArrayList<Boton> botons= new ArrayList <Boton>();
+    ConstantesJuego constantes;
+    Prueba prueba2;
+
+    int contador = 0;
+
+
     @Override
     public void create() {
 
-        this.gestorGrafico = new GestorGrafico();
-       // this.gestorGrafico.cargarTextura("tablero/campo1.png");
-        //this.gestorGrafico.actualizar("tablero/campo1.png",0,0);
+
+
+        this.constantes = new ConstantesJuego();
+        this.constantes.setResolucionPantalla(ResolucionPantalla.pequeña);
+        ArrayList<String> nombresTexturas = new ArrayList<String>();
+        nombresTexturas.add("jugador1.png");
+        nombresTexturas.add("campo1.png");
+        nombresTexturas.add("casellalila.png");
+        nombresTexturas.add("boto.png");
+        nombresTexturas.add("listaprueba.png");
+
+
+        this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
+        botons.add(new Boton(450,0, Entrada.pase,"boto.png",20));
+        botons.add(new Boton(650,0, Entrada.objeto,"boto.png",20));
+        botons.add(new Boton(850,0, Entrada.cambiar,"boto.png",20));
+        botons.add(new Boton(1050,0, Entrada.finalizar,"boto.png",20));
+        this.gestorEntrada = new GestorEntrada(this.gestorGrafico.getCamara().getOrthographicCamera(),botons,this.gestorGrafico);
+
         this.multiplexer = new InputMultiplexer();
+
         multiplexer.addProcessor(this.gestorGrafico.getCamara());
+        gestureDetector = new GestureDetector(20, 0.5f, 1, 0.5f,this.gestorEntrada);
+        multiplexer.addProcessor(gestureDetector);
         Gdx.input.setInputProcessor(multiplexer);
+        //this.prueba2 = new Prueba(100,100,100,"holaa");
+
+     //   campoDibujable = new CampoDibujable(this.gestorGrafico,0,0);
+
+         //new Texto(20,40, "prueba");
+
+        //this.prueba3 = new Prueba(this.gestorGrafico,1,4,300,"casilla.png");
+
+        //Simulador.getInstance().simular();
+
     }
 
     @Override
@@ -34,9 +81,10 @@ public class SkeletonMain extends Game {
     @Override
     public void render() {
 
-    this.gestorGrafico.dibujar();
 
+     this.gestorGrafico.dibujar();
 
+       //this.prueba2.render();
     }
 
     @Override

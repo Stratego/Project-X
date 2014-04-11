@@ -2,100 +2,215 @@ package com.rugbysurvive.partida.gestores;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.rugbysurvive.partida.ConstantesJuego;
+import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 /**
  * Created by aitor on 25/03/14.
+ *
+ *
  */
-public class GestorGrafico {
+public class GestorGrafico implements Dibujante{
 
+    protected int contador;
     protected AssetManager manager;
-
-    protected HashMap<String,InformacionTextura> texturasActivas;
+    protected ArrayList<TipoImagen> dibujables ;
     protected SpriteBatch sprite;
-    protected Camara camara;
+    protected static Camara camara;
+    protected int tamañoCasilla;
 
-    public GestorGrafico()
+    protected String TAG = "GESTOR GRAFICO";
+    protected int vueltas = 0;
+    protected static Dibujante instancia = null;
+    protected int ultimaPosicionFondos ;
+    BitmapFont font;
+
+
+    public GestorGrafico(ArrayList<String> nombresTexturas,int tamañoCasilla)
     {
-        this.camara =  new Camara(1000,1000);
+        this.contador = 0;
+        this.camara =  new Camara(ConstantesJuego.variables().getAnchoTablero(),ConstantesJuego.variables().getAltoTablero());
         this.sprite = new SpriteBatch();
-        this.texturasActivas = new HashMap<String, InformacionTextura>();
         this.manager =  new AssetManager();
-        // INTRODUCIR TODAS LAS TEXTURAS NECESARIAS PARA EL JUEGO A PARTIR DE LOS EQUIPOS
-        this.manager.load("tablero/campo1.png",Texture.class);
-        this.manager.finishLoading();
+        this.dibujables = new ArrayList<TipoImagen>();
+        this.generarTexturas(nombresTexturas);
+        this.tamañoCasilla = tamañoCasilla;
+        this.font=  new BitmapFont();
+
+
+        instancia = (Dibujante)this;
+        this.ultimaPosicionFondos = 0;
+        this.configurarFuente();
     }
 
 
-    public void cargarTextura(String nombreTextura){
-        if(manager.isLoaded(nombreTextura))
+    public static Dibujante generarDibujante()
+    {
+        return instancia;
+    }
+    public void dibujar() {
+
+        this.camara.render(this.sprite);
+        this.sprite.begin();
+
+        ArrayList<TipoDibujo> tiposDibujo = new ArrayList<TipoDibujo>();
+        tiposDibujo.add(TipoDibujo.fondo);
+        tiposDibujo.add(TipoDibujo.elementosJuego);
+        tiposDibujo.add(TipoDibujo.interficieUsuario);
+        tiposDibujo.add(TipoDibujo.texto);
+
+        //Log.i(TAG,"num iteraciones: "+this.vueltas);
+        ConstantesJuego constantes = ConstantesJuego.variables();
+        for(int i=0;i<3;i++)
         {
-            //this.manager.lo
-        }
-    }
-    public void eliminarTextura(String nombreTextura){
-        //Falta implementar
-    }
+            for(TipoImagen imagen : this.dibujables)
+             {
+                if(imagen.tipoDibujo == tiposDibujo.get(i))
+                {
+                    Texture textura = this.manager.get(imagen.dibujable.getTextura());
 
+
+
+                    if(TipoDibujo.interficieUsuario == tiposDibujo.get(i)){
+
+                        int posicionX = imagen.dibujable.getPosicionX();
+                        int posicionY = imagen.dibujable.getPosicionY();
+                        posicionX = posicionX - this.camara.getVariationX();
+                        posicionY = posicionY + this.camara.getVariationY();
+                        double ancho = textura.getWidth();
+                        double alto = textura.getHeight();
+                        this.sprite.draw(textura,posicionX,posicionY);
+
+                    }
+                    else
+                    {
+                        double posicionX = this.filtroX(imagen.dibujable.getPosicionX());
+                        double posicionY = this.filtroY(imagen.dibujable.getPosicionY());
+
+                        double multiplicador = constantes.getMultiplicador();
+                        double ancho = textura.getWidth()*multiplicador;
+                        double alto = textura.getHeight()*multiplicador;
+                        this.sprite.draw(textura,(float)posicionX,(float)posicionY,(float)ancho,(float)alto);
+
+                    }
+
+
+                }
+                 if(TipoDibujo.interficieUsuario== tiposDibujo.get(i) && imagen.tipoDibujo == TipoDibujo.texto){
+
+                     int posicionX = imagen.dibujable.getPosicionX();
+                     int posicionY = imagen.dibujable.getPosicionY();
+                     posicionX = posicionX - this.camara.getVariationX();
+                     posicionY = posicionY + this.camara.getVariationY();
+
+                     font.draw(this.sprite,imagen.dibujable.getTextura(), posicionX,posicionY);
+                 }
+
+
+            }
+        }
+        this.sprite.end();
+
+
+    }
 
     public void dispose(){
         this.sprite.dispose();
     }
-
-    /*
-
-     */
-    public void actualizar(String nombretextura ,int posicionX,int posicionY){
-        if(this.texturasActivas.containsKey(nombretextura)){
-            this.texturasActivas.remove(nombretextura);
-            InformacionTextura info = new InformacionTextura(nombretextura,posicionX,posicionY);
-            this.texturasActivas.put(nombretextura,info);
-        }
+    public static Camara getCamara()
+    {
+        return camara;
     }
 
-    public void dibujar(){
 
-        this.sprite.begin();
+    @Override
+    public void eliminarTextura(int ID) {
+        //Log.i("BORRAR","BORRANDO antes depurar: "+ID);
+        TipoImagen tipoImagenAux =null;
+        for( TipoImagen tipoImagen:this.dibujables)
+        {
+            if(tipoImagen.ID == ID){
+                tipoImagenAux = tipoImagen;
+                break;
+            }
+        }
+        if(tipoImagenAux != null)
+        {
+            this.dibujables.remove(tipoImagenAux);
+        }
+            //Log.i("BORRAR","BORRANDO");
 
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-        Iterator it = this.texturasActivas.entrySet().iterator();
+    }
+    @Override
+    public int añadirDibujable(Dibujable dibujable,TipoDibujo tipoDibujo)
+    {
+        this.contador++;
+        this.dibujables.add(new TipoImagen(tipoDibujo,dibujable,this.contador));
+        return this.contador;
+    }
+
+
+
+
+    private void generarTexturas(ArrayList<String> texturas) {
+
+         Iterator it = texturas.iterator();
+
         while (it.hasNext()) {
-            Map.Entry e = (Map.Entry)it.next();
-            InformacionTextura iTextura = (InformacionTextura)e.getValue();
-            Texture textura = this.manager.get(iTextura.nombretextura, Texture.class);
-            float posicionX = (float)iTextura.posicionX;
-            float posicionY = (float)iTextura.posicionY;
-            this.sprite.draw(textura,posicionX,posicionY);
+            String nombre =  (String)it.next();
+            this.manager.load(nombre,Texture.class);
         }
-        this.camara.render(this.sprite);
-        this.sprite.end();
+        this.manager.finishLoading();
     }
 
 
-    public Camara getCamara()
-    {
-        return this.camara;
-    }
-    private class InformacionTextura
-    {
-        public String nombretextura;
-        public int posicionX;
-        public int posicionY;
 
-        public InformacionTextura(String nombretextura ,int posicionX,int posicionY){
-            this.nombretextura = nombretextura;
-            this.posicionX = posicionX;
-            this.posicionY = posicionY;
+
+    private double filtroX(double posicionX)
+    {
+        double tamañoCasilla = ConstantesJuego.variables().getAnchoCasilla();
+        if(posicionX > 0 && posicionX < tamañoCasilla){
+            posicionX = posicionX * tamañoCasilla;
         }
-
+        return posicionX;
     }
 
+    private double filtroY(double posicionY)
+    {
+        double tamañoCasilla = ConstantesJuego.variables().getLargoCasilla();
+        if(posicionY > 0 && posicionY < tamañoCasilla){
+            posicionY = posicionY * tamañoCasilla;
+        }
+        return posicionY;
+    }
+
+    private class TipoImagen
+    {
+        public TipoDibujo tipoDibujo;
+        public Dibujable dibujable;
+        public int ID;
+
+        public TipoImagen(TipoDibujo tipoDibujo,Dibujable dibujable,int ID)
+        {
+            this.ID = ID;
+            this.tipoDibujo = tipoDibujo;
+            this.dibujable = dibujable;
+        }
+    }
+
+    private void configurarFuente()
+    {
+        // Aqui se configura la fuente
+            this.font.scale(2);
+    }
 }
 
