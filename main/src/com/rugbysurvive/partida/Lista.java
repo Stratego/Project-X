@@ -29,17 +29,17 @@ public class Lista {
         int posicion = 0;
 
 
-
-        jugadores.add(new Texto(850,130,"jugador 1 fuerza:10 vida:20 defensa:30"));
-        jugadores.add(new Texto(850,194,"jugador 2 fuerza:10 vida:20 defensa:30"));
-        jugadores.add(new Texto(850,258,"jugador 3 fuerza:10 vida:20 defensa:30"));
-        jugadores.add(new Texto(850,322,"jugador 4 fuerza:10 vida:20 defensa:30"));
+        listaSuplentes.add(new Boton(450,130, Entrada.listasuplente,"listaprueba.png",posicion));
+        jugadores.add(new Texto(450,194,"jugador 1 fuerza:10 vida:20 defensa:30"));
+        //jugadores.add(new Texto(850,194,"jugador 2 fuerza:10 vida:20 defensa:30"));
+        //jugadores.add(new Texto(850,258,"jugador 3 fuerza:10 vida:20 defensa:30"));
+        //jugadores.add(new Texto(850,322,"jugador 4 fuerza:10 vida:20 defensa:30"));
 
         /*jugadores.add(new Texto(0,0,"jugador 1 fuerza:10 vida:20 defensa:30"));
         jugadores.add(new Texto(0,50,"jugador 2 fuerza:10 vida:20 defensa:30"));
         jugadores.add(new Texto(0,100,"jugador 3 fuerza:10 vida:20 defensa:30"));
         jugadores.add(new Texto(0,150,"jugador 4 fuerza:10 vida:20 defensa:30"));*/
-
+/*
         System.out.println("entrada bucle");
         for (Texto iterador : jugadores){
 
@@ -52,20 +52,24 @@ public class Lista {
         }
 
         y = 130;
-        posicion = 0;
+        posicion = 0;*/
 
     }
 
     public void eliminarListaSuplentes(){
         int ID;
-        /*
+
         for (Boton iterador : listaSuplentes ){
             ID = iterador.getID();
             GestorGrafico.generarDibujante().eliminarTextura(ID);
-        }*/
-        ID = listaSuplentes.get(0).getID();
+        }
+        for (Texto iteradortexto : jugadores ){
+            ID = iteradortexto.getID();
+            GestorGrafico.generarDibujante().eliminarTextura(ID);
+        }
+        jugadores.clear();
         listaSuplentes.clear();
-        GestorGrafico.generarDibujante().eliminarTextura(ID);
+
 
     }
 
@@ -75,7 +79,7 @@ public class Lista {
                 listaSuplentes();
                 estadosuplente =true;
             }else {
-                //eliminarListaSuplentes();
+                eliminarListaSuplentes();
                 estadosuplente =false;
             }
         } else if (entrada ==Entrada.objeto){
