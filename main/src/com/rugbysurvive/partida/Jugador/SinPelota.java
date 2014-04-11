@@ -1,6 +1,7 @@
 package com.rugbysurvive.partida.Jugador;
 
 import com.rugbysurvive.partida.Simulador.Accion;
+import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 
 /**
  * Created by Victor on 27/03/14.
@@ -16,6 +17,11 @@ public class SinPelota implements Estado {
 
     @Override
     public boolean generarAccion(Jugador jugador, int posX, int posY) {
+        return false;
+    }
+
+    @Override
+    public boolean generarAccion(Jugador jugador, int posX, int posY, Entrada entrada) {
         return false;
     }
 
