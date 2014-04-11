@@ -135,13 +135,18 @@ public class GestorGrafico implements Dibujante{
     @Override
     public void eliminarTextura(int ID) {
         //Log.i("BORRAR","BORRANDO antes depurar: "+ID);
+        TipoImagen tipoImagenAux =null;
         for( TipoImagen tipoImagen:this.dibujables)
         {
             if(tipoImagen.ID == ID){
-                this.dibujables.remove(tipoImagen);
+                tipoImagenAux = tipoImagen;
+                break;
             }
         }
-
+        if(tipoImagenAux != null)
+        {
+            this.dibujables.remove(tipoImagenAux);
+        }
             //Log.i("BORRAR","BORRANDO");
 
     }
