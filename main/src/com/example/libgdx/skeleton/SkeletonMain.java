@@ -61,7 +61,7 @@ public class SkeletonMain extends Game {
         gestureDetector = new GestureDetector(20, 0.5f, 1, 0.5f,this.gestorEntrada);
         multiplexer.addProcessor(gestureDetector);
         Gdx.input.setInputProcessor(multiplexer);
-
+        this.prueba2 = new Prueba(100,100,100,"holaa");
 
      //   campoDibujable = new CampoDibujable(this.gestorGrafico,0,0);
 
@@ -84,7 +84,7 @@ public class SkeletonMain extends Game {
 
      this.gestorGrafico.dibujar();
 
-       //this.prueba2.render();
+       this.prueba2.render();
     }
 
     @Override

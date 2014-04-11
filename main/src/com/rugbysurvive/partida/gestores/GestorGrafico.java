@@ -107,8 +107,12 @@ public class GestorGrafico implements Dibujante{
                 }
                  if(TipoDibujo.interficieUsuario== tiposDibujo.get(i) && imagen.tipoDibujo == TipoDibujo.texto){
 
-                     font.draw(this.sprite,imagen.dibujable.getTextura(), imagen.dibujable.getPosicionX(),
-                             imagen.dibujable.getPosicionX());
+                     int posicionX = imagen.dibujable.getPosicionX();
+                     int posicionY = imagen.dibujable.getPosicionY();
+                     posicionX = posicionX - this.camara.getVariationX();
+                     posicionY = posicionY + this.camara.getVariationY();
+
+                     font.draw(this.sprite,imagen.dibujable.getTextura(), posicionX,posicionY);
                  }
 
 
@@ -201,7 +205,7 @@ public class GestorGrafico implements Dibujante{
     private void configurarFuente()
     {
         // Aqui se configura la fuente
-        this.font.scale(2);
+            this.font.scale(2);
     }
 }
 
