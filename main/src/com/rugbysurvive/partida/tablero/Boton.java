@@ -2,6 +2,7 @@ package com.rugbysurvive.partida.tablero;
 
 import com.badlogic.gdx.Gdx;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+import com.rugbysurvive.partida.Lista;
 import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.gestores.Entrada.*;
@@ -35,8 +36,10 @@ public class Boton implements GestionEntrada,Dibujable{
     int ID;
 
     String textura;
+
     int posicion;
 
+    Lista lista = new Lista();
     /**
      * Constructor del elemento boton
      *
@@ -68,6 +71,8 @@ public class Boton implements GestionEntrada,Dibujable{
                 accionEntrada(this.entrada);
 
                 selecionado=true;
+
+
             }
         }else {
             //System.out.println("Boton no selecionado");
@@ -90,7 +95,8 @@ public class Boton implements GestionEntrada,Dibujable{
 
     @Override
     public void accionEntrada(Entrada entrada) {
-
+        lista.crearLista(entrada);
+        System.out.println(posicion);
         System.out.println("Entrada: " + entrada);
         if (entrada ==Entrada.pase){
             this.entrada = Entrada.chute;
