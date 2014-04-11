@@ -42,7 +42,7 @@ public class EnMovimiento implements Estado {
 
 
         System.out.println("MOVIMIENTOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        if((jugador.getPosicionX() == posX) && (jugador.getPosicionY() == posY))
+        if(((jugador.getPosicionX() == posX) && (jugador.getPosicionY() == posY)) && (this.posicionActual == 0))
         {
             this.movimientos[this.posicionActual][0] = posX;
             this.movimientos[this.posicionActual][1] = posY;
@@ -57,7 +57,7 @@ public class EnMovimiento implements Estado {
                 {
                     int posXAnterior = this.movimientos[this.posicionActual-1][0];
                     int posYAnterior = this.movimientos[this.posicionActual-1][1];
-                    if((posXAnterior == posX-1 || posXAnterior == posX+1) && (posYAnterior == posY-1 || posYAnterior == posY+1))
+                    if(((posXAnterior == posX-1 || posXAnterior == posX+1) && (posYAnterior == posY)) || ((posYAnterior == posY-1 || posYAnterior == posY+1) && (posXAnterior == posX)))
                     {
                         this.movimientos[this.posicionActual][0] = posX;
                         this.movimientos[this.posicionActual][1] = posY;
@@ -67,6 +67,8 @@ public class EnMovimiento implements Estado {
                 }
             }
         }
+
+        System.out.println("POSICION ACTUAL:"+this.posicionActual);
 
         if(this.posicionActual == movimientos.length)
         {

@@ -7,8 +7,6 @@ import com.rugbysurvive.partida.gestores.Entrada.Entrada;
  */
 public interface Estado {
     public Jugador jugador = null;
-    public boolean seleccionado = false;
-    public boolean bloqueado = false;
     public boolean paseOChute = true;
 
 

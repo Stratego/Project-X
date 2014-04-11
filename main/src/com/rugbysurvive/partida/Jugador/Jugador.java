@@ -18,6 +18,10 @@ public class Jugador implements GestionEntrada, Dibujable {
     /*Le asignamos aquí tambien la posicion en la que se encuentra el jugador?*/
     private Casilla casilla = null;
 
+    /*Estas dos variables las ponemos aquí y no en estado, ya que si cambiamos el estado perdemos el valor de las variables*/
+    public boolean seleccionado = false;
+    public boolean bloqueado = false;
+
 
 
     public Jugador()
@@ -28,6 +32,7 @@ public class Jugador implements GestionEntrada, Dibujable {
     public Jugador(Casilla casilla)
     {
         this.estado = new ConPelota();
+        //this.estado = new EnMovimiento(8);
         this.casilla = casilla;
         GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
         this.estado.setBloqueado(false);
@@ -59,10 +64,32 @@ public class Jugador implements GestionEntrada, Dibujable {
         this.accion = accion;
     }
 
+    public boolean getSeleccionado()
+    {
+        return this.seleccionado;
+    }
+
+    public void setSeleccionado(boolean seleccionado)
+    {
+        this.seleccionado = seleccionado;
+    }
+
+    public boolean getBloqueado()
+    {
+        return this.bloqueado;
+    }
+
+    public void setBloqueado(boolean bloqueado)
+    {
+        this.bloqueado = bloqueado;
+    }
+
 
     public void accionEntrada(Entrada entrada, float posX, float posY, Casilla[][] casillas)
     {
         boolean accionGenerada = false;
+
+        GestorGrafico.getCamara().bloquear();
 
         //Falta hacer una comprobacion de seleccionados para ver si un jugador hace un pase o otra accion
 
@@ -72,29 +99,32 @@ public class Jugador implements GestionEntrada, Dibujable {
          * - Una vez localizado se le asigna el pase
          */
 
-        if(this.estado.getBloqueado() == false)
+        if(this.getBloqueado() == false)
         {
+
             for (int i = 0; i < 20; i++)
             {
                 for (int j = 0; j < 30; j++)
                 {
-                    if(this.getEstado().getSeleccionado() == true)
+                    if(this.getSeleccionado() == true)
                     {
                         /*
                         * Identificamos la casilla que ha lanzado el evento comparando con la X y la Y
                         */
                         if(casillas[i][j].getPosX() == posX && casillas[i][j].getPosY() == posY)
                         {
-                            if(entrada == Entrada.clicklargo)
+                            if(entrada == Entrada.clicklargo || entrada == Entrada.arrastrar)
                             {
-                                accionGenerada = this.getEstado().generarAccion(this,(int)posX,(int)posY);
-                                i=20;
-                                j=30;
+                                if(this.getSeleccionado() == true)
+                                {
+                                    accionGenerada = this.getEstado().generarAccion(this,(int)posX,(int)posY, entrada);
+                                    i=20;
+                                    j=30;
+                                }
                             }
                         }
                     }
                 }
-
 
             }
             if(accionGenerada == true)
@@ -105,26 +135,28 @@ public class Jugador implements GestionEntrada, Dibujable {
 
 
 
-            if(this.estado.getBloqueado() == false)
+
+
+            if(this.getBloqueado() == false)
             {
-                if(this.getEstado().getSeleccionado() == false)
+                if(this.getSeleccionado() == false)
                 {
                     if(this.casilla.getPosX() == posX && this.casilla.getPosY() == posY)
                     {
                         if(entrada == Entrada.clic)
                         {
-                            if(this.getEstado().getSeleccionado() == false)
-                            {
-                                this.getEstado().setSeleccionado(true);
-                                System.out.println(">---------Me seleccionan-------------<");
-                            }
+                            this.setSeleccionado(true);
+                            System.out.println(">---------Me seleccionan-------------<");
                         }
                     }
                 }
                 else
                 {
-                    this.getEstado().setSeleccionado(false);
-                    System.out.println("<---------Me deseleccionan------------->");
+                    if(entrada == Entrada.clic)
+                    {
+                        this.setSeleccionado(false);
+                        System.out.println("<---------Me deseleccionan------------->");
+                    }
 
                 }
             }
