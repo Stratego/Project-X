@@ -18,6 +18,8 @@ public class ConstantesJuego {
     protected  static final int TAMAÑO_BASE = 1;
     protected  static final int TAMAÑO_MEDIANO = 2;
     protected  static final int TAMAÑO_GRANDE = 3;
+    protected static final double  MAX_MULTIPLICADOR =2.0;
+    protected static final double MIN_MULTIPLICADOR = 0.75;
     protected static ConstantesJuego constantes ;
     protected ResolucionPantalla resolucionPantalla;
     protected double multiplicado = 1;
@@ -32,8 +34,16 @@ public class ConstantesJuego {
     public void setResolucionPantalla(ResolucionPantalla resolucionPantalla){this.resolucionPantalla = resolucionPantalla;}
     public double getAnchoCasilla(){return ANCHO_CASILLA * this.multiplicado;}
     public double getLargoCasilla(){return (double)(ALTO_CASILLA* this.multiplicado);}
-    public void sumarMultiplicado(){this.multiplicado = this.multiplicado + 0.002;}
-    public void restarMultiplicado(){this.multiplicado = this.multiplicado - 0.002;}
+    public void sumarMultiplicado(){
+        if(this.multiplicado < MAX_MULTIPLICADOR){
+            this.multiplicado = this.multiplicado + 0.002;
+        }
+    }
+    public void restarMultiplicado(){
+        if(this.multiplicado > MIN_MULTIPLICADOR){
+            this.multiplicado = this.multiplicado - 0.002;
+        }
+    }
     public double getMultiplicado(){return this.multiplicado;}
     public int getAnchoBoton(){return generarTamaño(ANCHO_BOTON);}
     public int getAltoBoton(){return generarTamaño(ALTO_BOTON);}

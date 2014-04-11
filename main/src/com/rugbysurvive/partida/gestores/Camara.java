@@ -53,19 +53,22 @@ public class Camara implements InputProcessor {
 
         if(!bloqueada)
         {
-             int variationX = Gdx.input.getDeltaX();
-              int variationY = Gdx.input.getDeltaY();
-
-            if(this.isCameraInsideBoard(variationX,variationY))
+            if(Gdx.input.isTouched(0) && !Gdx.input.isTouched(1))
              {
-                this.absoluteVariationX += variationX;
-                this.absoluteVariationY += variationY;
+                    int variationX = Gdx.input.getDeltaX();
+                    int variationY = Gdx.input.getDeltaY();
 
-             this.camera.translate(-variationX,variationY);
-            // this.camera.update();
-             // this.camera.apply(Gdx.graphics.getGL20());
+                     if(this.isCameraInsideBoard(variationX,variationY))
+                     {
+                         this.absoluteVariationX += variationX;
+                         this.absoluteVariationY += variationY;
+
+                         this.camera.translate(-variationX,variationY);
+                        // this.camera.update();
+                         // this.camera.apply(Gdx.graphics.getGL20());
                return true;
              }
+            }
         }
         return false;
     }
@@ -96,7 +99,7 @@ public class Camara implements InputProcessor {
                 && (-variationX)+ this.camera.position.x < this.boardWidth);
     }
 
-    public void bloquear(){this.bloqueada = true;}
+    public void bloquear(){/*this.bloqueada = true;*/}
     public void desbloquear(){this.bloqueada = false;}
 
 

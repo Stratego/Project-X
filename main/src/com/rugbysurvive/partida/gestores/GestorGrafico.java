@@ -38,7 +38,7 @@ public class GestorGrafico implements Dibujante{
     public GestorGrafico(ArrayList<String> nombresTexturas,int tamañoCasilla)
     {
         this.contador = 0;
-        this.camara =  new Camara(1000,1000);
+        this.camara =  new Camara(ConstantesJuego.variables().getAnchoTablero(),ConstantesJuego.variables().getAltoTablero());
         this.sprite = new SpriteBatch();
         this.manager =  new AssetManager();
         this.dibujables = new ArrayList<TipoImagen>();

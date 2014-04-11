@@ -1,6 +1,7 @@
 package com.rugbysurvive.partida.gestores.Entrada;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
@@ -159,6 +160,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         float distancia = (v2-v);
         //System.out.println("distancia : "+distancia );
 
+        if( Gdx.input.isTouched(1)){
         if(distancia >= 0)
         {
              for(int i=0 ;i<distancia/100;i++){
@@ -170,6 +172,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
             for(int i=0 ;i<-(distancia/100);i++){
                 ConstantesJuego.variables().restarMultiplicado();
             }
+        }
         }
         return true;
     }
