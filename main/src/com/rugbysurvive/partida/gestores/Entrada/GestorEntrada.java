@@ -31,7 +31,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
     /**
      * variable que nos indicara si se ha pulsado un boton
      */
-    boolean botonpulsado=false;
+    boolean longclick=false;
 
     /**
      * colecion de botones que nuestro juego mostrara en pantalla
@@ -74,6 +74,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
             }
         }
         campo.accionEntrada(Entrada.clicklargo,touchPos.x, touchPos.y );
+        longclick=true;
 
         return false;
     }
@@ -103,6 +104,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
 
     @Override
     public boolean tap(float screenX, float screenY, int i, int i2) {
+        if (longclick==false){
         Vector3 touchPos = new Vector3();
         touchPos.set(screenX, screenY,0);
         camera.unproject(touchPos);
@@ -117,7 +119,9 @@ public class GestorEntrada implements GestureDetector.GestureListener {
 
 
         campo.accionEntrada(Entrada.clic,touchPos.x, touchPos.y );
-
+        }else{
+            longclick=false;
+        }
 
         return false;
     }
@@ -138,7 +142,6 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         touchPos.set(screenX, screenY,0);
         camera.unproject(touchPos);
         //System.out.println("Posicion tocada: x: " + screenX + " y: "+ screenY );
-        //System.out.println("Posicion mundo: x: " + touchPos.x + " y: "+ touchPos.y );
 
         campo.accionEntrada(Entrada.arrastrar, touchPos.x, touchPos.y);
         return false;

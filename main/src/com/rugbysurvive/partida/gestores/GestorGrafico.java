@@ -1,8 +1,11 @@
 package com.rugbysurvive.partida.gestores;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 
@@ -29,7 +32,7 @@ public class GestorGrafico implements Dibujante{
     protected int vueltas = 0;
     protected static Dibujante instancia = null;
     protected int ultimaPosicionFondos ;
-
+    BitmapFont font;
 
 
     public GestorGrafico(ArrayList<String> nombresTexturas,int tamañoCasilla)
@@ -41,11 +44,12 @@ public class GestorGrafico implements Dibujante{
         this.dibujables = new ArrayList<TipoImagen>();
         this.generarTexturas(nombresTexturas);
         this.tamañoCasilla = tamañoCasilla;
+        this.font=  new BitmapFont();
 
 
         instancia = (Dibujante)this;
         this.ultimaPosicionFondos = 0;
-
+        this.configurarFuente();
     }
 
 
@@ -62,6 +66,7 @@ public class GestorGrafico implements Dibujante{
         tiposDibujo.add(TipoDibujo.fondo);
         tiposDibujo.add(TipoDibujo.elementosJuego);
         tiposDibujo.add(TipoDibujo.interficieUsuario);
+        tiposDibujo.add(TipoDibujo.texto);
 
         //Log.i(TAG,"num iteraciones: "+this.vueltas);
         ConstantesJuego constantes = ConstantesJuego.variables();
@@ -98,7 +103,14 @@ public class GestorGrafico implements Dibujante{
 
                     }
 
+
                 }
+                 if(TipoDibujo.interficieUsuario== tiposDibujo.get(i) && imagen.tipoDibujo == TipoDibujo.texto){
+
+                     font.draw(this.sprite,imagen.dibujable.getTextura(), imagen.dibujable.getPosicionX(),
+                             imagen.dibujable.getPosicionX());
+                 }
+
 
             }
         }
@@ -137,11 +149,7 @@ public class GestorGrafico implements Dibujante{
         return this.contador;
     }
 
-    @Override
-    public int añadirDibujable(TextoDibujable dibujable)
-    {
-        return 0;
-    }
+
 
 
     private void generarTexturas(ArrayList<String> texturas) {
@@ -188,6 +196,12 @@ public class GestorGrafico implements Dibujante{
             this.tipoDibujo = tipoDibujo;
             this.dibujable = dibujable;
         }
+    }
+
+    private void configurarFuente()
+    {
+        // Aqui se configura la fuente
+        //this.font.loqueuierasconfigurar
     }
 }
 

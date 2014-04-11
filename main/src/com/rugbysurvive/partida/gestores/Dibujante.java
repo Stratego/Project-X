@@ -30,13 +30,5 @@ public interface Dibujante {
      */
     public void eliminarTextura(int ID);
 
-    /**
-     * Añade una clase de tipo TextoDibujable a la clase de tipo dibujante
-     * La clase añadida si el texto existe y las posiciones han sido
-     * definidas sera dibujada y actualizada cada cierto tiempo en la pantalla
-     * de juego
-     * @param dibujable texto que se desea mostrar
-     * @return Identificador de la clase que nos permite eliminar la textura
-     */
-    public int añadirDibujable(TextoDibujable dibujable);
+   
 }

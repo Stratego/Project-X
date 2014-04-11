@@ -1,6 +1,10 @@
 package com.rugbysurvive.partida.tablero;
 
 
+
+import com.badlogic.gdx.Gdx;
+import com.rugbysurvive.partida.ConstantesJuego;
+
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoCampo;
 import com.rugbysurvive.partida.gestores.Dibujante;
@@ -23,8 +27,10 @@ public class Casilla implements GestionEntrada {
      */
     private float posY;
 
+
     private Jugador jugador ;
     private ObjetoCampo objeto;
+
 
     /**
      * indicara si el elemento esta seleccionado
@@ -45,6 +51,7 @@ public class Casilla implements GestionEntrada {
         this.objeto = null;
 
         this.dibujante = dibujante;
+
 
         /*Este objeto solo se usara para hacer pruebas*/
         //if((posY == 1 || posY == 9 || posY==17) && ((2+posX)%4 == 0))
@@ -161,10 +168,12 @@ public class Casilla implements GestionEntrada {
         this.jugador = jugador;
     }
 
-    public void accionEntrada(Entrada entrada, float posX, float posY, Casilla [][] casillas) {
 
+    public void accionEntrada(Entrada entrada, float posX, float posY, Casilla [][] casillas) {
+        System.out.println(entrada + " x: "+ posX + "y: " + posY);
         if(this.jugador != null)
         {
+            System.out.println("jugador "+entrada + "x: "+ posX + "y: " + posY);
             this.jugador.accionEntrada(entrada, posX, posY, casillas);
         }
 
@@ -181,6 +190,23 @@ public class Casilla implements GestionEntrada {
 
     }
 
+    /**
+     * indicamos que el elemento se ha seleccionado y su posicion en el tablero
+     * @param posX eje x donde se ha realizado la accion /entrada
+     * @param posY eje y donde se ha realizado la accion /entrada
+     */
+    public boolean esSeleccionado(float posX, float posY) {
+
+        if (posX == this.posX){
+            if (posY == this.posY){
+                selecionado=true;
+            }
+        }else {
+
+            selecionado=false;
+        }
+        return selecionado;
+    }
 
     public Jugador getJugador()
     {

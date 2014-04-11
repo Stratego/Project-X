@@ -12,6 +12,7 @@ import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.gestores.Prueba;
 import com.rugbysurvive.partida.tablero.*;
 
+
 import java.util.ArrayList;
 
 
@@ -21,15 +22,20 @@ public class SkeletonMain extends Game {
     InputMultiplexer multiplexer;
     GestorGrafico gestorGrafico;
 
+    GestureDetector gestureDetector;
+
     GestorEntrada gestorEntrada;
 
     private ArrayList<Boton> botons= new ArrayList <Boton>();
     ConstantesJuego constantes;
+    Prueba prueba2;
 
     int contador = 0;
 
+
     @Override
     public void create() {
+
 
 
         this.constantes = new ConstantesJuego();
@@ -50,13 +56,14 @@ public class SkeletonMain extends Game {
 
         this.multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(this.gestorGrafico.getCamara());
-        multiplexer.addProcessor(new GestureDetector(this.gestorEntrada));
+        gestureDetector = new GestureDetector(20, 0.5f, 1, 0.15f,this.gestorEntrada);
+        multiplexer.addProcessor(gestureDetector);
         Gdx.input.setInputProcessor(multiplexer);
 
 
      //   campoDibujable = new CampoDibujable(this.gestorGrafico,0,0);
 
-        //this.prueba2 = new Prueba(2,4,2000,"jugador1.png");
+        this.prueba2 = new Prueba(2,4,2000,"jugador1.png");
 
         //this.prueba3 = new Prueba(this.gestorGrafico,1,4,300,"casilla.png");
 
@@ -72,9 +79,10 @@ public class SkeletonMain extends Game {
     @Override
     public void render() {
 
+
      this.gestorGrafico.dibujar();
 
-        //this.prueba2.render();
+       this.prueba2.render();
     }
 
     @Override

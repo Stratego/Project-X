@@ -19,9 +19,9 @@ public class Prueba implements Dibujable{
         this.posicionX = posicionX;
         this.posicionY = posicionY;
         this.current_contador = 0;
-        this.ID = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
+        this.ID = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.texto);
 
-        this.textura = textura;
+        this.textura = "holaaaaaaaa";
     }
 
 
