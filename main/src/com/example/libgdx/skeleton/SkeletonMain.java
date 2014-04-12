@@ -47,6 +47,7 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("campo1.png");
         nombresTexturas.add("casellalila.png");
         nombresTexturas.add("boto.png");
+        nombresTexturas.add("listaprueba.png");
 
 
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
@@ -62,7 +63,7 @@ public class SkeletonMain extends Game {
         gestureDetector = new GestureDetector(20, 0.5f, 1, 0.5f,this.gestorEntrada);
         multiplexer.addProcessor(gestureDetector);
         Gdx.input.setInputProcessor(multiplexer);
-        this.prueba2 = new Prueba(100,100,100,"holaa");
+        //this.prueba2 = new Prueba(100,100,100,"holaa");
 
      //   campoDibujable = new CampoDibujable(this.gestorGrafico,0,0);
 
@@ -85,8 +86,10 @@ public class SkeletonMain extends Game {
              this.gestorObjetos.procesar();
        }
      this.gestorGrafico.dibujar();
+
     this.contador++;
        this.prueba2.render();
+
     }
 
     @Override
