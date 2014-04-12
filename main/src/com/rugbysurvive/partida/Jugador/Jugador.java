@@ -22,7 +22,11 @@ public class Jugador implements GestionEntrada, Dibujable {
     public boolean seleccionado = false;
     public boolean bloqueado = false;
 
+    public int Fuerza;
 
+    public int Vida;
+
+    public int Defensa;
 
     public Jugador()
     {
@@ -37,6 +41,14 @@ public class Jugador implements GestionEntrada, Dibujable {
         GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
         this.estado.setBloqueado(false);
         this.getEstado().setSeleccionado(false);
+    }
+
+    public Jugador(int fuerza,int vida, int defensa)
+    {
+        this.Fuerza= fuerza;
+        this.Vida = vida;
+        this.Defensa = defensa;
+
     }
 
     public void generarAccion(int posX, int posY)
@@ -197,6 +209,31 @@ public class Jugador implements GestionEntrada, Dibujable {
     public int getPosicionY() {
         return (int)this.casilla.getPosY();
     }
+
+    public int getFuerza() {
+        return Fuerza;
+    }
+
+    public void setFuerza(int fuerza) {
+        Fuerza = fuerza;
+    }
+
+    public int getVida() {
+        return Vida;
+    }
+
+    public void setVida(int vida) {
+        Vida = vida;
+    }
+
+    public int getDefensa() {
+        return Defensa;
+    }
+
+    public void setDefensa(int defensa) {
+        Defensa = defensa;
+    }
+
 
     //public void recibirImput();
 }

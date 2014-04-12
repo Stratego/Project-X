@@ -88,7 +88,7 @@ public class SkeletonMain extends Game {
      this.gestorGrafico.dibujar();
 
     this.contador++;
-       this.prueba2.render();
+       //this.prueba2.render();
 
     }
 
