@@ -27,6 +27,7 @@ public class GestorObjetos {
      */
     public void añadirObjeto(Objeto objeto)
     {
+        System.out.println("objeto añadido");
         this.objectos.add(objeto);
     }
 
@@ -47,8 +48,7 @@ public class GestorObjetos {
         ArrayList<Objeto> objectosEliminar = new ArrayList<Objeto>();
         for(Objeto objeto : objectos)
         {
-            if(objeto.pasarTurno())
-            {
+            if(objeto.pasarTurno()) {
                 objectosEliminar.add(objeto);
             }
         }
@@ -63,7 +63,7 @@ public class GestorObjetos {
      */
     private void eliminarObjetos(ArrayList<Objeto> objectosEliminar )
     {
-        for(Objeto objeto : objectos)
+        for(Objeto objeto : objectosEliminar)
         {
             this.objectos.remove(objeto);
         }

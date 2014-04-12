@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.input.GestureDetector;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.ResolucionPantalla;
+import com.rugbysurvive.partida.elementos.objetos.GestorObjetos;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestorEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
@@ -30,7 +31,7 @@ public class SkeletonMain extends Game {
     private ArrayList<Boton> botons= new ArrayList <Boton>();
     ConstantesJuego constantes;
     Prueba prueba2;
-
+    GestorObjetos gestorObjetos;
     int contador = 0;
 
 
@@ -56,7 +57,7 @@ public class SkeletonMain extends Game {
         this.gestorEntrada = new GestorEntrada(this.gestorGrafico.getCamara().getOrthographicCamera(),botons,this.gestorGrafico);
 
         this.multiplexer = new InputMultiplexer();
-
+        this.gestorObjetos = new GestorObjetos();
         multiplexer.addProcessor(this.gestorGrafico.getCamara());
         gestureDetector = new GestureDetector(20, 0.5f, 1, 0.5f,this.gestorEntrada);
         multiplexer.addProcessor(gestureDetector);
@@ -80,10 +81,11 @@ public class SkeletonMain extends Game {
 
     @Override
     public void render() {
-
-
+       if(contador %100 == 0 ){
+             this.gestorObjetos.procesar();
+       }
      this.gestorGrafico.dibujar();
-
+    this.contador++;
        this.prueba2.render();
     }
 

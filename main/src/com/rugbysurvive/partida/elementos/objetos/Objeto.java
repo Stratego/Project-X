@@ -6,26 +6,40 @@ package com.rugbysurvive.partida.elementos.objetos;
  * para ser gestionado en el proceso de activacion y
  * desactivacion por el gestor de objetos
  */
-public abstract class Objeto {
+public abstract class Objeto extends ObjetoJugador {
         protected int vida;
 
-        public Objeto(int vida){
+        public Objeto(int vida,String imagen){
+            super(imagen);
             this.vida = vida;
         }
 
         /**
          * Activa los efectos del objeto
          */
+        @Override
         public void activar(){
             this.iniciar();
             GestorObjetos.getGestor().añadirObjeto(this);
         }
+
+        /**
+         * Inicia el efecto del objeto
+         *
+        */
         protected abstract void iniciar();
+
+        /**
+         * Desace el efecto del objeto
+         */
         protected abstract void desactivar();
 
         /**
+        *Cada vez que se llama esta funcion
+        * el objeto pierde un turno de vida
         *
-        * @return
+        * @return Cierto si el objeto ha finalizado
+        * su vida , falso en caso contrario
         */
         public boolean pasarTurno()
         {
