@@ -39,7 +39,7 @@ public class Boton implements GestionEntrada,Dibujable{
 
     int posicion;
 
-    Lista lista = new Lista();
+    //Lista lista = new Lista();
     /**
      * Constructor del elemento boton
      *
@@ -66,8 +66,50 @@ public class Boton implements GestionEntrada,Dibujable{
     public boolean esSeleccionado(float posX, float posY) {
         //System.out.println("X: " + this.posX + " Y: " + this.posY);
         //System.out.println(Gdx.graphics.getHeight());
-        if (posX >= this.posX && posX <= this.posX+ConstantesJuego.variables().getAnchoBoton()){
-            if (posY >= Gdx.graphics.getHeight()-ConstantesJuego.variables().getAnchoBoton()){
+        int anchoBoton=0;
+        int altoBoton=0;
+        if (this.posicion == 20){
+            anchoBoton=ConstantesJuego.variables().getAnchoBoton();
+            altoBoton=ConstantesJuego.variables().getAnchoBoton();
+
+            /*
+            if (posX >= this.posX && posX <= this.posX+anchoBoton){
+                if (posY >= Gdx.graphics.getHeight()-altoBoton){
+                    accionEntrada(this.entrada);
+
+                    selecionado=true;
+
+
+                }
+            }else {
+                //System.out.println("Boton no selecionado");
+                selecionado=false;
+            }*/
+
+        }else{
+            anchoBoton=768;
+            altoBoton=64;
+
+            /*System.out.println(this.posX + " : " + this.posY);
+            System.out.println(Gdx.graphics.getHeight() -130 -altoBoton);
+            System.out.println(Gdx.graphics.getHeight()  -130);*/
+
+            /*if (posX >= this.posX && posX <= this.posX+anchoBoton){
+                if (posY >= Gdx.graphics.getHeight() - this.posY -altoBoton && posY <= Gdx.graphics.getHeight()  -this.posY){
+                    accionEntrada(this.entrada);
+
+                    selecionado=true;
+
+
+                }
+            }else {
+                //System.out.println("Boton no selecionado");
+                selecionado=false;
+            }*/
+        }
+
+        if (posX >= this.posX && posX <= this.posX+anchoBoton){
+            if (posY >= Gdx.graphics.getHeight() - this.posY -altoBoton && posY <= Gdx.graphics.getHeight()  -this.posY){
                 accionEntrada(this.entrada);
 
                 selecionado=true;
@@ -78,6 +120,18 @@ public class Boton implements GestionEntrada,Dibujable{
             //System.out.println("Boton no selecionado");
             selecionado=false;
         }
+        /*if (posX >= this.posX && posX <= this.posX+anchoBoton){
+            if (posY >= Gdx.graphics.getHeight()-altoBoton){
+                accionEntrada(this.entrada);
+
+                selecionado=true;
+
+
+            }
+        }else {
+            //System.out.println("Boton no selecionado");
+            selecionado=false;
+        }*/
         return selecionado;
     }
 
@@ -95,7 +149,7 @@ public class Boton implements GestionEntrada,Dibujable{
 
     @Override
     public void accionEntrada(Entrada entrada) {
-        lista.crearLista(entrada);
+        //lista.crearLista(entrada);
         System.out.println(posicion);
         System.out.println("Entrada: " + entrada);
         if (entrada ==Entrada.pase){

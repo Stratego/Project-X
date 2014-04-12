@@ -7,6 +7,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.rugbysurvive.partida.ConstantesJuego;
+import com.rugbysurvive.partida.Lista;
 import com.rugbysurvive.partida.gestores.Dibujante;
 import com.rugbysurvive.partida.tablero.Boton;
 import com.rugbysurvive.partida.tablero.Campo;
@@ -42,6 +43,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
 
     Dibujante dibujante;
 
+    Lista lista = new Lista();
 
     /**
      * constructor del elemento GestorImput
@@ -109,12 +111,22 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         Vector3 touchPos = new Vector3();
         touchPos.set(screenX, screenY,0);
         camera.unproject(touchPos);
-        //System.out.println("Posicion tocada: x: " + screenX + " y: "+ screenY );
+        System.out.println("Posicion tocada: x: " + screenX + " y: "+ screenY );
         //System.out.println("Posicion mundo: x: " + touchPos.x + " y: "+ touchPos.y );
 
         for (Boton iterador : botons){
             if (iterador.esSeleccionado(screenX,screenY)){
+                lista.crearLista(iterador.obtenerEntrada());
                 return false;
+            }
+        }
+        if (lista.hayLista()==true){
+            System.out.println("entra en bucle de listas");
+            for (Boton iteradorLista : lista.listaActiva()){
+                System.out.println("itera bucle de listas");
+                if (iteradorLista.esSeleccionado(screenX,screenY)){
+                    return false;
+                }
             }
         }
 

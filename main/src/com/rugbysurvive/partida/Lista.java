@@ -16,11 +16,12 @@ public class Lista {
     private ArrayList<Boton> listaSuplentes= new ArrayList <Boton>();
     private ArrayList<Boton> listaObjetos= new ArrayList <Boton>();
 
+    private ArrayList<Boton> listaActiva= new ArrayList <Boton>();
 
     private ArrayList<Texto> jugadores= new ArrayList <Texto>();
 
-    private boolean estadosuplente=false;
-    private boolean estadoobjeto=false;
+    private boolean estadoSuplente =false;
+    private boolean estadoObjeto =false;
 
 
     public void listaSuplentes(){
@@ -54,6 +55,8 @@ public class Lista {
         y = 130;
         posicion = 0;*/
 
+        estadoSuplente =true;
+
     }
 
     public void eliminarListaSuplentes(){
@@ -69,22 +72,42 @@ public class Lista {
         }
         jugadores.clear();
         listaSuplentes.clear();
-
+        estadoSuplente =false;
 
     }
 
     public void crearLista(Entrada entrada){
         if (entrada ==Entrada.cambiar){
-            if (estadosuplente==false){
+            if (estadoSuplente ==false){
                 listaSuplentes();
-                estadosuplente =true;
+                estadoSuplente =true;
             }else {
                 eliminarListaSuplentes();
-                estadosuplente =false;
+                estadoSuplente =false;
             }
         } else if (entrada ==Entrada.objeto){
             //this.entrada = Entrada.pase;
         }
+    }
+
+    public boolean hayLista(){
+        boolean listaEnUso=false;
+        if (estadoSuplente ==true || estadoObjeto ==true){
+            listaEnUso =true;
+        }
+        return listaEnUso;
+    }
+
+    public  ArrayList<Boton> listaActiva (){
+
+        if (estadoSuplente){
+          listaActiva=listaSuplentes;
+        }
+        if (estadoObjeto){
+            listaActiva = listaObjetos;
+        }
+        return listaActiva;
+
     }
 
 
