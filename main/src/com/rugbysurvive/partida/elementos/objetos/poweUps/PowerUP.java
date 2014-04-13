@@ -11,8 +11,10 @@ public class PowerUP extends Objeto {
 
     public PowerUP(int vida) { // Aqui falta añadir todos los elementos que se desean
                                // includir en el objeto para hacer el efecto
-        super(vida);
+        super(vida,"");
     }
+
+
 
     @Override
     protected void iniciar() {
