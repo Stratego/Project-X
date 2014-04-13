@@ -48,12 +48,27 @@ public class Jugador implements GestionEntrada, Dibujable {
         this.getEstado().setSeleccionado(false);
     }
 
-    public Jugador(int fuerza,int vida, int defensa)
+    public Jugador(Casilla casilla, int fuerza,int vida, int defensa, List<PowerUP> powerup, Estado estado)
     {
         this.Fuerza= fuerza;
         this.Vida = vida;
         this.Defensa = defensa;
 
+        if(powerup.size() <= 4)
+        {
+            this.powerup = powerup;
+        }
+
+        this.estado = new ConPelota();
+        //this.estado = new EnMovimiento(8);
+        //this.estado = estado;
+        
+        this.casilla = casilla;
+        this.estado.setBloqueado(false);
+        this.getEstado().setSeleccionado(false);
+
+
+        GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
     }
 
     public List<PowerUP> getPowerUP()
