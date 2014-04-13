@@ -9,6 +9,7 @@ import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.tablero.Casilla;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class Jugador implements GestionEntrada, Dibujable {
     public boolean seleccionado = false;
     public boolean bloqueado = false;
 
-    private List<PowerUP> powerup;
+    private ArrayList<PowerUP> powerup;
 
     public int Fuerza;
 
@@ -48,7 +49,7 @@ public class Jugador implements GestionEntrada, Dibujable {
         this.getEstado().setSeleccionado(false);
     }
 
-    public Jugador(Casilla casilla, int fuerza,int vida, int defensa, List<PowerUP> powerup, Estado estado)
+    public Jugador(Casilla casilla, int fuerza,int vida, int defensa, ArrayList<PowerUP> powerup)
     {
         this.Fuerza= fuerza;
         this.Vida = vida;
@@ -71,7 +72,7 @@ public class Jugador implements GestionEntrada, Dibujable {
         GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
     }
 
-    public List<PowerUP> getPowerUP()
+    public ArrayList<PowerUP> getPowerUP()
     {
         return this.powerup;
     }
