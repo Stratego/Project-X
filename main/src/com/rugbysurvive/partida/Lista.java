@@ -105,9 +105,8 @@ public class Lista {
      */
     public void ListaObjetos(){
 
-        //int x = jugador.getPosicionX();
-        //int y = jugador.getPosicionY();
-        int x =320;
+
+        int x =1050;
         int y =640;
         int posicion = 0;
         for (int i = 0; i<3;i++){
@@ -121,7 +120,7 @@ public class Lista {
                         x +=64;
                     }
                 }
-                x=320;
+                x=1050;
                 y -=128;
             }
         }
