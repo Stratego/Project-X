@@ -86,26 +86,14 @@ public class Boton implements GestionEntrada,Dibujable{
                 selecionado=false;
             }*/
 
-        }else{
+        }else if(this.obtenerEntrada()==Entrada.listasuplente){
             anchoBoton=768;
             altoBoton=64;
 
-            /*System.out.println(this.posX + " : " + this.posY);
-            System.out.println(Gdx.graphics.getHeight() -130 -altoBoton);
-            System.out.println(Gdx.graphics.getHeight()  -130);*/
 
-            /*if (posX >= this.posX && posX <= this.posX+anchoBoton){
-                if (posY >= Gdx.graphics.getHeight() - this.posY -altoBoton && posY <= Gdx.graphics.getHeight()  -this.posY){
-                    accionEntrada(this.entrada);
-
-                    selecionado=true;
-
-
-                }
-            }else {
-                //System.out.println("Boton no selecionado");
-                selecionado=false;
-            }*/
+        }else {
+            anchoBoton=64;
+            altoBoton=64;
         }
 
         if (posX >= this.posX && posX <= this.posX+anchoBoton){

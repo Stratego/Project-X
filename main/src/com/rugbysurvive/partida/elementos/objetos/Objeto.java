@@ -14,7 +14,9 @@ public abstract class Objeto extends ObjetoJugador {
             this.vida = vida;
         }
 
-        /**
+
+
+    /**
          * Activa los efectos del objeto
          */
         @Override

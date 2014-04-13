@@ -13,6 +13,8 @@ public class PowerUP extends Objeto {
         super(vida,"");
     }
 
+
+
     @Override
     protected void iniciar() {
         System.out.println("INICIAR");
