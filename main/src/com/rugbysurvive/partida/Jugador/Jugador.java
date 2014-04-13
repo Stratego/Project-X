@@ -2,11 +2,14 @@ package com.rugbysurvive.partida.Jugador;
 
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Simulador.Accion;
+import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
 import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.tablero.Casilla;
+
+import java.util.List;
 
 /**
  * Created by Victor on 27/03/14.
@@ -21,6 +24,8 @@ public class Jugador implements GestionEntrada, Dibujable {
     /*Estas dos variables las ponemos aquí y no en estado, ya que si cambiamos el estado perdemos el valor de las variables*/
     public boolean seleccionado = false;
     public boolean bloqueado = false;
+
+    private List<PowerUP> powerup;
 
     public int Fuerza;
 
@@ -49,6 +54,37 @@ public class Jugador implements GestionEntrada, Dibujable {
         this.Vida = vida;
         this.Defensa = defensa;
 
+    }
+
+    public List<PowerUP> getPowerUP()
+    {
+        return this.powerup;
+    }
+
+    public PowerUP getPowerUP(int index)
+    {
+        if(index>=0 && index<4)
+        {
+            return this.powerup.get(index);
+        }
+
+        return null;
+    }
+
+    public void setPowerUP(PowerUP powerup)
+    {
+        if(this.powerup.size() <= 4)
+        {
+            this.powerup.add(powerup);
+        }
+    }
+
+    public void setPowerUP(PowerUP powerup, int index)
+    {
+        if(index>=0 && index<4)
+        {
+            this.powerup.add(index, powerup);
+        }
     }
 
     public void generarAccion(int posX, int posY)

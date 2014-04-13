@@ -1,6 +1,5 @@
 package com.rugbysurvive.partida.elementos.objetos.poweUps;
 
-import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.elementos.objetos.Objeto;
 
 /**
@@ -11,7 +10,7 @@ public class PowerUP extends Objeto {
 
     public PowerUP(int vida) { // Aqui falta añadir todos los elementos que se desean
                                // includir en el objeto para hacer el efecto
-        super(vida);
+        super(vida,"");
     }
 
     @Override
