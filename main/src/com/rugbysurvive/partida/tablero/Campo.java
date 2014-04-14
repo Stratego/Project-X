@@ -8,6 +8,7 @@ import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.gestores.Dibujante;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
+import com.rugbysurvive.partida.jugadores.Equipo;
 
 /**
  * Clase que crea y define el comportamiente del terreno del juego
@@ -134,6 +135,12 @@ public class Campo implements GestionEntrada,Dibujable {
         return this.casillas[posicionX][posicionY].getObjeto();
     }
 
+
+    public void dibujarEquipo(Equipo equipo){
+        for (Jugador iter :equipo.getJugadores()){
+            this.añadirElemento(iter, iter.getPosicionX(), iter.getPosicionY());
+        }
+    }
 
 
     @Override

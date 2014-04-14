@@ -11,6 +11,8 @@ import com.rugbysurvive.partida.tablero.Casilla;
 
 import java.util.ArrayList;
 
+import java.util.List;
+
 /**
  * Created by Victor on 27/03/14.
  */

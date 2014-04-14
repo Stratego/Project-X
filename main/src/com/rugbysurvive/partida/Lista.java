@@ -1,6 +1,7 @@
 package com.rugbysurvive.partida;
 
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.gestores.Texto;
@@ -44,9 +45,12 @@ public class Lista {
     /**
      * Obtenemos el equipo donde obtendremos los datos
      */
-    private Equipo equipo = new Equipo();
+    private Equipo equipo;
 
 
+    public Lista(Equipo equipo){
+        this.equipo=equipo;
+    }
     /**
      * Obtiene la lista de suplentes del equipo y la dibuja en pantalla
      */
@@ -105,23 +109,28 @@ public class Lista {
      */
     public void ListaObjetos(){
 
-        //int x = jugador.getPosicionX();
-        //int y = jugador.getPosicionY();
-        int x =320;
+        ArrayList<PowerUP> powerupJugador = equipo.objetosJugador();
+
+        int x =1050;
         int y =640;
-        int posicion = 0;
+        int iteracion = 0;
         for (int i = 0; i<3;i++){
             if (i==0 ||i==2){
                 for (int p = 0; p<3;p++){
                     if (p==0 ||p==2){
-                        listaObjetos.add(new Boton(x,y, Entrada.listaobjetos,"casellalila.png",posicion));
+                        System.out.println(powerupJugador.size());
+                        System.out.println(iteracion);
+                        if (powerupJugador.size()!=0&&powerupJugador.size()>iteracion){
+                        listaObjetos.add(new Boton(x,y, Entrada.listaobjetos,"casellalila.png",iteracion));
                         x +=64;
-                        posicion +=1;
+                        iteracion +=1;
+                        }
+
                     }else{
                         x +=64;
                     }
                 }
-                x=320;
+                x=1050;
                 y -=128;
             }
         }
