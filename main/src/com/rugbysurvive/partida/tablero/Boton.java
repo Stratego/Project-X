@@ -125,7 +125,7 @@ public class Boton implements GestionEntrada,Dibujable{
 
     public Entrada obtenerEntrada()
     {
-        return entrada;
+        return this.entrada;
     }
 
     @Override
@@ -138,13 +138,26 @@ public class Boton implements GestionEntrada,Dibujable{
     @Override
     public void accionEntrada(Entrada entrada) {
         //lista.crearLista(entrada);
-        System.out.println(posicion);
+
         System.out.println("Entrada: " + entrada);
+        System.out.println("posicion: " + posicion);
+
         if (entrada ==Entrada.pase){
             this.entrada = Entrada.chute;
         } else if (entrada ==Entrada.chute){
             this.entrada = Entrada.pase;
         }
+
+        if (entrada == Entrada.listaobjetos){
+            //obteniendo la instansacion de equipo obtener la de objetos de jugador activo y activar objeto
+
+        }
+
+        if (entrada == Entrada.listasuplente){
+            //obteniendo la instansacion de equipo y realizar cambio en la lista de jugadores
+            //equipo.intercambioJugadores(12);
+        }
+
     }
 
     public int getID(){

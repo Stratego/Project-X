@@ -2,6 +2,7 @@ package com.rugbysurvive.partida.Jugador;
 
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Simulador.Accion;
+import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
 import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
@@ -27,7 +28,7 @@ public class Jugador implements GestionEntrada, Dibujable {
     public boolean seleccionado = false;
     public boolean bloqueado = false;
 
-    private ArrayList<PowerUP> powerup;
+    private ArrayList<ObjetoJugador> powerup;
 
     public int Fuerza;
 
@@ -50,7 +51,7 @@ public class Jugador implements GestionEntrada, Dibujable {
         this.getEstado().setSeleccionado(false);
     }
 
-    public Jugador(Casilla casilla, int fuerza,int vida, int defensa, ArrayList<PowerUP> powerup)
+    public Jugador(Casilla casilla, int fuerza,int vida, int defensa, ArrayList<ObjetoJugador> powerup)
     {
         this.Fuerza= fuerza;
         this.Vida = vida;
@@ -73,12 +74,12 @@ public class Jugador implements GestionEntrada, Dibujable {
         GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
     }
 
-    public ArrayList<PowerUP> getPowerUP()
+    public ArrayList<ObjetoJugador> getPowerUP()
     {
         return this.powerup;
     }
 
-    public PowerUP getPowerUP(int index)
+    public ObjetoJugador getPowerUP(int index)
     {
         if(index>=0 && index<4)
         {
@@ -88,7 +89,7 @@ public class Jugador implements GestionEntrada, Dibujable {
         return null;
     }
 
-    public void setPowerUP(PowerUP powerup)
+    public void setPowerUP(ObjetoJugador powerup)
     {
         if(this.powerup.size() <= 4)
         {

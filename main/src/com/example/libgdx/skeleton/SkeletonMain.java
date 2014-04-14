@@ -48,6 +48,7 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("casellalila.png");
         nombresTexturas.add("boto.png");
         nombresTexturas.add("listaprueba.png");
+        nombresTexturas.add("casilla.png");
 
 
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);

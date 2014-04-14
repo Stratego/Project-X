@@ -47,7 +47,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
 
     private Equipo equipo=new Equipo();
 
-    Lista lista = new Lista(equipo);
+    Lista lista;
 
     /**
      * constructor del elemento GestorImput
@@ -60,8 +60,9 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         this.botons = botons;
         this.dibujante = dibujante;
         campo = new Campo(dibujante);
-
         campo.dibujarEquipo(equipo);
+        lista = new Lista(equipo);
+
 
     }
 
@@ -117,7 +118,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         Vector3 touchPos = new Vector3();
         touchPos.set(screenX, screenY,0);
         camera.unproject(touchPos);
-        System.out.println("Posicion tocada: x: " + screenX + " y: "+ screenY );
+        //System.out.println("Posicion tocada: x: " + screenX + " y: "+ screenY );
         //System.out.println("Posicion mundo: x: " + touchPos.x + " y: "+ touchPos.y );
 
         for (Boton iterador : botons){
@@ -127,17 +128,19 @@ public class GestorEntrada implements GestureDetector.GestureListener {
             }
         }
         if (lista.hayLista()==true){
-            System.out.println("entra en bucle de listas");
+            //System.out.println("entra en bucle de listas");
             for (Boton iteradorLista : lista.listaActiva()){
-                System.out.println("itera bucle de listas");
+                //System.out.println("itera bucle de listas");
                 if (iteradorLista.esSeleccionado(screenX,screenY)){
+                    lista.crearLista(iteradorLista.obtenerEntrada());
                     return false;
                 }
             }
         }
 
-
+        lista.eliminarListaObjetos();
         campo.accionEntrada(Entrada.clic,touchPos.x, touchPos.y );
+
         }else{
             longclick=false;
         }
