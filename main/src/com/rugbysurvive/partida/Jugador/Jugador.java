@@ -2,6 +2,7 @@ package com.rugbysurvive.partida.Jugador;
 
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Simulador.Accion;
+import com.rugbysurvive.partida.elementos.objetos.Objeto;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
 import com.rugbysurvive.partida.gestores.Dibujable;
@@ -18,6 +19,9 @@ import java.util.List;
  * Created by Victor on 27/03/14.
  */
 public class Jugador implements GestionEntrada, Dibujable {
+
+    private static final int MAXIMO_OBJETOS = 4;
+
 
     private Estado estado;
     private Accion accion = null;
@@ -36,6 +40,10 @@ public class Jugador implements GestionEntrada, Dibujable {
 
     public int Defensa;
 
+    public int id;
+
+    public boolean enJuego;
+
     public Jugador()
     {
 
@@ -51,28 +59,57 @@ public class Jugador implements GestionEntrada, Dibujable {
         this.getEstado().setSeleccionado(false);
     }
 
-    public Jugador(Casilla casilla, int fuerza,int vida, int defensa, ArrayList<ObjetoJugador> powerup)
+    public Jugador(int fuerza,int vida, int defensa)
     {
         this.Fuerza= fuerza;
         this.Vida = vida;
         this.Defensa = defensa;
 
-        if(powerup.size() <= 4)
-        {
-            this.powerup = powerup;
-        }
+        this.powerup= new ArrayList<ObjetoJugador>();
 
         this.estado = new ConPelota();
         //this.estado = new EnMovimiento(8);
         //this.estado = estado;
 
-        this.casilla = casilla;
         this.estado.setBloqueado(false);
         this.getEstado().setSeleccionado(false);
+        this.id = -1;
+        this.enJuego = false;
 
-
-        GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
     }
+
+    public void añadirObjeto(ObjetoJugador objeto){
+       if(this.powerup.size() < MAXIMO_OBJETOS)
+       {
+            this.powerup.add(objeto);
+       }
+    }
+
+    /**
+     * Coloca un jugador en una casilla determinada e inicia
+     * el proceso de dibujado.
+     * @param casilla casilla donde se situa el jugador
+     */
+    public void colocar(Casilla casilla){
+        this.casilla= casilla;
+        if(casilla != null)
+        {
+            this.enJuego = true;
+            id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
+        }
+    }
+
+    /**
+     * Elimina el jugador de la casilla y finaliza el proceso de dibujado
+     */
+    public void quitar(){
+        this.casilla = null;
+        GestorGrafico.generarDibujante().eliminarTextura(id);
+        id = -1;
+        this.enJuego = false;
+
+    }
+
 
     public ArrayList<ObjetoJugador> getPowerUP()
     {
@@ -256,12 +293,20 @@ public class Jugador implements GestionEntrada, Dibujable {
 
     @Override
     public int getPosicionX() {
-        return (int)this.casilla.getPosX();
+        if(this.casilla != null)
+        {
+            return (int)this.casilla.getPosX();
+        }
+        else return -1;
     }
 
     @Override
     public int getPosicionY() {
-        return (int)this.casilla.getPosY();
+        if(this.casilla != null)
+        {
+            return (int)this.casilla.getPosY();
+        }
+        else return -1;
     }
 
     public int getFuerza() {
@@ -288,6 +333,7 @@ public class Jugador implements GestionEntrada, Dibujable {
         Defensa = defensa;
     }
 
+    public boolean getEnJuego(){return enJuego;}
 
     //public void recibirImput();
 }

@@ -80,6 +80,7 @@ public class Casilla implements GestionEntrada {
         if(this.jugador == null && this.objeto == null)
         {
             this.jugador = jugador;
+            this.jugador.colocar(this);
             return true;
         }
         return false;
@@ -125,6 +126,9 @@ public class Casilla implements GestionEntrada {
      */
     public void eliminarElemento()
     {
+        if(jugador != null){
+            this.jugador.quitar();
+        }
         this.jugador = null;
         this.objeto = null;
     }

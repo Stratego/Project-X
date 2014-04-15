@@ -8,6 +8,7 @@ import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.gestores.Dibujante;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
+import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.jugadores.Equipo;
 
 /**
@@ -30,10 +31,8 @@ public class Campo implements GestionEntrada,Dibujable {
     Dibujante dibujante;
 
 
-
-
-    public Campo(Dibujante dibujante)  {
-        this.dibujante = dibujante;
+    public Campo()  {
+        this.dibujante = GestorGrafico.generarDibujante();
         dibujante.añadirDibujable(this,TipoDibujo.fondo);
         this.dibujarTablero();
         campo = this;
@@ -139,9 +138,22 @@ public class Campo implements GestionEntrada,Dibujable {
     public void dibujarEquipo(Equipo equipo){
         for (Jugador iter :equipo.getJugadores()){
             this.añadirElemento(iter, iter.getPosicionX(), iter.getPosicionY());
+
         }
     }
 
+    /**
+     * Elimina todos los jugadores de este equipo en el campo
+     * @param equipo
+     */
+    public void borrarEquipo (Equipo equipo){
+        for (Jugador iter :equipo.getJugadores()){
+            if(iter.getEnJuego())
+            {
+                this.eliminarElemento(iter.getPosicionX(), iter.getPosicionY());
+            }
+        }
+    }
 
     @Override
     public void accionEntrada(Entrada entrada) {

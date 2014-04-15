@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Lista;
+import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.gestores.Dibujante;
 import com.rugbysurvive.partida.jugadores.Equipo;
 import com.rugbysurvive.partida.tablero.Boton;
@@ -59,8 +60,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         this.camera = camera;
         this.botons = botons;
         this.dibujante = dibujante;
-        campo = new Campo(dibujante);
-        campo.dibujarEquipo(equipo);
+        campo = ComponentesJuego.getComponentes().getCampo();
         lista = new Lista(equipo);
 
 

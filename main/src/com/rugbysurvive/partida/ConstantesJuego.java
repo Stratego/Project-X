@@ -11,8 +11,8 @@ public class ConstantesJuego {
     protected static final int ALTO_CASILLA = 64;
     protected static final int ANCHO_BOTON = 128;
     protected static final int ALTO_BOTON = 128;
-    protected  static final int NUMERO_CASILLAS_ANCHO_TABLERO = 20;
-    protected  static final int NUMERO_CASILLAS_LARGO_TABLERO = 30;
+    public static final int NUMERO_CASILLAS_ANCHO_TABLERO = 20;
+    public static final int NUMERO_CASILLAS_LARGO_TABLERO = 30;
     protected  static final int ANCHO_TABLERO = ANCHO_CASILLA*NUMERO_CASILLAS_ANCHO_TABLERO;
     protected  static final int ALTO_TABLERO = ALTO_CASILLA*NUMERO_CASILLAS_LARGO_TABLERO;
     protected  static final int TAMAÑO_BASE = 1;

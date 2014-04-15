@@ -14,7 +14,7 @@ public class ConPelota implements Estado {
 
     public boolean generarAccion(Jugador jugador) {
 
-        Simulador.getInstance().addAccionesSimulador(jugador.getAccion());
+        Simulador.getInstance().añadirAccion(jugador.getAccion());
 
         return false;
     }
@@ -52,7 +52,7 @@ public class ConPelota implements Estado {
 
         if(jugador.getAccion() != null)
         {
-            Simulador.getInstance().addAccionesSimulador(jugador.getAccion());
+            Simulador.getInstance().añadirAccion(jugador.getAccion());
             jugador.setBloqueado(true);
             return true;
         }

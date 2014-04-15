@@ -6,7 +6,7 @@ import com.rugbysurvive.partida.Jugador.SinPelota;
 /**
  * Created by Victor on 27/03/14.
  */
-public class Pase implements Accion {
+public class Pase extends Accion {
 
     int posXObjetivo;
     int posYObjetivo;
@@ -20,8 +20,14 @@ public class Pase implements Accion {
 
 
     @Override
-    public void simular() {
+    public boolean simular() {
         System.out.println("Pase lanzado a la posición: "+this.posXObjetivo+"-"+this.posYObjetivo);
         jugador.setEstado(new SinPelota());
+        return true;
+    }
+
+    @Override
+    public void simularAnimacion() {
+
     }
 }

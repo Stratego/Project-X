@@ -17,11 +17,9 @@ import java.util.ArrayList;
  */
 public  class Equipo {
 
+    public static final int JUGADORES_CAMPO = 7;
     private ArrayList<Jugador> jugadores = new ArrayList <Jugador>();
     private ArrayList<PosicionInicial> alineacion;
-
-    private ArrayList<ObjetoJugador> powerup = new ArrayList<ObjetoJugador>();
-    private ArrayList<ObjetoJugador> powerup2 = new ArrayList<ObjetoJugador>();
 
     private static Equipo equipo;
 
@@ -29,44 +27,14 @@ public  class Equipo {
 
     Campo campo = Campo.getInstanciaCampo();
 
-    //objetos de prueba
-    ObjetoJugador objeto1 = new ObjetoJugador(1,"casellalila.png") {
-        @Override
-        public void activar() {
-
-        }
-    };
-
-    //objetos de prueba
-    ObjetoJugador objeto2 = new ObjetoJugador(2,"casilla.png") {
-        @Override
-        public void activar() {
-
-        }
-    };
-
-    //objetos de prueba
-    ObjetoJugador objeto3 = new ObjetoJugador(3,"casilla.png") {
-        @Override
-        public void activar() {
-
-        }
-    };
-
-    //objetos de prueba
-    ObjetoJugador objeto4 = new ObjetoJugador(4,"casellalila.png") {
-        @Override
-        public void activar() {
-
-        }
-    };
-
     /**
      * contructor de la clase
      */
     public  Equipo(){
-        crearEquipo();
+        this.alineacion = new ArrayList<PosicionInicial>();
+        this.jugadores =  new ArrayList<Jugador>();
         equipo = this;
+
     }
 
     /**
@@ -76,32 +44,6 @@ public  class Equipo {
 
 
 
-        // equipo por defecto , implementar funcion una vez se haya unido con la otra parte
-        powerup.add(objeto1);
-        jugadores.add(new Jugador(new Casilla(0,0),10,10,10,powerup));
-
-
-        powerup.add(objeto2);
-        jugadores.add(new Jugador(new Casilla(0,1),10,10,10,powerup));
-
-        powerup.add(objeto3);
-        jugadores.add(new Jugador(new Casilla(2,0),10,10,10,powerup));
-
-        powerup.add(objeto4);
-        jugadores.add(new Jugador(new Casilla(2,1),10,10,10,powerup));
-
-        powerup2.add(objeto2);
-        jugadores.add(new Jugador(new Casilla(4,0),10,10,10,powerup2));
-        jugadores.add(new Jugador(new Casilla(4,1),10,10,10,powerup2));
-        jugadores.add(new Jugador(new Casilla(6,0),10,10,10,powerup2));
-        jugadores.add(new Jugador(new Casilla(6,1),10,20,30,powerup2));
-        jugadores.add(new Jugador(new Casilla(7,0),20,30,40,powerup2));
-        jugadores.add(new Jugador(new Casilla(7,1),30,40,50,powerup2));
-        jugadores.add(new Jugador(new Casilla(9,0),40,50,60,powerup2));
-        jugadores.add(new Jugador(new Casilla(9,1),50,60,70,powerup2));
-        jugadores.add(new Jugador(new Casilla(11,0),60,70,80,powerup2));
-        jugadores.add(new Jugador(new Casilla(11,1),70,80,90,powerup2));
-        jugadores.add(new Jugador(new Casilla(13,0),80,90,100,powerup2));
 
     }
 
@@ -155,7 +97,6 @@ public  class Equipo {
         return powerupJugador;
     }
 
-    public static Equipo getInstanciaEquipo(){return equipo;}
 
 
     public boolean hayJugadorSelecionado(){
@@ -204,6 +145,25 @@ public  class Equipo {
             jugadores.remove(posicionSuplente);
             jugadores.add(jugadorSelecionado);
         }
+    }
+
+    /**
+     * Añade un jugador al equipo , los primeros jugadores pertenecen
+     * a la lista de jugadores que saldran al campo , el resto quedaran
+     * como reserva.
+     * La posicionx y la posiciony son la posicion de la alineacion.
+     *
+     * La alineacion siempre se tiene en cuenta el lado izquierda del campo.
+     * La propia clase se encarga de convertirla al lado contrario
+     *
+     * @param jugador Jugador que sera añadido al equipo
+     * @param posicionX posicion incial del eje x de la alineacion
+     * @param posicionY posicion inicial en el eje y de la alineacion
+     */
+    public void añadirJugador(Jugador jugador ,int posicionX,int posicionY)
+    {
+        this.alineacion.add(new PosicionInicial(jugador,posicionX,posicionY));
+        this.jugadores.add(jugador);
     }
     /* public boolean desalojarCampo(Campo campo){}
     public boolean bloquear(){}

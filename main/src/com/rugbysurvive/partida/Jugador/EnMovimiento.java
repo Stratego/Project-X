@@ -25,7 +25,7 @@ public class EnMovimiento implements Estado {
     public boolean generarAccion(Jugador jugador) {
         Simulador simulador = Simulador.getInstance();
 
-        simulador.addAccionesSimulador(jugador.getAccion());
+        simulador.añadirAccion(jugador.getAccion());
 
         return false;
     }
@@ -34,7 +34,7 @@ public class EnMovimiento implements Estado {
     public boolean generarAccion(Jugador jugador, int posX, int posY) {
         Simulador simulador = Simulador.getInstance();
 
-        simulador.addAccionesSimulador(jugador.getAccion());
+        simulador.añadirAccion(jugador.getAccion());
 
         return false;
     }
@@ -83,7 +83,7 @@ public class EnMovimiento implements Estado {
 
             jugador.setAccion(new Movimiento(jugador, movimientos));
 
-            Simulador.getInstance().addAccionesSimulador(jugador.getAccion());
+            Simulador.getInstance().añadirAccion(jugador.getAccion());
 
             jugador.setBloqueado(true);
 

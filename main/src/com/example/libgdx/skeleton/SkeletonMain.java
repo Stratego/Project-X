@@ -5,7 +5,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.input.GestureDetector;
 import com.rugbysurvive.partida.ConstantesJuego;
+import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.ResolucionPantalla;
+import com.rugbysurvive.partida.Simulador.Movimiento;
+import com.rugbysurvive.partida.Simulador.Simulador;
+import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.GestorObjetos;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestorEntrada;
@@ -33,12 +37,15 @@ public class SkeletonMain extends Game {
     Prueba prueba2;
     GestorObjetos gestorObjetos;
     int contador = 0;
+    ComponentesJuego componentesJuego;
+    Simulador simulador;
 
 
     @Override
     public void create() {
 
-
+        this.simulador = new Simulador();
+        this.simulador.iniciarSimulacion();
 
         this.constantes = new ConstantesJuego();
         this.constantes.setResolucionPantalla(ResolucionPantalla.pequeña);
@@ -56,6 +63,10 @@ public class SkeletonMain extends Game {
         botons.add(new Boton(650,0, Entrada.objeto,"boto.png",20));
         botons.add(new Boton(850,0, Entrada.cambiar,"boto.png",20));
         botons.add(new Boton(1050,0, Entrada.finalizar,"boto.png",20));
+
+        this.componentesJuego = new ComponentesJuego();
+
+
         this.gestorEntrada = new GestorEntrada(this.gestorGrafico.getCamara().getOrthographicCamera(),botons,this.gestorGrafico);
 
         this.multiplexer = new InputMultiplexer();
@@ -64,6 +75,9 @@ public class SkeletonMain extends Game {
         gestureDetector = new GestureDetector(20, 0.5f, 1, 0.5f,this.gestorEntrada);
         multiplexer.addProcessor(gestureDetector);
         Gdx.input.setInputProcessor(multiplexer);
+
+
+
         //this.prueba2 = new Prueba(100,100,100,"holaa");
 
      //   campoDibujable = new CampoDibujable(this.gestorGrafico,0,0);
@@ -83,6 +97,8 @@ public class SkeletonMain extends Game {
 
     @Override
     public void render() {
+
+       this.simulador.simular();
        if(contador %100 == 0 ){
              this.gestorObjetos.procesar();
        }
