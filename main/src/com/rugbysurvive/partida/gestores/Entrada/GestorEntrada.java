@@ -46,7 +46,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
 
     Dibujante dibujante;
 
-    private Equipo equipo=new Equipo();
+    //private Equipo equipo=new Equipo();
 
     Lista lista;
 
@@ -61,7 +61,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         this.botons = botons;
         this.dibujante = dibujante;
         campo = ComponentesJuego.getComponentes().getCampo();
-        lista = new Lista(equipo);
+        lista = new Lista(ComponentesJuego.getComponentes().getEquipo1());
 
 
     }

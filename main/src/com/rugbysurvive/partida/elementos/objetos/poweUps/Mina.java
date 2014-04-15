@@ -1,13 +1,17 @@
 package com.rugbysurvive.partida.elementos.objetos.poweUps;
 
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.Objeto;
+import com.rugbysurvive.partida.elementos.objetos.ObjetoCampo;
+import com.rugbysurvive.partida.elementos.objetos.objetosCampo.MinaCampo;
 import com.rugbysurvive.partida.jugadores.Habilidades;
+import com.rugbysurvive.partida.tablero.Campo;
 
 /**
- * Created by aitor on 11/04/14.
+ * Created by Victor on 15/04/14.
  */
-public class PowerUP extends Objeto {
+public class Mina extends Objeto {
 
 
     //private final int vida;
@@ -18,7 +22,8 @@ public class PowerUP extends Objeto {
     protected int modificacion;
     protected Jugador jugador;
 
-    public PowerUP(int id,int vida,String imagen, Habilidades habilidad,int modificacion,Jugador jugador) {
+
+    public Mina(int id,int vida,String imagen, Habilidades habilidad,int modificacion,Jugador jugador) {
 
         super(id, vida, imagen, habilidad,modificacion, jugador);
 
@@ -37,11 +42,7 @@ public class PowerUP extends Objeto {
     protected void iniciar() {
         //int valorActual = 0;
 
-        if (habilidad == Habilidades.vida){
-            //valorActual=jugador.getVida();
-            jugador.setVida(jugador.getVida()+modificacion);
-        }
-
+        MinaCampo mina = new MinaCampo(this.jugador.getPosicionX()+1,this.jugador.getPosicionY(),this.textura);
 
         System.out.println("INICIAR");
 
@@ -50,12 +51,10 @@ public class PowerUP extends Objeto {
     @Override
     protected void desactivar() {
 
-        if (habilidad == Habilidades.vida){
-            jugador.setVida(jugador.getVida()-modificacion);
-        }
 
-        System.out.println("vida jugador al finalizar objeto "+ jugador.getVida());
         System.out.println("FINALIZAR");
 
     }
+
+
 }

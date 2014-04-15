@@ -23,7 +23,7 @@ public class Prueba implements Dibujable{
         this.posicionY = posicionY;
         this.current_contador = 0;
         this.ID = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.texto);
-        objetoJugador = new PowerUP(5);
+        //objetoJugador = new PowerUP(5);
         this.textura = "holaaaaaaaa";
         objetoJugador.activar();
     }

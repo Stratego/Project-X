@@ -18,11 +18,11 @@ public abstract class ObjetoJugador {
 
     //private int identificador;
 
-    public ObjetoJugador(String textura)
+    /*public ObjetoJugador(String textura)
     {
         this.textura = textura;
         this.id = -1;
-    }
+    }*/
     public abstract void activar();
 
     public ObjetoJugador(){}
@@ -61,11 +61,12 @@ public abstract class ObjetoJugador {
         id = -1;
     }
     */
+
     public String getTextura(){return this.textura;}
 
-    public int getPosicionX(){return this.posicionX;}
+    //public int getPosicionX(){return this.posicionX;}
 
-    public int getPosicionY(){return this.posicionY;}
+    //public int getPosicionY(){return this.posicionY;}
 
     public int getId(){return this.id;}
 
