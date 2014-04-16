@@ -111,6 +111,10 @@ public class Campo implements GestionEntrada,Dibujable {
        return this.casillas[posicionX][posicionY].añadirElemento(objeto);
     }
 
+    public Casilla getCasilla(int X, int Y)
+    {
+        return this.casillas[X][Y];
+    }
     /**
      *
      * @param posicionX

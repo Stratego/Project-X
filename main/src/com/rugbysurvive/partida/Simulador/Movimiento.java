@@ -2,6 +2,7 @@ package com.rugbysurvive.partida.Simulador;
 
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.SinPelota;
+import com.rugbysurvive.partida.tablero.Campo;
 
 /**
  * Created by Victor on 27/03/14.
@@ -23,6 +24,7 @@ public class Movimiento extends Accion {
         System.out.println("mover");
         for (int i = 0; i < this.camino.length; i++) {
            //System.out.println("Me muevo a la posición:"+camino[i][0]+"-"+camino[i][1]);
+            this.jugador.colocar(Campo.getInstanciaCampo().getCasilla(camino[i][0],camino[i][1]));
         }
         if(contador == 5)return true;//test
         this.jugador.setEstado(new SinPelota());
