@@ -1,5 +1,6 @@
 package com.rugbysurvive.partida;
 
+import com.badlogic.gdx.Gdx;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
@@ -112,16 +113,17 @@ public class Lista {
     public void ListaObjetos(){
 
         ArrayList<ObjetoJugador> objetosJugador = equipo.objetosJugador();
-
-        int x =1050;
-        int y =640;
+        //System.out.println(Gdx.graphics.getWidth());
+        //System.out.println(Gdx.graphics.getHeight());
+        int x =Gdx.graphics.getWidth()-230;
+        int y =Gdx.graphics.getHeight()-80;
         int iteracion = 0;
         for (int i = 0; i<3;i++){
             if (i==0 ||i==2){
                 for (int p = 0; p<3;p++){
                     if (p==0 ||p==2){
-                        System.out.println(objetosJugador.size());
-                        System.out.println(iteracion);
+                        //System.out.println(objetosJugador.size());
+                        //System.out.println(iteracion);
                         if (objetosJugador.size()!=0&&objetosJugador.size()>iteracion){
 
                             listaObjetos.add(new Boton(x, y, Entrada.listaobjetos, objetosJugador.get(iteracion).getTextura(),objetosJugador.get(iteracion).getId()));
