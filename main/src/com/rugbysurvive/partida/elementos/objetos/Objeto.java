@@ -1,5 +1,8 @@
 package com.rugbysurvive.partida.elementos.objetos;
 
+import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.jugadores.Habilidades;
+
 /**
  * Created by aitor on 11/04/14.
  * Estructura basica que debe cumplir un objeto
@@ -7,11 +10,26 @@ package com.rugbysurvive.partida.elementos.objetos;
  * desactivacion por el gestor de objetos
  */
 public abstract class Objeto extends ObjetoJugador {
-        protected int vida;
 
-        public Objeto(int vida,String imagen){
-            super(imagen);
+        protected int vida;
+        protected int id;
+        protected String imagen;
+        protected Habilidades habilidad;
+        protected int modificacion;
+        protected Jugador jugador;
+
+
+
+
+    public Objeto(int id,int vida,String imagen, Habilidades habilidad,int modificacion,Jugador jugador){
+            super(id,imagen);
+            this.id=id;
             this.vida = vida;
+            this.imagen = imagen;
+            this.habilidad = habilidad;
+            this.modificacion = modificacion;
+
+            this.jugador = jugador;
         }
 
 
@@ -54,4 +72,51 @@ public abstract class Objeto extends ObjetoJugador {
             return false;
         }
 
+    public int getVida() {
+        return vida;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public Habilidades getHabilidad() {
+        return habilidad;
+    }
+
+    public void setHabilidad(Habilidades habilidad) {
+        this.habilidad = habilidad;
+    }
+
+    public Jugador getJugador() {
+        return jugador;
+    }
+
+    public void setJugador(Jugador jugador) {
+        this.jugador = jugador;
+    }
+
+    public int getModificacion() {
+        return modificacion;
+    }
+
+    public void setModificacion(int modificacion) {
+        this.modificacion = modificacion;
+    }
 }

@@ -2,11 +2,16 @@ package com.rugbysurvive.partida.tablero;
 
 import com.badlogic.gdx.Gdx;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Lista;
+import com.rugbysurvive.partida.elementos.ComponentesJuego;
+import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.gestores.Entrada.*;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
+
+import java.util.ArrayList;
 
 /**
  * Clase que define la posicion y comportamiento de un boron dentro del tablero de juego
@@ -149,6 +154,15 @@ public class Boton implements GestionEntrada,Dibujable{
         }
 
         if (entrada == Entrada.listaobjetos){
+            Jugador jugador = ComponentesJuego.getComponentes().getEquipo1().getJugadorActivo();
+            ArrayList<ObjetoJugador> objetos = jugador.getPowerUP();
+            System.out.println("vida jugador antes objeto "+jugador.getVida());
+            for (ObjetoJugador iter: objetos){
+                if (iter.getId()==this.posicion){
+                    iter.activar();
+                    System.out.println("vida jugador despues objeto "+ jugador.getVida());
+                }
+            }
             //obteniendo la instansacion de equipo obtener la de objetos de jugador activo y activar objeto
 
         }
@@ -156,6 +170,12 @@ public class Boton implements GestionEntrada,Dibujable{
         if (entrada == Entrada.listasuplente){
             //obteniendo la instansacion de equipo y realizar cambio en la lista de jugadores
             //equipo.intercambioJugadores(12);
+        }
+
+        if (entrada==Entrada.finalizar){
+            //prueba mina
+            Campo campo = ComponentesJuego.getComponentes().getCampo();
+            campo.añadirElemento(new Jugador(80, 300, 100),0,2);
         }
 
     }

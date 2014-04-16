@@ -83,6 +83,12 @@ public  class Equipo {
 
         ArrayList<ObjetoJugador> powerupJugador = new ArrayList<ObjetoJugador>();
         if (hayJugadorSelecionado()==true){
+            /*jugadorSelecionado.añadirObjeto(new ObjetoJugador(1,"casellalila.png") {
+                @Override
+                public void activar() {
+
+                }
+            });*/
             return jugadorSelecionado.getPowerUP();
         }
         /*
@@ -168,4 +174,8 @@ public  class Equipo {
     /* public boolean desalojarCampo(Campo campo){}
     public boolean bloquear(){}
     public boolean desbloquear(){}*/
+
+    public Jugador getJugadorActivo (){
+        return  this.jugadorSelecionado;
+    }
 }
