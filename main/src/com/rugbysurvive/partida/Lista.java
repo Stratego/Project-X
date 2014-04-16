@@ -69,12 +69,12 @@ public class Lista {
         ArrayList<Jugador> suplentes= equipo.listaSuplentes();
         //suplentes = equipo.listaSuplentes();
 
-        //System.out.println("entrada bucle");
+        System.out.println("entrada bucle");
         //System.out.println(suplentes.size());
 
         for (Jugador iterador : suplentes){
 
-            //System.out.println("iteracion:" + posicion);
+            System.out.println("iteracion:" + posicion);
 
             listaSuplentes.add(new Boton(450,y, Entrada.listasuplente,"listaprueba.png",posicion));
             jugadores.add(new Texto(450,y+64,"jugador 1 fuerza:"+iterador.getFuerza()+" vida:"+iterador.getVida()+" defensa:"+iterador.getDefensa()));

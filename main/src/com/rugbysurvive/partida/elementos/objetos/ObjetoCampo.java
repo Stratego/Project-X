@@ -18,6 +18,7 @@ public abstract class ObjetoCampo implements Dibujable {
     private int posX;
     private int posY;
     private String textura;
+    Campo campo = ComponentesJuego.getComponentes().getCampo();
 
 
     public ObjetoCampo(){};
@@ -28,7 +29,7 @@ public abstract class ObjetoCampo implements Dibujable {
         this.posY=posY;
         this.textura=textura;
         this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
-
+        this.campo.añadirElemento(this,this.posX+1,this.posY);
     }
 
 
@@ -38,6 +39,7 @@ public abstract class ObjetoCampo implements Dibujable {
 
     public void quitar(){
         GestorGrafico.generarDibujante().eliminarTextura(id);
+        this.campo.eliminarElemento(this.posX,this.posY);
 
     }
 

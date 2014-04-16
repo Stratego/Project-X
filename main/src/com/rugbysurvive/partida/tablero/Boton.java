@@ -161,6 +161,8 @@ public class Boton implements GestionEntrada,Dibujable{
                 if (iter.getId()==this.posicion){
                     iter.activar();
                     System.out.println("vida jugador despues objeto "+ jugador.getVida());
+                    jugador.getPowerUP().remove(iter);
+                    break;
                 }
             }
             //obteniendo la instansacion de equipo obtener la de objetos de jugador activo y activar objeto
@@ -173,9 +175,7 @@ public class Boton implements GestionEntrada,Dibujable{
         }
 
         if (entrada==Entrada.finalizar){
-            //prueba mina
-            Campo campo = ComponentesJuego.getComponentes().getCampo();
-            campo.añadirElemento(new Jugador(80, 300, 100),0,2);
+
         }
 
     }
