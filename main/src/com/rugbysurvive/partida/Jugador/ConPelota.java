@@ -31,7 +31,7 @@ public class ConPelota implements Estado {
 
         if(entrada == Entrada.arrastrar)
         {
-            jugador.setEstado(new EnMovimiento(8));
+            jugador.setEstado(new EnMovimiento(8,this));
             System.out.println("<ME PONGO EN MOVIMIENTO>");
             return false;
         }
@@ -94,6 +94,11 @@ public class ConPelota implements Estado {
     @Override
     public void setPaseOChute(boolean paseOChute) {
 
+    }
+
+    @Override
+    public Estado getEstado() {
+        return this;
     }
 
 

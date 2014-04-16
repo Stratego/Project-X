@@ -58,6 +58,11 @@ public class Holligan implements Estado {
     }
 
     @Override
+    public Estado getEstado() {
+        return this;
+    }
+
+    @Override
     public void setJugador(Jugador jugador) {
 
     }

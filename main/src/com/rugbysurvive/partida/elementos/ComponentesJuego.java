@@ -1,5 +1,6 @@
 package com.rugbysurvive.partida.elementos;
 
+import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Lista;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
@@ -39,10 +40,18 @@ public class ComponentesJuego {
     {
 
         // falta añadir los objetos a cada jugador
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100),0,1);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100),1,4);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100),2,3);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100),4,7);
+        Jugador jugador = new Jugador(80, 90, 100);
+        jugador.setDireccion(DireccionJugador.derecha);
+        this.equipo1.añadirJugador(jugador,0,1);
+        jugador = new Jugador(80, 90, 100);
+        jugador.setDireccion(DireccionJugador.izquierda);
+        this.equipo1.añadirJugador(jugador,1,4);
+        jugador = new Jugador(80, 90, 100);
+        jugador.setDireccion(DireccionJugador.arriba);
+        this.equipo1.añadirJugador(jugador,2,3);
+        jugador = new Jugador(80, 90, 100);
+        jugador.setDireccion(DireccionJugador.abajo);
+        this.equipo1.añadirJugador(jugador,4,7);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100),0,5);
 
         this.equipo2.añadirJugador(new Jugador(80, 90, 100),0,1);

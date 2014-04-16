@@ -1,5 +1,6 @@
 package com.rugbysurvive.partida.Jugador;
 
+import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Simulador.Accion;
 import com.rugbysurvive.partida.elementos.objetos.Objeto;
@@ -21,7 +22,10 @@ import java.util.List;
 public class Jugador implements GestionEntrada, Dibujable {
 
     private static final int MAXIMO_OBJETOS = 4;
-
+    private String textura ;
+    private DireccionJugador direccion;
+    private ElementoDibujable seleccion;
+    private ElementoDibujable bloqueo;
 
     private Estado estado;
     private Accion accion = null;
@@ -44,20 +48,9 @@ public class Jugador implements GestionEntrada, Dibujable {
 
     public boolean enJuego;
 
-    public Jugador()
-    {
 
-    }
 
-    public Jugador(Casilla casilla)
-    {
-        this.estado = new ConPelota();
-        //this.estado = new EnMovimiento(8);
-        this.casilla = casilla;
-        GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
-        this.estado.setBloqueado(false);
-        this.getEstado().setSeleccionado(false);
-    }
+
 
     public Jugador(int fuerza,int vida, int defensa)
     {
@@ -75,6 +68,7 @@ public class Jugador implements GestionEntrada, Dibujable {
         this.getEstado().setSeleccionado(false);
         this.id = -1;
         this.enJuego = false;
+        this.textura = "jugador1.png";
 
     }
 
@@ -92,10 +86,13 @@ public class Jugador implements GestionEntrada, Dibujable {
      */
     public void colocar(Casilla casilla){
         this.casilla= casilla;
-        if(casilla != null)
+        if(this.casilla != null)
         {
             this.enJuego = true;
             id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
+            this.seleccion = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/seleccionado.png");
+            this.bloqueo = new ElementoDibujable(TipoDibujo.elementosJuego,"casellalila.png");
+
         }
     }
 
@@ -105,6 +102,8 @@ public class Jugador implements GestionEntrada, Dibujable {
     public void quitar(){
         this.casilla = null;
         GestorGrafico.generarDibujante().eliminarTextura(id);
+        this.seleccion.borrar();
+        this.seleccion = null;
         id = -1;
         this.enJuego = false;
 
@@ -175,6 +174,22 @@ public class Jugador implements GestionEntrada, Dibujable {
     public void setSeleccionado(boolean seleccionado)
     {
         this.seleccionado = seleccionado;
+        if(this.seleccionado == true)
+        {
+            if(this.seleccion == null) {
+                this.seleccion= new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/seleccionado.png");
+            }
+            this.seleccion.dibujar((int)this.casilla.getPosX(),(int)this.casilla.getPosY());
+            // Obligamos a dibjar la textura del jugador encima
+            GestorGrafico.generarDibujante().eliminarTextura(this.id);
+            GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
+        }
+        else
+        {
+            if(this.seleccion == null)
+                this.seleccion = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/seleccionado.png");
+            this.seleccion.borrar();
+        }
     }
 
     public boolean getBloqueado()
@@ -184,7 +199,21 @@ public class Jugador implements GestionEntrada, Dibujable {
 
     public void setBloqueado(boolean bloqueado)
     {
+
         this.bloqueado = bloqueado;
+        if(this.bloqueado == true)
+        {
+            if(this.bloqueo == null) {
+                    this.bloqueo = new ElementoDibujable(TipoDibujo.elementosJuego,"casellalila.png");;
+            }
+            this.bloqueo.dibujar((int)this.casilla.getPosX(),(int)this.casilla.getPosY());
+        }
+        else
+        {
+            if(this.bloqueo == null)
+                this.bloqueo = new ElementoDibujable(TipoDibujo.elementosJuego,"casellalila.png");;
+            this.bloqueo.borrar();
+        }
     }
 
 
@@ -192,7 +221,7 @@ public class Jugador implements GestionEntrada, Dibujable {
     {
         boolean accionGenerada = false;
 
-        GestorGrafico.getCamara().bloquear();
+      //  GestorGrafico.getCamara().bloquear();
 
         //Falta hacer una comprobacion de seleccionados para ver si un jugador hace un pase o otra accion
 
@@ -218,6 +247,7 @@ public class Jugador implements GestionEntrada, Dibujable {
                         {
                             if(entrada == Entrada.clicklargo || entrada == Entrada.arrastrar)
                             {
+                                System.out.println("entrada:"+entrada);
                                 if(this.getSeleccionado() == true)
                                 {
                                     accionGenerada = this.getEstado().generarAccion(this,(int)posX,(int)posY, entrada);
@@ -258,6 +288,7 @@ public class Jugador implements GestionEntrada, Dibujable {
                     if(entrada == Entrada.clic)
                     {
                         this.setSeleccionado(false);
+                        this.estado = estado.getEstado();
                         System.out.println("<---------Me deseleccionan------------->");
                     }
 
@@ -274,6 +305,33 @@ public class Jugador implements GestionEntrada, Dibujable {
         }*/
     }
 
+    public void setDireccion(DireccionJugador direccion)
+    {
+        this.direccion = direccion; 
+    }
+    public DireccionJugador getDireccion(){return this.direccion;}
+    private void dibujarDireccion(DireccionJugador direccion)
+    {
+        switch (direccion)
+        {
+            case arriba:
+                this.textura = "jugador/jugador4.png";
+                this.textura = "jugador1.png";
+                break;
+            case abajo:
+                this.textura = "jugador/jugador2.png";
+                this.textura = "jugador1.png";
+                break;
+            case izquierda:
+                this.textura = "jugador/jugador5.png";
+                this.textura = "jugador1.png";
+                break;
+            case derecha:
+                this.textura = "jugador/jugador1.png";
+                this.textura = "jugador1.png";
+                break;
+        }
+    }
     @Override
     public void accionEntrada(Entrada entrada, float posX, float posY) {
 
@@ -288,7 +346,7 @@ public class Jugador implements GestionEntrada, Dibujable {
     /*Métodos de dibujable, que habra que quitars*/
     @Override
     public String getTextura() {
-        return "jugador1.png";
+        return this.textura;
     }
 
     @Override

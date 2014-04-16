@@ -40,6 +40,15 @@ public class Campo implements GestionEntrada,Dibujable {
 
 
 
+     public void seleccionarCasilla(int posicionX,int posicionY)
+     {
+        this.casillas[posicionX][posicionY].seleccionar();
+     }
+
+    public void desSeleccionarCasilla(int posicionX,int posicionY)
+    {
+        this.casillas[posicionX][posicionY].desSeleccionar();
+    }
     /**
      * Dibujamos el tablero de juego
      */

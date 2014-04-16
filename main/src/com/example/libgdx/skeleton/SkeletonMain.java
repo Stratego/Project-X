@@ -56,6 +56,11 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("boto.png");
         nombresTexturas.add("listaprueba.png");
         nombresTexturas.add("casilla.png");
+        nombresTexturas.add("jugador/seleccionado.png");
+        nombresTexturas.add("jugador/jugador1.png");
+        nombresTexturas.add("jugador/jugador2.png");
+        nombresTexturas.add("jugador/jugador4.png");
+        nombresTexturas.add("jugador/jugador5.png");
 
 
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
@@ -71,9 +76,10 @@ public class SkeletonMain extends Game {
 
         this.multiplexer = new InputMultiplexer();
         this.gestorObjetos = new GestorObjetos();
-        multiplexer.addProcessor(this.gestorGrafico.getCamara());
         gestureDetector = new GestureDetector(20, 0.5f, 1, 0.5f,this.gestorEntrada);
         multiplexer.addProcessor(gestureDetector);
+        multiplexer.addProcessor(this.gestorGrafico.getCamara());
+
         Gdx.input.setInputProcessor(multiplexer);
 
 

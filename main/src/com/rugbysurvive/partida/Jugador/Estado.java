@@ -25,4 +25,6 @@ public interface Estado {
     public boolean getPaseOChute();
     public void setPaseOChute(boolean paseOChute);
 
+    public Estado getEstado();
+
 }

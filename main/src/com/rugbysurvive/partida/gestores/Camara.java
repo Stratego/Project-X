@@ -99,7 +99,7 @@ public class Camara implements InputProcessor {
                 && (-variationX)+ this.camera.position.x < this.boardWidth);
     }
 
-    public void bloquear(){/*this.bloqueada = true;*/}
+    public void bloquear(){this.bloqueada = true;}
     public void desbloquear(){this.bloqueada = false;}
 
 
