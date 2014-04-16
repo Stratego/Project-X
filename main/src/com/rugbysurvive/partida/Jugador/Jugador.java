@@ -3,7 +3,6 @@ package com.rugbysurvive.partida.Jugador;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Simulador.Accion;
-import com.rugbysurvive.partida.elementos.objetos.Objeto;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
 import com.rugbysurvive.partida.gestores.Dibujable;
@@ -13,8 +12,6 @@ import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.tablero.Casilla;
 
 import java.util.ArrayList;
-
-import java.util.List;
 
 /**
  * Created by Victor on 27/03/14.
@@ -280,6 +277,7 @@ public class Jugador implements GestionEntrada, Dibujable {
                         {
                             this.setSeleccionado(true);
                             System.out.println(">---------Me seleccionan-------------<");
+                            GestorGrafico.getCamara().bloquear();
                         }
                     }
                 }
@@ -290,6 +288,7 @@ public class Jugador implements GestionEntrada, Dibujable {
                         this.setSeleccionado(false);
                         this.estado = estado.getEstado();
                         System.out.println("<---------Me deseleccionan------------->");
+                        GestorGrafico.getCamara().desbloquear();
                     }
 
                 }
@@ -297,6 +296,7 @@ public class Jugador implements GestionEntrada, Dibujable {
             else
             {
                 System.out.println("<---------Estoy bloqueado-1------------>");
+                GestorGrafico.getCamara().desbloquear();
             }
         }
        /* else
