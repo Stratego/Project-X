@@ -45,21 +45,24 @@ public class ComponentesJuego {
         Jugador jugador = new Jugador(80, 90, 100);
 
         jugador.setDireccion(DireccionJugador.derecha);
-        this.equipo1.añadirJugador(jugador,0,1);
-        jugador = new Jugador(80, 90, 100);
-        jugador.setDireccion(DireccionJugador.izquierda);
-        this.equipo1.añadirJugador(jugador,1,4);
-        jugador = new Jugador(80, 90, 100);
-        jugador.setDireccion(DireccionJugador.arriba);
-        this.equipo1.añadirJugador(jugador,2,3);
-        jugador = new Jugador(80, 90, 100);
-        jugador.setDireccion(DireccionJugador.abajo);
         PowerUP objeto = new PowerUP(0,10,"casilla.png", Habilidades.vida,50,jugador);
 
         Mina objeto2 = new Mina(1,10,"casellalila.png", Habilidades.vida,50,jugador);
 
         jugador.añadirObjeto(objeto);
         jugador.añadirObjeto(objeto2);
+        jugador.añadirObjeto(objeto);
+        jugador.añadirObjeto(objeto);
+
+        this.equipo1.añadirJugador(jugador,0,1);
+        jugador = new Jugador(80, 90, 100);
+        jugador.setDireccion(DireccionJugador.izquierda);
+        this.equipo1.añadirJugador(jugador, 1, 4);
+        jugador = new Jugador(80, 90, 100);
+        jugador.setDireccion(DireccionJugador.arriba);
+        this.equipo1.añadirJugador(jugador,2,3);
+        jugador = new Jugador(80, 90, 100);
+        jugador.setDireccion(DireccionJugador.abajo);
         this.equipo1.añadirJugador(jugador,4,7);
 
         this.equipo1.añadirJugador(new Jugador(80, 90, 100),0,5);

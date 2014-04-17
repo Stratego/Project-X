@@ -1,8 +1,10 @@
 package com.rugbysurvive.partida.elementos.objetos.poweUps;
 
+import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.elementos.objetos.Objeto;
 import com.rugbysurvive.partida.jugadores.Habilidades;
+
 
 /**
  * Created by aitor on 11/04/14.
@@ -10,7 +12,6 @@ import com.rugbysurvive.partida.jugadores.Habilidades;
 public class PowerUP extends Objeto {
 
 
-    //private final int vida;
     protected int vida;
     protected int id;
     protected String imagen;
@@ -36,11 +37,24 @@ public class PowerUP extends Objeto {
     @Override
     protected void iniciar() {
         //int valorActual = 0;
+     switch (habilidad)
+        {
+            case vida:
 
-        if (habilidad == Habilidades.vida){
-            //valorActual=jugador.getVida();
-            jugador.setVida(jugador.getVida()+modificacion);
+                jugador.setVida(jugador.getVida()+modificacion);
+                break;
+
+            case fuerza:
+
+                jugador.setFuerza(jugador.getFuerza() + modificacion);
+                break;
+            case defensa:
+
+                jugador.setDefensa(jugador.getDefensa() + modificacion);
+                break;
+
         }
+
 
 
         System.out.println("INICIAR");
@@ -49,9 +63,23 @@ public class PowerUP extends Objeto {
 
     @Override
     protected void desactivar() {
+        switch (habilidad)
+        {
+            case vida:
 
-        if (habilidad == Habilidades.vida){
-            jugador.setVida(jugador.getVida()-modificacion);
+                jugador.setVida(jugador.getVida()-modificacion);
+                break;
+
+            case fuerza:
+
+                jugador.setFuerza(jugador.getFuerza()-modificacion);
+                break;
+
+            case defensa:
+
+                jugador.setDefensa(jugador.getDefensa()-modificacion);
+                break;
+
         }
 
         System.out.println("vida jugador al finalizar objeto "+ jugador.getVida());

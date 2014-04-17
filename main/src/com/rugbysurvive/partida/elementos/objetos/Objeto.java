@@ -1,7 +1,10 @@
 package com.rugbysurvive.partida.elementos.objetos;
 
+import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.jugadores.Habilidades;
+import com.rugbysurvive.partida.tablero.Campo;
 
 /**
  * Created by aitor on 11/04/14.
@@ -17,6 +20,9 @@ public abstract class Objeto extends ObjetoJugador {
         protected Habilidades habilidad;
         protected int modificacion;
         protected Jugador jugador;
+
+        protected int x;
+        protected int y;
 
 
 
@@ -72,6 +78,66 @@ public abstract class Objeto extends ObjetoJugador {
             return false;
         }
 
+
+
+    public boolean controlPosicion(){
+
+        x = jugador.getPosicionX();
+        y = jugador.getPosicionY();
+        boolean colocable = false;
+        Campo campo = ComponentesJuego.getComponentes().getCampo();
+        switch (jugador.getDireccion())
+        {
+            case derecha:
+                if (x< ConstantesJuego.NUMERO_CASILLAS_LARGO_TABLERO-1){
+                    x += 1;
+                    colocable=true;
+                }
+
+                break;
+
+            case izquierda:
+                if (x>0 ){
+                    x -= 1;
+                    colocable=true;
+                }
+                break;
+
+            case arriba:
+                if (y<ConstantesJuego.NUMERO_CASILLAS_ANCHO_TABLERO-1){
+                    y += 1;
+                    colocable=true;
+                }
+                break;
+
+            case abajo:
+                if (y>0 ){
+                    y -= 1;
+                    colocable=true;
+                }
+                break;
+        }
+        if (colocable==true&&campo.getCasilla(x,y).sinObjeto()==true){
+            return colocable;
+        }
+        return false;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
     public int getVida() {
         return vida;
     }
