@@ -63,6 +63,11 @@ public class Holligan implements Estado {
     }
 
     @Override
+    public Estado getEstadoAnterior() {
+        return null;
+    }
+
+    @Override
     public void setJugador(Jugador jugador) {
 
     }

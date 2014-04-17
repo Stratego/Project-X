@@ -101,6 +101,11 @@ public class ConPelota implements Estado {
         return this;
     }
 
+    @Override
+    public Estado getEstadoAnterior() {
+        return null;
+    }
+
 
     @Override
     public void setJugador(Jugador jugador) {
