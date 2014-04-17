@@ -46,8 +46,7 @@ public class Mina extends Objeto {
 
         if (super.controlPosicion()==true){
             mina = new MinaCampo(super.getX(),super.getY(),this.textura);
-            //mina.efecto(new Jugador(80, 90, 100));
-            //jugador.getPowerUP().remove(this);
+            colocable=true;
         }else{
             System.out.println("elemento no colocado");
         }
@@ -60,6 +59,7 @@ public class Mina extends Objeto {
     protected void desactivar() {
         if (colocable==true){
         mina.quitar();
+        colocable=false;
         }
         System.out.println("FINALIZAR");
 

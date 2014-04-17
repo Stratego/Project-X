@@ -57,13 +57,14 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("jugador/jugador2.png");
         nombresTexturas.add("jugador/jugador4.png");
         nombresTexturas.add("jugador/jugador5.png");
+        nombresTexturas.add("plantillaobjetos.png");
 
 
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
-        botons.add(new Boton(450,0, Entrada.pase,"boto.png",20));
-        botons.add(new Boton(650,0, Entrada.objeto,"boto.png",20));
-        botons.add(new Boton(850,0, Entrada.cambiar,"boto.png",20));
-        botons.add(new Boton(1050,0, Entrada.finalizar,"boto.png",20));
+        botons.add(new Boton(ConstantesJuego.POSICION_BOTON_CHUTEPASE,0, Entrada.pase,"boto.png",ConstantesJuego.ID_BOTON));
+        botons.add(new Boton(ConstantesJuego.POSICION_BOTON_OBJETOS,0, Entrada.objeto,"boto.png",ConstantesJuego.ID_BOTON));
+        botons.add(new Boton(ConstantesJuego.POSICION_BOTON_SUPLENTE,0, Entrada.cambiar,"boto.png",ConstantesJuego.ID_BOTON));
+        botons.add(new Boton(ConstantesJuego.POSICION_BOTON_FINALIZAR,0, Entrada.finalizar,"boto.png",ConstantesJuego.ID_BOTON));
 
         this.componentesJuego = new ComponentesJuego();
 

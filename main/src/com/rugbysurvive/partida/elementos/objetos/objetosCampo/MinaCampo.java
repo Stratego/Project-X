@@ -10,14 +10,12 @@ import com.rugbysurvive.partida.elementos.objetos.ObjetoCampo;
  */
 public class MinaCampo extends ObjetoCampo {
 
-    int posX;
-    int posY;
+
 
 
     public MinaCampo(int posX, int posY, String textura){
         super(posX,posY,textura);
-        this.posX=posX;
-        this.posY=posY;
+
 
     }
     @Override

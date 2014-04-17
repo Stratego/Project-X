@@ -40,11 +40,17 @@ public class Boton implements GestionEntrada,Dibujable{
      */
     int ID;
 
+    /**
+     * Textura que representara al boton el la interficie grafica
+     */
     String textura;
 
+    /**
+     * identificador que se usara  para identidificar elementos en las listas de objetos o suplentes
+     */
     int posicion;
 
-    //Lista lista = new Lista();
+
     /**
      * Constructor del elemento boton
      *
@@ -70,61 +76,34 @@ public class Boton implements GestionEntrada,Dibujable{
      */
     public boolean esSeleccionado(float posX, float posY) {
         //System.out.println("X: " + this.posX + " Y: " + this.posY);
-        //System.out.println(Gdx.graphics.getHeight());
         int anchoBoton=0;
         int altoBoton=0;
-        if (this.posicion == 20){
+
+        if (this.posicion == ConstantesJuego.ID_BOTON){
             anchoBoton=ConstantesJuego.variables().getAnchoBoton();
             altoBoton=ConstantesJuego.variables().getAnchoBoton();
 
-            /*
-            if (posX >= this.posX && posX <= this.posX+anchoBoton){
-                if (posY >= Gdx.graphics.getHeight()-altoBoton){
-                    accionEntrada(this.entrada);
-
-                    selecionado=true;
-
-
-                }
-            }else {
-                //System.out.println("Boton no selecionado");
-                selecionado=false;
-            }*/
-
         }else if(this.obtenerEntrada()==Entrada.listasuplente){
-            anchoBoton=768;
-            altoBoton=64;
-
+            anchoBoton=ConstantesJuego.ANCHO_BOTON_SUPLENTES;
+            altoBoton=ConstantesJuego.ALTO_BOTON_SUPLENTES;
 
         }else {
-            anchoBoton=64;
-            altoBoton=64;
+            anchoBoton=ConstantesJuego.ANCHO_BOTON_OBJETOS;
+            altoBoton=ConstantesJuego.ALTO_BOTON_OBJETOS;
         }
 
         if (posX >= this.posX && posX <= this.posX+anchoBoton){
             if (posY >= Gdx.graphics.getHeight() - this.posY -altoBoton && posY <= Gdx.graphics.getHeight()  -this.posY){
                 accionEntrada(this.entrada);
-
                 selecionado=true;
-
-
+            }else{
+                selecionado=false;
             }
+
         }else {
-            //System.out.println("Boton no selecionado");
             selecionado=false;
         }
-        /*if (posX >= this.posX && posX <= this.posX+anchoBoton){
-            if (posY >= Gdx.graphics.getHeight()-altoBoton){
-                accionEntrada(this.entrada);
 
-                selecionado=true;
-
-
-            }
-        }else {
-            //System.out.println("Boton no selecionado");
-            selecionado=false;
-        }*/
         return selecionado;
     }
 
@@ -142,21 +121,23 @@ public class Boton implements GestionEntrada,Dibujable{
 
     @Override
     public void accionEntrada(Entrada entrada) {
-        //lista.crearLista(entrada);
 
         System.out.println("Entrada: " + entrada);
         System.out.println("posicion: " + posicion);
-
+        // intercambio entre entrada pase o chute
         if (entrada ==Entrada.pase){
+            //introducir accion pase
             this.entrada = Entrada.chute;
         } else if (entrada ==Entrada.chute){
+            //introducir accion chute
             this.entrada = Entrada.pase;
         }
-
+        //obtenemos el elemento de la lista mediante la posicion le dimos al crear el boton
         if (entrada == Entrada.listaobjetos){
             Jugador jugador = ComponentesJuego.getComponentes().getEquipo1().getJugadorActivo();
             ArrayList<ObjetoJugador> objetos = jugador.getPowerUP();
             System.out.println("vida jugador antes objeto "+jugador.getVida());
+            //activamos y eliminamos el objeto de la lista
             for (ObjetoJugador iter: objetos){
                 if (iter.getId()==this.posicion){
                     iter.activar();
@@ -171,10 +152,11 @@ public class Boton implements GestionEntrada,Dibujable{
 
         if (entrada == Entrada.listasuplente){
             //obteniendo la instansacion de equipo y realizar cambio en la lista de jugadores
-            //equipo.intercambioJugadores(12);
+            ComponentesJuego.getComponentes().getEquipo1().intercambioJugadores(posicion);
         }
 
         if (entrada==Entrada.finalizar){
+            //introducir accion finalizar
 
         }
 
