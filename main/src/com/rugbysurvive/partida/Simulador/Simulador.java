@@ -19,7 +19,7 @@ public class Simulador {
     private List<Accion> acciones;
     private boolean simulando;
 
-    public Simulador()
+    private Simulador()
     {
         this.contador =0;
         this.simulando= false;
@@ -78,5 +78,9 @@ public class Simulador {
 
         }
         return false;
+    }
+
+    public int listSize(){
+        return this.acciones.size();
     }
 }

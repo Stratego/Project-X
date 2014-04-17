@@ -16,16 +16,20 @@ public class Movimiento extends Accion {
     {
         this.camino = camino;
         this.jugador = jugador;
+        this.contador = 0;
     }
 
     @Override
     public boolean simular() {
-        contador++;//test
         System.out.println("mover");
-        for (int i = 0; i < this.camino.length; i++) {
-           //System.out.println("Me muevo a la posición:"+camino[i][0]+"-"+camino[i][1]);
-            this.jugador.colocar(Campo.getInstanciaCampo().getCasilla(camino[i][0],camino[i][1]));
-        }
+
+        //System.out.println("Me muevo a la posición:"+camino[i][0]+"-"+camino[i][1]);
+
+        this.jugador.colocar(Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]));
+        contador = contador + 1;
+
+        System.out.println(this.camino[contador][1]+"-"+this.camino[contador][0]);
+
         if(contador == 5)return true;//test
         this.jugador.setEstado(new SinPelota());
         return false;

@@ -5,9 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.input.GestureDetector;
 import com.rugbysurvive.partida.ConstantesJuego;
-import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.ResolucionPantalla;
-import com.rugbysurvive.partida.Simulador.Movimiento;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.GestorObjetos;
@@ -15,9 +13,7 @@ import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestorEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.gestores.Prueba;
-import com.rugbysurvive.partida.gestores.Texto;
-import com.rugbysurvive.partida.tablero.*;
-
+import com.rugbysurvive.partida.tablero.Boton;
 
 import java.util.ArrayList;
 
@@ -44,7 +40,7 @@ public class SkeletonMain extends Game {
     @Override
     public void create() {
 
-        this.simulador = new Simulador();
+        this.simulador = Simulador.getInstance();
         this.simulador.iniciarSimulacion();
 
         this.constantes = new ConstantesJuego();
@@ -92,6 +88,7 @@ public class SkeletonMain extends Game {
 
         //this.prueba3 = new Prueba(this.gestorGrafico,1,4,300,"casilla.png");
 
+
         //Simulador.getInstance().simular();
 
     }
@@ -103,7 +100,6 @@ public class SkeletonMain extends Game {
 
     @Override
     public void render() {
-
        this.simulador.simular();
        if(contador %100 == 0 ){
              this.gestorObjetos.procesar();
