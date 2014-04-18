@@ -2,10 +2,13 @@ package com.rugbysurvive.partida.gestores;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 
@@ -33,7 +36,13 @@ public class GestorGrafico implements Dibujante{
     protected static Dibujante instancia = null;
     protected int ultimaPosicionFondos ;
     BitmapFont font;
+    protected int posXPaseInicial = 0;
+    protected int posYPaseInicial = 0;
+    protected int posXPaseFinal = 0;
+    protected int posYPaseFinal = 0;
 
+    private Pixmap pixmap;
+    Texture texture ;
 
     public GestorGrafico(ArrayList<String> nombresTexturas,int tamañoCasilla)
     {
@@ -46,7 +55,7 @@ public class GestorGrafico implements Dibujante{
         this.tamañoCasilla = tamañoCasilla;
         this.font=  new BitmapFont();
 
-
+        pixmap = new Pixmap(2048,2048, Pixmap.Format.RGBA8888);
         instancia = (Dibujante)this;
         this.ultimaPosicionFondos = 0;
         this.configurarFuente();
@@ -88,7 +97,7 @@ public class GestorGrafico implements Dibujante{
                         posicionY = posicionY + this.camara.getVariationY();
                         double ancho = textura.getWidth();
                         double alto = textura.getHeight();
-                        this.sprite.draw(textura,posicionX,posicionY);
+                         this.sprite.draw(textura,posicionX,posicionY);
 
                     }
                     else
@@ -99,7 +108,8 @@ public class GestorGrafico implements Dibujante{
                         double multiplicador = constantes.getMultiplicador();
                         double ancho = textura.getWidth()*multiplicador;
                         double alto = textura.getHeight()*multiplicador;
-                        this.sprite.draw(textura,(float)posicionX,(float)posicionY,(float)ancho,(float)alto);
+                         this.sprite.draw(textura,(float)posicionX,(float)posicionY,(float)ancho,(float)alto);
+
 
                     }
 
@@ -117,7 +127,10 @@ public class GestorGrafico implements Dibujante{
 
 
             }
+
         }
+
+
         this.sprite.end();
 
 
@@ -150,6 +163,35 @@ public class GestorGrafico implements Dibujante{
             //Log.i("BORRAR","BORRANDO");
 
     }
+
+    @Override
+    public void dibujarLinia(int posicionXInicial, int posicionYInicial, int posicionXFinal, int posicionYFinal) {
+
+        System.out.println("Dibujar linia activado");
+        this.posXPaseFinal = posicionXFinal;
+        this.posXPaseInicial = posicionXInicial;
+        this.posYPaseFinal = posicionYFinal;
+        this.posYPaseInicial = posicionYInicial;
+
+
+
+        double posIniX = this.filtroX((double)this.posXPaseInicial);
+        double posIniY =  this.filtroY((double)this.posYPaseFinal);
+        double posFiX = this.filtroX((double)this.posXPaseInicial);
+        double posFiY =  this.filtroY((double)this.posYPaseFinal);
+
+        Gdx.gl20.glLineWidth(20);
+        pixmap.setColor(Color.BLUE);
+        //pixmap.drawLine((int) posIniX, (int) posIniY, (int) posFiX, (int) posFiY);
+        pixmap.drawLine(0,0, 500,500);
+
+        texture = new Texture(pixmap);
+
+
+
+
+    }
+
     @Override
     public int añadirDibujable(Dibujable dibujable,TipoDibujo tipoDibujo)
     {

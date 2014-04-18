@@ -87,6 +87,7 @@ public class Camara implements InputProcessor {
         this.camera.update();
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(this.camera.combined);
+
 //        this.camera.apply(Gdx.gl10);
 
     }

@@ -1,5 +1,7 @@
 package com.rugbysurvive.partida.Jugador;
 
+import com.rugbysurvive.partida.Jugador.extras.GestorIndicadorMovimientos;
+import com.rugbysurvive.partida.Jugador.extras.IndicadorMovimientos;
 import com.rugbysurvive.partida.Simulador.*;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
@@ -16,7 +18,7 @@ public class EnMovimiento implements Estado {
     int movimientos[][];
     int posicionActual;
     Estado estadoAnterior;
-
+    IndicadorMovimientos indicador;
 
     public EnMovimiento(int nPosiciones,Estado estadoAnterior)
     {
@@ -101,10 +103,12 @@ public class EnMovimiento implements Estado {
 
             jugador.setAccion(new Movimiento(jugador, movimientos));
 
-            Simulador.getInstance().añadirAccion(jugador.getAccion());
+          //  Simulador.getInstance().añadirAccion(jugador.getAccion());
 
             jugador.setBloqueado(true);
             jugador.setSeleccionado(false);
+            this.indicador = new IndicadorMovimientos(jugador,this.movimientos,this.posicionActual);
+            this.indicador.procesar();
 
             return true;
         }
@@ -122,9 +126,8 @@ public class EnMovimiento implements Estado {
                     && entrada == Entrada.clicklargo)
              {
                  System.out.println("ok");
-                    return true;
-              }
-
+                 return true;
+             }
         }
         return false;
     }

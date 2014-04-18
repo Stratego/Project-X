@@ -1,9 +1,13 @@
 package com.rugbysurvive.partida.Jugador;
 
+import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
+import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+import com.rugbysurvive.partida.Jugador.extras.GestorIndicadorMovimientos;
 import com.rugbysurvive.partida.Simulador.Chute;
 import com.rugbysurvive.partida.Simulador.Pase;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
+import com.rugbysurvive.partida.gestores.GestorGrafico;
 
 /**
  * Created by Victor on 27/03/14.
@@ -11,6 +15,9 @@ import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 public class ConPelota implements Estado {
     public boolean seleccionado = false;
     public boolean bloqueado = false;
+    ElementoDibujable indicadorPelota;
+
+
 
     public boolean generarAccion(Jugador jugador) {
 
@@ -53,6 +60,8 @@ public class ConPelota implements Estado {
         if(jugador.getAccion() != null)
         {
             Simulador.getInstance().añadirAccion(jugador.getAccion());
+            this.indicadorPelota = new ElementoDibujable(TipoDibujo.fondo,"indicadoresMovimiento/pilotaPosessio.png");
+            this.indicadorPelota.dibujar(posX,posY);
             jugador.setBloqueado(true);
             return true;
         }
