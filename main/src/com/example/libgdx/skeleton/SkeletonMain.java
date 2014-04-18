@@ -8,6 +8,7 @@ import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.ResolucionPantalla;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
+import com.rugbysurvive.partida.elementos.Marcador;
 import com.rugbysurvive.partida.elementos.objetos.GestorObjetos;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestorEntrada;
@@ -67,12 +68,15 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("indicadoresMovimiento/rectaHorizontal.png");
         nombresTexturas.add("indicadoresMovimiento/rectaVertical.png");
         nombresTexturas.add("indicadoresMovimiento/pilotaPosessio.png");
-
-
+        nombresTexturas.add("Menu/botoSubstitucions.png");
+        nombresTexturas.add("Menu/xutBoto.png");
+        nombresTexturas.add("banderas/logo1.png");
+        nombresTexturas.add("banderas/logo4.png");
+        nombresTexturas.add("Menu/marcador.png");
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
-        botons.add(new Boton(ConstantesJuego.POSICION_BOTON_CHUTEPASE,0, Entrada.pase,"boto.png",ConstantesJuego.ID_BOTON));
+        botons.add(new Boton(ConstantesJuego.POSICION_BOTON_CHUTEPASE,0, Entrada.pase,"Menu/xutBoto.png",ConstantesJuego.ID_BOTON));
         botons.add(new Boton(ConstantesJuego.POSICION_BOTON_OBJETOS,0, Entrada.objeto,"boto.png",ConstantesJuego.ID_BOTON));
-        botons.add(new Boton(ConstantesJuego.POSICION_BOTON_SUPLENTE,0, Entrada.cambiar,"boto.png",ConstantesJuego.ID_BOTON));
+        botons.add(new Boton(ConstantesJuego.POSICION_BOTON_SUPLENTE,0, Entrada.cambiar,"Menu/botoSubstitucions.png",ConstantesJuego.ID_BOTON));
         botons.add(new Boton(ConstantesJuego.POSICION_BOTON_FINALIZAR,0, Entrada.finalizar,"boto.png",ConstantesJuego.ID_BOTON));
 
         this.componentesJuego = new ComponentesJuego();
@@ -113,6 +117,7 @@ public class SkeletonMain extends Game {
        this.simulador.simular();
        if(contador %100 == 0 ){
              this.gestorObjetos.procesar();
+          // this.componentesJuego.getMarcador().sumarPuntuacion(1, ComponentesJuego.getComponentes().getEquipo1().getJugadores().get(1));
        }
      this.gestorGrafico.dibujar();
 

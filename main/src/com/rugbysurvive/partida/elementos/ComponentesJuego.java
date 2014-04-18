@@ -23,6 +23,7 @@ public class ComponentesJuego {
     protected Campo campo;
     protected Equipo equipo1;
     protected Equipo equipo2;
+    protected Marcador marcador;
     protected static ComponentesJuego componentesJuego;
 
 
@@ -35,7 +36,9 @@ public class ComponentesJuego {
         this.campo = new Campo();
         campo = new Campo();
         this.generarEquipos();
+        this.marcador = new Marcador(this.equipo1,this.equipo2);
         componentesJuego = this;
+
 
     }
     public static ComponentesJuego getComponentes(){return componentesJuego;}
@@ -96,5 +99,6 @@ public class ComponentesJuego {
     {
         return equipo2;
     }
+    public Marcador getMarcador(){return this.marcador;}
 
 }
