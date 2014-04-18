@@ -1,8 +1,7 @@
 package com.rugbysurvive.partida.Jugador;
 
-import com.rugbysurvive.partida.Jugador.extras.GestorIndicadorMovimientos;
 import com.rugbysurvive.partida.Jugador.extras.IndicadorMovimientos;
-import com.rugbysurvive.partida.Simulador.*;
+import com.rugbysurvive.partida.Simulador.Movimiento;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
@@ -102,7 +101,7 @@ public class EnMovimiento implements Estado {
 
             jugador.setAccion(new Movimiento(jugador, movimientos));
 
-          //  Simulador.getInstance().añadirAccion(jugador.getAccion());
+            Simulador.getInstance().añadirAccion(jugador.getAccion());
 
             jugador.setBloqueado(true);
             jugador.setSeleccionado(false);
