@@ -32,7 +32,7 @@ public class Movimiento extends Accion {
             /*Comprobaciones si esta con pelota el jugador*/
 
 
-            if(contador < this.camino.length)
+            if(contador <= this.camino.length)
             {
                 /*Comprobamos si en la siguiente casilla hay un jugador ya que si no no se podra llamar a la funcion getMiEquipo*/
                 if(Campo.getInstanciaCampo().getCasilla(this.camino[contador][1], this.camino[contador][0]).getJugador() != null)
@@ -56,9 +56,17 @@ public class Movimiento extends Accion {
                         /*Verificamos que es posible que el jugador pueda seguir avanzando sin problemas*/
                         for(int i=contador; i<this.camino.length; i++)
                         {
-                            if(Campo.getInstanciaCampo().getCasilla(this.camino[i][1],this.camino[i][0]).getJugador() != null)
+                            if(Campo.getInstanciaCampo().getCasilla(this.camino[i][1],this.camino[i][0]).getJugador() == null)
                             {
                                 incrementa = true;
+                                i = this.camino.length-1;
+                            }
+                            else
+                            {
+                                if(jugador.getMiEquipo() != Campo.getInstanciaCampo().getCasilla(this.camino[i][1],this.camino[i][0]).getJugador().getMiEquipo())
+                                {
+                                    i = this.camino.length-1;
+                                }
                             }
                         }
                     }
@@ -77,7 +85,16 @@ public class Movimiento extends Accion {
 
         if(incrementa == true)
         {
+            /*Referenciamos jugador y casillas en ambos sentidos*/
             this.jugador.colocar(Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]));
+            Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).setJugador(this.jugador);
+
+            /*Quitamos la referencia de la posicion anterior del jugador en la casilla*/
+            if(contador > 0)
+            {
+                Campo.getInstanciaCampo().getCasilla(this.camino[contador-1][1],this.camino[contador-1][0]).setJugador(null);
+            }
+
             contador = contador + 1;
         }
         else

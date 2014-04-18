@@ -62,7 +62,7 @@ public class ComponentesJuego {
         this.equipo1.añadirJugador(jugador,4,7);*/
 
         this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),8,7);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),6,5);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),8,3);
         /*this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),6,4);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),7,3);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),8,7);
