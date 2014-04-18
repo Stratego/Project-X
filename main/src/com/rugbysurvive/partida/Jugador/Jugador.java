@@ -9,6 +9,7 @@ import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
+import com.rugbysurvive.partida.jugadores.Equipo;
 import com.rugbysurvive.partida.tablero.Casilla;
 
 import java.util.ArrayList;
@@ -45,15 +46,17 @@ public class Jugador implements GestionEntrada, Dibujable {
 
     public boolean enJuego;
 
+    public Equipo miEquipo;
 
 
 
-
-    public Jugador(int fuerza,int vida, int defensa)
+    public Jugador(int fuerza,int vida, int defensa, Equipo equipo)
     {
         this.Fuerza= fuerza;
         this.Vida = vida;
         this.Defensa = defensa;
+
+        this.miEquipo = equipo;
 
         this.powerup= new ArrayList<ObjetoJugador>();
 
@@ -65,6 +68,11 @@ public class Jugador implements GestionEntrada, Dibujable {
         this.enJuego = false;
         this.textura = "jugador1.png";
 
+    }
+
+    public Equipo getMiEquipo()
+    {
+        return this.miEquipo;
     }
 
     public void añadirObjeto(ObjetoJugador objeto){

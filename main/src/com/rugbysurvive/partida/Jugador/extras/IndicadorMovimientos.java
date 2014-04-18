@@ -1,7 +1,5 @@
 package com.rugbysurvive.partida.Jugador.extras;
 
-import android.provider.CalendarContract;
-import com.partido.Entrada;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
