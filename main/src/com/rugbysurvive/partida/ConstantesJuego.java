@@ -1,18 +1,39 @@
 package com.rugbysurvive.partida;
 
 
+import com.badlogic.gdx.Gdx;
+
 /**
  * Created by aitor on 2/04/14.
  */
 public class ConstantesJuego {
 
 
-    protected static final int ANCHO_CASILLA = 64;
-    protected static final int ALTO_CASILLA = 64;
-    protected static final int ANCHO_BOTON = 128;
-    protected static final int ALTO_BOTON = 128;
+    public static final int ANCHO_CASILLA = 64;
+    public static final int ALTO_CASILLA = 64;
+    public static final int ANCHO_BOTON = 128;
+    public static final int ALTO_BOTON = 128;
+    public static final int POSICION_BOTON_CHUTEPASE = Gdx.graphics.getWidth() - 830;
+    public static final int POSICION_BOTON_OBJETOS = Gdx.graphics.getWidth() - 630;
+    public static final int POSICION_BOTON_SUPLENTE = Gdx.graphics.getWidth() - 430;
+    public static final int POSICION_BOTON_FINALIZAR = Gdx.graphics.getWidth() - 230;
+    public static final int ALTO_BOTON_OBJETOS = 64;
+    public static final int ANCHO_BOTON_OBJETOS = 64;
+    public static final int ALTO_BOTON_SUPLENTES = 64;
+    public static final int ANCHO_BOTON_SUPLENTES = 768;
+    public static final int POSICION_INICIAL_Y_BOTON_SUPLENTES=130;
+    public static final int POSICION_INICIAL_Y_BOTON_OBJETOS=Gdx.graphics.getHeight()-80;
+    public static final int POSICION_INICIAL_X_BOTON_OBJETOS=Gdx.graphics.getWidth()-230;
+    public static final int POSICION_INICIAL_X_PLANTILLAOBJETOS=POSICION_INICIAL_X_BOTON_OBJETOS-32;
+    public static final int POSICION_INICIAL_Y_PLANTILLAOBJETOS=Gdx.graphics.getHeight()-256;
+
+
+    public static final int JUGADORES_CAMPO = 7;
+    public static final int ID_BOTON = 1000;
     public static final int NUMERO_CASILLAS_ANCHO_TABLERO = 20;
+    public static final int LIMITE_CASILLAS_ANCHO_TABLERO = 19;
     public static final int NUMERO_CASILLAS_LARGO_TABLERO = 30;
+    public static final int LIMITE_CASILLAS_LARGO_TABLERO = 29;
     protected  static final int ANCHO_TABLERO = ANCHO_CASILLA*NUMERO_CASILLAS_ANCHO_TABLERO;
     protected  static final int ALTO_TABLERO = ALTO_CASILLA*NUMERO_CASILLAS_LARGO_TABLERO;
     protected  static final int TAMAÑO_BASE = 1;
@@ -23,6 +44,7 @@ public class ConstantesJuego {
     protected static ConstantesJuego constantes ;
     protected ResolucionPantalla resolucionPantalla;
     protected double multiplicado = 1;
+
 
 
     public ConstantesJuego()

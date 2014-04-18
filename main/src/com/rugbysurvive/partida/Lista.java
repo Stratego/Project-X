@@ -1,7 +1,9 @@
 package com.rugbysurvive.partida;
 
 import com.badlogic.gdx.Gdx;
+import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
@@ -49,21 +51,22 @@ public class Lista {
      */
     private Equipo equipo;
 
+    int idPlantillaObjetos=0;
 
-    public Lista(Equipo equipo){
-        this.equipo=equipo;
+    public Lista(){
+
     }
     /**
      * Obtiene la lista de suplentes del equipo y la dibuja en pantalla
      */
     public void listaSuplentes(){
 
-        int y = 130;
-        int posicion = 7;
+        int y = ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES;
+        int posicion = ConstantesJuego.JUGADORES_CAMPO;
 
 
+        equipo = ComponentesJuego.getComponentes().getEquipo1();
 
-        //equipo.crearEquipo();
         if (equipo.hayJugadorSelecionado()==true){
 
         ArrayList<Jugador> suplentes= equipo.listaSuplentes();
@@ -76,8 +79,8 @@ public class Lista {
 
             System.out.println("iteracion:" + posicion);
 
-            listaSuplentes.add(new Boton(450,y, Entrada.listasuplente,"listaprueba.png",posicion));
-            jugadores.add(new Texto(450,y+64,"jugador 1 fuerza:"+iterador.getFuerza()+" vida:"+iterador.getVida()+" defensa:"+iterador.getDefensa()));
+            listaSuplentes.add(new Boton(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y, Entrada.listasuplente,"listaprueba.png",posicion));
+            jugadores.add(new Texto(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y+64,"jugador 1 fuerza:"+iterador.getFuerza()+" vida:"+iterador.getVida()+" defensa:"+iterador.getDefensa()));
 
             y += 64;
             posicion += 1;
@@ -112,38 +115,43 @@ public class Lista {
      */
     public void ListaObjetos(){
 
+        equipo = ComponentesJuego.getComponentes().getEquipo1();
+
         ArrayList<ObjetoJugador> objetosJugador = equipo.objetosJugador();
-        //System.out.println(Gdx.graphics.getWidth());
-        //System.out.println(Gdx.graphics.getHeight());
-        int x =Gdx.graphics.getWidth()-230;
-        int y =Gdx.graphics.getHeight()-80;
-        int iteracion = 0;
-        for (int i = 0; i<3;i++){
-            if (i==0 ||i==2){
-                for (int p = 0; p<3;p++){
-                    if (p==0 ||p==2){
-                        //System.out.println(objetosJugador.size());
-                        //System.out.println(iteracion);
-                        if (objetosJugador.size()!=0&&objetosJugador.size()>iteracion){
+        int x =ConstantesJuego.POSICION_INICIAL_X_BOTON_OBJETOS;
+        int y =ConstantesJuego.POSICION_INICIAL_Y_BOTON_OBJETOS;
 
-                            listaObjetos.add(new Boton(x, y, Entrada.listaobjetos, objetosJugador.get(iteracion).getTextura(),objetosJugador.get(iteracion).getId()));
-                            x +=64;
-                            iteracion +=1;
-                        }
 
-                    }else{
-                        x +=64;
-                    }
-                }
-                x=1050;
-                y -=128;
-            }
-        }
         if (objetosJugador.size()!=0){
+            int iteracion = 0;
+            idPlantillaObjetos = GestorGrafico.generarDibujante().añadirDibujable(new PlantillaObjetos(ConstantesJuego.POSICION_INICIAL_X_PLANTILLAOBJETOS,ConstantesJuego.POSICION_INICIAL_Y_PLANTILLAOBJETOS,"plantillaobjetos.png"), TipoDibujo.interficieUsuario);
+            for (int i = 0; i<3;i++){
+                if (i==0 ||i==2){
+                    for (int p = 0; p<3;p++){
+                        if (p==0 ||p==2){
+                            //System.out.println(objetosJugador.size());
+                            //System.out.println(iteracion);
+                            if (objetosJugador.size()!=0&&objetosJugador.size()>iteracion){
+
+                                listaObjetos.add(new Boton(x, y, Entrada.listaobjetos, objetosJugador.get(iteracion).getTextura(),objetosJugador.get(iteracion).getId()));
+                                x +=64;
+                                iteracion +=1;
+                            }
+
+                        }else{
+                            x +=64;
+                        }
+                    }
+                    x=1050;
+                    y -=128;
+                }
+            }
             estadoObjeto=true;
         }else{
             estadoObjeto=false;
         }
+
+
 
     }
 
@@ -152,6 +160,7 @@ public class Lista {
      */
     public void eliminarListaObjetos(){
         int ID;
+        GestorGrafico.generarDibujante().eliminarTextura(idPlantillaObjetos);
         for (Boton iterador : listaObjetos ){
             ID = iterador.getID();
             GestorGrafico.generarDibujante().eliminarTextura(ID);

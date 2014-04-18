@@ -1,5 +1,6 @@
 package com.rugbysurvive.partida.jugadores;
 
+import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  */
 public  class Equipo {
 
-    public static final int JUGADORES_CAMPO = 7;
+
     private ArrayList<Jugador> jugadores = new ArrayList <Jugador>();
     private ArrayList<PosicionInicial> alineacion;
 
@@ -53,7 +54,7 @@ public  class Equipo {
      */
     public ArrayList<Jugador> listaSuplentes (){
         ArrayList<Jugador> suplentes = new ArrayList <Jugador>();
-        for (int i=7; i<jugadores.size(); i++){
+        for (int i= ConstantesJuego.JUGADORES_CAMPO; i<jugadores.size(); i++){
             System.out.println(jugadores.get(i).getFuerza());
             suplentes.add(jugadores.get(i));
 
@@ -67,7 +68,7 @@ public  class Equipo {
      */
     public ArrayList<Jugador> listaJugadoresCampo (){
         ArrayList<Jugador> JugadoresCampo = new ArrayList <Jugador>();
-        for (int i=0; i<7; i++){
+        for (int i=0; i<ConstantesJuego.JUGADORES_CAMPO; i++){
             System.out.println(jugadores.get(i).getFuerza());
             JugadoresCampo.add(jugadores.get(i));
 

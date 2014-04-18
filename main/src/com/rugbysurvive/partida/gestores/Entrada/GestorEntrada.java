@@ -48,7 +48,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
 
     //private Equipo equipo=new Equipo();
 
-    Lista lista;
+    Lista lista = new Lista();
 
     /**
      * constructor del elemento GestorImput
@@ -61,8 +61,6 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         this.botons = botons;
         this.dibujante = dibujante;
         campo = ComponentesJuego.getComponentes().getCampo();
-        lista = new Lista(ComponentesJuego.getComponentes().getEquipo1());
-
 
     }
 
@@ -115,31 +113,37 @@ public class GestorEntrada implements GestureDetector.GestureListener {
     @Override
     public boolean tap(float screenX, float screenY, int i, int i2) {
         if (longclick==false){
-        Vector3 touchPos = new Vector3();
-        touchPos.set(screenX, screenY,0);
-        camera.unproject(touchPos);
-        //System.out.println("Posicion tocada: x: " + screenX + " y: "+ screenY );
-        //System.out.println("Posicion mundo: x: " + touchPos.x + " y: "+ touchPos.y );
+            Vector3 touchPos = new Vector3();
+            touchPos.set(screenX, screenY,0);
+            camera.unproject(touchPos);
+            //System.out.println("Posicion tocada: x: " + screenX + " y: "+ screenY );
+            //System.out.println("Posicion mundo: x: " + touchPos.x + " y: "+ touchPos.y );
 
-        for (Boton iterador : botons){
-            if (iterador.esSeleccionado(screenX,screenY)){
-                lista.crearLista(iterador.obtenerEntrada());
-                return false;
-            }
-        }
-        if (lista.hayLista()==true){
-            //System.out.println("entra en bucle de listas");
-            for (Boton iteradorLista : lista.listaActiva()){
-                //System.out.println("itera bucle de listas");
-                if (iteradorLista.esSeleccionado(screenX,screenY)){
-                    lista.crearLista(iteradorLista.obtenerEntrada());
+            for (Boton iterador : botons){
+                if (iterador.esSeleccionado(screenX,screenY)==true){
+                        lista.crearLista(iterador.obtenerEntrada());
+
                     return false;
                 }
             }
-        }
+            //si hay lista comprueba que se haya clicado en uno se sus botones
+            if (lista.hayLista()==true){
+                //System.out.println("entra en bucle de listas");
+                for (Boton iteradorLista : lista.listaActiva()){
+                    //System.out.println("itera bucle de listas");
+                    if (iteradorLista.esSeleccionado(screenX,screenY)){
+                        lista.crearLista(iteradorLista.obtenerEntrada());
+                        return false;
+                    }
+                }
+            }
+            // comprieba si hay lista y no se ha clicado en sus botones se elimina
 
-        lista.eliminarListaObjetos();
-        campo.accionEntrada(Entrada.clic,touchPos.x, touchPos.y );
+            lista.eliminarListaObjetos();
+            lista.eliminarListaSuplentes();
+
+
+            campo.accionEntrada(Entrada.clic,touchPos.x, touchPos.y );
 
         }else{
             longclick=false;

@@ -26,7 +26,7 @@ public class Posicionamiento {
         int posicionX;
         int posicionY;
 
-        for(int i =0 ;i<Equipo.JUGADORES_CAMPO;i++)
+        for(int i =0 ;i<ConstantesJuego.JUGADORES_CAMPO;i++)
         {
 
             if(equipo.getAlineacion().size()>i){

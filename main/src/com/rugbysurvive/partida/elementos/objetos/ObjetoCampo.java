@@ -29,7 +29,7 @@ public abstract class ObjetoCampo implements Dibujable {
         this.posY=posY;
         this.textura=textura;
         this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
-        this.campo.añadirElemento(this,this.posX+1,this.posY);
+        this.campo.añadirElemento(this,this.posX,this.posY);
     }
 
 

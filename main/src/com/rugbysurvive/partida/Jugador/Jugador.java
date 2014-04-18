@@ -58,11 +58,9 @@ public class Jugador implements GestionEntrada, Dibujable {
         this.powerup= new ArrayList<ObjetoJugador>();
 
         this.estado = new ConPelota();
-        //this.estado = new EnMovimiento(8);
-        //this.estado = estado;
 
         this.estado.setBloqueado(false);
-        this.getEstado().setSeleccionado(false);
+        this.setSeleccionado(false);
         this.id = -1;
         this.enJuego = false;
         this.textura = "jugador1.png";
@@ -259,8 +257,8 @@ public class Jugador implements GestionEntrada, Dibujable {
             }
             if(accionGenerada == true)
             {
-                this.setEstado(new SinPelota());
-                System.out.println("me quedo sin pelota");
+                //this.setEstado(new SinPelota());
+                //System.out.println("me quedo sin pelota");
             }
 
 
