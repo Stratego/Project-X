@@ -118,7 +118,11 @@ public  class Equipo {
 
         return  hayJugador;
     }
-
+    public boolean jugadorEnEquipo(Jugador jugador){
+        if(this.jugadores.indexOf(jugador) !=  -1)
+            return true;
+        else return false;
+    }
 
 
     public ArrayList<Jugador> getJugadores() {
