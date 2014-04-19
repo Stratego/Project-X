@@ -1,5 +1,6 @@
 package com.rugbysurvive.partida.Jugador;
 
+
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.extras.GestorIndicadorMovimientos;
@@ -8,6 +9,7 @@ import com.rugbysurvive.partida.Simulador.Pase;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
+import com.rugbysurvive.partida.jugadores.Equipo;
 
 /**
  * Created by Victor on 27/03/14.
@@ -46,13 +48,25 @@ public class ConPelota implements Estado {
         {
             if(jugador.getEstado().getPaseOChute() == true)
             {
-                jugador.setAccion(new Pase(jugador, posX, posY));
-                System.out.println("La PASOOOOO!!!");
+                //Comprovem que fem el pase en una posció en horitzontal o per davant del jugador
+
+                if (posX <= jugador.getPosicionX()){
+                    jugador.setAccion(new Pase(jugador, posX, posY));
+                    System.out.println("La PASOOOOO!!!");
+                }
             }
             else
             {
-                jugador.setAccion(new Chute(jugador, posX, posY));
-                System.out.println("La CHUTOOO!!!");
+                //Comprovem que fem el xut en una posció en horitzontal o per davant del jugador
+
+
+                if(posX >= jugador.getPosicionX()){
+
+                    jugador.setAccion(new Chute(jugador, posX, posY));
+                    System.out.println("La CHUTOOO!!!");
+
+                }
+
             }
         }
 

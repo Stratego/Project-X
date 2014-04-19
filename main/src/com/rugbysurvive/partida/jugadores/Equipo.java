@@ -38,6 +38,14 @@ public  class Equipo {
 
     }
 
+    public static Equipo getEquipo() {
+        return equipo;
+    }
+
+    public static void setEquipo(Equipo equipo) {
+        Equipo.equipo = equipo;
+    }
+
     /**
      * crea el equipo
      */
