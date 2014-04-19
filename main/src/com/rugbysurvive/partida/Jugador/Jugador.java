@@ -48,6 +48,7 @@ public class Jugador implements GestionEntrada, Dibujable {
 
     public Equipo miEquipo;
 
+    public Entrada paseOChute = Entrada.chute;
 
 
     public Jugador(int fuerza,int vida, int defensa, Equipo equipo)
@@ -230,15 +231,9 @@ public class Jugador implements GestionEntrada, Dibujable {
          * - Si hay un jugador seleccionado, procedemos a verificar cual de ellos es
          * - Una vez localizado se le asigna el pase
          */
-        if (entrada ==Entrada.pase || entrada ==Entrada.chute){
-            if (entrada ==Entrada.chute)
-            {
-                this.paseOChute = Entrada.chute;
-            }
-            else
-            {
-                this.paseOChute = Entrada.pase;
-            }
+        if (entrada == Entrada.pase || entrada == Entrada.chute)
+        {
+              this.paseOChute = entrada;
         }
         else
         {
@@ -317,7 +312,7 @@ public class Jugador implements GestionEntrada, Dibujable {
         return this.paseOChute;
     }
 
-    public Entrada paseOChute = Entrada.pase;
+
 
     public void setDireccion(DireccionJugador direccion)
     {

@@ -1,15 +1,14 @@
 package com.rugbysurvive.partida.tablero;
 
 import com.badlogic.gdx.Gdx;
+import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
-import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.Jugador;
-import com.rugbysurvive.partida.Lista;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.gestores.Dibujable;
-import com.rugbysurvive.partida.ConstantesJuego;
-import com.rugbysurvive.partida.gestores.Entrada.*;
+import com.rugbysurvive.partida.gestores.Entrada.Entrada;
+import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 
 import java.util.ArrayList;
@@ -123,8 +122,8 @@ public class Boton implements GestionEntrada,Dibujable{
     @Override
     public void accionEntrada(Entrada entrada) {
 
-        System.out.println("Entrada: " + entrada);
-        System.out.println("posicion: " + posicion);
+        //System.out.println("Entrada: " + entrada);
+        //System.out.println("posicion: " + posicion);
         // intercambio entre entrada pase o chute
         if (entrada ==Entrada.pase){
             //introducir accion pase
@@ -133,6 +132,10 @@ public class Boton implements GestionEntrada,Dibujable{
             //introducir accion chute
             this.entrada = Entrada.pase;
         }
+
+        Campo.getInstanciaCampo().accionEntrada(this.entrada,0,0);
+
+
         //obtenemos el elemento de la lista mediante la posicion le dimos al crear el boton
         if (entrada == Entrada.listaobjetos){
             Jugador jugador = ComponentesJuego.getComponentes().getEquipo1().getJugadorActivo();
