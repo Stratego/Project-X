@@ -223,93 +223,101 @@ public class Jugador implements GestionEntrada, Dibujable {
     public void accionEntrada(Entrada entrada, float posX, float posY, Casilla[][] casillas)
     {
         boolean accionGenerada = false;
-
-      //  GestorGrafico.getCamara().bloquear();
-
+        //  GestorGrafico.getCamara().bloquear();
         //Falta hacer una comprobacion de seleccionados para ver si un jugador hace un pase o otra accion
-
         /**
          * - Recorremos todas las casillas y verificamos si en alguna de ellas hay un jugador con estado seleccionado == true
          * - Si hay un jugador seleccionado, procedemos a verificar cual de ellos es
          * - Una vez localizado se le asigna el pase
          */
-
-        if(this.getBloqueado() == false)
-        {
-
-            for (int i = 0; i < 20; i++)
+        if (entrada ==Entrada.pase || entrada ==Entrada.chute){
+            if (entrada ==Entrada.chute)
             {
-                for (int j = 0; j < 30; j++)
+                this.paseOChute = Entrada.chute;
+            }
+            else
+            {
+                this.paseOChute = Entrada.pase;
+            }
+        }
+        else
+        {
+            if(this.getBloqueado() == false)
+            {
+                for (int i = 0; i < 20; i++)
                 {
-                    if(this.getSeleccionado() == true)
+                    for (int j = 0; j < 30; j++)
                     {
-                        /*
-                        * Identificamos la casilla que ha lanzado el evento comparando con la X y la Y
-                        */
-                        if(casillas[i][j].getPosX() == posX && casillas[i][j].getPosY() == posY)
+                        if(this.getSeleccionado() == true)
                         {
-                            if(entrada == Entrada.clicklargo || entrada == Entrada.arrastrar)
+                            /*
+                            * Identificamos la casilla que ha lanzado el evento comparando con la X y la Y
+                            */
+                            if(casillas[i][j].getPosX() == posX && casillas[i][j].getPosY() == posY)
                             {
-                                System.out.println("entrada:"+entrada);
-                                if(this.getSeleccionado() == true)
+                                if(entrada == Entrada.clicklargo || entrada == Entrada.arrastrar)
                                 {
-                                    accionGenerada = this.getEstado().generarAccion(this,(int)posX,(int)posY, entrada);
-                                    i=20;
-                                    j=30;
+                                    System.out.println("entrada:"+entrada);
+                                    if(this.getSeleccionado() == true)
+                                    {
+                                        accionGenerada = this.getEstado().generarAccion(this,(int)posX,(int)posY, entrada);
+                                        i=20;
+                                        j=30;
+                                    }
                                 }
                             }
                         }
                     }
                 }
-
-            }
-            if(accionGenerada == true)
-            {
-                //this.setEstado(new SinPelota());
-                //System.out.println("me quedo sin pelota");
-            }
-
-
-
-
-
-            if(this.getBloqueado() == false)
-            {
-                if(this.getSeleccionado() == false)
+                if(accionGenerada == true)
                 {
-                    if(this.casilla.getPosX() == posX && this.casilla.getPosY() == posY)
+                    //this.setEstado(new SinPelota());
+                    //System.out.println("me quedo sin pelota");
+                }
+                if(this.getBloqueado() == false)
+                {
+                    if(this.getSeleccionado() == false)
+                    {
+                        if(this.casilla.getPosX() == posX && this.casilla.getPosY() == posY)
+                        {
+                            if(entrada == Entrada.clic)
+                            {
+                                this.setSeleccionado(true);
+                                System.out.println(">---------Me seleccionan-------------<");
+                                GestorGrafico.getCamara().bloquear();
+                            }
+                        }
+                    }
+                    else
                     {
                         if(entrada == Entrada.clic)
                         {
-                            this.setSeleccionado(true);
-                            System.out.println(">---------Me seleccionan-------------<");
-                            GestorGrafico.getCamara().bloquear();
+                            this.setSeleccionado(false);
+                            this.estado = estado.getEstado();
+                            System.out.println("<---------Me deseleccionan------------->");
+                            GestorGrafico.getCamara().desbloquear();
                         }
                     }
                 }
                 else
                 {
-                    if(entrada == Entrada.clic)
-                    {
-                        this.setSeleccionado(false);
-                        this.estado = estado.getEstado();
-                        System.out.println("<---------Me deseleccionan------------->");
-                        GestorGrafico.getCamara().desbloquear();
-                    }
-
+                    System.out.println("<---------Estoy bloqueado-1------------>");
+                    GestorGrafico.getCamara().desbloquear();
                 }
             }
-            else
+           /* else
             {
-                System.out.println("<---------Estoy bloqueado-1------------>");
-                GestorGrafico.getCamara().desbloquear();
-            }
+                System.out.println("<---------Estoy bloqueado-2------------>");
+            }*/
         }
-       /* else
-        {
-            System.out.println("<---------Estoy bloqueado-2------------>");
-        }*/
     }
+
+    public Entrada getPaseOChute()
+    {
+        return this.paseOChute;
+    }
+
+    public Entrada paseOChute = Entrada.pase;
 
     public void setDireccion(DireccionJugador direccion)
     {

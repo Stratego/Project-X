@@ -46,7 +46,7 @@ public class ConPelota implements Estado {
         }
         else
         {
-            if(jugador.getEstado().getPaseOChute() == true)
+            if(jugador.getPaseOChute() == Entrada.pase)
             {
                 //Comprovem que fem el pase en una posció en horitzontal o per davant del jugador
 

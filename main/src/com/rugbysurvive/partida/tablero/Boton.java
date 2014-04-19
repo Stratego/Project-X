@@ -2,6 +2,7 @@ package com.rugbysurvive.partida.tablero;
 
 import com.badlogic.gdx.Gdx;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Lista;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
