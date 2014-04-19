@@ -71,6 +71,13 @@ public class Movimiento extends Accion {
                         }
                     }
                 }
+                else
+                {
+                    if(Campo.getInstanciaCampo().getCasilla(this.camino[contador][1], this.camino[contador][0]).getObjeto() != null)
+                    {
+                        /*Interactuar con el Objeto, puede estunearte, darte mas poder o quitarte poder, o liquidarte durante este partido*/
+                    }
+                }
 
             }
        /* }
