@@ -3,7 +3,7 @@ package com.uab.lis.rugby.database.models;
 import android.content.ContentValues;
 import android.database.Cursor;
 import com.uab.lis.rugby.database.contracts.tbEquipos;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by Manuel on 7/04/14.
@@ -11,10 +11,10 @@ import java.util.Set;
 public class Equipo {
     private int id;
     private String nombre;
+    private List<Jugador> jugadores;
     private String escudo;
     private String equipacion;
-    private Set<Jugador> alineacion;
-    private Set<Jugador> jugadores;
+    private List<Jugador> alineacion;
 
     public int getId() {
         return id;
@@ -32,11 +32,11 @@ public class Equipo {
         return equipacion;
     }
 
-    public Set<Jugador> getAlineacion() {
+    public List<Jugador> getAlineacion() {
         return alineacion;
     }
 
-    public Set<Jugador> getJugadoes() {
+    public List<Jugador> getJugadoes() {
         return jugadores;
     }
 
@@ -56,11 +56,11 @@ public class Equipo {
         this.equipacion = equipacion;
     }
 
-    public void setAlineacion(Set<Jugador> alineacion) {
+    public void setAlineacion(List<Jugador> alineacion) {
         this.alineacion = alineacion;
     }
 
-    public void setJugadores(Set<Jugador> jugadores) {
+    public void setJugadores(List<Jugador> jugadores) {
         this.jugadores = jugadores;
     }
 

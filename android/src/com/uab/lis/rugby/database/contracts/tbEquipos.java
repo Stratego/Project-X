@@ -3,11 +3,11 @@ package com.uab.lis.rugby.database.contracts;
 import android.provider.BaseColumns;
 
 /**
- * Created by adria on 27/03/14.
+ * Created by Manuel on 19/04/2014.
  */
 public class tbEquipos implements BaseColumns{
 
-    public static final String TABLE = "Equipos";
+    public static final String TABLE = "EQUIPOS";
 
     public static final String COL_NOMBRE = "nombre";
 
@@ -15,16 +15,10 @@ public class tbEquipos implements BaseColumns{
 
     public static final String COL_EQUIPACION = "equipacion";
 
-    public static final String COL_ALINEACION = "alineacion";
-
-    public static final String COL_JUGADORES = "jugadores";
-
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE + " ("
                     + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + COL_NOMBRE + " TEXT, "
                     + COL_ESCUDO + " TEXT, "
-                    + COL_EQUIPACION + " TEXT, "
-                    + COL_ALINEACION + " TEXT, "
-                    + COL_JUGADORES + " TEXT)";
+                    + COL_EQUIPACION + " TEXT)";
 }

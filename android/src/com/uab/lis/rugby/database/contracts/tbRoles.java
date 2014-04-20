@@ -5,9 +5,9 @@ import android.provider.BaseColumns;
 /**
  * Created by Manuel on 19/04/2014.
  */
-public class tbObjetos implements BaseColumns{
+public class tbRoles implements BaseColumns {
 
-    public static final String TABLE = "OBJETOS";
+    public static final String TABLE = "ROLES";
 
     public static final String COL_NOMBRE = "nombre";
 

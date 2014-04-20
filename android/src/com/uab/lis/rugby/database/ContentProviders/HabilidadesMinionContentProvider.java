@@ -1,7 +1,7 @@
 package com.uab.lis.rugby.database.ContentProviders;
 
 /**
- * Created by Manuel on 29/03/2014.
+ * Created by Manuel on 20/04/2014.
  */
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -9,11 +9,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import com.uab.lis.rugby.database.libContentProvider.MinionContentProvider;
 
-public class JugadoresMinionContentProvider extends MinionContentProvider {
-    public static final String TABLE="JUGADORES";
+public class HabilidadesMinionContentProvider extends MinionContentProvider {
+    public static final String TABLE="HABILIDADES";
     @Override
-    public String getBasePath() {content://com.uab.lis.rugby.jugadores/1 up
-        return "jugadores";
+    public String getBasePath() {
+        return "habilidades";
     }
 
     @Override
@@ -39,6 +39,6 @@ public class JugadoresMinionContentProvider extends MinionContentProvider {
 
     @Override
     public String getType() {
-        return "Jugadores";
+        return "Habilidades";
     }
 }
