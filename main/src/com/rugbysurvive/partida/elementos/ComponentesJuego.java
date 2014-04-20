@@ -52,7 +52,8 @@ public class ComponentesJuego {
         jugador.añadirObjeto(objeto);
         jugador.añadirObjeto(objeto);
 
-        /*this.equipo1.añadirJugador(jugador,0,1);
+        this.equipo1.añadirJugador(jugador,0,1);
+
         jugador = new Jugador(80, 90, 100,this.equipo1);
         jugador.setDireccion(DireccionJugador.izquierda);
         this.equipo1.añadirJugador(jugador, 1, 4);
@@ -61,15 +62,15 @@ public class ComponentesJuego {
         this.equipo1.añadirJugador(jugador, 2, 3);
         jugador = new Jugador(80, 90, 100,this.equipo1);
         jugador.setDireccion(DireccionJugador.abajo);
-        jugador.setEstado(new ConPelota());
-        this.equipo1.añadirJugador(jugador,4,7);*/
+        //jugador.setEstado(new ConPelota());
+        this.equipo1.añadirJugador(jugador,4,7);
 
         this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),8,7);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),8,3);
-        /*this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),6,4);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),6,4);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),7,3);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),8,7);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),9,5);*/
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),9,5);
 
         this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),11,21);
         /*this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),1,4);

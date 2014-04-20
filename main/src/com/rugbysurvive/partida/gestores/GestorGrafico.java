@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+import com.rugbysurvive.partida.ResolucionPantalla;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -78,7 +79,9 @@ public class GestorGrafico implements Dibujante{
         tiposDibujo.add(TipoDibujo.texto);
 
         //Log.i(TAG,"num iteraciones: "+this.vueltas);
-        ConstantesJuego constantes = ConstantesJuego.variables();
+        //ConstantesJuego constantes = ConstantesJuego.variables();
+        ConstantesJuego constantes = new ConstantesJuego();
+
         for(int i=0;i<3;i++)
         {
             for(TipoImagen imagen : this.dibujables)
@@ -95,9 +98,14 @@ public class GestorGrafico implements Dibujante{
                         int posicionY = imagen.dibujable.getPosicionY();
                         posicionX = posicionX - this.camara.getVariationX();
                         posicionY = posicionY + this.camara.getVariationY();
-                        double ancho = textura.getWidth();
-                        double alto = textura.getHeight();
-                         this.sprite.draw(textura,posicionX,posicionY);
+
+                        //constantes.setResolucionPantalla(constantes.calcularResolucion());
+                        //constantes.setMultiplicador(constantes.multiplicador());
+
+
+                        double ancho = constantes.generarTamaño(textura.getWidth());
+                        double alto = constantes.generarTamaño(textura.getHeight());
+                        this.sprite.draw(textura,(float)posicionX,(float)posicionY,(float)ancho,(float)alto);
 
                     }
                     else

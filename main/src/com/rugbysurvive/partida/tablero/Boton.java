@@ -84,12 +84,12 @@ public class Boton implements GestionEntrada,Dibujable{
             altoBoton=ConstantesJuego.variables().getAnchoBoton();
 
         }else if(this.obtenerEntrada()==Entrada.listasuplente){
-            anchoBoton=ConstantesJuego.ANCHO_BOTON_SUPLENTES;
-            altoBoton=ConstantesJuego.ALTO_BOTON_SUPLENTES;
+            anchoBoton=ConstantesJuego.getAnchoBotonSuplentes();
+            altoBoton=ConstantesJuego.getAltoBotonSuplentes();
 
         }else {
-            anchoBoton=ConstantesJuego.ANCHO_BOTON_OBJETOS;
-            altoBoton=ConstantesJuego.ALTO_BOTON_OBJETOS;
+            anchoBoton=ConstantesJuego.getAnchoBotonObjetos();
+            altoBoton=ConstantesJuego.getAltoBotonObjetos();
         }
 
         if (posX >= this.posX && posX <= this.posX+anchoBoton){
@@ -122,7 +122,7 @@ public class Boton implements GestionEntrada,Dibujable{
     @Override
     public void accionEntrada(Entrada entrada) {
 
-        //System.out.println("Entrada: " + entrada);
+        System.out.println("Entrada: " + entrada);
         //System.out.println("posicion: " + posicion);
         // intercambio entre entrada pase o chute
         if (entrada ==Entrada.pase){
@@ -188,4 +188,6 @@ public class Boton implements GestionEntrada,Dibujable{
     public int getPosicionY() {
         return (int)this.posY;
     }
+
+
 }

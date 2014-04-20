@@ -80,9 +80,9 @@ public class Lista {
             System.out.println("iteracion:" + posicion);
 
             listaSuplentes.add(new Boton(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y, Entrada.listasuplente,"listaprueba.png",posicion));
-            jugadores.add(new Texto(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y+64,"jugador 1 fuerza:"+iterador.getFuerza()+" vida:"+iterador.getVida()+" defensa:"+iterador.getDefensa()));
+            jugadores.add(new Texto(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y+ConstantesJuego.getAltoBotonSuplentes(),"jugador 1 fuerza:"+iterador.getFuerza()+" vida:"+iterador.getVida()+" defensa:"+iterador.getDefensa()));
 
-            y += 64;
+            y += ConstantesJuego.getAltoBotonSuplentes();
             posicion += 1;
         }
         suplentes.clear();
@@ -120,11 +120,12 @@ public class Lista {
         ArrayList<ObjetoJugador> objetosJugador = equipo.objetosJugador();
         int x =ConstantesJuego.POSICION_INICIAL_X_BOTON_OBJETOS;
         int y =ConstantesJuego.POSICION_INICIAL_Y_BOTON_OBJETOS;
+        //int y = ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES;
 
 
         if (objetosJugador.size()!=0){
             int iteracion = 0;
-            idPlantillaObjetos = GestorGrafico.generarDibujante().añadirDibujable(new PlantillaObjetos(ConstantesJuego.POSICION_INICIAL_X_PLANTILLAOBJETOS,ConstantesJuego.POSICION_INICIAL_Y_PLANTILLAOBJETOS,"plantillaobjetos.png"), TipoDibujo.interficieUsuario);
+            idPlantillaObjetos = GestorGrafico.generarDibujante().añadirDibujable(new PlantillaObjetos(ConstantesJuego.POSICION_BOTON_CHUTEPASE,ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES,"plantillaobjetos.png"), TipoDibujo.interficieUsuario);
             for (int i = 0; i<3;i++){
                 if (i==0 ||i==2){
                     for (int p = 0; p<3;p++){
@@ -134,16 +135,16 @@ public class Lista {
                             if (objetosJugador.size()!=0&&objetosJugador.size()>iteracion){
 
                                 listaObjetos.add(new Boton(x, y, Entrada.listaobjetos, objetosJugador.get(iteracion).getTextura(),objetosJugador.get(iteracion).getId()));
-                                x +=64;
+                                x +=ConstantesJuego.getAnchoBotonObjetos();
                                 iteracion +=1;
                             }
 
                         }else{
-                            x +=64;
+                            x +=ConstantesJuego.getAnchoBotonObjetos();
                         }
                     }
-                    x=1050;
-                    y -=128;
+                    x=ConstantesJuego.POSICION_INICIAL_X_BOTON_OBJETOS;
+                    y -=ConstantesJuego.getAltoBotonObjetos()*2;
                 }
             }
             estadoObjeto=true;
