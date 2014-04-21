@@ -69,16 +69,14 @@ public class Equipo {
         int colNombre = cursor.getColumnIndex(tbEquipos.COL_NOMBRE);
         int colEscudo = cursor.getColumnIndex(tbEquipos.COL_ESCUDO);
         int colEquipacion = cursor.getColumnIndex(tbEquipos.COL_EQUIPACION);
-        int colAlineacion = cursor.getColumnIndex(tbEquipos.COL_ALINEACION);
-        int colJugadores = cursor.getColumnIndex(tbEquipos.COL_JUGADORES);
+        // FALTA COMPLETAR
 
         Equipo equipo = new Equipo();
         equipo.setId(cursor.getInt(colId));
         equipo.setNombre(cursor.getString(colNombre));
         equipo.setEscudo(cursor.getString(colEscudo));
         equipo.setEquipacion(cursor.getString(colEquipacion));
-        //equipo.setAlineacion(cursor.getString(colAlineacion));
-        //equipo.setJugadores(cursor.getString(colJugadores));
+        // FALTA COMPLETAR
 
         return equipo;
     }
@@ -86,13 +84,17 @@ public class Equipo {
         ContentValues values = new ContentValues();
         values.put(tbEquipos._ID, equipo.getId());
         values.put(tbEquipos.COL_NOMBRE,equipo.getNombre());
+        values.put(tbEquipos.COL_ESCUDO,equipo.getEscudo());
+        values.put(tbEquipos.COL_EQUIPACION,equipo.getEquipacion());
         return values;
     }
     @Override
     public String toString() {
         return "tbEquipos{" +
                 "id=" + id +
-                ", nombre='" + nombre + '\'' +
+                "nombre=" + nombre +
+                "escudo=" + escudo +
+                ", equipacion='" + equipacion + '\'' +
                 '}';
     }
 }
