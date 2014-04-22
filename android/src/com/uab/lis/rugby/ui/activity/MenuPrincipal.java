@@ -25,5 +25,19 @@ public class MenuPrincipal extends Activity {
                 startActivity(new Intent(MenuPrincipal.this,AndroidStarter.class));
             }
         });
+
+        configuracion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuPrincipal.this,Configuracion.class));
+            }
+        });
+
+        tienda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuPrincipal.this,Tienda.class));
+            }
+        });
     }
 }

@@ -33,6 +33,11 @@
         </activity>
         <activity android:name=".ui.activity.CreateUser"/>
         <activity android:name=".ui.activity.MenuPrincipal"/>
+        <activity android:name=".ui.activity.Configuracion"/>
+        <activity android:name=".ui.activity.Tienda"/>
+        <activity android:name=".ui.activity.TiendaFichajes"/>
+        <activity android:name=".ui.activity.TiendaObjetos"/>
+        <activity android:name=".ui.activity.TiendaOtros"/>
 
         <service android:name=".service.MusicService" />
     </application>
