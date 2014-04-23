@@ -10,17 +10,20 @@ public class ConstantesJuego {
 
     protected double multiplicado = 1;
     private static int multiplicador = 1;
+    //private static double multiplicadorBoton = 0.17 * Gdx.graphics.getHeight());
     public static final int ANCHO_CASILLA = 64;
     public static final int ALTO_CASILLA = 64;
-    public static final int ANCHO_BOTON = 128;
+    //public static final int ANCHO_BOTON = 128;
     public static final int ALTO_BOTON = 128;
+    public static final int ANCHO_BOTON = (int)(0.17 * Gdx.graphics.getHeight());
 
-    public static  int separacionBotones = (ANCHO_BOTON+72)*multiplicador;
-    public static  int POSICION_BOTON_FINALIZAR = Gdx.graphics.getWidth() -separacionBotones;
+    public static  double separacionBotones = (ANCHO_BOTON+78);
+    public static  int POSICION_BOTON_FINALIZAR = (int)(Gdx.graphics.getWidth() -separacionBotones);
 
-    public static  int POSICION_BOTON_SUPLENTE = Gdx.graphics.getWidth() - (separacionBotones*2);
-    public static  int POSICION_BOTON_OBJETOS = Gdx.graphics.getWidth() - (separacionBotones*3);
-    public static  int POSICION_BOTON_CHUTEPASE = Gdx.graphics.getWidth() - (separacionBotones*4);
+    public static  int POSICION_BOTON_SUPLENTE = (int)(Gdx.graphics.getWidth() - (separacionBotones*2));
+    public static  int POSICION_BOTON_OBJETOS = (int)(Gdx.graphics.getWidth() - (separacionBotones*3));
+    public static  int POSICION_BOTON_CHUTEPASE = (int)(Gdx.graphics.getWidth() - (separacionBotones*4));
+
     //public static final int POSICION_BOTON_SUPLENTE = POSICION_BOTON_FINALIZAR-separacionBotones;
     //public static final int POSICION_BOTON_OBJETOS = POSICION_BOTON_SUPLENTE - separacionBotones;
     //public static final int POSICION_BOTON_CHUTEPASE = POSICION_BOTON_OBJETOS - separacionBotones;
@@ -61,10 +64,10 @@ public class ConstantesJuego {
     public ConstantesJuego()
     {
         // la inicializacion no funciona correctamente
-        resolucionPantalla = calcularResolucion();
+        //resolucionPantalla = calcularResolucion();
         //System.out.println(resolucionPantalla);
 
-        multiplicador =  multiplicador();
+       // multiplicador =  multiplicador();
        // System.out.println(multiplicador);
 
         constantes = this;
@@ -156,15 +159,16 @@ public class ConstantesJuego {
 
 
     public ResolucionPantalla calcularResolucion(){
+
         //System.out.println(Gdx.graphics.getHeight());
         //System.out.println(Gdx.graphics.getWidth());
-        if (Gdx.graphics.getHeight()<=720&&Gdx.graphics.getWidth()<=1280){
+        /*if (Gdx.graphics.getHeight()<=720&&Gdx.graphics.getWidth()<=1280){
             resolucionPantalla= ResolucionPantalla.pequeña;
             multiplicador=1;
         }else{
             resolucionPantalla= ResolucionPantalla.mediana;
             multiplicador=2;
-        }
+        }*/
 
         return resolucionPantalla;
     }
