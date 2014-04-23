@@ -122,17 +122,20 @@ public class Boton implements GestionEntrada,Dibujable{
     @Override
     public void accionEntrada(Entrada entrada) {
 
-        System.out.println("Entrada: " + entrada);
+
         //System.out.println("posicion: " + posicion);
         // intercambio entre entrada pase o chute
-        if (entrada ==Entrada.pase){
+        if (entrada == Entrada.pase){
             //introducir accion pase
             this.entrada = Entrada.chute;
-        } else if (entrada ==Entrada.chute){
-            //introducir accion chute
-            this.entrada = Entrada.pase;
+            } else {
+                if (entrada == Entrada.chute){
+                    //introducir accion chute
+                    this.entrada = Entrada.pase;
+            }
         }
 
+        //System.out.println("Entrada: " + this.entrada);
         Campo.getInstanciaCampo().accionEntrada(this.entrada,0,0);
 
 
