@@ -15,7 +15,7 @@ public class ConstantesJuego {
     public static final int ALTO_CASILLA = 64;
     //public static final int ANCHO_BOTON = 128;
     public static final int ALTO_BOTON = 128;
-    public static final int ANCHO_BOTON = (int)(0.17 * Gdx.graphics.getHeight());
+    public static final int ANCHO_BOTON = (int)(0.1777777778 * Gdx.graphics.getHeight());
 
     public static  double separacionBotones = (ANCHO_BOTON+78);
     public static  int POSICION_BOTON_FINALIZAR = (int)(Gdx.graphics.getWidth() -separacionBotones);
