@@ -135,7 +135,6 @@ public class Boton implements GestionEntrada,Dibujable{
             }
         }
 
-        //System.out.println("Entrada: " + this.entrada);
         Campo.getInstanciaCampo().accionEntrada(this.entrada,0,0);
 
 

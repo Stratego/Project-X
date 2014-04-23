@@ -231,11 +231,9 @@ public class Jugador implements GestionEntrada, Dibujable {
          * - Si hay un jugador seleccionado, procedemos a verificar cual de ellos es
          * - Una vez localizado se le asigna el pase
          */
-        System.out.println("Llega :"+entrada);
         if (entrada == Entrada.pase || entrada == Entrada.chute)
         {
               this.paseOChute = entrada;
-            System.out.println("Me asigno :"+this.paseOChute);
         }
         else
         {
