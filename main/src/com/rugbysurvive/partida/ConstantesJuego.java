@@ -48,6 +48,19 @@ public class ConstantesJuego {
     public static final int LIMITE_CASILLAS_ANCHO_TABLERO = 19;
     public static final int NUMERO_CASILLAS_LARGO_TABLERO = 30;
     public static final int LIMITE_CASILLAS_LARGO_TABLERO = 29;
+
+
+    public static final int POSICION_X_MARCADOR = (int)((Gdx.graphics.getWidth()/2 -64) * constanteRescalado);
+    public static final int POSICION_Y_MARCADOR = (int)((Gdx.graphics.getHeight()-64) * constanteRescalado);
+    public static final int POSICION_X_PUNTUACION_EQUIPO1 = (int)((Gdx.graphics.getWidth()/2 -60)*constanteRescalado);
+    public static final int POSICION_X_PUNTUACION_EQUIPO2 = (int)((Gdx.graphics.getWidth()/2+10)*constanteRescalado);
+    public static final int POSICION_Y_PUNTUACION = (int)((Gdx.graphics.getHeight()-20)*constanteRescalado);
+
+    public static final int POSICION_X_ESCUDO_EQUIPO1 = (int)((Gdx.graphics.getWidth()/2 -140)*constanteRescalado);
+    public static final int POSICION_X_ESCUDO_EQUIPO2 = (int)((Gdx.graphics.getWidth()/2 +70)*constanteRescalado);
+    public static final int POSICION_Y_ESCUDO = (int)((Gdx.graphics.getHeight()-70)*constanteRescalado);
+
+
     protected  static final int ANCHO_TABLERO = ANCHO_CASILLA*NUMERO_CASILLAS_ANCHO_TABLERO;
     protected  static final int ALTO_TABLERO = ALTO_CASILLA*NUMERO_CASILLAS_LARGO_TABLERO;
     protected  static final int TAMAÑO_BASE = 1;
@@ -121,22 +134,6 @@ public class ConstantesJuego {
     public static int generarTamaño(int tamaño)
     {
 
-        /*
-        switch(resolucionPantalla)
-        {
-
-           case pequeña:
-                //System.out.println("cambiando a base");
-                return tamaño * TAMAÑO_BASE;
-           case mediana:
-               //System.out.println("cambiando a mediano");
-               return tamaño * TAMAÑO_MEDIANO;
-            default:
-               //System.out.println("cambiando a grande");
-                return tamaño * TAMAÑO_GRANDE;
-
-        }*/
-
         return (int)(tamaño * constanteRescalado);
 
     }
@@ -160,21 +157,6 @@ public class ConstantesJuego {
 
 
 
-
-    public ResolucionPantalla calcularResolucion(){
-
-        //System.out.println(Gdx.graphics.getHeight());
-        //System.out.println(Gdx.graphics.getWidth());
-        /*if (Gdx.graphics.getHeight()<=720&&Gdx.graphics.getWidth()<=1280){
-            resolucionPantalla= ResolucionPantalla.pequeña;
-            multiplicador=1;
-        }else{
-            resolucionPantalla= ResolucionPantalla.mediana;
-            multiplicador=2;
-        }*/
-
-        return resolucionPantalla;
-    }
 
 
 
