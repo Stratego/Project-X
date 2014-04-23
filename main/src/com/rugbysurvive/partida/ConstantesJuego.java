@@ -121,6 +121,7 @@ public class ConstantesJuego {
     public static int generarTamaño(int tamaño)
     {
 
+        /*
         switch(resolucionPantalla)
         {
 
@@ -134,7 +135,9 @@ public class ConstantesJuego {
                //System.out.println("cambiando a grande");
                 return tamaño * TAMAÑO_GRANDE;
 
-        }
+        }*/
+
+        return (int)(tamaño * constanteRescalado);
 
     }
 
