@@ -69,6 +69,7 @@ public class Campo implements GestionEntrada,Dibujable {
        double anchura = ConstantesJuego.variables().getAnchoCasilla();
        double altura = ConstantesJuego.variables().getLargoCasilla();
 
+        System.out.println("EN campo llega:"+entrada);
        for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 30; j++) {
                         //Filtro

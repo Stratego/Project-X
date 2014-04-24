@@ -48,7 +48,7 @@ public class Jugador implements GestionEntrada, Dibujable {
 
     public Equipo miEquipo;
 
-    public Entrada paseOChute = Entrada.chute;
+    public Entrada paseOChute = Entrada.pase;
 
 
     public Jugador(int fuerza,int vida, int defensa, Equipo equipo)
