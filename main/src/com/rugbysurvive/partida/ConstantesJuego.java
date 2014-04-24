@@ -34,7 +34,9 @@ public class ConstantesJuego {
     public static final int ANCHO_BOTON_SUPLENTES = 768;
     public static  int POSICION_INICIAL_Y_BOTON_SUPLENTES=(int)((ALTO_BOTON * constanteRescalado)+2);
     //public static final int POSICION_INICIAL_Y_BOTON_OBJETOS=Gdx.graphics.getHeight()-80;
+
     // public static final int POSICION_INICIAL_X_BOTON_OBJETOS=Gdx.graphics.getWidth()-230;
+
     public static  int POSICION_INICIAL_Y_BOTON_OBJETOS=(int)(((ALTO_BOTON * constanteRescalado)+2)+(ALTO_BOTON_OBJETOS*constanteRescalado *2)+((ALTO_BOTON_OBJETOS*constanteRescalado)/2));
     //public static final int POSICION_INICIAL_X_BOTON_OBJETOS=Gdx.graphics.getWidth() - 798;
     public static final int POSICION_INICIAL_X_BOTON_OBJETOS=POSICION_BOTON_CHUTEPASE +32;
@@ -80,8 +82,10 @@ public class ConstantesJuego {
         //resolucionPantalla = calcularResolucion();
         //System.out.println(resolucionPantalla);
 
+
         // multiplicador =  multiplicador();
         // System.out.println(multiplicador);
+
 
         constantes = this;
 

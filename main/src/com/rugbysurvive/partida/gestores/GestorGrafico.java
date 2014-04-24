@@ -80,8 +80,10 @@ public class GestorGrafico implements Dibujante{
         tiposDibujo.add(TipoDibujo.texto);
 
         //Log.i(TAG,"num iteraciones: "+this.vueltas);
-        //ConstantesJuego constantes = ConstantesJuego.variables();
+
+
         ConstantesJuego constantes = ConstantesJuego.variables();
+
 
         for(int i=0;i<3;i++)
         {

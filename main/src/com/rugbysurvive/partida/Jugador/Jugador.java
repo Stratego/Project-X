@@ -49,7 +49,7 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
 
     public Equipo miEquipo;
 
-    public Entrada paseOChute = Entrada.chute;
+    public Entrada paseOChute = Entrada.pase;
 
 
     public Jugador(int fuerza,int vida, int defensa, Equipo equipo)

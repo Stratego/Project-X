@@ -128,10 +128,13 @@ public class Boton implements GestionEntrada,Dibujable{
         if (entrada == Entrada.pase){
             //introducir accion pase
             this.entrada = Entrada.chute;
-        } else {
-            if (entrada == Entrada.chute){
-                //introducir accion chute
-                this.entrada = Entrada.pase;
+        this.entrada = Entrada.pase;
+
+            } else {
+                if (entrada == Entrada.chute){
+                    //introducir accion chute
+                    this.entrada = Entrada.pase;
+
             }
         }
 
