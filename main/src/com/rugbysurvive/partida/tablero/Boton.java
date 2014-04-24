@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Clase que define la posicion y comportamiento de un boron dentro del tablero de juego
  * Created by Victor on 24/03/14.
  */
-public class Boton implements GestionEntrada,Dibujable{
+public abstract class Boton implements GestionEntrada,Dibujable{
 
     /**
      * posicion x en el tablero
@@ -29,7 +29,7 @@ public class Boton implements GestionEntrada,Dibujable{
      */
     private float posY;
 
-    private Entrada entrada;
+    public Entrada entrada;
     /**
      * indicara si el elemento esta selecionado
      */
@@ -48,7 +48,7 @@ public class Boton implements GestionEntrada,Dibujable{
     /**
      * identificador que se usara  para identidificar elementos en las listas de objetos o suplentes
      */
-    int posicion;
+    public int posicion;
 
 
     /**
@@ -120,7 +120,33 @@ public class Boton implements GestionEntrada,Dibujable{
     }
 
     @Override
-    public void accionEntrada(Entrada entrada) {
+    public abstract void accionEntrada(Entrada entrada);
+
+    public int getID(){
+        return ID;
+    }
+
+    public int getPosicion(){
+        return this.posicion;
+    }
+
+    @Override
+    public String getTextura() {
+        return this.textura;
+    }
+
+    @Override
+    public int getPosicionX() {
+        return (int)this.posX;
+    }
+
+    @Override
+    public int getPosicionY() {
+        return (int)this.posY;
+    }
+/*
+    @Override
+    public abstract void accionEntrada(Entrada entrada) {
 
 
         //System.out.println("posicion: " + posicion);
@@ -128,10 +154,10 @@ public class Boton implements GestionEntrada,Dibujable{
         if (entrada == Entrada.pase){
             //introducir accion pase
             this.entrada = Entrada.chute;
-            } else {
-                if (entrada == Entrada.chute){
-                    //introducir accion chute
-                    this.entrada = Entrada.pase;
+        } else {
+            if (entrada == Entrada.chute){
+                //introducir accion chute
+                this.entrada = Entrada.pase;
             }
         }
 
@@ -167,29 +193,6 @@ public class Boton implements GestionEntrada,Dibujable{
         }
 
     }
-
-    public int getID(){
-        return ID;
-    }
-
-    public int getPosicion(){
-        return this.posicion;
-    }
-
-    @Override
-    public String getTextura() {
-        return this.textura;
-    }
-
-    @Override
-    public int getPosicionX() {
-        return (int)this.posX;
-    }
-
-    @Override
-    public int getPosicionY() {
-        return (int)this.posY;
-    }
-
+*/
 
 }
