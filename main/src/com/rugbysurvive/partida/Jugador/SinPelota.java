@@ -13,6 +13,8 @@ public class SinPelota implements Estado {
     public boolean seleccionado = false;
     public boolean bloqueado = false;
 
+    public Jugador jugador;
+
     /*public boolean generarAccion(Jugador jugador) {
 
         Simulador.getInstance().addAccionesSimulador(jugador.getAccion());
@@ -47,6 +49,8 @@ public class SinPelota implements Estado {
             jugador.setBloqueado(true);
             return true;
         }
+
+        this.jugador = jugador;
 
         return false;
     }

@@ -61,7 +61,7 @@ public class Jugador implements GestionEntrada, Dibujable {
 
         this.powerup= new ArrayList<ObjetoJugador>();
 
-        this.estado = new ConPelota();
+        this.estado = new SinPelota();
 
         this.estado.setBloqueado(false);
         this.setSeleccionado(false);

@@ -19,6 +19,8 @@ public class EnMovimiento implements Estado {
     Estado estadoAnterior;
     IndicadorMovimientos indicador;
 
+    public Jugador jugador;
+
     public EnMovimiento(int nPosiciones,Estado estadoAnterior)
     {
         /*De momento declaramos una matriz de 8*2, hasta que logremos obtener cuanto podra mover cada jugador*/
@@ -51,6 +53,8 @@ public class EnMovimiento implements Estado {
 
     @Override
     public boolean generarAccion(Jugador jugador, int posX, int posY, Entrada entrada) {
+
+        this.jugador = jugador;
 
         if(entrada == Entrada.arrastrar)
         {
@@ -90,7 +94,7 @@ public class EnMovimiento implements Estado {
         }
          System.out.println("POSICION ACTUAL:"+this.posicionActual);
 
-        if(this.posicionActual == movimientos.length || this.jugadorFinalizaMovimiento(entrada,posX,posY))// falta limitarlo por su habilidad
+        if(this.posicionActual == movimientos.length || this.jugadorFinalizaMovimiento(entrada,posX,posY))
         {
 
             for(int i=0; i<movimientos.length; i++)
@@ -107,6 +111,11 @@ public class EnMovimiento implements Estado {
             jugador.setSeleccionado(false);
             this.indicador = new IndicadorMovimientos(jugador,this.movimientos,this.posicionActual);
             this.indicador.procesar();
+
+            /*Le devolvemos su estado anterior*/
+            this.jugador.setEstado(this.estadoAnterior);
+
+            System.out.println("ESTADOOOOOOO:"+this.jugador.getEstado());
 
             return true;
         }
