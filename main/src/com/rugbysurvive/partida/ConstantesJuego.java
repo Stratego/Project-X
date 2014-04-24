@@ -61,10 +61,10 @@ public class ConstantesJuego {
     public ConstantesJuego()
     {
         // la inicializacion no funciona correctamente
-        resolucionPantalla = calcularResolucion();
+        //resolucionPantalla = calcularResolucion();
         //System.out.println(resolucionPantalla);
 
-        multiplicador =  multiplicador();
+       // multiplicador =  multiplicador();
        // System.out.println(multiplicador);
 
         constantes = this;
