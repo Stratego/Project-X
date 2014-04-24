@@ -6,6 +6,7 @@ import com.rugbysurvive.partida.Simulador.Accion;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
 import com.rugbysurvive.partida.gestores.Dibujable;
+import com.rugbysurvive.partida.gestores.Entrada.DibujableEscalado;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by Victor on 27/03/14.
  */
-public class Jugador implements GestionEntrada, Dibujable {
+public class Jugador implements GestionEntrada, DibujableEscalado {
 
     private static final int MAXIMO_OBJETOS = 4;
     private String textura ;
@@ -210,7 +211,10 @@ public class Jugador implements GestionEntrada, Dibujable {
             if(this.bloqueo == null) {
                     this.bloqueo = new ElementoDibujable(TipoDibujo.elementosJuego,"casellalila.png");;
             }
-            this.bloqueo.dibujar((int)this.casilla.getPosX(),(int)this.casilla.getPosY());
+            if(this.casilla != null)
+            {
+                 this.bloqueo.dibujar((int)this.casilla.getPosX(),(int)this.casilla.getPosY());
+            }
         }
         else
         {
@@ -316,7 +320,8 @@ public class Jugador implements GestionEntrada, Dibujable {
 
     public void setDireccion(DireccionJugador direccion)
     {
-        this.direccion = direccion; 
+        this.direccion = direccion;
+        this.dibujarDireccion(direccion);
     }
     public DireccionJugador getDireccion(){return this.direccion;}
     private void dibujarDireccion(DireccionJugador direccion)
@@ -325,19 +330,15 @@ public class Jugador implements GestionEntrada, Dibujable {
         {
             case arriba:
                 this.textura = "jugador/jugador4.png";
-                this.textura = "jugador1.png";
                 break;
             case abajo:
                 this.textura = "jugador/jugador2.png";
-                this.textura = "jugador1.png";
                 break;
             case izquierda:
                 this.textura = "jugador/jugador5.png";
-                this.textura = "jugador1.png";
                 break;
             case derecha:
                 this.textura = "jugador/jugador1.png";
-                this.textura = "jugador1.png";
                 break;
         }
     }
@@ -401,6 +402,11 @@ public class Jugador implements GestionEntrada, Dibujable {
     }
 
     public boolean getEnJuego(){return enJuego;}
+
+    @Override
+    public double getEscalado() {
+        return 1.70;
+    }
 
     //public void recibirImput();
 }

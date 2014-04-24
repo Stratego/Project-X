@@ -21,6 +21,7 @@ public  class Equipo {
 
     private ArrayList<Jugador> jugadores = new ArrayList <Jugador>();
     private ArrayList<PosicionInicial> alineacion;
+    private boolean jugando; // indica si el equipo esta siendo usado
 
     private static Equipo equipo;
 
@@ -34,6 +35,7 @@ public  class Equipo {
     public  Equipo(){
         this.alineacion = new ArrayList<PosicionInicial>();
         this.jugadores =  new ArrayList<Jugador>();
+        this.jugando = false;
         equipo = this;
 
     }
@@ -155,6 +157,41 @@ public  class Equipo {
         }
     }
 
+    /**
+     * Desbloquea todos los jugadores del equipo
+     */
+    public void desbloquear()
+    {
+        for(Jugador jugador : this.jugadores){
+            jugador.setBloqueado(false);
+        }
+    }
+    /**
+     * Bloquea todos los jugadores del equipo
+     */
+    public void bloquear()
+    {
+        for(Jugador jugador : this.jugadores){
+            jugador.setBloqueado(true);
+        }
+    }
+
+    /**
+     * Indica si el equipo entero esta bloqueado
+     * A la que haya un jugador desbloqueado el
+     * equipo entero se considera desbloqueado
+     * @return equipo bloqueado o no
+     */
+    public boolean bloqueado(){
+
+        for(Jugador jugador : this.jugadores){
+            if(jugador.getBloqueado() == false)
+                return false;
+        }
+        return true;
+    }
+
+
     public void intercambioJugadores(int posicionSuplente){
         int posicion;
         if (hayJugadorSelecionado()==true){
@@ -190,5 +227,13 @@ public  class Equipo {
 
     public Jugador getJugadorActivo (){
         return  this.jugadorSelecionado;
+    }
+
+    public boolean isJugando() {
+        return jugando;
+    }
+
+    public void setJugando(boolean jugando) {
+        this.jugando = jugando;
     }
 }

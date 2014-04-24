@@ -80,9 +80,9 @@ public class Lista {
             System.out.println("iteracion:" + posicion);
 
             listaSuplentes.add(new Boton(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y, Entrada.listasuplente,"listaprueba.png",posicion));
-            jugadores.add(new Texto(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y+ConstantesJuego.getAltoBotonSuplentes(),"jugador 1 fuerza:"+iterador.getFuerza()+" vida:"+iterador.getVida()+" defensa:"+iterador.getDefensa()));
+            jugadores.add(new Texto(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y+ConstantesJuego.variables().getAnchoBoton(),"jugador 1 fuerza:"+iterador.getFuerza()+" vida:"+iterador.getVida()+" defensa:"+iterador.getDefensa()));
 
-            y += ConstantesJuego.getAltoBotonSuplentes();
+            y += ConstantesJuego.variables().getAnchoBoton();
             posicion += 1;
         }
         suplentes.clear();
@@ -135,16 +135,16 @@ public class Lista {
                             if (objetosJugador.size()!=0&&objetosJugador.size()>iteracion){
 
                                 listaObjetos.add(new Boton(x, y, Entrada.listaobjetos, objetosJugador.get(iteracion).getTextura(),objetosJugador.get(iteracion).getId()));
-                                x +=ConstantesJuego.getAnchoBotonObjetos();
+                                x +=ConstantesJuego.variables().getAnchoBoton();
                                 iteracion +=1;
                             }
 
                         }else{
-                            x +=ConstantesJuego.getAnchoBotonObjetos();
+                            x +=ConstantesJuego.variables().getAnchoBoton();;
                         }
                     }
                     x=ConstantesJuego.POSICION_INICIAL_X_BOTON_OBJETOS;
-                    y -=ConstantesJuego.getAltoBotonObjetos()*2;
+                    y -=ConstantesJuego.variables().getAnchoBoton()*2;
                 }
             }
             estadoObjeto=true;

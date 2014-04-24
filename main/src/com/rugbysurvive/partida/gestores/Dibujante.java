@@ -1,6 +1,7 @@
 package com.rugbysurvive.partida.gestores;
 
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+import com.rugbysurvive.partida.gestores.Entrada.DibujableEscalado;
 
 /**
  * Created by aitor on 26/03/14.
@@ -15,9 +16,12 @@ public interface Dibujante {
      * definidas sera dibujada y actualizada cada cierto tiempo en la pantalla
      * de juego
      *
-     * @param dibujable clase que contiene todos los atributos necesarios
+     * @param dibujable Clase que contiene todos los atributos necesarios
      *                  para dibujar la textura
-     * @return identificar que debera ser usado para borrar la referencia
+     *
+     * @param tipoDibujo Estilo de dibujo que se realizara.
+     *
+     * @return identificador que debera ser usado para borrar la referencia
      *         posteriormente
      */
     public int añadirDibujable(Dibujable dibujable,TipoDibujo tipoDibujo);
@@ -32,5 +36,17 @@ public interface Dibujante {
 
     public void dibujarLinia(int posicionXInicial,int posicionYInicial,int posicionXFinal,int posicionYFinal);
 
-   
+    /**
+     * Añade una clase de tipo dibujable escalado a la clase de tipo dibujante
+     * La clase añadida si la textura existe y las posiciones  y el escalado han sido
+     * definidas sera dibujada y actualizada cada cierto tiempo en la pantalla.
+     *
+     * @param dibujable Clase que contiene todos los atributos necesarios
+     *                  para dibujar la textura
+     * @param tipoDibujo Estilo de Estilo de dibujo que se realizara.
+     * @return identificador que debera ser usado para borrar la referencia
+     *         posteriormente
+     */
+    public int añadirDibujable(DibujableEscalado dibujable,TipoDibujo tipoDibujo);
+
 }

@@ -10,6 +10,8 @@ import com.rugbysurvive.partida.jugadores.Equipo;
 
 /**
  * Created by aitor on 18/04/14.
+ * Contiene todos los procesos necesarios para generar la puntuacion
+ * del partido . Ademas muestra el resultado por pantalla.
  */
 public class Marcador implements Dibujable{
 
@@ -24,9 +26,13 @@ public class Marcador implements Dibujable{
     private   Equipo equipo2;
     private String textura;
 
+    /**
+     *
+     * @param equipo1 Equipo que se mostrara el resultado en la izquierda del marcador
+     * @param equipo2 Equipo qeu se mostrara el resultado en la derecha del marcador
+     */
+    public Marcador(Equipo equipo1 ,Equipo equipo2) {
 
-    public Marcador(Equipo equipo1 ,Equipo equipo2)
-    {
         GestorGrafico.generarDibujante().añadirDibujable(this,TipoDibujo.interficieUsuario);
         this.textura = "Menu/marcador.png";
         this.puntuacionGraficaEquipo1 = new ElementoDibujable(TipoDibujo.texto,"0");
@@ -43,8 +49,27 @@ public class Marcador implements Dibujable{
 
     }
 
-    private void dibujarMarcador()
-    {
+
+    /**
+     * Añade la puntuacion al equipo al que pertenece el jugador.
+     *
+     * @param puntuacion cantidad que sera añadida a la puntuacion existente
+     * @param jugador Jugador que ha conseguido realizar el punto
+     */
+    public void sumarPuntuacion(int puntuacion,Jugador jugador)  {
+        if(equipo1.jugadorEnEquipo(jugador)){
+            puntuacionEquipo1  = puntuacionEquipo1 + puntuacion;
+        }
+        else {
+            puntuacionEquipo2 = puntuacionEquipo2 + puntuacion;
+        }
+        this.dibujarMarcador();
+    }
+
+    /**
+     * Realiza el proceso de dibujado del marcador
+     */
+    private void dibujarMarcador()  {
         this.puntuacionGraficaEquipo2.borrar();
         this.puntuacionGraficaEquipo1.borrar();
         this.puntuacionGraficaEquipo1 = new ElementoDibujable(TipoDibujo.texto,""+puntuacionEquipo1);
@@ -52,16 +77,6 @@ public class Marcador implements Dibujable{
         this.puntuacionGraficaEquipo1.dibujar(Gdx.graphics.getWidth()/2 -60,Gdx.graphics.getHeight()-20);
         this.puntuacionGraficaEquipo2.dibujar(Gdx.graphics.getWidth()/2+10,Gdx.graphics.getHeight()-20);
 
-    }
-    public void sumarPuntuacion(int puntuacion,Jugador jugador)
-    {
-        if(equipo1.jugadorEnEquipo(jugador)){
-            puntuacionEquipo1  = puntuacionEquipo1 + puntuacion;
-        }
-        else{
-            puntuacionEquipo2 = puntuacionEquipo2 + puntuacion;
-        }
-        this.dibujarMarcador();
     }
 
 

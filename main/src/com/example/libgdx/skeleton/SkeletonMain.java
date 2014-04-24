@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.input.GestureDetector;
+import com.partido.GestorTurnos;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.ResolucionPantalla;
 import com.rugbysurvive.partida.Simulador.Simulador;
@@ -13,6 +14,7 @@ import com.rugbysurvive.partida.elementos.objetos.GestorObjetos;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestorEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
+import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
 import com.rugbysurvive.partida.gestores.Prueba;
 import com.rugbysurvive.partida.tablero.Boton;
 
@@ -37,13 +39,17 @@ public class SkeletonMain extends Game {
     ComponentesJuego componentesJuego;
     Simulador simulador;
 
+    GestorTurnos gestor;
+    // VARIABLES DE ESTADO
+    boolean calculandoEquipoInicio = false;
+    boolean simular = false;
 
     @Override
     public void create() {
 
         this.simulador = Simulador.getInstance();
         this.simulador.iniciarSimulacion();
-
+        this.gestor = new GestorTurnos();
         this.constantes = new ConstantesJuego();
         this.constantes.setResolucionPantalla(ResolucionPantalla.pequeña);
         ArrayList<String> nombresTexturas = new ArrayList<String>();
@@ -105,6 +111,10 @@ public class SkeletonMain extends Game {
 
         //Simulador.getInstance().simular();
 
+
+        this.calculandoEquipoInicio = true;
+        this.simular = false;
+
     }
 
     @Override
@@ -114,14 +124,32 @@ public class SkeletonMain extends Game {
 
     @Override
     public void render() {
-       this.simulador.simular();
+
+       if(this.calculandoEquipoInicio){
+           GestorTurnos.iniciarPartido();
+           this.calculandoEquipoInicio = false;
+       }
+       else
+       {
+          if(this.gestor.CambiarTurno())
+          {
+          }
+
+       }
+        if(GestorTurnos.finTurnoJugadores()){
+            this.simular = true;
+        }
+        if(simular){
+            this.simulador.simular();
+        }
        if(contador %100 == 0 ){
-             this.gestorObjetos.procesar();
+           this.gestorObjetos.procesar();
           // this.componentesJuego.getMarcador().sumarPuntuacion(1, ComponentesJuego.getComponentes().getEquipo1().getJugadores().get(1));
        }
      this.gestorGrafico.dibujar();
-
+     ProcesosContinuos.procesar();
     this.contador++;
+
        //this.prueba2.render();
 
     }

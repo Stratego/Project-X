@@ -176,6 +176,9 @@ public class GestorEntrada implements GestureDetector.GestureListener {
 
     @Override
     public boolean panStop(float v, float v2, int i, int i2) {
+        for (Boton iteradorLista : lista.listaActiva()){
+            iteradorLista.setApretado(false);
+        }
         return false;
     }
 

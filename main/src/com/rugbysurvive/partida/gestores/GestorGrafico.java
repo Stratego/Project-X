@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.ResolucionPantalla;
+import com.rugbysurvive.partida.gestores.Entrada.DibujableEscalado;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -80,7 +81,7 @@ public class GestorGrafico implements Dibujante{
 
         //Log.i(TAG,"num iteraciones: "+this.vueltas);
         //ConstantesJuego constantes = ConstantesJuego.variables();
-        ConstantesJuego constantes = new ConstantesJuego();
+        ConstantesJuego constantes = ConstantesJuego.variables();
 
         for(int i=0;i<3;i++)
         {
@@ -89,7 +90,6 @@ public class GestorGrafico implements Dibujante{
                 if(imagen.tipoDibujo == tiposDibujo.get(i))
                 {
                     Texture textura = this.manager.get(imagen.dibujable.getTextura());
-
 
 
                     if(TipoDibujo.interficieUsuario == tiposDibujo.get(i)){
@@ -103,8 +103,12 @@ public class GestorGrafico implements Dibujante{
                         //constantes.setMultiplicador(constantes.multiplicador());
 
 
-                        double ancho = constantes.generarTamaño(textura.getWidth());
-                        double alto = constantes.generarTamaño(textura.getHeight());
+                    //    double ancho = constantes.generarTamaño(textura.getWidth());
+                      //  double alto = constantes.generarTamaño(textura.getHeight());
+
+                        double ancho = textura.getWidth()*imagen.escalado;
+                        double alto = textura.getHeight()*imagen.escalado;
+
                         this.sprite.draw(textura,(float)posicionX,(float)posicionY,(float)ancho,(float)alto);
 
                     }
@@ -116,6 +120,8 @@ public class GestorGrafico implements Dibujante{
                         double multiplicador = constantes.getMultiplicador();
                         double ancho = textura.getWidth()*multiplicador;
                         double alto = textura.getHeight()*multiplicador;
+
+
                          this.sprite.draw(textura,(float)posicionX,(float)posicionY,(float)ancho,(float)alto);
 
 
@@ -201,6 +207,13 @@ public class GestorGrafico implements Dibujante{
     }
 
     @Override
+    public int añadirDibujable(DibujableEscalado dibujable, TipoDibujo tipoDibujo) {
+        this.contador++;
+        this.dibujables.add(new TipoImagen(tipoDibujo,dibujable,this.contador));
+        return this.contador;
+    }
+
+    @Override
     public int añadirDibujable(Dibujable dibujable,TipoDibujo tipoDibujo)
     {
         this.contador++;
@@ -248,12 +261,22 @@ public class GestorGrafico implements Dibujante{
         public TipoDibujo tipoDibujo;
         public Dibujable dibujable;
         public int ID;
+        public double escalado;
 
         public TipoImagen(TipoDibujo tipoDibujo,Dibujable dibujable,int ID)
         {
             this.ID = ID;
             this.tipoDibujo = tipoDibujo;
             this.dibujable = dibujable;
+            this.escalado = 1;
+        }
+
+        public TipoImagen(TipoDibujo tipoDibujo,DibujableEscalado dibujable,int ID)
+        {
+            this.ID = ID;
+            this.tipoDibujo = tipoDibujo;
+            this.dibujable = dibujable;
+            this.escalado =dibujable.getEscalado();
         }
     }
 
