@@ -108,8 +108,8 @@ public class GestorGrafico implements Dibujante{
                     //    double ancho = constantes.generarTamaño(textura.getWidth());
                       //  double alto = constantes.generarTamaño(textura.getHeight());
 
-                        double ancho = textura.getWidth()*imagen.escalado;
-                        double alto = textura.getHeight()*imagen.escalado;
+                        double ancho = constantes.generarTamaño(textura.getWidth());
+                        double alto = constantes.generarTamaño(textura.getHeight());
 
                         this.sprite.draw(textura,(float)posicionX,(float)posicionY,(float)ancho,(float)alto);
 

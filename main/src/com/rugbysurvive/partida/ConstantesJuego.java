@@ -10,7 +10,7 @@ public class ConstantesJuego {
 
     protected double multiplicado = 1;
     //private static int multiplicador = 1;
-    private static double constanteRescalado = 0.1777777778* Gdx.graphics.getHeight()/128;
+    private static double constanteRescalado = 0.1777777778* Gdx.graphics.getWidth()/128;
     public static final int ANCHO_CASILLA = 64;
     public static final int ALTO_CASILLA = 64;
     public static final int ANCHO_BOTON = 128;
@@ -18,11 +18,11 @@ public class ConstantesJuego {
     //public static final int ANCHO_BOTON = (int)(0.1777777778 * Gdx.graphics.getHeight());
 
     public static  double separacionBotones = (ANCHO_BOTON+78)*constanteRescalado;
-    public static  int POSICION_BOTON_FINALIZAR = (int)(Gdx.graphics.getWidth() -separacionBotones);
+    public static  int POSICION_BOTON_FINALIZAR = (int)(Gdx.graphics.getHeight() -separacionBotones);
 
-    public static  int POSICION_BOTON_SUPLENTE = (int)(Gdx.graphics.getWidth() - (separacionBotones*2));
-    public static  int POSICION_BOTON_OBJETOS = (int)(Gdx.graphics.getWidth() - (separacionBotones*3));
-    public static  int POSICION_BOTON_CHUTEPASE = (int)(Gdx.graphics.getWidth() - (separacionBotones*4));
+    public static  int POSICION_BOTON_SUPLENTE = (int)(Gdx.graphics.getHeight() - (separacionBotones*2));
+    public static  int POSICION_BOTON_OBJETOS = (int)(Gdx.graphics.getHeight() - (separacionBotones*3));
+    public static  int POSICION_BOTON_CHUTEPASE = (int)(Gdx.graphics.getHeight() - (separacionBotones*4));
 
     //public static final int POSICION_BOTON_SUPLENTE = POSICION_BOTON_FINALIZAR-separacionBotones;
     //public static final int POSICION_BOTON_OBJETOS = POSICION_BOTON_SUPLENTE - separacionBotones;
@@ -52,15 +52,15 @@ public class ConstantesJuego {
     public static final int LIMITE_CASILLAS_LARGO_TABLERO = 29;
 
 
-    public static final int POSICION_X_MARCADOR = (int)((Gdx.graphics.getWidth()/2 -64) * constanteRescalado);
-    public static final int POSICION_Y_MARCADOR = (int)((Gdx.graphics.getHeight()-64) * constanteRescalado);
-    public static final int POSICION_X_PUNTUACION_EQUIPO1 = (int)((Gdx.graphics.getWidth()/2 -60)*constanteRescalado);
-    public static final int POSICION_X_PUNTUACION_EQUIPO2 = (int)((Gdx.graphics.getWidth()/2+10)*constanteRescalado);
-    public static final int POSICION_Y_PUNTUACION = (int)((Gdx.graphics.getHeight()-20)*constanteRescalado);
+    public static final int POSICION_X_MARCADOR = (int)((Gdx.graphics.getWidth()/2 -64));
+    public static final int POSICION_Y_MARCADOR = (int)((Gdx.graphics.getHeight()-64));
+    public static final int POSICION_X_PUNTUACION_EQUIPO1 = (int)((Gdx.graphics.getWidth()/2 -60));
+    public static final int POSICION_X_PUNTUACION_EQUIPO2 = (int)((Gdx.graphics.getWidth()/2+10));
+    public static final int POSICION_Y_PUNTUACION = (int)((Gdx.graphics.getHeight()-20));
 
-    public static final int POSICION_X_ESCUDO_EQUIPO1 = (int)((Gdx.graphics.getWidth()/2 -140)*constanteRescalado);
-    public static final int POSICION_X_ESCUDO_EQUIPO2 = (int)((Gdx.graphics.getWidth()/2 +70)*constanteRescalado);
-    public static final int POSICION_Y_ESCUDO = (int)((Gdx.graphics.getHeight()-70)*constanteRescalado);
+    public static final int POSICION_X_ESCUDO_EQUIPO1 = (int)((Gdx.graphics.getWidth()/2 -140));
+    public static final int POSICION_X_ESCUDO_EQUIPO2 = (int)((Gdx.graphics.getWidth()/2 +70));
+    public static final int POSICION_Y_ESCUDO = (int)((Gdx.graphics.getHeight()-70));
 
 
     protected  static final int ANCHO_TABLERO = ANCHO_CASILLA*NUMERO_CASILLAS_ANCHO_TABLERO;
@@ -137,27 +137,10 @@ public class ConstantesJuego {
 
     public static int generarTamaño(int tamaño)
     {
-
         return (int)(tamaño * constanteRescalado);
 
     }
 
-
-
-    public int multiplicador ()
-    {
-
-        switch(this.resolucionPantalla)
-        {
-            case pequeña:
-                return TAMAÑO_BASE;
-            case mediana:
-                return TAMAÑO_MEDIANO;
-            default:
-                return TAMAÑO_GRANDE;
-
-        }
-    }
 
 
 

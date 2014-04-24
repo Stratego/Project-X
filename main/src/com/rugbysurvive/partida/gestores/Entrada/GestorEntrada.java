@@ -121,7 +121,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
 
             for (Boton iterador : botons){
                 if (iterador.esSeleccionado(screenX,screenY)==true){
-                        lista.crearLista(iterador.obtenerEntrada());
+                    lista.crearLista(iterador.obtenerEntrada());
 
                     return false;
                 }
@@ -176,9 +176,6 @@ public class GestorEntrada implements GestureDetector.GestureListener {
 
     @Override
     public boolean panStop(float v, float v2, int i, int i2) {
-        for (Boton iteradorLista : lista.listaActiva()){
-            iteradorLista.setApretado(false);
-        }
         return false;
     }
 
@@ -189,18 +186,18 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         //System.out.println("distancia : "+distancia );
 
         if( Gdx.input.isTouched(1)){
-        if(distancia >= 0)
-        {
-             for(int i=0 ;i<distancia/100;i++){
+            if(distancia >= 0)
+            {
+                for(int i=0 ;i<distancia/100;i++){
                     ConstantesJuego.variables().sumarMultiplicado();
                 }
-        }
-        else
-        {
-            for(int i=0 ;i<-(distancia/100);i++){
-                ConstantesJuego.variables().restarMultiplicado();
             }
-        }
+            else
+            {
+                for(int i=0 ;i<-(distancia/100);i++){
+                    ConstantesJuego.variables().restarMultiplicado();
+                }
+            }
         }
         return true;
     }

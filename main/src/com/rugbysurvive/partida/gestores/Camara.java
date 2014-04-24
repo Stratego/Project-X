@@ -75,21 +75,9 @@ public class Camara implements InputProcessor {
 
     public void render(SpriteBatch batch)
     {
-
-       // GL10 gl = Gdx.graphics.getGL20();
-
-
-        // Camera --------------------- /
-        //   gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        //gl.glViewport((int) glViewport.x, (int) glViewport.y,
-               // (int) glViewport.width, (int) glViewport.height);
-
         this.camera.update();
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(this.camera.combined);
-
-//        this.camera.apply(Gdx.gl10);
-
     }
 
     private boolean isCameraInsideBoard(int variationX,int variationY)

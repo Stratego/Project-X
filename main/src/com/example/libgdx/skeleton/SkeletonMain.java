@@ -24,21 +24,21 @@ import java.util.ArrayList;
 public class SkeletonMain extends Game {
 
 
-    InputMultiplexer multiplexer;
-    GestorGrafico gestorGrafico;
+    private InputMultiplexer multiplexer;
+    private GestorGrafico gestorGrafico;
 
-    GestureDetector gestureDetector;
+    private GestureDetector gestureDetector;
 
-    GestorEntrada gestorEntrada;
+    private GestorEntrada gestorEntrada;
 
     private ArrayList<Boton> botons= new ArrayList <Boton>();
-    ConstantesJuego constantes;
-    Prueba prueba2;
+    private ConstantesJuego constantes;
+    private Prueba prueba2;
     GestorObjetos gestorObjetos;
     int contador = 0;
     ComponentesJuego componentesJuego;
     Simulador simulador;
-
+    Marcador marcador;
     GestorTurnos gestor;
     // VARIABLES DE ESTADO
     boolean calculandoEquipoInicio = false;
@@ -107,7 +107,8 @@ public class SkeletonMain extends Game {
         multiplexer.addProcessor(this.gestorGrafico.getCamara());
 
         Gdx.input.setInputProcessor(multiplexer);
-
+        this.marcador = new Marcador(ComponentesJuego.getComponentes().getEquipo1()
+                                        ,ComponentesJuego.getComponentes().getEquipo2());
 
 
         //this.prueba2 = new Prueba(100,100,100,"holaa");
@@ -135,29 +136,27 @@ public class SkeletonMain extends Game {
     @Override
     public void render() {
 
-       if(this.calculandoEquipoInicio){
+       if(this.calculandoEquipoInicio) {
            GestorTurnos.iniciarPartido();
            this.calculandoEquipoInicio = false;
        }
-       else
-       {
-          if(this.gestor.CambiarTurno())
-          {
-          }
-
+       else {
+          this.gestor.CambiarTurno();
        }
+
         if(GestorTurnos.finTurnoJugadores()){
             this.simular = true;
         }
-        if(simular){
+        if(simular) {
             this.simulador.simular();
         }
-       if(contador %100 == 0 ){
+       if(contador %100 == 0 ) {
            this.gestorObjetos.procesar();
           // this.componentesJuego.getMarcador().sumarPuntuacion(1, ComponentesJuego.getComponentes().getEquipo1().getJugadores().get(1));
        }
-     this.gestorGrafico.dibujar();
-     ProcesosContinuos.procesar();
+
+    this.gestorGrafico.dibujar();
+    ProcesosContinuos.procesar();
     this.contador++;
 
        //this.prueba2.render();
