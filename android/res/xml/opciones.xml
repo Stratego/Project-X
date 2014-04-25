@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory >
+        <SwitchPreference
+            android:key="musicPower"
+            android:title="Musica"
+            android:switchTextOn="On"
+            android:switchTextOff="Off"/>
+        <CheckBoxPreference
+                android:key="opcion1"
+                android:title="Preferencia 1"
+                android:summary="Descripción de la preferencia 1" />
+        <EditTextPreference
+                android:key="opcion2"
+                android:title="Preferencia 2"
+                android:summary="Descripción de la preferencia 2"
+                android:dialogTitle="Introduce valor" />
+    </PreferenceCategory>
+</PreferenceScreen>

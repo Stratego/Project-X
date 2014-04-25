@@ -10,7 +10,7 @@ import com.uab.lis.rugby.R;
 /**
  * Created by adria on 30/03/14.
  */
-public class MenuPrincipal extends Activity {
+public class MenuPrincipal extends BaseActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

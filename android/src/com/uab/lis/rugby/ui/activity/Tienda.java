@@ -11,7 +11,7 @@ import com.uab.lis.rugby.R;
 /**
  * Created by Manuel on 22/04/2014.
  */
-public class Tienda extends Activity {
+public class Tienda extends BaseActivity {
 
     private TextView tituloTienda;
 
