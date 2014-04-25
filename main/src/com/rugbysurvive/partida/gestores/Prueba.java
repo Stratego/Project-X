@@ -1,6 +1,8 @@
 package com.rugbysurvive.partida.gestores;
 
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
+import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
 
 /**
  * Created by aitor on 26/03/14.
@@ -13,6 +15,7 @@ public class Prueba implements Dibujable{
     int contador;
     int current_contador;
     String textura;
+    ObjetoJugador objetoJugador;
 
     public Prueba(int posicionX,int posicionY,int contador,String textura){
         this.contador = contador;
@@ -20,8 +23,9 @@ public class Prueba implements Dibujable{
         this.posicionY = posicionY;
         this.current_contador = 0;
         this.ID = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.texto);
-
+        //objetoJugador = new PowerUP(5);
         this.textura = "holaaaaaaaa";
+        objetoJugador.activar();
     }
 
 

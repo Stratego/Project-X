@@ -8,6 +8,7 @@ import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 public interface Estado {
     public Jugador jugador = null;
     public boolean paseOChute = true;
+    public Estado estadoAnterior = null;
 
 
     public boolean generarAccion(Jugador jugador, int posX, int posY);
@@ -24,5 +25,9 @@ public interface Estado {
 
     public boolean getPaseOChute();
     public void setPaseOChute(boolean paseOChute);
+
+    public Estado getEstado();
+
+    public Estado getEstadoAnterior();
 
 }
