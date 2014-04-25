@@ -14,17 +14,17 @@ public class MyAppContentProvider extends DespicableContentProvider {
 
     @Override
     public void recruitMinions() {
-        addMinion(new UsuariosMinionContentProvider());
-        addMinion(new JugadoresMinionContentProvider());
-        addMinion(new EquiposMinionContentProvider());
-        addMinion(new HabilidadesMinionContentProvider());
-        addMinion(new ObjetosMinionContentProvider());
-        addMinion(new RolesMinionContentProvider());
-        addMinion(new UsuarioEquipoMinionContentProvider());
-        addMinion(new JugadorEquipoMinionContentProvider());
-        addMinion(new JugadorRolMinionContentProvider());
-        addMinion(new JugadorObjetoMinionContentProvider());
-        addMinion(new JugadorHabilidadMinionContentProvider());
+        addMinion(new UsuariosMinion());
+        addMinion(new JugadoresMinion());
+        addMinion(new EquiposMinion());
+        addMinion(new HabilidadesMinion());
+        addMinion(new ObjetosMinion());
+        addMinion(new RolesMinion());
+        addMinion(new UsuarioEquipoMinion());
+        addMinion(new JugadorEquipoMinion());
+        addMinion(new JugadorRolMinion());
+        addMinion(new JugadorObjetoMinion());
+        addMinion(new JugadorHabilidadMinion());
     }
 
     @Override

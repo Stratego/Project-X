@@ -9,11 +9,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import com.uab.lis.rugby.database.libContentProvider.MinionContentProvider;
 
-public class JugadorObjetoMinionContentProvider extends MinionContentProvider {
-    public static final String TABLE="JUGADOR_OBJETO";
+public class UsuarioEquipoMinion extends MinionContentProvider {
+    public static final String TABLE="USUARIO_EQUIPO";
     @Override
     public String getBasePath() {
-        return "jugador_objeto";
+        return "usuario_equipo";
     }
 
     @Override
@@ -39,6 +39,6 @@ public class JugadorObjetoMinionContentProvider extends MinionContentProvider {
 
     @Override
     public String getType() {
-        return "Jugador_objeto";
+        return "Usuario_equipo";
     }
 }
