@@ -1,6 +1,7 @@
 package com.rugbysurvive.partida;
 
 import com.badlogic.gdx.Gdx;
+import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
@@ -11,6 +12,8 @@ import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.gestores.Texto;
 import com.rugbysurvive.partida.jugadores.Equipo;
 import com.rugbysurvive.partida.tablero.Boton;
+import com.rugbysurvive.partida.tablero.Botones.BotonObjeto;
+import com.rugbysurvive.partida.tablero.Botones.BotonSuplente;
 
 import java.util.ArrayList;
 
@@ -51,7 +54,9 @@ public class Lista {
      */
     private Equipo equipo;
 
-    int idPlantillaObjetos=0;
+    //int idPlantillaObjetos=0;
+
+    ElementoDibujable plantillaObjetos;
 
     public Lista(){
 
@@ -79,8 +84,10 @@ public class Lista {
 
             System.out.println("iteracion:" + posicion);
 
-            listaSuplentes.add(new Boton(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y, Entrada.listasuplente,"listaprueba.png",posicion));
-            jugadores.add(new Texto(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y+ConstantesJuego.variables().getAnchoBoton(),"jugador 1 fuerza:"+iterador.getFuerza()+" vida:"+iterador.getVida()+" defensa:"+iterador.getDefensa()));
+
+            listaSuplentes.add(new BotonSuplente(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y, Entrada.listasuplente,"TauloCanviJugadors.png",posicion));
+            jugadores.add(new Texto(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y+ConstantesJuego.getAltoBotonSuplentes(),"jugador 1 fuerza:"+iterador.getFuerza()+" vida:"+iterador.getVida()+" defensa:"+iterador.getDefensa()));
+
 
             y += ConstantesJuego.variables().getAnchoBoton();
             posicion += 1;
@@ -125,7 +132,11 @@ public class Lista {
 
         if (objetosJugador.size()!=0){
             int iteracion = 0;
-            idPlantillaObjetos = GestorGrafico.generarDibujante().añadirDibujable(new PlantillaObjetos(ConstantesJuego.POSICION_BOTON_CHUTEPASE,ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES,"plantillaobjetos.png"), TipoDibujo.interficieUsuario);
+
+            this.plantillaObjetos = new ElementoDibujable(TipoDibujo.interficieUsuario,"taulellObjectes.png");
+            this.plantillaObjetos.dibujar(ConstantesJuego.POSICION_BOTON_CHUTEPASE,ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES);
+            //idPlantillaObjetos = GestorGrafico.generarDibujante().añadirDibujable(new PlantillaObjetos(ConstantesJuego.POSICION_BOTON_CHUTEPASE,ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES,"plantillaobjetos.png"), TipoDibujo.interficieUsuario);
+
             for (int i = 0; i<3;i++){
                 if (i==0 ||i==2){
                     for (int p = 0; p<3;p++){
@@ -134,8 +145,10 @@ public class Lista {
                             //System.out.println(iteracion);
                             if (objetosJugador.size()!=0&&objetosJugador.size()>iteracion){
 
-                                listaObjetos.add(new Boton(x, y, Entrada.listaobjetos, objetosJugador.get(iteracion).getTextura(),objetosJugador.get(iteracion).getId()));
-                                x +=ConstantesJuego.variables().getAnchoBoton();
+
+                                listaObjetos.add(new BotonObjeto(x, y, Entrada.listaobjetos, objetosJugador.get(iteracion).getTextura(),objetosJugador.get(iteracion).getId()));
+                                x +=ConstantesJuego.getAnchoBotonObjetos();
+
                                 iteracion +=1;
                             }
 
@@ -161,7 +174,11 @@ public class Lista {
      */
     public void eliminarListaObjetos(){
         int ID;
-        GestorGrafico.generarDibujante().eliminarTextura(idPlantillaObjetos);
+        //GestorGrafico.generarDibujante().eliminarTextura(idPlantillaObjetos);
+        if (this.plantillaObjetos!=null){
+            this.plantillaObjetos.borrar();
+        }
+
         for (Boton iterador : listaObjetos ){
             ID = iterador.getID();
             GestorGrafico.generarDibujante().eliminarTextura(ID);

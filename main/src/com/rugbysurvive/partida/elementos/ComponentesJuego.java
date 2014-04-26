@@ -45,7 +45,7 @@ public class ComponentesJuego {
         jugador.setDireccion(DireccionJugador.derecha);
         PowerUP objeto = new PowerUP(0,10,"casilla.png", Habilidades.vida,50,jugador);
 
-        Mina objeto2 = new Mina(1,10,"casellalila.png", Habilidades.vida,50,jugador);
+        Mina objeto2 = new Mina(1,10,"mina.png", Habilidades.vida,50,jugador);
 
         jugador.añadirObjeto(objeto);
         jugador.añadirObjeto(objeto2);
