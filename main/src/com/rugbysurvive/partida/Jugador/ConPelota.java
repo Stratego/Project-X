@@ -16,6 +16,7 @@ public class ConPelota implements Estado {
     public boolean bloqueado = false;
     ElementoDibujable indicadorPelota;
 
+    public Jugador jugador;
 
 
     public boolean generarAccion(Jugador jugador) {
@@ -34,6 +35,7 @@ public class ConPelota implements Estado {
     @Override
     public boolean generarAccion(Jugador jugador, int posX, int posY, Entrada entrada) {
 
+        this.jugador = jugador;
 
         if(entrada == Entrada.arrastrar)
         {

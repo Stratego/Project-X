@@ -1,5 +1,6 @@
 package com.rugbysurvive.partida.elementos;
 
+import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.Mina;
@@ -62,20 +63,21 @@ public class ComponentesJuego {
         this.equipo1.añadirJugador(jugador, 2, 3);
         jugador = new Jugador(80, 90, 100,this.equipo1);
         jugador.setDireccion(DireccionJugador.abajo);
+        jugador.setEstado(new ConPelota());
         //jugador.setEstado(new ConPelota());
         this.equipo1.añadirJugador(jugador,4,7);
 
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),8,7);
+        /*this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),8,7);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),8,3);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),6,4);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),7,3);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),8,7);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),9,5);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),9,5);*/
 
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),11,21);
-        /*this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),1,4);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),15,21);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),1,4);
         this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),2,3);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),4,7);
+        /*this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),4,7);
         this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),0,5);*/
 
         Posicionamiento.generarSaqueCampo(this.campo,this.equipo1, Lado.izquierda);

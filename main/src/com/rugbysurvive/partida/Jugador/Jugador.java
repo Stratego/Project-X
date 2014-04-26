@@ -62,7 +62,7 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
 
         this.powerup= new ArrayList<ObjetoJugador>();
 
-        this.estado = new ConPelota();
+        this.estado = new SinPelota();
 
         this.estado.setBloqueado(false);
         this.setSeleccionado(false);
