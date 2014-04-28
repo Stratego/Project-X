@@ -1,7 +1,9 @@
 package com.uab.lis.rugby.database.models;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import com.uab.lis.rugby.database.contracts.tbEquipos;
 import java.util.List;
 
@@ -64,12 +66,20 @@ public class Equipo {
         this.jugadores = jugadores;
     }
 
-    public static Equipo newInstance(Cursor cursor){
+    public static Equipo newInstance(Context context, Cursor cursor){
         int colId = cursor.getColumnIndex(tbEquipos._ID);
         int colNombre = cursor.getColumnIndex(tbEquipos.COL_NOMBRE);
         int colEscudo = cursor.getColumnIndex(tbEquipos.COL_ESCUDO);
         int colEquipacion = cursor.getColumnIndex(tbEquipos.COL_EQUIPACION);
         // FALTA COMPLETAR
+
+        Uri uri = null;
+        String where = "";
+        Cursor jugadors = context.getContentResolver().query(uri,null,where,null,null);
+        jugadors.moveToFirst();
+        do{
+            Jugador j = Jugador.newInstance(jugadors);
+        }while (jugadors.moveToNext());
 
         Equipo equipo = new Equipo();
         equipo.setId(cursor.getInt(colId));

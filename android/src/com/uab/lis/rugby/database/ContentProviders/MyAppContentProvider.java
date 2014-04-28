@@ -5,11 +5,14 @@ package com.uab.lis.rugby.database.ContentProviders;
  */
 
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import com.uab.lis.rugby.database.SQLiteHelper;
 import com.uab.lis.rugby.database.libContentProvider.DespicableContentProvider;
 
 public class MyAppContentProvider extends DespicableContentProvider {
+
     public static final String AUTHORITY = "com.uab.lis.rugby";
+    public static final Uri URI_BASE = Uri.parse("content://"+AUTHORITY);
     private static SQLiteDatabase db;
 
     @Override

@@ -13,6 +13,8 @@ public class Jugador {
     private String nombre;
     private Rol rol;
     private List<Habilidad> habilidades;
+    private int posX;
+    private int posY;
     private String extrasVisuales;
 
     public int getId() {
@@ -29,6 +31,14 @@ public class Jugador {
 
     public List<Habilidad> getHabilidades() {
         return habilidades;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
     }
 
     public String getExtrasVisuales() {
@@ -51,6 +61,14 @@ public class Jugador {
         this.habilidades = habilidades;
     }
 
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
     public void setExtrasVisuales(String extrasVisuales) {
         this.extrasVisuales = extrasVisuales;
     }
@@ -58,7 +76,6 @@ public class Jugador {
     public static Jugador newInstance(Cursor cursor){
         int colId = cursor.getColumnIndex(tbJugadores._ID);
         int colNombre = cursor.getColumnIndex(tbJugadores.COL_NOMBRE);
-        int colExtras = cursor.getColumnIndex(tbJugadores.COL_EXTRAS);
         // FALTA COMPLETAR
 
         Jugador jugador = new Jugador();
