@@ -138,7 +138,7 @@ public class ConstantesJuego {
     public static int generarTamaño(int tamaño)
     {
 
-        System.out.println(Gdx.graphics.getWidth());
+
 
         return (int)(tamaño * constanteRescalado);
 
