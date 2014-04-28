@@ -5,7 +5,6 @@ import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Simulador.Accion;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
-import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.gestores.Entrada.DibujableEscalado;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
@@ -235,6 +234,8 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
          * - Si hay un jugador seleccionado, procedemos a verificar cual de ellos es
          * - Una vez localizado se le asigna el pase
          */
+
+
         if (entrada == Entrada.pase || entrada == Entrada.chute)
         {
               this.paseOChute = entrada;
@@ -243,6 +244,7 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
         {
             if(this.getBloqueado() == false)
             {
+                System.out.println(posX+"-"+posY+"-------"+this.getPosicionX()+"-"+this.getPosicionY());
                 for (int i = 0; i < 20; i++)
                 {
                     for (int j = 0; j < 30; j++)
@@ -256,7 +258,7 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
                             {
                                 if(entrada == Entrada.clicklargo || entrada == Entrada.arrastrar)
                                 {
-                                    System.out.println("entrada:"+entrada);
+                                    //System.out.println("entrada:"+entrada);
                                     if(this.getSeleccionado() == true)
                                     {
                                         accionGenerada = this.getEstado().generarAccion(this,(int)posX,(int)posY, entrada);
