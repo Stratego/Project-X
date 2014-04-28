@@ -8,7 +8,7 @@ import com.uab.lis.rugby.R;
 /**
  * Created by Manuel on 22/04/2014.
  */
-public class TiendaOtros extends Activity {
+public class TiendaOtros extends BaseActivity {
 
     private TextView tituloTiendaOtros;
 

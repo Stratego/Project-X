@@ -2,18 +2,21 @@ package com.rugbysurvive.partida.tablero;
 
 
 
+import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoCampo;
+import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.gestores.Dibujante;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
+import com.rugbysurvive.partida.gestores.GestorGrafico;
 
 
 /**
  * Definicion de la casilla, elemento basico del que se compone el tablero de juego
  * Created by Victor on 24/03/14.
  */
-public class Casilla implements GestionEntrada {
+public class Casilla implements GestionEntrada ,Dibujable{
     /**
      * posicion x en el tablero
      */
@@ -27,8 +30,8 @@ public class Casilla implements GestionEntrada {
 
     private Jugador jugador ;
     private ObjetoCampo objeto;
-
-
+    private String texturaSeleccionada;
+    private int id = -1;
     /**
      * indicara si el elemento esta seleccionado
      */
@@ -46,21 +49,8 @@ public class Casilla implements GestionEntrada {
         this.posX = posX;
         this.jugador = null;
         this.objeto = null;
-
+        this.texturaSeleccionada = "casellalila.png";
         this.dibujante = dibujante;
-
-
-        /*Este objeto solo se usara para hacer pruebas*/
-        //if((posY == 1 || posY == 9 || posY==17) && ((2+posX)%4 == 0))
-        if(posY == 10 && posX == 4)
-        {
-            this.jugador = new Jugador(this);
-        }
-        else
-        {
-            this.jugador = null;
-        }
-
 
     }
 
@@ -80,6 +70,7 @@ public class Casilla implements GestionEntrada {
         if(this.jugador == null && this.objeto == null)
         {
             this.jugador = jugador;
+            this.jugador.colocar(this);
             return true;
         }
         return false;
@@ -125,6 +116,9 @@ public class Casilla implements GestionEntrada {
      */
     public void eliminarElemento()
     {
+        if(jugador != null){
+            this.jugador.quitar();
+        }
         this.jugador = null;
         this.objeto = null;
     }
@@ -158,7 +152,18 @@ public class Casilla implements GestionEntrada {
     public ObjetoCampo getObjeto(){return this.objeto;}
 
 
-
+    public void seleccionar(){
+        if(id == -1) {
+            id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.fondo);
+        }
+    }
+    public void desSeleccionar(){
+        if(id!=-1)
+        {
+            GestorGrafico.generarDibujante().eliminarTextura(id);
+             this.id = -1;
+        }
+    }
 
     public void setJugador(Jugador jugador)
     {
@@ -228,6 +233,21 @@ public class Casilla implements GestionEntrada {
         this.posY = posY;
     }
 
+
+    @Override
+    public String getTextura() {
+        return this.texturaSeleccionada;
+    }
+
+    @Override
+    public int getPosicionX() {
+        return (int)this.getPosY();
+    }
+
+    @Override
+    public int getPosicionY() {
+        return (int)this.getPosX();
+    }
 
 
 }

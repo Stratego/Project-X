@@ -33,7 +33,7 @@ import java.util.List;
 /**
  * Created by adria on 30/03/14.
  */
-public class CreateUser extends Activity {
+public class CreateUser extends BaseActivity {
     private EditText nameUser;
     private EditText nameEquipo;
     private ViewPager escudo;

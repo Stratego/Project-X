@@ -8,6 +8,8 @@ import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.gestores.Dibujante;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
+import com.rugbysurvive.partida.gestores.GestorGrafico;
+import com.rugbysurvive.partida.jugadores.Equipo;
 
 /**
  * Clase que crea y define el comportamiente del terreno del juego
@@ -29,10 +31,8 @@ public class Campo implements GestionEntrada,Dibujable {
     Dibujante dibujante;
 
 
-
-
-    public Campo(Dibujante dibujante)  {
-        this.dibujante = dibujante;
+    public Campo()  {
+        this.dibujante = GestorGrafico.generarDibujante();
         dibujante.añadirDibujable(this,TipoDibujo.fondo);
         this.dibujarTablero();
         campo = this;
@@ -40,6 +40,15 @@ public class Campo implements GestionEntrada,Dibujable {
 
 
 
+     public void seleccionarCasilla(int posicionX,int posicionY)
+     {
+        this.casillas[posicionX][posicionY].seleccionar();
+     }
+
+    public void desSeleccionarCasilla(int posicionX,int posicionY)
+    {
+        this.casillas[posicionX][posicionY].desSeleccionar();
+    }
     /**
      * Dibujamos el tablero de juego
      */
@@ -60,6 +69,7 @@ public class Campo implements GestionEntrada,Dibujable {
        double anchura = ConstantesJuego.variables().getAnchoCasilla();
        double altura = ConstantesJuego.variables().getLargoCasilla();
 
+        System.out.println("EN campo llega:"+entrada);
        for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 30; j++) {
                         //Filtro
@@ -102,6 +112,10 @@ public class Campo implements GestionEntrada,Dibujable {
        return this.casillas[posicionX][posicionY].añadirElemento(objeto);
     }
 
+    public Casilla getCasilla(int X, int Y)
+    {
+        return this.casillas[X][Y];
+    }
     /**
      *
      * @param posicionX
@@ -135,6 +149,25 @@ public class Campo implements GestionEntrada,Dibujable {
     }
 
 
+    public void dibujarEquipo(Equipo equipo){
+        for (Jugador iter :equipo.getJugadores()){
+            this.añadirElemento(iter, iter.getPosicionX(), iter.getPosicionY());
+
+        }
+    }
+
+    /**
+     * Elimina todos los jugadores de este equipo en el campo
+     * @param equipo
+     */
+    public void borrarEquipo (Equipo equipo){
+        for (Jugador iter :equipo.getJugadores()){
+            if(iter.getEnJuego())
+            {
+                this.eliminarElemento(iter.getPosicionX(), iter.getPosicionY());
+            }
+        }
+    }
 
     @Override
     public void accionEntrada(Entrada entrada) {

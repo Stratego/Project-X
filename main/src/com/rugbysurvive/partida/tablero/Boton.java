@@ -1,18 +1,23 @@
 package com.rugbysurvive.partida.tablero;
 
 import com.badlogic.gdx.Gdx;
-import com.rugbysurvive.partida.Dibujables.TipoDibujo;
-import com.rugbysurvive.partida.Lista;
-import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.ConstantesJuego;
-import com.rugbysurvive.partida.gestores.Entrada.*;
+import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.elementos.ComponentesJuego;
+import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
+import com.rugbysurvive.partida.gestores.Dibujable;
+import com.rugbysurvive.partida.gestores.Entrada.Entrada;
+import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
+
+import java.util.ArrayList;
 
 /**
  * Clase que define la posicion y comportamiento de un boron dentro del tablero de juego
  * Created by Victor on 24/03/14.
  */
-public class Boton implements GestionEntrada,Dibujable{
+public abstract class Boton implements GestionEntrada,Dibujable{
 
     /**
      * posicion x en el tablero
@@ -24,7 +29,7 @@ public class Boton implements GestionEntrada,Dibujable{
      */
     private float posY;
 
-    private Entrada entrada;
+    public Entrada entrada;
     /**
      * indicara si el elemento esta selecionado
      */
@@ -35,11 +40,17 @@ public class Boton implements GestionEntrada,Dibujable{
      */
     int ID;
 
+    /**
+     * Textura que representara al boton el la interficie grafica
+     */
     String textura;
 
-    int posicion;
+    /**
+     * identificador que se usara  para identidificar elementos en las listas de objetos o suplentes
+     */
+    public int posicion;
 
-    Lista lista = new Lista();
+
     /**
      * Constructor del elemento boton
      *
@@ -65,25 +76,40 @@ public class Boton implements GestionEntrada,Dibujable{
      */
     public boolean esSeleccionado(float posX, float posY) {
         //System.out.println("X: " + this.posX + " Y: " + this.posY);
-        //System.out.println(Gdx.graphics.getHeight());
-        if (posX >= this.posX && posX <= this.posX+ConstantesJuego.variables().getAnchoBoton()){
-            if (posY >= Gdx.graphics.getHeight()-ConstantesJuego.variables().getAnchoBoton()){
-                accionEntrada(this.entrada);
+        int anchoBoton=0;
+        int altoBoton=0;
 
-                selecionado=true;
+        if (this.posicion == ConstantesJuego.ID_BOTON){
+            anchoBoton=ConstantesJuego.variables().getAnchoBoton();
+            altoBoton=ConstantesJuego.variables().getAnchoBoton();
 
+        }else if(this.obtenerEntrada()==Entrada.listasuplente){
+            anchoBoton=ConstantesJuego.getAnchoBotonSuplentes();
+            altoBoton=ConstantesJuego.getAltoBotonSuplentes();
 
-            }
         }else {
-            //System.out.println("Boton no selecionado");
+            anchoBoton=ConstantesJuego.getAnchoBotonObjetos();
+            altoBoton=ConstantesJuego.getAltoBotonObjetos();
+        }
+
+        if (posX >= this.posX && posX <= this.posX+anchoBoton){
+            if (posY >= Gdx.graphics.getHeight() - this.posY -altoBoton && posY <= Gdx.graphics.getHeight()  -this.posY){
+                accionEntrada(this.entrada);
+                selecionado=true;
+            }else{
+                selecionado=false;
+            }
+
+        }else {
             selecionado=false;
         }
+
         return selecionado;
     }
 
     public Entrada obtenerEntrada()
     {
-        return entrada;
+        return this.entrada;
     }
 
     @Override
@@ -94,16 +120,7 @@ public class Boton implements GestionEntrada,Dibujable{
     }
 
     @Override
-    public void accionEntrada(Entrada entrada) {
-        lista.crearLista(entrada);
-        System.out.println(posicion);
-        System.out.println("Entrada: " + entrada);
-        if (entrada ==Entrada.pase){
-            this.entrada = Entrada.chute;
-        } else if (entrada ==Entrada.chute){
-            this.entrada = Entrada.pase;
-        }
-    }
+    public abstract void accionEntrada(Entrada entrada);
 
     public int getID(){
         return ID;
@@ -127,4 +144,55 @@ public class Boton implements GestionEntrada,Dibujable{
     public int getPosicionY() {
         return (int)this.posY;
     }
+/*
+    @Override
+    public abstract void accionEntrada(Entrada entrada) {
+
+
+        //System.out.println("posicion: " + posicion);
+        // intercambio entre entrada pase o chute
+        if (entrada == Entrada.pase){
+            //introducir accion pase
+            this.entrada = Entrada.chute;
+        } else {
+            if (entrada == Entrada.chute){
+                //introducir accion chute
+                this.entrada = Entrada.pase;
+            }
+        }
+
+        Campo.getInstanciaCampo().accionEntrada(this.entrada,0,0);
+
+
+        //obtenemos el elemento de la lista mediante la posicion le dimos al crear el boton
+        if (entrada == Entrada.listaobjetos){
+            Jugador jugador = ComponentesJuego.getComponentes().getEquipo1().getJugadorActivo();
+            ArrayList<ObjetoJugador> objetos = jugador.getPowerUP();
+            System.out.println("vida jugador antes objeto "+jugador.getVida());
+            //activamos y eliminamos el objeto de la lista
+            for (ObjetoJugador iter: objetos){
+                if (iter.getId()==this.posicion){
+                    iter.activar();
+                    System.out.println("vida jugador despues objeto "+ jugador.getVida());
+                    jugador.getPowerUP().remove(iter);
+                    break;
+                }
+            }
+            //obteniendo la instansacion de equipo obtener la de objetos de jugador activo y activar objeto
+
+        }
+
+        if (entrada == Entrada.listasuplente){
+            //obteniendo la instansacion de equipo y realizar cambio en la lista de jugadores
+            ComponentesJuego.getComponentes().getEquipo1().intercambioJugadores(posicion);
+        }
+
+        if (entrada==Entrada.finalizar){
+            //introducir accion finalizar
+
+        }
+
+    }
+*/
+
 }

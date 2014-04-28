@@ -10,11 +10,20 @@ import java.util.List;
 
 /*Esta clase es un Singleton*/
 public class Simulador {
+    private static final int ACCIONES_SEGUNDO = 1;
+    private static final int ITERACIONES_SEGUNDO = 50;
+    private static final double TIEMPO_EJECUCION = ITERACIONES_SEGUNDO / ACCIONES_SEGUNDO;
+    private int contador;
+    private int posicion;
     private static Simulador instance;
-    private List<Accion> listaAcciones;
+    private List<Accion> acciones;
+    private boolean simulando;
 
     private Simulador()
     {
+        this.contador =0;
+        this.simulando= false;
+        this.acciones = new ArrayList();
     }
 
     public static Simulador getInstance()
@@ -26,23 +35,52 @@ public class Simulador {
         return instance;
     }
 
-    public void addAccionesSimulador(Accion accion)
+    public void añadirAccion(Accion accion)
     {
         /*En caso de no existir ninguna lista se crea una*/
-        if(this.listaAcciones == null)
+        if(this.acciones == null)
         {
-            this.listaAcciones = new ArrayList();
+            this.acciones = new ArrayList();
+            this.simulando = false;
+            this.contador =0;
+            this.posicion =0;
         }
-        this.listaAcciones.add(accion);
+        this.acciones.add(accion);
+    }
+    public void iniciarSimulacion()
+    {
+        this.simulando = true;
     }
 
-    public void simular()
+    public boolean simular()
     {
-        for (int i = 0; i < this.listaAcciones.size(); i++) {
-            listaAcciones.get(i).simular();
-        }
 
-        //Como ya se han generado todas las simulaciones, volvemos a poner la lista a null
-        this.listaAcciones = null;
+        if(simulando && this.acciones.size() > 0){
+            boolean accionFinalizada = false;
+            this.contador++;
+            if(contador == TIEMPO_EJECUCION)
+            {
+
+                accionFinalizada = this.acciones.get(0).simular();
+                this.contador =0;
+                if(accionFinalizada){
+                    System.out.println("Accion finalizada");
+                    this.acciones.remove(0);
+                }
+            }
+            if(this.acciones.size() == 0){
+                System.out.println("Simulacion finalizada");
+                return true;
+            }
+            else {
+                return false;
+            }
+
+        }
+        return false;
+    }
+
+    public int listSize(){
+        return this.acciones.size();
     }
 }

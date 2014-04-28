@@ -1,19 +1,19 @@
 package com.uab.lis.rugby.database.ContentProviders;
 
-/**
- * Created by Manuel on 20/04/2014.
- */
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import com.uab.lis.rugby.database.libContentProvider.MinionContentProvider;
 
-public class UsuarioEquipoMinionContentProvider extends MinionContentProvider {
-    public static final String TABLE="USUARIO_EQUIPO";
+/**
+ * Created by Manuel on 28/04/14.
+ */
+public class ExtrasMinion extends MinionContentProvider {
+    public static final String TABLE="EXTRAS";
     @Override
     public String getBasePath() {
-        return "usuario_equipo";
+        return "extras";
     }
 
     @Override
@@ -39,6 +39,6 @@ public class UsuarioEquipoMinionContentProvider extends MinionContentProvider {
 
     @Override
     public String getType() {
-        return "Usuario_equipo";
+        return "Extras";
     }
 }

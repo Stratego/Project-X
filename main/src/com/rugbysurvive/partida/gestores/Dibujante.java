@@ -30,5 +30,7 @@ public interface Dibujante {
      */
     public void eliminarTextura(int ID);
 
+    public void dibujarLinia(int posicionXInicial,int posicionYInicial,int posicionXFinal,int posicionYFinal);
+
    
 }
