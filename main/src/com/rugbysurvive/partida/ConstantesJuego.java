@@ -10,7 +10,7 @@ public class ConstantesJuego {
 
     protected double multiplicado = 1;
     //private static int multiplicador = 1;
-    private static double constanteRescalado = 0.1777777778* Gdx.graphics.getWidth()/128;
+    private static double constanteRescalado = 0.1777777778* ConstantesJuego.getWidth()/128;
     public static final int ANCHO_CASILLA = 64;
     public static final int ALTO_CASILLA = 64;
     public static final int ANCHO_BOTON = 128;
@@ -18,11 +18,11 @@ public class ConstantesJuego {
     //public static final int ANCHO_BOTON = (int)(0.1777777778 * Gdx.graphics.getHeight());
 
     public static  double separacionBotones = (ANCHO_BOTON+78)*constanteRescalado;
-    public static  int POSICION_BOTON_FINALIZAR = (int)(Gdx.graphics.getHeight() -separacionBotones);
+    public static  int POSICION_BOTON_FINALIZAR = (int)( ConstantesJuego.getHeight() -separacionBotones);
 
-    public static  int POSICION_BOTON_SUPLENTE = (int)(Gdx.graphics.getHeight() - (separacionBotones*2));
-    public static  int POSICION_BOTON_OBJETOS = (int)(Gdx.graphics.getHeight() - (separacionBotones*3));
-    public static  int POSICION_BOTON_CHUTEPASE = (int)(Gdx.graphics.getHeight() - (separacionBotones*4));
+    public static  int POSICION_BOTON_SUPLENTE = (int)(ConstantesJuego.getHeight() - (separacionBotones*2));
+    public static  int POSICION_BOTON_OBJETOS = (int)( ConstantesJuego.getHeight() - (separacionBotones*3));
+    public static  int POSICION_BOTON_CHUTEPASE = (int)(ConstantesJuego.getHeight() - (separacionBotones*4));
 
     //public static final int POSICION_BOTON_SUPLENTE = POSICION_BOTON_FINALIZAR-separacionBotones;
     //public static final int POSICION_BOTON_OBJETOS = POSICION_BOTON_SUPLENTE - separacionBotones;
@@ -137,8 +137,28 @@ public class ConstantesJuego {
 
     public static int generarTamaño(int tamaño)
     {
+        System.out.println(Gdx.graphics.getWidth());
         return (int)(tamaño * constanteRescalado);
 
+    }
+
+    public static int getHeight()
+    {
+        if(Gdx.graphics.getHeight() > Gdx.graphics.getWidth()) {
+            return Gdx.graphics.getHeight();
+        }
+        else {
+            return Gdx.graphics.getWidth();
+        }
+    }
+    public static int getWidth()
+    {
+        if(Gdx.graphics.getHeight() < Gdx.graphics.getWidth()) {
+            return Gdx.graphics.getHeight();
+        }
+        else {
+            return Gdx.graphics.getWidth();
+        }
     }
 
 

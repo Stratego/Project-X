@@ -119,6 +119,12 @@ public abstract class Boton implements GestionEntrada,Dibujable{
 
     }
 
+
+    public void borrar()
+    {
+        GestorGrafico.generarDibujante().eliminarTextura(this.getID());
+    }
+
     @Override
     public abstract void accionEntrada(Entrada entrada);
 

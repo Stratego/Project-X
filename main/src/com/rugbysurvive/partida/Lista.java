@@ -85,11 +85,11 @@ public class Lista {
             System.out.println("iteracion:" + posicion);
 
 
-            listaSuplentes.add(new BotonSuplente(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y, Entrada.listasuplente,"TauloCanviJugadors.png",posicion));
-            jugadores.add(new Texto(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y+ConstantesJuego.getAltoBotonSuplentes(),"jugador 1 fuerza:"+iterador.getFuerza()+" vida:"+iterador.getVida()+" defensa:"+iterador.getDefensa()));
+            listaSuplentes.add(new BotonSuplente(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y, Entrada.listasuplente,"TauloCanviJugadors.png",posicion,iterador));
+           // jugadores.add(new Texto(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y+ConstantesJuego.getAltoBotonSuplentes(),"jugador 1 fuerza:"+iterador.getFuerza()+" vida:"+iterador.getVida()+" defensa:"+iterador.getDefensa()));
 
 
-            y += ConstantesJuego.variables().getAnchoBoton();
+            y += 96;
             posicion += 1;
         }
         suplentes.clear();
@@ -104,13 +104,9 @@ public class Lista {
         int ID;
 
         for (Boton iterador : listaSuplentes ){
-            ID = iterador.getID();
-            GestorGrafico.generarDibujante().eliminarTextura(ID);
+            iterador.borrar();
         }
-        for (Texto iteradortexto : jugadores ){
-            ID = iteradortexto.getID();
-            GestorGrafico.generarDibujante().eliminarTextura(ID);
-        }
+
         jugadores.clear();
         listaSuplentes.clear();
         estadoSuplente =false;

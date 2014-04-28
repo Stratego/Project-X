@@ -46,7 +46,10 @@ public class GestorTurnos implements Dibujable,Proceso {
 
         Random random = new Random();
 
-        if(random.nextInt()%2 != 0) {
+        equipo1.desbloquear();
+        equipo1.setJugando(true);
+        equipo2.bloquear();
+        /*if(random.nextInt()%2 != 0) {
             equipo1.desbloquear();
             equipo1.setJugando(true);
             equipo2.bloquear();
@@ -56,7 +59,7 @@ public class GestorTurnos implements Dibujable,Proceso {
             equipo1.bloquear();
             equipo2.desbloquear();
             equipo2.setJugando(true);
-        }
+        }*/
 
     }
 
