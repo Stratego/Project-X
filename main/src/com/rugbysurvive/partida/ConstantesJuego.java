@@ -54,15 +54,15 @@ public class ConstantesJuego {
     public static final int LIMITE_CASILLAS_LARGO_TABLERO = 29;
 
 
-    public static final int POSICION_X_MARCADOR = (int)((Gdx.graphics.getWidth()/2 -64) * constanteRescalado);
-    public static final int POSICION_Y_MARCADOR = (int)((Gdx.graphics.getHeight()-64) * constanteRescalado);
-    public static final int POSICION_X_PUNTUACION_EQUIPO1 = (int)((Gdx.graphics.getWidth()/2 -60)*constanteRescalado);
-    public static final int POSICION_X_PUNTUACION_EQUIPO2 = (int)((Gdx.graphics.getWidth()/2+10)*constanteRescalado);
-    public static final int POSICION_Y_PUNTUACION = (int)((Gdx.graphics.getHeight()-20)*constanteRescalado);
+    public static final int POSICION_X_MARCADOR = (int)((Gdx.graphics.getWidth()/2 -64) );
+    public static final int POSICION_Y_MARCADOR = (int)((Gdx.graphics.getHeight()-64));
+    public static final int POSICION_X_PUNTUACION_EQUIPO1 = (int)((Gdx.graphics.getWidth()/2 -60));
+    public static final int POSICION_X_PUNTUACION_EQUIPO2 = (int)((Gdx.graphics.getWidth()/2+10));
+    public static final int POSICION_Y_PUNTUACION = (int)((Gdx.graphics.getHeight()-20));
 
-    public static final int POSICION_X_ESCUDO_EQUIPO1 = (int)((Gdx.graphics.getWidth()/2 -140)*constanteRescalado);
-    public static final int POSICION_X_ESCUDO_EQUIPO2 = (int)((Gdx.graphics.getWidth()/2 +70)*constanteRescalado);
-    public static final int POSICION_Y_ESCUDO = (int)((Gdx.graphics.getHeight()-70)*constanteRescalado);
+    public static final int POSICION_X_ESCUDO_EQUIPO1 = (int)((Gdx.graphics.getWidth()/2 -140));
+    public static final int POSICION_X_ESCUDO_EQUIPO2 = (int)((Gdx.graphics.getWidth()/2 +70));
+    public static final int POSICION_Y_ESCUDO = (int)((Gdx.graphics.getHeight()-70));
 
 
     protected  static final int ANCHO_TABLERO = ANCHO_CASILLA*NUMERO_CASILLAS_ANCHO_TABLERO;

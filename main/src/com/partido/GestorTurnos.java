@@ -92,8 +92,8 @@ public class GestorTurnos implements Dibujable,Proceso {
             return true;
         }
 
-        else if(forzarCambioTurno  && (equipo2.isJugando()  && !equipo1.isJugando())
-                || (!equipo2.isJugando()  && equipo1.isJugando()))
+        else if(forzarCambioTurno  && ((equipo2.isJugando()  && !equipo1.isJugando())
+                || (!equipo2.isJugando()  && equipo1.isJugando())))
         {
             if(equipo2.isJugando()) {
                 equipo1.desbloquear();
