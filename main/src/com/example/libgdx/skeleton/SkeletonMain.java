@@ -17,6 +17,7 @@ import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
 import com.rugbysurvive.partida.gestores.Prueba;
 import com.rugbysurvive.partida.tablero.Boton;
+import com.rugbysurvive.partida.tablero.Botones.BotonCambioTurno;
 import com.rugbysurvive.partida.tablero.Botones.BotonInterfaz;
 
 import java.util.ArrayList;
@@ -89,13 +90,16 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("mina.png");
         nombresTexturas.add("taulellObjectes.png");
         nombresTexturas.add("TauloCanviJugadors.png");
+        nombresTexturas.add("Menu/Habilidades/nivel1.png");
+        nombresTexturas.add("Menu/Habilidades/nivel2.png");
+        nombresTexturas.add("Menu/Habilidades/nivel3.png");
 
+        nombresTexturas.add("Menu/Habilidades/fuerza.png");
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
         botons.add(new BotonInterfaz(ConstantesJuego.POSICION_BOTON_CHUTEPASE,0, Entrada.pase,"botoPassada.png",ConstantesJuego.ID_BOTON));
         botons.add(new BotonInterfaz(ConstantesJuego.POSICION_BOTON_OBJETOS,0, Entrada.objeto,"botonsPowerUp.png",ConstantesJuego.ID_BOTON));
         botons.add(new BotonInterfaz(ConstantesJuego.POSICION_BOTON_SUPLENTE,0, Entrada.cambiar,"Menu/botoSubstitucions.png",ConstantesJuego.ID_BOTON));
-        botons.add(new BotonInterfaz(ConstantesJuego.POSICION_BOTON_FINALIZAR,0, Entrada.finalizar,"botoCanviTorn.png",ConstantesJuego.ID_BOTON));
-
+        botons.add(new BotonCambioTurno(ConstantesJuego.POSICION_BOTON_FINALIZAR,0, Entrada.finalizar,"botoCanviTorn.png",ConstantesJuego.ID_BOTON));
         this.componentesJuego = new ComponentesJuego();
 
 

@@ -11,7 +11,7 @@ public class ConstantesJuego {
     protected double multiplicado = 1;
     //private static int multiplicador = 1;
 
-    private static double constanteRescalado = 0.1777777778* Gdx.graphics.getHeight()/128;
+    private static double constanteRescalado = 0.1777777778* getWidth()/128;
 
     public static final int ANCHO_CASILLA = 64;
     public static final int ALTO_CASILLA = 64;
@@ -21,11 +21,11 @@ public class ConstantesJuego {
 
     public static  double separacionBotones = (ANCHO_BOTON+78)*constanteRescalado;
 
-    public static  int POSICION_BOTON_FINALIZAR = (int)(Gdx.graphics.getWidth() -separacionBotones);
+    public static  int POSICION_BOTON_FINALIZAR = (int)(getHeight() -separacionBotones);
 
-    public static  int POSICION_BOTON_SUPLENTE = (int)(Gdx.graphics.getWidth() - (separacionBotones*2));
-    public static  int POSICION_BOTON_OBJETOS = (int)(Gdx.graphics.getWidth() - (separacionBotones*3));
-    public static  int POSICION_BOTON_CHUTEPASE = (int)(Gdx.graphics.getWidth() - (separacionBotones*4));
+    public static  int POSICION_BOTON_SUPLENTE = (int)(getHeight() - (separacionBotones*2));
+    public static  int POSICION_BOTON_OBJETOS = (int)(getHeight() - (separacionBotones*3));
+    public static  int POSICION_BOTON_CHUTEPASE = (int)(getHeight() - (separacionBotones*4));
 
 
     //public static final int POSICION_BOTON_SUPLENTE = POSICION_BOTON_FINALIZAR-separacionBotones;
@@ -34,7 +34,7 @@ public class ConstantesJuego {
 
     public static final int ALTO_BOTON_OBJETOS = 64;
     public static final int ANCHO_BOTON_OBJETOS = 64;
-    public static final int ALTO_BOTON_SUPLENTES = 64;
+    public static final int ALTO_BOTON_SUPLENTES = 92;
     public static final int ANCHO_BOTON_SUPLENTES = 768;
     public static  int POSICION_INICIAL_Y_BOTON_SUPLENTES=(int)((ALTO_BOTON * constanteRescalado)+2);
     //public static final int POSICION_INICIAL_Y_BOTON_OBJETOS=Gdx.graphics.getHeight()-80;

@@ -81,12 +81,7 @@ public class Lista {
         //System.out.println(suplentes.size());
 
         for (Jugador iterador : suplentes){
-
-            System.out.println("iteracion:" + posicion);
-
-
             listaSuplentes.add(new BotonSuplente(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y, Entrada.listasuplente,"TauloCanviJugadors.png",posicion,iterador));
-           // jugadores.add(new Texto(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y+ConstantesJuego.getAltoBotonSuplentes(),"jugador 1 fuerza:"+iterador.getFuerza()+" vida:"+iterador.getVida()+" defensa:"+iterador.getDefensa()));
 
 
             y += 96;
@@ -126,36 +121,28 @@ public class Lista {
         //int y = ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES;
 
 
-        if (objetosJugador.size()!=0){
-            int iteracion = 0;
+        if (objetosJugador.size()  > 0){
+
 
             this.plantillaObjetos = new ElementoDibujable(TipoDibujo.interficieUsuario,"taulellObjectes.png");
             this.plantillaObjetos.dibujar(ConstantesJuego.POSICION_BOTON_CHUTEPASE,ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES);
             //idPlantillaObjetos = GestorGrafico.generarDibujante().añadirDibujable(new PlantillaObjetos(ConstantesJuego.POSICION_BOTON_CHUTEPASE,ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES,"plantillaobjetos.png"), TipoDibujo.interficieUsuario);
 
-            for (int i = 0; i<3;i++){
-                if (i==0 ||i==2){
-                    for (int p = 0; p<3;p++){
-                        if (p==0 ||p==2){
-                            //System.out.println(objetosJugador.size());
-                            //System.out.println(iteracion);
-                            if (objetosJugador.size()!=0&&objetosJugador.size()>iteracion){
+            x = ConstantesJuego.POSICION_BOTON_CHUTEPASE;
+            y = ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES;
 
+            listaObjetos.add(new BotonObjeto(x +30, y +115, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(0).getId()));
 
-                                listaObjetos.add(new BotonObjeto(x, y, Entrada.listaobjetos, objetosJugador.get(iteracion).getTextura(),objetosJugador.get(iteracion).getId()));
-                                x +=ConstantesJuego.getAnchoBotonObjetos();
-
-                                iteracion +=1;
-                            }
-
-                        }else{
-                            x +=ConstantesJuego.variables().getAnchoBoton();;
-                        }
-                    }
-                    x=ConstantesJuego.POSICION_INICIAL_X_BOTON_OBJETOS;
-                    y -=ConstantesJuego.variables().getAnchoBoton()*2;
-                }
+            if(objetosJugador.size()>=2){
+                listaObjetos.add(new BotonObjeto(x+115, y+115, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(1).getId()));
             }
+            if(objetosJugador.size()>=3){
+                listaObjetos.add(new BotonObjeto(x+30, y+30, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(2).getId()));
+            }
+            if(objetosJugador.size()>=4){
+                listaObjetos.add(new BotonObjeto(x+115, y+30, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(3).getId()));
+            }
+
             estadoObjeto=true;
         }else{
             estadoObjeto=false;

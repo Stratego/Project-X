@@ -18,30 +18,37 @@ public abstract class ObjetoCampo implements Dibujable {
     private int posX;
     private int posY;
     private String textura;
-    Campo campo = ComponentesJuego.getComponentes().getCampo();
 
 
-    public ObjetoCampo(){};
 
-    public ObjetoCampo(int posX, int posY, String textura){
+    public ObjetoCampo(String textura){
 
-        this.posX=posX;
-        this.posY=posY;
         this.textura=textura;
-        this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
-        this.campo.añadirElemento(this,this.posX,this.posY);
+
     }
 
+
+    public void colocar(int posicionX,int posicionY){
+        this.posX = posicionX;
+        this.posY = posicionY;
+        this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
+        Campo campo = ComponentesJuego.getComponentes().getCampo();
+        campo.añadirElemento(this,this.posX,this.posY);
+    }
+
+    public void quitar(){
+        GestorGrafico.generarDibujante().eliminarTextura(id);
+        Campo campo = ComponentesJuego.getComponentes().getCampo();
+        campo.eliminarElemento(this.posX,this.posY);
+
+    }
 
     public abstract void efecto(Jugador jugador);
 
 
 
-    public void quitar(){
-        GestorGrafico.generarDibujante().eliminarTextura(id);
-        this.campo.eliminarElemento(this.posX,this.posY);
 
-    }
+
 
     @Override
     public String getTextura() {

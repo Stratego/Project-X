@@ -138,6 +138,7 @@ public class Casilla implements GestionEntrada ,Dibujable{
      */
     public void eliminarElemento()
     {
+        System.out.println("ELIMINANDO ELEMENTO");
         if(jugador != null) {
             this.jugador.quitar();
         }

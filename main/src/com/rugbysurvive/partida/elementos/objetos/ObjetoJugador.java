@@ -25,7 +25,6 @@ public abstract class ObjetoJugador {
     }*/
     public abstract void activar();
 
-    public ObjetoJugador(){}
 
     public ObjetoJugador(int id, String textura){
         this.id = id;

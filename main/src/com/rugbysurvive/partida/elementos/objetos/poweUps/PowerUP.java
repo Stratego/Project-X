@@ -21,7 +21,7 @@ public class PowerUP extends Objeto {
 
     public PowerUP(int id,int vida,String imagen, Habilidades habilidad,int modificacion,Jugador jugador) {
 
-        super(id, vida, imagen, habilidad,modificacion, jugador);
+        super(id, vida, imagen,jugador);
 
         this.id=id;
         this.vida = vida;

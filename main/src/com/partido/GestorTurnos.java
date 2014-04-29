@@ -27,6 +27,7 @@ public class GestorTurnos implements Dibujable,Proceso {
     private static String estandarteEquipo2 = "banderas/logo4.png";
     private static int equipoCambiado = 0;
     private int id;
+    private static boolean forzarCambioTurno = false;
 
     public GestorTurnos(){
          this.posicionTexturaX = Gdx.graphics.getWidth();
@@ -47,7 +48,8 @@ public class GestorTurnos implements Dibujable,Proceso {
         Random random = new Random();
 
 
-        if(random.nextInt()%2 != 0) {
+
+       if(random.nextInt()%2 != 0) {
             equipo1.desbloquear();
             equipo1.setJugando(true);
             equipo2.bloquear();
@@ -86,6 +88,31 @@ public class GestorTurnos implements Dibujable,Proceso {
             equipo1.setJugando(true);
             ProcesosContinuos.añadirProceso(this);
             this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
+
+            return true;
+        }
+
+        else if(forzarCambioTurno  && (equipo2.isJugando()  && !equipo1.isJugando())
+                || (!equipo2.isJugando()  && equipo1.isJugando()))
+        {
+            if(equipo2.isJugando()) {
+                equipo1.desbloquear();
+                equipo1.setJugando(true);
+                ProcesosContinuos.añadirProceso(this);
+                this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
+                forzarCambioTurno = false;
+                equipo2.bloquear();
+            }
+
+            else{
+                equipo2.desbloquear();
+                equipo2.setJugando(true);
+                ProcesosContinuos.añadirProceso(this);
+                this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
+                forzarCambioTurno = false;
+                equipo1.bloquear();
+            }
+
             return true;
         }
 
@@ -107,6 +134,12 @@ public class GestorTurnos implements Dibujable,Proceso {
 
         if(equipo1.bloqueado() && equipo1.isJugando()  && equipo2.bloqueado() && equipo2.isJugando() ) {
             return true;
+        }
+        else if(equipo1.isJugando()  && equipo2.isJugando()  && forzarCambioTurno ){
+            forzarCambioTurno = false;
+            equipo1.bloquear();
+            equipo2.bloquear();
+           return true;
         }
        return false;
     }
@@ -137,5 +170,10 @@ public class GestorTurnos implements Dibujable,Proceso {
             GestorGrafico.generarDibujante().eliminarTextura(this.id);
             return true;
         }
+    }
+
+    public static void cambiarTurno()
+    {
+        forzarCambioTurno = true;
     }
 }

@@ -110,6 +110,9 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
         this.seleccion = null;
         id = -1;
         this.enJuego = false;
+        this.seleccionado = false;
+        this.bloqueado = false;
+
 
     }
 

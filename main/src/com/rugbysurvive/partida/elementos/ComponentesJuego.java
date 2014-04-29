@@ -3,7 +3,9 @@ package com.rugbysurvive.partida.elementos;
 import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
-import com.rugbysurvive.partida.elementos.objetos.poweUps.Mina;
+import com.rugbysurvive.partida.elementos.objetos.ObjetoCampo;
+import com.rugbysurvive.partida.elementos.objetos.objetosCampo.MinaCampo;
+import com.rugbysurvive.partida.elementos.objetos.poweUps.ColocadorObjetosCampo;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
 import com.rugbysurvive.partida.jugadores.Equipo;
 import com.rugbysurvive.partida.jugadores.Habilidades;
@@ -45,8 +47,7 @@ public class ComponentesJuego {
 
         jugador.setDireccion(DireccionJugador.derecha);
         PowerUP objeto = new PowerUP(0,10,"casilla.png", Habilidades.vida,50,jugador);
-
-        Mina objeto2 = new Mina(1,10,"mina.png", Habilidades.vida,50,jugador);
+        ColocadorObjetosCampo objeto2 = new ColocadorObjetosCampo(1,10,"mina.png",jugador,new MinaCampo("mina.png"));
 
         jugador.añadirObjeto(objeto);
         jugador.añadirObjeto(objeto2);
