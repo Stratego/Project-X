@@ -144,13 +144,27 @@ public class Movimiento extends Accion {
     /*Siempre consideramos como atacado aquel que tiene la pelota*/
     public boolean luchaPelota(int fuerzaAtacante, int defensaAtacado)
     {
-        int probAdquirir = new Double(Math.random() * (fuerzaAtacante + defensaAtacado)).intValue();
+        int ganaAtacante =0;
+        int ganaDefensor =0;
+
+        for(int i=0; i<3; i++)
+        {
+            int probAdquirir = new Double(Math.random() * (fuerzaAtacante + defensaAtacado)).intValue();
+            System.out.println("Numero aleatorio generado: "+probAdquirir);
+
+            /*Si la variable probAdquirir es menor que la fuerza de un jugador, el atacante se queda la pelota, en caso contrario gana el defensor*/
+            if(probAdquirir < fuerzaAtacante)
+            {
+                ganaAtacante += 1;
+            }
+            else
+            {
+                ganaDefensor += 1;
+            }
+        }
 
 
-        System.out.println("Numero aleatorio generado: "+probAdquirir);
-
-        /*Si la variable probAdquirir es menor que la fuerza de un jugador, el atacante se queda la pelota, en caso contrario gana el defensor*/
-        if(probAdquirir < fuerzaAtacante)
+        if(ganaAtacante >= ganaDefensor)
         {
             return true;
         }
