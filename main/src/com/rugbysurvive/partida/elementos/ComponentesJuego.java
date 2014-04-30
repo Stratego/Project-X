@@ -3,14 +3,9 @@ package com.rugbysurvive.partida.elementos;
 import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
-
 import com.rugbysurvive.partida.arbitro.Arbitro;
-import com.rugbysurvive.partida.arbitro.Choque;
-
-
 import com.rugbysurvive.partida.elementos.objetos.objetosCampo.MinaCampo;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.ColocadorObjetosCampo;
-
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
 import com.rugbysurvive.partida.jugadores.Equipo;
 import com.rugbysurvive.partida.jugadores.Habilidades;
@@ -81,7 +76,7 @@ public class ComponentesJuego {
         this.equipo1.añadirJugador(new Jugador(80, 90, 100,this.equipo1),14,14);
 
 
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),15,21);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),15,22);
         //this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),1,4);
         //this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),2,3);
         /*this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),4,7);

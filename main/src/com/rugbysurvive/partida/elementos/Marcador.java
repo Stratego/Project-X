@@ -27,6 +27,8 @@ public class Marcador implements Dibujable{
     private   Equipo equipo2;
     private String textura;
 
+    private static Marcador marcador;
+
     /**
      *
      * @param equipo1 Equipo que se mostrara el resultado en la izquierda del marcador
@@ -46,10 +48,15 @@ public class Marcador implements Dibujable{
         this.banderaEquipo2.dibujar(ConstantesJuego.POSICION_X_ESCUDO_EQUIPO2,ConstantesJuego.POSICION_Y_ESCUDO);
         this.equipo1 = equipo1;
         this.equipo2 = equipo2;
+        marcador = this;
 
 
     }
 
+    public static Marcador getInstanceMarcador()
+    {
+        return marcador;
+    }
 
     /**
      * Añade la puntuacion al equipo al que pertenece el jugador.
