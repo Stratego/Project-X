@@ -1,6 +1,9 @@
 package com.rugbysurvive.partida.tablero.Botones;
 
+
+
 import com.rugbysurvive.partida.ConstantesJuego;
+
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.tablero.Boton;
 import com.rugbysurvive.partida.tablero.Campo;
@@ -40,6 +43,7 @@ public class BotonInterfaz extends Boton{
                 this.entradaBoton = Entrada.pase;
             }
         }
+
 
         Campo.getInstanciaCampo().accionEntrada(this.entradaBoton,0,0);
 

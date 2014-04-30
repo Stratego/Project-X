@@ -11,6 +11,7 @@ public class ConstantesJuego {
     protected double multiplicado = 1;
     //private static int multiplicador = 1;
 
+
     private static double constanteRescalado = 0.1777777778* getWidth()/128;
 
     public static final int ANCHO_CASILLA = 64;
@@ -21,11 +22,13 @@ public class ConstantesJuego {
 
     public static  double separacionBotones = (ANCHO_BOTON+78)*constanteRescalado;
 
+
     public static  int POSICION_BOTON_FINALIZAR = (int)(getHeight() -separacionBotones);
 
     public static  int POSICION_BOTON_SUPLENTE = (int)(getHeight() - (separacionBotones*2));
     public static  int POSICION_BOTON_OBJETOS = (int)(getHeight() - (separacionBotones*3));
     public static  int POSICION_BOTON_CHUTEPASE = (int)(getHeight() - (separacionBotones*4));
+
 
 
     //public static final int POSICION_BOTON_SUPLENTE = POSICION_BOTON_FINALIZAR-separacionBotones;
@@ -52,6 +55,9 @@ public class ConstantesJuego {
     public static final int LIMITE_CASILLAS_ANCHO_TABLERO = 19;
     public static final int NUMERO_CASILLAS_LARGO_TABLERO = 30;
     public static final int LIMITE_CASILLAS_LARGO_TABLERO = 29;
+
+    public static final int FUERA_CAMPO_ABAJO = 1;
+    public static final int FUERA_CAMPO_ARRIBA = 28;
 
 
     public static final int POSICION_X_MARCADOR = (int)((Gdx.graphics.getWidth()/2 -64) );
@@ -140,8 +146,6 @@ public class ConstantesJuego {
     public static int generarTamaño(int tamaño)
     {
 
-
-
         return (int)(tamaño * constanteRescalado);
 
     }
@@ -167,21 +171,6 @@ public class ConstantesJuego {
 
 
 
-    public int multiplicador ()
-    {
-
-        switch(this.resolucionPantalla)
-        {
-            case pequeña:
-                return TAMAÑO_BASE;
-            case mediana:
-                return TAMAÑO_MEDIANO;
-            default:
-                return TAMAÑO_GRANDE;
-
-        }
-    }
-
 
 
 
@@ -189,3 +178,4 @@ public class ConstantesJuego {
 
 
 }
+

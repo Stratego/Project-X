@@ -22,9 +22,10 @@ public class Choque extends Regla{
     @Override
     public boolean arbitrar() {
 
-       // this.arbitro.esSucesoVisible(posicionX,posicionY de la jugada) {
-            // CODIGO AQUI
-        //}
+        if(this.arbitro.esSucesoVisible(2,10)==true){
+            System.out.println("ha ocurrido un choque");
+            return true;
+        }
 
         return false;
     }

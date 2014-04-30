@@ -8,6 +8,7 @@ import com.partido.GestorTurnos;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.ResolucionPantalla;
 import com.rugbysurvive.partida.Simulador.Simulador;
+import com.rugbysurvive.partida.arbitro.Arbitro;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.Marcador;
 import com.rugbysurvive.partida.elementos.objetos.GestorObjetos;
@@ -45,13 +46,15 @@ public class SkeletonMain extends Game {
     // VARIABLES DE ESTADO
     boolean calculandoEquipoInicio = false;
     boolean simular = false;
+    Arbitro arbitro;
+
 
     @Override
     public void create() {
 
         this.simulador = Simulador.getInstance();
         this.simulador.iniciarSimulacion();
-        this.gestor = new GestorTurnos();
+
         this.constantes = new ConstantesJuego();
         this.constantes.setResolucionPantalla(ResolucionPantalla.pequeña);
         ArrayList<String> nombresTexturas = new ArrayList<String>();
@@ -131,6 +134,8 @@ public class SkeletonMain extends Game {
 
         this.calculandoEquipoInicio = true;
         this.simular = false;
+        arbitro = new Arbitro();
+        this.gestor = new GestorTurnos();
 
     }
 
@@ -153,9 +158,12 @@ public class SkeletonMain extends Game {
         if(GestorTurnos.finTurnoJugadores()){
             this.simular = true;
         }
-        if(simular) {
+        if(simular==true) {
             this.simulador.simular();
+
         }
+
+
        if(contador %100 == 0 ) {
            this.gestorObjetos.procesar();
           // this.componentesJuego.getMarcador().sumarPuntuacion(1, ComponentesJuego.getComponentes().getEquipo1().getJugadores().get(1));

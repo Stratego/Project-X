@@ -2,6 +2,7 @@ package com.partido;
 
 import com.badlogic.gdx.Gdx;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+import com.rugbysurvive.partida.arbitro.Arbitro;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
@@ -27,7 +28,11 @@ public class GestorTurnos implements Dibujable,Proceso {
     private static String estandarteEquipo2 = "banderas/logo4.png";
     private static int equipoCambiado = 0;
     private int id;
+
+    Arbitro arbitro=Arbitro.getInstancia();
+
     private static boolean forzarCambioTurno = false;
+
 
     public GestorTurnos(){
          this.posicionTexturaX = Gdx.graphics.getWidth();
@@ -80,6 +85,7 @@ public class GestorTurnos implements Dibujable,Proceso {
             equipo2.setJugando(true);
             ProcesosContinuos.añadirProceso(this);
             this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
+            arbitro.mover();
             return true;
         }
 
@@ -88,6 +94,9 @@ public class GestorTurnos implements Dibujable,Proceso {
             equipo1.setJugando(true);
             ProcesosContinuos.añadirProceso(this);
             this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
+
+            arbitro.mover();
+
 
             return true;
         }
@@ -112,6 +121,7 @@ public class GestorTurnos implements Dibujable,Proceso {
                 forzarCambioTurno = false;
                 equipo1.bloquear();
             }
+
 
             return true;
         }

@@ -172,8 +172,7 @@ public class GestorGrafico implements Dibujante{
                 break;
             }
         }
-        if(tipoImagenAux != null)
-        {
+        if(tipoImagenAux != null) {
             this.dibujables.remove(tipoImagenAux);
         }
             //Log.i("BORRAR","BORRANDO");
