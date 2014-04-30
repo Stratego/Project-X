@@ -46,7 +46,7 @@ public class ConstantesJuego {
     public static final int POSICION_INICIAL_Y_PLANTILLAOBJETOS=Gdx.graphics.getHeight()-256;
 
 
-    public static final int JUGADORES_CAMPO = 7;
+    public static final int JUGADORES_CAMPO = 8;
     public static final int ID_BOTON = 1000;
     public static final int NUMERO_CASILLAS_ANCHO_TABLERO = 20;
     public static final int LIMITE_CASILLAS_ANCHO_TABLERO = 19;
