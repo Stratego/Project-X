@@ -3,7 +3,10 @@ package com.rugbysurvive.partida.Simulador;
 import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.SinPelota;
+import com.rugbysurvive.partida.arbitro.Choque;
+import com.rugbysurvive.partida.elementos.Marcador;
 import com.rugbysurvive.partida.tablero.Campo;
+import com.rugbysurvive.partida.tablero.Lado;
 
 /**
  * Created by Victor on 27/03/14.
@@ -71,6 +74,15 @@ public class Movimiento extends Accion {
                                     System.out.println("Quito la pelota------------->");
                                 }
                             }
+                            else
+                            {
+                                /*Verificamos que los dos jugadores no tienen bolam, y si es así, se arbitra*/
+                                if((jugador.getEstado() instanceof SinPelota) && (Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).getJugador().getEstado() instanceof SinPelota))
+                                {
+                                    Choque choque = new Choque(jugador, Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).getJugador());
+                                    choque.arbitrar();
+                                }
+                            }
                         }
 
                         incrementa = false;
@@ -126,6 +138,25 @@ public class Movimiento extends Accion {
             if(contador > 0)
             {
                 Campo.getInstanciaCampo().getCasilla(this.camino[contador-1][1],this.camino[contador-1][0]).setJugador(null);
+                if(contador < this.camino.length)
+                {
+                    if(this.jugador.getMiEquipo().getLado() == Lado.izquierda)
+                    {
+                        if(this.camino[contador][0] >= 28)
+                        {
+                            Marcador.getInstanceMarcador().sumarPuntuacion(1, jugador);
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        if(this.camino[contador][0] <= 1)
+                        {
+                            Marcador.getInstanceMarcador().sumarPuntuacion(1, jugador);
+                            return true;
+                        }
+                    }
+                }
             }
 
             contador = contador + 1;
