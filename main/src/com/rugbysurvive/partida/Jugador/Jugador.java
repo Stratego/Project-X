@@ -72,6 +72,7 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
 
     }
 
+
     public Equipo getMiEquipo()
     {
         return this.miEquipo;
