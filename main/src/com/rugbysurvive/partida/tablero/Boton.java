@@ -19,37 +19,24 @@ package com.rugbysurvive.partida.tablero;
  */
 public abstract class Boton implements GestionEntrada,Dibujable{
 
-    /**
-     * posicion x en el tablero
-     */
-    private float posX;
 
-    /**
-     * posicion y en el tablero
-     */
-    private float posY;
+    protected float posX;
 
-    public Entrada entrada;
-    /**
-     * indicara si el elemento esta selecionado
-     */
-    private boolean selecionado;
+    protected float posY;
 
-    /**
-     * identificador del boton para el gestor grafico
-     */
-    int ID;
+    protected Entrada entrada;
 
-    /**
-     * Textura que representara al boton el la interficie grafica
-     */
-    String textura;
+    protected boolean selecionado;
 
-    /**
-     * identificador que se usara  para identidificar elementos en las listas de objetos o suplentes
-     */
-    public int posicion;
+    protected int ID;
 
+    protected String textura;
+
+    protected int posicion;
+
+    protected int ancho;
+
+    protected int alto;
 
     /**
      * Constructor del elemento boton
@@ -65,6 +52,8 @@ public abstract class Boton implements GestionEntrada,Dibujable{
         this.textura = textura;
         this.posicion = posicion;
         ID=GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
+        this.ancho =0;
+        this.alto = 0;
     }
 
 
@@ -75,25 +64,10 @@ public abstract class Boton implements GestionEntrada,Dibujable{
      * @param posY eje y donde se ha realizado la accion /entrada
      */
     public boolean esSeleccionado(float posX, float posY) {
-        //System.out.println("X: " + this.posX + " Y: " + this.posY);
-        int anchoBoton=0;
-        int altoBoton=0;
 
-        if (this.posicion == ConstantesJuego.ID_BOTON){
-            anchoBoton=ConstantesJuego.variables().getAnchoBoton();
-            altoBoton=ConstantesJuego.variables().getAnchoBoton();
 
-        }else if(this.obtenerEntrada()==Entrada.listasuplente){
-            anchoBoton=ConstantesJuego.getAnchoBotonSuplentes();
-            altoBoton=ConstantesJuego.getAltoBotonSuplentes();
-
-        }else {
-            anchoBoton=ConstantesJuego.getAnchoBotonObjetos();
-            altoBoton=ConstantesJuego.getAltoBotonObjetos();
-        }
-
-        if (posX >= this.posX && posX <= this.posX+anchoBoton){
-            if (posY >= Gdx.graphics.getHeight() - this.posY -altoBoton && posY <= Gdx.graphics.getHeight()  -this.posY){
+        if (posX >= this.posX && posX <= this.posX+ancho){
+            if (posY >= Gdx.graphics.getHeight() - this.posY -alto && posY <= Gdx.graphics.getHeight()  -this.posY){
                 accionEntrada(this.entrada);
                 selecionado=true;
             }else{
@@ -117,6 +91,12 @@ public abstract class Boton implements GestionEntrada,Dibujable{
 
 
 
+    }
+
+
+    public void borrar()
+    {
+        GestorGrafico.generarDibujante().eliminarTextura(this.getID());
     }
 
     @Override

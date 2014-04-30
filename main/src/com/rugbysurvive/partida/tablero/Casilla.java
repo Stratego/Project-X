@@ -138,6 +138,7 @@ public class Casilla implements GestionEntrada ,Dibujable{
      */
     public void eliminarElemento()
     {
+        System.out.println("ELIMINANDO ELEMENTO");
         if(jugador != null) {
             this.jugador.quitar();
         }
@@ -278,12 +279,12 @@ public class Casilla implements GestionEntrada ,Dibujable{
 
     @Override
     public int getPosicionX() {
-        return (int)this.getPosY();
+        return (int)this.getPosX();
     }
 
     @Override
     public int getPosicionY() {
-        return (int)this.getPosX();
+        return (int)this.getPosY();
     }
 
 

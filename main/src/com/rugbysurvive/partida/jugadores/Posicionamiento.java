@@ -39,12 +39,14 @@ public class Posicionamiento {
                  posicionY = equipo.getAlineacion().get(i).posicionY;
                  if(lado == Lado.izquierda){
                         campo.añadirElemento(jugador,posicionX,posicionY);
+                        equipo.setLado(lado);
                  }
                  else
                  {
-                     posicionY =ConstantesJuego.NUMERO_CASILLAS_LARGO_TABLERO -posicionY -1;
-                     posicionX = ConstantesJuego.NUMERO_CASILLAS_ANCHO_TABLERO -posicionX- 1;
+                     posicionY =ConstantesJuego.NUMERO_CASILLAS_LARGO_TABLERO - posicionY -1;
+                     posicionX = ConstantesJuego.NUMERO_CASILLAS_ANCHO_TABLERO  -posicionX- 1;
                      campo.añadirElemento(jugador,posicionX,posicionY);
+                     equipo.setLado(lado);
                  }
 
             }

@@ -1,11 +1,16 @@
 package com.rugbysurvive.partida.jugadores;
 
 import com.rugbysurvive.partida.ConstantesJuego;
+import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
+import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
+import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.tablero.Campo;
 import com.rugbysurvive.partida.tablero.Casilla;
+import com.rugbysurvive.partida.tablero.Lado;
 
 
 import java.util.ArrayList;
@@ -20,6 +25,10 @@ public  class Equipo {
 
 
     private ArrayList<Jugador> jugadores = new ArrayList <Jugador>();
+    private ArrayList<Jugador> descartados = new ArrayList<Jugador>();
+
+
+    private Lado lado;
     private ArrayList<PosicionInicial> alineacion;
     private boolean jugando; // indica si el equipo esta siendo usado
 
@@ -35,6 +44,8 @@ public  class Equipo {
     public  Equipo(){
         this.alineacion = new ArrayList<PosicionInicial>();
         this.jugadores =  new ArrayList<Jugador>();
+        this.descartados = new ArrayList<Jugador>();
+
         this.jugando = false;
         equipo = this;
 
@@ -191,15 +202,34 @@ public  class Equipo {
         return true;
     }
 
-
+    /**
+     * Intercambia un jugador de la lista de suplentes por un jugador que este
+     * en la partida .
+     * El jugador colocado aparece en estado bloqueado.
+     * @param posicionSuplente Posicion donde esta situado el suplente dentro
+     *                         la lista.
+     */
     public void intercambioJugadores(int posicionSuplente){
         int posicion;
-        if (hayJugadorSelecionado()==true){
+
+        if (hayJugadorSelecionado()){
+
             posicion=jugadores.indexOf(jugadorSelecionado);
-            jugadores.add(posicion,jugadores.get(posicionSuplente));
-            jugadores.remove(posicion+1);
-            jugadores.remove(posicionSuplente);
-            jugadores.add(jugadorSelecionado);
+            Campo campo = ComponentesJuego.getComponentes().getCampo();
+            int posY = jugadorSelecionado.getPosicionY();
+            int posX= jugadorSelecionado.getPosicionX();
+
+            campo.eliminarElemento(posY, posX);
+            GestorGrafico.getCamara().desbloquear();
+
+            Jugador jugadorSuplente = jugadores.get(posicionSuplente);
+            jugadores.remove(jugadorSuplente);
+            this.jugadores.add(posicion,jugadorSuplente);
+            this.jugadores.remove(jugadorSelecionado);
+            this.descartados.add(jugadorSelecionado);
+            campo.añadirElemento(jugadorSuplente,posY,posX);
+            jugadorSuplente.setBloqueado(true);
+
         }
     }
 
@@ -235,5 +265,13 @@ public  class Equipo {
 
     public void setJugando(boolean jugando) {
         this.jugando = jugando;
+    }
+
+    public Lado getLado() {
+        return lado;
+    }
+
+    public void setLado(Lado lado) {
+        this.lado = lado;
     }
 }

@@ -58,7 +58,8 @@ public class EnMovimiento implements Estado {
 
         if(entrada == Entrada.arrastrar)
         {
-        System.out.println("MOVIMIENTOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            System.out.println("ENMOVIMIENTO:"+posX+"-"+posY);
+        //System.out.println("MOVIMIENTOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         if(((jugador.getPosicionX() == posX) && (jugador.getPosicionY() == posY)) && (this.posicionActual == 0))
         {
             this.movimientos[this.posicionActual][0] = posX;
@@ -70,7 +71,7 @@ public class EnMovimiento implements Estado {
         {
             if(this.posicionActual > 0)
             {
-                if(posY <= 16 && posY >= 0 && posX<=28 && posX>=0)
+                if((posY < 20 && posY >= 0) && (posX<30 && posX>=0))
                 {
                     int posXAnterior = this.movimientos[this.posicionActual-1][0];
                     int posYAnterior = this.movimientos[this.posicionActual-1][1];
@@ -115,7 +116,7 @@ public class EnMovimiento implements Estado {
             /*Le devolvemos su estado anterior*/
             this.jugador.setEstado(this.estadoAnterior);
 
-            System.out.println("ESTADOOOOOOO:"+this.jugador.getEstado());
+            //System.out.println("ESTADOOOOOOO:"+this.jugador.getEstado());
 
             return true;
         }
