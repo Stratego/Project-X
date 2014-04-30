@@ -10,6 +10,7 @@ import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.tablero.Campo;
 import com.rugbysurvive.partida.tablero.Casilla;
+import com.rugbysurvive.partida.tablero.Lado;
 
 
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ public  class Equipo {
     private ArrayList<Jugador> jugadores = new ArrayList <Jugador>();
     private ArrayList<Jugador> descartados = new ArrayList<Jugador>();
 
+
+    private Lado lado;
     private ArrayList<PosicionInicial> alineacion;
     private boolean jugando; // indica si el equipo esta siendo usado
 
@@ -216,7 +219,7 @@ public  class Equipo {
             int posY = jugadorSelecionado.getPosicionY();
             int posX= jugadorSelecionado.getPosicionX();
 
-            campo.eliminarElemento(posY ,posX);
+            campo.eliminarElemento(posY, posX);
             GestorGrafico.getCamara().desbloquear();
 
             Jugador jugadorSuplente = jugadores.get(posicionSuplente);
@@ -262,5 +265,13 @@ public  class Equipo {
 
     public void setJugando(boolean jugando) {
         this.jugando = jugando;
+    }
+
+    public Lado getLado() {
+        return lado;
+    }
+
+    public void setLado(Lado lado) {
+        this.lado = lado;
     }
 }
