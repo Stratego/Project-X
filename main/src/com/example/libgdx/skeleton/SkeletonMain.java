@@ -68,6 +68,7 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("jugador/jugador1.png");
         nombresTexturas.add("jugador/jugador2.png");
         nombresTexturas.add("jugador/jugador4.png");
+        nombresTexturas.add("jugador/jugador3.png");
         nombresTexturas.add("jugador/jugador5.png");
         nombresTexturas.add("plantillaobjetos.png");
 

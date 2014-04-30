@@ -82,9 +82,7 @@ public class Lista {
 
         for (Jugador iterador : suplentes){
             listaSuplentes.add(new BotonSuplente(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y, Entrada.listasuplente,"TauloCanviJugadors.png",posicion,iterador));
-
-
-            y += 96;
+            y += ConstantesJuego.ANCHO_TABLON_SUSTITUCION;
             posicion += 1;
         }
         suplentes.clear();
