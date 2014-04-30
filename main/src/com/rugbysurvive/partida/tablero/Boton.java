@@ -124,65 +124,6 @@ public abstract class Boton implements GestionEntrada,Dibujable{
     public int getPosicionY() {
         return (int)this.posY;
     }
-/*
-    @Override
-    public abstract void accionEntrada(Entrada entrada) {
 
-
-        //System.out.println("posicion: " + posicion);
-        // intercambio entre entrada pase o chute
-        if (entrada == Entrada.pase){
-            //introducir accion pase
-            this.entrada = Entrada.chute;
-<<<<<<< HEAD
-        this.entrada = Entrada.pase;
-
-            } else {
-                if (entrada == Entrada.chute){
-                    //introducir accion chute
-                    this.entrada = Entrada.pase;
-
-=======
-        } else {
-            if (entrada == Entrada.chute){
-                //introducir accion chute
-                this.entrada = Entrada.pase;
->>>>>>> 3ba40cfb80f2b91a8478fe860c99b6c6a291ebed
-            }
-        }
-
-        Campo.getInstanciaCampo().accionEntrada(this.entrada,0,0);
-
-
-        //obtenemos el elemento de la lista mediante la posicion le dimos al crear el boton
-        if (entrada == Entrada.listaobjetos){
-            Jugador jugador = ComponentesJuego.getComponentes().getEquipo1().getJugadorActivo();
-            ArrayList<ObjetoJugador> objetos = jugador.getPowerUP();
-            System.out.println("vida jugador antes objeto "+jugador.getVida());
-            //activamos y eliminamos el objeto de la lista
-            for (ObjetoJugador iter: objetos){
-                if (iter.getId()==this.posicion){
-                    iter.activar();
-                    System.out.println("vida jugador despues objeto "+ jugador.getVida());
-                    jugador.getPowerUP().remove(iter);
-                    break;
-                }
-            }
-            //obteniendo la instansacion de equipo obtener la de objetos de jugador activo y activar objeto
-
-        }
-
-        if (entrada == Entrada.listasuplente){
-            //obteniendo la instansacion de equipo y realizar cambio en la lista de jugadores
-            ComponentesJuego.getComponentes().getEquipo1().intercambioJugadores(posicion);
-        }
-
-        if (entrada==Entrada.finalizar){
-            //introducir accion finalizar
-
-        }
-
-    }
-*/
 
 }

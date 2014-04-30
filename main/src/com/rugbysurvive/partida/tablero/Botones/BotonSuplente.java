@@ -25,7 +25,7 @@ public class BotonSuplente extends Boton {
 
     ArrayList<ElementoDibujable> habilidades;
     ArrayList<ElementoDibujable> capacidadHabilidades;
-    ElementoDibujable dibujoJugador;
+    ArrayList <ElementoDibujable> dibujoJugador;
 
     /**
      * Constructor del elemento boton
@@ -41,6 +41,7 @@ public class BotonSuplente extends Boton {
         this.jugador = jugador;
         this.habilidades = new ArrayList<ElementoDibujable>();
         this.capacidadHabilidades = new ArrayList<ElementoDibujable>();
+        this.dibujoJugador = new ArrayList<ElementoDibujable>();
         this.mostrarHabilidades();
         this.ancho = ConstantesJuego.getAnchoBotonSuplentes();
         this.alto =ConstantesJuego.getAltoBotonSuplentes();
@@ -54,6 +55,10 @@ public class BotonSuplente extends Boton {
 
     private void mostrarHabilidades(){
 
+        this.habilidades = new ArrayList<ElementoDibujable>();
+        this.capacidadHabilidades = new ArrayList<ElementoDibujable>();
+        this.dibujoJugador = new ArrayList<ElementoDibujable>();
+
         this.capacidadHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,NIVEL_1));
         this.capacidadHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,NIVEL_3));
         this.capacidadHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,NIVEL_2));
@@ -63,11 +68,14 @@ public class BotonSuplente extends Boton {
         int posicionX = this.getPosicionX()+ (int)(ConstantesJuego.LARGO_TABLON_SUSITUCION/3);
         int posicionY = this.getPosicionY() + 5;
 
-        this.dibujoJugador = new ElementoDibujable(TipoDibujo.interficieUsuario,jugador.getTexturasMuestreo().get(0))
+
+        for(String textura : jugador.getTexturasMuestreo()) {
+            ElementoDibujable dibujo = new ElementoDibujable(TipoDibujo.interficieUsuario,textura);
+            this.dibujoJugador.add(dibujo);
+            dibujo.dibujar(this.getPosicionX() + ConstantesJuego.LARGO_TABLON_SUSITUCION / 9, posicionY);
+        }
 
 
-        ;
-        this.dibujoJugador.dibujar(this.getPosicionX() + ConstantesJuego.LARGO_TABLON_SUSITUCION/9 , posicionY);
         for(ElementoDibujable elemento : this.capacidadHabilidades) {
             elemento.dibujar(posicionX, posicionY);
             posicionX = posicionX + ConstantesJuego.LARGO_TABLON_SUSITUCION/8;
@@ -93,9 +101,10 @@ public class BotonSuplente extends Boton {
         for(ElementoDibujable elemento : this.capacidadHabilidades){
             elemento.borrar();
         }
+        for(ElementoDibujable elemento : this.dibujoJugador){
+            elemento.borrar();
+        }
 
-        this.dibujoJugador.borrar();
-        this.dibujoJugador = null;
 
     }
 }

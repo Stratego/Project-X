@@ -417,8 +417,10 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
 
     public ArrayList<String> getTexturasMuestreo(){
         ArrayList<String> texturas = new ArrayList<String>();
-        texturas.add("jugador/jugador3.png");
 
+        texturas.add("jugador/ropa/jugador3E1roba.png");
+        texturas.add("jugador/piel/jugador3E1pell.png");
+        texturas.add("jugador/jugador3.png");
         return texturas;
     }
     //public void recibirImput();

@@ -85,12 +85,13 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("banderas/logo1.png");
         nombresTexturas.add("banderas/logo4.png");
         nombresTexturas.add("Menu/marcador.png");
-
-
+        nombresTexturas.add("jugador/ropa/jugador3E1roba.png");
+        nombresTexturas.add("jugador/piel/jugador3E1pell.png");
 
         nombresTexturas.add("botoCanviTorn.png");
         nombresTexturas.add("botonsPowerUp.png");
-        nombresTexturas.add("botoPassada.png");
+        nombresTexturas.add("Menu/botoPassada.png");
+        nombresTexturas.add("Menu/xutBoto.png");
         nombresTexturas.add("mina.png");
         nombresTexturas.add("taulellObjectes.png");
         nombresTexturas.add("TauloCanviJugadors.png");
@@ -98,9 +99,10 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("Menu/Habilidades/nivel2.png");
         nombresTexturas.add("Menu/Habilidades/nivel3.png");
 
+
         nombresTexturas.add("Menu/Habilidades/fuerza.png");
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
-        botons.add(new BotonInterfaz(ConstantesJuego.POSICION_BOTON_CHUTEPASE,0, Entrada.pase,"botoPassada.png",ConstantesJuego.ID_BOTON));
+        botons.add(new BotonInterfaz(ConstantesJuego.POSICION_BOTON_CHUTEPASE,0, Entrada.pase,"Menu/botoPassada.png",ConstantesJuego.ID_BOTON));
         botons.add(new BotonInterfaz(ConstantesJuego.POSICION_BOTON_OBJETOS,0, Entrada.objeto,"botonsPowerUp.png",ConstantesJuego.ID_BOTON));
         botons.add(new BotonInterfaz(ConstantesJuego.POSICION_BOTON_SUPLENTE,0, Entrada.cambiar,"Menu/botoSubstitucions.png",ConstantesJuego.ID_BOTON));
         botons.add(new BotonCambioTurno(ConstantesJuego.POSICION_BOTON_FINALIZAR,0, Entrada.finalizar,"botoCanviTorn.png",ConstantesJuego.ID_BOTON));
