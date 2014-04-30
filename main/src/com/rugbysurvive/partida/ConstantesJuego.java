@@ -16,11 +16,13 @@ public class ConstantesJuego {
 
     public static final int ANCHO_CASILLA = 64;
     public static final int ALTO_CASILLA = 64;
-    public static final int ANCHO_BOTON = 128;
-    public static final int ALTO_BOTON = 128;
-    //public static final int ANCHO_BOTON = (int)(0.1777777778 * Gdx.graphics.getHeight());
+    private static final int ANCHO_BOTON_REAL = 128;
+    private static final int ALTO_BOTON_REAL = 128;
 
-    public static  double separacionBotones = (ANCHO_BOTON+78)*constanteRescalado;
+    public static final int ALTO_BOTON = (int)(128 *constanteRescalado);
+    public static final int ANCHO_BOTON = (int)(128 *constanteRescalado);
+
+    public static  double separacionBotones = (ANCHO_BOTON_REAL+78)*constanteRescalado;
 
 
     public static  int POSICION_BOTON_FINALIZAR = (int)(getHeight() -separacionBotones);
@@ -39,10 +41,10 @@ public class ConstantesJuego {
     public static final int ANCHO_BOTON_OBJETOS = 64;
     public static final int ALTO_BOTON_SUPLENTES = 92;
     public static final int ANCHO_BOTON_SUPLENTES = 768;
-    public static  int POSICION_INICIAL_Y_BOTON_SUPLENTES=(int)((ALTO_BOTON * constanteRescalado)+2);
+    public static  int POSICION_INICIAL_Y_BOTON_SUPLENTES=(int)((ALTO_BOTON_REAL * constanteRescalado)+2);
     //public static final int POSICION_INICIAL_Y_BOTON_OBJETOS=Gdx.graphics.getHeight()-80;
     // public static final int POSICION_INICIAL_X_BOTON_OBJETOS=Gdx.graphics.getWidth()-230;
-    public static  int POSICION_INICIAL_Y_BOTON_OBJETOS=(int)(((ALTO_BOTON * constanteRescalado)+2)+(ALTO_BOTON_OBJETOS*constanteRescalado *2)+((ALTO_BOTON_OBJETOS*constanteRescalado)/2));
+    public static  int POSICION_INICIAL_Y_BOTON_OBJETOS=(int)(((ALTO_BOTON_REAL * constanteRescalado)+2)+(ALTO_BOTON_OBJETOS*constanteRescalado *2)+((ALTO_BOTON_OBJETOS*constanteRescalado)/2));
     //public static final int POSICION_INICIAL_X_BOTON_OBJETOS=Gdx.graphics.getWidth() - 798;
     public static final int POSICION_INICIAL_X_BOTON_OBJETOS=POSICION_BOTON_CHUTEPASE +32;
     public static final int POSICION_INICIAL_X_PLANTILLAOBJETOS=POSICION_INICIAL_X_BOTON_OBJETOS-32;
@@ -75,9 +77,7 @@ public class ConstantesJuego {
     public static final int LARGO_TABLON_SUSITUCION = (int) (768 * constanteRescalado);
     protected  static final int ANCHO_TABLERO = ANCHO_CASILLA*NUMERO_CASILLAS_ANCHO_TABLERO;
     protected  static final int ALTO_TABLERO = ALTO_CASILLA*NUMERO_CASILLAS_LARGO_TABLERO;
-    protected  static final int TAMAÑO_BASE = 1;
-    protected  static final int TAMAÑO_MEDIANO = 2;
-    protected  static final int TAMAÑO_GRANDE = 3;
+
     protected static final double  MAX_MULTIPLICADOR =2.0;
     protected static final double MIN_MULTIPLICADOR = 0.75;
     protected static ConstantesJuego constantes ;

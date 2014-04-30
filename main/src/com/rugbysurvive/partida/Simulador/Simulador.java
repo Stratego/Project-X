@@ -18,6 +18,7 @@ public class Simulador {
     private static Simulador instance;
     private List<Accion> acciones;
     private boolean simulando;
+    private boolean accionFinalizada;
 
     private Simulador()
     {
@@ -52,11 +53,20 @@ public class Simulador {
         this.simulando = true;
     }
 
+    public void forzarFinal(){
+        while(!simular());
+    }
+
+    public void finalizarAccion(){
+        while(!accionFinalizada){
+            simular();
+        }
+    }
+
     public boolean simular()
     {
-
         if(simulando && this.acciones.size() > 0){
-            boolean accionFinalizada = false;
+            accionFinalizada = false;
             this.contador++;
             if(contador == TIEMPO_EJECUCION)
             {

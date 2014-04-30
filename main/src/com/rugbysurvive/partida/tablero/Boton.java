@@ -10,6 +10,8 @@ package com.rugbysurvive.partida.tablero;
         import com.rugbysurvive.partida.gestores.Entrada.Entrada;
         import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
         import com.rugbysurvive.partida.gestores.GestorGrafico;
+        import com.rugbysurvive.partida.gestores.Procesos.Proceso;
+        import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
 
         import java.util.ArrayList;
 
@@ -17,12 +19,16 @@ package com.rugbysurvive.partida.tablero;
  * Clase que define la posicion y comportamiento de un boron dentro del tablero de juego
  * Created by Victor on 24/03/14.
  */
-public abstract class Boton implements GestionEntrada,Dibujable{
+public abstract class Boton implements GestionEntrada,Dibujable,Proceso{
 
 
     protected float posX;
 
     protected float posY;
+
+    protected float posYOriginal;
+
+    protected float posXOriginal;
 
     protected Entrada entrada;
 
@@ -38,6 +44,13 @@ public abstract class Boton implements GestionEntrada,Dibujable{
 
     protected int alto;
 
+    protected boolean escondido;
+
+
+
+    protected boolean procesando;
+
+
     /**
      * Constructor del elemento boton
      *
@@ -48,12 +61,16 @@ public abstract class Boton implements GestionEntrada,Dibujable{
     public Boton(float posX, float posY, Entrada entrada,String textura, int posicion) {
         this.posY = posY;
         this.posX = posX;
+        this.posXOriginal = posX;
+        this.posYOriginal = posY;
         this.entrada = entrada;
         this.textura = textura;
         this.posicion = posicion;
         ID=GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
         this.ancho =0;
         this.alto = 0;
+        this.escondido = false;
+        this.procesando = false;
     }
 
 
@@ -66,8 +83,8 @@ public abstract class Boton implements GestionEntrada,Dibujable{
     public boolean esSeleccionado(float posX, float posY) {
 
 
-        if (posX >= this.posX && posX <= this.posX+ancho){
-            if (posY >= Gdx.graphics.getHeight() - this.posY -alto && posY <= Gdx.graphics.getHeight()  -this.posY){
+        if (posX >= this.posX && posX <= this.posX+ConstantesJuego.ANCHO_BOTON){
+            if (posY >= Gdx.graphics.getHeight() - this.posY -ConstantesJuego.ALTO_BOTON && posY <= Gdx.graphics.getHeight()  -this.posY){
                 accionEntrada(this.entrada);
                 selecionado=true;
             }else{
@@ -125,5 +142,59 @@ public abstract class Boton implements GestionEntrada,Dibujable{
         return (int)this.posY;
     }
 
+    @Override
+    public boolean procesar(){
 
+       if(!this.escondido){
+           if(this.posY > -140){
+                this.posY = posY -10;
+           }
+
+           else {
+               this.escondido = true;
+               this.procesando = false;
+               return true;
+           }
+       }
+
+       else{
+           if(this.posY <= posYOriginal){
+               this.posY = posY +10;
+           }
+
+           else {
+               this.escondido = false;
+               this.procesando = false;
+               return true;
+           }
+       }
+       return false;
+    }
+
+    public void esconder(){
+        if(!this.escondido){
+            this.procesando = true;
+            ProcesosContinuos.añadirProceso(this);
+        }
+
+    }
+
+    public void mostrar() {
+        if(this.escondido) {
+            this.procesando = true;
+            ProcesosContinuos.añadirProceso(this);
+        }
+    }
+
+    public boolean isEscondido() {
+        return escondido;
+    }
+
+    public void setEscondido(boolean escondido) {
+        this.escondido = escondido;
+    }
+
+    public boolean isProcesando() {
+        return procesando;
+    }
 }

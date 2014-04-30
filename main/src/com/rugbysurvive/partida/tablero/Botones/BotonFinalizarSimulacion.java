@@ -1,15 +1,17 @@
 package com.rugbysurvive.partida.tablero.Botones;
 
-import com.partido.GestorTurnos;
 import com.rugbysurvive.partida.ConstantesJuego;
+import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.tablero.Boton;
 
 /**
- * Created by aitor on 29/04/14.
+ * Created by aitor on 30/04/14.
  */
-public class BotonCambioTurno extends Boton {
+public class BotonFinalizarSimulacion extends Boton {
 
+
+    private boolean objetoElegido;
 
     /**
      * Constructor del elemento boton
@@ -20,16 +22,18 @@ public class BotonCambioTurno extends Boton {
      * @param textura
      * @param posicion
      */
-    public BotonCambioTurno(float posX, float posY, Entrada entrada, String textura, int posicion) {
+    public BotonFinalizarSimulacion(float posX, float posY, Entrada entrada, String textura, int posicion) {
         super(posX, posY, entrada, textura, posicion);
-        this.ancho = ConstantesJuego.variables().getAnchoBoton();
-        this.alto =ConstantesJuego.variables().getAnchoBoton();
-
+        this.objetoElegido = false;
+        this.ancho= ConstantesJuego.getAnchoBotonObjetos();
+        this.alto=ConstantesJuego.getAltoBotonObjetos();
+        this.posY = -140;
+        this.setEscondido(true);
     }
 
     @Override
     public void accionEntrada(Entrada entrada) {
-        GestorTurnos.cambiarTurno();
-        System.out.println("CAMBIO TURNO");
+        Simulador.getInstance().forzarFinal();
     }
+
 }

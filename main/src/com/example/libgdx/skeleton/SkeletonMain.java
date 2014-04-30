@@ -19,6 +19,8 @@ import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
 import com.rugbysurvive.partida.gestores.Prueba;
 import com.rugbysurvive.partida.tablero.Boton;
 import com.rugbysurvive.partida.tablero.Botones.BotonCambioTurno;
+import com.rugbysurvive.partida.tablero.Botones.BotonFinalizarAccion;
+import com.rugbysurvive.partida.tablero.Botones.BotonFinalizarSimulacion;
 import com.rugbysurvive.partida.tablero.Botones.BotonInterfaz;
 
 import java.util.ArrayList;
@@ -102,10 +104,19 @@ public class SkeletonMain extends Game {
 
         nombresTexturas.add("Menu/Habilidades/fuerza.png");
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
+
         botons.add(new BotonInterfaz(ConstantesJuego.POSICION_BOTON_CHUTEPASE,0, Entrada.pase,"Menu/botoPassada.png",ConstantesJuego.ID_BOTON));
         botons.add(new BotonInterfaz(ConstantesJuego.POSICION_BOTON_OBJETOS,0, Entrada.objeto,"botonsPowerUp.png",ConstantesJuego.ID_BOTON));
         botons.add(new BotonInterfaz(ConstantesJuego.POSICION_BOTON_SUPLENTE,0, Entrada.cambiar,"Menu/botoSubstitucions.png",ConstantesJuego.ID_BOTON));
         botons.add(new BotonCambioTurno(ConstantesJuego.POSICION_BOTON_FINALIZAR,0, Entrada.finalizar,"botoCanviTorn.png",ConstantesJuego.ID_BOTON));
+
+        // LIMITE ENTRE LOS BOTONES DE INTERFAZ NORMAL Y SIMULADOR
+        botons.add(new BotonFinalizarAccion(ConstantesJuego.POSICION_BOTON_SUPLENTE,0, Entrada.cambiar,"Menu/botoSubstitucions.png",ConstantesJuego.ID_BOTON));
+        botons.add(new BotonFinalizarSimulacion(ConstantesJuego.POSICION_BOTON_FINALIZAR,0, Entrada.finalizar,"botoCanviTorn.png",ConstantesJuego.ID_BOTON));
+        // COLOCAR EL RESTO DE BOTONES DEPSUES DE ESTOS
+
+
+
         this.componentesJuego = new ComponentesJuego();
 
 
@@ -161,7 +172,24 @@ public class SkeletonMain extends Game {
             this.simular = true;
         }
         if(simular==true) {
-            this.simulador.simular();
+
+            int i=0;
+            for(Boton boton : this.botons){
+                if(i<4) {
+                    boton.esconder();
+                    i++;
+                }
+            }
+
+            if(this.botons.get(0).isEscondido() && !this.botons.get(4).isProcesando()){
+                this.botons.get(4).mostrar();
+                this.botons.get(5).mostrar();
+            }
+
+            if(!this.botons.get(4).isEscondido() && !this.botons.get(4).isProcesando()){
+                this.simulador.simular();
+            }
+
 
         }
 
