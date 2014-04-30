@@ -28,11 +28,11 @@ public class GestorTurnos implements Dibujable,Proceso {
     private static String estandarteEquipo2 = "banderas/logo4.png";
     private static int equipoCambiado = 0;
     private int id;
-<<<<<<< HEAD
+
     Arbitro arbitro=Arbitro.getInstancia();
-=======
+
     private static boolean forzarCambioTurno = false;
->>>>>>> 6f44cf55d52d96aedb2aa7894c49927f2a001191
+
 
     public GestorTurnos(){
          this.posicionTexturaX = Gdx.graphics.getWidth();
@@ -94,9 +94,9 @@ public class GestorTurnos implements Dibujable,Proceso {
             equipo1.setJugando(true);
             ProcesosContinuos.añadirProceso(this);
             this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
-<<<<<<< HEAD
+
             arbitro.mover();
-=======
+
 
             return true;
         }
@@ -122,7 +122,7 @@ public class GestorTurnos implements Dibujable,Proceso {
                 equipo1.bloquear();
             }
 
->>>>>>> 6f44cf55d52d96aedb2aa7894c49927f2a001191
+
             return true;
         }
 

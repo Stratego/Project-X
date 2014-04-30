@@ -61,7 +61,7 @@ public class ComponentesJuego {
 
         this.equipo1.añadirJugador(jugador,0,1);
 
-        /*jugador = new Jugador(80, 90, 100,this.equipo1);
+        jugador = new Jugador(80, 90, 100,this.equipo1);
         jugador.setDireccion(DireccionJugador.izquierda);
         this.equipo1.añadirJugador(jugador, 6, 6);
         jugador = new Jugador(80, 90, 100,this.equipo1);
