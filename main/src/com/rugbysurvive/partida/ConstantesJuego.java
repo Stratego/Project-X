@@ -65,6 +65,8 @@ public class ConstantesJuego {
     public static final int POSICION_Y_ESCUDO = (int)((Gdx.graphics.getHeight()-70));
 
 
+    public static final int ANCHO_TABLON_SUSTITUCION = (int) (96 * constanteRescalado);
+    public static final int LARGO_TABLON_SUSITUCION = (int) (768 * constanteRescalado);
     protected  static final int ANCHO_TABLERO = ANCHO_CASILLA*NUMERO_CASILLAS_ANCHO_TABLERO;
     protected  static final int ALTO_TABLERO = ALTO_CASILLA*NUMERO_CASILLAS_LARGO_TABLERO;
     protected  static final int TAMAÑO_BASE = 1;

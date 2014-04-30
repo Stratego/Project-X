@@ -1,5 +1,6 @@
 package com.rugbysurvive.partida.Jugador;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Simulador.Accion;
@@ -413,5 +414,11 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
         return 1.70;
     }
 
+    public ArrayList<String> getTexturasMuestreo(){
+        ArrayList<String> texturas = new ArrayList<String>();
+        texturas.add("jugador/jugador3.png");
+
+        return texturas;
+    }
     //public void recibirImput();
 }
