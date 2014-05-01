@@ -1,6 +1,8 @@
 package com.rugbysurvive.partida.Simulador;
 
 
+import com.rugbysurvive.partida.gestores.GestorGrafico;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +12,10 @@ import java.util.List;
 
 /*Esta clase es un Singleton*/
 public class Simulador {
-    private static final int ACCIONES_SEGUNDO = 1;
+    private static final int ACCIONES_SEGUNDO = 3;
     private static final int ITERACIONES_SEGUNDO = 50;
     private static final double TIEMPO_EJECUCION = ITERACIONES_SEGUNDO / ACCIONES_SEGUNDO;
     private int contador;
-    private int posicion;
     private static Simulador instance;
     private List<Accion> acciones;
     private boolean simulando;
@@ -44,7 +45,6 @@ public class Simulador {
             this.acciones = new ArrayList();
             this.simulando = false;
             this.contador =0;
-            this.posicion =0;
         }
         this.acciones.add(accion);
     }

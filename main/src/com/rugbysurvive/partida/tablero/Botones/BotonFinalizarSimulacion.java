@@ -11,7 +11,7 @@ import com.rugbysurvive.partida.tablero.Boton;
 public class BotonFinalizarSimulacion extends Boton {
 
 
-    private boolean objetoElegido;
+
 
     /**
      * Constructor del elemento boton
@@ -24,7 +24,6 @@ public class BotonFinalizarSimulacion extends Boton {
      */
     public BotonFinalizarSimulacion(float posX, float posY, Entrada entrada, String textura, int posicion) {
         super(posX, posY, entrada, textura, posicion);
-        this.objetoElegido = false;
         this.ancho= ConstantesJuego.getAnchoBotonObjetos();
         this.alto=ConstantesJuego.getAltoBotonObjetos();
         this.posY = -140;
