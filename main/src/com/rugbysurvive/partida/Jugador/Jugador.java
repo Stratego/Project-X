@@ -2,6 +2,8 @@ package com.rugbysurvive.partida.Jugador;
 
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+import com.rugbysurvive.partida.Jugador.extras.Color;
+import com.rugbysurvive.partida.Jugador.extras.GeneradorImagenJugador;
 import com.rugbysurvive.partida.Simulador.Accion;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
@@ -17,14 +19,17 @@ import java.util.ArrayList;
 /**
  * Created by Victor on 27/03/14.
  */
-public class Jugador implements GestionEntrada, DibujableEscalado {
+public class Jugador implements GestionEntrada {
 
     private static final int MAXIMO_OBJETOS = 4;
-    private String textura ;
+    private String textura;
     private DireccionJugador direccion;
     private ElementoDibujable seleccion;
     private ElementoDibujable bloqueo;
 
+
+
+    private Color color;
     private Estado estado;
     private Accion accion = null;
     /*Le asignamos aquí tambien la posicion en la que se encuentra el jugador?*/
@@ -33,6 +38,9 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
     /*Estas dos variables las ponemos aquí y no en estado, ya que si cambiamos el estado perdemos el valor de las variables*/
     public boolean seleccionado = false;
     public boolean bloqueado = false;
+
+
+    private ArrayList<ElementoDibujable> texturas;
 
     private ArrayList<ObjetoJugador> powerup;
 
@@ -74,6 +82,10 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
         this.id = -1;
         this.enJuego = false;
         this.textura = "jugador1.png";
+        this.color = Color.azul;
+        this.direccion = DireccionJugador.izquierda;
+        this.texturas = GeneradorImagenJugador.generarTexturas(this.color,DireccionJugador.izquierda);
+
 
     }
 
@@ -107,7 +119,11 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
         if(this.casilla != null)
         {
             this.enJuego = true;
-            id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
+            for(ElementoDibujable textura: this.texturas){
+                textura.dibujar(this.getPosicionX(),this.getPosicionY());
+
+            }
+
             this.seleccion = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/seleccionado.png");
             this.bloqueo = new ElementoDibujable(TipoDibujo.elementosJuego,"casellalila.png");
 
@@ -179,6 +195,19 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
         }
     }
 
+
+    /**
+     * Modifica la direccion del jugador
+     * @param direccion
+     */
+    public void setDireccion(DireccionJugador direccion)
+    {
+        this.direccion = direccion;
+        this.texturas = GeneradorImagenJugador.generarTexturas(this.color,direccion);
+
+    }
+
+
     /**
      * Generamos una acción
      * @param posX
@@ -248,8 +277,15 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
             }
             this.seleccion.dibujar((int)this.casilla.getPosX(),(int)this.casilla.getPosY());
             // Obligamos a dibjar la textura del jugador encima
-            GestorGrafico.generarDibujante().eliminarTextura(this.id);
-            GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
+
+            for(ElementoDibujable texturas : this.texturas) {
+                texturas.borrar();
+            }
+
+            for(ElementoDibujable texturas : this.texturas) {
+                texturas.dibujar(this.getPosicionX(),this.getPosicionY());
+            }
+
         }
         else
         {
@@ -400,34 +436,9 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
     }
 
 
-    /**
-     * Modifica la direccion del jugador
-     * @param direccion
-     */
-    public void setDireccion(DireccionJugador direccion)
-    {
-        this.direccion = direccion;
-        this.dibujarDireccion(direccion);
-    }
+
     public DireccionJugador getDireccion(){return this.direccion;}
-    private void dibujarDireccion(DireccionJugador direccion)
-    {
-        switch (direccion)
-        {
-            case arriba:
-                this.textura = "jugador/jugador4.png";
-                break;
-            case abajo:
-                this.textura = "jugador/jugador2.png";
-                break;
-            case izquierda:
-                this.textura = "jugador/jugador5.png";
-                break;
-            case derecha:
-                this.textura = "jugador/jugador1.png";
-                break;
-        }
-    }
+
 
     /**
      * @param entrada tipo de entrada
@@ -449,17 +460,14 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
     }
 
 
-    /*Métodos de dibujable, que habra que quitars*/
-    @Override
-    public String getTextura() {
-        return this.textura;
-    }
+
+
 
     /**
      * Obtenemos la posición X del jugador
      * @return int Posición X
      */
-    @Override
+
     public int getPosicionX() {
         if(this.casilla != null)
         {
@@ -472,7 +480,7 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
      * Obtenemos la posición Y del jugador
      * @return int Posición Y
      */
-    @Override
+
     public int getPosicionY() {
         if(this.casilla != null)
         {
@@ -535,26 +543,23 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
      */
     public boolean getEnJuego(){return enJuego;}
 
-    /**
-     *
-     * @return 1.70
-     */
-    @Override
-    public double getEscalado() {
-        return 1.70;
-    }
 
     /**
      *
      * @return ArrayList texturas
      */
-    public ArrayList<String> getTexturasMuestreo(){
-        ArrayList<String> texturas = new ArrayList<String>();
+    public ArrayList<ElementoDibujable> getTexturasMuestreo(){
 
-        texturas.add("jugador/ropa/jugador3E1roba.png");
-        texturas.add("jugador/piel/jugador3E1pell.png");
-        texturas.add("jugador/jugador3.png");
-        return texturas;
+        return GeneradorImagenJugador.generarTexturasIntefaz(this.color, DireccionJugador.frontal);
     }
-    //public void recibirImput();
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+        this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.direccion);
+    }
+
 }

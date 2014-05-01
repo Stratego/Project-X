@@ -4,6 +4,7 @@ import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.Jugador.extras.Color;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
@@ -28,6 +29,8 @@ public  class Equipo {
     private ArrayList<Jugador> descartados = new ArrayList<Jugador>();
 
 
+    private Color color;
+
     private Lado lado;
     private ArrayList<PosicionInicial> alineacion;
     private boolean jugando; // indica si el equipo esta siendo usado
@@ -48,6 +51,7 @@ public  class Equipo {
 
         this.jugando = false;
         equipo = this;
+        this.color = Color.azul;
 
     }
 
@@ -248,6 +252,7 @@ public  class Equipo {
      */
     public void añadirJugador(Jugador jugador ,int posicionX,int posicionY)
     {
+        jugador.setColor(this.color);
         this.alineacion.add(new PosicionInicial(jugador,posicionX,posicionY));
         this.jugadores.add(jugador);
     }
@@ -273,5 +278,14 @@ public  class Equipo {
 
     public void setLado(Lado lado) {
         this.lado = lado;
+    }
+
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

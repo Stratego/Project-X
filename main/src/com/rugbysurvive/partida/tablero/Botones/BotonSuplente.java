@@ -68,10 +68,8 @@ public class BotonSuplente extends Boton {
         int posicionX = this.getPosicionX()+ (int)(ConstantesJuego.LARGO_TABLON_SUSITUCION/3);
         int posicionY = this.getPosicionY() + 5;
 
-
-        for(String textura : jugador.getTexturasMuestreo()) {
-            ElementoDibujable dibujo = new ElementoDibujable(TipoDibujo.interficieUsuario,textura);
-            this.dibujoJugador.add(dibujo);
+        dibujoJugador = jugador.getTexturasMuestreo();
+        for(ElementoDibujable dibujo : this.dibujoJugador) {
             dibujo.dibujar(this.getPosicionX() + ConstantesJuego.LARGO_TABLON_SUSITUCION / 9, posicionY);
         }
 

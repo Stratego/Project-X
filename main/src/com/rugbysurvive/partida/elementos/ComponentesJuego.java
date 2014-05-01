@@ -3,6 +3,7 @@ package com.rugbysurvive.partida.elementos;
 import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.Jugador.extras.Color;
 import com.rugbysurvive.partida.arbitro.Arbitro;
 import com.rugbysurvive.partida.elementos.objetos.objetosCampo.MinaCampo;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.ColocadorObjetosCampo;
@@ -30,6 +31,8 @@ public class ComponentesJuego {
     {
         this.equipo1 = new Equipo();
         this.equipo2 = new Equipo();
+        this.equipo1.setColor(Color.rojo);
+        this.equipo2.setColor(Color.azul);
         this.campo = new Campo();
         campo = new Campo();
         this.generarEquipos();

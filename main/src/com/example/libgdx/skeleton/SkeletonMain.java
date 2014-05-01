@@ -87,8 +87,7 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("banderas/logo1.png");
         nombresTexturas.add("banderas/logo4.png");
         nombresTexturas.add("Menu/marcador.png");
-        nombresTexturas.add("jugador/ropa/jugador3E1roba.png");
-        nombresTexturas.add("jugador/piel/jugador3E1pell.png");
+
 
         nombresTexturas.add("botoCanviTorn.png");
         nombresTexturas.add("botonsPowerUp.png");
@@ -103,6 +102,48 @@ public class SkeletonMain extends Game {
 
 
         nombresTexturas.add("Menu/Habilidades/fuerza.png");
+
+
+        nombresTexturas.add("jugador/piel/jugador1pell1.png");
+        nombresTexturas.add("jugador/piel/jugador1pell2.png");
+        nombresTexturas.add("jugador/piel/jugador1pell3.png");
+        nombresTexturas.add("jugador/piel/jugador2pell1.png");
+        nombresTexturas.add("jugador/piel/jugador2pell2.png");
+        nombresTexturas.add("jugador/piel/jugador2pell3.png");
+        nombresTexturas.add("jugador/piel/jugador3pell1.png");
+        nombresTexturas.add("jugador/piel/jugador3pell2.png");
+        nombresTexturas.add("jugador/piel/jugador3pell3.png");
+        nombresTexturas.add("jugador/piel/jugador4pell1.png");
+        nombresTexturas.add("jugador/piel/jugador4pell2.png");
+        nombresTexturas.add("jugador/piel/jugador4pell3.png");
+        nombresTexturas.add("jugador/piel/jugador5pell1.png");
+        nombresTexturas.add("jugador/piel/jugador5pell2.png");
+        nombresTexturas.add("jugador/piel/jugador5pell3.png");
+
+
+        nombresTexturas.add("jugador/ropa/jugador1E1.png");
+        nombresTexturas.add("jugador/ropa/jugador1E2.png");
+        nombresTexturas.add("jugador/ropa/jugador1E3.png");
+        nombresTexturas.add("jugador/ropa/jugador1E4.png");
+        nombresTexturas.add("jugador/ropa/jugador2E1.png");
+        nombresTexturas.add("jugador/ropa/jugador2E2.png");
+        nombresTexturas.add("jugador/ropa/jugador2E3.png");
+        nombresTexturas.add("jugador/ropa/jugador2E4.png");
+        nombresTexturas.add("jugador/ropa/jugador3E1.png");
+        nombresTexturas.add("jugador/ropa/jugador3E1.png");
+        nombresTexturas.add("jugador/ropa/jugador3E2.png");
+        nombresTexturas.add("jugador/ropa/jugador3E3.png");
+        nombresTexturas.add("jugador/ropa/jugador3E4.png");
+        nombresTexturas.add("jugador/ropa/jugador4E1.png");
+        nombresTexturas.add("jugador/ropa/jugador4E2.png");
+        nombresTexturas.add("jugador/ropa/jugador4E3.png");
+        nombresTexturas.add("jugador/ropa/jugador4E4.png");
+        nombresTexturas.add("jugador/ropa/jugador5E1.png");
+        nombresTexturas.add("jugador/ropa/jugador5E2.png");
+        nombresTexturas.add("jugador/ropa/jugador5E3.png");
+        nombresTexturas.add("jugador/ropa/jugador5E4.png");
+
+
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
 
         botons.add(new BotonInterfaz(ConstantesJuego.POSICION_BOTON_CHUTEPASE,0, Entrada.pase,"Menu/botoPassada.png",ConstantesJuego.ID_BOTON));
