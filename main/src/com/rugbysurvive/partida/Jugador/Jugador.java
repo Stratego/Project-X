@@ -37,10 +37,11 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
     private ArrayList<ObjetoJugador> powerup;
 
     public int Fuerza;
-
     public int Vida;
-
     public int Defensa;
+    public int Habilidad;
+    public int Resistencia;
+    public int Ataque;
 
     public int id;
 
@@ -57,11 +58,14 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
      * @param defensa Indica la defensa de un jugador
      * @param equipo Indica a que equipo pertenece un jugador
      */
-    public Jugador(int fuerza,int vida, int defensa, Equipo equipo)
+    public Jugador(int fuerza, int vida, int defensa, int habilidad, int resistencia, int ataque, Equipo equipo)
     {
         this.Fuerza= fuerza;
         this.Vida = vida;
         this.Defensa = defensa;
+        this.Habilidad = habilidad;
+        this.Resistencia = resistencia;
+        this.Ataque = ataque;
 
         this.miEquipo = equipo;
 
@@ -481,52 +485,38 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
         else return -1;
     }
 
-    /**
-     * Obtenemos la fuerza de un jugador
-     * @return int  Fuerza
-     */
-    public int getFuerza() {
-        return Fuerza;
-    }
+    public int getFuerza() { return this.Fuerza; }
 
-    /**
-     * Modifica la fuerza de un jugador
-     * @param fuerza
-     */
     public void setFuerza(int fuerza) {
-        Fuerza = fuerza;
+        this.Fuerza = fuerza;
     }
 
-    /**
-     * Obtenemos la vida de un jugador
-     * @return int  Vida
-     */
-    public int getVida() {
-        return Vida;
-    }
+    public int getVida() { return this.Vida; }
 
-    /**
-     *
-     * @param vida
-     */
-    public void setVida(int vida) {
-        Vida = vida;
-    }
+    public void setVida(int vida) { this.Vida = vida;}
 
-    /**
-     *
-     * @return int Defensa
-     */
     public int getDefensa() {
-        return Defensa;
+        return this.Defensa;
     }
 
-    /**
-     * Modifica la defensa del jugador
-     * @param defensa
-     */
-    public void setDefensa(int defensa) {
-        Defensa = defensa;
+    public void setDefensa(int defensa) { this.Defensa = defensa; }
+
+    public int getHabilidad() { return this.Habilidad; }
+
+    public void setHabilidad(int habilidad) { this.Habilidad = habilidad; }
+
+    public int getResistencia() {
+        return this.Resistencia;
+    }
+
+    public void setResistencia(int resistencia) {
+        this.Resistencia = resistencia;
+    }
+
+    public int getAtaque() {return this.Ataque; }
+
+    public void setAtaque(int ataque) {
+        this.Ataque = ataque;
     }
 
     /**
