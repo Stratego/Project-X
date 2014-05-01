@@ -1,6 +1,5 @@
 package com.rugbysurvive.partida.Jugador;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Simulador.Accion;
@@ -51,7 +50,13 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
 
     public Entrada paseOChute = Entrada.pase;
 
-
+    /**
+     * Constructor de jugador
+     * @param fuerza Indica la fuerza de un jugador
+     * @param vida Indica la vida de un jugador
+     * @param defensa Indica la defensa de un jugador
+     * @param equipo Indica a que equipo pertenece un jugador
+     */
     public Jugador(int fuerza,int vida, int defensa, Equipo equipo)
     {
         this.Fuerza= fuerza;
@@ -72,12 +77,19 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
 
     }
 
-
+    /**
+     * Devuelve a que equipo pertenece un jugador.
+     * @return Equipo
+     */
     public Equipo getMiEquipo()
     {
         return this.miEquipo;
     }
 
+    /**
+     * Añade a la lista de objetos del jugador un nuevo objeto.
+     * @param objeto Objeto a añadir a un jugador
+     */
     public void añadirObjeto(ObjetoJugador objeto){
        if(this.powerup.size() < MAXIMO_OBJETOS)
        {
@@ -118,12 +130,20 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
 
     }
 
-
+    /**
+     *
+     * @return PowerUp
+     */
     public ArrayList<ObjetoJugador> getPowerUP()
     {
         return this.powerup;
     }
 
+    /**
+     * Devolvemos el PowerUp deseado
+     * @param index Posición en la que se encuentra un PowerUp
+     * @return PowerUp
+     */
     public ObjetoJugador getPowerUP(int index)
     {
         if(index>=0 && index<4)
@@ -134,6 +154,10 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
         return null;
     }
 
+    /**
+     * Añadimos un PowerUp a jugador
+     * @param powerup
+     */
     public void setPowerUP(ObjetoJugador powerup)
     {
         if(this.powerup.size() <= 4)
@@ -142,6 +166,11 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
         }
     }
 
+    /**
+     * Añadimos un PowerUp a jugador en el índice deseado
+     * @param powerup
+     * @param index
+     */
     public void setPowerUP(PowerUP powerup, int index)
     {
         if(index>=0 && index<4)
@@ -150,36 +179,65 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
         }
     }
 
+    /**
+     * Generamos una acción
+     * @param posX
+     * @param posY
+     */
     public void generarAccion(int posX, int posY)
     {
         this.estado.generarAccion(this, (int)posX, (int)posY);
     }
 
+    /**
+     * Devuelve el estado del jugador
+     * @return Estado
+     */
     public Estado getEstado()
     {
         return this.estado;
     }
 
+    /**
+     * Modifica el estado del jugador
+     * @param estado Nuevo estado
+     */
     public void setEstado(Estado estado)
     {
         this.estado = estado;
     }
 
+    /**
+     * Devuelve la acción assignada a un Jugador
+     * @return Accion
+     */
     public Accion getAccion()
     {
         return this.accion;
     }
 
+    /**
+     * Modifica la acción del jugador
+     * @param accion
+     */
     public void setAccion(Accion accion)
     {
         this.accion = accion;
     }
 
+    /**
+     * Devuelve si un jugador esta o no seleccionado
+     * @return Boolean
+     */
     public boolean getSeleccionado()
     {
         return this.seleccionado;
     }
 
+    /**
+     * Selecciona a nu jugador
+     * @param seleccionado
+     */
     public void setSeleccionado(boolean seleccionado)
     {
         this.seleccionado = seleccionado;
@@ -201,11 +259,19 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
         }
     }
 
+    /**
+     * Devuelve si un jugador se encuentra seleccionado
+     * @return Boolean
+     */
     public boolean getBloqueado()
     {
         return this.bloqueado;
     }
 
+    /**
+     * Modifica el estado de bloqueo de un jugador
+     * @param bloqueado
+     */
     public void setBloqueado(boolean bloqueado)
     {
 
@@ -228,7 +294,13 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
         }
     }
 
-
+    /**
+     * Controla todo lo relacionado con el jugador
+     * @param entrada
+     * @param posX
+     * @param posY
+     * @param casillas
+     */
     public void accionEntrada(Entrada entrada, float posX, float posY, Casilla[][] casillas)
     {
         boolean accionGenerada = false;
@@ -318,13 +390,20 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
         }
     }
 
+    /**
+     * Devuelve si pase o chute
+     * @return Entrada
+     */
     public Entrada getPaseOChute()
     {
         return this.paseOChute;
     }
 
 
-
+    /**
+     * Modifica la direccion del jugador
+     * @param direccion
+     */
     public void setDireccion(DireccionJugador direccion)
     {
         this.direccion = direccion;
@@ -349,11 +428,21 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
                 break;
         }
     }
+
+    /**
+     * @param entrada tipo de entrada
+     * @param posX eje x donde se ha realizado la acciion /entrada
+     * @param posY eje y donde se ha realizado la acciion /entrada
+     */
     @Override
     public void accionEntrada(Entrada entrada, float posX, float posY) {
 
     }
 
+    /**
+     *
+     * @param entrada tipo de entrada
+     */
     @Override
     public void accionEntrada(Entrada entrada) {
         System.out.println("---------------------------------Tipo entrada:"+entrada);
@@ -366,6 +455,10 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
         return this.textura;
     }
 
+    /**
+     * Obtenemos la posición X del jugador
+     * @return int Posición X
+     */
     @Override
     public int getPosicionX() {
         if(this.casilla != null)
@@ -375,6 +468,10 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
         else return -1;
     }
 
+    /**
+     * Obtenemos la posición Y del jugador
+     * @return int Posición Y
+     */
     @Override
     public int getPosicionY() {
         if(this.casilla != null)
@@ -384,37 +481,73 @@ public class Jugador implements GestionEntrada, DibujableEscalado {
         else return -1;
     }
 
+    /**
+     * Obtenemos la fuerza de un jugador
+     * @return int  Fuerza
+     */
     public int getFuerza() {
         return Fuerza;
     }
 
+    /**
+     * Modifica la fuerza de un jugador
+     * @param fuerza
+     */
     public void setFuerza(int fuerza) {
         Fuerza = fuerza;
     }
 
+    /**
+     * Obtenemos la vida de un jugador
+     * @return int  Vida
+     */
     public int getVida() {
         return Vida;
     }
 
+    /**
+     *
+     * @param vida
+     */
     public void setVida(int vida) {
         Vida = vida;
     }
 
+    /**
+     *
+     * @return int Defensa
+     */
     public int getDefensa() {
         return Defensa;
     }
 
+    /**
+     * Modifica la defensa del jugador
+     * @param defensa
+     */
     public void setDefensa(int defensa) {
         Defensa = defensa;
     }
 
+    /**
+     *
+     * @return boolean enJuego
+     */
     public boolean getEnJuego(){return enJuego;}
 
+    /**
+     *
+     * @return 1.70
+     */
     @Override
     public double getEscalado() {
         return 1.70;
     }
 
+    /**
+     *
+     * @return ArrayList texturas
+     */
     public ArrayList<String> getTexturasMuestreo(){
         ArrayList<String> texturas = new ArrayList<String>();
 
