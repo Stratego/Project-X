@@ -6,8 +6,10 @@ package com.uab.lis.rugby.database.ContentProviders;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import com.uab.lis.rugby.database.contracts.tbJugadorRol;
+import com.uab.lis.rugby.database.contracts.tbJugadores;
 import com.uab.lis.rugby.database.libContentProvider.MinionContentProvider;
 
 public class JugadorRolMinion extends MinionContentProvider {
@@ -19,7 +21,9 @@ public class JugadorRolMinion extends MinionContentProvider {
     @Override
     public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         String id = uri.getPathSegments().get(0);
-        return db.query(tbJugadorRol.TABLE, projection, selection, selectionArgs, null, null, sortOrder);
+        SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+        queryBuilder.setTables(tbJugadores.TABLE+" JOIN "+tbJugadorRol.TABLE+" ON "+ tbJugadores._ID+" = "+tbJugadorRol.COL_JUGADOR);
+        return queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
     }
 
     @Override
