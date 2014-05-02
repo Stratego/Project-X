@@ -82,10 +82,10 @@ public class ComponentesJuego {
 
 
         this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),15,21);
-        //this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),1,4);
-        //this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),2,3);
-        /*this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),4,7);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),0,5);*/
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),1,4);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),2,3);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),4,7);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),0,5);
 
         Posicionamiento.generarSaqueCampo(this.campo,this.equipo1, Lado.izquierda);
         Posicionamiento.generarSaqueCampo(this.campo,this.equipo2, Lado.derecha);
