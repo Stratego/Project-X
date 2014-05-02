@@ -10,6 +10,8 @@ package com.rugbysurvive.partida.tablero;
         import com.rugbysurvive.partida.gestores.Entrada.Entrada;
         import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
         import com.rugbysurvive.partida.gestores.GestorGrafico;
+        import com.rugbysurvive.partida.gestores.Procesos.Proceso;
+        import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
 
         import java.util.ArrayList;
 
@@ -17,12 +19,16 @@ package com.rugbysurvive.partida.tablero;
  * Clase que define la posicion y comportamiento de un boron dentro del tablero de juego
  * Created by Victor on 24/03/14.
  */
-public abstract class Boton implements GestionEntrada,Dibujable{
+public abstract class Boton implements GestionEntrada,Dibujable,Proceso{
 
 
     protected float posX;
 
     protected float posY;
+
+    protected float posYOriginal;
+
+    protected float posXOriginal;
 
     protected Entrada entrada;
 
@@ -38,6 +44,13 @@ public abstract class Boton implements GestionEntrada,Dibujable{
 
     protected int alto;
 
+    protected boolean escondido;
+
+
+
+    protected boolean procesando;
+
+
     /**
      * Constructor del elemento boton
      *
@@ -48,12 +61,16 @@ public abstract class Boton implements GestionEntrada,Dibujable{
     public Boton(float posX, float posY, Entrada entrada,String textura, int posicion) {
         this.posY = posY;
         this.posX = posX;
+        this.posXOriginal = posX;
+        this.posYOriginal = posY;
         this.entrada = entrada;
         this.textura = textura;
         this.posicion = posicion;
         ID=GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
         this.ancho =0;
         this.alto = 0;
+        this.escondido = false;
+        this.procesando = false;
     }
 
 
@@ -66,8 +83,8 @@ public abstract class Boton implements GestionEntrada,Dibujable{
     public boolean esSeleccionado(float posX, float posY) {
 
 
-        if (posX >= this.posX && posX <= this.posX+ancho){
-            if (posY >= Gdx.graphics.getHeight() - this.posY -alto && posY <= Gdx.graphics.getHeight()  -this.posY){
+        if (posX >= this.posX && posX <= this.posX+ConstantesJuego.ANCHO_BOTON){
+            if (posY >= Gdx.graphics.getHeight() - this.posY -ConstantesJuego.ALTO_BOTON && posY <= Gdx.graphics.getHeight()  -this.posY){
                 accionEntrada(this.entrada);
                 selecionado=true;
             }else{
@@ -124,65 +141,60 @@ public abstract class Boton implements GestionEntrada,Dibujable{
     public int getPosicionY() {
         return (int)this.posY;
     }
-/*
+
     @Override
-    public abstract void accionEntrada(Entrada entrada) {
+    public boolean procesar(){
 
+       if(!this.escondido){
+           if(this.posY > -140){
+                this.posY = posY -10;
+           }
 
-        //System.out.println("posicion: " + posicion);
-        // intercambio entre entrada pase o chute
-        if (entrada == Entrada.pase){
-            //introducir accion pase
-            this.entrada = Entrada.chute;
-<<<<<<< HEAD
-        this.entrada = Entrada.pase;
+           else {
+               this.escondido = true;
+               this.procesando = false;
+               return true;
+           }
+       }
 
-            } else {
-                if (entrada == Entrada.chute){
-                    //introducir accion chute
-                    this.entrada = Entrada.pase;
+       else{
+           if(this.posY <= posYOriginal){
+               this.posY = posY +10;
+           }
 
-=======
-        } else {
-            if (entrada == Entrada.chute){
-                //introducir accion chute
-                this.entrada = Entrada.pase;
->>>>>>> 3ba40cfb80f2b91a8478fe860c99b6c6a291ebed
-            }
-        }
+           else {
+               this.escondido = false;
+               this.procesando = false;
+               return true;
+           }
+       }
+       return false;
+    }
 
-        Campo.getInstanciaCampo().accionEntrada(this.entrada,0,0);
-
-
-        //obtenemos el elemento de la lista mediante la posicion le dimos al crear el boton
-        if (entrada == Entrada.listaobjetos){
-            Jugador jugador = ComponentesJuego.getComponentes().getEquipo1().getJugadorActivo();
-            ArrayList<ObjetoJugador> objetos = jugador.getPowerUP();
-            System.out.println("vida jugador antes objeto "+jugador.getVida());
-            //activamos y eliminamos el objeto de la lista
-            for (ObjetoJugador iter: objetos){
-                if (iter.getId()==this.posicion){
-                    iter.activar();
-                    System.out.println("vida jugador despues objeto "+ jugador.getVida());
-                    jugador.getPowerUP().remove(iter);
-                    break;
-                }
-            }
-            //obteniendo la instansacion de equipo obtener la de objetos de jugador activo y activar objeto
-
-        }
-
-        if (entrada == Entrada.listasuplente){
-            //obteniendo la instansacion de equipo y realizar cambio en la lista de jugadores
-            ComponentesJuego.getComponentes().getEquipo1().intercambioJugadores(posicion);
-        }
-
-        if (entrada==Entrada.finalizar){
-            //introducir accion finalizar
-
+    public void esconder(){
+        if(!this.escondido){
+            this.procesando = true;
+            ProcesosContinuos.añadirProceso(this);
         }
 
     }
-*/
 
+    public void mostrar() {
+        if(this.escondido) {
+            this.procesando = true;
+            ProcesosContinuos.añadirProceso(this);
+        }
+    }
+
+    public boolean isEscondido() {
+        return escondido;
+    }
+
+    public void setEscondido(boolean escondido) {
+        this.escondido = escondido;
+    }
+
+    public boolean isProcesando() {
+        return procesando;
+    }
 }

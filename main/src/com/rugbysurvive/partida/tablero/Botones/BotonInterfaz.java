@@ -37,10 +37,14 @@ public class BotonInterfaz extends Boton{
         if (this.entradaBoton == Entrada.pase){
             //introducir accion pase
             this.entradaBoton = Entrada.chute;
+            this.textura = "Menu/xutBoto.png";
+
+
         } else {
             if (this.entradaBoton == Entrada.chute){
                 //introducir accion chute
                 this.entradaBoton = Entrada.pase;
+                this.textura = "Menu/botoPassada.png";
             }
         }
 

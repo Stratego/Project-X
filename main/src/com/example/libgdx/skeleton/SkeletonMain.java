@@ -20,6 +20,8 @@ import com.rugbysurvive.partida.gestores.Prueba;
 import com.rugbysurvive.partida.jugadores.Posicionamiento;
 import com.rugbysurvive.partida.tablero.Boton;
 import com.rugbysurvive.partida.tablero.Botones.BotonCambioTurno;
+import com.rugbysurvive.partida.tablero.Botones.BotonFinalizarAccion;
+import com.rugbysurvive.partida.tablero.Botones.BotonFinalizarSimulacion;
 import com.rugbysurvive.partida.tablero.Botones.BotonInterfaz;
 
 import java.util.ArrayList;
@@ -69,6 +71,7 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("jugador/jugador1.png");
         nombresTexturas.add("jugador/jugador2.png");
         nombresTexturas.add("jugador/jugador4.png");
+        nombresTexturas.add("jugador/jugador3.png");
         nombresTexturas.add("jugador/jugador5.png");
         nombresTexturas.add("plantillaobjetos.png");
 
@@ -87,10 +90,10 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("Menu/marcador.png");
 
 
-
         nombresTexturas.add("botoCanviTorn.png");
         nombresTexturas.add("botonsPowerUp.png");
-        nombresTexturas.add("botoPassada.png");
+        nombresTexturas.add("Menu/botoPassada.png");
+        nombresTexturas.add("Menu/xutBoto.png");
         nombresTexturas.add("mina.png");
         nombresTexturas.add("taulellObjectes.png");
         nombresTexturas.add("TauloCanviJugadors.png");
@@ -98,12 +101,64 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("Menu/Habilidades/nivel2.png");
         nombresTexturas.add("Menu/Habilidades/nivel3.png");
 
+
         nombresTexturas.add("Menu/Habilidades/fuerza.png");
+
+
+        nombresTexturas.add("jugador/piel/jugador1pell1.png");
+        nombresTexturas.add("jugador/piel/jugador1pell2.png");
+        nombresTexturas.add("jugador/piel/jugador1pell3.png");
+        nombresTexturas.add("jugador/piel/jugador2pell1.png");
+        nombresTexturas.add("jugador/piel/jugador2pell2.png");
+        nombresTexturas.add("jugador/piel/jugador2pell3.png");
+        nombresTexturas.add("jugador/piel/jugador3pell1.png");
+        nombresTexturas.add("jugador/piel/jugador3pell2.png");
+        nombresTexturas.add("jugador/piel/jugador3pell3.png");
+        nombresTexturas.add("jugador/piel/jugador4pell1.png");
+        nombresTexturas.add("jugador/piel/jugador4pell2.png");
+        nombresTexturas.add("jugador/piel/jugador4pell3.png");
+        nombresTexturas.add("jugador/piel/jugador5pell1.png");
+        nombresTexturas.add("jugador/piel/jugador5pell2.png");
+        nombresTexturas.add("jugador/piel/jugador5pell3.png");
+
+
+        nombresTexturas.add("jugador/ropa/jugador1E1.png");
+        nombresTexturas.add("jugador/ropa/jugador1E2.png");
+        nombresTexturas.add("jugador/ropa/jugador1E3.png");
+        nombresTexturas.add("jugador/ropa/jugador1E4.png");
+        nombresTexturas.add("jugador/ropa/jugador2E1.png");
+        nombresTexturas.add("jugador/ropa/jugador2E2.png");
+        nombresTexturas.add("jugador/ropa/jugador2E3.png");
+        nombresTexturas.add("jugador/ropa/jugador2E4.png");
+        nombresTexturas.add("jugador/ropa/jugador3E1.png");
+        nombresTexturas.add("jugador/ropa/jugador3E1.png");
+        nombresTexturas.add("jugador/ropa/jugador3E2.png");
+        nombresTexturas.add("jugador/ropa/jugador3E3.png");
+        nombresTexturas.add("jugador/ropa/jugador3E4.png");
+        nombresTexturas.add("jugador/ropa/jugador4E1.png");
+        nombresTexturas.add("jugador/ropa/jugador4E2.png");
+        nombresTexturas.add("jugador/ropa/jugador4E3.png");
+        nombresTexturas.add("jugador/ropa/jugador4E4.png");
+        nombresTexturas.add("jugador/ropa/jugador5E1.png");
+        nombresTexturas.add("jugador/ropa/jugador5E2.png");
+        nombresTexturas.add("jugador/ropa/jugador5E3.png");
+        nombresTexturas.add("jugador/ropa/jugador5E4.png");
+
+
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
-        botons.add(new BotonInterfaz(ConstantesJuego.POSICION_BOTON_CHUTEPASE,0, Entrada.pase,"botoPassada.png",ConstantesJuego.ID_BOTON));
+
+        botons.add(new BotonInterfaz(ConstantesJuego.POSICION_BOTON_CHUTEPASE,0, Entrada.pase,"Menu/botoPassada.png",ConstantesJuego.ID_BOTON));
         botons.add(new BotonInterfaz(ConstantesJuego.POSICION_BOTON_OBJETOS,0, Entrada.objeto,"botonsPowerUp.png",ConstantesJuego.ID_BOTON));
         botons.add(new BotonInterfaz(ConstantesJuego.POSICION_BOTON_SUPLENTE,0, Entrada.cambiar,"Menu/botoSubstitucions.png",ConstantesJuego.ID_BOTON));
         botons.add(new BotonCambioTurno(ConstantesJuego.POSICION_BOTON_FINALIZAR,0, Entrada.finalizar,"botoCanviTorn.png",ConstantesJuego.ID_BOTON));
+
+        // LIMITE ENTRE LOS BOTONES DE INTERFAZ NORMAL Y SIMULADOR
+        botons.add(new BotonFinalizarAccion(ConstantesJuego.POSICION_BOTON_SUPLENTE,0, Entrada.cambiar,"Menu/botoSubstitucions.png",ConstantesJuego.ID_BOTON));
+        botons.add(new BotonFinalizarSimulacion(ConstantesJuego.POSICION_BOTON_FINALIZAR,0, Entrada.finalizar,"botoCanviTorn.png",ConstantesJuego.ID_BOTON));
+        // COLOCAR EL RESTO DE BOTONES DEPSUES DE ESTOS
+
+
+
         this.componentesJuego = new ComponentesJuego();
 
 
@@ -136,8 +191,7 @@ public class SkeletonMain extends Game {
         this.simular = false;
         arbitro = new Arbitro();
         this.gestor = new GestorTurnos();
-        Posicionamiento posicionamiento = new Posicionamiento();
-        posicionamiento.generarSaqueBanda(10,1,componentesJuego.getEquipo1());
+
 
     }
 
@@ -161,7 +215,24 @@ public class SkeletonMain extends Game {
             this.simular = true;
         }
         if(simular==true) {
-            this.simulador.simular();
+
+            int i=0;
+            for(Boton boton : this.botons){
+                if(i<4) {
+                    boton.esconder();
+                    i++;
+                }
+            }
+
+            if(this.botons.get(0).isEscondido() && !this.botons.get(4).isProcesando()){
+                this.botons.get(4).mostrar();
+                this.botons.get(5).mostrar();
+            }
+
+            if(!this.botons.get(4).isEscondido() && !this.botons.get(4).isProcesando()){
+                this.simulador.simular();
+            }
+
 
         }
 
