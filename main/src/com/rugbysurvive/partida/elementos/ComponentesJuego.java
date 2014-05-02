@@ -44,7 +44,7 @@ public class ComponentesJuego {
     public static ComponentesJuego getComponentes(){return componentesJuego;}
     private void generarEquipos()
     {
-        Arbitro arbitro = new Arbitro();
+        //Arbitro arbitro = new Arbitro();
         // falta añadir los objetos a cada jugador
         Jugador jugador = new Jugador(80, 90, 100, 90, 80, 70, null);
 
@@ -81,6 +81,11 @@ public class ComponentesJuego {
 
 
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),15,22);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),0,0);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),0,1);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),0,2);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),0,3);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),0,4);
         //this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),1,4);
         //this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),2,3);
         /*this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),4,7);
