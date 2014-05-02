@@ -7,11 +7,15 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
+import com.uab.lis.rugby.database.ContentProviders.EquiposMinion;
+import com.uab.lis.rugby.database.ContentProviders.MyAppContentProvider;
 import com.uab.lis.rugby.database.contracts.*;
+import com.uab.lis.rugby.database.models.Jugador;
 
 import java.io.*;
 
@@ -50,20 +54,25 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int versionAnterior, int versionNueva) {
-        db.execSQL("DROP TABLE IF EXISTS JUGADORES");
-        db.execSQL("DROP TABLE IF EXISTS OBJETOS");
-        db.execSQL("DROP TABLE IF EXISTS EQUIPOS");
-        db.execSQL("DROP TABLE IF EXISTS HABILIDADES");
-        db.execSQL("DROP TABLE IF EXISTS USUARIOS");
-        db.execSQL("DROP TABLE IF EXISTS ROLES");
-        db.execSQL("DROP TABLE IF EXISTS USUARIO_EQUIPO");
-        db.execSQL("DROP TABLE IF EXISTS JUGADOR_EQUIPO");
-        db.execSQL("DROP TABLE IF EXISTS JUGADOR_ROL");
-        db.execSQL("DROP TABLE IF EXISTS JUGADOR_OBJETO");
-        db.execSQL("DROP TABLE IF EXISTS JUGADOR_HABILIDAD");
-        db.execSQL("DROP TABLE IF EXISTS EXTRAS");
-        db.execSQL("DROP TABLE IF EXISTS JUGADOR_EXTRA");
-        db.execSQL("DROP TABLE IF EXISTS POWERUPS");
+        String[] tablas = new String[]{
+            tbJugadores.TABLE,
+            tbObjetos.TABLE,
+            tbEquipos.TABLE,
+            tbHabilidades.TABLE,
+            tbUsuarios.TABLE,
+            tbRoles.TABLE,
+            tbUsuarioEquipo.TABLE,
+            tbJugadorEquipo.TABLE,
+            tbJugadorRol.TABLE,
+            tbJugadorObjeto.TABLE,
+            tbJugadorHabilidad.TABLE,
+            tbExtras.TABLE,
+            tbJugadorExtra.TABLE,
+            tbPowerups.TABLE,
+        };
+        for(String tab : tablas){
+            db.execSQL("DROP TABLE IF EXISTS "+tab);
+        }
         onCreate(db);
     }
 
@@ -71,8 +80,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         @Override
         protected Void doInBackground(Void... voids) {
+            /*String uriBase = "com.uab.lis.rugby";
+
             ContentResolver cr = context.getContentResolver();
-            //...
+            Jugador jugador = new Jugador();
+            jugador.setNombre("adria");
+            cr.insert(Uri.parse(uriBase+"/"+tbEquipos.TABLE),Jugador.generateValues(jugador));
+            */
             return null;
         }
 
@@ -96,7 +110,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             FileInputStream fis = new FileInputStream(dbFile);
 
             String outFileName = Environment.getExternalStorageDirectory()
-                    + "/"+nomBD+".db";
+                    + "/"+nomBD;
             //Open the empty db as the output stream
             OutputStream output = new FileOutputStream(outFileName);
             //transfer bytes from the inputfile to the outputfile
