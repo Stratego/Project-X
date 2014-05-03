@@ -26,7 +26,7 @@ public class Choque extends Regla{
 
         if(this.arbitro.esSucesoVisible(this.jugadorDefensor.getPosicionX(),this.jugadorDefensor.getPosicionY())==true){
             System.out.println("ha ocurrido un choque");
-            if (this.jugadorDefensor.getPosicionY()>=7 && this.jugadorDefensor.getPosicionY()<=22 ){
+            if (this.jugadorDefensor.getPosicionX()>=7 && this.jugadorDefensor.getPosicionX()<=22 ){
                 this.posicionamiento.generarMele(this.jugadorDefensor.getPosicionX(),this.jugadorDefensor.getPosicionY());
             }else{
                 //GENERAR CHUTE

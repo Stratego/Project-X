@@ -5,6 +5,7 @@ import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.arbitro.Arbitro;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.tablero.Campo;
 import com.rugbysurvive.partida.tablero.Casilla;
@@ -89,8 +90,17 @@ public class Posicionamiento {
         Campo campo = ComponentesJuego.getComponentes().getCampo();
         jugadoresCercanos(posX,posY);
         int x = posX;
+        if (posY<=ConstantesJuego.POSICION_SAQUE_BANDA_INFERIOR+1){
+            posY+=1;
+        }else if (posY>=ConstantesJuego.POSICION_SAQUE_BANDA_SUPERIOR-1){
+            posY-=1;
+        }
         int y = posY +1;
-        /*DireccionJugador direccion1 ;
+
+
+
+        Arbitro arbitro = Arbitro.getInstancia();
+        DireccionJugador direccion1 ;
         DireccionJugador direccion2 ;
         if (jugadaequipo1.get(0).getMiEquipo().getLado()==Lado.derecha){
             direccion1= DireccionJugador.izquierda;
@@ -100,13 +110,15 @@ public class Posicionamiento {
             direccion1= DireccionJugador.derecha;
             direccion2= DireccionJugador.izquierda;
             System.out.println("entra condicion 2");
-        }*/
+        }
 
         for (Jugador jugador1:jugadaequipo1){
             campo.eliminarElemento(jugador1.getPosicionY(),jugador1.getPosicionX());
-            jugador1.setDireccion(DireccionJugador.derecha);
+            jugador1.setDireccion(direccion1);
             jugador1.colocar(new Casilla((float)x,(float)y));
-
+            if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
+                arbitro.mover();
+            }
 
 
             y -=1;
@@ -120,8 +132,11 @@ public class Posicionamiento {
         y = posY +1;
         for (Jugador jugador2:jugadaequipo2){
             campo.eliminarElemento(jugador2.getPosicionY(),jugador2.getPosicionX());
-            jugador2.setDireccion(DireccionJugador.izquierda);
+            jugador2.setDireccion(direccion2);
             jugador2.colocar(new Casilla((float) x, (float) y));
+            if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
+                arbitro.mover();
+            }
 
 
             y -=1;
@@ -130,6 +145,7 @@ public class Posicionamiento {
                 y=posY;
             }
         }
+
 
         jugadaequipo1.clear();
         jugadaequipo2.clear();
@@ -151,14 +167,29 @@ public class Posicionamiento {
         jugadoresCercanos(posX,posY);
         int x = posX-1;
         int y = posY +3;
-        DireccionJugador direccion=DireccionJugador.derecha;
+        Arbitro arbitro = Arbitro.getInstancia();
+        DireccionJugador direccion1 ;
+        DireccionJugador direccion2 ;
+        if (jugadaequipo1.get(0).getMiEquipo().getLado()==Lado.derecha){
+            direccion1= DireccionJugador.izquierda;
+            direccion2= DireccionJugador.derecha;
+            System.out.println("entra condicion 1");
+        }else{
+            direccion1= DireccionJugador.derecha;
+            direccion2= DireccionJugador.izquierda;
+            System.out.println("entra condicion 2");
+        }
         if (posY>=ConstantesJuego.POSICION_SAQUE_BANDA_SUPERIOR){
             y = posY -3;
         }
         for (Jugador jugador1:jugadaequipo1){
                 campo.eliminarElemento(jugador1.getPosicionY(),jugador1.getPosicionX());
-                jugador1.setDireccion(direccion);
+                jugador1.setDireccion(direccion1);
                 jugador1.colocar(new Casilla((float)x,(float)y));
+
+            if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
+                arbitro.mover();
+            }
             if (posY>=ConstantesJuego.POSICION_SAQUE_BANDA_SUPERIOR){
                 y +=1;
             }else{
@@ -171,9 +202,9 @@ public class Posicionamiento {
                     break;
                 }else{
                     if (y>=ConstantesJuego.POSICION_SAQUE_BANDA_SUPERIOR){
-                        direccion= DireccionJugador.abajo;
+                        direccion1= DireccionJugador.abajo;
                     }else{
-                        direccion= DireccionJugador.arriba;
+                        direccion1= DireccionJugador.arriba;
                     }
                 }
             }
@@ -190,8 +221,12 @@ public class Posicionamiento {
         for (Jugador jugador2:jugadaequipo2){
 
             campo.eliminarElemento(jugador2.getPosicionY(),jugador2.getPosicionX());
-            jugador2.setDireccion(DireccionJugador.izquierda);
+            jugador2.setDireccion(direccion2);
             jugador2.colocar(new Casilla((float) x, (float) y));
+
+            if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
+                arbitro.mover();
+            }
 
             if (posY>=ConstantesJuego.POSICION_SAQUE_BANDA_SUPERIOR){
                 y +=1;
@@ -206,9 +241,9 @@ public class Posicionamiento {
                     break;
                 }else{
                     if (y>=ConstantesJuego.POSICION_SAQUE_BANDA_SUPERIOR){
-                        direccion= DireccionJugador.abajo;
+                        direccion2= DireccionJugador.abajo;
                     }else{
-                        direccion= DireccionJugador.arriba;
+                        direccion2= DireccionJugador.arriba;
                     }
                 }
             }

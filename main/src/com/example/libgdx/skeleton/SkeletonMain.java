@@ -189,7 +189,7 @@ public class SkeletonMain extends Game {
 
         this.calculandoEquipoInicio = true;
         this.simular = false;
-        arbitro = new Arbitro();
+        //arbitro = new Arbitro();
         this.gestor = new GestorTurnos();
         //Posicionamiento posicionamiento = new Posicionamiento();
         //posicionamiento.generarMele(20,10);

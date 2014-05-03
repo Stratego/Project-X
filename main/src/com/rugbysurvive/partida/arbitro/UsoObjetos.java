@@ -17,10 +17,11 @@ public class UsoObjetos extends Regla {
     public boolean arbitrar() {
         if(this.arbitro.esSucesoVisible(this.jugador.getPosicionX(),this.jugador.getPosicionY())==true){
             System.out.println("ha ocurrido un choque");
-            if (this.jugador.getPosicionY()>=7 && this.jugador.getPosicionY()<=22 ){
+            if (this.jugador.getPosicionX()>=7 && this.jugador.getPosicionX()<=22 ){
                 this.posicionamiento.generarMele(this.jugador.getPosicionX(),this.jugador.getPosicionY());
             }else{
                 //GENERAR CHUTE
+                System.out.println("generando chute");
             }
 
             return true;
