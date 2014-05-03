@@ -17,6 +17,7 @@ import com.rugbysurvive.partida.gestores.Entrada.GestorEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
 import com.rugbysurvive.partida.gestores.Prueba;
+import com.rugbysurvive.partida.jugadores.Posicionamiento;
 import com.rugbysurvive.partida.tablero.Boton;
 import com.rugbysurvive.partida.tablero.Botones.BotonCambioTurno;
 import com.rugbysurvive.partida.tablero.Botones.BotonFinalizarAccion;
@@ -190,6 +191,9 @@ public class SkeletonMain extends Game {
         this.simular = false;
         arbitro = new Arbitro();
         this.gestor = new GestorTurnos();
+        //Posicionamiento posicionamiento = new Posicionamiento();
+        //posicionamiento.generarMele(20,10);
+        //posicionamiento.generarSaqueBanda(20,18,ComponentesJuego.getComponentes().getEquipo1());
 
     }
 

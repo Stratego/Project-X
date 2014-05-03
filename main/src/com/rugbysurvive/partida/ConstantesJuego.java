@@ -71,6 +71,9 @@ public class ConstantesJuego {
     public static final int POSICION_X_ESCUDO_EQUIPO2 = (int)((Gdx.graphics.getWidth()/2 +70));
     public static final int POSICION_Y_ESCUDO = (int)((Gdx.graphics.getHeight()-70));
 
+    public static final int POSICION_SAQUE_BANDA_INFERIOR = 1;
+    public static final int POSICION_SAQUE_BANDA_SUPERIOR = 18;
+
 
     public static final int ANCHO_TABLON_SUSTITUCION = (int) (96 * constanteRescalado);
     public static final int LARGO_TABLON_SUSITUCION = (int) (768 * constanteRescalado);
@@ -79,6 +82,7 @@ public class ConstantesJuego {
 
     protected static final double  MAX_MULTIPLICADOR =2.0;
     protected static final double MIN_MULTIPLICADOR = 0.75;
+
     protected static ConstantesJuego constantes ;
     private static ResolucionPantalla resolucionPantalla = ResolucionPantalla.pequeña;
 

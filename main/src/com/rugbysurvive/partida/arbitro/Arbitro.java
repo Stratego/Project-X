@@ -28,7 +28,7 @@ public class Arbitro implements Dibujable{
 
     private DireccionJugador direccion = DireccionJugador.izquierda;
 
-    private int posX =15;
+    private int posX =25;
 
     private int posY = 10;
 
@@ -44,6 +44,7 @@ public class Arbitro implements Dibujable{
     public Arbitro() {
         this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
         arbitro=this;
+        ComponentesJuego.getComponentes().getCampo().getCasilla(this.posY,this.posX).añadirElemento(arbitro);
         generarCampoVision();
     }
     public static Arbitro getInstancia() {
@@ -70,8 +71,8 @@ public class Arbitro implements Dibujable{
         }
         else {
 
-            Campo campo = ComponentesJuego.getComponentes().getCampo();
-            this.quitar();
+            //ComponentesJuego.getComponentes().getCampo().getCasilla(this.posY,this.posX).eliminarElemento();
+            //this.quitar();
             //int rangoAleatorio = (int)Math.random()*(movimiento-(movimiento*=-1))+(movimiento*=-1);
             int rangoAleatorio = new Random().nextInt(movimiento);
             //int positivoNegativo= new Random().nextInt(1);
@@ -90,6 +91,8 @@ public class Arbitro implements Dibujable{
             //System.out.println(rangoX);
             //System.out.println(rangoY);
             if (controlPosicion(rangoX,rangoY)==true){
+                ComponentesJuego.getComponentes().getCampo().getCasilla(this.posY,this.posX).eliminarElemento();
+                this.quitar();
                 System.out.println("moviendo arbitro");
                 this.posX= rangoX;
                 this.posY = rangoY;
@@ -99,6 +102,7 @@ public class Arbitro implements Dibujable{
                 System.out.println(rangoY);
                 System.out.println(direccion);
                 generarCampoVision();
+                ComponentesJuego.getComponentes().getCampo().getCasilla(this.posY,this.posX).añadirElemento(this);
             }
 
 
@@ -197,11 +201,15 @@ public class Arbitro implements Dibujable{
     }
 
 
-
+    /**
+     * Controla que la posicision en la que se va colocar el arbitro sea posible
+     * @param x posible cordenada x
+     * @param y posible cordenada y
+     * @return
+     */
     public boolean controlPosicion(int x, int y){
 
-        //int x = this.posX;
-        //int y = this.posY;
+
         boolean colocable = false;
 
 

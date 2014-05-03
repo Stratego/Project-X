@@ -45,7 +45,7 @@ public class ComponentesJuego {
     public static ComponentesJuego getComponentes(){return componentesJuego;}
     private void generarEquipos()
     {
-        Arbitro arbitro = new Arbitro();
+        //Arbitro arbitro = new Arbitro();
         // falta añadir los objetos a cada jugador
         Jugador jugador = new Jugador(80, 90, 100, 90, 80, 70, null);
 
@@ -54,7 +54,7 @@ public class ComponentesJuego {
         ColocadorObjetosCampo objeto2 = new ColocadorObjetosCampo(1,10,"mina.png",jugador,new MinaCampo("mina.png"));
 
         jugador.añadirObjeto(objeto);
-        jugador.añadirObjeto(objeto2);º
+        jugador.añadirObjeto(objeto2);
         jugador.añadirObjeto(objeto);
         jugador.añadirObjeto(objeto);
 
@@ -98,6 +98,7 @@ public class ComponentesJuego {
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),15,22);
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),12,12);
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),3,22);
+
 
 
         Posicionamiento.generarSaqueCampo(this.campo,this.equipo1, Lado.izquierda);
