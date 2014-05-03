@@ -4,7 +4,6 @@ import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.extras.Color;
-import com.rugbysurvive.partida.arbitro.Arbitro;
 import com.rugbysurvive.partida.elementos.objetos.objetosCampo.MinaCampo;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.ColocadorObjetosCampo;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
@@ -70,34 +69,34 @@ public class ComponentesJuego {
         jugador.setDireccion(DireccionJugador.abajo);
         jugador.setEstado(new ConPelota());
 
-        this.equipo1.añadirJugador(jugador,8,8);
+        this.equipo1.añadirJugador(jugador,12,25);
 
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),9,9);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),10,10);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),11,25);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),11,11);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),12,12);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),13,13);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),14,14);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),3,12);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),15,15);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),16,16);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),17,17);
+
+
+        /*this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),3,12);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),4,13);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),5,14);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),5,14);*/
 
 
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),3,12);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),4,13);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),5,14);
-
-
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),10,10);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),11,11);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),12,12);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),13,13);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),14,14);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),15,21);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),15,25);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),12,19);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),13,20);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),14,21);
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),15,22);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),12,12);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),3,22);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),16,23);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),17,24);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),18,25);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),19,26);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),20,27);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),21,21);
 
 
 

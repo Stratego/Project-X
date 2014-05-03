@@ -126,10 +126,43 @@ public class Movimiento extends Accion {
 
         if(incrementa == true)
         {
+
+
+        /*Giramos la textura del jugador segun convenga*/
+         /*   if((this.camino[contador][0] > this.camino[contador-1][0]) && (this.camino[contador][1] == this.camino[contador-1][1]))
+            {
+                jugador.setDireccion(DireccionJugador.derecha);
+            }
+            else
+            {
+                if((this.camino[contador][0] < this.camino[contador-1][0]) && (this.camino[contador][1] == this.camino[contador-1][1]))
+                {
+                    jugador.setDireccion(DireccionJugador.izquierda);
+                }
+                else
+                {
+                    if((this.camino[contador][0] == this.camino[contador-1][0]) && (this.camino[contador][1] > this.camino[contador-1][1]))
+                    {
+                        jugador.setDireccion(DireccionJugador.arriba);
+                    }
+                    else
+                    {
+                        if((this.camino[contador][0] == this.camino[contador-1][0]) && (this.camino[contador][1] < this.camino[contador-1][1]))
+                        {
+                            jugador.setDireccion(DireccionJugador.abajo);
+                        }
+                    }
+                }
+            }*/
+
             /*Referenciamos jugador y casillas en ambos sentidos*/
             this.jugador.colocar(Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]));
-            GestorGrafico.getCamara().variarPosicion(this.camino[contador][0]*64,this.camino[contador][1]*64);
+            //eliminar de alguna forma la textura de la casilla anterior
+
+
             Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).setJugador(this.jugador);
+            GestorGrafico.getCamara().variarPosicion(this.camino[contador][0]*64,this.camino[contador][1]*64);
+
 
             /*Quitamos la referencia de la posicion anterior del jugador en la casilla*/
             if(contador > 0)
@@ -137,20 +170,24 @@ public class Movimiento extends Accion {
                 Campo.getInstanciaCampo().getCasilla(this.camino[contador-1][1],this.camino[contador-1][0]).setJugador(null);
                 if(contador < this.camino.length)
                 {
-                    if(this.jugador.getMiEquipo().getLado() == Lado.izquierda)
+                    /*Solo un jugador con pelota puede marcar*/
+                    if(jugador.getEstado() instanceof ConPelota)
                     {
-                        if(this.camino[contador][0] >= 28)
+                        if(this.jugador.getMiEquipo().getLado() == Lado.izquierda)
                         {
-                            Marcador.getInstanceMarcador().sumarPuntuacion(1, jugador);
-                            return true;
+                            if(this.camino[contador][0] >= 28)
+                            {
+                                Marcador.getInstanceMarcador().sumarPuntuacion(7, jugador);
+                                return true;
+                            }
                         }
-                    }
-                    else
-                    {
-                        if(this.camino[contador][0] <= 1)
+                        else
                         {
-                            Marcador.getInstanceMarcador().sumarPuntuacion(1, jugador);
-                            return true;
+                            if(this.camino[contador][0] <= 1)
+                            {
+                                Marcador.getInstanceMarcador().sumarPuntuacion(7, jugador);
+                                return true;
+                            }
                         }
                     }
                 }
