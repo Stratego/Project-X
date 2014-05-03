@@ -18,11 +18,12 @@ import com.rugbysurvive.partida.tablero.Lado;
  * Created by aitor on 15/04/14.
  */
 public class ComponentesJuego {
-    protected Campo campo;
-    protected Equipo equipo1;
-    protected Equipo equipo2;
-    protected Marcador marcador;
-    protected static ComponentesJuego componentesJuego;
+    private Campo campo;
+    private Equipo equipo1;
+    private Equipo equipo2;
+    private Marcador marcador;
+
+    private static ComponentesJuego componentesJuego;
 
 
 
@@ -44,7 +45,7 @@ public class ComponentesJuego {
     public static ComponentesJuego getComponentes(){return componentesJuego;}
     private void generarEquipos()
     {
-        Arbitro arbitro = new Arbitro();
+        //Arbitro arbitro = new Arbitro();
         // falta añadir los objetos a cada jugador
         Jugador jugador = new Jugador(80, 90, 100, 90, 80, 70, null);
 
@@ -77,13 +78,28 @@ public class ComponentesJuego {
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),12,12);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),13,13);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),14,14);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),3,12);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),4,13);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),5,14);
 
 
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),3,12);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),4,13);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),5,14);
+
+
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),10,10);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),11,11);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),12,12);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),13,13);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),14,14);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),15,21);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),15,25);
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),15,22);
-        //this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),1,4);
-        //this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),2,3);
-        /*this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),4,7);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100,this.equipo2),0,5);*/
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),12,12);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),3,22);
+
+
 
         Posicionamiento.generarSaqueCampo(this.campo,this.equipo1, Lado.izquierda);
         Posicionamiento.generarSaqueCampo(this.campo,this.equipo2, Lado.derecha);

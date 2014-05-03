@@ -21,9 +21,7 @@ public class BotonCambioTurno extends Boton {
      * @param posicion
      */
     public BotonCambioTurno(float posX, float posY, Entrada entrada, String textura, int posicion) {
-        super(posX, posY, entrada, textura, posicion);
-        this.ancho = ConstantesJuego.variables().getAnchoBoton();
-        this.alto =ConstantesJuego.variables().getAnchoBoton();
+        super(posX, posY, entrada, textura, posicion,ConstantesJuego.ANCHO_BOTON,ConstantesJuego.ALTO_BOTON);
 
     }
 

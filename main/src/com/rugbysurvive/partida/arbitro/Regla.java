@@ -1,5 +1,7 @@
 package com.rugbysurvive.partida.arbitro;
 
+import com.rugbysurvive.partida.jugadores.Posicionamiento;
+
 /**
  * Created by aitor on 26/04/14.
  * Esqueleto del conjunto de reglas que deben ser arbitradas.
@@ -10,6 +12,7 @@ package com.rugbysurvive.partida.arbitro;
 public abstract class Regla {
 
     protected Arbitro arbitro;
+    protected Posicionamiento posicionamiento = new Posicionamiento();
 
     public Regla() {
        this.arbitro = Arbitro.getInstancia();

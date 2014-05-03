@@ -34,23 +34,25 @@ public class BotonSuplente extends Boton {
      * @param posY     posicion y en el tablero
      * @param entrada  tipo de boton que sera
      * @param textura
-     * @param posicion
      */
-    public BotonSuplente(float posX, float posY, Entrada entrada, String textura, int posicion,Jugador jugador) {
-        super(posX, posY, entrada, textura, posicion);
+    public BotonSuplente(float posX, float posY, Entrada entrada, String textura,Jugador jugador) {
+
+
+        super(posX, posY, entrada, textura,0,ConstantesJuego.LARGO_TABLON_SUSITUCION,ConstantesJuego.ANCHO_TABLON_SUSTITUCION);
         this.jugador = jugador;
         this.habilidades = new ArrayList<ElementoDibujable>();
         this.capacidadHabilidades = new ArrayList<ElementoDibujable>();
         this.dibujoJugador = new ArrayList<ElementoDibujable>();
         this.mostrarHabilidades();
-        this.ancho = ConstantesJuego.getAnchoBotonSuplentes();
-        this.alto =ConstantesJuego.getAltoBotonSuplentes();
+
     }
 
     @Override
     public void accionEntrada(Entrada entrada) {
+        System.out.println("INTERCAMBIO De JUGADOres");
         //obteniendo la instansacion de equipo y realizar cambio en la lista de jugadores
-        ComponentesJuego.getComponentes().getEquipo1().intercambioJugadores(posicion);
+        ComponentesJuego.getComponentes().getEquipo1().intercambioJugadores(this.jugador);
+        ComponentesJuego.getComponentes().getEquipo2().intercambioJugadores(this.jugador);
     }
 
     private void mostrarHabilidades(){

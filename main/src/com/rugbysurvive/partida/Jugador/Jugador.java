@@ -58,6 +58,7 @@ public class Jugador implements GestionEntrada {
 
     public Entrada paseOChute = Entrada.pase;
 
+    public int aspecto;
     /**
      * Constructor de jugador
      * @param fuerza Indica la fuerza de un jugador
@@ -67,6 +68,7 @@ public class Jugador implements GestionEntrada {
      */
     public Jugador(int fuerza, int vida, int defensa, int habilidad, int resistencia, int ataque, Equipo equipo)
     {
+        this.aspecto = GeneradorImagenJugador.generarAspecto();
         this.Fuerza= fuerza;
         this.Vida = vida;
         this.Defensa = defensa;
@@ -87,7 +89,7 @@ public class Jugador implements GestionEntrada {
         this.textura = "jugador1.png";
         this.color = Color.azul;
         this.direccion = DireccionJugador.izquierda;
-        this.texturas = GeneradorImagenJugador.generarTexturas(this.color,DireccionJugador.izquierda);
+        this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,DireccionJugador.izquierda);
 
 
     }
@@ -138,13 +140,15 @@ public class Jugador implements GestionEntrada {
      */
     public void quitar(){
         this.casilla = null;
-        GestorGrafico.generarDibujante().eliminarTextura(id);
         this.seleccion.borrar();
         this.seleccion = null;
         id = -1;
         this.enJuego = false;
         this.seleccionado = false;
         this.bloqueado = false;
+        for(ElementoDibujable elemento : this.texturas){
+            elemento.borrar();
+        }
 
 
     }
@@ -206,7 +210,7 @@ public class Jugador implements GestionEntrada {
     public void setDireccion(DireccionJugador direccion)
     {
         this.direccion = direccion;
-        this.texturas = GeneradorImagenJugador.generarTexturas(this.color,direccion);
+        this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,direccion);
 
     }
 
@@ -539,7 +543,7 @@ public class Jugador implements GestionEntrada {
      */
     public ArrayList<ElementoDibujable> getTexturasMuestreo(){
 
-        return GeneradorImagenJugador.generarTexturasIntefaz(this.color, DireccionJugador.frontal);
+        return GeneradorImagenJugador.generarTexturasIntefaz(this.color,this.aspecto, DireccionJugador.frontal);
     }
 
     public Color getColor() {
@@ -548,7 +552,7 @@ public class Jugador implements GestionEntrada {
 
     public void setColor(Color color) {
         this.color = color;
-        this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.direccion);
+        this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,this.direccion);
     }
 
 }

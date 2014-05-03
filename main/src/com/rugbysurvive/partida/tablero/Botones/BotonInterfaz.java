@@ -23,10 +23,9 @@ public class BotonInterfaz extends Boton{
      * @param posicion
      */
     public BotonInterfaz(float posX, float posY, Entrada entrada, String textura, int posicion) {
-        super(posX, posY, entrada, textura, posicion);
+        super(posX, posY, entrada, textura, posicion,ConstantesJuego.ANCHO_BOTON,ConstantesJuego.ALTO_BOTON);
         this.entradaBoton = entrada;
-        this.ancho = ConstantesJuego.variables().getAnchoBoton();
-        this.alto =ConstantesJuego.variables().getAnchoBoton();
+
 
 
     }
