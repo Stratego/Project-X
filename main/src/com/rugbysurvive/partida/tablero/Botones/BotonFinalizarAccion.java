@@ -23,10 +23,8 @@ public class BotonFinalizarAccion extends Boton {
      * @param posicion
      */
     public BotonFinalizarAccion(float posX, float posY, Entrada entrada, String textura, int posicion) {
-        super(posX, posY, entrada, textura, posicion);
+        super(posX, posY, entrada, textura, posicion,ConstantesJuego.ANCHO_BOTON,ConstantesJuego.ALTO_BOTON);
         this.objetoElegido = false;
-        this.ancho= ConstantesJuego.getAnchoBotonObjetos();
-        this.alto=ConstantesJuego.getAltoBotonObjetos();
         this.posY = -140;
         this.setEscondido(true);
     }

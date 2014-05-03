@@ -37,10 +37,9 @@ public class ConstantesJuego {
     //public static final int POSICION_BOTON_OBJETOS = POSICION_BOTON_SUPLENTE - separacionBotones;
     //public static final int POSICION_BOTON_CHUTEPASE = POSICION_BOTON_OBJETOS - separacionBotones;
 
-    public static final int ALTO_BOTON_OBJETOS = 64;
+    public static final int ALTO_BOTON_OBJETOS = 64 ;
     public static final int ANCHO_BOTON_OBJETOS = 64;
-    public static final int ALTO_BOTON_SUPLENTES = 92;
-    public static final int ANCHO_BOTON_SUPLENTES = 768;
+
     public static  int POSICION_INICIAL_Y_BOTON_SUPLENTES=(int)((ALTO_BOTON_REAL * constanteRescalado)+2);
     //public static final int POSICION_INICIAL_Y_BOTON_OBJETOS=Gdx.graphics.getHeight()-80;
     // public static final int POSICION_INICIAL_X_BOTON_OBJETOS=Gdx.graphics.getWidth()-230;
@@ -111,13 +110,6 @@ public class ConstantesJuego {
         return generarTamaño(ANCHO_BOTON_OBJETOS);
     }
 
-    public static int getAltoBotonSuplentes() {
-        return generarTamaño(ALTO_BOTON_SUPLENTES);
-    }
-
-    public static int getAnchoBotonSuplentes() {
-        return generarTamaño(ANCHO_BOTON_SUPLENTES);
-    }
 
     public void sumarMultiplicado(){
         if(this.multiplicado < MAX_MULTIPLICADOR){

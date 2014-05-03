@@ -12,6 +12,7 @@ import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.gestores.Texto;
 import com.rugbysurvive.partida.jugadores.Equipo;
 import com.rugbysurvive.partida.tablero.Boton;
+import com.rugbysurvive.partida.tablero.Botones.BotonDesplazamiento;
 import com.rugbysurvive.partida.tablero.Botones.BotonObjeto;
 import com.rugbysurvive.partida.tablero.Botones.BotonSuplente;
 
@@ -58,35 +59,69 @@ public class Lista {
 
     ElementoDibujable plantillaObjetos;
 
-    public Lista(){
 
-    }
+    private static int posicionInicial = 0;
+    private static int posicionFinal = 0;
+
+
+
+
+    private Boton botonArriba = null;
+
+
+    private Boton botonAbajo =null;
+
     /**
      * Obtiene la lista de suplentes del equipo y la dibuja en pantalla
      */
     public void listaSuplentes(){
 
+
+
         int y = ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES;
-        int posicion = ConstantesJuego.JUGADORES_CAMPO;
 
+        listaSuplentes = new ArrayList<Boton>();
+        Equipo equipo1 = ComponentesJuego.getComponentes().getEquipo1();
+        Equipo equipo2 = ComponentesJuego.getComponentes().getEquipo2();
+        Equipo equipoSeleccionado = equipo2;
 
-        equipo = ComponentesJuego.getComponentes().getEquipo1();
-
-        if (equipo.hayJugadorSelecionado()==true){
-
-        ArrayList<Jugador> suplentes= equipo.listaSuplentes();
-        //suplentes = equipo.listaSuplentes();
-
-        System.out.println("entrada bucle");
-        //System.out.println(suplentes.size());
-
-        for (Jugador iterador : suplentes){
-            listaSuplentes.add(new BotonSuplente(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y, Entrada.listasuplente,"TauloCanviJugadors.png",posicion,iterador));
-            y += ConstantesJuego.ANCHO_TABLON_SUSTITUCION;
-            posicion += 1;
+        if(equipo1.hayJugadorSelecionado()){
+            equipoSeleccionado  = equipo1;
         }
-        suplentes.clear();
         estadoSuplente =true;
+
+        if (equipoSeleccionado.hayJugadorSelecionado()){
+
+            ArrayList<Jugador> suplentes= equipoSeleccionado.listaSuplentes();
+            int posicion = posicionInicial;
+
+
+             for (Jugador iterador : suplentes) {
+
+                 if(posicion < posicionInicial +3) {
+                    listaSuplentes.add(new BotonSuplente(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y,
+                                        Entrada.listasuplente,"TauloCanviJugadors.png",iterador));
+                    y += ConstantesJuego.ANCHO_TABLON_SUSTITUCION;
+                    posicion++;
+                 }
+             }
+
+
+
+            if(posicionInicial >0){
+                this.botonAbajo = new BotonDesplazamiento(ConstantesJuego.POSICION_BOTON_CHUTEPASE-100,100,Entrada.listasuplente,
+                        "boto.png",1,this);
+                this.botonArriba.mostrar();
+            }
+            if(posicionInicial +3 < suplentes.size()- 1){
+                this.botonArriba = new BotonDesplazamiento(ConstantesJuego.POSICION_BOTON_CHUTEPASE-100,200,Entrada.listasuplente,
+                        "boto.png",0,this);
+                this.botonArriba.mostrar();
+            }
+
+
+
+
         }
     }
 
@@ -98,6 +133,13 @@ public class Lista {
 
         for (Boton iterador : listaSuplentes ){
             iterador.borrar();
+        }
+
+        if(this.botonAbajo != null){
+            this.botonAbajo.borrar();
+        }
+        if(this.botonArriba != null){
+            this.botonArriba.borrar();
         }
 
         jugadores.clear();
@@ -217,18 +259,33 @@ public class Lista {
      * @return lista activa
      */
     public  ArrayList<Boton> listaActiva (){
-        ArrayList<Boton> listaActiva= new ArrayList <Boton>();
 
         if (estadoSuplente){
-          listaActiva=listaSuplentes;
+          return this.listaSuplentes;
         }
         if (estadoObjeto){
-            listaActiva = listaObjetos;
+            return this.listaObjetos;
         }
-        return listaActiva;
+        return new ArrayList<Boton>();
 
     }
 
+    public void reiniciarPosicionamientoLista(){
+        posicionInicial =0;
+    }
+
+    public void setPosicionListaSuplentesInicial(int posicion){
+       posicionInicial = posicion;
+    }
+    public int getPosicionListaSuplentesInicial(){
+        return posicionInicial;
+    }
+    public Boton getBotonArriba() {
+        return botonArriba;
+    }
+    public Boton getBotonAbajo() {
+        return botonAbajo;
+    }
 
 
 }
