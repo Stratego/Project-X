@@ -7,7 +7,6 @@ import com.rugbysurvive.partida.Jugador.extras.GeneradorImagenJugador;
 import com.rugbysurvive.partida.Simulador.Accion;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
-import com.rugbysurvive.partida.gestores.Entrada.DibujableEscalado;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
@@ -361,7 +360,7 @@ public class Jugador implements GestionEntrada {
         {
             if(this.getBloqueado() == false)
             {
-                System.out.println(posX+"-"+posY+"-------"+this.getPosicionX()+"-"+this.getPosicionY());
+                //System.out.println(posX+"-"+posY+"-------"+this.getPosicionX()+"-"+this.getPosicionY());
                 for (int i = 0; i < 20; i++)
                 {
                     for (int j = 0; j < 30; j++)
@@ -401,7 +400,7 @@ public class Jugador implements GestionEntrada {
                             if(entrada == Entrada.clic)
                             {
                                 this.setSeleccionado(true);
-                                System.out.println(">---------Me seleccionan-------------<");
+                                System.out.println(">---------Me seleccionan-------------<"+this.getEstado());
                                 GestorGrafico.getCamara().bloquear();
                             }
                         }
