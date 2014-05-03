@@ -31,4 +31,6 @@ public interface Dibujable {
      */
     public int getPosicionY();
 
+
+
 }

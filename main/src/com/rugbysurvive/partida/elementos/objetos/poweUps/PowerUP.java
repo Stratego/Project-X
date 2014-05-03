@@ -2,6 +2,7 @@ package com.rugbysurvive.partida.elementos.objetos.poweUps;
 
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.arbitro.UsoObjetos;
 import com.rugbysurvive.partida.elementos.objetos.Objeto;
 import com.rugbysurvive.partida.jugadores.Habilidades;
 
@@ -18,10 +19,11 @@ public class PowerUP extends Objeto {
     protected Habilidades habilidad;
     protected int modificacion;
     protected Jugador jugador;
+    UsoObjetos usoObjetos;
 
     public PowerUP(int id,int vida,String imagen, Habilidades habilidad,int modificacion,Jugador jugador) {
 
-        super(id, vida, imagen, habilidad,modificacion, jugador);
+        super(id, vida, imagen,jugador);
 
         this.id=id;
         this.vida = vida;
@@ -36,6 +38,8 @@ public class PowerUP extends Objeto {
 
     @Override
     protected void iniciar() {
+        usoObjetos = new UsoObjetos(this.jugador);
+        usoObjetos.arbitrar();
         //int valorActual = 0;
      switch (habilidad)
         {

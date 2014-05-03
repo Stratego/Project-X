@@ -27,13 +27,11 @@ public abstract class Objeto extends ObjetoJugador {
 
 
 
-    public Objeto(int id,int vida,String imagen, Habilidades habilidad,int modificacion,Jugador jugador){
+    public Objeto(int id,int vida,String imagen,Jugador jugador){
             super(id,imagen);
             this.id=id;
             this.vida = vida;
             this.imagen = imagen;
-            this.habilidad = habilidad;
-            this.modificacion = modificacion;
 
             this.jugador = jugador;
         }

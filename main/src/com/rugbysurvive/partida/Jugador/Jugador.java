@@ -2,10 +2,12 @@ package com.rugbysurvive.partida.Jugador;
 
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+import com.rugbysurvive.partida.Jugador.extras.Color;
+import com.rugbysurvive.partida.Jugador.extras.GeneradorImagenJugador;
 import com.rugbysurvive.partida.Simulador.Accion;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
-import com.rugbysurvive.partida.gestores.Dibujable;
+import com.rugbysurvive.partida.gestores.Entrada.DibujableEscalado;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
@@ -17,14 +19,17 @@ import java.util.ArrayList;
 /**
  * Created by Victor on 27/03/14.
  */
-public class Jugador implements GestionEntrada, Dibujable {
+public class Jugador implements GestionEntrada {
 
     private static final int MAXIMO_OBJETOS = 4;
-    private String textura ;
+    private String textura;
     private DireccionJugador direccion;
     private ElementoDibujable seleccion;
     private ElementoDibujable bloqueo;
 
+
+
+    private Color color;
     private Estado estado;
     private Accion accion = null;
     /*Le asignamos aquí tambien la posicion en la que se encuentra el jugador?*/
@@ -34,13 +39,17 @@ public class Jugador implements GestionEntrada, Dibujable {
     public boolean seleccionado = false;
     public boolean bloqueado = false;
 
+
+    private ArrayList<ElementoDibujable> texturas;
+
     private ArrayList<ObjetoJugador> powerup;
 
     public int Fuerza;
-
     public int Vida;
-
     public int Defensa;
+    public int Habilidad;
+    public int Resistencia;
+    public int Ataque;
 
     public int id;
 
@@ -50,12 +59,23 @@ public class Jugador implements GestionEntrada, Dibujable {
 
     public Entrada paseOChute = Entrada.pase;
 
-
-    public Jugador(int fuerza,int vida, int defensa, Equipo equipo)
+    public int aspecto;
+    /**
+     * Constructor de jugador
+     * @param fuerza Indica la fuerza de un jugador
+     * @param vida Indica la vida de un jugador
+     * @param defensa Indica la defensa de un jugador
+     * @param equipo Indica a que equipo pertenece un jugador
+     */
+    public Jugador(int fuerza, int vida, int defensa, int habilidad, int resistencia, int ataque, Equipo equipo)
     {
+        this.aspecto = GeneradorImagenJugador.generarAspecto();
         this.Fuerza= fuerza;
         this.Vida = vida;
         this.Defensa = defensa;
+        this.Habilidad = habilidad;
+        this.Resistencia = resistencia;
+        this.Ataque = ataque;
 
         this.miEquipo = equipo;
 
@@ -68,14 +88,26 @@ public class Jugador implements GestionEntrada, Dibujable {
         this.id = -1;
         this.enJuego = false;
         this.textura = "jugador1.png";
+        this.color = Color.azul;
+        this.direccion = DireccionJugador.izquierda;
+        this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,DireccionJugador.izquierda);
+
 
     }
 
+    /**
+     * Devuelve a que equipo pertenece un jugador.
+     * @return Equipo
+     */
     public Equipo getMiEquipo()
     {
         return this.miEquipo;
     }
 
+    /**
+     * Añade a la lista de objetos del jugador un nuevo objeto.
+     * @param objeto Objeto a añadir a un jugador
+     */
     public void añadirObjeto(ObjetoJugador objeto){
        if(this.powerup.size() < MAXIMO_OBJETOS)
        {
@@ -93,7 +125,11 @@ public class Jugador implements GestionEntrada, Dibujable {
         if(this.casilla != null)
         {
             this.enJuego = true;
-            id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
+            for(ElementoDibujable textura: this.texturas){
+                textura.dibujar(this.getPosicionX(),this.getPosicionY());
+
+            }
+
             this.seleccion = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/seleccionado.png");
             this.bloqueo = new ElementoDibujable(TipoDibujo.elementosJuego,"casellalila.png");
 
@@ -105,20 +141,33 @@ public class Jugador implements GestionEntrada, Dibujable {
      */
     public void quitar(){
         this.casilla = null;
-        GestorGrafico.generarDibujante().eliminarTextura(id);
         this.seleccion.borrar();
         this.seleccion = null;
         id = -1;
         this.enJuego = false;
+        this.seleccionado = false;
+        this.bloqueado = false;
+        for(ElementoDibujable elemento : this.texturas){
+            elemento.borrar();
+        }
+
 
     }
 
-
+    /**
+     *
+     * @return PowerUp
+     */
     public ArrayList<ObjetoJugador> getPowerUP()
     {
         return this.powerup;
     }
 
+    /**
+     * Devolvemos el PowerUp deseado
+     * @param index Posición en la que se encuentra un PowerUp
+     * @return PowerUp
+     */
     public ObjetoJugador getPowerUP(int index)
     {
         if(index>=0 && index<4)
@@ -129,6 +178,10 @@ public class Jugador implements GestionEntrada, Dibujable {
         return null;
     }
 
+    /**
+     * Añadimos un PowerUp a jugador
+     * @param powerup
+     */
     public void setPowerUP(ObjetoJugador powerup)
     {
         if(this.powerup.size() <= 4)
@@ -137,6 +190,11 @@ public class Jugador implements GestionEntrada, Dibujable {
         }
     }
 
+    /**
+     * Añadimos un PowerUp a jugador en el índice deseado
+     * @param powerup
+     * @param index
+     */
     public void setPowerUP(PowerUP powerup, int index)
     {
         if(index>=0 && index<4)
@@ -145,36 +203,78 @@ public class Jugador implements GestionEntrada, Dibujable {
         }
     }
 
+
+    /**
+     * Modifica la direccion del jugador
+     * @param direccion
+     */
+    public void setDireccion(DireccionJugador direccion)
+    {
+        this.direccion = direccion;
+        this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,direccion);
+
+    }
+
+
+    /**
+     * Generamos una acción
+     * @param posX
+     * @param posY
+     */
     public void generarAccion(int posX, int posY)
     {
         this.estado.generarAccion(this, (int)posX, (int)posY);
     }
 
+    /**
+     * Devuelve el estado del jugador
+     * @return Estado
+     */
     public Estado getEstado()
     {
         return this.estado;
     }
 
+    /**
+     * Modifica el estado del jugador
+     * @param estado Nuevo estado
+     */
     public void setEstado(Estado estado)
     {
         this.estado = estado;
     }
 
+    /**
+     * Devuelve la acción assignada a un Jugador
+     * @return Accion
+     */
     public Accion getAccion()
     {
         return this.accion;
     }
 
+    /**
+     * Modifica la acción del jugador
+     * @param accion
+     */
     public void setAccion(Accion accion)
     {
         this.accion = accion;
     }
 
+    /**
+     * Devuelve si un jugador esta o no seleccionado
+     * @return Boolean
+     */
     public boolean getSeleccionado()
     {
         return this.seleccionado;
     }
 
+    /**
+     * Selecciona a nu jugador
+     * @param seleccionado
+     */
     public void setSeleccionado(boolean seleccionado)
     {
         this.seleccionado = seleccionado;
@@ -185,8 +285,15 @@ public class Jugador implements GestionEntrada, Dibujable {
             }
             this.seleccion.dibujar((int)this.casilla.getPosX(),(int)this.casilla.getPosY());
             // Obligamos a dibjar la textura del jugador encima
-            GestorGrafico.generarDibujante().eliminarTextura(this.id);
-            GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
+
+            for(ElementoDibujable texturas : this.texturas) {
+                texturas.borrar();
+            }
+
+            for(ElementoDibujable texturas : this.texturas) {
+                texturas.dibujar(this.getPosicionX(),this.getPosicionY());
+            }
+
         }
         else
         {
@@ -196,11 +303,19 @@ public class Jugador implements GestionEntrada, Dibujable {
         }
     }
 
+    /**
+     * Devuelve si un jugador se encuentra seleccionado
+     * @return Boolean
+     */
     public boolean getBloqueado()
     {
         return this.bloqueado;
     }
 
+    /**
+     * Modifica el estado de bloqueo de un jugador
+     * @param bloqueado
+     */
     public void setBloqueado(boolean bloqueado)
     {
 
@@ -210,7 +325,10 @@ public class Jugador implements GestionEntrada, Dibujable {
             if(this.bloqueo == null) {
                     this.bloqueo = new ElementoDibujable(TipoDibujo.elementosJuego,"casellalila.png");;
             }
-            this.bloqueo.dibujar((int)this.casilla.getPosX(),(int)this.casilla.getPosY());
+            if(this.casilla != null)
+            {
+                 this.bloqueo.dibujar((int)this.casilla.getPosX(),(int)this.casilla.getPosY());
+            }
         }
         else
         {
@@ -220,7 +338,13 @@ public class Jugador implements GestionEntrada, Dibujable {
         }
     }
 
-
+    /**
+     * Controla todo lo relacionado con el jugador
+     * @param entrada
+     * @param posX
+     * @param posY
+     * @param casillas
+     */
     public void accionEntrada(Entrada entrada, float posX, float posY, Casilla[][] casillas)
     {
         boolean accionGenerada = false;
@@ -231,6 +355,8 @@ public class Jugador implements GestionEntrada, Dibujable {
          * - Si hay un jugador seleccionado, procedemos a verificar cual de ellos es
          * - Una vez localizado se le asigna el pase
          */
+
+
         if (entrada == Entrada.pase || entrada == Entrada.chute)
         {
               this.paseOChute = entrada;
@@ -239,6 +365,7 @@ public class Jugador implements GestionEntrada, Dibujable {
         {
             if(this.getBloqueado() == false)
             {
+                System.out.println(posX+"-"+posY+"-------"+this.getPosicionX()+"-"+this.getPosicionY());
                 for (int i = 0; i < 20; i++)
                 {
                     for (int j = 0; j < 30; j++)
@@ -252,7 +379,7 @@ public class Jugador implements GestionEntrada, Dibujable {
                             {
                                 if(entrada == Entrada.clicklargo || entrada == Entrada.arrastrar)
                                 {
-                                    System.out.println("entrada:"+entrada);
+                                    //System.out.println("entrada:"+entrada);
                                     if(this.getSeleccionado() == true)
                                     {
                                         accionGenerada = this.getEstado().generarAccion(this,(int)posX,(int)posY, entrada);
@@ -307,6 +434,10 @@ public class Jugador implements GestionEntrada, Dibujable {
         }
     }
 
+    /**
+     * Devuelve si pase o chute
+     * @return Entrada
+     */
     public Entrada getPaseOChute()
     {
         return this.paseOChute;
@@ -314,51 +445,37 @@ public class Jugador implements GestionEntrada, Dibujable {
 
 
 
-    public void setDireccion(DireccionJugador direccion)
-    {
-        this.direccion = direccion; 
-    }
     public DireccionJugador getDireccion(){return this.direccion;}
-    private void dibujarDireccion(DireccionJugador direccion)
-    {
-        switch (direccion)
-        {
-            case arriba:
-                this.textura = "jugador/jugador4.png";
-                this.textura = "jugador1.png";
-                break;
-            case abajo:
-                this.textura = "jugador/jugador2.png";
-                this.textura = "jugador1.png";
-                break;
-            case izquierda:
-                this.textura = "jugador/jugador5.png";
-                this.textura = "jugador1.png";
-                break;
-            case derecha:
-                this.textura = "jugador/jugador1.png";
-                this.textura = "jugador1.png";
-                break;
-        }
-    }
+
+
+    /**
+     * @param entrada tipo de entrada
+     * @param posX eje x donde se ha realizado la acciion /entrada
+     * @param posY eje y donde se ha realizado la acciion /entrada
+     */
     @Override
     public void accionEntrada(Entrada entrada, float posX, float posY) {
 
     }
 
+    /**
+     *
+     * @param entrada tipo de entrada
+     */
     @Override
     public void accionEntrada(Entrada entrada) {
         System.out.println("---------------------------------Tipo entrada:"+entrada);
     }
 
 
-    /*Métodos de dibujable, que habra que quitars*/
-    @Override
-    public String getTextura() {
-        return this.textura;
-    }
 
-    @Override
+
+
+    /**
+     * Obtenemos la posición X del jugador
+     * @return int Posición X
+     */
+
     public int getPosicionX() {
         if(this.casilla != null)
         {
@@ -367,7 +484,11 @@ public class Jugador implements GestionEntrada, Dibujable {
         else return -1;
     }
 
-    @Override
+    /**
+     * Obtenemos la posición Y del jugador
+     * @return int Posición Y
+     */
+
     public int getPosicionY() {
         if(this.casilla != null)
         {
@@ -376,31 +497,63 @@ public class Jugador implements GestionEntrada, Dibujable {
         else return -1;
     }
 
-    public int getFuerza() {
-        return Fuerza;
-    }
+    public int getFuerza() { return this.Fuerza; }
 
     public void setFuerza(int fuerza) {
-        Fuerza = fuerza;
+        this.Fuerza = fuerza;
     }
 
-    public int getVida() {
-        return Vida;
-    }
+    public int getVida() { return this.Vida; }
 
-    public void setVida(int vida) {
-        Vida = vida;
-    }
+    public void setVida(int vida) { this.Vida = vida;}
 
     public int getDefensa() {
-        return Defensa;
+        return this.Defensa;
     }
 
-    public void setDefensa(int defensa) {
-        Defensa = defensa;
+    public void setDefensa(int defensa) { this.Defensa = defensa; }
+
+    public int getHabilidad() { return this.Habilidad; }
+
+    public void setHabilidad(int habilidad) { this.Habilidad = habilidad; }
+
+    public int getResistencia() {
+        return this.Resistencia;
     }
 
+    public void setResistencia(int resistencia) {
+        this.Resistencia = resistencia;
+    }
+
+    public int getAtaque() {return this.Ataque; }
+
+    public void setAtaque(int ataque) {
+        this.Ataque = ataque;
+    }
+
+    /**
+     *
+     * @return boolean enJuego
+     */
     public boolean getEnJuego(){return enJuego;}
 
-    //public void recibirImput();
+
+    /**
+     *
+     * @return ArrayList texturas
+     */
+    public ArrayList<ElementoDibujable> getTexturasMuestreo(){
+
+        return GeneradorImagenJugador.generarTexturasIntefaz(this.color,this.aspecto, DireccionJugador.frontal);
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+        this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,this.direccion);
+    }
+
 }

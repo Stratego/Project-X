@@ -13,21 +13,15 @@ public class MinaCampo extends ObjetoCampo {
 
 
 
-    public MinaCampo(int posX, int posY, String textura){
-        super(posX,posY,textura);
-
-
+    public MinaCampo(String textura){
+        super(textura);
     }
     @Override
     public void efecto(Jugador jugador) {
         jugador.setVida(jugador.getVida()-100);
         //System.out.println("vida jugador que ha pisado"+jugador.getVida());
-
         quitar();
     }
 
-    public void quitar(){
-        super.quitar();
 
-    }
 }
