@@ -28,9 +28,9 @@ public class Arbitro implements Dibujable{
 
     private DireccionJugador direccion = DireccionJugador.izquierda;
 
-    private int posX =25;
+    private int posX =23;
 
-    private int posY = 10;
+    private int posY = 17;
 
     private int rangoVision = 5;
     private int movimiento = 8;
