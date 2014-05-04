@@ -28,10 +28,9 @@ public class BotonObjeto extends Boton {
      * @param posicion
      */
     public BotonObjeto(float posX, float posY, Entrada entrada, String textura, int posicion) {
-        super(posX, posY, entrada, textura, posicion);
+        super(posX, posY, entrada,textura,posicion,ConstantesJuego.getAnchoBotonObjetos(),ConstantesJuego.getAltoBotonObjetos());
         this.objetoElegido = false;
-        this.ancho= ConstantesJuego.getAnchoBotonObjetos();
-        this.alto=ConstantesJuego.getAltoBotonObjetos();
+
     }
 
     @Override

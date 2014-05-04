@@ -186,4 +186,5 @@ public class GestorTurnos implements Dibujable,Proceso {
     {
         forzarCambioTurno = true;
     }
+
 }

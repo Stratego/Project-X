@@ -23,6 +23,10 @@ public class Chute extends Accion {
     public boolean simular() {
         System.out.println("Chute hecho");
 
+        //jugador.setEstado(new SinPelota());
+        //return true;
+
+
         precisionChute();
 
         return true;
@@ -41,10 +45,13 @@ public class Chute extends Accion {
             int ejesDestinoPelota[][] = new int[25][2];
             ejesDestinoPelota[24][0] = FinalX;
             ejesDestinoPelota[24][1] = FinalY;
+
             boolean resto = true;
             boolean xoy = true;
             int contCambioXoY = 1;
             int cont = 0;
+
+
             //Como hay 25 casillas, empezamos desde la 25, que seria con precision 4 hasta la 0, que seria precision 100
             for(int i=23; i>=0; i--)
             {
@@ -62,6 +69,7 @@ public class Chute extends Accion {
                         ejesDestinoPelota[i][1] = ejesDestinoPelota[i+1][1];
                         cont ++;
                     }
+
                     if(contCambioXoY == cont)
                     {
                         xoy = false;
@@ -82,6 +90,7 @@ public class Chute extends Accion {
                         ejesDestinoPelota[i][1] = ejesDestinoPelota[i+1][1] + 1;
                         cont ++;
                     }
+
                     if(contCambioXoY == cont)
                     {
                         xoy = true;
@@ -98,11 +107,13 @@ public class Chute extends Accion {
                     }
                 }
             }
+
             int casillaChute = -1;
             /*Obtenemos la posición de la matriz de la que se cogera el chute y validamos que la posición X y Y almacenada es correcta*/
             while(casillaChute < jugador.getHabilidad()/10)
             {
                 casillaChute = new Double(Math.random() * (25)).intValue();
+
                 if(ejesDestinoPelota[casillaChute][0] < 0 || ejesDestinoPelota[casillaChute][0]>=30)
                 {
                     casillaChute = -1;
@@ -115,7 +126,12 @@ public class Chute extends Accion {
                     }
                 }
             }
+
             // Campo.getInstanciaCampo().ponerPelota(ejesDestinoPelota[casillaChute][0], ejesDestinoPelota[casillaChute][1]);
+
+
+           // Campo.getInstanciaCampo().ponerPelota(ejesDestinoPelota[casillaChute][0], ejesDestinoPelota[casillaChute][1]);
+
             System.out.println("La pelota va a la posicion: "+ejesDestinoPelota[casillaChute][0]+"-"+ejesDestinoPelota[casillaChute][1]);
             jugador.setEstado(new SinPelota());
             return true;

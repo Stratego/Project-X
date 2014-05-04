@@ -209,30 +209,30 @@ public  class Equipo {
     /**
      * Intercambia un jugador de la lista de suplentes por un jugador que este
      * en la partida .
+     * Automaticamente detecta si es el equipo corecto o no
      * El jugador colocado aparece en estado bloqueado.
-     * @param posicionSuplente Posicion donde esta situado el suplente dentro
-     *                         la lista.
+     *
      */
-    public void intercambioJugadores(int posicionSuplente){
-        int posicion;
+    public void intercambioJugadores(Jugador jugador){
+
 
         if (hayJugadorSelecionado()){
 
-            posicion=jugadores.indexOf(jugadorSelecionado);
             Campo campo = ComponentesJuego.getComponentes().getCampo();
             int posY = jugadorSelecionado.getPosicionY();
             int posX= jugadorSelecionado.getPosicionX();
 
+
             campo.eliminarElemento(posY, posX);
             GestorGrafico.getCamara().desbloquear();
 
-            Jugador jugadorSuplente = jugadores.get(posicionSuplente);
-            jugadores.remove(jugadorSuplente);
-            this.jugadores.add(posicion,jugadorSuplente);
+            jugadores.remove(jugador);
+            this.jugadores.add(0,jugador);
             this.jugadores.remove(jugadorSelecionado);
             this.descartados.add(jugadorSelecionado);
-            campo.añadirElemento(jugadorSuplente,posY,posX);
-            jugadorSuplente.setBloqueado(true);
+            campo.añadirElemento(jugador,posY,posX);
+            jugador.setBloqueado(true);
+
 
         }
     }

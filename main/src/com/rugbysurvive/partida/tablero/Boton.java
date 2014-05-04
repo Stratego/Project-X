@@ -58,7 +58,7 @@ public abstract class Boton implements GestionEntrada,Dibujable,Proceso{
      * @param posY posicion y en el tablero
      * @param entrada tipo de boton que sera
      */
-    public Boton(float posX, float posY, Entrada entrada,String textura, int posicion) {
+    public Boton(float posX, float posY, Entrada entrada,String textura, int posicion,int ancho,int alto) {
         this.posY = posY;
         this.posX = posX;
         this.posXOriginal = posX;
@@ -67,8 +67,8 @@ public abstract class Boton implements GestionEntrada,Dibujable,Proceso{
         this.textura = textura;
         this.posicion = posicion;
         ID=GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
-        this.ancho =0;
-        this.alto = 0;
+        this.ancho =ancho;
+        this.alto = alto;
         this.escondido = false;
         this.procesando = false;
     }
@@ -83,8 +83,8 @@ public abstract class Boton implements GestionEntrada,Dibujable,Proceso{
     public boolean esSeleccionado(float posX, float posY) {
 
 
-        if (posX >= this.posX && posX <= this.posX+ConstantesJuego.ANCHO_BOTON){
-            if (posY >= Gdx.graphics.getHeight() - this.posY -ConstantesJuego.ALTO_BOTON && posY <= Gdx.graphics.getHeight()  -this.posY){
+        if (posX >= this.posX && posX <= this.posX+this.ancho){
+            if (posY >= Gdx.graphics.getHeight() - this.posY -this.alto && posY <= Gdx.graphics.getHeight()  -this.posY){
                 accionEntrada(this.entrada);
                 selecionado=true;
             }else{
