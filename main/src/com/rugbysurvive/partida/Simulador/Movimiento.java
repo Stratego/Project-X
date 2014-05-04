@@ -4,8 +4,11 @@ import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.SinPelota;
 import com.rugbysurvive.partida.arbitro.Choque;
+import com.rugbysurvive.partida.arbitro.SaqueBanda;
+import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.Marcador;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
+import com.rugbysurvive.partida.jugadores.Equipo;
 import com.rugbysurvive.partida.tablero.Campo;
 import com.rugbysurvive.partida.tablero.Lado;
 
@@ -31,10 +34,51 @@ public class Movimiento extends Accion {
 
 
     /**
+     * Verifica si un jugador con pelota sale fuera del campo, y si es asi llama a la función arbitrar de SaqueBanda
+     * @param contador posición actual del vector
+     * @param camino Multidimensional Array del camino a seguir por parte del jugador
+     * @return Boolean Respuesta del arbitro
+     */
+    private Boolean SaleDeBanda(int contador, int camino[][])
+    {
+
+            /*Si un jugador se sale del campo se llama a la funcion arbitrar de saquebanda*/
+        if((this.camino[contador][1] > 18 || this.camino[contador][1] < 1) && (this.jugador.getEstado() instanceof ConPelota))
+        {
+            Equipo equipoRival = ComponentesJuego.getComponentes().getEquipo1();
+            if(this.jugador.getMiEquipo() == ComponentesJuego.getComponentes().getEquipo1())
+            {
+                equipoRival = ComponentesJuego.getComponentes().getEquipo2();
+            }
+
+            SaqueBanda saquebanda = new SaqueBanda(this.camino[contador][1],this.camino[contador][0],equipoRival);
+            return saquebanda.arbitrar();
+        }
+
+        return false;
+    }
+
+    /**
+     * Verifica si dos jugadores colisionan, y si es así, se llama a la función arbitrar de la clase choque
+     * @return Booelan Respuesta del arbitro
+     */
+    private Boolean ChoqueJugadores()
+    {
+        /*Verificamos que los dos jugadores no tienen la pelota, y si es así, se arbitra*/
+        if((this.jugador.getEstado() instanceof SinPelota) && (Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).getJugador().getEstado() instanceof SinPelota))
+        {
+            Choque choque = new Choque(this.jugador, Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).getJugador());
+            return choque.arbitrar();
+        }
+
+        return false;
+    }
+
+    /**
      * Sumulación de la acción movimiento por parte de un jugador
      * @return Boolean Condición que indica si la simulación ha llegado o no al final
      * */
-    @Override
+     @Override
     public boolean simular() {
         System.out.println("mover");
 
@@ -42,6 +86,12 @@ public class Movimiento extends Accion {
 
         if(contador <= this.camino.length)
         {
+            /*Verificamos si sale de banda*/
+            if(this.SaleDeBanda(contador,this.camino) == true)
+            {
+                return true;
+            }
+
             /*Comprobamos si en la siguiente casilla hay un jugador ya que si no no se podra llamar a la funcion getMiEquipo*/
             if(Campo.getInstanciaCampo().getCasilla(this.camino[contador][1], this.camino[contador][0]).getJugador() != null)
             {
@@ -80,11 +130,10 @@ public class Movimiento extends Accion {
                         }
                         else
                         {
-                            /*Verificamos que los dos jugadores no tienen bolam, y si es así, se arbitra*/
-                            if((jugador.getEstado() instanceof SinPelota) && (Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).getJugador().getEstado() instanceof SinPelota))
+                            /*Llamamos a la función choque de jugadores, para ver si hay dos jugadores que colisionan entre ellos*/
+                            if(this.ChoqueJugadores() == true)
                             {
-                                Choque choque = new Choque(jugador, Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).getJugador());
-                                choque.arbitrar();
+                                return true;
                             }
                         }
                     }

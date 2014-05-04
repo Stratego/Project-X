@@ -4,6 +4,7 @@ import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.extras.Color;
+import com.rugbysurvive.partida.arbitro.Arbitro;
 import com.rugbysurvive.partida.elementos.objetos.objetosCampo.MinaCampo;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.ColocadorObjetosCampo;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;

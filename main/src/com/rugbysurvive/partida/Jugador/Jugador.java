@@ -149,8 +149,6 @@ public class Jugador implements GestionEntrada {
         for(ElementoDibujable elemento : this.texturas){
             elemento.borrar();
         }
-
-
     }
 
     /**
