@@ -1,6 +1,7 @@
 package com.rugbysurvive.partida.Simulador;
 
 import com.rugbysurvive.partida.Jugador.ConPelota;
+import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.SinPelota;
 import com.rugbysurvive.partida.arbitro.Choque;
@@ -178,7 +179,7 @@ public class Movimiento extends Accion {
 
 
         /*Giramos la textura del jugador segun convenga*/
-         /*   if((this.camino[contador][0] > this.camino[contador-1][0]) && (this.camino[contador][1] == this.camino[contador-1][1]))
+            if((this.camino[contador][0] > this.camino[contador-1][0]) && (this.camino[contador][1] == this.camino[contador-1][1]))
             {
                 jugador.setDireccion(DireccionJugador.derecha);
             }
@@ -202,7 +203,7 @@ public class Movimiento extends Accion {
                         }
                     }
                 }
-            }*/
+            }
 
             /*Referenciamos jugador y casillas en ambos sentidos*/
             this.jugador.colocar(Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]));
