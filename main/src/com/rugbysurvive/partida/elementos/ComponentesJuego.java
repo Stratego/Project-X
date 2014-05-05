@@ -48,7 +48,7 @@ public class ComponentesJuego {
     {
 
         // falta añadir los objetos a cada jugador
-        Jugador jugador = new Jugador(80, 90, 100, 90, 80, 70, null);
+        Jugador jugador = new Jugador(80, 90, 100, 90, 80, 70, equipo1);
 
         jugador.setDireccion(DireccionJugador.derecha);
         PowerUP objeto = new PowerUP(0,10,"casilla.png", Habilidades.vida,50,jugador);
