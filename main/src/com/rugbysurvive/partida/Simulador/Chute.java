@@ -110,22 +110,33 @@ public class Chute extends Accion {
             }
 
             int casillaChute = -1;
+            int contPrecision = 0;
             /*Obtenemos la posición de la matriz de la que se cogera el chute y validamos que la posición X y Y almacenada es correcta*/
-            while(casillaChute < jugador.getHabilidad()/10)
+            while(casillaChute < ((jugador.getHabilidad()/4)-1))
             {
-                casillaChute = new Double(Math.random() * (25)).intValue();
-
-                if(ejesDestinoPelota[casillaChute][0] < 0 || ejesDestinoPelota[casillaChute][0]>=30)
+                casillaChute = new Double(Math.random() * (24)).intValue();
+                System.out.println("RANDOOOOM:"+casillaChute);
+                casillaChute = casillaChute - (jugador.getHabilidad()/4);
+                if(casillaChute >= 0)
                 {
-                    casillaChute = -1;
-                }
-                else
-                {
-                    if(ejesDestinoPelota[casillaChute][1] < 0 || ejesDestinoPelota[casillaChute][1]>=20)
+                    if(ejesDestinoPelota[casillaChute][0] < 0 || ejesDestinoPelota[casillaChute][0]>=30)
                     {
                         casillaChute = -1;
                     }
+                    else
+                    {
+                        if(ejesDestinoPelota[casillaChute][1] < 0 || ejesDestinoPelota[casillaChute][1]>=20)
+                        {
+                            casillaChute = -1;
+                        }
+                    }
                 }
+                if(contPrecision == 8)
+                {
+                    casillaChute = 24;
+                }
+                contPrecision = contPrecision + 1;
+                System.out.println("Contador"+contPrecision);
             }
 
             Campo.getInstanciaCampo().colocarPelota(ejesDestinoPelota[casillaChute][0], +ejesDestinoPelota[casillaChute][1]);
