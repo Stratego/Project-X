@@ -208,6 +208,10 @@ public class Jugador implements GestionEntrada {
     public void setDireccion(DireccionJugador direccion)
     {
         this.direccion = direccion;
+        for(ElementoDibujable dibujo: this.texturas)
+        {
+            dibujo.borrar();
+        }
         this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,direccion);
 
     }
