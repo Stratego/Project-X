@@ -2,6 +2,7 @@ package com.rugbysurvive.partida.Simulador;
 
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.SinPelota;
+import com.rugbysurvive.partida.tablero.Campo;
 
 /**
  * Created by Aleix on 31/03/14.
@@ -27,7 +28,7 @@ public class Chute extends Accion {
         //return true;
 
 
-        precisionChute();
+        this.precisionChute();
 
         return true;
     }
@@ -127,10 +128,7 @@ public class Chute extends Accion {
                 }
             }
 
-            // Campo.getInstanciaCampo().ponerPelota(ejesDestinoPelota[casillaChute][0], ejesDestinoPelota[casillaChute][1]);
-
-
-           // Campo.getInstanciaCampo().ponerPelota(ejesDestinoPelota[casillaChute][0], ejesDestinoPelota[casillaChute][1]);
+            Campo.getInstanciaCampo().colocarPelota(ejesDestinoPelota[casillaChute][0], +ejesDestinoPelota[casillaChute][1]);
 
             System.out.println("La pelota va a la posicion: "+ejesDestinoPelota[casillaChute][0]+"-"+ejesDestinoPelota[casillaChute][1]);
             jugador.setEstado(new SinPelota());
