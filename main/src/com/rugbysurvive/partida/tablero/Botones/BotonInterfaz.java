@@ -1,5 +1,9 @@
 package com.rugbysurvive.partida.tablero.Botones;
 
+
+
+import com.rugbysurvive.partida.ConstantesJuego;
+
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.tablero.Boton;
 import com.rugbysurvive.partida.tablero.Campo;
@@ -19,8 +23,10 @@ public class BotonInterfaz extends Boton{
      * @param posicion
      */
     public BotonInterfaz(float posX, float posY, Entrada entrada, String textura, int posicion) {
-        super(posX, posY, entrada, textura, posicion);
+        super(posX, posY, entrada, textura, posicion,ConstantesJuego.ANCHO_BOTON,ConstantesJuego.ALTO_BOTON);
         this.entradaBoton = entrada;
+
+
 
     }
 
@@ -30,12 +36,17 @@ public class BotonInterfaz extends Boton{
         if (this.entradaBoton == Entrada.pase){
             //introducir accion pase
             this.entradaBoton = Entrada.chute;
+            this.textura = "Menu/xutBoto.png";
+
+
         } else {
             if (this.entradaBoton == Entrada.chute){
                 //introducir accion chute
                 this.entradaBoton = Entrada.pase;
+                this.textura = "Menu/botoPassada.png";
             }
         }
+
 
         Campo.getInstanciaCampo().accionEntrada(this.entradaBoton,0,0);
 

@@ -21,6 +21,11 @@ public class EnMovimiento implements Estado {
 
     public Jugador jugador;
 
+    /**
+     * Constructor de estado EnMovimiento
+     * @param nPosiciones
+     * @param estadoAnterior
+     */
     public EnMovimiento(int nPosiciones,Estado estadoAnterior)
     {
         /*De momento declaramos una matriz de 8*2, hasta que logremos obtener cuanto podra mover cada jugador*/
@@ -33,7 +38,11 @@ public class EnMovimiento implements Estado {
     }
 
 
-
+    /**
+     * Genera la acción
+     * @param jugador
+     * @return false
+     */
     public boolean generarAccion(Jugador jugador) {
         Simulador simulador = Simulador.getInstance();
 
@@ -42,6 +51,13 @@ public class EnMovimiento implements Estado {
         return false;
     }
 
+    /**
+     * Genera la acción
+     * @param jugador
+     * @param posX
+     * @param posY
+     * @return false
+     */
     @Override
     public boolean generarAccion(Jugador jugador, int posX, int posY) {
         Simulador simulador = Simulador.getInstance();
@@ -51,6 +67,14 @@ public class EnMovimiento implements Estado {
         return false;
     }
 
+    /**
+     * Genera la acción
+     * @param jugador
+     * @param posX
+     * @param posY
+     * @param entrada
+     * @return Boolean acción generada
+     */
     @Override
     public boolean generarAccion(Jugador jugador, int posX, int posY, Entrada entrada) {
 
@@ -58,7 +82,8 @@ public class EnMovimiento implements Estado {
 
         if(entrada == Entrada.arrastrar)
         {
-        System.out.println("MOVIMIENTOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            System.out.println("ENMOVIMIENTO:"+posX+"-"+posY);
+        //System.out.println("MOVIMIENTOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         if(((jugador.getPosicionX() == posX) && (jugador.getPosicionY() == posY)) && (this.posicionActual == 0))
         {
             this.movimientos[this.posicionActual][0] = posX;
@@ -70,7 +95,7 @@ public class EnMovimiento implements Estado {
         {
             if(this.posicionActual > 0)
             {
-                if(posY <= 16 && posY >= 0 && posX<=28 && posX>=0)
+                if((posY < 20 && posY >= 0) && (posX<30 && posX>=0))
                 {
                     int posXAnterior = this.movimientos[this.posicionActual-1][0];
                     int posYAnterior = this.movimientos[this.posicionActual-1][1];
@@ -115,7 +140,7 @@ public class EnMovimiento implements Estado {
             /*Le devolvemos su estado anterior*/
             this.jugador.setEstado(this.estadoAnterior);
 
-            System.out.println("ESTADOOOOOOO:"+this.jugador.getEstado());
+            //System.out.println("ESTADOOOOOOO:"+this.jugador.getEstado());
 
             return true;
         }
@@ -123,6 +148,13 @@ public class EnMovimiento implements Estado {
     }
 
 
+    /**
+     * Finalización de movimiento de un jugador
+     * @param entrada
+     * @param posicionX
+     * @param posicionY
+     * @return
+     */
     private boolean jugadorFinalizaMovimiento(Entrada entrada ,int posicionX,int posicionY)
     {
 
@@ -139,6 +171,9 @@ public class EnMovimiento implements Estado {
         return false;
     }
 
+    /**
+     * Elimina el recorrido hecho por un jugador
+     */
     private void eliminarRecorrido()
     {
         for(int i=0; i<movimientos.length; i++)
@@ -146,9 +181,14 @@ public class EnMovimiento implements Estado {
             ComponentesJuego.getComponentes().getCampo().desSeleccionarCasilla(movimientos[i][0],movimientos[i][1]);
         }
     }
+
+    /**
+     * Obtenemos un jugador
+     * @return
+     */
     @Override
     public Jugador getJugador() {
-        return null;
+        return this.jugador;
     }
 
     @Override
@@ -182,14 +222,23 @@ public class EnMovimiento implements Estado {
 
     }
 
+    /**
+     * Obtenemos estado
+     * @return Estado
+     */
     @Override
     public Estado getEstado() {
         this.eliminarRecorrido();
         return this.estadoAnterior;
     }
 
+    /**
+     * Obtenemos estadoAnterior
+     * @return Estado
+     */
     @Override
     public Estado getEstadoAnterior() {
+        this.eliminarRecorrido();
         return this.estadoAnterior;
     }
 

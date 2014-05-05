@@ -4,6 +4,7 @@ package com.rugbysurvive.partida.tablero;
 
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.arbitro.Arbitro;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoCampo;
 import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.gestores.Dibujante;
@@ -30,6 +31,7 @@ public class Casilla implements GestionEntrada ,Dibujable{
 
     private Jugador jugador ;
     private ObjetoCampo objeto;
+    private Arbitro arbitro;
     private String texturaSeleccionada;
     private int id = -1;
     /**
@@ -49,6 +51,7 @@ public class Casilla implements GestionEntrada ,Dibujable{
         this.posX = posX;
         this.jugador = null;
         this.objeto = null;
+        this.arbitro = null;
         this.texturaSeleccionada = "casellalila.png";
         this.dibujante = dibujante;
 
@@ -56,7 +59,7 @@ public class Casilla implements GestionEntrada ,Dibujable{
 
     /**
      * Añade un jugador a la casilla en caso de que no exista
-     * ningun objeto o jugador colocado anteriormente
+     * ningun otro elemento colocado anteriormente
      *
      * En caso que existe algun elemento devolvera false y el
      * jugador no sera colocado , si esta vacia se colocara
@@ -78,7 +81,7 @@ public class Casilla implements GestionEntrada ,Dibujable{
 
     /**
      * Añade un objeto a la casilla en caso de que no exista
-     * ningun objeto o jugador colocado anteriormente
+     * ningun otro elemento colocado anteriormente
      *
      * En caso que existe algun elemento devolvera false y el
      * objeto no sera colocado , si esta vacia se colocara
@@ -97,15 +100,34 @@ public class Casilla implements GestionEntrada ,Dibujable{
         return false;
     }
 
+
+    /**
+     * Añade un arbitro a la casilla en caso de que no exista
+     * ningun otro elemento colocado anteriormente
+     *
+     * En caso que existe algun elemento devolvera false y el
+     * objeto no sera colocado , si esta vacia se colocara
+     * sin problemas
+     *
+     * @param arbitro elemento que se coloca en la casilla
+     * @return si se ha podido colocar o no
+     */
+    public boolean añadirElemento(Arbitro arbitro)
+    {
+        if(this.jugador == null && this.objeto == null && arbitro != null)
+        {
+            this.arbitro = arbitro;
+            return true;
+        }
+        return false;
+    }
     /**
      * Indica si no hay ningun elemento situado en esta casilla
      *
      * @return cierto si la casilla esta libre
      */
-    public boolean casillaLibre()
-    {
-        if(this.jugador == null && this.objeto == null)
-        {
+    public boolean casillaLibre() {
+        if(this.jugador == null && this.objeto == null && this.arbitro == null) {
             return true;
         }
         return false;
@@ -116,11 +138,12 @@ public class Casilla implements GestionEntrada ,Dibujable{
      */
     public void eliminarElemento()
     {
-        if(jugador != null){
+        if(jugador != null) {
             this.jugador.quitar();
         }
         this.jugador = null;
         this.objeto = null;
+        this.arbitro = null;
     }
 
     /**
@@ -130,7 +153,7 @@ public class Casilla implements GestionEntrada ,Dibujable{
      */
     public boolean sinObjeto()
     {
-        if(this.objeto == null){
+        if(this.objeto == null) {
             return true;
         }
        return false;
@@ -143,11 +166,25 @@ public class Casilla implements GestionEntrada ,Dibujable{
      */
     public boolean sinJugador()
     {
-        if(this.jugador == null){
+        if(this.jugador == null) {
             return true;
         }
         return false;
     }
+
+    /**
+     * Indica si hay un arbitro en la casilla
+     * @return devuelve cierto en caso que no haya ,
+     * falso en caso contrario
+     */
+    public boolean sinArbitro()
+    {
+        if(this.arbitro == null) {
+            return true;
+        }
+        return false;
+    }
+
 
     public ObjetoCampo getObjeto(){return this.objeto;}
 
@@ -241,12 +278,12 @@ public class Casilla implements GestionEntrada ,Dibujable{
 
     @Override
     public int getPosicionX() {
-        return (int)this.getPosY();
+        return (int)this.getPosX();
     }
 
     @Override
     public int getPosicionY() {
-        return (int)this.getPosX();
+        return (int)this.getPosY();
     }
 
 

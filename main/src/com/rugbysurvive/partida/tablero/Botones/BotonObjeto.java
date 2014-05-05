@@ -1,9 +1,11 @@
 package com.rugbysurvive.partida.tablero.Botones;
 
+import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
+import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.tablero.Boton;
 
 import java.util.ArrayList;
@@ -12,6 +14,10 @@ import java.util.ArrayList;
  * Created by Victor on 24/04/14.
  */
 public class BotonObjeto extends Boton {
+
+
+    private boolean objetoElegido;
+
     /**
      * Constructor del elemento boton
      *
@@ -22,25 +28,32 @@ public class BotonObjeto extends Boton {
      * @param posicion
      */
     public BotonObjeto(float posX, float posY, Entrada entrada, String textura, int posicion) {
-        super(posX, posY, entrada, textura, posicion);
+        super(posX, posY, entrada,textura,posicion,ConstantesJuego.getAnchoBotonObjetos(),ConstantesJuego.getAltoBotonObjetos());
+        this.objetoElegido = false;
+
     }
 
     @Override
     public void accionEntrada(Entrada entrada) {
         //obtenemos el elemento de la lista mediante la posicion le dimos al crear el boton
-
-            Jugador jugador = ComponentesJuego.getComponentes().getEquipo1().getJugadorActivo();
-            ArrayList<ObjetoJugador> objetos = jugador.getPowerUP();
-            System.out.println("vida jugador antes objeto "+jugador.getVida());
-            //activamos y eliminamos el objeto de la lista
-            for (ObjetoJugador iter: objetos){
-                if (iter.getId()==this.posicion){
-                    iter.activar();
-                    System.out.println("vida jugador despues objeto "+ jugador.getVida());
-                    jugador.getPowerUP().remove(iter);
-                    break;
-                }
+            if(!objetoElegido) {
+                 Jugador jugador = ComponentesJuego.getComponentes().getEquipo1().getJugadorActivo();
+                 ArrayList<ObjetoJugador> objetos = jugador.getPowerUP();
+                 //activamos y eliminamos el objeto de la lista
+                 for (ObjetoJugador iter: objetos){
+                     if (iter.getId()==this.posicion){
+                             iter.activar();
+                             jugador.getPowerUP().remove(iter);
+                             this.objetoElegido = true;
+                             GestorGrafico.generarDibujante().eliminarTextura(this.ID);
+                             break;
+                 }
             }
+
+
+    }
+
+
 
 
 

@@ -1,6 +1,7 @@
 package com.uab.lis.rugby.ui.activity;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -19,6 +21,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.uab.lis.rugby.R;
+import com.uab.lis.rugby.database.UrisGenerated;
+import com.uab.lis.rugby.database.contracts.tbUsuarioEquipo;
+import com.uab.lis.rugby.database.models.Equipo;
+import com.uab.lis.rugby.database.models.Usuario;
 import com.uab.lis.rugby.utils.Utils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -212,8 +218,30 @@ public class CreateUser extends BaseActivity {
                     int selectedC = ((Adapter)camiseta.getAdapter()).getPositionSelect();
                     int selectedE = ((Adapter)escudo.getAdapter()).getPositionSelect();
 
-                    //TODO BBDD
+                    //creamos el usuario y lo insertamos
+                    Usuario user = new Usuario();
+                    user.setNombre(nameU);
+                    Uri userUri = UrisGenerated.getUriUsuario();
+                    Uri uriUserItem = getContentResolver().insert(userUri,Usuario.generateValues(user));
 
+                    //creamos el equipo y lo insertamos
+                    Equipo equipo = new Equipo();
+                    equipo.setNombre(nameE);
+                    equipo.setEquipacion(getCamisetas().get(selectedC)[0]);
+                    equipo.setEscudo(getEscudos().get(selectedE)[0]);
+                    Uri equipoUri = UrisGenerated.getUriEquipo();
+                    Uri uriEquipoItem = getContentResolver().insert(equipoUri,Equipo.generateValues(equipo));
+
+                    //unimos el equipo con el usuario
+                    String idE = uriEquipoItem.getPathSegments().get(0);
+                    String idU = uriUserItem.getPathSegments().get(0);
+                    Uri equipoUsuarioUri = UrisGenerated.getUriEquipoUsuario();
+                    ContentValues cv = new ContentValues();
+                    cv.put(tbUsuarioEquipo.COL_EQUIPO,idE);
+                    cv.put(tbUsuarioEquipo.COL_USUARIO,idU);
+                    Uri uriEquipoUsuarioItem = getContentResolver().insert(equipoUsuarioUri,cv);
+
+                    //marcamos que ya hemos generado el primer de todo
                     SharedPreferences preferencias = getSharedPreferences("firstEje", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor=preferencias.edit();
                     editor.putBoolean("first", false);

@@ -1,11 +1,17 @@
 package com.rugbysurvive.partida.jugadores;
 
 import com.rugbysurvive.partida.ConstantesJuego;
+import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
+import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.Jugador.extras.Color;
+import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
+import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.tablero.Campo;
 import com.rugbysurvive.partida.tablero.Casilla;
+import com.rugbysurvive.partida.tablero.Lado;
 
 
 import java.util.ArrayList;
@@ -20,7 +26,14 @@ public  class Equipo {
 
 
     private ArrayList<Jugador> jugadores = new ArrayList <Jugador>();
+    private ArrayList<Jugador> descartados = new ArrayList<Jugador>();
+
+
+    private Color color;
+
+    private Lado lado;
     private ArrayList<PosicionInicial> alineacion;
+    private boolean jugando; // indica si el equipo esta siendo usado
 
     private static Equipo equipo;
 
@@ -34,7 +47,11 @@ public  class Equipo {
     public  Equipo(){
         this.alineacion = new ArrayList<PosicionInicial>();
         this.jugadores =  new ArrayList<Jugador>();
+        this.descartados = new ArrayList<Jugador>();
+
+        this.jugando = false;
         equipo = this;
+        this.color = Color.azul;
 
     }
 
@@ -155,14 +172,68 @@ public  class Equipo {
         }
     }
 
-    public void intercambioJugadores(int posicionSuplente){
-        int posicion;
-        if (hayJugadorSelecionado()==true){
-            posicion=jugadores.indexOf(jugadorSelecionado);
-            jugadores.add(posicion,jugadores.get(posicionSuplente));
-            jugadores.remove(posicion+1);
-            jugadores.remove(posicionSuplente);
-            jugadores.add(jugadorSelecionado);
+    /**
+     * Desbloquea todos los jugadores del equipo
+     */
+    public void desbloquear()
+    {
+        for(Jugador jugador : this.jugadores){
+            jugador.setBloqueado(false);
+        }
+    }
+    /**
+     * Bloquea todos los jugadores del equipo
+     */
+    public void bloquear()
+    {
+        for(Jugador jugador : this.jugadores){
+            jugador.setBloqueado(true);
+        }
+    }
+
+    /**
+     * Indica si el equipo entero esta bloqueado
+     * A la que haya un jugador desbloqueado el
+     * equipo entero se considera desbloqueado
+     * @return equipo bloqueado o no
+     */
+    public boolean bloqueado(){
+
+        for(Jugador jugador : this.jugadores){
+            if(jugador.getBloqueado() == false)
+                return false;
+        }
+        return true;
+    }
+
+    /**
+     * Intercambia un jugador de la lista de suplentes por un jugador que este
+     * en la partida .
+     * Automaticamente detecta si es el equipo corecto o no
+     * El jugador colocado aparece en estado bloqueado.
+     *
+     */
+    public void intercambioJugadores(Jugador jugador){
+
+
+        if (hayJugadorSelecionado()){
+
+            Campo campo = ComponentesJuego.getComponentes().getCampo();
+            int posY = jugadorSelecionado.getPosicionY();
+            int posX= jugadorSelecionado.getPosicionX();
+
+
+            campo.eliminarElemento(posY, posX);
+            GestorGrafico.getCamara().desbloquear();
+
+            jugadores.remove(jugador);
+            this.jugadores.add(0,jugador);
+            this.jugadores.remove(jugadorSelecionado);
+            this.descartados.add(jugadorSelecionado);
+            campo.añadirElemento(jugador,posY,posX);
+            jugador.setBloqueado(true);
+
+
         }
     }
 
@@ -181,6 +252,7 @@ public  class Equipo {
      */
     public void añadirJugador(Jugador jugador ,int posicionX,int posicionY)
     {
+        jugador.setColor(this.color);
         this.alineacion.add(new PosicionInicial(jugador,posicionX,posicionY));
         this.jugadores.add(jugador);
     }
@@ -190,5 +262,30 @@ public  class Equipo {
 
     public Jugador getJugadorActivo (){
         return  this.jugadorSelecionado;
+    }
+
+    public boolean isJugando() {
+        return jugando;
+    }
+
+    public void setJugando(boolean jugando) {
+        this.jugando = jugando;
+    }
+
+    public Lado getLado() {
+        return lado;
+    }
+
+    public void setLado(Lado lado) {
+        this.lado = lado;
+    }
+
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

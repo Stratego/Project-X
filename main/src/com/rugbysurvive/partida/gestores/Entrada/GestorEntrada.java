@@ -121,13 +121,15 @@ public class GestorEntrada implements GestureDetector.GestureListener {
 
             for (Boton iterador : botons){
                 if (iterador.esSeleccionado(screenX,screenY)==true){
-                        lista.crearLista(iterador.obtenerEntrada());
+                    lista.crearLista(iterador.obtenerEntrada());
 
                     return false;
                 }
             }
             //si hay lista comprueba que se haya clicado en uno se sus botones
-            if (lista.hayLista()==true){
+            if (lista.hayLista()){
+
+
                 //System.out.println("entra en bucle de listas");
                 for (Boton iteradorLista : lista.listaActiva()){
                     //System.out.println("itera bucle de listas");
@@ -136,12 +138,20 @@ public class GestorEntrada implements GestureDetector.GestureListener {
                         return false;
                     }
                 }
+
+                if(this.lista.getBotonAbajo() != null) {
+                    if(this.lista.getBotonAbajo().esSeleccionado(screenX,screenY)){return true;}
+                }
+
+                if(this.lista.getBotonArriba() != null) {
+                    if(this.lista.getBotonArriba().esSeleccionado(screenX,screenY)){return true;}
+                }
             }
             // comprieba si hay lista y no se ha clicado en sus botones se elimina
 
             lista.eliminarListaObjetos();
             lista.eliminarListaSuplentes();
-
+            lista.reiniciarPosicionamientoLista();
 
             campo.accionEntrada(Entrada.clic,touchPos.x, touchPos.y );
 
@@ -186,18 +196,18 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         //System.out.println("distancia : "+distancia );
 
         if( Gdx.input.isTouched(1)){
-        if(distancia >= 0)
-        {
-             for(int i=0 ;i<distancia/100;i++){
+            if(distancia >= 0)
+            {
+                for(int i=0 ;i<distancia/100;i++){
                     ConstantesJuego.variables().sumarMultiplicado();
                 }
-        }
-        else
-        {
-            for(int i=0 ;i<-(distancia/100);i++){
-                ConstantesJuego.variables().restarMultiplicado();
             }
-        }
+            else
+            {
+                for(int i=0 ;i<-(distancia/100);i++){
+                    ConstantesJuego.variables().restarMultiplicado();
+                }
+            }
         }
         return true;
     }
