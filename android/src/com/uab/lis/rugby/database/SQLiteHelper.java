@@ -52,6 +52,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(tbExtras.CREATE_TABLE);
         db.execSQL(tbJugadorExtra.CREATE_TABLE);
         db.execSQL(tbPowerups.CREATE_TABLE);
+
         new DumyDatos().execute();
 
     }
@@ -89,16 +90,17 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
             Jugador jugador1 = new Jugador();
             jugador1.setNombre("Manu");
-            Uri uriJugador1 = cr.insert(Uri.parse(uriBase+"/"+tbJugadores.TABLE),Jugador.generateValues(jugador1));
+            Uri uri_jugador1 = cr.insert(Uri.parse(uriBase+"/"+tbJugadores.TABLE),Jugador.generateValues(jugador1));
 
-            Equipo equipo1 = new Equipo();
+            Equipo equipo1;
+            equipo1 = new Equipo();
             equipo1.setNombre("A-Team");
-            Uri uriEquipo1 = cr.insert(Uri.parse(uriBase+"/"+tbEquipos.TABLE),Equipo.generateValues(equipo1));
+            Uri uri_equipo1 = cr.insert(Uri.parse(uriBase+"/"+tbEquipos.TABLE),Equipo.generateValues(equipo1));
 
-            ContentValues cv1 = new ContentValues();
-            cv1.put(tbJugadorEquipo.COL_JUGADOR, ContentUris.parseId(uriJugador1));
-            cv1.put(tbJugadorEquipo.COL_EQUIPO, ContentUris.parseId(uriEquipo1));
-            cr.insert(Uri.parse(uriBase + "/" + tbJugadorEquipo.TABLE), cv1);
+            ContentValues cv = new ContentValues();
+            cv.put(tbJugadorEquipo.COL_JUGADOR, ContentUris.parseId(uri_jugador1));
+            cv.put(tbJugadorEquipo.COL_EQUIPO, ContentUris.parseId(uri_equipo1));
+            cr.insert(Uri.parse(uriBase + "/" + tbJugadorEquipo.TABLE), cv);
 
             return null;
         }
