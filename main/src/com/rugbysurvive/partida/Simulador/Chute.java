@@ -2,6 +2,7 @@ package com.rugbysurvive.partida.Simulador;
 
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.SinPelota;
+import com.rugbysurvive.partida.tablero.Campo;
 
 /**
  * Created by Aleix on 31/03/14.
@@ -22,10 +23,12 @@ public class Chute extends Accion {
     @Override
     public boolean simular() {
         System.out.println("Chute hecho");
+
         //jugador.setEstado(new SinPelota());
         //return true;
 
-        precisionChute();
+
+        this.precisionChute();
 
         return true;
     }
@@ -46,9 +49,9 @@ public class Chute extends Accion {
 
             boolean resto = true;
             boolean xoy = true;
-
             int contCambioXoY = 1;
             int cont = 0;
+
 
             //Como hay 25 casillas, empezamos desde la 25, que seria con precision 4 hasta la 0, que seria precision 100
             for(int i=23; i>=0; i--)
@@ -125,7 +128,8 @@ public class Chute extends Accion {
                 }
             }
 
-           // Campo.getInstanciaCampo().ponerPelota(ejesDestinoPelota[casillaChute][0], ejesDestinoPelota[casillaChute][1]);
+            Campo.getInstanciaCampo().colocarPelota(ejesDestinoPelota[casillaChute][0], +ejesDestinoPelota[casillaChute][1]);
+
             System.out.println("La pelota va a la posicion: "+ejesDestinoPelota[casillaChute][0]+"-"+ejesDestinoPelota[casillaChute][1]);
             jugador.setEstado(new SinPelota());
             return true;
