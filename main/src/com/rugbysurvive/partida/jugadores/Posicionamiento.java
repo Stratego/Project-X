@@ -261,10 +261,10 @@ public class Posicionamiento {
         }
 
         if (new Random().nextInt()%2 != 0){
-            jugadaequipo1.get(jugadaequipo1.size()).setEstado(new ConPelota());
+            jugadaequipo1.get(jugadaequipo1.size()-1).setEstado(new ConPelota());
             GestorTurnos.iniciarTurnoEquipo(ComponentesJuego.getComponentes().getEquipo2(),ComponentesJuego.getComponentes().getEquipo1());
         }else{
-            jugadaequipo2.get(jugadaequipo2.size()).setEstado(new ConPelota());
+            jugadaequipo2.get(jugadaequipo2.size()-1).setEstado(new ConPelota());
             GestorTurnos.iniciarTurnoEquipo(ComponentesJuego.getComponentes().getEquipo1(),ComponentesJuego.getComponentes().getEquipo2());
         }
 
