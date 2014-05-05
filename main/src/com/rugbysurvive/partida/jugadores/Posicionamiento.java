@@ -123,7 +123,7 @@ public class Posicionamiento {
         for (Jugador jugador1:jugadaequipo1){
             campo.eliminarElemento(jugador1.getPosicionY(),jugador1.getPosicionX());
             jugador1.setDireccion(direccion1);
-            jugador1.colocar(new Casilla((float)x,(float)y));
+            campo.añadirElemento(jugador1,y,x);
             if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
                 arbitro.mover();
             }
@@ -141,7 +141,8 @@ public class Posicionamiento {
         for (Jugador jugador2:jugadaequipo2){
             campo.eliminarElemento(jugador2.getPosicionY(),jugador2.getPosicionX());
             jugador2.setDireccion(direccion2);
-            jugador2.colocar(new Casilla((float) x, (float) y));
+            //jugador2.colocar(new Casilla((float) x, (float) y));
+            campo.añadirElemento(jugador2,y,x);
             if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
                 arbitro.mover();
             }
@@ -154,7 +155,13 @@ public class Posicionamiento {
             }
         }
 
-
+        if (new Random().nextInt()%2 != 0){
+            jugadaequipo1.get(jugadaequipo1.size()-1).setEstado(new ConPelota());
+            GestorTurnos.iniciarTurnoEquipo(ComponentesJuego.getComponentes().getEquipo2(),ComponentesJuego.getComponentes().getEquipo1());
+        }else{
+            jugadaequipo2.get(jugadaequipo2.size()-1).setEstado(new ConPelota());
+            GestorTurnos.iniciarTurnoEquipo(ComponentesJuego.getComponentes().getEquipo1(),ComponentesJuego.getComponentes().getEquipo2());
+        }
 
 
         jugadaequipo1.clear();
@@ -174,6 +181,9 @@ public class Posicionamiento {
 
 
         Campo campo = ComponentesJuego.getComponentes().getCampo();
+        simulador.eliminarAccionsSimulador();
+        ComponentesJuego.getComponentes().getEquipo1().quitarPelota();
+        ComponentesJuego.getComponentes().getEquipo2().quitarPelota();
         jugadoresCercanos(posX,posY);
         int x = posX-1;
         int y = posY +3;
@@ -195,7 +205,8 @@ public class Posicionamiento {
         for (Jugador jugador1:jugadaequipo1){
                 campo.eliminarElemento(jugador1.getPosicionY(),jugador1.getPosicionX());
                 jugador1.setDireccion(direccion1);
-                jugador1.colocar(new Casilla((float)x,(float)y));
+                campo.añadirElemento(jugador1,y,x);
+                //jugador1.colocar(new Casilla((float)x,(float)y));
 
             if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
                 arbitro.mover();
@@ -232,7 +243,8 @@ public class Posicionamiento {
 
             campo.eliminarElemento(jugador2.getPosicionY(),jugador2.getPosicionX());
             jugador2.setDireccion(direccion2);
-            jugador2.colocar(new Casilla((float) x, (float) y));
+            campo.añadirElemento(jugador2,y,x);
+            //jugador2.colocar(new Casilla((float) x, (float) y));
 
             if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
                 arbitro.mover();
@@ -261,10 +273,10 @@ public class Posicionamiento {
         }
 
         if (new Random().nextInt()%2 != 0){
-            jugadaequipo1.get(jugadaequipo1.size()-1).setEstado(new ConPelota());
+            jugadaequipo1.get(jugadaequipo1.size()-2).setEstado(new ConPelota());
             GestorTurnos.iniciarTurnoEquipo(ComponentesJuego.getComponentes().getEquipo2(),ComponentesJuego.getComponentes().getEquipo1());
         }else{
-            jugadaequipo2.get(jugadaequipo2.size()-1).setEstado(new ConPelota());
+            jugadaequipo2.get(jugadaequipo2.size()-2).setEstado(new ConPelota());
             GestorTurnos.iniciarTurnoEquipo(ComponentesJuego.getComponentes().getEquipo1(),ComponentesJuego.getComponentes().getEquipo2());
         }
 
@@ -300,6 +312,8 @@ public class Posicionamiento {
                         if (ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador()!=null){
                             //System.out.println("entra selecion jugador");
                             if (ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador().getMiEquipo()==ComponentesJuego.getComponentes().getEquipo1()){
+                            //if (ComponentesJuego.getComponentes().getEquipo1().jugadorEnEquipo(ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador())==true){
+
                                 if (jugadaequipo1.contains(ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador())==false && jugadaequipo1.size()<4){
                                     jugadaequipo1.add(ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador());
                                     System.out.println("añadido jugador equipo1: " + jugadaequipo1.size());

@@ -24,7 +24,7 @@ public class GestorTurnos implements Dibujable,Proceso {
     private static final int VELOCIDAD = 10;
     private int posicionTexturaX;
     private int posicionTexturaY;
-    private static String estandarteEquipo1 = "banderas/logo1.png";
+    private static String estandarteEquipo1 ="Menu/CanviTorn.png";
     private static String estandarteEquipo2 = "banderas/logo4.png";
     private static int equipoCambiado = 0;
     private int id;

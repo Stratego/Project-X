@@ -145,6 +145,9 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("jugador/ropa/jugador5E2.png");
         nombresTexturas.add("jugador/ropa/jugador5E3.png");
         nombresTexturas.add("jugador/ropa/jugador5E4.png");
+        nombresTexturas.add("Menu/CanviTorn.png");
+        nombresTexturas.add("Menu/fletxaAmunt.png");
+        nombresTexturas.add("Menu/fletxaAvall.png");
 
 
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
@@ -193,9 +196,9 @@ public class SkeletonMain extends Game {
         this.simular = false;
         //arbitro = new Arbitro();
         this.gestor = new GestorTurnos();
-        //Posicionamiento posicionamiento = new Posicionamiento();
+        Posicionamiento posicionamiento = new Posicionamiento();
         //posicionamiento.generarMele(20,10);
-        //posicionamiento.generarSaqueBanda(20,18,ComponentesJuego.getComponentes().getEquipo1());
+        posicionamiento.generarSaqueBanda(20,18,ComponentesJuego.getComponentes().getEquipo1());
 
     }
 
