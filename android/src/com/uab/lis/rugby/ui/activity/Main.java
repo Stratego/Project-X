@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.content.LocalBroadcastManager;
 
 import android.util.Log;
@@ -14,8 +15,15 @@ import android.view.View;
 import android.widget.Button;
 import com.uab.lis.rugby.R;
 import com.uab.lis.rugby.database.ContentProviders.MyAppContentProvider;
+import com.uab.lis.rugby.database.SQLiteHelper;
 import com.uab.lis.rugby.database.contracts.tbJugadores;
 import com.uab.lis.rugby.service.MusicService;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 
 /**
  * Created by adria on 13/03/14.
@@ -42,8 +50,9 @@ public class Main extends BaseActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 
-        Uri uri = Uri.withAppendedPath(MyAppContentProvider.URI_BASE, "jugadores");
+        Uri uri = Uri.withAppendedPath(MyAppContentProvider.URI_BASE, tbJugadores.TABLE);
         Cursor cursor = getContentResolver().query(uri,null,null,null,null);
         cursor.close();
+
     }
 }

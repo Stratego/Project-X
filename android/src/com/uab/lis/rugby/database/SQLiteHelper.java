@@ -4,6 +4,8 @@ package com.uab.lis.rugby.database;
  * Created by Manuel on 24/03/14.
  */
 import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -15,9 +17,11 @@ import android.widget.Toast;
 import com.uab.lis.rugby.database.ContentProviders.EquiposMinion;
 import com.uab.lis.rugby.database.ContentProviders.MyAppContentProvider;
 import com.uab.lis.rugby.database.contracts.*;
+import com.uab.lis.rugby.database.models.Equipo;
 import com.uab.lis.rugby.database.models.Jugador;
 
 import java.io.*;
+import java.nio.channels.FileChannel;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
     private Context context;
@@ -80,49 +84,50 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            /*String uriBase = "com.uab.lis.rugby";
-
+            String uriBase = "content://com.uab.lis.uab.rugby";
             ContentResolver cr = context.getContentResolver();
-            Jugador jugador = new Jugador();
-            jugador.setNombre("adria");
-            cr.insert(Uri.parse(uriBase+"/"+tbEquipos.TABLE),Jugador.generateValues(jugador));
-            */
+
+            Jugador jugador1 = new Jugador();
+            jugador1.setNombre("Manu");
+            Uri uriJugador1 = cr.insert(Uri.parse(uriBase+"/"+tbJugadores.TABLE),Jugador.generateValues(jugador1));
+
+            Equipo equipo1 = new Equipo();
+            equipo1.setNombre("A-Team");
+            Uri uriEquipo1 = cr.insert(Uri.parse(uriBase+"/"+tbEquipos.TABLE),Equipo.generateValues(equipo1));
+
+            ContentValues cv1 = new ContentValues();
+            cv1.put(tbJugadorEquipo.COL_JUGADOR, ContentUris.parseId(uriJugador1));
+            cv1.put(tbJugadorEquipo.COL_EQUIPO, ContentUris.parseId(uriEquipo1));
+            cr.insert(Uri.parse(uriBase + "/" + tbJugadorEquipo.TABLE), cv1);
+
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            try {
-                backupDatabase();
-            } catch (IOException e) {
-
-                Log.e("aba",e.toString());
-                Toast.makeText(context,"error save file --> "+e.toString(),Toast.LENGTH_LONG).show();
-            }
+            backupDatabase();
         }
 
         //Coloca en la memoria SD una copia del archivo de la base de datos
-        public void backupDatabase() throws IOException {
-            //Open your local db as the input stream
-            String inFileName = "/data/data/com.uab.lis.rugby/databases/"+nomBD;
-            File dbFile = new File(inFileName);
-            FileInputStream fis = new FileInputStream(dbFile);
-
-            String outFileName = Environment.getExternalStorageDirectory()
-                    + "/"+nomBD;
-            //Open the empty db as the output stream
-            OutputStream output = new FileOutputStream(outFileName);
-            //transfer bytes from the inputfile to the outputfile
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = fis.read(buffer))>0){
-                output.write(buffer, 0, length);
+        public void backupDatabase() {
+            File sd = Environment.getExternalStorageDirectory();
+            File data = Environment.getDataDirectory();
+            FileChannel source=null;
+            FileChannel destination=null;
+            String currentDBPath = "/data/"+ "com.uab.lis.rugby" +"/databases/"+nomBD;
+            String backupDBPath = nomBD;
+            File currentDB = new File(data, currentDBPath);
+            File backupDB = new File(sd, backupDBPath);
+            try {
+                source = new FileInputStream(currentDB).getChannel();
+                destination = new FileOutputStream(backupDB).getChannel();
+                destination.transferFrom(source, 0, source.size());
+                source.close();
+                destination.close();
+            } catch(IOException e) {
+                e.printStackTrace();
             }
-            //Close the streams
-            output.flush();
-            output.close();
-            fis.close();
         }
     }
 }

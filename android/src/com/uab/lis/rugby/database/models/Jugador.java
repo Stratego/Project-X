@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Manuel on 7/04/14.
  */
 public class Jugador {
-    private int id;
+    private long id;
     private String nombre;
     private Rol rol;
     private List<Habilidad> habilidades;
@@ -17,7 +17,7 @@ public class Jugador {
     private int posY;
     private String extrasVisuales;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -45,7 +45,7 @@ public class Jugador {
         return extrasVisuales;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

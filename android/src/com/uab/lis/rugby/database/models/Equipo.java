@@ -11,14 +11,14 @@ import java.util.List;
  * Created by Manuel on 7/04/14.
  */
 public class Equipo {
-    private int id;
+    private long id;
     private String nombre;
     private List<Jugador> jugadores;
     private String escudo;
     private String equipacion;
     private List<Jugador> alineacion;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -42,7 +42,7 @@ public class Equipo {
         return jugadores;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
