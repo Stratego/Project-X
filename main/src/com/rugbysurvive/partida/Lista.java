@@ -110,12 +110,12 @@ public class Lista {
 
             if(posicionInicial >0){
                 this.botonAbajo = new BotonDesplazamiento(ConstantesJuego.POSICION_BOTON_CHUTEPASE-100,100,Entrada.listasuplente,
-                        "boto.png",1,this);
+                        "Menu/fletxaAvall.png",1,this);
                 this.botonArriba.mostrar();
             }
             if(posicionInicial +3 < suplentes.size()- 1){
                 this.botonArriba = new BotonDesplazamiento(ConstantesJuego.POSICION_BOTON_CHUTEPASE-100,200,Entrada.listasuplente,
-                        "boto.png",0,this);
+                        "Menu/fletxaAmunt.png",0,this);
                 this.botonArriba.mostrar();
             }
 
