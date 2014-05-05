@@ -3,7 +3,10 @@ package com.rugbysurvive.partida.jugadores;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+import com.rugbysurvive.partida.Jugador.ConPelota;
+import com.rugbysurvive.partida.Jugador.Estado;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.Jugador.SinPelota;
 import com.rugbysurvive.partida.Jugador.extras.Color;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
@@ -255,6 +258,14 @@ public  class Equipo {
         jugador.setColor(this.color);
         this.alineacion.add(new PosicionInicial(jugador,posicionX,posicionY));
         this.jugadores.add(jugador);
+    }
+
+    public void quitarPelota(){
+        for (Jugador jugador: listaJugadoresCampo()){
+            if (jugador.getEstado()instanceof ConPelota){
+                jugador.setEstado(new SinPelota());
+            }
+        }
     }
     /* public boolean desalojarCampo(Campo campo){}
     public boolean bloquear(){}

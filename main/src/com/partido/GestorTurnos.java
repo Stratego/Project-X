@@ -110,6 +110,7 @@ public class GestorTurnos implements Dibujable,Proceso {
                 ProcesosContinuos.añadirProceso(this);
                 this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
                 forzarCambioTurno = false;
+                arbitro.mover();
                 equipo2.bloquear();
             }
 
@@ -119,6 +120,7 @@ public class GestorTurnos implements Dibujable,Proceso {
                 ProcesosContinuos.añadirProceso(this);
                 this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
                 forzarCambioTurno = false;
+                arbitro.mover();
                 equipo1.bloquear();
             }
 
@@ -152,6 +154,13 @@ public class GestorTurnos implements Dibujable,Proceso {
            return true;
         }
        return false;
+    }
+
+    public static void iniciarTurnoEquipo(Equipo equipo1, Equipo equipo2){
+        equipo1.bloquear();
+        equipo2.desbloquear();
+        equipo2.setJugando(true);
+
     }
 
     @Override
