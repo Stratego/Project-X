@@ -1,10 +1,13 @@
 package com.rugbysurvive.partida.jugadores;
 
+import com.partido.GestorTurnos;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.arbitro.Arbitro;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.tablero.Campo;
@@ -22,6 +25,8 @@ public class Posicionamiento {
     public static ArrayList<Jugador> jugadaequipo1 = new ArrayList<Jugador>();
     public static ArrayList<Jugador> jugadaequipo2 = new ArrayList<Jugador>();
     public static ElementoDibujable casillaVision;
+
+    private static Simulador simulador = Simulador.getInstance();
 
     /**
      * Coloca al equipo en posicion de saque elegido predeterminado
@@ -88,7 +93,10 @@ public class Posicionamiento {
 
 
         Campo campo = ComponentesJuego.getComponentes().getCampo();
-        jugadoresCercanos(posX,posY);
+        simulador.eliminarAccionsSimulador();
+        ComponentesJuego.getComponentes().getEquipo1().quitarPelota();
+        ComponentesJuego.getComponentes().getEquipo2().quitarPelota();
+        jugadoresCercanos(posX, posY);
         int x = posX;
         if (posY<=ConstantesJuego.POSICION_SAQUE_BANDA_INFERIOR+1){
             posY+=1;
@@ -145,6 +153,8 @@ public class Posicionamiento {
                 y=posY;
             }
         }
+
+
 
 
         jugadaequipo1.clear();
@@ -248,6 +258,14 @@ public class Posicionamiento {
                 }
             }
 
+        }
+
+        if (new Random().nextInt()%2 != 0){
+            jugadaequipo1.get(jugadaequipo1.size()-1).setEstado(new ConPelota());
+            GestorTurnos.iniciarTurnoEquipo(ComponentesJuego.getComponentes().getEquipo2(),ComponentesJuego.getComponentes().getEquipo1());
+        }else{
+            jugadaequipo2.get(jugadaequipo2.size()-1).setEstado(new ConPelota());
+            GestorTurnos.iniciarTurnoEquipo(ComponentesJuego.getComponentes().getEquipo1(),ComponentesJuego.getComponentes().getEquipo2());
         }
 
         jugadaequipo1.clear();

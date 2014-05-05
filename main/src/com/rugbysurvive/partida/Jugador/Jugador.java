@@ -21,6 +21,12 @@ import java.util.ArrayList;
 public class Jugador implements GestionEntrada {
 
     private static final int MAXIMO_OBJETOS = 4;
+    public static final int MAX_HABILIDAD = 100;
+    public static final int MAX_DEFENSA = 100;
+    public static final int MAX_ATAQUE = 100;
+    public static final int MAX_FUERZA = 100;
+    public static final int MAX_RESISTENCIA = 100;
+
     private String textura;
     private DireccionJugador direccion;
     private ElementoDibujable seleccion;

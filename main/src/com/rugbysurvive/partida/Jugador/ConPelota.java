@@ -7,14 +7,19 @@ import com.rugbysurvive.partida.Simulador.Chute;
 import com.rugbysurvive.partida.Simulador.Pase;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
+import com.rugbysurvive.partida.gestores.Procesos.Proceso;
+import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
+import com.rugbysurvive.partida.tablero.Lado;
 
 /**
  * Created by Victor on 27/03/14.
  */
-public class ConPelota implements Estado {
+public class ConPelota implements Estado, Proceso {
     public boolean seleccionado = false;
     public boolean bloqueado = false;
     ElementoDibujable indicadorPelota;
+    ElementoDibujable atencionJugador;
+    int count;
 
     public Jugador jugador;
 
@@ -48,20 +53,76 @@ public class ConPelota implements Estado {
             if(jugador.getPaseOChute() == Entrada.pase)
             {
                 //Comprovem que fem el pase en una posció en horitzontal o per davant del jugador
-                if (posX <= jugador.getPosicionX()){
-                    jugador.setAccion(new Pase(jugador, posX, posY));
-                    System.out.println("La PASOOOOO!!!");
+                if (jugador.getMiEquipo().getLado()== Lado.izquierda){
+
+                    if(posX <= jugador.getPosicionX()){
+
+                        jugador.setAccion(new Pase(jugador, posX, posY));
+                        System.out.println("La PASOOOOO!!!");
+                    }
+
+                    else{
+
+                        this.atencionJugador = new ElementoDibujable(TipoDibujo.elementosJuego, "jugador/extras/caution.png" );
+                        this.atencionJugador.dibujar(jugador.getPosicionX(), jugador.getPosicionY());
+                        ProcesosContinuos.añadirProceso(this);
+                        count = 0;
+
+                    }
+
+                if(jugador.getMiEquipo().getLado()== Lado.derecha){
+
+                        if (posX >= jugador.getPosicionX()){
+                            jugador.setAccion(new Pase(jugador, posX, posY));
+                            System.out.println("La PASOOOOO!!!");
+                        }
+
+                    else {
+
+                            this.atencionJugador = new ElementoDibujable(TipoDibujo.elementosJuego, "jugador/extras/caution.png" );
+                            this.atencionJugador.dibujar(jugador.getPosicionX(), jugador.getPosicionY());
+                            ProcesosContinuos.añadirProceso(this);
+                            count = 0;
+
+                        }
                 }
             }
+
+            }
+
             else
             {
                 //Comprovem que fem el xut en una posció en horitzontal o per davant del jugador
 
+                if (jugador.getMiEquipo().getLado()== Lado.izquierda){
 
-                if(posX >= jugador.getPosicionX()){
+                    if(posX >= jugador.getPosicionX()){
 
-                    jugador.setAccion(new Chute(jugador, posX, posY));
-                    System.out.println("La CHUTOOO!!!");
+                        jugador.setAccion(new Chute(jugador, posX, posY));
+                        System.out.println("La CHUTOOO!!!");
+                    }
+                    else{
+
+                        this.atencionJugador = new ElementoDibujable(TipoDibujo.elementosJuego, "jugador/extras/caution.png" );
+                        this.atencionJugador.dibujar(jugador.getPosicionX(), jugador.getPosicionY());
+                        ProcesosContinuos.añadirProceso(this);
+                        count = 0;
+                    }
+
+                if (jugador.getMiEquipo().getLado() == Lado.derecha){
+                        if(posX >= jugador.getPosicionX()){
+
+                            jugador.setAccion(new Chute(jugador, posX, posY));
+                            System.out.println("La CHUTOOO!!!");
+                        }
+                    else{
+                            this.atencionJugador = new ElementoDibujable(TipoDibujo.elementosJuego, "jugador/extras/caution.png" );
+                            this.atencionJugador.dibujar(jugador.getPosicionX(), jugador.getPosicionY());
+                            ProcesosContinuos.añadirProceso(this);
+                            count = 0;
+
+                        }
+                    }
 
                 }
 
@@ -134,4 +195,13 @@ public class ConPelota implements Estado {
     }
 
 
+    @Override
+    public boolean procesar() {
+        count++;
+        if(count == 100){
+            this.atencionJugador.borrar();
+            return true;
+        }
+        return false;
+    }
 }
