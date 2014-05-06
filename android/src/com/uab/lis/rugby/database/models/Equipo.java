@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Manuel on 7/04/14.
  */
 public class Equipo {
-    private long id;
+    private long id = -1;
     private String nombre;
     private List<Jugador> jugadores;
     private String escudo;
@@ -92,7 +92,9 @@ public class Equipo {
     }
     public static ContentValues generateValues(Equipo equipo){
         ContentValues values = new ContentValues();
-        values.put(tbEquipos._ID, equipo.getId());
+        if(equipo.getId() != -1){
+            values.put(tbEquipos._ID, equipo.getId());
+        }
         values.put(tbEquipos.COL_NOMBRE,equipo.getNombre());
         values.put(tbEquipos.COL_ESCUDO,equipo.getEscudo());
         values.put(tbEquipos.COL_EQUIPACION,equipo.getEquipacion());

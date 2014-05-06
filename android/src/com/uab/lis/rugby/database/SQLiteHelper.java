@@ -85,22 +85,21 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            String uriBase = "content://com.uab.lis.uab.rugby";
             ContentResolver cr = context.getContentResolver();
 
             Jugador jugador1 = new Jugador();
             jugador1.setNombre("Manu");
-            Uri uri_jugador1 = cr.insert(Uri.parse(uriBase+"/"+tbJugadores.TABLE),Jugador.generateValues(jugador1));
+            Uri uri_jugador1 = cr.insert(Uri.parse(MyAppContentProvider.URI_BASE.toString()+"/"+tbJugadores.TABLE),Jugador.generateValues(jugador1));
 
             Equipo equipo1;
             equipo1 = new Equipo();
-            equipo1.setNombre("A-Team");
-            Uri uri_equipo1 = cr.insert(Uri.parse(uriBase+"/"+tbEquipos.TABLE),Equipo.generateValues(equipo1));
+            equipo1.setNombre("ATeam");
+            Uri uri_equipo1 = cr.insert(Uri.parse(MyAppContentProvider.URI_BASE.toString()+"/"+tbEquipos.TABLE),Equipo.generateValues(equipo1));
 
             ContentValues cv = new ContentValues();
             cv.put(tbJugadorEquipo.COL_JUGADOR, ContentUris.parseId(uri_jugador1));
             cv.put(tbJugadorEquipo.COL_EQUIPO, ContentUris.parseId(uri_equipo1));
-            cr.insert(Uri.parse(uriBase + "/" + tbJugadorEquipo.TABLE), cv);
+            cr.insert(Uri.parse(MyAppContentProvider.URI_BASE.toString() + "/" + tbJugadorEquipo.TABLE), cv);
 
             return null;
         }
@@ -108,6 +107,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            try {
+                Thread.sleep(1000 * 60 );
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             backupDatabase();
         }
 
