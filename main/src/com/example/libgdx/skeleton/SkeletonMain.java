@@ -198,7 +198,7 @@ public class SkeletonMain extends Game {
         this.gestor = new GestorTurnos();
         Posicionamiento posicionamiento = new Posicionamiento();
         //posicionamiento.generarMele(20,10);
-        posicionamiento.generarSaqueBanda(20,18,ComponentesJuego.getComponentes().getEquipo1());
+        //posicionamiento.generarSaqueBanda(20,18,ComponentesJuego.getComponentes().getEquipo1());
 
     }
 

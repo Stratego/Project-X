@@ -3,15 +3,14 @@ package com.rugbysurvive.partida.jugadores;
 import com.partido.GestorTurnos;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
-import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.Simulador.Chute;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.arbitro.Arbitro;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.tablero.Campo;
-import com.rugbysurvive.partida.tablero.Casilla;
 import com.rugbysurvive.partida.tablero.Lado;
 
 import java.util.ArrayList;
@@ -25,6 +24,8 @@ public class Posicionamiento {
     public static ArrayList<Jugador> jugadaequipo1 = new ArrayList<Jugador>();
     public static ArrayList<Jugador> jugadaequipo2 = new ArrayList<Jugador>();
     public static ElementoDibujable casillaVision;
+
+    private static Chute chute;
 
     private static Simulador simulador = Simulador.getInstance();
 
@@ -123,7 +124,7 @@ public class Posicionamiento {
         for (Jugador jugador1:jugadaequipo1){
             campo.eliminarElemento(jugador1.getPosicionY(),jugador1.getPosicionX());
             jugador1.setDireccion(direccion1);
-            campo.añadirElemento(jugador1,y,x);
+            campo.añadirElemento(jugador1, y, x);
             if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
                 arbitro.mover();
             }
@@ -142,7 +143,7 @@ public class Posicionamiento {
             campo.eliminarElemento(jugador2.getPosicionY(),jugador2.getPosicionX());
             jugador2.setDireccion(direccion2);
             //jugador2.colocar(new Casilla((float) x, (float) y));
-            campo.añadirElemento(jugador2,y,x);
+            campo.añadirElemento(jugador2, y, x);
             if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
                 arbitro.mover();
             }
@@ -168,6 +169,39 @@ public class Posicionamiento {
         jugadaequipo2.clear();
     }
 
+    public static void generarPenalty(Equipo equipo, int posX, int posY){
+        Campo campo = ComponentesJuego.getComponentes().getCampo();
+        simulador.eliminarAccionsSimulador();
+        ComponentesJuego.getComponentes().getEquipo1().quitarPelota();
+        ComponentesJuego.getComponentes().getEquipo2().quitarPelota();
+        if (ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador()==null){
+            jugadoresCercanos(posX,posY);
+            if (jugadaequipo1.get(0).getMiEquipo()==equipo){
+                jugadaequipo1.get(0).setEstado(new ConPelota());
+                if (jugadaequipo1.get(0).getMiEquipo().getLado()==Lado.derecha){
+                    chute = new Chute(jugadaequipo1.get(0),1,9);
+                }else{
+                    chute = new Chute(jugadaequipo1.get(0),27,9);
+                }
+            }else{
+                jugadaequipo2.get(0).setEstado(new ConPelota());
+                if (jugadaequipo2.get(0).getMiEquipo().getLado()==Lado.derecha){
+                    chute = new Chute(jugadaequipo2.get(0),1,9);
+                }else{
+                    chute = new Chute(jugadaequipo2.get(0),27,9);
+                }
+            }
+
+        }else{
+            ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador().setEstado(new ConPelota());
+            if (ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador().getMiEquipo().getLado()==Lado.derecha){
+                chute = new Chute(ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador(),1,9);
+            }else{
+                chute = new Chute(ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador(),27,9);
+            }
+        }
+
+    }
 
     /**
      * Coloca los dos equipos en posicion de saque de banda en la posicion determinada
@@ -205,7 +239,7 @@ public class Posicionamiento {
         for (Jugador jugador1:jugadaequipo1){
                 campo.eliminarElemento(jugador1.getPosicionY(),jugador1.getPosicionX());
                 jugador1.setDireccion(direccion1);
-                campo.añadirElemento(jugador1,y,x);
+                campo.añadirElemento(jugador1, y, x);
                 //jugador1.colocar(new Casilla((float)x,(float)y));
 
             if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
@@ -243,7 +277,7 @@ public class Posicionamiento {
 
             campo.eliminarElemento(jugador2.getPosicionY(),jugador2.getPosicionX());
             jugador2.setDireccion(direccion2);
-            campo.añadirElemento(jugador2,y,x);
+            campo.añadirElemento(jugador2, y, x);
             //jugador2.colocar(new Casilla((float) x, (float) y));
 
             if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){

@@ -2,6 +2,7 @@ package com.rugbysurvive.partida.arbitro;
 
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.jugadores.Posicionamiento;
+import com.rugbysurvive.partida.tablero.Lado;
 
 /**
  * Created by aitor on 25/04/14.
@@ -26,10 +27,11 @@ public class Choque extends Regla{
 
         if(this.arbitro.esSucesoVisible(this.jugadorDefensor.getPosicionX(),this.jugadorDefensor.getPosicionY())==true){
             System.out.println("ha ocurrido un choque");
-            if (this.jugadorDefensor.getPosicionX()>=7 && this.jugadorDefensor.getPosicionX()<=22 ){
-                this.posicionamiento.generarMele(this.jugadorDefensor.getPosicionX(),this.jugadorDefensor.getPosicionY());
+
+            if ((jugadorAtacante.getMiEquipo().getLado()== Lado.izquierda && this.jugadorDefensor.getPosicionX()>=7)||(jugadorAtacante.getMiEquipo().getLado()== Lado.derecha && this.jugadorDefensor.getPosicionX()<=22)){
+                this.posicionamiento.generarPenalty(this.jugadorDefensor.getMiEquipo(),jugadorDefensor.getPosicionX(),jugadorDefensor.getPosicionY());
             }else{
-                //GENERAR CHUTE
+                this.posicionamiento.generarMele(this.jugadorDefensor.getPosicionX(),this.jugadorDefensor.getPosicionY());
             }
 
             return true;

@@ -33,7 +33,7 @@ public abstract class ObjetoCampo implements Dibujable {
         this.posY = posicionY;
         this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
         Campo campo = ComponentesJuego.getComponentes().getCampo();
-        campo.añadirElemento(this,this.posX,this.posY);
+        campo.añadirElemento(this,this.posY,this.posX);
     }
 
     public void quitar(){

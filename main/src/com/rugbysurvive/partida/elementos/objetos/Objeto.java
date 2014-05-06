@@ -115,7 +115,7 @@ public abstract class Objeto extends ObjetoJugador {
                 }
                 break;
         }
-        if (colocable==true&&campo.getCasilla(x,y).sinObjeto()==true){
+        if (colocable==true&&campo.getCasilla(y,x).sinObjeto()==true){
             return colocable;
         }
         return false;
