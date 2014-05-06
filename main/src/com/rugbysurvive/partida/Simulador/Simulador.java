@@ -90,8 +90,8 @@ public class Simulador {
 
     public void eliminarAccionsSimulador()
     {
-        this.acciones = new ArrayList();
-        this.simulando = false;
+        /*this.acciones = new ArrayList();
+        this.simulando = false;*/
 
     }
 

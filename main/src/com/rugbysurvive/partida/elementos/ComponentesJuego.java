@@ -59,7 +59,7 @@ public class ComponentesJuego {
         jugador.añadirObjeto(objeto);
         jugador.añadirObjeto(objeto);
 
-        this.equipo1.añadirJugador(jugador,17,22);
+        this.equipo1.añadirJugador(jugador,17,23);
         //this.equipo1.añadirJugador(jugador,17,22);
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo1);

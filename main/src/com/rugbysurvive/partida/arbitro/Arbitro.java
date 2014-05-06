@@ -27,7 +27,7 @@ public class Arbitro implements Dibujable{
 
     private DireccionJugador direccion = DireccionJugador.izquierda;
 
-    private int posX =23;
+    private int posX =24;
 
     private int posY = 17;
 
@@ -84,7 +84,7 @@ public class Arbitro implements Dibujable{
                 rangoY = posY+(movimiento-rangoAleatorio);
             }
 
-            if (controlPosicion(rangoX,rangoY)==true){
+            if (controlPosicion(rangoX,rangoY,true)==true){
                 ComponentesJuego.getComponentes().getCampo().getCasilla(this.posY,this.posX).eliminarElemento();
                 this.quitar();
                 System.out.println("moviendo arbitro");
@@ -132,6 +132,7 @@ public class Arbitro implements Dibujable{
 
         int posYAux=0;
 
+        System.out.println("angulo vision");
 
         switch (this.direccion)
         {
@@ -161,7 +162,7 @@ public class Arbitro implements Dibujable{
         for (int i=0; i<rangoVision; i++){
 
             for (int j=0; j<=ancho; j++){
-                if (controlPosicion(posXAux,posYAux)==true){
+                if (controlPosicion(posXAux,posYAux,false)==true){
                     //this.casillaVision = new ElementoDibujable(TipoDibujo.elementosJuego,"casilla.png");
                     //this.casillaVision.dibujar(posXAux,posYAux);
                     this.casilla.add(new Casilla((float)posXAux,(float)posYAux));
@@ -206,16 +207,21 @@ public class Arbitro implements Dibujable{
      * Controla que la posicision en la que se va colocar el arbitro sea posible
      * @param x posible cordenada x
      * @param y posible cordenada y
+     * @param control indica si la casilla es para el arbritro o la zona de vision
      * @return
      */
-    public boolean controlPosicion(int x, int y){
+    public boolean controlPosicion(int x, int y, boolean control){
 
 
         boolean colocable = false;
 
 
                 if (x>=0 && x<=ConstantesJuego.LIMITE_CASILLAS_LARGO_TABLERO && y<=ConstantesJuego.LIMITE_CASILLAS_ANCHO_TABLERO && y>=0){
-                    if (ComponentesJuego.getComponentes().getCampo().getCasilla(y,x).sinJugador()==true){
+                    if (control==true){
+                        if (ComponentesJuego.getComponentes().getCampo().getCasilla(y,x).sinJugador()==true){
+                            colocable=true;
+                        }
+                    }else{
                         colocable=true;
                     }
                 }
@@ -230,7 +236,7 @@ public class Arbitro implements Dibujable{
      * quita el arbitro del campo y lo borra graficamente
      */
     private void quitar(){
-        System.out.println("quitar");
+
         GestorGrafico.generarDibujante().eliminarTextura(id);
         this.casilla.clear();
     }
