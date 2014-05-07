@@ -54,7 +54,7 @@ public class GestorTurnos implements Dibujable,Proceso {
 
 
 
-       if(true){//random.nextInt()%2 != 0) {
+       if(random.nextInt()%2 != 0) {
             equipo1.desbloquear();
             equipo1.setJugando(true);
             equipo2.bloquear();
