@@ -17,10 +17,13 @@ public class UsoObjetos extends Regla {
     @Override
     public boolean arbitrar() {
         System.out.println("arbitrando uso de objetos");
+        boolean zonapenalty1 = false;
+        boolean zonapenalty2 = false;
+
         if(this.arbitro.esSucesoVisible(this.jugador.getPosicionX(),this.jugador.getPosicionY())==true){
             System.out.println("uso de objetos");
 
-            if ((jugador.getMiEquipo().getLado()== Lado.izquierda && this.jugador.getPosicionX()<=7)||(jugador.getMiEquipo().getLado()== Lado.derecha && this.jugador.getPosicionX()>=23)){
+            if ((jugador.getMiEquipo().getLado()== Lado.derecha && this.jugador.getPosicionX()<=7)||(jugador.getMiEquipo().getLado()== Lado.izquierda && this.jugador.getPosicionX()>=23)){
                 this.posicionamiento.generarPenalty(this.jugador.getMiEquipo(), jugador.getPosicionX(), jugador.getPosicionY());
                 System.out.println("chute");
             }else{
