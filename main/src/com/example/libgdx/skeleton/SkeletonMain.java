@@ -148,6 +148,13 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("Menu/CanviTorn.png");
         nombresTexturas.add("Menu/fletxaAmunt.png");
         nombresTexturas.add("Menu/fletxaAvall.png");
+        nombresTexturas.add("Menu/botoPasarAccio.png");
+        nombresTexturas.add("Menu/botoAccelerar.png");
+        nombresTexturas.add("Menu/Habilidades/taulohabilitats.png");
+        nombresTexturas.add( "Menu/Habilidades/atac.png");
+        nombresTexturas.add("Menu/Habilidades/defensa.png");
+        nombresTexturas.add("Menu/Habilidades/fuerza.png");
+        nombresTexturas.add("Menu/Habilidades/resistencia.png");
 
 
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
@@ -158,8 +165,8 @@ public class SkeletonMain extends Game {
         botons.add(new BotonCambioTurno(ConstantesJuego.POSICION_BOTON_FINALIZAR,0, Entrada.finalizar,"botoCanviTorn.png",ConstantesJuego.ID_BOTON));
 
         // LIMITE ENTRE LOS BOTONES DE INTERFAZ NORMAL Y SIMULADOR
-        botons.add(new BotonFinalizarAccion(ConstantesJuego.POSICION_BOTON_SUPLENTE,0, Entrada.cambiar,"Menu/botoSubstitucions.png",ConstantesJuego.ID_BOTON));
-        botons.add(new BotonFinalizarSimulacion(ConstantesJuego.POSICION_BOTON_FINALIZAR,0, Entrada.finalizar,"botoCanviTorn.png",ConstantesJuego.ID_BOTON));
+        botons.add(new BotonFinalizarAccion(ConstantesJuego.POSICION_BOTON_SUPLENTE,0, Entrada.cambiar,"Menu/botoPasarAccio.png",ConstantesJuego.ID_BOTON));
+        botons.add(new BotonFinalizarSimulacion(ConstantesJuego.POSICION_BOTON_FINALIZAR,0, Entrada.finalizar,"Menu/botoAccelerar.png",ConstantesJuego.ID_BOTON));
         // COLOCAR EL RESTO DE BOTONES DEPSUES DE ESTOS
 
 
