@@ -84,8 +84,10 @@ public class Camara implements InputProcessor {
     public void variarPosicion(int posicionX,int posicionY)
     {
 
-           posicionX = (int)(posicionX/ConstantesJuego.variables().getMultiplicador());
-        posicionY = (int)(posicionY/ConstantesJuego.variables().getMultiplicador());
+           posicionX = (int)(posicionX*ConstantesJuego.variables().getMultiplicador());
+        posicionY = (int)(posicionY*ConstantesJuego.variables().getMultiplicador());
+
+
             if(posicionX>= this.camera.position.x +this.width/2 ||posicionX <= this.camera.position.x -this.width/2
                  || posicionY>= this.camera.position.y +this.height/2 ||posicionY <= this.camera.position.y -this.height/2)
                 {
