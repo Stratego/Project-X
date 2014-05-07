@@ -137,7 +137,7 @@ public class Casilla implements GestionEntrada ,Dibujable{
      */
     public boolean añadirElemento(Arbitro arbitro)
     {
-        if(this.jugador == null && this.objeto == null && arbitro != null)
+        if(this.jugador == null && this.objeto == null && arbitro == null)
         {
             this.arbitro = arbitro;
             return true;

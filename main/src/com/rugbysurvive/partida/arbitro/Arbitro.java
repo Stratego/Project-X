@@ -27,7 +27,7 @@ public class Arbitro implements Dibujable{
 
     private DireccionJugador direccion = DireccionJugador.izquierda;
 
-    private int posX =24;
+    private int posX =23;
 
     private int posY = 17;
 
@@ -238,6 +238,8 @@ public class Arbitro implements Dibujable{
     private void quitar(){
 
         GestorGrafico.generarDibujante().eliminarTextura(id);
+        ComponentesJuego.getComponentes().getCampo().eliminarElemento(posY,posX);
+
         this.casilla.clear();
     }
 

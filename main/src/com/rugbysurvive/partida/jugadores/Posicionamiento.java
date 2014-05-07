@@ -124,10 +124,11 @@ public class Posicionamiento {
         for (Jugador jugador1:jugadaequipo1){
             campo.eliminarElemento(jugador1.getPosicionY(),jugador1.getPosicionX());
             jugador1.setDireccion(direccion1);
-            campo.añadirElemento(jugador1, y, x);
             if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
                 arbitro.mover();
             }
+            campo.añadirElemento(jugador1, y, x);
+            System.out.println("estado casilla"+campo.getCasilla(y,x).sinArbitro());
 
 
             y -=1;
@@ -143,11 +144,11 @@ public class Posicionamiento {
             campo.eliminarElemento(jugador2.getPosicionY(),jugador2.getPosicionX());
             jugador2.setDireccion(direccion2);
             //jugador2.colocar(new Casilla((float) x, (float) y));
-            campo.añadirElemento(jugador2, y, x);
+
             if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
                 arbitro.mover();
             }
-
+            campo.añadirElemento(jugador2, y, x);
 
             y -=1;
             if (y==(posY-2)){
@@ -239,12 +240,14 @@ public class Posicionamiento {
         for (Jugador jugador1:jugadaequipo1){
                 campo.eliminarElemento(jugador1.getPosicionY(),jugador1.getPosicionX());
                 jugador1.setDireccion(direccion1);
+                if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
+                    arbitro.mover();
+                }
+
                 campo.añadirElemento(jugador1, y, x);
                 //jugador1.colocar(new Casilla((float)x,(float)y));
 
-            if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
-                arbitro.mover();
-            }
+
             if (posY>=ConstantesJuego.POSICION_SAQUE_BANDA_SUPERIOR){
                 y +=1;
             }else{
@@ -277,12 +280,13 @@ public class Posicionamiento {
 
             campo.eliminarElemento(jugador2.getPosicionY(),jugador2.getPosicionX());
             jugador2.setDireccion(direccion2);
-            campo.añadirElemento(jugador2, y, x);
+
             //jugador2.colocar(new Casilla((float) x, (float) y));
 
             if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
                 arbitro.mover();
             }
+            campo.añadirElemento(jugador2, y, x);
 
             if (posY>=ConstantesJuego.POSICION_SAQUE_BANDA_SUPERIOR){
                 y +=1;

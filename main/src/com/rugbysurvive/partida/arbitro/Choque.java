@@ -28,7 +28,7 @@ public class Choque extends Regla{
         if(this.arbitro.esSucesoVisible(this.jugadorDefensor.getPosicionX(),this.jugadorDefensor.getPosicionY())==true){
             System.out.println("ha ocurrido un choque");
 
-            if ((jugadorAtacante.getMiEquipo().getLado()== Lado.izquierda && this.jugadorDefensor.getPosicionX()>=7)||(jugadorAtacante.getMiEquipo().getLado()== Lado.derecha && this.jugadorDefensor.getPosicionX()<=22)){
+            if ((jugadorDefensor.getMiEquipo().getLado()== Lado.derecha && this.jugadorDefensor.getPosicionX()<=7)||(jugadorDefensor.getMiEquipo().getLado()== Lado.izquierda && this.jugadorDefensor.getPosicionX()>=23)){
                 this.posicionamiento.generarPenalty(this.jugadorDefensor.getMiEquipo(),jugadorDefensor.getPosicionX(),jugadorDefensor.getPosicionY());
             }else{
                 this.posicionamiento.generarMele(this.jugadorDefensor.getPosicionX(),this.jugadorDefensor.getPosicionY());
