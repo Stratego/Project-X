@@ -28,25 +28,38 @@ public class Pase extends Accion {
 
         boolean pelotaAtrapada = false;
 
-        int contadorTotal = ((ConstantesJuego.ALTO_CASILLA*jugador.getPosicionX()+34)+(ConstantesJuego.ALTO_CASILLA*jugador.getPosicionY()+34)+(ConstantesJuego.ALTO_CASILLA*this.posXObjetivo+34)+(ConstantesJuego.ALTO_CASILLA*this.posYObjetivo+34));
+
         int contadorAux = 0;
 
-        int x = ConstantesJuego.ALTO_CASILLA*jugador.getPosicionX()+34 / ConstantesJuego.ALTO_CASILLA*this.posXObjetivo+34;
-        int y = ConstantesJuego.ALTO_CASILLA*jugador.getPosicionY()+34 / ConstantesJuego.ALTO_CASILLA*this.posYObjetivo+34;
-        int casillaX = (jugador.getPosicionX()-x)%ConstantesJuego.ALTO_CASILLA;
-        int casillaY = (jugador.getPosicionY()-y)%ConstantesJuego.ALTO_CASILLA;
+        /*Posicion pixels jugador*/
+        int pixelsJugadorX = (ConstantesJuego.ALTO_CASILLA*jugador.getPosicionX())+34;
+        int pixelsJugadorY = (ConstantesJuego.ALTO_CASILLA*jugador.getPosicionY())+34;
+
+        /*Destino pelota en pixels*/
+        int pixelsDestinoX = this.posXObjetivo*ConstantesJuego.ALTO_CASILLA;
+        int pixelsDestinoY = this.posYObjetivo*ConstantesJuego.ALTO_CASILLA;
+
+        /*Distancia XY entre jugador y destino*/
+        int pixelsDistanciaX = pixelsJugadorX-pixelsDestinoX;
+        int pixelsDistanciaY = pixelsJugadorY-pixelsDestinoY;
+
+        /*Incremento X Y para el bucle*/
+        int incrementoX = pixelsJugadorX/pixelsDestinoX;
+        int incrementoY = pixelsJugadorY/pixelsDestinoY;
+
+        int contadorTotal = pixelsJugadorX+pixelsJugadorY+pixelsDistanciaX+pixelsDistanciaY;
 
         while (contadorAux<contadorTotal && pelotaAtrapada == false){
             //Comprovem si hi ha un jugador
-            if(Campo.getInstanciaCampo().getCasilla(casillaX,casillaY).getJugador() != null){
+            if(Campo.getInstanciaCampo().getCasilla((pixelsJugadorX-incrementoX)/64,(pixelsJugadorY-incrementoY)/64).getJugador() != null){
 
                 //Comprovem si es o no del nostre equip
                 //if(jugador.getMiEquipo() != Campo.getInstanciaCampo().getCasilla(casillaX,casillaY).getJugador().getMiEquipo()){
 
-                Campo.getInstanciaCampo().getCasilla(casillaX, casillaY).getJugador().setEstado(new ConPelota());
+                Campo.getInstanciaCampo().getCasilla((pixelsJugadorX-incrementoX)/64, (pixelsJugadorY-incrementoY)/64).getJugador().setEstado(new ConPelota());
                 pelotaAtrapada = true;
             }
-            contadorAux = contadorAux + casillaX + casillaY;
+            contadorAux = contadorAux + incrementoX + incrementoX;
         }
 
         if (pelotaAtrapada = false){
