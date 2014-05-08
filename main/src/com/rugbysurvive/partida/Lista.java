@@ -183,13 +183,21 @@ public class Lista {
      */
     public void ListaObjetos(){
 
-        equipo = ComponentesJuego.getComponentes().getEquipo1();
 
-        ArrayList<ObjetoJugador> objetosJugador = equipo.objetosJugador();
+
+
         int x =ConstantesJuego.POSICION_INICIAL_X_BOTON_OBJETOS;
         int y =ConstantesJuego.POSICION_INICIAL_Y_BOTON_OBJETOS;
         //int y = ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES;
 
+        Equipo equipo1 = ComponentesJuego.getComponentes().getEquipo1();
+        Equipo equipo2 = ComponentesJuego.getComponentes().getEquipo2();
+        Equipo equipoSeleccionado = equipo2;
+
+        if(equipo1.hayJugadorSelecionado()){
+            equipoSeleccionado  = equipo1;
+        }
+        ArrayList<ObjetoJugador> objetosJugador = equipoSeleccionado.objetosJugador();
 
         if (objetosJugador.size()  > 0){
 

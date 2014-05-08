@@ -59,7 +59,7 @@ public class ComponentesJuego {
         jugador.añadirObjeto(objeto);
         jugador.añadirObjeto(objeto);
 
-        this.equipo1.añadirJugador(jugador,17,22);
+        this.equipo1.añadirJugador(jugador,17,23);
         //this.equipo1.añadirJugador(jugador,17,22);
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo1);
@@ -92,6 +92,8 @@ public class ComponentesJuego {
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),5,14);*/
 
 
+
+
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),12,19);
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),13,20);
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),14,21);
@@ -99,9 +101,18 @@ public class ComponentesJuego {
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),16,23);
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),17,24);
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),18,25);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),19,26);
+        jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo2);
+        objeto = new PowerUP(0,10,"casilla.png", Habilidades.vida,50,jugador);
+        objeto2 = new ColocadorObjetosCampo(1,10,"mina.png",jugador,new MinaCampo("mina.png"));
+
+        jugador.añadirObjeto(objeto);
+        jugador.añadirObjeto(objeto2);
+        jugador.añadirObjeto(objeto);
+        jugador.añadirObjeto(objeto);
+        this.equipo2.añadirJugador(jugador,19,26);
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),20,27);
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),21,21);
+
 
 
 
