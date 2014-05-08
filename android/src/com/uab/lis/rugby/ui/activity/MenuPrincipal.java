@@ -24,7 +24,9 @@ public class MenuPrincipal extends BaseActivity {
         jugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(MenuPrincipal.this, SelectPositionPlayers.class));
+            }
+                /**
                 DialogInterface.OnClickListener positive = new DialogInterface.OnClickListener() {
 
                     @Override
@@ -33,14 +35,13 @@ public class MenuPrincipal extends BaseActivity {
                                 "Equipo 1","Equipo 2","Equipo 3","Equipo 4"
                         };
 
-
                         AlertDialog.Builder builder = new AlertDialog.Builder(MenuPrincipal.this);
                         builder.setTitle("Selecciona el ribal");
                         //builder.setMessage("Selecciona el quipo ribal que deseas ganar");
                         builder.setItems(items,new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        startActivity(new Intent(MenuPrincipal.this, AndroidStarter.class));
+                                        startActivity(new Intent(MenuPrincipal.this, SelectPositionPlayers.class));
                                     }
                                  }
                         );
@@ -51,7 +52,7 @@ public class MenuPrincipal extends BaseActivity {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(MenuPrincipal.this, AndroidStarter.class));
+                        startActivity(new Intent(MenuPrincipal.this, SelectPositionPlayers.class));
                     }
                 };
 
@@ -62,7 +63,7 @@ public class MenuPrincipal extends BaseActivity {
                 builder.setNegativeButton("P vs IA",negative);
                 builder.create().show();
 
-            }
+            }**/
         });
 
         configuracion.setOnClickListener(new View.OnClickListener() {

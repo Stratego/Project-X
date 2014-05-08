@@ -38,6 +38,7 @@
         <activity android:name=".ui.activity.TiendaFichajes"/>
         <activity android:name=".ui.activity.TiendaObjetos"/>
         <activity android:name=".ui.activity.TiendaOtros"/>
+        <activity android:name=".ui.activity.SelectPositionPlayers"/>
 
         <service android:name=".service.MusicService" />
     </application>
