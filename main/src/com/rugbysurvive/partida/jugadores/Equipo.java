@@ -258,6 +258,7 @@ public  class Equipo {
         jugador.setColor(this.color);
         this.alineacion.add(new PosicionInicial(jugador,posicionX,posicionY));
         this.jugadores.add(jugador);
+
     }
 
     public void quitarPelota(){

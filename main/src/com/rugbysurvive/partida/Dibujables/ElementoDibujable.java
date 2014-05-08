@@ -57,6 +57,8 @@ public class ElementoDibujable implements Dibujable {
        }
     }
 
+
+
     @Override
     public String getTextura() {
         return textura;

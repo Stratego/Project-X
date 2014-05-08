@@ -21,7 +21,7 @@ import java.util.Random;
  */
 public class GestorTurnos implements Dibujable,Proceso {
 
-    private static final int VELOCIDAD = 10;
+    private static final int VELOCIDAD = 15;
     private int posicionTexturaX;
     private int posicionTexturaY;
     private static String estandarteEquipo1 ="Menu/CanviTorn.png";
@@ -47,22 +47,19 @@ public class GestorTurnos implements Dibujable,Proceso {
 
         Equipo equipo1 = ComponentesJuego.getComponentes().getEquipo1();
         Equipo equipo2 = ComponentesJuego.getComponentes().getEquipo2();
-        equipo1.bloquear();
-        equipo2.bloquear();
 
         Random random = new Random();
 
 
-
        if(random.nextInt()%2 != 0) {
-            equipo1.desbloquear();
+             equipo2.bloquear();
             equipo1.setJugando(true);
-            equipo2.bloquear();
+
+
         }
 
         else {
             equipo1.bloquear();
-            equipo2.desbloquear();
             equipo2.setJugando(true);
         }
 

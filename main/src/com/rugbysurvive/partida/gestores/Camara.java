@@ -90,11 +90,10 @@ public class Camara implements InputProcessor {
 
             if(posicionX>= this.camera.position.x +this.width/2 ||posicionX <= this.camera.position.x -this.width/2
                  || posicionY>= this.camera.position.y +this.height/2 ||posicionY <= this.camera.position.y -this.height/2)
-                {
-            this.absoluteVariationX =  (int)(this.width/2) -posicionX;
-            this.absoluteVariationY =  posicionY - (int)(this.height/2);
-              System.out.println("variacion:"+this.absoluteVariationX+","+this.absoluteVariationY);
-            this.camera.position.set(posicionX,posicionY,0);
+            {
+                 this.absoluteVariationX =  (int)(this.width/2) -posicionX;
+                 this.absoluteVariationY =  posicionY - (int)(this.height/2);
+                 this.camera.position.set(posicionX,posicionY,0);
             }
     }
 
