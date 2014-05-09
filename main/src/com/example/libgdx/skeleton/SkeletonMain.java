@@ -151,10 +151,14 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("Menu/botoPasarAccio.png");
         nombresTexturas.add("Menu/botoAccelerar.png");
         nombresTexturas.add("Menu/Habilidades/taulohabilitats.png");
-        nombresTexturas.add( "Menu/Habilidades/atac.png");
+        nombresTexturas.add("Menu/Habilidades/atac.png");
         nombresTexturas.add("Menu/Habilidades/defensa.png");
         nombresTexturas.add("Menu/Habilidades/fuerza.png");
         nombresTexturas.add("Menu/Habilidades/resistencia.png");
+        nombresTexturas.add("arbitro/arbitre1.png");
+        nombresTexturas.add("arbitro/arbitre2.png");
+        nombresTexturas.add("arbitro/arbitre3.png");
+        nombresTexturas.add("arbitro/arbitre4.png");
 
         nombresTexturas.add("jugador/bloqueado/jugador1Congelat.png");
         nombresTexturas.add("jugador/bloqueado/jugador2Congelat.png");
@@ -204,7 +208,10 @@ public class SkeletonMain extends Game {
         this.simular = false;
         //arbitro = new Arbitro();
         this.gestor = new GestorTurnos();
-        //posicionamiento.generarMele(20,10);
+
+        //Posicionamiento posicionamiento = new Posicionamiento();
+        //posicionamiento.generarPenalty(componentesJuego.getEquipo2(),3,3);
+
         //posicionamiento.generarSaqueBanda(20,18,ComponentesJuego.getComponentes().getEquipo1());
 
 
