@@ -370,6 +370,7 @@ public class Jugador implements GestionEntrada {
                 this.texturas.add(elemento);
                 this.bloqueo = elemento;
                 break;
+
         }
 
 

@@ -160,7 +160,7 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("jugador/bloqueado/jugador2Congelat.png");
         nombresTexturas.add("jugador/bloqueado/jugador4Congelat.png");
         nombresTexturas.add("jugador/bloqueado/jugador5Congelat.png");
-
+        nombresTexturas.add("banderas/peixetEscut.png");
 
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
 
@@ -175,7 +175,6 @@ public class SkeletonMain extends Game {
         // COLOCAR EL RESTO DE BOTONES DEPSUES DE ESTOS
 
 
-
         this.componentesJuego = new ComponentesJuego();
 
 
@@ -184,10 +183,7 @@ public class SkeletonMain extends Game {
         this.multiplexer = new InputMultiplexer();
         this.gestorObjetos = new GestorObjetos();
         gestureDetector = new GestureDetector(20, 0.5f, 1, 0.5f,this.gestorEntrada);
-        multiplexer.addProcessor(gestureDetector);
-        multiplexer.addProcessor(this.gestorGrafico.getCamara());
 
-        Gdx.input.setInputProcessor(multiplexer);
         this.marcador = new Marcador(ComponentesJuego.getComponentes().getEquipo1()
                                         ,ComponentesJuego.getComponentes().getEquipo2());
 
@@ -208,9 +204,9 @@ public class SkeletonMain extends Game {
         this.simular = false;
         //arbitro = new Arbitro();
         this.gestor = new GestorTurnos();
-        Posicionamiento posicionamiento = new Posicionamiento();
         //posicionamiento.generarMele(20,10);
         //posicionamiento.generarSaqueBanda(20,18,ComponentesJuego.getComponentes().getEquipo1());
+
 
     }
 
@@ -222,9 +218,18 @@ public class SkeletonMain extends Game {
     @Override
     public void render() {
 
-       if(this.calculandoEquipoInicio) {
-           GestorTurnos.iniciarPartido();
-           this.calculandoEquipoInicio = false;
+        if(!this.gestor.isAnimacionInicializadaAnteriormente()){
+            this.gestor.iniciarPresentacion();
+        }
+
+       if(this.gestor.isAnimacionInicialFinalizada())
+       {
+            if(this.calculandoEquipoInicio) {
+                multiplexer.addProcessor(gestureDetector);
+                multiplexer.addProcessor(this.gestorGrafico.getCamara());
+                Gdx.input.setInputProcessor(multiplexer);
+                this.gestor.iniciarPartido();
+                this.calculandoEquipoInicio = false;
        }
        else {
           this.gestor.CambiarTurno();
@@ -255,6 +260,7 @@ public class SkeletonMain extends Game {
 
         }
 
+       }
 
        if(contador %100 == 0 ) {
            this.gestorObjetos.procesar();

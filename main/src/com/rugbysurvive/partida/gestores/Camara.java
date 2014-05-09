@@ -97,6 +97,20 @@ public class Camara implements InputProcessor {
             }
     }
 
+    public void situarCamara(int posicionX,int posicionY)
+    {
+
+        posicionX = (int)(posicionX*ConstantesJuego.variables().getMultiplicador());
+        posicionY = (int)(posicionY*ConstantesJuego.variables().getMultiplicador());
+
+
+       this.absoluteVariationX =  (int)(this.width/2) -posicionX;
+       this.absoluteVariationY =  posicionY - (int)(this.height/2);
+       this.camera.position.set(posicionX,posicionY,0);
+
+    }
+
+
     private boolean isCameraInsideBoard(int variationX,int variationY)
     {
         return (variationY + this.camera.position.y > MIN_POSITION_Y

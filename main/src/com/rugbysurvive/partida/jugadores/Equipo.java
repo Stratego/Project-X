@@ -169,6 +169,9 @@ public  class Equipo {
         this.alineacion = alineacion;
     }
 
+
+
+
     public void dibujarEquipo(){
         for (Jugador iter :this.getJugadores()){
             campo.añadirElemento(iter, iter.getPosicionX(), iter.getPosicionY());

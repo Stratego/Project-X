@@ -44,6 +44,9 @@ public class ComponentesJuego {
 
     }
     public static ComponentesJuego getComponentes(){return componentesJuego;}
+
+
+
     private void generarEquipos()
     {
 
@@ -104,10 +107,14 @@ public class ComponentesJuego {
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),21,21);
 
 
+    }
+
+    public void generarSaque(){
 
         Posicionamiento.generarSaqueCampo(this.campo,this.equipo1, Lado.izquierda);
         Posicionamiento.generarSaqueCampo(this.campo,this.equipo2, Lado.derecha);
     }
+
 
 
     public Campo getCampo(){

@@ -21,6 +21,10 @@ import java.util.Random;
  */
 public class Posicionamiento {
 
+    private static final int POS_LINIA_SALUDO_Y = 12;
+    private static final int POS_LINIA_SALUDO_X_IZQUIERDA = 14;
+    private static final int POS_LINIA_SALUDO_X_DERECHA = 15;
+
     public static ArrayList<Jugador> jugadaequipo1 = new ArrayList<Jugador>();
     public static ArrayList<Jugador> jugadaequipo2 = new ArrayList<Jugador>();
     public static ElementoDibujable casillaVision;
@@ -53,16 +57,60 @@ public class Posicionamiento {
                  posicionX = equipo.getAlineacion().get(i).posicionX;
                  posicionY = equipo.getAlineacion().get(i).posicionY;
                  if(lado == Lado.izquierda){
+                     jugador.setDireccion(DireccionJugador.izquierda);
                         campo.añadirElemento(jugador,posicionX,posicionY);
                         equipo.setLado(lado);
                  }
                  else
                  {
+                     jugador.setDireccion(DireccionJugador.derecha);
                      posicionY =ConstantesJuego.NUMERO_CASILLAS_LARGO_TABLERO - posicionY -1;
                      posicionX = ConstantesJuego.NUMERO_CASILLAS_ANCHO_TABLERO  -posicionX- 1;
                      campo.añadirElemento(jugador,posicionX,posicionY);
                      equipo.setLado(lado);
                  }
+
+            }
+        }
+
+    }
+
+
+    public static void generarPosicionSaludo(Campo campo,Equipo equipo,Lado lado){
+
+        campo.borrarEquipo(equipo);
+        Jugador jugador;
+
+        int posicionX = 0;
+        int posicionY = POS_LINIA_SALUDO_Y;
+
+        if(lado == Lado.izquierda){
+           posicionX = POS_LINIA_SALUDO_X_IZQUIERDA;
+        }
+        else{
+            posicionX = POS_LINIA_SALUDO_X_DERECHA;
+        }
+
+
+
+
+        for(int i =0 ;i<ConstantesJuego.JUGADORES_CAMPO;i++)
+        {
+
+            if(equipo.getAlineacion().size()>i){
+                jugador = equipo.getAlineacion().get(i).jugador;
+                jugador.setDireccion(DireccionJugador.frontal);
+                if(lado == Lado.izquierda){
+
+                    campo.añadirElemento(jugador,posicionY,posicionX);
+                    posicionX--;
+                }
+
+                else
+                {
+                    campo.añadirElemento(jugador,posicionY,posicionX);
+                    posicionX++;
+                }
 
             }
         }
