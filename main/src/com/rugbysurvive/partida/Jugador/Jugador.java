@@ -56,6 +56,9 @@ public class Jugador implements GestionEntrada {
     public int Resistencia;
     public int Ataque;
 
+    /*contMovimientos indicara la cantidad de acciones movimiento que ha hecho hasta el momento, y de esta manera podremos ir haciendo que el jugador pierda resistencia segun interese*/
+    public int contMovimientos;
+
     public int id;
 
 
@@ -99,6 +102,36 @@ public class Jugador implements GestionEntrada {
         this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,DireccionJugador.izquierda);
         this.bloqueo =null;
 
+        this.contMovimientos = 0;
+
+    }
+
+    public void cansancio()
+    {
+        if(this.contMovimientos == 2)
+        {
+            this.setResistencia(this.getResistencia() - 3);
+            this.contMovimientos = 0;
+        }
+        else
+        {
+            this.contMovimientos += 1;
+        }
+    }
+
+    /*Le va quitando vida al jugador hasta que se lesiona*/
+    public void lesionar()
+    {
+        if(this.getVida() > 0)
+        {
+            this.setVida(this.getVida() - 10);
+            if(this.getVida() <= 0)
+            {
+                this.setVida(0);
+                this.setResistencia(0);
+                this.setFuerza(0);
+            }
+        }
     }
 
     /**
