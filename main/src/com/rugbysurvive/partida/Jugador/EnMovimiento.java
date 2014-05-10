@@ -132,6 +132,9 @@ public class EnMovimiento implements Estado {
 
             Simulador.getInstance().añadirAccion(jugador.getAccion());
 
+            /*Este metodo ira haciendo que el jugador se vaya cansando*/
+            this.jugador.cansancio();
+
             jugador.setBloqueado(true);
             jugador.setSeleccionado(false);
             this.indicador = new IndicadorMovimientos(jugador,this.movimientos,this.posicionActual);

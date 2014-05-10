@@ -2,6 +2,7 @@ package com.rugbysurvive.partida.tablero;
 
 
 
+import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.arbitro.Arbitro;
@@ -38,6 +39,28 @@ public class Casilla implements GestionEntrada ,Dibujable{
      * indicara si el elemento esta seleccionado
      */
     private boolean selecionado;
+
+    private boolean existePelota;
+    private ElementoDibujable pelota;
+
+    public void colocarPelota() {
+        this.existePelota = true;
+        this.pelota = new ElementoDibujable(TipoDibujo.elementosJuego, "pelota.png");
+        this.pelota.dibujar(this.getPosicionX(), this.getPosicionY());
+    }
+
+    public void quitarPelota(){
+        this.existePelota = false;
+        this.pelota.borrar();
+    }
+
+    /**
+     *
+     * @return Boolean existe pelota
+     */
+    public boolean hayPelota(){
+        return this.existePelota;
+    }
 
     Dibujante dibujante;
 
@@ -114,7 +137,7 @@ public class Casilla implements GestionEntrada ,Dibujable{
      */
     public boolean añadirElemento(Arbitro arbitro)
     {
-        if(this.jugador == null && this.objeto == null && arbitro != null)
+        if(this.jugador == null && this.objeto == null && arbitro == null)
         {
             this.arbitro = arbitro;
             return true;

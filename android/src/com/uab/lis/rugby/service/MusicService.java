@@ -32,29 +32,24 @@ public class MusicService extends Service {
     public void onCreate() {
         super.onCreate();
         Log.e(TAG, "onCreate");
-        MusicBrodcastReceiver brodcast = new MusicBrodcastReceiver();
+        /*MusicBrodcastReceiver brodcast = new MusicBrodcastReceiver();
         LocalBroadcastManager.getInstance(this).registerReceiver(brodcast, new IntentFilter(IntentFilterMusicStart));
-        LocalBroadcastManager.getInstance(this).registerReceiver(brodcast, new IntentFilter(IntentFilterMusicStop));
-
-
-        //registerReceiver(brodcast, new IntentFilter(Intent.ACTION_USER_BACKGROUND));
-        //registerReceiver(brodcast, new IntentFilter(Intent.ACTION_USER_FOREGROUND));
-
+        LocalBroadcastManager.getInstance(this).registerReceiver(brodcast, new IntentFilter(IntentFilterMusicStop));*/
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.e(TAG,"onStartCommand");
-        Intent intent2 = new Intent(MusicService.IntentFilterMusicStart);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent2);
+       /* Intent intent2 = new Intent(MusicService.IntentFilterMusicStart);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent2);*/
         return START_NOT_STICKY;
     }
 
     @Override
     public void onDestroy() {
-        Log.e(TAG,"onDestroy");
+        /*Log.e(TAG,"onDestroy");
         mediaPlayer.stop();
-        super.onDestroy();
+        super.onDestroy();*/
     }
 
 

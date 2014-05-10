@@ -44,11 +44,14 @@ public class ComponentesJuego {
 
     }
     public static ComponentesJuego getComponentes(){return componentesJuego;}
+
+
+
     private void generarEquipos()
     {
 
         // falta añadir los objetos a cada jugador
-        Jugador jugador = new Jugador(80, 90, 100, 90, 80, 70, null);
+        Jugador jugador = new Jugador(80, 90, 100, 90, 80, 70, equipo1);
 
         jugador.setDireccion(DireccionJugador.derecha);
         PowerUP objeto = new PowerUP(0,10,"casilla.png", Habilidades.vida,50,jugador);
@@ -59,7 +62,7 @@ public class ComponentesJuego {
         jugador.añadirObjeto(objeto);
         jugador.añadirObjeto(objeto);
 
-        this.equipo1.añadirJugador(jugador,0,1);
+        this.equipo1.añadirJugador(jugador,17,23);
         //this.equipo1.añadirJugador(jugador,17,22);
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo1);
@@ -72,40 +75,57 @@ public class ComponentesJuego {
         jugador.setDireccion(DireccionJugador.abajo);
         jugador.setEstado(new ConPelota());
 
-        this.equipo1.añadirJugador(jugador,8,8);
+        this.equipo1.añadirJugador(jugador,9,8);
 
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),9,9);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),10,10);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),11,25);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),11,11);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),12,12);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),13,13);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),14,14);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),3,12);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),15,15);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),16,16);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),17,17);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),12,12);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),4,4);
+
+
+        /*this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),3,12);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),4,13);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),5,14);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),5,14);*/
 
 
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),3,12);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),4,13);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),5,14);
 
 
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),10,10);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),11,11);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),12,12);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),13,13);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),14,14);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),15,21);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),15,25);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),12,19);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),13,20);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),14,21);
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),15,22);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),12,12);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),3,22);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),16,23);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),17,24);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),18,25);
+        jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo2);
+        objeto = new PowerUP(0,10,"casilla.png", Habilidades.vida,50,jugador);
+        objeto2 = new ColocadorObjetosCampo(1,10,"mina.png",jugador,new MinaCampo("mina.png"));
 
+        jugador.añadirObjeto(objeto);
+        jugador.añadirObjeto(objeto2);
+        jugador.añadirObjeto(objeto);
+        jugador.añadirObjeto(objeto);
+        this.equipo2.añadirJugador(jugador,19,26);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),20,27);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),21,21);
+
+
+    }
+
+    public void generarSaque(){
 
 
         Posicionamiento.generarSaqueCampo(this.campo,this.equipo1, Lado.izquierda);
         Posicionamiento.generarSaqueCampo(this.campo,this.equipo2, Lado.derecha);
     }
+
 
 
     public Campo getCampo(){

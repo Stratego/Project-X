@@ -1,14 +1,17 @@
 package com.rugbysurvive.partida.jugadores;
 
+import com.partido.GestorTurnos;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.Simulador.Chute;
+import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.arbitro.Arbitro;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.tablero.Campo;
-import com.rugbysurvive.partida.tablero.Casilla;
 import com.rugbysurvive.partida.tablero.Lado;
 
 import java.util.ArrayList;
@@ -19,9 +22,17 @@ import java.util.Random;
  */
 public class Posicionamiento {
 
+    private static final int POS_LINIA_SALUDO_Y = 12;
+    private static final int POS_LINIA_SALUDO_X_IZQUIERDA = 14;
+    private static final int POS_LINIA_SALUDO_X_DERECHA = 15;
+
     public static ArrayList<Jugador> jugadaequipo1 = new ArrayList<Jugador>();
     public static ArrayList<Jugador> jugadaequipo2 = new ArrayList<Jugador>();
     public static ElementoDibujable casillaVision;
+
+    private static Chute chute;
+
+    private static Simulador simulador = Simulador.getInstance();
 
     /**
      * Coloca al equipo en posicion de saque elegido predeterminado
@@ -47,16 +58,60 @@ public class Posicionamiento {
                  posicionX = equipo.getAlineacion().get(i).posicionX;
                  posicionY = equipo.getAlineacion().get(i).posicionY;
                  if(lado == Lado.izquierda){
+                     jugador.setDireccion(DireccionJugador.izquierda);
                         campo.añadirElemento(jugador,posicionX,posicionY);
                         equipo.setLado(lado);
                  }
                  else
                  {
+                     jugador.setDireccion(DireccionJugador.derecha);
                      posicionY =ConstantesJuego.NUMERO_CASILLAS_LARGO_TABLERO - posicionY -1;
                      posicionX = ConstantesJuego.NUMERO_CASILLAS_ANCHO_TABLERO  -posicionX- 1;
                      campo.añadirElemento(jugador,posicionX,posicionY);
                      equipo.setLado(lado);
                  }
+
+            }
+        }
+
+    }
+
+
+    public static void generarPosicionSaludo(Campo campo,Equipo equipo,Lado lado){
+
+        campo.borrarEquipo(equipo);
+        Jugador jugador;
+
+        int posicionX = 0;
+        int posicionY = POS_LINIA_SALUDO_Y;
+
+        if(lado == Lado.izquierda){
+           posicionX = POS_LINIA_SALUDO_X_IZQUIERDA;
+        }
+        else{
+            posicionX = POS_LINIA_SALUDO_X_DERECHA;
+        }
+
+
+
+
+        for(int i =0 ;i<ConstantesJuego.JUGADORES_CAMPO;i++)
+        {
+
+            if(equipo.getAlineacion().size()>i){
+                jugador = equipo.getAlineacion().get(i).jugador;
+                jugador.setDireccion(DireccionJugador.frontal);
+                if(lado == Lado.izquierda){
+
+                    campo.añadirElemento(jugador,posicionY,posicionX);
+                    posicionX--;
+                }
+
+                else
+                {
+                    campo.añadirElemento(jugador,posicionY,posicionX);
+                    posicionX++;
+                }
 
             }
         }
@@ -88,7 +143,10 @@ public class Posicionamiento {
 
 
         Campo campo = ComponentesJuego.getComponentes().getCampo();
-        jugadoresCercanos(posX,posY);
+        simulador.eliminarAccionsSimulador();
+        ComponentesJuego.getComponentes().getEquipo1().quitarPelota();
+        ComponentesJuego.getComponentes().getEquipo2().quitarPelota();
+        jugadoresCercanos(posX, posY);
         int x = posX;
         if (posY<=ConstantesJuego.POSICION_SAQUE_BANDA_INFERIOR+1){
             posY+=1;
@@ -115,10 +173,11 @@ public class Posicionamiento {
         for (Jugador jugador1:jugadaequipo1){
             campo.eliminarElemento(jugador1.getPosicionY(),jugador1.getPosicionX());
             jugador1.setDireccion(direccion1);
-            jugador1.colocar(new Casilla((float)x,(float)y));
             if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
                 arbitro.mover();
             }
+            campo.añadirElemento(jugador1, y, x);
+            System.out.println("estado casilla"+campo.getCasilla(y,x).sinArbitro());
 
 
             y -=1;
@@ -133,11 +192,12 @@ public class Posicionamiento {
         for (Jugador jugador2:jugadaequipo2){
             campo.eliminarElemento(jugador2.getPosicionY(),jugador2.getPosicionX());
             jugador2.setDireccion(direccion2);
-            jugador2.colocar(new Casilla((float) x, (float) y));
+            //jugador2.colocar(new Casilla((float) x, (float) y));
+
             if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
                 arbitro.mover();
             }
-
+            campo.añadirElemento(jugador2, y, x);
 
             y -=1;
             if (y==(posY-2)){
@@ -146,11 +206,63 @@ public class Posicionamiento {
             }
         }
 
+        if (new Random().nextInt()%2 != 0){
+            jugadaequipo1.get(jugadaequipo1.size()-1).setEstado(new ConPelota());
+            GestorTurnos.iniciarTurnoEquipo(ComponentesJuego.getComponentes().getEquipo2(),ComponentesJuego.getComponentes().getEquipo1());
+        }else{
+            jugadaequipo2.get(jugadaequipo2.size()-1).setEstado(new ConPelota());
+            GestorTurnos.iniciarTurnoEquipo(ComponentesJuego.getComponentes().getEquipo1(),ComponentesJuego.getComponentes().getEquipo2());
+        }
+
 
         jugadaequipo1.clear();
         jugadaequipo2.clear();
     }
 
+    public static void generarPenalty(Equipo equipo, int posX, int posY){
+        Campo campo = ComponentesJuego.getComponentes().getCampo();
+        simulador.eliminarAccionsSimulador();
+        simulador.iniciarSimulacion();
+        ComponentesJuego.getComponentes().getEquipo1().quitarPelota();
+        ComponentesJuego.getComponentes().getEquipo2().quitarPelota();
+        if (ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador()==null){
+            jugadoresCercanos(posX,posY);
+            if (jugadaequipo1.get(0).getMiEquipo()==equipo){
+                jugadaequipo1.get(0).setEstado(new ConPelota());
+                if (jugadaequipo1.get(0).getMiEquipo().getLado()==Lado.derecha){
+                    chute = new Chute(jugadaequipo1.get(0),new Random().nextInt()%2,(int)(Math.random()*(11-8+1)+8));
+                    System.out.println("chute izquierda jugador cercano jugador 1");
+                }else{
+                    chute = new Chute(jugadaequipo1.get(0),(int)(Math.random()*(29-28+1)+28),(int)(Math.random()*(11-8+1)+8));
+                    System.out.println("chute derecha jugador cercano jugador 1");
+                }
+            }else{
+                jugadaequipo2.get(0).setEstado(new ConPelota());
+                if (jugadaequipo2.get(0).getMiEquipo().getLado()==Lado.derecha){
+                    chute = new Chute(jugadaequipo2.get(0),new Random().nextInt()%2,(int)(Math.random()*(11-8+1)+8));
+                    System.out.println("chute izquierda jugador cercano jugador 2");
+                }else{
+                    chute = new Chute(jugadaequipo2.get(0),(int)(Math.random()*(29-28+1)+28),(int)(Math.random()*(11-8+1)+8));
+                    System.out.println("chute derecha jugador cercano jugador 2");
+                }
+            }
+
+
+        }else{
+            ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador().setEstado(new ConPelota());
+            if (ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador().getMiEquipo().getLado()==Lado.derecha){
+                chute = new Chute(ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador(),new Random().nextInt()%2,(int)(Math.random()*(11-8+1)+8));
+                System.out.println("chute izquierda");
+            }else{
+                chute = new Chute(ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador(),(int)(Math.random()*(29-28+1)+28),(int)(Math.random()*(11-8+1)+8));
+                System.out.println("chute derecha");
+            }
+
+        }
+
+        //simulador.iniciarSimulacion();
+
+    }
 
     /**
      * Coloca los dos equipos en posicion de saque de banda en la posicion determinada
@@ -164,6 +276,9 @@ public class Posicionamiento {
 
 
         Campo campo = ComponentesJuego.getComponentes().getCampo();
+        simulador.eliminarAccionsSimulador();
+        ComponentesJuego.getComponentes().getEquipo1().quitarPelota();
+        ComponentesJuego.getComponentes().getEquipo2().quitarPelota();
         jugadoresCercanos(posX,posY);
         int x = posX-1;
         int y = posY +3;
@@ -185,11 +300,14 @@ public class Posicionamiento {
         for (Jugador jugador1:jugadaequipo1){
                 campo.eliminarElemento(jugador1.getPosicionY(),jugador1.getPosicionX());
                 jugador1.setDireccion(direccion1);
-                jugador1.colocar(new Casilla((float)x,(float)y));
+                if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
+                    arbitro.mover();
+                }
 
-            if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
-                arbitro.mover();
-            }
+                campo.añadirElemento(jugador1, y, x);
+                //jugador1.colocar(new Casilla((float)x,(float)y));
+
+
             if (posY>=ConstantesJuego.POSICION_SAQUE_BANDA_SUPERIOR){
                 y +=1;
             }else{
@@ -222,11 +340,13 @@ public class Posicionamiento {
 
             campo.eliminarElemento(jugador2.getPosicionY(),jugador2.getPosicionX());
             jugador2.setDireccion(direccion2);
-            jugador2.colocar(new Casilla((float) x, (float) y));
+
+            //jugador2.colocar(new Casilla((float) x, (float) y));
 
             if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
                 arbitro.mover();
             }
+            campo.añadirElemento(jugador2, y, x);
 
             if (posY>=ConstantesJuego.POSICION_SAQUE_BANDA_SUPERIOR){
                 y +=1;
@@ -248,6 +368,14 @@ public class Posicionamiento {
                 }
             }
 
+        }
+
+        if (new Random().nextInt()%2 != 0){
+            jugadaequipo1.get(jugadaequipo1.size()-2).setEstado(new ConPelota());
+            GestorTurnos.iniciarTurnoEquipo(ComponentesJuego.getComponentes().getEquipo2(),ComponentesJuego.getComponentes().getEquipo1());
+        }else{
+            jugadaequipo2.get(jugadaequipo2.size()-2).setEstado(new ConPelota());
+            GestorTurnos.iniciarTurnoEquipo(ComponentesJuego.getComponentes().getEquipo1(),ComponentesJuego.getComponentes().getEquipo2());
         }
 
         jugadaequipo1.clear();
@@ -282,6 +410,8 @@ public class Posicionamiento {
                         if (ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador()!=null){
                             //System.out.println("entra selecion jugador");
                             if (ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador().getMiEquipo()==ComponentesJuego.getComponentes().getEquipo1()){
+                            //if (ComponentesJuego.getComponentes().getEquipo1().jugadorEnEquipo(ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador())==true){
+
                                 if (jugadaequipo1.contains(ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador())==false && jugadaequipo1.size()<4){
                                     jugadaequipo1.add(ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador());
                                     System.out.println("añadido jugador equipo1: " + jugadaequipo1.size());

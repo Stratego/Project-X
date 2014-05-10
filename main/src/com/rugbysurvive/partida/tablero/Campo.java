@@ -38,6 +38,18 @@ public class Campo implements GestionEntrada,Dibujable {
         campo = this;
     }
 
+    public void colocarPelota(int posicionX, int posicionY){
+        this.casillas[posicionX][posicionY].colocarPelota();
+    }
+
+    public void quitarPelota(int posicionX, int posicionY){
+        this.casillas[posicionX][posicionY].quitarPelota();
+    }
+
+    public void hayPelota(int posicionX, int posicionY){
+        this.casillas[posicionX][posicionY].hayPelota();
+    }
+
 
 
      public void seleccionarCasilla(int posicionX,int posicionY)
@@ -164,7 +176,7 @@ public class Campo implements GestionEntrada,Dibujable {
         for (Jugador iter :equipo.getJugadores()){
             if(iter.getEnJuego())
             {
-                this.eliminarElemento(iter.getPosicionX(), iter.getPosicionY());
+                this.eliminarElemento(iter.getPosicionY(), iter.getPosicionX());
             }
         }
     }

@@ -6,6 +6,7 @@ import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
+import com.rugbysurvive.partida.jugadores.Equipo;
 import com.rugbysurvive.partida.tablero.Boton;
 
 import java.util.ArrayList;
@@ -37,7 +38,15 @@ public class BotonObjeto extends Boton {
     public void accionEntrada(Entrada entrada) {
         //obtenemos el elemento de la lista mediante la posicion le dimos al crear el boton
             if(!objetoElegido) {
-                 Jugador jugador = ComponentesJuego.getComponentes().getEquipo1().getJugadorActivo();
+
+                Equipo equipo1 = ComponentesJuego.getComponentes().getEquipo1();
+                Equipo equipo2 = ComponentesJuego.getComponentes().getEquipo2();
+                Equipo equipoSeleccionado = equipo2;
+
+                if(equipo1.hayJugadorSelecionado()){
+                    equipoSeleccionado  = equipo1;
+                }
+                 Jugador jugador = equipoSeleccionado.getJugadorActivo();
                  ArrayList<ObjetoJugador> objetos = jugador.getPowerUP();
                  //activamos y eliminamos el objeto de la lista
                  for (ObjetoJugador iter: objetos){

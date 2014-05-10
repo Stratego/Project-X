@@ -1,6 +1,7 @@
 package com.rugbysurvive.partida.elementos.objetos.poweUps;
 
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.arbitro.UsoObjetos;
 import com.rugbysurvive.partida.elementos.objetos.Objeto;
 
 import com.rugbysurvive.partida.elementos.objetos.ObjetoCampo;
@@ -22,6 +23,7 @@ public class ColocadorObjetosCampo extends Objeto {
     protected Jugador jugador;
     boolean colocable = false;
     private ObjetoCampo objetoCampo;
+    UsoObjetos usoObjetos;
 
     public ColocadorObjetosCampo(int id, int vida, String imagen, Jugador jugador, ObjetoCampo objetoCampo) {
 
@@ -42,6 +44,7 @@ public class ColocadorObjetosCampo extends Objeto {
 
 
         if (controlPosicion()){
+            usoObjetos = new UsoObjetos(this.jugador);
             this.objetoCampo.colocar(super.getX(),super.getY());
         }else{
             System.out.println("elemento no colocado");

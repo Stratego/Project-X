@@ -1,6 +1,10 @@
 package com.partido;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
+import com.rugbysurvive.partida.ConstantesJuego;
+import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.arbitro.Arbitro;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
@@ -9,6 +13,9 @@ import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.gestores.Procesos.Proceso;
 import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
 import com.rugbysurvive.partida.jugadores.Equipo;
+import com.rugbysurvive.partida.jugadores.Posicionamiento;
+import com.rugbysurvive.partida.tablero.Campo;
+import com.rugbysurvive.partida.tablero.Lado;
 
 import java.util.Random;
 
@@ -21,15 +28,34 @@ import java.util.Random;
  */
 public class GestorTurnos implements Dibujable,Proceso {
 
-    private static final int VELOCIDAD = 10;
+    private static final int VELOCIDAD = 15;
+    private static final int TIEMPO_PRESENTACION = 400;
+    private static final int POSICION_CAMARA_INCIAL_X = 12*64;
+    private static final int POSICION_CAMARA_INICIAL_Y = 11*64;
+    private static final int TIEMPO_MUESTRA_ESCUDO = 100;
+
     private int posicionTexturaX;
     private int posicionTexturaY;
-    private static String estandarteEquipo1 = "banderas/logo1.png";
+    private static String estandarteEquipo1 ="Menu/CanviTorn.png";
     private static String estandarteEquipo2 = "banderas/logo4.png";
     private static int equipoCambiado = 0;
     private int id;
+    private int tipoProceso;
+    private int contadorTiempoPresentacion = 0;
+    private float posicionCamaraX;
+    private float posicionCamaraY;
+    Music ambiente;
+    private int tiempoMuestraEscudo;
+    private ElementoDibujable escudo;
+
+    private boolean animacionInicializadaAnteriormente;
+    private boolean animacionInicialFinalizada;
+
+    // Indica si el proceso inicial de carga de juego a finalizado
+    private boolean procesoPrePartidoFinalizado;
 
     Arbitro arbitro=Arbitro.getInstancia();
+
 
     private static boolean forzarCambioTurno = false;
 
@@ -37,32 +63,54 @@ public class GestorTurnos implements Dibujable,Proceso {
     public GestorTurnos(){
          this.posicionTexturaX = Gdx.graphics.getWidth();
          this.posicionTexturaY = 0;
+        this.tipoProceso = 0;
+        this.posicionCamaraX = POSICION_CAMARA_INCIAL_X;
+        this.posicionCamaraY = POSICION_CAMARA_INICIAL_Y;
+        this.animacionInicialFinalizada = false;
+        this.animacionInicializadaAnteriormente = false;
+        this.ambiente = Gdx.audio.newMusic(Gdx.files.internal("sonido/ambiente/ambiente1.mp3"));
+        this.tiempoMuestraEscudo =0;
+        this.escudo = new ElementoDibujable(TipoDibujo.interficieUsuario,"banderas/peixetEscut.png");
+        this.procesoPrePartidoFinalizado = false;
+    }
+
+
+
+    public void iniciarPresentacion(){
+        Equipo equipo1 = ComponentesJuego.getComponentes().getEquipo1();
+        Equipo equipo2 = ComponentesJuego.getComponentes().getEquipo2();
+        Campo campo = ComponentesJuego.getComponentes().getCampo();
+        Posicionamiento.generarPosicionSaludo(campo,equipo1, Lado.izquierda);
+        Posicionamiento.generarPosicionSaludo(campo,equipo2, Lado.derecha);
+        ProcesosContinuos.añadirProceso(this);
+        this.animacionInicializadaAnteriormente = true;
+        this.ambiente.play();
+
+
     }
 
 
     /**
      * Inicializa el primer turno del partido
      */
-    public static void iniciarPartido() {
+    public void iniciarPartido() {
+
+        this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
+        ProcesosContinuos.añadirProceso(this);
 
         Equipo equipo1 = ComponentesJuego.getComponentes().getEquipo1();
         Equipo equipo2 = ComponentesJuego.getComponentes().getEquipo2();
-        equipo1.bloquear();
-        equipo2.bloquear();
 
         Random random = new Random();
 
 
-
        if(random.nextInt()%2 != 0) {
-            equipo1.desbloquear();
+             equipo2.bloquear();
             equipo1.setJugando(true);
-            equipo2.bloquear();
-        }
+       }
 
-        else {
+       else {
             equipo1.bloquear();
-            equipo2.desbloquear();
             equipo2.setJugando(true);
         }
 
@@ -81,6 +129,7 @@ public class GestorTurnos implements Dibujable,Proceso {
 
 
         if(equipo1.bloqueado() && equipo1.isJugando()  && equipo2.bloqueado() && !equipo2.isJugando() ) {
+            this.tipoProceso = 1;
             equipo2.desbloquear();
             equipo2.setJugando(true);
             ProcesosContinuos.añadirProceso(this);
@@ -90,6 +139,7 @@ public class GestorTurnos implements Dibujable,Proceso {
         }
 
         else if (equipo2.bloqueado() && equipo2.isJugando()  && equipo1.bloqueado() && !equipo1.isJugando() ) {
+            this.tipoProceso = 1;
             equipo1.desbloquear();
             equipo1.setJugando(true);
             ProcesosContinuos.añadirProceso(this);
@@ -105,20 +155,24 @@ public class GestorTurnos implements Dibujable,Proceso {
                 || (!equipo2.isJugando()  && equipo1.isJugando())))
         {
             if(equipo2.isJugando()) {
+                this.tipoProceso =1;
                 equipo1.desbloquear();
                 equipo1.setJugando(true);
                 ProcesosContinuos.añadirProceso(this);
                 this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
                 forzarCambioTurno = false;
+                arbitro.mover();
                 equipo2.bloquear();
             }
 
             else{
+                this.tipoProceso = 1;
                 equipo2.desbloquear();
                 equipo2.setJugando(true);
                 ProcesosContinuos.añadirProceso(this);
                 this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
                 forzarCambioTurno = false;
+                arbitro.mover();
                 equipo1.bloquear();
             }
 
@@ -154,6 +208,13 @@ public class GestorTurnos implements Dibujable,Proceso {
        return false;
     }
 
+    public static void iniciarTurnoEquipo(Equipo equipo1, Equipo equipo2){
+        equipo1.bloquear();
+        equipo2.desbloquear();
+        equipo2.setJugando(true);
+
+    }
+
     @Override
     public String getTextura() {
         return estandarteEquipo1;
@@ -172,19 +233,76 @@ public class GestorTurnos implements Dibujable,Proceso {
     @Override
     public boolean procesar() {
 
-        if(this.posicionTexturaX > 0) {
-            this.posicionTexturaX = this.posicionTexturaX - VELOCIDAD;
-            return false;
+        // GESTION CAMBIO TURNO
+        if(this.tipoProceso ==1) {
+
+            if(this.posicionTexturaX == Gdx.graphics.getHeight()){
+                this.ambiente = Gdx.audio.newMusic(Gdx.files.internal("sonido/cambioTurno.wav"));
+                this.ambiente.play();
+            }
+            if(this.posicionTexturaX > 0) {
+                this.posicionTexturaX = this.posicionTexturaX - VELOCIDAD;
+                return false;
+            }
+            else {
+                if(this.tiempoMuestraEscudo >= TIEMPO_MUESTRA_ESCUDO ) {
+                    GestorGrafico.generarDibujante().eliminarTextura(this.id);
+                    this.escudo.borrar();
+                    this.posicionTexturaX = Gdx.graphics.getHeight();
+                    this.tiempoMuestraEscudo =0;
+                    return true;
+                }
+                else if(this.tiempoMuestraEscudo == 0){
+                    this.ambiente = Gdx.audio.newMusic(Gdx.files.internal("sonido/golpe.wav"));
+                    this.ambiente.play();
+                    this.escudo.dibujar(ConstantesJuego.POS_BANDERA_CAMBIO_TURNO_X,ConstantesJuego.POS_BANDERA_CAMBIO_TURNO_Y);
+                    if(!this.procesoPrePartidoFinalizado){
+                        ComponentesJuego.getComponentes().generarSaque();
+                        this.procesoPrePartidoFinalizado = true;
+                    }
+                }
+                this.tiempoMuestraEscudo++;
+               return false;
+            }
         }
-        else {
-            GestorGrafico.generarDibujante().eliminarTextura(this.id);
-            return true;
+
+        // GESTION PRESENTACION PARTIDO
+        else if(this.tipoProceso ==0) {
+
+            if(this.contadorTiempoPresentacion >= TIEMPO_PRESENTACION){
+                this.posicionCamaraX = POSICION_CAMARA_INCIAL_X;
+                this.posicionCamaraY = POSICION_CAMARA_INICIAL_Y;
+                this.animacionInicialFinalizada = true;
+                this.ambiente.pause();
+                this.ambiente.dispose();
+                this.tipoProceso =1;
+                return true;
+            }
+
+            else {
+                if(contadorTiempoPresentacion%2==0){
+                    GestorGrafico.getCamara().situarCamara((int)this.posicionCamaraX,(int)this.posicionCamaraY);
+                    this.posicionCamaraX++;
+                    this.posicionCamaraY = this.posicionCamaraY + (float)0.5;
+                }
+            }
+            this.contadorTiempoPresentacion++;
+
         }
+        return false;
     }
 
     public static void cambiarTurno()
     {
         forzarCambioTurno = true;
     }
+
+    public boolean isAnimacionInicialFinalizada() {
+        return animacionInicialFinalizada;
+    }
+    public boolean isAnimacionInicializadaAnteriormente() {
+        return animacionInicializadaAnteriormente;
+    }
+
 
 }

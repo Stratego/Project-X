@@ -1,8 +1,6 @@
 package com.rugbysurvive.partida.Simulador;
 
 
-import com.rugbysurvive.partida.gestores.GestorGrafico;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,6 +86,13 @@ public class Simulador {
 
         }
         return false;
+    }
+
+    public void eliminarAccionsSimulador()
+    {
+        /*this.acciones = new ArrayList();
+        this.simulando = false;*/
+
     }
 
     public int listSize(){

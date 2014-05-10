@@ -19,6 +19,9 @@ public class ConstantesJuego {
     private static final int ANCHO_BOTON_REAL = 128;
     private static final int ALTO_BOTON_REAL = 128;
 
+    public static final int POS_BANDERA_CAMBIO_TURNO_X = (int)(520*constanteRescalado);
+    public static final int POS_BANDERA_CAMBIO_TURNO_Y = (int)(226*constanteRescalado);
+
     public static final int ALTO_BOTON = (int)(128 *constanteRescalado);
     public static final int ANCHO_BOTON = (int)(128 *constanteRescalado);
 
