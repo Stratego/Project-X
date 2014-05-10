@@ -138,7 +138,7 @@ public class SelectPositionPlayers extends Activity {
 
         @Override
         public void onClick(View v) {
-
+            SelectPositionPlayers.this.finish();
         }
     }
 }
