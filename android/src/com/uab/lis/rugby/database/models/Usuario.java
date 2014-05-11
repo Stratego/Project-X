@@ -51,7 +51,6 @@ public class Usuario {
     }
     public static ContentValues generateValues(Usuario usuario){
         ContentValues values = new ContentValues();
-        values.put(tbUsuarios._ID, usuario.getId());
         values.put(tbUsuarios.COL_NOMBRE, usuario.getNombre());
         // FALTA COMPLETAR
         return values;

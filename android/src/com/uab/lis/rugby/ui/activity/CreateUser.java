@@ -222,19 +222,24 @@ public class CreateUser extends BaseActivity {
                     Usuario user = new Usuario();
                     user.setNombre(nameU);
                     Uri userUri = UrisGenerated.getUriUsuario();
+                    Log.e("insert", userUri.toString());
                     Uri uriUserItem = getContentResolver().insert(userUri,Usuario.generateValues(user));
+                    Log.e("insert", uriUserItem.toString());
+                    int idU = Integer.parseInt(uriUserItem.getPathSegments().get(1));
 
                     //creamos el equipo y lo insertamos
                     Equipo equipo = new Equipo();
                     equipo.setNombre(nameE);
                     equipo.setEquipacion(getCamisetas().get(selectedC)[0]);
                     equipo.setEscudo(getEscudos().get(selectedE)[0]);
-                    Uri equipoUri = UrisGenerated.getUriEquipo();
+                    Uri equipoUri = UrisGenerated.getUriEquipos(idU);
+                    Log.e("insert", equipoUri.toString());
                     Uri uriEquipoItem = getContentResolver().insert(equipoUri,Equipo.generateValues(equipo));
+                    Log.e("insert", uriEquipoItem.toString());
 
                     //unimos el equipo con el usuario
-                    String idE = uriEquipoItem.getPathSegments().get(0);
-                    String idU = uriUserItem.getPathSegments().get(0);
+                    int idE = Integer.parseInt(uriEquipoItem.getPathSegments().get(3));
+
                     Uri equipoUsuarioUri = UrisGenerated.getUriEquipoUsuario();
                     ContentValues cv = new ContentValues();
                     cv.put(tbUsuarioEquipo.COL_EQUIPO,idE);
@@ -245,6 +250,8 @@ public class CreateUser extends BaseActivity {
                     SharedPreferences preferencias = getSharedPreferences("firstEje", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor=preferencias.edit();
                     editor.putBoolean("first", false);
+                    editor.putInt("usuarioID",idU);
+                    editor.putInt("equipoID",idE);
                     editor.commit();
                     startActivity(new Intent(CreateUser.this,MenuPrincipal.class));
                     break;

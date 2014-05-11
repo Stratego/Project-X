@@ -15,7 +15,6 @@ public class tbJugadorEquipo implements BaseColumns {
 
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE + " ("
-                    + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + COL_JUGADOR + " INTEGER, "
                     + COL_EQUIPO + " INTEGER)";
 }

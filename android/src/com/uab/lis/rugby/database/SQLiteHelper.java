@@ -50,8 +50,25 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(tbJugadorExtra.CREATE_TABLE);
         db.execSQL(tbPowerups.CREATE_TABLE);
 
-        new DumyDatos().execute(db);
+        db.execSQL("INSERT INTO USUARIOS VALUES(1,'ANDROID');");
+        db.execSQL("INSERT INTO EQUIPOS VALUES(1,'Equipo 1','Logo1.png','Jugador3E1.png');");
+        db.execSQL("INSERT INTO EQUIPOS VALUES(2,'Equipo 2','Logo2.png','Jugador3E2.png');");
+        db.execSQL("INSERT INTO EQUIPOS VALUES(3,'Equipo 3','Logo3.png','Jugador3E3.png');");
+        db.execSQL("INSERT INTO EQUIPOS VALUES(4,'Equipo 4','Logo4.png','Jugador3E4.png');");
+        db.execSQL("INSERT INTO USUARIO_EQUIPO VALUES(1,1,1);");
+        db.execSQL("INSERT INTO USUARIO_EQUIPO VALUES(2,1,4);");
+        db.execSQL("INSERT INTO USUARIO_EQUIPO VALUES(3,1,2);");
+        db.execSQL("INSERT INTO USUARIO_EQUIPO VALUES(4,1,3);");
 
+        int count = 1;
+        for(int i : new int[]{1,2,3,4}) {
+            for(String nom : new String[]{"Manu","Aitor","Victor","Victor M","Nicoleta","Suki","Aleix","Carles","Adria","Esther","Aureli","Ruben","Richi","La Sombra","Ivan"}){
+                db.execSQL("INSERT INTO JUGADORES VALUES("+(count)+",'"+nom+"',NULL,NULL);");
+                db.execSQL("INSERT INTO JUGADOR_EQUIPO VALUES("+count+","+i+");");
+                count++;
+            }
+        }
+        backupDatabase();
     }
 
     @Override
@@ -78,63 +95,23 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    class DumyDatos extends AsyncTask<SQLiteDatabase,Void,Void>{
-
-        @Override
-        protected Void doInBackground(SQLiteDatabase... databases) {
-            SQLiteDatabase db = databases[0];
-
-            db.execSQL("INSERT INTO USUARIOS VALUES(1,'ANDROID');");
-            db.execSQL("INSERT INTO EQUIPOS VALUES(1,'Equipo 1','Logo1.png','Jugador3E1.png');");
-            db.execSQL("INSERT INTO EQUIPOS VALUES(2,'Equipo 2','Logo2.png','Jugador3E2.png');");
-            db.execSQL("INSERT INTO EQUIPOS VALUES(3,'Equipo 3','Logo3.png','Jugador3E3.png');");
-            db.execSQL("INSERT INTO EQUIPOS VALUES(4,'Equipo 4','Logo4.png','Jugador3E4.png');");
-            db.execSQL("INSERT INTO USUARIO_EQUIPO VALUES(1,1,1);");
-            db.execSQL("INSERT INTO USUARIO_EQUIPO VALUES(2,1,4);");
-            db.execSQL("INSERT INTO USUARIO_EQUIPO VALUES(3,1,2);");
-            db.execSQL("INSERT INTO USUARIO_EQUIPO VALUES(4,1,3);");
-
-            int count = 1;
-            for(int i : new int[]{1,2,3,4}) {
-                for(String nom : new String[]{"Manu","Aitor","Victor","Victor M","Nicoleta","Suki","Aleix","Carles","Adria","Esther","Aureli","Ruben","Richi","La Sombra","Ivan"}){
-                    db.execSQL("INSERT INTO JUGADORES VALUES("+(count)+",'"+nom+"',NULL,NULL);");
-                    db.execSQL("INSERT INTO JUGADOR_EQUIPO VALUES("+count+","+count+","+i+");");
-                    count++;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            try {
-                Thread.sleep(1000 * 60 );
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            backupDatabase();
-        }
-
-        //Coloca en la memoria SD una copia del archivo de la base de datos
-        public void backupDatabase() {
-            File sd = Environment.getExternalStorageDirectory();
-            File data = Environment.getDataDirectory();
-            FileChannel source=null;
-            FileChannel destination=null;
-            String currentDBPath = "/data/"+ "com.uab.lis.rugby" +"/databases/"+nomBD;
-            String backupDBPath = nomBD;
-            File currentDB = new File(data, currentDBPath);
-            File backupDB = new File(sd, backupDBPath);
-            try {
-                source = new FileInputStream(currentDB).getChannel();
-                destination = new FileOutputStream(backupDB).getChannel();
-                destination.transferFrom(source, 0, source.size());
-                source.close();
-                destination.close();
-            } catch(IOException e) {
-                e.printStackTrace();
-            }
+    public static void backupDatabase() {
+        File sd = Environment.getExternalStorageDirectory();
+        File data = Environment.getDataDirectory();
+        FileChannel source=null;
+        FileChannel destination=null;
+        String currentDBPath = "/data/"+ "com.uab.lis.rugby" +"/databases/"+nomBD;
+        String backupDBPath = nomBD;
+        File currentDB = new File(data, currentDBPath);
+        File backupDB = new File(sd, backupDBPath);
+        try {
+            source = new FileInputStream(currentDB).getChannel();
+            destination = new FileOutputStream(backupDB).getChannel();
+            destination.transferFrom(source, 0, source.size());
+            source.close();
+            destination.close();
+        } catch(IOException e) {
+            e.printStackTrace();
         }
     }
 }

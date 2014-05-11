@@ -7,6 +7,8 @@
             android:title="Musica"
             android:switchTextOn="On"
             android:switchTextOff="Off"/>
+        <Preference android:title="extraer base de datos"
+                android:key="export"/>
         <CheckBoxPreference
                 android:key="opcion1"
                 android:title="Preferencia 1"

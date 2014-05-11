@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,16 +28,19 @@ import java.util.List;
  */
 public class SelectPositionPlayers extends Activity {
     private List<Jugador> jugadores;
-    private int IDequipo = 1;
+    private int IDequipo = -1;
+    private int IDuser = -1;
     public static final String ID_EQUIP = "idequip";
+    public static final String ID_USER = "iduser";
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_position_players);
 
         Intent intent = getIntent();
         IDequipo = intent.getIntExtra(ID_EQUIP,-1);
+        IDuser = intent.getIntExtra(ID_USER,-1);
 
-
+        Log.e("datos","equipo:"+IDequipo + " user:"+IDuser);
 
 
         View ButtonAceptar = findViewById(R.id.Aceptar);
@@ -59,19 +63,24 @@ public class SelectPositionPlayers extends Activity {
                 view.setOnDragListener(new MyDragListener());
             }
         }
-//todo fer la query perque vingin tots de la base de dades
-        int numJugadors = 15;
-        jugadores = new ArrayList<Jugador>();
+        //todo fer la query perque vingin tots de la base de dades
         LinearLayout lista = (LinearLayout) findViewById(R.id.lista);
-        for(int i = 0; i != numJugadors; i++) {
+        jugadores = new ArrayList<Jugador>();
+        Uri urijugadores = UrisGenerated.getUriJugadoresEquipo(IDuser,IDequipo);
+        Cursor cursor = getContentResolver().query(urijugadores,null,null,null,null);
+        cursor.moveToFirst();
+        do{
+            Jugador jugador = Jugador.newInstance(cursor);
             ImageView image = new ImageView(this);
             image.setOnTouchListener(new MyTouchListener());
             image.setImageResource(R.drawable.icon);
-            Jugador j = new Jugador();
-            jugadores.add(j);
-            image.setTag(j);
+
+            jugadores.add(jugador);
+            image.setTag(jugador);
             lista.addView(image);
-        }
+
+        }while (cursor.moveToNext());
+
     }
 
     private final class MyTouchListener implements View.OnTouchListener {
@@ -135,7 +144,7 @@ public class SelectPositionPlayers extends Activity {
             ContentResolver cr = SelectPositionPlayers.this.getContentResolver();
             for(Jugador jugador : jugadores){
                 ContentValues values = Jugador.generateValues(jugador);
-                Uri uri = UrisGenerated.getUriJugadoresEquipoItem(IDequipo,jugador.getId());
+                Uri uri = UrisGenerated.getUriJugadoresEquipoItem(IDuser,IDequipo,jugador.getId());
                 int id = cr.update(uri,values,null,null);
             }
         }

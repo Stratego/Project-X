@@ -20,13 +20,13 @@ public class UrisGenerated {
         return Uri.withAppendedPath(base, tbUsuarios.TABLE + "/" + id);
     }
 
-    public static Uri getUriEquipo() {
-        Uri base = MyAppContentProvider.URI_BASE;
+    public static Uri getUriEquipos(int idusuario) {
+        Uri base = getUriUsuario(idusuario);
         return Uri.withAppendedPath(base, tbEquipos.TABLE);
     }
-    public static Uri getUriEquipo(int id) {
-        Uri base = MyAppContentProvider.URI_BASE;
-        return Uri.withAppendedPath(base, tbEquipos.TABLE + "/" + id);
+    public static Uri getUriEquipo(int idusuario,int idequipo) {
+        Uri base = getUriUsuario(idusuario);
+        return Uri.withAppendedPath(base, tbEquipos.TABLE + "/" + idequipo);
     }
 
 
@@ -34,14 +34,13 @@ public class UrisGenerated {
         Uri base = MyAppContentProvider.URI_BASE;
         return Uri.withAppendedPath(base, tbUsuarioEquipo.TABLE);
     }
-    public static Uri getUriJugadoresEquipo(int equipo){
-        Uri base = getUriEquipo();
-        base = Uri.withAppendedPath(base,equipo + "");
+    public static Uri getUriJugadoresEquipo(int iduser, int equipo){
+        Uri base = getUriEquipo(iduser,equipo);
         base = Uri.withAppendedPath(base, tbJugadores.TABLE);
         return base;
     }
-    public static Uri getUriJugadoresEquipoItem(int equipo, int jugador){
-        Uri base = getUriJugadoresEquipo(equipo);
+    public static Uri getUriJugadoresEquipoItem(int iduser, int equipo, int jugador){
+        Uri base = getUriJugadoresEquipo(iduser, equipo);
         base = Uri.withAppendedPath(base,jugador + "");
         return base;
     }

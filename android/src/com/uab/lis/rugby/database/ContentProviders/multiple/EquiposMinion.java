@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import com.uab.lis.rugby.database.contracts.tbEquipos;
+import com.uab.lis.rugby.database.contracts.tbJugadores;
 import com.uab.lis.rugby.database.contracts.tbUsuarios;
 import com.uab.lis.rugby.database.libContentProvider.MinionContentProvider;
 
@@ -25,7 +26,15 @@ public class EquiposMinion extends MinionContentProvider {
 
     @Override
     public long insert(SQLiteDatabase db, Uri uri, ContentValues contentValues) {
-        return db.insert(tbEquipos.TABLE,null,contentValues);
+        long i = db.insert(tbEquipos.TABLE,null,contentValues);
+        for(String nom : new String[]{"Manu","Aitor","Victor","Victor M","Nicoleta","Suki","Aleix","Carles","Adria","Esther","Aureli","Ruben","Richi","La Sombra","Ivan"}){
+            ContentValues values = new ContentValues();
+            values.put(tbJugadores.COL_NOMBRE,nom);
+            long id = db.insertOrThrow(tbJugadores.TABLE,null,values);
+            db.execSQL("INSERT INTO JUGADOR_EQUIPO VALUES("+id+","+i+");");
+        }
+
+        return i;
     }
 
     @Override

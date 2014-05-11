@@ -119,7 +119,7 @@ public abstract class DespicableContentProvider extends ContentProvider {
         long id = minion.insert(getDb(), uri, contentValues);
         getContext().getContentResolver().notifyChange(uri, null);
 
-        return Uri.parse(minion.getBasePath() + "/" + id);
+        return Uri.parse(uri + "/" + id);
     }
 
     @Override
