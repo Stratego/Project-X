@@ -18,13 +18,13 @@ public class UsuarioMinion extends MinionContentProvider {
 
     @Override
     public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        String id = uri.getPathSegments().get(0);
-        return db.query(tbUsuarios.TABLE, projection, selection, selectionArgs, null, null, sortOrder);
+        String id = uri.getPathSegments().get(1);
+        return db.query(tbUsuarios.TABLE, projection, tbUsuarios._ID + " = " + id, selectionArgs, null, null, sortOrder);
     }
 
     @Override
     public long insert(SQLiteDatabase db, Uri uri, ContentValues contentValues) {
-        return db.insert(tbUsuarios.TABLE,null,contentValues);
+        throw new NoClassDefFoundError("no definido");
     }
 
     @Override

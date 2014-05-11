@@ -27,7 +27,7 @@ public class RolMinion extends MinionContentProvider {
 
     @Override
     public long insert(SQLiteDatabase db, Uri uri, ContentValues contentValues) {
-        return db.insert(tbRoles.TABLE,null,contentValues);
+        throw new NoClassDefFoundError("no definido");
     }
 
     @Override

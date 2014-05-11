@@ -16,10 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import com.uab.lis.rugby.R;
 import com.uab.lis.rugby.database.UrisGenerated;
+import com.uab.lis.rugby.database.contracts.tbEquipos;
 import com.uab.lis.rugby.database.models.Jugador;
+import com.uab.lis.rugby.utils.Utils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,15 +73,29 @@ public class SelectPositionPlayers extends Activity {
         Uri urijugadores = UrisGenerated.getUriJugadoresEquipo(IDuser,IDequipo);
         Cursor cursor = getContentResolver().query(urijugadores,null,null,null,null);
         cursor.moveToFirst();
+        Drawable equipacion = null;
+        try {
+            equipacion = Utils.getDrawableFromAssets(this, cursor.getString(cursor.getColumnIndex(tbEquipos.COL_EQUIPACION)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         do{
             Jugador jugador = Jugador.newInstance(cursor);
-            ImageView image = new ImageView(this);
-            image.setOnTouchListener(new MyTouchListener());
-            image.setImageResource(R.drawable.icon);
+            View item = getLayoutInflater().inflate(R.layout.row_select_player,null);
+            ImageView image = (ImageView) item.findViewById(android.R.id.icon);
+            TextView text = (TextView) item.findViewById(android.R.id.text1);
+            item.setOnTouchListener(new MyTouchListener());
 
+            if(equipacion != null) {
+                image.setImageDrawable(equipacion);
+            }else{
+                image.setImageResource(R.drawable.icon);
+            }
+            text.setText(jugador.getNombre());
             jugadores.add(jugador);
-            image.setTag(jugador);
-            lista.addView(image);
+            item.setTag(jugador);
+            lista.addView(item);
 
         }while (cursor.moveToNext());
 

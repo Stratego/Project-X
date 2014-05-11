@@ -28,7 +28,7 @@ public class ExtraMinion extends MinionContentProvider {
 
     @Override
     public long insert(SQLiteDatabase db, Uri uri, ContentValues contentValues) {
-        return db.insert(tbExtras.TABLE,null,contentValues);
+        throw new NoClassDefFoundError("no definido");
     }
 
     @Override

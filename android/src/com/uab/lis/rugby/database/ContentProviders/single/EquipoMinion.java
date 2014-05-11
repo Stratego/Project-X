@@ -6,6 +6,7 @@ package com.uab.lis.rugby.database.ContentProviders.single;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import com.uab.lis.rugby.database.contracts.tbEquipos;
 import com.uab.lis.rugby.database.contracts.tbUsuarios;
@@ -19,13 +20,17 @@ public class EquipoMinion extends MinionContentProvider {
 
     @Override
     public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        String id = uri.getPathSegments().get(0);
-        return db.query(tbEquipos.TABLE, projection, selection, selectionArgs, null, null, sortOrder);
+        String idUser = uri.getPathSegments().get(1);
+        String idEquip = uri.getPathSegments().get(3);
+        SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+        queryBuilder.setTables(tbEquipos.TABLE + " as e");
+        String where = "e." + tbEquipos._ID + " = " + idEquip;
+        return queryBuilder.query(db,null,where,null,null,null,null);
     }
 
     @Override
     public long insert(SQLiteDatabase db, Uri uri, ContentValues contentValues) {
-        return db.insert(tbEquipos.TABLE,null,contentValues);
+        throw new NoClassDefFoundError("no definido");
     }
 
     @Override
