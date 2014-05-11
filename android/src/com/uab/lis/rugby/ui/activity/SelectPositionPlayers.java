@@ -165,6 +165,7 @@ public class SelectPositionPlayers extends Activity {
                 Uri uri = UrisGenerated.getUriJugadoresEquipoItem(IDuser,IDequipo,jugador.getId());
                 int id = cr.update(uri,values,null,null);
             }
+            startActivity(new Intent(SelectPositionPlayers.this,AndroidStarter.class));
         }
     }
 

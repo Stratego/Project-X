@@ -42,6 +42,8 @@ public class JugadorMinion extends MinionContentProvider {
 
     @Override
     public int update(SQLiteDatabase db, Uri uri, ContentValues values, String where, String[] selectionArgs) {
+        String idJugador = uri.getPathSegments().get(5);
+        where = tbJugadores._ID + " = " + idJugador;
         return db.update(tbJugadores.TABLE,values,where,selectionArgs);
     }
 

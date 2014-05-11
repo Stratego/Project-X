@@ -7,6 +7,7 @@ package com.uab.lis.rugby.database.ContentProviders;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import com.uab.lis.rugby.database.ContentProviders.multiple.*;
+import com.uab.lis.rugby.database.ContentProviders.single.*;
 import com.uab.lis.rugby.database.SQLiteHelper;
 import com.uab.lis.rugby.database.libContentProvider.DespicableContentProvider;
 
@@ -32,6 +33,14 @@ public class MyAppContentProvider extends DespicableContentProvider {
         addMinion(new ExtrasMinion());
         addMinion(new JugadorExtraMinion());
         addMinion(new PowerupMinion());
+
+        addMinion(new EquipoMinion());
+        addMinion(new ExtraMinion());
+        addMinion(new HabilidadMinion());
+        addMinion(new JugadorMinion());
+        addMinion(new ObjetoMinion());
+        addMinion(new RolMinion());
+        addMinion(new UsuarioMinion());
     }
 
     @Override
