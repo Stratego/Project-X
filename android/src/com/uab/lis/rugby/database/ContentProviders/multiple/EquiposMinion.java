@@ -1,4 +1,4 @@
-package com.uab.lis.rugby.database.ContentProviders;
+package com.uab.lis.rugby.database.ContentProviders.multiple;
 
 /**
  * Created by Manuel on 20/04/2014.
@@ -8,12 +8,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import com.uab.lis.rugby.database.contracts.tbEquipos;
+import com.uab.lis.rugby.database.contracts.tbUsuarios;
 import com.uab.lis.rugby.database.libContentProvider.MinionContentProvider;
 
 public class EquiposMinion extends MinionContentProvider {
     @Override
     public String getBasePath() {
-    return tbEquipos.TABLE;
+        return tbUsuarios.TABLE + "/#/" + tbEquipos.TABLE;
     }
 
     @Override

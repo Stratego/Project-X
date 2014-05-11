@@ -12,9 +12,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.util.Log;
-import android.widget.Toast;
-import com.uab.lis.rugby.database.ContentProviders.EquiposMinion;
 import com.uab.lis.rugby.database.ContentProviders.MyAppContentProvider;
 import com.uab.lis.rugby.database.contracts.*;
 import com.uab.lis.rugby.database.models.Equipo;
@@ -53,7 +50,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(tbJugadorExtra.CREATE_TABLE);
         db.execSQL(tbPowerups.CREATE_TABLE);
 
-        new DumyDatos().execute();
+        new DumyDatos().execute(db);
 
     }
 
@@ -81,26 +78,30 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    class DumyDatos extends AsyncTask<Void,Void,Void>{
+    class DumyDatos extends AsyncTask<SQLiteDatabase,Void,Void>{
 
         @Override
-        protected Void doInBackground(Void... voids) {
-            ContentResolver cr = context.getContentResolver();
+        protected Void doInBackground(SQLiteDatabase... databases) {
+            SQLiteDatabase db = databases[0];
 
-            Jugador jugador1 = new Jugador();
-            jugador1.setNombre("Manu");
-            Uri uri_jugador1 = cr.insert(Uri.parse(MyAppContentProvider.URI_BASE.toString()+"/"+tbJugadores.TABLE),Jugador.generateValues(jugador1));
+            db.execSQL("INSERT INTO USUARIOS VALUES(1,'ANDROID');");
+            db.execSQL("INSERT INTO EQUIPOS VALUES(1,'Equipo 1','Logo1.png','Jugador3E1.png');");
+            db.execSQL("INSERT INTO EQUIPOS VALUES(2,'Equipo 2','Logo2.png','Jugador3E2.png');");
+            db.execSQL("INSERT INTO EQUIPOS VALUES(3,'Equipo 3','Logo3.png','Jugador3E3.png');");
+            db.execSQL("INSERT INTO EQUIPOS VALUES(4,'Equipo 4','Logo4.png','Jugador3E4.png');");
+            db.execSQL("INSERT INTO USUARIO_EQUIPO VALUES(1,1,1);");
+            db.execSQL("INSERT INTO USUARIO_EQUIPO VALUES(2,1,4);");
+            db.execSQL("INSERT INTO USUARIO_EQUIPO VALUES(3,1,2);");
+            db.execSQL("INSERT INTO USUARIO_EQUIPO VALUES(4,1,3);");
 
-            Equipo equipo1;
-            equipo1 = new Equipo();
-            equipo1.setNombre("ATeam");
-            Uri uri_equipo1 = cr.insert(Uri.parse(MyAppContentProvider.URI_BASE.toString()+"/"+tbEquipos.TABLE),Equipo.generateValues(equipo1));
-
-            ContentValues cv = new ContentValues();
-            cv.put(tbJugadorEquipo.COL_JUGADOR, ContentUris.parseId(uri_jugador1));
-            cv.put(tbJugadorEquipo.COL_EQUIPO, ContentUris.parseId(uri_equipo1));
-            cr.insert(Uri.parse(MyAppContentProvider.URI_BASE.toString() + "/" + tbJugadorEquipo.TABLE), cv);
-
+            int count = 1;
+            for(int i : new int[]{1,2,3,4}) {
+                for(String nom : new String[]{"Manu","Aitor","Victor","Victor M","Nicoleta","Suki","Aleix","Carles","Adria","Esther","Aureli","Ruben","Richi","La Sombra","Ivan"}){
+                    db.execSQL("INSERT INTO JUGADORES VALUES("+(count)+",'"+nom+"',NULL,NULL);");
+                    db.execSQL("INSERT INTO JUGADOR_EQUIPO VALUES("+count+","+count+","+i+");");
+                    count++;
+                }
+            }
             return null;
         }
 

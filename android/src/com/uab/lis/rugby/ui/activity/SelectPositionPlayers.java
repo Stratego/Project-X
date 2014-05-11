@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,12 +26,18 @@ import java.util.List;
  * Created by Adria on 08/05/2014.
  */
 public class SelectPositionPlayers extends Activity {
-    List<Jugador> jugadores;
-    int equipo = 1;
+    private List<Jugador> jugadores;
+    private int IDequipo = 1;
+    public static final String ID_EQUIP = "idequip";
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_position_players);
+
+        Intent intent = getIntent();
+        IDequipo = intent.getIntExtra(ID_EQUIP,-1);
+
+
+
 
         View ButtonAceptar = findViewById(R.id.Aceptar);
         View ButtonCancelar = findViewById(R.id.Cancelar);
@@ -52,7 +59,7 @@ public class SelectPositionPlayers extends Activity {
                 view.setOnDragListener(new MyDragListener());
             }
         }
-
+//todo fer la query perque vingin tots de la base de dades
         int numJugadors = 15;
         jugadores = new ArrayList<Jugador>();
         LinearLayout lista = (LinearLayout) findViewById(R.id.lista);
@@ -128,7 +135,7 @@ public class SelectPositionPlayers extends Activity {
             ContentResolver cr = SelectPositionPlayers.this.getContentResolver();
             for(Jugador jugador : jugadores){
                 ContentValues values = Jugador.generateValues(jugador);
-                Uri uri = UrisGenerated.getUriJugadoresEquipoItem(equipo,jugador.getId());
+                Uri uri = UrisGenerated.getUriJugadoresEquipoItem(IDequipo,jugador.getId());
                 int id = cr.update(uri,values,null,null);
             }
         }

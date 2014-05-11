@@ -6,6 +6,7 @@ package com.uab.lis.rugby.database.ContentProviders;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import com.uab.lis.rugby.database.ContentProviders.multiple.*;
 import com.uab.lis.rugby.database.SQLiteHelper;
 import com.uab.lis.rugby.database.libContentProvider.DespicableContentProvider;
 
