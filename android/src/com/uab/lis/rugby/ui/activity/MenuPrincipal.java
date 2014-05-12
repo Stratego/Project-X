@@ -15,7 +15,7 @@ import com.uab.lis.rugby.R;
  * Created by adria on 30/03/14.
  */
 public class MenuPrincipal extends BaseActivity {
-
+    private Intent intent;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meny_principal);
@@ -24,6 +24,9 @@ public class MenuPrincipal extends BaseActivity {
         final int userID = preferencias.getInt("usuarioID",-1);
         final int equipoID = preferencias.getInt("equipoID", -1);
 
+        intent = new Intent(MenuPrincipal.this, SelectPositionPlayers.class);
+        intent.putExtra(SelectPositionPlayers.ID_EQUIP,equipoID);
+        intent.putExtra(SelectPositionPlayers.ID_USER,userID);
 
         Button jugar = (Button)findViewById(R.id.btnJugar);
         Button tienda = (Button)findViewById(R.id.btnTienda);
@@ -32,12 +35,7 @@ public class MenuPrincipal extends BaseActivity {
         jugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuPrincipal.this, SelectPositionPlayers.class);
-                intent.putExtra(SelectPositionPlayers.ID_EQUIP,equipoID);
-                intent.putExtra(SelectPositionPlayers.ID_USER,userID);
-                startActivity(intent);
-            }
-                /**
+
                 DialogInterface.OnClickListener positive = new DialogInterface.OnClickListener() {
 
                     @Override
@@ -52,7 +50,9 @@ public class MenuPrincipal extends BaseActivity {
                         builder.setItems(items,new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        startActivity(new Intent(MenuPrincipal.this, SelectPositionPlayers.class));
+                                        intent.putExtra(SelectPositionPlayers.IA,false);
+                                        intent.putExtra(SelectPositionPlayers.ID_EQUIP_RIBAL,which+1);
+                                        startActivity(intent);
                                     }
                                  }
                         );
@@ -63,7 +63,10 @@ public class MenuPrincipal extends BaseActivity {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(MenuPrincipal.this, SelectPositionPlayers.class));
+                        intent.putExtra(SelectPositionPlayers.IA,true);
+                        int id = (int)Math.round(Math.random() * 4);
+                        intent.putExtra(SelectPositionPlayers.ID_EQUIP_RIBAL,id);
+                        startActivity(intent);
                     }
                 };
 
@@ -74,7 +77,7 @@ public class MenuPrincipal extends BaseActivity {
                 builder.setNegativeButton("P vs IA",negative);
                 builder.create().show();
 
-            }**/
+            }
         });
 
         configuracion.setOnClickListener(new View.OnClickListener() {

@@ -1,10 +1,7 @@
 package com.uab.lis.rugby.ui.activity;
 
 import android.app.Activity;
-import android.content.ClipData;
-import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.content.Intent;
+import android.content.*;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -14,9 +11,7 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 import com.uab.lis.rugby.R;
 import com.uab.lis.rugby.database.UrisGenerated;
 import com.uab.lis.rugby.database.contracts.tbEquipos;
@@ -31,9 +26,15 @@ import java.util.List;
  * Created by Adria on 08/05/2014.
  */
 public class SelectPositionPlayers extends Activity {
+    public static final String ID_EQUIP_RIBAL = "idequiporival";
+    public static final String IA = "ia";
     private List<Jugador> jugadores;
+    private List<Drawable> equipaciones;
+    private Adapter adapter;
     private int IDequipo = -1;
     private int IDuser = -1;
+    private int ribal = -1;
+    private boolean ia = false;
     public static final String ID_EQUIP = "idequip";
     public static final String ID_USER = "iduser";
     public void onCreate(Bundle savedInstanceState) {
@@ -43,8 +44,9 @@ public class SelectPositionPlayers extends Activity {
         Intent intent = getIntent();
         IDequipo = intent.getIntExtra(ID_EQUIP,-1);
         IDuser = intent.getIntExtra(ID_USER,-1);
-
-        Log.e("datos","equipo:"+IDequipo + " user:"+IDuser);
+        ia = intent.getBooleanExtra(IA, false);
+        ribal = intent.getIntExtra(ID_EQUIP_RIBAL,-1);
+        Log.e("datos","equipo:"+IDequipo + " user:"+IDuser + " ia:" + ia + " id_equipo_ribal:"+ribal);
 
 
         View ButtonAceptar = findViewById(R.id.Aceptar);
@@ -62,15 +64,25 @@ public class SelectPositionPlayers extends Activity {
                 Log.e("error","A"+f+"A"+c);
                 int id = getResources().getIdentifier("A"+f+"A"+c,"id","com.uab.lis.rugby");
                 View view = findViewById(id);
-                view.setTag(new int[]{f,c});
+                view.setTag(new Integer[]{f,c});
                 view.setBackgroundColor(getResources().getColor(color));
                 view.setOnDragListener(new MyDragListener());
             }
         }
-        //todo fer la query perque vingin tots de la base de dades
-        LinearLayout lista = (LinearLayout) findViewById(R.id.lista);
+        //todo fer la query perque vingin tots de la base de dades 
+
+        ListView lista = (ListView) findViewById(R.id.lista);
+
         jugadores = new ArrayList<Jugador>();
-        Uri urijugadores = UrisGenerated.getUriJugadoresEquipo(IDuser,IDequipo);
+        equipaciones = new ArrayList<Drawable>();
+        initList(IDequipo);
+        initList(ribal);
+        adapter = new Adapter(this,jugadores,equipaciones);
+        lista.setAdapter(adapter);
+    }
+
+    private void initList(int idequipo){
+        Uri urijugadores = UrisGenerated.getUriJugadoresEquipo(IDuser,idequipo);
         Cursor cursor = getContentResolver().query(urijugadores,null,null,null,null);
         cursor.moveToFirst();
         Drawable equipacion = null;
@@ -82,23 +94,10 @@ public class SelectPositionPlayers extends Activity {
 
         do{
             Jugador jugador = Jugador.newInstance(cursor);
-            View item = getLayoutInflater().inflate(R.layout.row_select_player,null);
-            ImageView image = (ImageView) item.findViewById(android.R.id.icon);
-            TextView text = (TextView) item.findViewById(android.R.id.text1);
-            item.setOnTouchListener(new MyTouchListener());
-
-            if(equipacion != null) {
-                image.setImageDrawable(equipacion);
-            }else{
-                image.setImageResource(R.drawable.icon);
-            }
-            text.setText(jugador.getNombre());
+            equipaciones.add(equipacion);
             jugadores.add(jugador);
-            item.setTag(jugador);
-            lista.addView(item);
 
         }while (cursor.moveToNext());
-
     }
 
     private final class MyTouchListener implements View.OnTouchListener {
@@ -131,18 +130,61 @@ public class SelectPositionPlayers extends Activity {
                 case DragEvent.ACTION_DROP:
                     // Dropped, reassign View to ViewGroup
                     //try {
-                        View view = (View) event.getLocalState();
-                        ViewGroup owner = (ViewGroup) view.getParent();
-                        owner.removeView(view);
-                        LinearLayout container = (LinearLayout) v;
-                        int[] xy = (int[]) container.getTag();
-                        Jugador jugador = (Jugador)view.getTag();
-                        jugador.setPosX(xy[0]);
-                        jugador.setPosY(xy[1]);
-                        view.setTag(jugador);
+                    View view = (View) event.getLocalState();
+                    if(view.getParent() instanceof ListView){
+                        ListView owner = (ListView) view.getParent();
+                        ArrayAdapter adapter = (ArrayAdapter) owner.getAdapter();
 
-                        container.addView(view);
-                        view.setVisibility(View.VISIBLE);
+                        LinearLayout container = (LinearLayout) v;
+                        Object[] xy = (Object[]) container.getTag();
+                        Jugador jugador = (Jugador)(((Object[])view.getTag())[0]);
+                        Drawable equipacion = (Drawable)(((Object[])view.getTag())[1]);
+                        jugador.setPosX(Integer.parseInt(xy[0].toString()));
+                        jugador.setPosY(Integer.parseInt(xy[1].toString()));
+
+
+                        View item = getLayoutInflater().inflate(R.layout.row_select_player,null);
+                        ImageView image = (ImageView) item.findViewById(android.R.id.icon);
+                        TextView text = (TextView) item.findViewById(android.R.id.text1);
+                        item.setOnTouchListener(new MyTouchListener());
+                        if(equipacion != null) {
+                            image.setImageDrawable(equipacion);
+                        }else{
+                            image.setImageResource(R.drawable.icon);
+                        }
+                        text.setText(jugador.getNombre());
+                        item.setTag(jugador);
+                        container.addView(item);
+                        item.setVisibility(View.VISIBLE);
+
+                        adapter.remove((Jugador)(((Object[])view.getTag())[0]));
+                        adapter.notifyDataSetChanged();
+                    }else{
+                        ViewGroup owner = (ViewGroup) view.getParent();
+                        Jugador jugador = (Jugador)view.getTag();
+                        LinearLayout container = (LinearLayout) v;
+                        Object[] xy = (Object[]) container.getTag();
+                        jugador.setPosX(Integer.parseInt(xy[0].toString()));
+                        jugador.setPosY(Integer.parseInt(xy[1].toString()));
+                        owner.removeView(view);
+
+                        Drawable equipacion = ((ImageView)(view.findViewById(android.R.id.icon))).getDrawable();
+
+                        View item = getLayoutInflater().inflate(R.layout.row_select_player,null);
+                        ImageView image = (ImageView) item.findViewById(android.R.id.icon);
+                        TextView text = (TextView) item.findViewById(android.R.id.text1);
+                        item.setOnTouchListener(new MyTouchListener());
+                        if(equipacion != null) {
+                            image.setImageDrawable(equipacion);
+                        }else{
+                            image.setImageResource(R.drawable.icon);
+                        }
+                        text.setText(jugador.getNombre());
+                        item.setTag(jugador);
+
+                        container.addView(item);
+
+                    }
                     //}catch(Exception ex){
 
                     //}
@@ -174,6 +216,51 @@ public class SelectPositionPlayers extends Activity {
         @Override
         public void onClick(View v) {
             SelectPositionPlayers.this.finish();
+        }
+    }
+    private class Adapter extends ArrayAdapter{
+        private List<Jugador> jugadores;
+        private List<Drawable> equipaciones;
+        public Adapter(Context context, List<Jugador> jugadores, List<Drawable> equipaciones) {
+            super(context, 0);
+            this.jugadores = jugadores;
+            this.equipaciones = equipaciones;
+        }
+
+        @Override
+        public int getCount() {
+            return this.jugadores.size();
+        }
+
+        @Override
+        public Jugador getItem(int position) {
+            return jugadores.get(position);
+        }
+
+        @Override
+        public void remove(Object object) {
+            int position = jugadores.indexOf(object);
+            jugadores.remove(position);
+            equipaciones.remove(position);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View item = getLayoutInflater().inflate(R.layout.row_select_player,null);
+            ImageView image = (ImageView) item.findViewById(android.R.id.icon);
+            TextView text = (TextView) item.findViewById(android.R.id.text1);
+            item.setOnTouchListener(new MyTouchListener());
+
+            Jugador jugador = getItem(position);
+            Drawable equipacion = equipaciones.get(position);
+            if(equipacion != null) {
+                image.setImageDrawable(equipacion);
+            }else{
+                image.setImageResource(R.drawable.icon);
+            }
+            text.setText(jugador.getNombre());
+            item.setTag(new Object[]{jugador,equipacion});
+            return item;
         }
     }
 }
