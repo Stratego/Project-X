@@ -222,8 +222,8 @@ public class SkeletonMain extends Game {
         //posicionamiento.generarPenalty(componentesJuego.getEquipo2(),3,3);
 
         //posicionamiento.generarSaqueBanda(20,18,ComponentesJuego.getComponentes().getEquipo1());
-        MovimentoIA movimentoIA= new MovimentoIA(ComponentesJuego.getComponentes().getCampo().getCasilla(0,0),ComponentesJuego.getComponentes().getCampo().getCasilla(10,0));
-        //movimentoIA.calcularCamino();
+        MovimentoIA movimentoIA= new MovimentoIA(ComponentesJuego.getComponentes().getCampo().getCasilla(0,0),ComponentesJuego.getComponentes().getCampo().getCasilla(5,0));
+        System.out.println("Resultado camino: " + movimentoIA.calcularCamino());
 
     }
 
