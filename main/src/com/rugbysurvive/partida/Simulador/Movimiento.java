@@ -111,6 +111,7 @@ public class Movimiento extends Accion {
                         if(luchaPelota(Fuerza, Defensa))
                         {
                             jugador.setEstado(new SinPelota());
+                            jugador.lesionar();
                             Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).getJugador().setEstado(new ConPelota());
                             System.out.println("Me quitan la pelota-----------------<");
                         }
@@ -126,6 +127,7 @@ public class Movimiento extends Accion {
                             {
                                 jugador.setEstado(new ConPelota());
                                 Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).getJugador().setEstado(new SinPelota());
+                                Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).getJugador().lesionar();
                                 System.out.println("Quito la pelota------------->");
                             }
                         }

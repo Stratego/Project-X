@@ -176,7 +176,7 @@ public class Campo implements GestionEntrada,Dibujable {
         for (Jugador iter :equipo.getJugadores()){
             if(iter.getEnJuego())
             {
-                this.eliminarElemento(iter.getPosicionX(), iter.getPosicionY());
+                this.eliminarElemento(iter.getPosicionY(), iter.getPosicionX());
             }
         }
     }

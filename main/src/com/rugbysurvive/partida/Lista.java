@@ -58,7 +58,7 @@ public class Lista {
     //int idPlantillaObjetos=0;
 
     ElementoDibujable plantillaObjetos;
-
+    ArrayList<ElementoDibujable> tablonInformacionHabilidades = new ArrayList<ElementoDibujable>();;
 
     private static int posicionInicial = 0;
     private static int posicionFinal = 0;
@@ -94,6 +94,8 @@ public class Lista {
 
             ArrayList<Jugador> suplentes= equipoSeleccionado.listaSuplentes();
             int posicion = posicionInicial;
+            this.reiniciarPosicionamientoLista();
+
 
 
              for (Jugador iterador : suplentes) {
@@ -105,6 +107,30 @@ public class Lista {
                     posicion++;
                  }
              }
+
+            this.tablonInformacionHabilidades = new ArrayList<ElementoDibujable>();
+
+            this.tablonInformacionHabilidades.add( new ElementoDibujable(TipoDibujo.interficieUsuario,"Menu/Habilidades/taulohabilitats.png"));
+
+
+            this.tablonInformacionHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,"Menu/Habilidades/atac.png"));
+            this.tablonInformacionHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,"Menu/Habilidades/defensa.png"));
+            this.tablonInformacionHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,"Menu/Habilidades/fuerza.png"));
+            this.tablonInformacionHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,"Menu/Habilidades/resistencia.png"));
+
+           int posicionX = ConstantesJuego.POSICION_BOTON_CHUTEPASE+ (int)(ConstantesJuego.LARGO_TABLON_SUSITUCION/3) + ConstantesJuego.LARGO_TABLON_SUSITUCION / 9;
+
+            for(ElementoDibujable dibujo : this.tablonInformacionHabilidades) {
+
+                if(this.tablonInformacionHabilidades.indexOf(dibujo)==0) {
+                    this.tablonInformacionHabilidades.get(0).dibujar(ConstantesJuego.POSICION_BOTON_CHUTEPASE + 200,y);
+                }
+                else {
+                dibujo.dibujar(posicionX,y+10);
+                posicionX = posicionX + ConstantesJuego.LARGO_TABLON_SUSITUCION/8;
+                }
+            }
+
 
 
 
@@ -134,6 +160,10 @@ public class Lista {
         for (Boton iterador : listaSuplentes ){
             iterador.borrar();
         }
+        for(ElementoDibujable elemento : this.tablonInformacionHabilidades){
+            elemento.borrar();
+        }
+        this.tablonInformacionHabilidades = new ArrayList<ElementoDibujable>();
 
         if(this.botonAbajo != null){
             this.botonAbajo.borrar();
@@ -153,13 +183,21 @@ public class Lista {
      */
     public void ListaObjetos(){
 
-        equipo = ComponentesJuego.getComponentes().getEquipo1();
 
-        ArrayList<ObjetoJugador> objetosJugador = equipo.objetosJugador();
+
+
         int x =ConstantesJuego.POSICION_INICIAL_X_BOTON_OBJETOS;
         int y =ConstantesJuego.POSICION_INICIAL_Y_BOTON_OBJETOS;
         //int y = ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES;
 
+        Equipo equipo1 = ComponentesJuego.getComponentes().getEquipo1();
+        Equipo equipo2 = ComponentesJuego.getComponentes().getEquipo2();
+        Equipo equipoSeleccionado = equipo2;
+
+        if(equipo1.hayJugadorSelecionado()){
+            equipoSeleccionado  = equipo1;
+        }
+        ArrayList<ObjetoJugador> objetosJugador = equipoSeleccionado.objetosJugador();
 
         if (objetosJugador.size()  > 0){
 

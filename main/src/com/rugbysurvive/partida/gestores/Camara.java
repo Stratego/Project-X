@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.rugbysurvive.partida.ConstantesJuego;
 
 /**
  * Process the game's view.
@@ -82,15 +83,33 @@ public class Camara implements InputProcessor {
 
     public void variarPosicion(int posicionX,int posicionY)
     {
+
+           posicionX = (int)(posicionX*ConstantesJuego.variables().getMultiplicador());
+        posicionY = (int)(posicionY*ConstantesJuego.variables().getMultiplicador());
+
+
             if(posicionX>= this.camera.position.x +this.width/2 ||posicionX <= this.camera.position.x -this.width/2
                  || posicionY>= this.camera.position.y +this.height/2 ||posicionY <= this.camera.position.y -this.height/2)
-                {
-            this.absoluteVariationX =  (int)(this.width/2) -posicionX;
-            this.absoluteVariationY =  posicionY - (int)(this.height/2);
-              System.out.println("variacion:"+this.absoluteVariationX+","+this.absoluteVariationY);
-            this.camera.position.set(posicionX,posicionY,0);
+            {
+                 this.absoluteVariationX =  (int)(this.width/2) -posicionX;
+                 this.absoluteVariationY =  posicionY - (int)(this.height/2);
+                 this.camera.position.set(posicionX,posicionY,0);
             }
     }
+
+    public void situarCamara(int posicionX,int posicionY)
+    {
+
+        posicionX = (int)(posicionX*ConstantesJuego.variables().getMultiplicador());
+        posicionY = (int)(posicionY*ConstantesJuego.variables().getMultiplicador());
+
+
+       this.absoluteVariationX =  (int)(this.width/2) -posicionX;
+       this.absoluteVariationY =  posicionY - (int)(this.height/2);
+       this.camera.position.set(posicionX,posicionY,0);
+
+    }
+
 
     private boolean isCameraInsideBoard(int variationX,int variationY)
     {

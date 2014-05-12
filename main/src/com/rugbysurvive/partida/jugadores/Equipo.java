@@ -169,6 +169,9 @@ public  class Equipo {
         this.alineacion = alineacion;
     }
 
+
+
+
     public void dibujarEquipo(){
         for (Jugador iter :this.getJugadores()){
             campo.añadirElemento(iter, iter.getPosicionX(), iter.getPosicionY());
@@ -258,6 +261,7 @@ public  class Equipo {
         jugador.setColor(this.color);
         this.alineacion.add(new PosicionInicial(jugador,posicionX,posicionY));
         this.jugadores.add(jugador);
+
     }
 
     public void quitarPelota(){

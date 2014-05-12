@@ -27,9 +27,9 @@ public class Arbitro implements Dibujable{
 
     private DireccionJugador direccion = DireccionJugador.izquierda;
 
-    private int posX =23;
+    private int posX =5;
 
-    private int posY = 17;
+    private int posY = 0;
 
     private int rangoVision = 5;
     private int movimiento = 8;
@@ -251,16 +251,16 @@ public class Arbitro implements Dibujable{
         switch (this.direccion)
         {
             case arriba:
-                textura = "jugador/jugador4.png";
+                textura = "arbitro/arbitre2.png";
                 break;
             case abajo:
-                textura = "jugador/jugador2.png";
+                textura = "arbitro/arbitre4.png";
                 break;
             case izquierda:
-                textura = "jugador/jugador5.png";
+                textura = "arbitro/arbitre1.png";
                 break;
             case derecha:
-                textura = "jugador/jugador1.png";
+                textura = "arbitro/arbitre3.png";
                 break;
         }
         return textura;

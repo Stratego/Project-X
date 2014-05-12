@@ -41,8 +41,8 @@ public class Jugador implements GestionEntrada {
     private Casilla casilla = null;
 
     /*Estas dos variables las ponemos aquí y no en estado, ya que si cambiamos el estado perdemos el valor de las variables*/
-    public boolean seleccionado = false;
-    public boolean bloqueado = false;
+    private boolean seleccionado = false;
+    private boolean bloqueado = false;
 
 
     private ArrayList<ElementoDibujable> texturas;
@@ -56,9 +56,13 @@ public class Jugador implements GestionEntrada {
     public int Resistencia;
     public int Ataque;
 
+    /*contMovimientos indicara la cantidad de acciones movimiento que ha hecho hasta el momento, y de esta manera podremos ir haciendo que el jugador pierda resistencia segun interese*/
+    public int contMovimientos;
+
     public int id;
 
-    public boolean enJuego;
+
+    private boolean enJuego;
 
     public Equipo miEquipo;
 
@@ -96,8 +100,38 @@ public class Jugador implements GestionEntrada {
         this.color = Color.azul;
         this.direccion = DireccionJugador.izquierda;
         this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,DireccionJugador.izquierda);
+        this.bloqueo =null;
 
+        this.contMovimientos = 0;
 
+    }
+
+    public void cansancio()
+    {
+        if(this.contMovimientos == 2)
+        {
+            this.setResistencia(this.getResistencia() - 3);
+            this.contMovimientos = 0;
+        }
+        else
+        {
+            this.contMovimientos += 1;
+        }
+    }
+
+    /*Le va quitando vida al jugador hasta que se lesiona*/
+    public void lesionar()
+    {
+        if(this.getVida() > 0)
+        {
+            this.setVida(this.getVida() - 10);
+            if(this.getVida() <= 0)
+            {
+                this.setVida(0);
+                this.setResistencia(0);
+                this.setFuerza(0);
+            }
+        }
     }
 
     /**
@@ -136,7 +170,6 @@ public class Jugador implements GestionEntrada {
             }
 
             this.seleccion = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/seleccionado.png");
-            this.bloqueo = new ElementoDibujable(TipoDibujo.elementosJuego,"casellalila.png");
 
         }
     }
@@ -155,6 +188,7 @@ public class Jugador implements GestionEntrada {
         for(ElementoDibujable elemento : this.texturas){
             elemento.borrar();
         }
+        this.bloqueo = null;
     }
 
     /**
@@ -285,7 +319,8 @@ public class Jugador implements GestionEntrada {
     public void setSeleccionado(boolean seleccionado)
     {
         this.seleccionado = seleccionado;
-        if(this.seleccionado == true)
+
+        if(this.seleccionado )
         {
             if(this.seleccion == null) {
                 this.seleccion= new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/seleccionado.png");
@@ -327,21 +362,54 @@ public class Jugador implements GestionEntrada {
     {
 
         this.bloqueado = bloqueado;
-        if(this.bloqueado == true)
-        {
-            if(this.bloqueo == null) {
-                    this.bloqueo = new ElementoDibujable(TipoDibujo.elementosJuego,"casellalila.png");;
-            }
-            if(this.casilla != null)
-            {
-                 this.bloqueo.dibujar((int)this.casilla.getPosX(),(int)this.casilla.getPosY());
+
+        if(this.bloqueado && this.bloqueo == null)  {
+                this.generarTexturaBloqueado();
+        }
+
+        else {
+             if(this.texturas.contains(this.bloqueo)){
+                    ElementoDibujable texturaBloqueado = this.texturas.get(this.texturas.indexOf(this.bloqueo));
+                     texturaBloqueado.borrar();
+                     this.texturas.remove(texturaBloqueado);
+                     this.bloqueo = null;
             }
         }
-        else
-        {
-            if(this.bloqueo == null)
-                this.bloqueo = new ElementoDibujable(TipoDibujo.elementosJuego,"casellalila.png");;
-            this.bloqueo.borrar();
+    }
+
+    private void generarTexturaBloqueado(){
+
+    if(this.getPosicionY() >= 0  && this.getPosicionX() >= 0)
+    {
+        ElementoDibujable elemento;
+        switch (this.direccion){
+            case izquierda:
+                elemento = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/bloqueado/jugador5Congelat.png");
+                this.texturas.add(elemento);
+                this.bloqueo = elemento;
+                break;
+            case derecha:
+                elemento =new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/bloqueado/jugador1Congelat.png");
+                this.texturas.add( elemento);
+                this.bloqueo = elemento;
+                break;
+            case arriba:
+                elemento =new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/bloqueado/jugador4Congelat.png");
+                this.texturas.add(elemento );
+                this.bloqueo = elemento;
+                break;
+            case abajo:
+                elemento =new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/bloqueado/jugador2Congelat.png");
+                this.texturas.add(elemento);
+                this.bloqueo = elemento;
+                break;
+
+        }
+
+
+            this.texturas.get(this.texturas.size()-1).dibujar(this.getPosicionX(),this.getPosicionY());
+            System.out.println("Dibujando textura: "+this.getPosicionX()+","+this.getPosicionY());
+
         }
     }
 
@@ -561,6 +629,10 @@ public class Jugador implements GestionEntrada {
     public void setColor(Color color) {
         this.color = color;
         this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,this.direccion);
+    }
+
+    public void setEnJuego(boolean enJuego) {
+        this.enJuego = enJuego;
     }
 
 }
