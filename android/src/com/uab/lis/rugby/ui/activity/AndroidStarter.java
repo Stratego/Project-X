@@ -55,7 +55,8 @@ public class AndroidStarter extends AndroidApplication implements SkeletonMain.C
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         boolean musuc = pref.getBoolean("musicPower",true);
 		initialize(new SkeletonMain(equipo1,equipo2,ia,musuc,this), cfg);
-        
+
+        finichMatch(50,20,equipo1,equipo2);
 	}
 
     @Override
@@ -72,6 +73,8 @@ public class AndroidStarter extends AndroidApplication implements SkeletonMain.C
 
         Toast.makeText(this,uriItem.toString(),Toast.LENGTH_LONG).show();
 
-        finish();
+        Intent intent = new Intent(this,MenuPrincipal.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

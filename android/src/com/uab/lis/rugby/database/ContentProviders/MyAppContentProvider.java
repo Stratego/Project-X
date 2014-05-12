@@ -41,6 +41,8 @@ public class MyAppContentProvider extends DespicableContentProvider {
         addMinion(new ObjetoMinion());
         addMinion(new RolMinion());
         addMinion(new UsuarioMinion());
+
+        addMinion(new HistorialPartidosMinion());
     }
 
     @Override
