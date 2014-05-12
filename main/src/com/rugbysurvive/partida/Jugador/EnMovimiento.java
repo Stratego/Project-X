@@ -122,13 +122,17 @@ public class EnMovimiento implements Estado {
         if(this.posicionActual == movimientos.length || this.jugadorFinalizaMovimiento(entrada,posX,posY))
         {
 
-            for(int i=0; i<movimientos.length; i++)
+            int movimientosAux[][] = new int[this.posicionActual][2];
+
+            for(int i=0; i<this.posicionActual; i++)
             {
                 ComponentesJuego.getComponentes().getCampo().desSeleccionarCasilla(movimientos[i][0],movimientos[i][1]);
+                movimientosAux[i][0] = movimientos[i][0];
+                movimientosAux[i][1] = movimientos[i][1];
             }
 
 
-            jugador.setAccion(new Movimiento(jugador, movimientos));
+            jugador.setAccion(new Movimiento(jugador, movimientosAux));
 
             Simulador.getInstance().añadirAccion(jugador.getAccion());
 
@@ -137,7 +141,7 @@ public class EnMovimiento implements Estado {
 
             jugador.setBloqueado(true);
             jugador.setSeleccionado(false);
-            this.indicador = new IndicadorMovimientos(jugador,this.movimientos,this.posicionActual);
+            this.indicador = new IndicadorMovimientos(jugador,movimientosAux,this.posicionActual);
             this.indicador.procesar();
 
             /*Le devolvemos su estado anterior*/
