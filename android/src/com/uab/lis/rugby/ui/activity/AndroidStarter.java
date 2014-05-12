@@ -1,9 +1,11 @@
 package com.uab.lis.rugby.ui.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.example.libgdx.skeleton.SkeletonMain;
@@ -45,7 +47,9 @@ public class AndroidStarter extends AndroidApplication implements SkeletonMain.C
         Equipo equipo1 = EquipoCursor.newInstance(this,cursorEquipo1,idUser);
         Equipo equipo2 = EquipoCursor.newInstance(this,cursorEquipo2,1);
 
-		initialize(new SkeletonMain(equipo1,equipo2,ia,this), cfg);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean musuc = pref.getBoolean("musicPower",true);
+		initialize(new SkeletonMain(equipo1,equipo2,ia,musuc,this), cfg);
         
 	}
 

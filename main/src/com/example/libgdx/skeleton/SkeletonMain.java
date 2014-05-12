@@ -54,7 +54,7 @@ public class SkeletonMain extends Game {
     boolean simular = false;
     Arbitro arbitro;
 
-    public SkeletonMain(Equipo equipo1, Equipo equipo2, boolean ia,CollBack collBack) {
+    public SkeletonMain(Equipo equipo1, Equipo equipo2, boolean ia,boolean musica,CollBack collBack) {
 
     }
     public interface CollBack{
