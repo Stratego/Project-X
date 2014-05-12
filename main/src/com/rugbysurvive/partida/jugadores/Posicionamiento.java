@@ -58,7 +58,7 @@ public class Posicionamiento {
                  posicionX = equipo.getAlineacion().get(i).posicionX;
                  posicionY = equipo.getAlineacion().get(i).posicionY;
                  if(lado == Lado.izquierda){
-                     jugador.setDireccion(DireccionJugador.izquierda);
+                        jugador.setDireccion(DireccionJugador.izquierda);
                         campo.añadirElemento(jugador,posicionX,posicionY);
                         equipo.setLado(lado);
                  }

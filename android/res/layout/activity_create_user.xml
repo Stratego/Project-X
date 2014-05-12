@@ -16,8 +16,7 @@
             android:id="@+id/edtNombreJugador"
             android:layout_gravity="center_horizontal" android:layout_alignParentLeft="true"
             android:layout_marginLeft="0dp" android:layout_alignParentTop="true" android:layout_marginTop="0dp"
-            android:layout_marginBottom="@dimen/activity_create_user_marge_button"/>
-    <EditText
+            android:layout_marginBottom="@dimen/activity_create_user_marge_button"/>    <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"

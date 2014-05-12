@@ -235,27 +235,33 @@ public class SkeletonMain extends Game {
     @Override
     public void render() {
 
+        // La presentacion se realiza unicamente una vez
         if(!this.gestor.isAnimacionInicializadaAnteriormente()){
             this.gestor.iniciarPresentacion();
         }
 
+        // Bucle principal del juego , se inicia una vez finalizada la animacion
        if(this.gestor.isAnimacionInicialFinalizada())
        {
+           // Proceso por el cual se inicia el partido
             if(this.calculandoEquipoInicio) {
                 multiplexer.addProcessor(gestureDetector);
                 multiplexer.addProcessor(this.gestorGrafico.getCamara());
                 Gdx.input.setInputProcessor(multiplexer);
-                this.gestor.iniciarPartido();
+                this.gestor.iniciarPartida();
                 this.calculandoEquipoInicio = false;
-       }
-       else {
-          this.gestor.CambiarTurno();
-       }
+            }
+
+           this.gestor.CambiarTurno();
+
 
         if(GestorTurnos.finTurnoJugadores()){
+            System.out.println("Iniciando simulacion");
             this.simular = true;
         }
-        if(simular==true) {
+
+
+        if(simular) {
 
             int i=0;
             for(Boton boton : this.botons){
@@ -276,6 +282,7 @@ public class SkeletonMain extends Game {
 
 
         }
+
 
        }
 

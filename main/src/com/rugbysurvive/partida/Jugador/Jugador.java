@@ -254,6 +254,10 @@ public class Jugador implements GestionEntrada {
         }
         this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,direccion);
 
+        if(this.bloqueado && this.bloqueo != null){
+                this.generarTexturaBloqueado();
+                this.texturas.add(this.bloqueo);
+        }
     }
 
 
@@ -363,8 +367,10 @@ public class Jugador implements GestionEntrada {
 
         this.bloqueado = bloqueado;
 
+          System.out.println("bloqueo:"+bloqueado);
         if(this.bloqueado && this.bloqueo == null)  {
                 this.generarTexturaBloqueado();
+            System.out.println("generando textura bloqueo");
         }
 
         else {
@@ -373,6 +379,7 @@ public class Jugador implements GestionEntrada {
                      texturaBloqueado.borrar();
                      this.texturas.remove(texturaBloqueado);
                      this.bloqueo = null;
+                 System.out.println("Eliminando textura bloqueo");
             }
         }
     }
