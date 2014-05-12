@@ -6,11 +6,9 @@ package com.uab.lis.rugby.database.ContentProviders.multiple;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import com.uab.lis.rugby.database.contracts.tbEquipos;
-import com.uab.lis.rugby.database.contracts.tbJugadores;
-import com.uab.lis.rugby.database.contracts.tbRoles;
-import com.uab.lis.rugby.database.contracts.tbUsuarios;
+import com.uab.lis.rugby.database.contracts.*;
 import com.uab.lis.rugby.database.libContentProvider.MinionContentProvider;
 
 public class RolesMinion extends MinionContentProvider {
@@ -21,8 +19,16 @@ public class RolesMinion extends MinionContentProvider {
 
     @Override
     public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        String id = uri.getPathSegments().get(0);
-        return db.query(tbRoles.TABLE, projection, selection, selectionArgs, null, null, sortOrder);
+        String idUser = uri.getPathSegments().get(1);
+        String idEquipo = uri.getPathSegments().get(3);
+        String idJugador = uri.getPathSegments().get(5);
+        SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+        queryBuilder.setTables(tbJugadores.TABLE + " as j, " + tbJugadorRol.TABLE + " as jr, " + tbRoles.TABLE + " as r");
+        String where = "j." + tbJugadores._ID + " = jr." + tbJugadorRol.COL_JUGADOR +
+                " and jr." + tbJugadorRol.COL_ROL + " = r." + tbRoles._ID +
+                " and j." + tbJugadores._ID + " = " + idJugador;
+        String[] columnas = new String[]{"r."+tbRoles._ID,"r."+tbRoles.COL_NOMBRE,"r."+tbRoles.COL_DESCRIPCION};
+        return queryBuilder.query(db,columnas,where,null,null,null,null);
     }
 
     @Override

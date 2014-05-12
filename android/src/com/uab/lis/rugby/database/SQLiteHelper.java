@@ -52,11 +52,27 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO USUARIO_EQUIPO VALUES(3,1,2);");
         db.execSQL("INSERT INTO USUARIO_EQUIPO VALUES(4,1,3);");
 
+        db.execSQL("INSERT INTO ROLES VALUES(1,'atacante','es un jugador especializado en ataque');");
+        db.execSQL("INSERT INTO ROLES VALUES(2,'defensa','su contundencia en la defensa es memorable');");
+        db.execSQL("INSERT INTO ROLES VALUES(3,'chutador','quanto mas chuta... mas inutil es');");
+
+
+        db.execSQL("INSERT INTO HABILIDADES VALUES(1,'Fuerza','def fuerza');");
+        db.execSQL("INSERT INTO HABILIDADES VALUES(2,'Defensa','def defensa');");
+        db.execSQL("INSERT INTO HABILIDADES VALUES(3,'Habilidad','def habilidad');");
+        db.execSQL("INSERT INTO HABILIDADES VALUES(4,'Resistencia','def resistencia');");
+        db.execSQL("INSERT INTO HABILIDADES VALUES(5,'Ataque','def ataque');");
+
+
         int count = 1;
         for(int i : new int[]{1,2,3,4}) {
             for(String nom : new String[]{"Manu","Aitor","Victor","Victor M","Nicoleta","Suki","Aleix","Carles","Adria","Esther","Aureli","Ruben","Richi","La Sombra","Ivan"}){
                 db.execSQL("INSERT INTO JUGADORES VALUES("+(count)+",'"+nom+"',NULL,NULL);");
                 db.execSQL("INSERT INTO JUGADOR_EQUIPO VALUES("+count+","+i+");");
+                db.execSQL("INSERT INTO JUGADOR_ROL VALUES('"+count+"',"+count+","+(Math.round(Math.random() * 2)+1)+");");
+                for(int j : new int[]{1,2,3,4,5}) {
+                    db.execSQL("INSERT INTO JUGADOR_HABILIDAD VALUES(" + count + "," + j + "," + Math.round(Math.random() * 100) + ");");
+                }
                 count++;
             }
         }

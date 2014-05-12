@@ -43,6 +43,7 @@ public class JugadorCursor {
                 jugador.setRol(rol);
             }while (cursorRol.moveToNext());
         }
+
         //es lo k falta
         jugador.getExtrasVisuales();
         jugador.getHabilidades();

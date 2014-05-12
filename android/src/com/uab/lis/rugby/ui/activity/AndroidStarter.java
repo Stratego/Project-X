@@ -39,8 +39,11 @@ public class AndroidStarter extends AndroidApplication implements SkeletonMain.C
         Cursor cursorEquipo1 = getContentResolver().query(uriEquipo1,null,null,null,null);
         Cursor cursorEquipo2 = getContentResolver().query(uriEquipo2,null,null,null,null);
 
+        cursorEquipo1.moveToFirst();
+        cursorEquipo2.moveToFirst();
+
         Equipo equipo1 = EquipoCursor.newInstance(this,cursorEquipo1,idUser);
-        Equipo equipo2 = EquipoCursor.newInstance(this,cursorEquipo2,0);
+        Equipo equipo2 = EquipoCursor.newInstance(this,cursorEquipo2,1);
 
 		initialize(new SkeletonMain(equipo1,equipo2,ia,this), cfg);
         

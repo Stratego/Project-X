@@ -32,6 +32,10 @@ public class EquiposMinion extends MinionContentProvider {
             values.put(tbJugadores.COL_NOMBRE,nom);
             long id = db.insertOrThrow(tbJugadores.TABLE,null,values);
             db.execSQL("INSERT INTO JUGADOR_EQUIPO VALUES("+id+","+i+");");
+            db.execSQL("INSERT INTO JUGADOR_ROL VALUES('"+id+"',"+id+","+(Math.round(Math.random() * 2)+1)+");");
+            for(int j : new int[]{1,2,3,4,5}) {
+                db.execSQL("INSERT INTO JUGADOR_HABILIDAD VALUES(" + id + "," + j + "," + Math.round(Math.random() * 100) + ");");
+            }
         }
 
         return i;

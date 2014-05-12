@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import com.models.Habilidad;
 import com.uab.lis.rugby.database.contracts.tbHabilidades;
+import com.uab.lis.rugby.database.contracts.tbJugadorHabilidad;
 
 /**
  * Created by adria on 12/05/14.
@@ -13,7 +14,7 @@ public class HabilidadCursor {
         int colId = cursor.getColumnIndex(tbHabilidades._ID);
         int colNombre = cursor.getColumnIndex(tbHabilidades.COL_NOMBRE);
         int colDescripcion = cursor.getColumnIndex(tbHabilidades.COL_DESCRIPCION);
-        int colValor = cursor.getColumnIndex(tbHabilidades.COL_VALOR);
+        int colValor = cursor.getColumnIndex(tbJugadorHabilidad.COL_VALOR);
 
         Habilidad habilidad = new Habilidad();
         habilidad.setId(cursor.getInt(colId));
@@ -28,7 +29,6 @@ public class HabilidadCursor {
         values.put(tbHabilidades._ID, habilidad.getId());
         values.put(tbHabilidades.COL_NOMBRE, habilidad.getNombre());
         values.put(tbHabilidades.COL_DESCRIPCION, habilidad.getDescripcion());
-        values.put(tbHabilidades.COL_VALOR, habilidad.getValor());
         return values;
     }
 }
