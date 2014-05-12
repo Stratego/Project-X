@@ -31,16 +31,18 @@ public class JugadorCursor {
         ContentResolver cr = context.getContentResolver();
         Cursor cursorRol = cr.query(uriRol,null,null,null,null);
         cursorRol.moveToFirst();
-        do{
-            Rol rol = new Rol();
-            String nombre = cursorRol.getString(cursorRol.getColumnIndex(tbRoles.COL_NOMBRE));
-            String descri = cursorRol.getString(cursorRol.getColumnIndex(tbRoles.COL_DESCRIPCION));
-            int idR = cursorRol.getInt(cursorRol.getColumnIndex(tbRoles._ID));
-            rol.setId(idR);
-            rol.setNombre(nombre);
-            rol.setDescripcion(descri);
-            jugador.setRol(rol);
-        }while (cursorRol.moveToNext());
+        if(cursorRol.getCount() > 0){
+            do{
+                Rol rol = new Rol();
+                String nombre = cursorRol.getString(cursorRol.getColumnIndex(tbRoles.COL_NOMBRE));
+                String descri = cursorRol.getString(cursorRol.getColumnIndex(tbRoles.COL_DESCRIPCION));
+                int idR = cursorRol.getInt(cursorRol.getColumnIndex(tbRoles._ID));
+                rol.setId(idR);
+                rol.setNombre(nombre);
+                rol.setDescripcion(descri);
+                jugador.setRol(rol);
+            }while (cursorRol.moveToNext());
+        }
         //es lo k falta
         jugador.getExtrasVisuales();
         jugador.getHabilidades();
