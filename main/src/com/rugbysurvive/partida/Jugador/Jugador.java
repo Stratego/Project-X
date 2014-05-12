@@ -607,6 +607,10 @@ public class Jugador implements GestionEntrada {
         this.Ataque = ataque;
     }
 
+    public Casilla getCasilla(){ return this.casilla;}
+
+    public void setCasilla(Casilla casilla) { this.casilla = casilla;}
+
     /**
      *
      * @return boolean enJuego
