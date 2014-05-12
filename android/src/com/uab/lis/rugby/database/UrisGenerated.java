@@ -43,7 +43,7 @@ public class UrisGenerated {
     }
 
     public static Uri getUriRol(int iduser, int equipo, int jugador) {
-        Uri base = getUriJugadoresEquipoItem(iduser,equipo,jugador);
+        Uri base = getUriJugadoresEquipoItem(iduser, equipo, jugador);
         base = Uri.withAppendedPath(base, tbRoles.TABLE);
         return base;
     }
@@ -52,5 +52,10 @@ public class UrisGenerated {
         Uri base = getUriJugadoresEquipoItem(iduser,equipo,jugador);
         base = Uri.withAppendedPath(base, tbHabilidades.TABLE);
         return base;
+    }
+
+    public static Uri getUriHistorialPArtida() {
+        Uri base = MyAppContentProvider.URI_BASE;
+        return Uri.withAppendedPath(base, tbHistorialPartido.TABLE);
     }
 }

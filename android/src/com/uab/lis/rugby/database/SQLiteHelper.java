@@ -41,6 +41,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(tbExtras.CREATE_TABLE);
         db.execSQL(tbJugadorExtra.CREATE_TABLE);
         db.execSQL(tbPowerups.CREATE_TABLE);
+        db.execSQL(tbHistorialPartido.CREATE_TABLE);
 
         db.execSQL("INSERT INTO USUARIOS VALUES(1,'ANDROID');");
         db.execSQL("INSERT INTO EQUIPOS VALUES(1,'Equipo 1','Logo1.png','Jugador3E1.png');");

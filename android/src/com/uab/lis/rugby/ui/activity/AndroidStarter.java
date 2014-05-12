@@ -1,17 +1,21 @@
 package com.uab.lis.rugby.ui.activity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.example.libgdx.skeleton.SkeletonMain;
 import com.models.Equipo;
 import com.uab.lis.rugby.database.UrisGenerated;
 import com.uab.lis.rugby.database.Utilis.EquipoCursor;
+import com.uab.lis.rugby.database.Utilis.HistorialPartidosCursor;
+import com.uab.lis.rugby.database.models.HistorialPartido;
 
 
 public class AndroidStarter extends AndroidApplication implements SkeletonMain.CollBack{
@@ -19,6 +23,7 @@ public class AndroidStarter extends AndroidApplication implements SkeletonMain.C
     public static final String IDEQUIPO = "idequipo";
     public static final String IDRIBAL = "idribal";
     public static final String IDUSER = "iduser";
+
 
     @Override
 	public void onCreate(Bundle savedInstanceState){
@@ -55,6 +60,18 @@ public class AndroidStarter extends AndroidApplication implements SkeletonMain.C
 
     @Override
     public void finichMatch(int rEquipo1, int rEquipo2, Equipo equipo1, Equipo equipo2) {
+        HistorialPartido historial = new HistorialPartido();
+        historial.setIdEquipo1((int)equipo1.getId());
+        historial.setIdEquipo2((int) equipo2.getId());
+        historial.setPuntuacionEquipo1(rEquipo1);
+        historial.setPuntuacionEquipo2(rEquipo2);
+        ContentValues values = HistorialPartidosCursor.generateValues(historial);
 
+        Uri uri = UrisGenerated.getUriHistorialPArtida();
+        Uri uriItem = getContentResolver().insert(uri,values);
+
+        Toast.makeText(this,uriItem.toString(),Toast.LENGTH_LONG).show();
+
+        finish();
     }
 }
