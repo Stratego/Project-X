@@ -7,6 +7,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.models.Equipo;
 import com.partido.GestorTurnos;
 import com.rugbysurvive.partida.ConstantesJuego;
+import com.rugbysurvive.partida.IA.MovimentoIA;
 import com.rugbysurvive.partida.ResolucionPantalla;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.arbitro.Arbitro;
@@ -24,6 +25,7 @@ import com.rugbysurvive.partida.tablero.Botones.BotonCambioTurno;
 import com.rugbysurvive.partida.tablero.Botones.BotonFinalizarAccion;
 import com.rugbysurvive.partida.tablero.Botones.BotonFinalizarSimulacion;
 import com.rugbysurvive.partida.tablero.Botones.BotonInterfaz;
+import com.rugbysurvive.partida.tablero.Casilla;
 
 import java.util.ArrayList;
 
@@ -69,7 +71,7 @@ public class SkeletonMain extends Game {
         this.constantes.setResolucionPantalla(ResolucionPantalla.pequeña);
         ArrayList<String> nombresTexturas = new ArrayList<String>();
         nombresTexturas.add("jugador1.png");
-        nombresTexturas.add("campo1.png");
+        nombresTexturas.add("tablero/campo.png");
         nombresTexturas.add("casellalila.png");
         nombresTexturas.add("boto.png");
         nombresTexturas.add("listaprueba.png");
@@ -220,7 +222,8 @@ public class SkeletonMain extends Game {
         //posicionamiento.generarPenalty(componentesJuego.getEquipo2(),3,3);
 
         //posicionamiento.generarSaqueBanda(20,18,ComponentesJuego.getComponentes().getEquipo1());
-
+        MovimentoIA movimentoIA= new MovimentoIA(ComponentesJuego.getComponentes().getCampo().getCasilla(0,0),ComponentesJuego.getComponentes().getCampo().getCasilla(5,0));
+        System.out.println("Resultado camino: " + movimentoIA.calcularCamino());
 
     }
 
