@@ -47,4 +47,10 @@ public class UrisGenerated {
         base = Uri.withAppendedPath(base, tbRoles.TABLE);
         return base;
     }
+
+    public static Uri getUriHabilidades(int iduser, int equipo, int jugador) {
+        Uri base = getUriJugadoresEquipoItem(iduser,equipo,jugador);
+        base = Uri.withAppendedPath(base, tbHabilidades.TABLE);
+        return base;
+    }
 }
