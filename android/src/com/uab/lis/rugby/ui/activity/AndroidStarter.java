@@ -32,15 +32,15 @@ public class AndroidStarter extends AndroidApplication implements SkeletonMain.C
         int idEquipo2 = intent.getIntExtra(IDRIBAL,-1);
         int idUser = intent.getIntExtra(IDUSER, -1);
         boolean ia = intent.getBooleanExtra(IA,false);
-
+/**
         Uri uriEquipo1 = UrisGenerated.getUriEquipo(idUser,idEquipo1);
         Uri uriEquipo2 = UrisGenerated.getUriEquipo(0,idEquipo2);
 
         Cursor cursorEquipo1 = getContentResolver().query(uriEquipo1,null,null,null,null);
         Cursor cursorEquipo2 = getContentResolver().query(uriEquipo2,null,null,null,null);
-
-        Equipo equipo1 = EquipoCursor.newInstance(this,cursorEquipo1,idUser);
-        Equipo equipo2 = EquipoCursor.newInstance(this,cursorEquipo2,0);
+**/
+        Equipo equipo1 = null;//EquipoCursor.newInstance(this,cursorEquipo1,idUser);
+        Equipo equipo2 = null;//EquipoCursor.newInstance(this,cursorEquipo2,0);
 
 		initialize(new SkeletonMain(equipo1,equipo2,ia,this), cfg);
         
