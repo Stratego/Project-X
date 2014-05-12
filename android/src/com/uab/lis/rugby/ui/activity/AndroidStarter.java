@@ -8,9 +8,13 @@ import com.example.libgdx.skeleton.SkeletonMain;
 
 public class AndroidStarter extends AndroidApplication
 {
-	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
+    public static final String IA = "ia";
+    public static final String IDEQUIPO = "idequipo";
+    public static final String IDRIBAL = "idribal";
+    public static final String IDUSER = "iduser";
+
+    @Override
+	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
 		cfg.useAccelerometer = false;

@@ -92,11 +92,14 @@ public class Jugador {
         // FALTA COMPLETAR
         return values;
     }
+
     @Override
     public String toString() {
-        return "tbJugador{" +
+        return "Jugador{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
+                ", posX=" + posX +
+                ", posY=" + posY +
                 '}';
     }
 }

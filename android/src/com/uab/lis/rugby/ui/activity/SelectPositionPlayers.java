@@ -20,6 +20,7 @@ import com.uab.lis.rugby.utils.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,6 +38,8 @@ public class SelectPositionPlayers extends Activity {
     private boolean ia = false;
     public static final String ID_EQUIP = "idequip";
     public static final String ID_USER = "iduser";
+
+    private HashMap<Integer,Jugador> listaFinal = new HashMap<Integer,Jugador>();
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_position_players);
@@ -142,6 +145,7 @@ public class SelectPositionPlayers extends Activity {
                         jugador.setPosX(Integer.parseInt(xy[0].toString()));
                         jugador.setPosY(Integer.parseInt(xy[1].toString()));
 
+                        listaFinal.put(jugador.getId(),jugador);
 
                         View item = getLayoutInflater().inflate(R.layout.row_select_player,null);
                         ImageView image = (ImageView) item.findViewById(android.R.id.icon);
@@ -167,6 +171,8 @@ public class SelectPositionPlayers extends Activity {
                         jugador.setPosX(Integer.parseInt(xy[0].toString()));
                         jugador.setPosY(Integer.parseInt(xy[1].toString()));
                         owner.removeView(view);
+
+                        listaFinal.put(jugador.getId(),jugador);
 
                         Drawable equipacion = ((ImageView)(view.findViewById(android.R.id.icon))).getDrawable();
 
@@ -202,12 +208,18 @@ public class SelectPositionPlayers extends Activity {
         @Override
         public void onClick(View v) {
             ContentResolver cr = SelectPositionPlayers.this.getContentResolver();
-            for(Jugador jugador : jugadores){
+            for(Jugador jugador : listaFinal.values()){
+                Log.e("jugadores",jugador.toString());
                 ContentValues values = Jugador.generateValues(jugador);
                 Uri uri = UrisGenerated.getUriJugadoresEquipoItem(IDuser,IDequipo,jugador.getId());
                 int id = cr.update(uri,values,null,null);
             }
-            startActivity(new Intent(SelectPositionPlayers.this,AndroidStarter.class));
+            Intent intent = new Intent(SelectPositionPlayers.this,AndroidStarter.class);
+            intent.putExtra(AndroidStarter.IA,ia);
+            intent.putExtra(AndroidStarter.IDEQUIPO,IDequipo);
+            intent.putExtra(AndroidStarter.IDRIBAL,ribal);
+            intent.putExtra(AndroidStarter.IDUSER,IDuser);
+            startActivity(intent);
         }
     }
 
