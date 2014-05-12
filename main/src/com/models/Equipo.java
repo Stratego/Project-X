@@ -1,52 +1,74 @@
 package com.models;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by adria on 11/04/14.
+ * Created by Manuel on 7/04/14.
  */
 public class Equipo {
-    private ArrayList<Jugador> plantilla;
-    private String rutaEscudo;
-    private String nombreEquipo;
-    private ArrayList<Jugador> bankillo;
+    private long id = -1;
+    private String nombre;
+    private List<Jugador> jugadores;
+    private String escudo;
+    private String equipacion;
+    private List<Jugador> alineacion;
 
-    public Equipo(ArrayList<Jugador> plantilla, String rutaEscudo, String nombreEquipo, ArrayList<Jugador> bankillo) {
-        this.plantilla = plantilla;
-        this.rutaEscudo = rutaEscudo;
-        this.nombreEquipo = nombreEquipo;
-        this.bankillo = bankillo;
+    public long getId() {
+        return id;
     }
 
-    public ArrayList<Jugador> getPlantilla() {
-        return plantilla;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setPlantilla(ArrayList<Jugador> plantilla) {
-        this.plantilla = plantilla;
+    public String getEscudo() {
+        return escudo;
     }
 
-    public String getRutaEscudo() {
-        return rutaEscudo;
+    public String getEquipacion() {
+        return equipacion;
     }
 
-    public void setRutaEscudo(String rutaEscudo) {
-        this.rutaEscudo = rutaEscudo;
+    public List<Jugador> getAlineacion() {
+        return alineacion;
     }
 
-    public String getNombreEquipo() {
-        return nombreEquipo;
+    public List<Jugador> getJugadoes() {
+        return jugadores;
     }
 
-    public void setNombreEquipo(String nombreEquipo) {
-        this.nombreEquipo = nombreEquipo;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public ArrayList<Jugador> getBankillo() {
-        return bankillo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setBankillo(ArrayList<Jugador> bankillo) {
-        this.bankillo = bankillo;
+    public void setEscudo(String escudo) {
+        this.escudo = escudo;
+    }
+
+    public void setEquipacion(String equipacion) {
+        this.equipacion = equipacion;
+    }
+
+    public void setAlineacion(List<Jugador> alineacion) {
+        this.alineacion = alineacion;
+    }
+
+    public void setJugadores(List<Jugador> jugadores) {
+        this.jugadores = jugadores;
+    }
+
+
+    @Override
+    public String toString() {
+        return "tbEquipos{" +
+                "id=" + id +
+                "nombre=" + nombre +
+                "escudo=" + escudo +
+                ", equipacion='" + equipacion + '\'' +
+                '}';
     }
 }

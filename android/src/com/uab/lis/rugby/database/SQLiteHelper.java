@@ -3,19 +3,11 @@ package com.uab.lis.rugby.database;
 /**
  * Created by Manuel on 24/03/14.
  */
-import android.content.ContentResolver;
-import android.content.ContentUris;
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Environment;
-import com.uab.lis.rugby.database.ContentProviders.MyAppContentProvider;
 import com.uab.lis.rugby.database.contracts.*;
-import com.uab.lis.rugby.database.models.Equipo;
-import com.uab.lis.rugby.database.models.Jugador;
 
 import java.io.*;
 import java.nio.channels.FileChannel;

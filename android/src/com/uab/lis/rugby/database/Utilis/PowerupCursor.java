@@ -1,33 +1,15 @@
-package com.uab.lis.rugby.database.models;
+package com.uab.lis.rugby.database.Utilis;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import com.models.Objeto;
+import com.models.Powerup;
 import com.uab.lis.rugby.database.contracts.tbPowerups;
 
 /**
- * Created by Manuel on 28/04/14.
+ * Created by adria on 12/05/14.
  */
-public class Powerup extends Objeto {
-
-    private int habilidad;
-    private int efecto;
-
-    public int getHabilidad() {
-        return habilidad;
-    }
-
-    public int getEfecto() {
-        return efecto;
-    }
-
-    public void setHabilidad(int habilidad) {
-        this.habilidad = habilidad;
-    }
-
-    public void setEfecto(int efecto) {
-        this.efecto = efecto;
-    }
-
+public class PowerupCursor {
     public static Powerup newInstance(Cursor cursor){
         int colId = cursor.getColumnIndex(tbPowerups._ID);
         int colNombre = cursor.getColumnIndex(tbPowerups.COL_NOMBRE);
@@ -50,9 +32,5 @@ public class Powerup extends Objeto {
         values.put(tbPowerups.COL_NOMBRE,objeto.getNombre());
         values.put(tbPowerups.COL_DESCRIPCION,objeto.getDescripcion());
         return values;
-    }
-    @Override
-    public String toString() {
-        return "tbObjeto{}";
     }
 }

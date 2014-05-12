@@ -44,6 +44,6 @@ public class DesktopStarter {
 		}
 		cfg.resizable = false;
 		cfg.vSyncEnabled = false;
-		new LwjglApplication(new SkeletonMain(), cfg);
+		new LwjglApplication(new SkeletonMain(null,null,false,null), cfg);
 	}
 }

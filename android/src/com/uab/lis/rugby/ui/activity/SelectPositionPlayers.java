@@ -14,8 +14,9 @@ import android.view.ViewGroup;
 import android.widget.*;
 import com.uab.lis.rugby.R;
 import com.uab.lis.rugby.database.UrisGenerated;
+import com.uab.lis.rugby.database.Utilis.JugadorCursor;
 import com.uab.lis.rugby.database.contracts.tbEquipos;
-import com.uab.lis.rugby.database.models.Jugador;
+import com.models.Jugador;
 import com.uab.lis.rugby.utils.Utils;
 
 import java.io.IOException;
@@ -96,7 +97,7 @@ public class SelectPositionPlayers extends Activity {
         }
 
         do{
-            Jugador jugador = Jugador.newInstance(cursor);
+            Jugador jugador = JugadorCursor.newInstance(cursor);
             equipaciones.add(equipacion);
             jugadores.add(jugador);
 
@@ -210,7 +211,7 @@ public class SelectPositionPlayers extends Activity {
             ContentResolver cr = SelectPositionPlayers.this.getContentResolver();
             for(Jugador jugador : listaFinal.values()){
                 Log.e("jugadores",jugador.toString());
-                ContentValues values = Jugador.generateValues(jugador);
+                ContentValues values = JugadorCursor.generateValues(jugador);
                 Uri uri = UrisGenerated.getUriJugadoresEquipoItem(IDuser,IDequipo,jugador.getId());
                 int id = cr.update(uri,values,null,null);
             }

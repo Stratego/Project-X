@@ -1,41 +1,14 @@
-package com.uab.lis.rugby.database.models;
+package com.uab.lis.rugby.database.Utilis;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import com.models.Objeto;
 import com.uab.lis.rugby.database.contracts.tbObjetos;
 
 /**
- * Created by Manuel on 7/04/14.
+ * Created by adria on 12/05/14.
  */
-public class Objeto {
-    private int id;
-    private String nombre;
-    private String descripcion;
-
-    public int getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
+public class ObjetoCursor {
     public static Objeto newInstance(Cursor cursor){
         int colId = cursor.getColumnIndex(tbObjetos._ID);
         int colNombre = cursor.getColumnIndex(tbObjetos.COL_NOMBRE);
@@ -54,13 +27,5 @@ public class Objeto {
         values.put(tbObjetos.COL_NOMBRE,objeto.getNombre());
         values.put(tbObjetos.COL_DESCRIPCION,objeto.getDescripcion());
         return values;
-    }
-    @Override
-    public String toString() {
-        return "tbObjeto{" +
-                "id=" + id +
-                ", nombre='" + nombre +
-                ", descripcion='" + descripcion + '\'' +
-                '}';
     }
 }

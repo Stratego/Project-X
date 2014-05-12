@@ -1,13 +1,14 @@
 package com.models;
 
+import java.util.List;
+
 /**
  * Created by Manuel on 19/04/2014.
  */
-public class Habilidad {
+public class Usuario {
     private int id;
     private String nombre;
-    private String descripcion;
-    private int valor;
+    private List<Equipo> equipos;
 
     public int getId() {
         return id;
@@ -17,12 +18,8 @@ public class Habilidad {
         return nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public int getValor() {
-        return valor;
+    public List<Equipo> getEquipos() {
+        return equipos;
     }
 
     public void setId(int id) {
@@ -33,12 +30,8 @@ public class Habilidad {
         this.nombre = nombre;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public void setValor(int valor) {
-        this.valor = valor;
+    public void setEquipos(List<Equipo> equipos) {
+        this.equipos = equipos;
     }
 
 
@@ -46,9 +39,8 @@ public class Habilidad {
     public String toString() {
         return "tbObjeto{" +
                 "id=" + id +
-                ", nombre='" + nombre +
-                ", descripcion='" + descripcion +
-                ", valor='" + valor + '\'' +
+                ", nombre='" + nombre + '\'' +
                 '}';
     }
+
 }

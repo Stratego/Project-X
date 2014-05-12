@@ -1,13 +1,12 @@
 package com.models;
 
 /**
- * Created by Manuel on 19/04/2014.
+ * Created by Manuel on 18/04/2014.
  */
-public class Habilidad {
+public class Rol {
     private int id;
     private String nombre;
     private String descripcion;
-    private int valor;
 
     public int getId() {
         return id;
@@ -19,10 +18,6 @@ public class Habilidad {
 
     public String getDescripcion() {
         return descripcion;
-    }
-
-    public int getValor() {
-        return valor;
     }
 
     public void setId(int id) {
@@ -37,18 +32,13 @@ public class Habilidad {
         this.descripcion = descripcion;
     }
 
-    public void setValor(int valor) {
-        this.valor = valor;
-    }
-
 
     @Override
     public String toString() {
         return "tbObjeto{" +
                 "id=" + id +
                 ", nombre='" + nombre +
-                ", descripcion='" + descripcion +
-                ", valor='" + valor + '\'' +
+                ", descripcion='" + descripcion +'\'' +
                 '}';
     }
 }

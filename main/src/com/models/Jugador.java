@@ -1,23 +1,84 @@
 package com.models;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by adria on 11/04/14.
+ * Created by Manuel on 7/04/14.
  */
 public class Jugador {
-    public enum Tipos{
-        Capitan,Chutador,Normal
-    }
-    public enum Posicion{
-        Delantero,MedioCampo,Defensa
-    }
-    private ArrayList<Habilidad> habilidades;
-    private ArrayList<Objeto> objetos;
-    private int dorsal;
+    private int id;
     private String nombre;
-    private String[] imagenes;//son 4 imagenes la ruta
-    private  Tipos tipo;
-    private Posicion posicion;
-    private int numPosicion;
+    private Rol rol;
+    private List<Habilidad> habilidades;
+    private int posX;
+    private int posY;
+    private String extrasVisuales;
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public List<Habilidad> getHabilidades() {
+        return habilidades;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public String getExtrasVisuales() {
+        return extrasVisuales;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    public void setHabilidades(List<Habilidad> habilidades) {
+        this.habilidades = habilidades;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
+    public void setExtrasVisuales(String extrasVisuales) {
+        this.extrasVisuales = extrasVisuales;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "Jugador{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", posX=" + posX +
+                ", posY=" + posY +
+                '}';
+    }
 }

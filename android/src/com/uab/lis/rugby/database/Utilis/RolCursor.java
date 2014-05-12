@@ -1,41 +1,14 @@
-package com.uab.lis.rugby.database.models;
+package com.uab.lis.rugby.database.Utilis;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import com.models.Rol;
 import com.uab.lis.rugby.database.contracts.tbRoles;
 
 /**
- * Created by Manuel on 18/04/2014.
+ * Created by adria on 12/05/14.
  */
-public class Rol {
-    private int id;
-    private String nombre;
-    private String descripcion;
-
-    public int getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
+public class RolCursor {
     public static Rol newInstance(Cursor cursor){
         int colId = cursor.getColumnIndex(tbRoles._ID);
         int colNombre = cursor.getColumnIndex(tbRoles.COL_NOMBRE);
@@ -54,13 +27,5 @@ public class Rol {
         values.put(tbRoles.COL_NOMBRE, rol.getNombre());
         values.put(tbRoles.COL_DESCRIPCION, rol.getDescripcion());
         return values;
-    }
-    @Override
-    public String toString() {
-        return "tbObjeto{" +
-                "id=" + id +
-                ", nombre='" + nombre +
-                ", descripcion='" + descripcion +'\'' +
-                '}';
     }
 }

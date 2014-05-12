@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.input.GestureDetector;
+import com.models.Equipo;
 import com.partido.GestorTurnos;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.ResolucionPantalla;
@@ -51,6 +52,12 @@ public class SkeletonMain extends Game {
     boolean simular = false;
     Arbitro arbitro;
 
+    public SkeletonMain(Equipo equipo1, Equipo equipo2, boolean ia,CollBack collBack) {
+
+    }
+    public interface CollBack{
+        public void finichMatch(int rEquipo1,int rEquipo2,Equipo equipo1, Equipo equipo2);
+    }
 
     @Override
     public void create() {

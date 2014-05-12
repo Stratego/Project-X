@@ -1,50 +1,14 @@
-package com.uab.lis.rugby.database.models;
+package com.uab.lis.rugby.database.Utilis;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import com.models.Extra;
 import com.uab.lis.rugby.database.contracts.tbExtras;
 
 /**
- * Created by Manuel on 28/04/14.
+ * Created by adria on 12/05/14.
  */
-public class Extra {
-    private int id;
-    private String nombre;
-    private String descripcion;
-    private int valor;
-
-    public int getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public int getValor() {
-        return valor;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public void setValor(int valor) {
-        this.valor = valor;
-    }
-
+public class ExtraCursor {
     public static Extra newInstance(Cursor cursor){
         int colId = cursor.getColumnIndex(tbExtras._ID);
         int colNombre = cursor.getColumnIndex(tbExtras.COL_NOMBRE);
@@ -66,14 +30,5 @@ public class Extra {
         values.put(tbExtras.COL_DESCRIPCION, extra.getDescripcion());
         values.put(tbExtras.COL_VALOR, extra.getValor());
         return values;
-    }
-    @Override
-    public String toString() {
-        return "tbExtras{" +
-                "id=" + id +
-                ", nombre='" + nombre +
-                ", descripcion='" + descripcion +
-                ", valor='" + valor + '\'' +
-                '}';
     }
 }

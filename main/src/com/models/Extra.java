@@ -1,9 +1,9 @@
 package com.models;
 
 /**
- * Created by Manuel on 19/04/2014.
+ * Created by Manuel on 28/04/14.
  */
-public class Habilidad {
+public class Extra {
     private int id;
     private String nombre;
     private String descripcion;
@@ -44,7 +44,7 @@ public class Habilidad {
 
     @Override
     public String toString() {
-        return "tbObjeto{" +
+        return "tbExtras{" +
                 "id=" + id +
                 ", nombre='" + nombre +
                 ", descripcion='" + descripcion +

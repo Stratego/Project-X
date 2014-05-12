@@ -1,12 +1,9 @@
 package com.uab.lis.rugby.ui.activity;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.*;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
@@ -19,12 +16,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 import com.uab.lis.rugby.R;
 import com.uab.lis.rugby.database.UrisGenerated;
+import com.uab.lis.rugby.database.Utilis.EquipoCursor;
+import com.uab.lis.rugby.database.Utilis.UsuarioCursor;
 import com.uab.lis.rugby.database.contracts.tbUsuarioEquipo;
-import com.uab.lis.rugby.database.models.Equipo;
-import com.uab.lis.rugby.database.models.Usuario;
+import com.models.Equipo;
+import com.models.Usuario;
 import com.uab.lis.rugby.utils.Utils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -223,7 +221,7 @@ public class CreateUser extends BaseActivity {
                     user.setNombre(nameU);
                     Uri userUri = UrisGenerated.getUriUsuario();
                     Log.e("insert", userUri.toString());
-                    Uri uriUserItem = getContentResolver().insert(userUri,Usuario.generateValues(user));
+                    Uri uriUserItem = getContentResolver().insert(userUri, UsuarioCursor.generateValues(user));
                     Log.e("insert", uriUserItem.toString());
                     int idU = Integer.parseInt(uriUserItem.getPathSegments().get(1));
 
@@ -234,7 +232,7 @@ public class CreateUser extends BaseActivity {
                     equipo.setEscudo(getEscudos().get(selectedE)[0]);
                     Uri equipoUri = UrisGenerated.getUriEquipos(idU);
                     Log.e("insert", equipoUri.toString());
-                    Uri uriEquipoItem = getContentResolver().insert(equipoUri,Equipo.generateValues(equipo));
+                    Uri uriEquipoItem = getContentResolver().insert(equipoUri, EquipoCursor.generateValues(equipo));
                     Log.e("insert", uriEquipoItem.toString());
 
                     //unimos el equipo con el usuario
