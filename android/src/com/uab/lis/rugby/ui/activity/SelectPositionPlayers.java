@@ -97,7 +97,7 @@ public class SelectPositionPlayers extends Activity {
         }
 
         do{
-            Jugador jugador = JugadorCursor.newInstance(cursor);
+            Jugador jugador = JugadorCursor.newInstance(this,cursor);
             equipaciones.add(equipacion);
             jugadores.add(jugador);
 
