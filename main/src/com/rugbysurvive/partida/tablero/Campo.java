@@ -181,6 +181,14 @@ public class Campo implements GestionEntrada,Dibujable {
         }
     }
 
+    /**
+     * retorna la lista de casillas que forman el tablero, necesario, para la IA
+     * @return
+     */
+    public Casilla [][] getTablero(){
+        return casillas;
+    }
+
     @Override
     public void accionEntrada(Entrada entrada) {
 
