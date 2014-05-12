@@ -83,38 +83,38 @@ public class EnMovimiento implements Estado {
         if(entrada == Entrada.arrastrar)
         {
             System.out.println("ENMOVIMIENTO:"+posX+"-"+posY);
-        //System.out.println("MOVIMIENTOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        if(((jugador.getPosicionX() == posX) && (jugador.getPosicionY() == posY)) && (this.posicionActual == 0))
-        {
-            this.movimientos[this.posicionActual][0] = posX;
-            this.movimientos[this.posicionActual][1] = posY;
-            this.posicionActual += 1;
-            System.out.println("--------------Me guardo el primer movimiento--------------");
-        }
-        else
-        {
-            if(this.posicionActual > 0)
+            //System.out.println("MOVIMIENTOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            if(((jugador.getPosicionX() == posX) && (jugador.getPosicionY() == posY)) && (this.posicionActual == 0))
             {
-                if((posY < 20 && posY >= 0) && (posX<30 && posX>=0))
+                this.movimientos[this.posicionActual][0] = posX;
+                this.movimientos[this.posicionActual][1] = posY;
+                this.posicionActual += 1;
+                System.out.println("--------------Me guardo el primer movimiento--------------");
+            }
+            else
+            {
+                if(this.posicionActual > 0)
                 {
-                    int posXAnterior = this.movimientos[this.posicionActual-1][0];
-                    int posYAnterior = this.movimientos[this.posicionActual-1][1];
-
-                    if(((posXAnterior == posX-1 || posXAnterior == posX+1)  ||  (posYAnterior == posY-1 || posYAnterior == posY+1))
-                            && (posY == posYAnterior || posX == posXAnterior))
+                    if((posY < 20 && posY >= 0) && (posX<30 && posX>=0))
                     {
-                        this.movimientos[this.posicionActual][0] = posX;
-                        this.movimientos[this.posicionActual][1] = posY;
-                        System.out.println("--------------Me guardo el movimiento--------------" + this.posicionActual);
-                        System.out.println("--------------Me guardo el movimiento-------------- :" + posX+";"+posY);
-                        ComponentesJuego.getComponentes().getCampo().seleccionarCasilla(posX,posY);
-                        this.posicionActual += 1;
+                        int posXAnterior = this.movimientos[this.posicionActual-1][0];
+                        int posYAnterior = this.movimientos[this.posicionActual-1][1];
+
+                        if(((posXAnterior == posX-1 || posXAnterior == posX+1)  ||  (posYAnterior == posY-1 || posYAnterior == posY+1))
+                                && (posY == posYAnterior || posX == posXAnterior))
+                        {
+                            this.movimientos[this.posicionActual][0] = posX;
+                            this.movimientos[this.posicionActual][1] = posY;
+                            System.out.println("--------------Me guardo el movimiento--------------" + this.posicionActual);
+                            System.out.println("--------------Me guardo el movimiento-------------- :" + posX+";"+posY);
+                            ComponentesJuego.getComponentes().getCampo().seleccionarCasilla(posX,posY);
+                            this.posicionActual += 1;
+                        }
                     }
                 }
+
+
             }
-
-
-        }
 
         }
          System.out.println("POSICION ACTUAL:"+this.posicionActual);
