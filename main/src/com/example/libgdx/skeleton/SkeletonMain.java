@@ -4,8 +4,10 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.input.GestureDetector;
+import com.models.Equipo;
 import com.partido.GestorTurnos;
 import com.rugbysurvive.partida.ConstantesJuego;
+import com.rugbysurvive.partida.IA.MovimentoIA;
 import com.rugbysurvive.partida.ResolucionPantalla;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.arbitro.Arbitro;
@@ -23,6 +25,7 @@ import com.rugbysurvive.partida.tablero.Botones.BotonCambioTurno;
 import com.rugbysurvive.partida.tablero.Botones.BotonFinalizarAccion;
 import com.rugbysurvive.partida.tablero.Botones.BotonFinalizarSimulacion;
 import com.rugbysurvive.partida.tablero.Botones.BotonInterfaz;
+import com.rugbysurvive.partida.tablero.Casilla;
 
 import java.util.ArrayList;
 
@@ -51,6 +54,12 @@ public class SkeletonMain extends Game {
     boolean simular = false;
     Arbitro arbitro;
 
+    public SkeletonMain(Equipo equipo1, Equipo equipo2, boolean ia,CollBack collBack) {
+
+    }
+    public interface CollBack{
+        public void finichMatch(int rEquipo1,int rEquipo2,Equipo equipo1, Equipo equipo2);
+    }
 
     @Override
     public void create() {
@@ -213,7 +222,8 @@ public class SkeletonMain extends Game {
         //posicionamiento.generarPenalty(componentesJuego.getEquipo2(),3,3);
 
         //posicionamiento.generarSaqueBanda(20,18,ComponentesJuego.getComponentes().getEquipo1());
-
+        MovimentoIA movimentoIA= new MovimentoIA(ComponentesJuego.getComponentes().getCampo().getCasilla(0,0),ComponentesJuego.getComponentes().getCampo().getCasilla(10,0));
+        //movimentoIA.calcularCamino();
 
     }
 
@@ -293,7 +303,6 @@ public class SkeletonMain extends Game {
     @Override
     public void resume() {
     }
-
 }
 
 

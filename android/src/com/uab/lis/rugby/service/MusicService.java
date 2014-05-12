@@ -1,14 +1,12 @@
 package com.uab.lis.rugby.service;
 
 import android.app.Service;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
+import android.content.*;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -58,23 +56,26 @@ public class MusicService extends Service {
 
 
 
-    private class MusicBrodcastReceiver extends BroadcastReceiver {
+    public final class MusicBrodcastReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+            if(pref.getBoolean("musicPower",true)){
 
-            String action = intent.getAction();
-            if(action.equals(MusicService.IntentFilterMusicStart)){
-                mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.music_bird);
-                mediaPlayer.setVolume(5,100);
-                mediaPlayer.setLooping(true);
-                mediaPlayer.start();
-                Log.e(TAG,"Play");
-            }else if(action.equals(MusicService.IntentFilterMusicStop)){
-                if(mediaPlayer != null){
-                    mediaPlayer.stop();
+                String action = intent.getAction();
+                if(action.equals(MusicService.IntentFilterMusicStart)){
+                    mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.music_bird);
+                    mediaPlayer.setVolume(5,100);
+                    mediaPlayer.setLooping(true);
+                    mediaPlayer.start();
+                    Log.e(TAG,"Play");
+                }else if(action.equals(MusicService.IntentFilterMusicStop)){
+                    if(mediaPlayer != null){
+                        mediaPlayer.stop();
+                    }
+                    Log.e(TAG,"Stop");
                 }
-                Log.e(TAG,"Stop");
             }
         }
     }

@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">libGDX Skeleton</string>
+    <string name="mainActivity_button_newUser">CrearUsuario</string>
+    <string name="activity_create_user_nombre">Nombre Usuario</string>
+    <string name="activity_create_user_name_equipo">Nombre Equipo</string>
+    <string name="activity_menu_principal_jugar">Jugar</string>
+    <string name="activity_menu_principal_tienda">Tienda</string>
+    <string name="activity_menu_principal_configurar">Configuración</string>
+    <string name="activity_create_user_escuts">Escuts</string>
+    <string name="activity_create_user_ropa">Color Ropa</string>
+    <string name="activity_configuracion_titulo">Configuración</string>
+    <string name="activity_tienda_titulo">Tienda</string>
+    <string name="activity_tienda_fichajes">Fichajes</string>
+    <string name="activity_tienda_objetos">Objetos</string>
+    <string name="activity_tienda_otros">Otros</string>
+    <string name="activity_tiendafichajes_titulo">Tienda de fichajes</string>
+    <string name="activity_tiendaobjetos_titulo">Tienda de objetos</string>
+    <string name="activity_tiendaotros_titulo">Tienda de otros</string>
 </resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/herba"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:background="@drawable/fusta"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:padding="16dp"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_menu_principal_jugar"
+            android:id="@+id/btnJugar"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_menu_principal_tienda"
+            android:id="@+id/btnTienda"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_menu_principal_configurar"
+                android:id="@+id/btnConfigurar"/>
+    </LinearLayout>
+
+</RelativeLayout>

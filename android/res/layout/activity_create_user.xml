@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+        android:padding="4dp" android:background="@drawable/herba">
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/activity_create_user_nombre"
+            android:ems="10"
+            android:textColorHint="#F8F8FF"
+            android:id="@+id/edtNombreJugador"
+            android:layout_gravity="center_horizontal" android:layout_alignParentLeft="true"
+            android:layout_marginLeft="0dp" android:layout_alignParentTop="true" android:layout_marginTop="0dp"
+            android:layout_marginBottom="@dimen/activity_create_user_marge_button"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/activity_create_user_name_equipo"
+            android:ems="10"
+            android:textColorHint="#F8F8FF"
+            android:layout_marginBottom="@dimen/activity_create_user_marge_button"
+            android:id="@+id/edtNombreEquipo"
+            android:layout_below="@+id/edtNombreJugador" android:layout_alignParentStart="true"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@+id/edtNombreEquipo"
+            android:layout_above="@+id/linearLayout">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:background="@drawable/fusta"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/activity_create_user_escuts"
+                    android:id="@+id/textView" android:layout_gravity="center_horizontal"/>
+            <android.support.v4.view.ViewPager
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="12dp"
+                    android:id="@+id/vp_Escudos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true" />
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:background="@drawable/fusta"
+                android:layout_width="fill_parent"
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/activity_create_user_ropa"
+                    android:id="@+id/textView2" android:layout_gravity="center_horizontal"/>
+            <android.support.v4.view.ViewPager
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="12dp"
+                    android:id="@+id/vp_Ropa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/vp_Escudos"
+                    android:layout_alignParentStart="true" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" android:id="@+id/linearLayout">
+        <Button android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@android:string/cancel"
+                android:id="@+id/btnCancelar"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@android:string/ok"
+                android:id="@+id/btnAceptar" />
+    </LinearLayout>
+</RelativeLayout>

@@ -16,6 +16,7 @@ public class RugbyApplication extends Application {
         super.onCreate();
         Log.e(TAG,"start");
         startService(new Intent(this, MusicService.class));
+
     }
 
     @Override

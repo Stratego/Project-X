@@ -1,49 +1,59 @@
 package com.uab.lis.rugby.ui.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.content.LocalBroadcastManager;
 
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import com.uab.lis.rugby.R;
+import com.uab.lis.rugby.database.ContentProviders.MyAppContentProvider;
+import com.uab.lis.rugby.database.SQLiteHelper;
+import com.uab.lis.rugby.database.contracts.tbJugadores;
 import com.uab.lis.rugby.service.MusicService;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 
 /**
  * Created by adria on 13/03/14.
  */
-public class Main extends Activity {
-    private static final String TAG ="Main";
+public class Main extends BaseActivity {
     private boolean state = true;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Button button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(state == true ? MusicService.IntentFilterMusicStop : MusicService.IntentFilterMusicStart);
-                LocalBroadcastManager.getInstance(Main.this).sendBroadcast(intent);
-                state = !state;
-            }
-        });
-    }
+        SharedPreferences preferencias = getSharedPreferences("firstEje", Context.MODE_PRIVATE);
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.e(TAG,"onResume");
-        Intent intent = new Intent(MusicService.IntentFilterMusicStart);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-    }
+        boolean first = preferencias.getBoolean("first",true);
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.e(TAG, "onDestroy");
-        Intent intent = new Intent(MusicService.IntentFilterMusicStop);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+        Class classe;
+        if(first){
+            classe = CreateUser.class;
+        }else{
+            classe = MenuPrincipal.class;
+        }
+
+        Intent intent = new Intent(this,classe);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+
+        /*
+        Uri uri = Uri.withAppendedPath(MyAppContentProvider.URI_BASE, tbJugadores.TABLE);
+        Cursor cursor = getContentResolver().query(uri,null,null,null,null);
+        cursor.close();
+         */
     }
 }

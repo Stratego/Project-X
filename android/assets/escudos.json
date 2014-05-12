@@ -1,0 +1,20 @@
+{
+    "escudos": [
+        {
+            "normal": "logo1.png",
+            "focus": "logo1seleccionat.png"
+        },
+        {
+            "normal": "Logo2.png",
+            "focus": "logo2seleccionat.png"
+        },
+        {
+            "normal": "logo3.png",
+            "focus": "logo3seleccionat.png"
+        },
+        {
+            "normal": "logo4.png",
+            "focus": "logo4seleccionat.png"
+        }
+    ]
+}

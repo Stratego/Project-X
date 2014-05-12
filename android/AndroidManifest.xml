@@ -13,20 +13,34 @@
     <application
             android:icon="@drawable/icon"
             android:label="@string/app_name"
-            android:name=".app.RugbyApplication">
+            android:name=".app.RugbyApplication"
+            android:theme="@android:style/Theme.Holo.NoActionBar">
+
+        <provider android:name=".database.ContentProviders.MyAppContentProvider"
+                  android:authorities="com.uab.lis.rugby"/>
 
         <activity
                 android:name=".ui.activity.AndroidStarter"
                 android:label="@string/app_name"
                 android:screenOrientation="landscape">
-
+        </activity>
+        <activity android:name=".ui.activity.Main"
+                  android:label="main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.Main" android:label="main">
-        </activity>
+        <activity android:name=".ui.activity.CreateUser"/>
+        <activity android:name=".ui.activity.MenuPrincipal"/>
+        <activity android:name=".ui.activity.Configuracion"/>
+        <activity android:name=".ui.activity.Tienda"/>
+        <activity android:name=".ui.activity.TiendaFichajes"/>
+        <activity android:name=".ui.activity.TiendaObjetos"/>
+        <activity android:name=".ui.activity.TiendaOtros"/>
+        <activity android:name=".ui.activity.SelectPositionPlayers"
+                android:screenOrientation="landscape"/>
+
         <service android:name=".service.MusicService" />
     </application>
 

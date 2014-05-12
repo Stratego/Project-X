@@ -34,6 +34,16 @@ public class Casilla implements GestionEntrada ,Dibujable{
     private ObjetoCampo objeto;
     private Arbitro arbitro;
     private String texturaSeleccionada;
+
+    public int getCoste() {
+        return coste;
+    }
+
+    public void setCoste(int coste) {
+        this.coste = coste;
+    }
+
+    private int coste=1;
     private int id = -1;
     /**
      * indicara si el elemento esta seleccionado
