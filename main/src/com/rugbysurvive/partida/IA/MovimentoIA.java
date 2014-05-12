@@ -2,6 +2,7 @@ package com.rugbysurvive.partida.IA;
 
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.tablero.Casilla;
+import com.sun.deploy.util.ArrayUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -362,8 +363,8 @@ public class MovimentoIA {
                     {
                         nodoAdyacente.setNodoPadre(nodoActual);
                         listaAbierta.push(nodoAdyacente);
-
-                        if (nodoFinal == nodoAdyacente)
+                        System.out.println(listaAbierta.toString());
+                        if ((nodoFinal.getX() == nodoAdyacente.getX()) && (nodoFinal.getY() == nodoAdyacente.getY()) )
                         {
                             caminoEncontrado = true;
                         }
@@ -380,6 +381,8 @@ public class MovimentoIA {
                         {
                             nodoAdyacente.setNodoPadre(nodoActual);
                             listaAbierta.reordenar();
+                            System.out.println(listaAbierta.toString());
+                            //imprimirLista(listaAbierta);
                         }
                     }
                 }
@@ -390,15 +393,17 @@ public class MovimentoIA {
         // Si hemos llegado al nodo final, volvemos hacia atrás desde ese nodo extrayendo el camino hasta el nodo inicial.
         if (caminoEncontrado)
         {
-            ArrayList camino = new ArrayList<NodoIA>();
+            /*ArrayList camino = new ArrayList<NodoIA>();
             NodoIA nodoAuxiliar = nodoFinal;
             while (nodoAuxiliar != null)
             {
                 camino.add(0, nodoAuxiliar);
                 nodoAuxiliar = nodoAuxiliar.getNodoPadre();
-            }
-            imprimirLista(camino);
-            return camino;
+            }*/
+            //Collections.reverse(listaCerrada);
+            //listaCerrada.add(0,nodoFinal);
+            listaCerrada.add(nodoFinal);
+            return listaCerrada;
         }
         else
         {
@@ -450,6 +455,20 @@ public class MovimentoIA {
 
 
         }
+    }
+
+    public int[][] arraymovimento(){
+
+        int iteraciones = 0;
+        ArrayList <NodoIA> lista = calcularCamino();
+        int[][] movimiento = new int [lista.size()][2];
+        for (NodoIA nodo :  lista){
+
+            movimiento[iteraciones][0]= nodo.getX();
+            movimiento[iteraciones][1]= nodo.getY();
+            iteraciones++;
+        }
+        return movimiento;
     }
 
 }

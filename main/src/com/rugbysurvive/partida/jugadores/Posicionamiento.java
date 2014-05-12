@@ -217,6 +217,7 @@ public class Posicionamiento {
 
         jugadaequipo1.clear();
         jugadaequipo2.clear();
+        simulador.iniciarSimulacion();
     }
 
     public static void generarPenalty(Equipo equipo, int posX, int posY){
@@ -260,7 +261,7 @@ public class Posicionamiento {
 
         }
 
-        //simulador.iniciarSimulacion();
+        simulador.iniciarSimulacion();
 
     }
 
@@ -380,6 +381,7 @@ public class Posicionamiento {
 
         jugadaequipo1.clear();
         jugadaequipo2.clear();
+        simulador.iniciarSimulacion();
     }
 
 

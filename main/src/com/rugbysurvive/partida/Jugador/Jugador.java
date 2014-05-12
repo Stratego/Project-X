@@ -161,6 +161,7 @@ public class Jugador implements GestionEntrada {
      */
     public void colocar(Casilla casilla){
         this.casilla= casilla;
+        casilla.setJugador(this);
         if(this.casilla != null)
         {
             this.enJuego = true;
