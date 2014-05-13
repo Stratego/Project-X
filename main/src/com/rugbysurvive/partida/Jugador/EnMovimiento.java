@@ -132,7 +132,9 @@ public class EnMovimiento implements Estado {
             }
 
 
-            jugador.setAccion(new Movimiento(jugador, movimientosAux));
+            this.indicador = new IndicadorMovimientos(jugador,movimientosAux,this.posicionActual);
+
+            jugador.setAccion(new Movimiento(jugador, movimientosAux, this.indicador));
 
             Simulador.getInstance().añadirAccion(jugador.getAccion());
 
@@ -141,7 +143,7 @@ public class EnMovimiento implements Estado {
 
             jugador.setBloqueado(true);
             jugador.setSeleccionado(false);
-            this.indicador = new IndicadorMovimientos(jugador,movimientosAux,this.posicionActual);
+
             this.indicador.procesar();
 
             /*Le devolvemos su estado anterior*/

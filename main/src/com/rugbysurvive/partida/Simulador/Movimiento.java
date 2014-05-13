@@ -4,6 +4,7 @@ import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.SinPelota;
+import com.rugbysurvive.partida.Jugador.extras.IndicadorMovimientos;
 import com.rugbysurvive.partida.arbitro.Choque;
 import com.rugbysurvive.partida.arbitro.SaqueBanda;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
@@ -20,17 +21,19 @@ public class Movimiento extends Accion {
     private int camino[][];
     private Jugador jugador;
     private int contador  = 0;//test
+    private IndicadorMovimientos indicadorMovimientos;
 
     /**
      * Constructor de la acción movimiento
      * @param jugador
      * @param camino
      */
-    public Movimiento(Jugador jugador,int camino[][])
+    public Movimiento(Jugador jugador,int camino[][], IndicadorMovimientos indicadorMovimientos)
     {
         this.camino = camino;
         this.jugador = jugador;
         this.contador = 1;
+        this.indicadorMovimientos = indicadorMovimientos;
     }
 
 
@@ -103,6 +106,8 @@ public class Movimiento extends Accion {
                     * En el primera caso, el propietaro de la pelota es el que esta haciendo la acción de movimiento
                     * En el segundo caso, el propietario de la pelota es el jugador que esta en la casilla por la que el jugador de la accion movimiento va a pasar
                     */
+
+                    /*AQUI SE HACE OTRO CHOQUE*/
                     if(jugador.getEstado() instanceof ConPelota)
                     {
                         int Fuerza = jugador.getFuerza();
@@ -136,6 +141,7 @@ public class Movimiento extends Accion {
                             /*Llamamos a la función choque de jugadores, para ver si hay dos jugadores que colisionan entre ellos*/
                             if(this.ChoqueJugadores() == true)
                             {
+                                //AQUI SE HACE UN CHOQUE
                                 return true;
                             }
                         }
@@ -254,7 +260,15 @@ public class Movimiento extends Accion {
 
         //System.out.println(this.camino[contador][1]+"-"+this.camino[contador][0]);
 
-        if(contador == this.camino.length)return true;//test
+        if(contador == this.camino.length)
+        {
+            if(this.indicadorMovimientos != null)
+            {
+                this.indicadorMovimientos.borrar();
+            }
+
+            return true;//test
+        }
         return false;
     }
 

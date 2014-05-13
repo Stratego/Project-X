@@ -22,7 +22,7 @@ public class IA {
             MovimentoIA movimentoIA= new MovimentoIA(ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY(),jugador.getPosicionX()),
                     ComponentesJuego.getComponentes().getCampo().getCasilla(5,0));
             Simulador simulador = Simulador.getInstance();
-            simulador.añadirAccion(new Movimiento(jugador,movimentoIA.arraymovimento()));
+            simulador.añadirAccion(new Movimiento(jugador,movimentoIA.arraymovimento(), null));
         }
     }
 }

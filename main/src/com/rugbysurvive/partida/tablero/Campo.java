@@ -109,6 +109,7 @@ public class Campo implements GestionEntrada,Dibujable {
      */
     public boolean añadirElemento(Jugador jugador, int posicionX,int posicionY)
     {
+
         return this.casillas[posicionX][posicionY].añadirElemento(jugador);
     }
 
