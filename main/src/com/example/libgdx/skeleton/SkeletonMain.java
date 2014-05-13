@@ -217,7 +217,7 @@ public class SkeletonMain extends Game {
         this.calculandoEquipoInicio = true;
         this.simular = false;
         //arbitro = new Arbitro();
-        this.gestor = new GestorTurnos();
+        this.gestor = new GestorTurnos(this);
 
         //Posicionamiento posicionamiento = new Posicionamiento();
         //posicionamiento.generarPenalty(componentesJuego.getEquipo2(),3,3);
@@ -252,10 +252,7 @@ public class SkeletonMain extends Game {
                 Gdx.input.setInputProcessor(multiplexer);
                 this.gestor.iniciarPartida();
                 this.calculandoEquipoInicio = false;
-                this.botons.get(0).mostrar();
-                this.botons.get(1).mostrar();
-                this.botons.get(2).mostrar();
-                this.botons.get(3).mostrar();
+
             }
 
            this.gestor.CambiarTurno();
@@ -326,6 +323,13 @@ public class SkeletonMain extends Game {
 
     @Override
     public void resume() {
+    }
+
+    public void mostrarBotones(){
+        this.botons.get(0).mostrar();
+        this.botons.get(1).mostrar();
+        this.botons.get(2).mostrar();
+        this.botons.get(3).mostrar();
     }
 }
 

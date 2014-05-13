@@ -3,6 +3,7 @@ package com.partido;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.example.libgdx.skeleton.SkeletonMain;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
@@ -60,9 +61,9 @@ public class GestorTurnos implements Dibujable,Proceso {
     private Equipo equipoJugandoTurnoAnterior;
 
     private static boolean forzarCambioTurno = false;
+    private SkeletonMain main;
 
-
-    public GestorTurnos(){
+    public GestorTurnos(SkeletonMain main){
          this.posicionTexturaX = Gdx.graphics.getWidth();
          this.posicionTexturaY = 0;
         this.tipoProceso = 0;
@@ -74,6 +75,7 @@ public class GestorTurnos implements Dibujable,Proceso {
         this.tiempoMuestraEscudo =0;
         this.escudo = new ElementoDibujable(TipoDibujo.interficieUsuario,"banderas/peixetEscut.png");
         this.procesoPrePartidoFinalizado = false;
+        this.main = main;
     }
 
 
@@ -305,6 +307,7 @@ public class GestorTurnos implements Dibujable,Proceso {
                 else if(this.tiempoMuestraEscudo == 0){
                     this.ambiente = Gdx.audio.newMusic(Gdx.files.internal("sonido/golpe.wav"));
                     this.ambiente.play();
+                    this.main.mostrarBotones();
                     this.escudo.dibujar(ConstantesJuego.POS_BANDERA_CAMBIO_TURNO_X,ConstantesJuego.POS_BANDERA_CAMBIO_TURNO_Y);
                     if(!this.procesoPrePartidoFinalizado){
                         ComponentesJuego.getComponentes().generarSaque();
