@@ -2,6 +2,7 @@ package com.rugbysurvive.partida.IA;
 
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.tablero.Casilla;
+import com.sun.deploy.util.ArrayUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,19 +20,19 @@ public class MovimentoIA {
      * ser transitable o no y que tiene un coste particular (por ejemplo, sería
      * más difícil caminar por el barro que por tierra seca).
      */
-    private Casilla[][] matriz;
+    private NodoIA[][] matriz;
 
     /**
      * Nodo de partida que indica una posición (x,y) en la matriz de celdas.
      * No importa si es un nodo intransitable y tampoco se considera el coste.
      */
-    private Casilla casillaInicial;
+    private NodoIA nodoInicial;
 
     /**
      * Nodo de llegada que indica una posición (x,y) en la matriz de celdas.
      * Debe ser un nodo transitable.
      */
-    private Casilla casillaFinal;
+    private NodoIA nodoFinal;
 
 
 
@@ -44,9 +45,11 @@ public class MovimentoIA {
      */
     public MovimentoIA (Casilla casillaInicial,Casilla casillaFinal)
     {
-        this.matriz = ComponentesJuego.getComponentes().getCampo().getTablero();
-        this.casillaInicial = casillaInicial;
-        this.casillaFinal = casillaFinal;
+        this.matriz = comversorMatriz(ComponentesJuego.getComponentes().getCampo().getTablero());
+        this.nodoInicial = conversorNodo(casillaInicial);
+        this.nodoFinal = conversorNodo(casillaFinal);
+        FinalCamino();
+
 
     }
 
@@ -55,7 +58,7 @@ public class MovimentoIA {
      * punto de inicio hasta el punto final.
      * @return Devuelve una lista (no vacía) de nodos si existe el camino. Si no existe, devuelve null.
      */
-    public ArrayList<Casilla> calcularCamino()
+    /*public ArrayList<Casilla> calcularCamino()
     {
         //ArrayList <Casilla> listaAbierta = new ArrayList<Casilla>();
         ArrayList <ArrayList<Casilla>> listaAbierta = new ArrayList<ArrayList<Casilla>>();
@@ -149,7 +152,7 @@ public class MovimentoIA {
                     casillasAdyacentes.add(matriz[(int)casillaActual.getPosY()+1][(int)casillaActual.getPosX()-1]);
 */
             // Para cada nodo encontrado, comprobamos si hemos llegado al punto de destino.
-            while (!casillasAdyacentes.isEmpty() && !caminoEncontrado)
+            /*while (!casillasAdyacentes.isEmpty() && !caminoEncontrado)
             {
                 Casilla nodoAdyacente = casillasAdyacentes.remove(casillasAdyacentes.size()-1);
                 if (!listaCerrada.contains(nodoAdyacente))
@@ -191,7 +194,7 @@ public class MovimentoIA {
                         {
                             nodoAdyacente.setNodoPadre(casillaActual);
                             listaAbierta.reordenar();
-                        }*/
+                        }
 
                         int costecasilla = casillaActual.getCoste();
 
@@ -222,13 +225,13 @@ public class MovimentoIA {
         if (caminoEncontrado)
         {
             /*ArrayList camino = new ArrayList<Casilla>();
-            NodoAstar nodoAuxiliar = casillaFinal;
+            NodoIA nodoAuxiliar = casillaFinal;
             while (nodoAuxiliar != null)
             {
                 camino.add(0, nodoAuxiliar);
                 nodoAuxiliar = nodoAuxiliar.getNodoPadre();
             }
-            return camino;*/
+            return camino;
 
 
 
@@ -240,7 +243,7 @@ public class MovimentoIA {
         }
 
 
-    }
+    }*/
 
   public void reordenar(ArrayList <ArrayList <Casilla>> lista){
 
@@ -269,20 +272,14 @@ public class MovimentoIA {
 
   }
 
-  public void imprimirLista(ArrayList <Casilla> lista){
-      System.out.print("imprimiendo lista");
-      for (Casilla casilla: lista){
-          System.out.print("["+casilla.getPosicionX()+"] ["+casilla.getPosicionY()+"], ");
-      }
-
-  }
 
 
-    /*public ArrayList calcularCamino()
+
+    public ArrayList calcularCamino()
     {
-        Deap listaAbierta = new Deap();
-        ArrayList listaCerrada = new ArrayList<NodoAstar>();
-        NodoAstar nodoActual = null;
+        PilaIA listaAbierta = new PilaIA();
+        ArrayList listaCerrada = new ArrayList<NodoIA>();
+        NodoIA nodoActual = null;
         boolean caminoEncontrado = false;
 
         int filas = matriz.length;
@@ -299,11 +296,11 @@ public class MovimentoIA {
         {
             iteraciones++;
             // Extraemos el nodo de menor F desde la lista abierta hacia la lista cerrada.
-            nodoActual = (NodoAstar) listaAbierta.popBottom();
+            nodoActual = (NodoIA) listaAbierta.popBottom();
             listaCerrada.add(nodoActual);
 
             // Extraemos los nodos adyacentes al nodo actual.
-            ArrayList nodosAdyacentes = new ArrayList<NodoAstar>();
+            ArrayList nodosAdyacentes = new ArrayList<NodoIA>();
 
             boolean derecha = false, izquierda = false, arriba = false, abajo = false;
             if (0 <= nodoActual.getX()+1 && nodoActual.getX()+1 < columnas && 0 <= nodoActual.getY() && nodoActual.getY() < filas)
@@ -338,7 +335,7 @@ public class MovimentoIA {
                     abajo = true;
                 }
             }
-
+/*
             // Sólo incluidos las diagonales si las ortogonales se han incluido previamente ya que para ser 8-conectado primero debe ser 4-conectado.
             if (0 <= nodoActual.getX()+1 && nodoActual.getX()+1 < columnas && 0 <= nodoActual.getY()-1 && nodoActual.getY()-1 < filas && (forzar8conectado || (arriba && derecha)))
                 if (matriz[nodoActual.getY()-1][nodoActual.getX()+1].getTransitable())
@@ -355,19 +352,19 @@ public class MovimentoIA {
             if (0 <= nodoActual.getX()-1 && nodoActual.getX()-1 < columnas && 0 <= nodoActual.getY()+1 && nodoActual.getY()+1 < filas && (forzar8conectado || (abajo && izquierda)))
                 if (matriz[nodoActual.getY()+1][nodoActual.getX()-1].getTransitable())
                     nodosAdyacentes.add(matriz[nodoActual.getY()+1][nodoActual.getX()-1]);
-
+*/
             // Para cada nodo encontrado, comprobamos si hemos llegado al punto de destino.
             while (!nodosAdyacentes.isEmpty() && !caminoEncontrado)
             {
-                NodoAstar nodoAdyacente = (NodoAstar) nodosAdyacentes.remove(0);
+                NodoIA nodoAdyacente = (NodoIA) nodosAdyacentes.remove(0);
                 if (!listaCerrada.contains(nodoAdyacente))
                 {
                     if (!listaAbierta.contains(nodoAdyacente))
                     {
                         nodoAdyacente.setNodoPadre(nodoActual);
                         listaAbierta.push(nodoAdyacente);
-
-                        if (nodoFinal == nodoAdyacente)
+                        System.out.println(listaAbierta.toString());
+                        if ((nodoFinal.getX() == nodoAdyacente.getX()) && (nodoFinal.getY() == nodoAdyacente.getY()) )
                         {
                             caminoEncontrado = true;
                         }
@@ -384,6 +381,8 @@ public class MovimentoIA {
                         {
                             nodoAdyacente.setNodoPadre(nodoActual);
                             listaAbierta.reordenar();
+                            System.out.println(listaAbierta.toString());
+                            //imprimirLista(listaAbierta);
                         }
                     }
                 }
@@ -394,19 +393,82 @@ public class MovimentoIA {
         // Si hemos llegado al nodo final, volvemos hacia atrás desde ese nodo extrayendo el camino hasta el nodo inicial.
         if (caminoEncontrado)
         {
-            ArrayList camino = new ArrayList<NodoAstar>();
-            NodoAstar nodoAuxiliar = nodoFinal;
+            /*ArrayList camino = new ArrayList<NodoIA>();
+            NodoIA nodoAuxiliar = nodoFinal;
             while (nodoAuxiliar != null)
             {
                 camino.add(0, nodoAuxiliar);
                 nodoAuxiliar = nodoAuxiliar.getNodoPadre();
-            }
-            return camino;
+            }*/
+            //Collections.reverse(listaCerrada);
+            //listaCerrada.add(0,nodoFinal);
+            listaCerrada.add(nodoFinal);
+            return listaCerrada;
         }
         else
         {
             return null;
         }
-    }*/
+    }
+
+
+    public void imprimirLista(ArrayList <NodoIA> lista){
+        System.out.print("imprimiendo lista");
+        for (NodoIA casilla: lista){
+            System.out.print("["+casilla.getY()+"] ["+casilla.getX()+"], ");
+        }
+
+    }
+    public NodoIA conversorNodo(Casilla casilla){
+
+        NodoIA nodo = new NodoIA();
+        nodo.setX((int)casilla.getPosX());
+        nodo.setY((int) casilla.getPosY());
+        nodo.setCoste(casilla.getCoste());
+        nodo.setTransitable(true);
+
+
+        return nodo;
+    }
+
+    public NodoIA [][] comversorMatriz(Casilla[][] campo){
+
+        NodoIA[][] matriz = new NodoIA[20][30] ;
+
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 30; j++) {
+                matriz[i][j]=conversorNodo(campo[i][j]);
+            }
+
+
+        }
+        return matriz;
+
+    }
+
+    public void FinalCamino(){
+
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 30; j++) {
+                matriz[i][j].setNodoFinal(nodoFinal);
+            }
+
+
+        }
+    }
+
+    public int[][] arraymovimento(){
+
+        int iteraciones = 0;
+        ArrayList <NodoIA> lista = calcularCamino();
+        int[][] movimiento = new int [lista.size()][2];
+        for (NodoIA nodo :  lista){
+
+            movimiento[iteraciones][0]= nodo.getX();
+            movimiento[iteraciones][1]= nodo.getY();
+            iteraciones++;
+        }
+        return movimiento;
+    }
 
 }

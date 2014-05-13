@@ -1,10 +1,15 @@
 package com.uab.lis.rugby.ui.activity;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.example.libgdx.skeleton.SkeletonMain;
 import com.models.Equipo;
+import com.uab.lis.rugby.database.UrisGenerated;
+import com.uab.lis.rugby.database.Utilis.EquipoCursor;
 
 
 public class AndroidStarter extends AndroidApplication implements SkeletonMain.CollBack{
@@ -22,10 +27,22 @@ public class AndroidStarter extends AndroidApplication implements SkeletonMain.C
 		cfg.useWakelock = true;
 		cfg.useGL20 = true;
 
+        Intent intent = getIntent();
+        int idEquipo1 = intent.getIntExtra(IDEQUIPO,-1);
+        int idEquipo2 = intent.getIntExtra(IDRIBAL,-1);
+        int idUser = intent.getIntExtra(IDUSER, -1);
+        boolean ia = intent.getBooleanExtra(IA,false);
+/**
+        Uri uriEquipo1 = UrisGenerated.getUriEquipo(idUser,idEquipo1);
+        Uri uriEquipo2 = UrisGenerated.getUriEquipo(0,idEquipo2);
 
-        Equipo equipo1 = null;
-        Equipo equipo2 = null;
-		initialize(new SkeletonMain(equipo1,equipo2,true,this), cfg);
+        Cursor cursorEquipo1 = getContentResolver().query(uriEquipo1,null,null,null,null);
+        Cursor cursorEquipo2 = getContentResolver().query(uriEquipo2,null,null,null,null);
+**/
+        Equipo equipo1 = null;//EquipoCursor.newInstance(this,cursorEquipo1,idUser);
+        Equipo equipo2 = null;//EquipoCursor.newInstance(this,cursorEquipo2,0);
+
+		initialize(new SkeletonMain(equipo1,equipo2,ia,this), cfg);
         
 	}
 

@@ -196,7 +196,7 @@ public class Campo implements GestionEntrada,Dibujable {
 
     @Override
     public String getTextura() {
-        return "campo1.png";
+        return "tablero/campo.png";
     }
 
     @Override

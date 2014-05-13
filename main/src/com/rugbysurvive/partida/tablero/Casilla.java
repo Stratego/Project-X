@@ -106,6 +106,7 @@ public class Casilla implements GestionEntrada ,Dibujable{
         if(this.jugador == null && this.objeto == null)
         {
             this.jugador = jugador;
+            jugador.setCasilla(this);
             this.jugador.colocar(this);
             return true;
         }

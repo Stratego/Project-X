@@ -6,33 +6,33 @@ import android.database.Cursor;
 import android.net.Uri;
 import com.models.Equipo;
 import com.models.Jugador;
+import com.uab.lis.rugby.database.UrisGenerated;
 import com.uab.lis.rugby.database.contracts.tbEquipos;
 
 /**
  * Created by adria on 12/05/14.
  */
 public class EquipoCursor {
-    public static Equipo newInstance(Context context, Cursor cursor){
+    public static Equipo newInstance(Context context, Cursor cursor,int iduser){
         int colId = cursor.getColumnIndex(tbEquipos._ID);
         int colNombre = cursor.getColumnIndex(tbEquipos.COL_NOMBRE);
         int colEscudo = cursor.getColumnIndex(tbEquipos.COL_ESCUDO);
         int colEquipacion = cursor.getColumnIndex(tbEquipos.COL_EQUIPACION);
-        // FALTA COMPLETAR
-
-        Uri uri = null;
-        String where = "";
-        Cursor jugadors = context.getContentResolver().query(uri,null,where,null,null);
-        jugadors.moveToFirst();
-        do{
-            Jugador j = JugadorCursor.newInstance(jugadors);
-        }while (jugadors.moveToNext());
 
         Equipo equipo = new Equipo();
         equipo.setId(cursor.getInt(colId));
         equipo.setNombre(cursor.getString(colNombre));
         equipo.setEscudo(cursor.getString(colEscudo));
         equipo.setEquipacion(cursor.getString(colEquipacion));
-        // FALTA COMPLETAR
+
+        Uri uri = UrisGenerated.getUriJugadoresEquipo(iduser,(int)equipo.getId());
+        Cursor jugadors = context.getContentResolver().query(uri,null,null,null,null);
+        jugadors.moveToFirst();
+        do{
+            Jugador j = JugadorCursor.newInstance(context, jugadors);
+        }while (jugadors.moveToNext());
+
+
 
         return equipo;
     }
