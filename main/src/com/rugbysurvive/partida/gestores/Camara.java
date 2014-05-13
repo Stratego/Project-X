@@ -112,10 +112,13 @@ public class Camara implements InputProcessor {
 
     private boolean isCameraInsideBoard(int variationX,int variationY)
     {
-        return (variationY + this.camera.position.y > MIN_POSITION_Y
+
+        return true;
+
+        /*return (variationY + this.camera.position.y > MIN_POSITION_Y
                 && (-variationX)+ this.camera.position.x > MIN_POSITION_X
                 && variationY + this.camera.position.y < MAXIMO_ANCHURA
-                && (-variationX)+ this.camera.position.x < MAXIMO_ALTURA);
+                && (-variationX)+ this.camera.position.x < MAXIMO_ALTURA);*/
     }
 
     public void bloquear(){this.bloqueada = true;}

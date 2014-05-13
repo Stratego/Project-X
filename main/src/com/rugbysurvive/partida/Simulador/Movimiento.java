@@ -229,9 +229,10 @@ public class Movimiento extends Accion {
                 if(contador < this.camino.length)
                 {
                     /*Solo un jugador con pelota puede marcar*/
+                    System.out.println("ESTADOOOOOOOOOOOOOOOOOOOOOO "+jugador.getEstado());
                     if(jugador.getEstado() instanceof ConPelota)
                     {
-                        if(this.jugador.getMiEquipo().getLado() == Lado.izquierda)
+                        if(this.jugador.getMiEquipo().getLado() == Lado.derecha)
                         {
                             if(this.camino[contador][0] >= 28)
                             {
