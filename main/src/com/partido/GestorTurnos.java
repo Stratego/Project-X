@@ -33,7 +33,7 @@ public class GestorTurnos implements Dibujable,Proceso {
     private static final int TIEMPO_PRESENTACION = 400;
     private static final int POSICION_CAMARA_INCIAL_X = 12*64;
     private static final int POSICION_CAMARA_INICIAL_Y = 11*64;
-    private static final int TIEMPO_MUESTRA_ESCUDO = 100;
+    private static final int TIEMPO_MUESTRA_ESCUDO = 50;
 
     private int posicionTexturaX;
     private int posicionTexturaY;
@@ -57,6 +57,7 @@ public class GestorTurnos implements Dibujable,Proceso {
 
     Arbitro arbitro=Arbitro.getInstancia();
 
+    private Equipo equipoJugandoTurnoAnterior;
 
     private static boolean forzarCambioTurno = false;
 
@@ -138,6 +139,7 @@ public class GestorTurnos implements Dibujable,Proceso {
             this.tipoProceso = 1;
             equipo2.desbloquear();
             equipo2.setJugando(true);
+            this.equipoJugandoTurnoAnterior = equipo2;
             ProcesosContinuos.añadirProceso(this);
             this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
             arbitro.mover();
@@ -148,6 +150,7 @@ public class GestorTurnos implements Dibujable,Proceso {
 
         else if (equipo2.bloqueado() && equipo2.isJugando()  && equipo1.bloqueado() && !equipo1.isJugando() ) {
             this.tipoProceso = 1;
+            this.equipoJugandoTurnoAnterior = equipo1;
             equipo1.desbloquear();
             equipo1.setJugando(true);
             ProcesosContinuos.añadirProceso(this);
@@ -168,6 +171,7 @@ public class GestorTurnos implements Dibujable,Proceso {
                 this.tipoProceso =1;
                 equipo1.desbloquear();
                 equipo1.setJugando(true);
+                this.equipoJugandoTurnoAnterior = equipo1;
                 ProcesosContinuos.añadirProceso(this);
                 this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
                 forzarCambioTurno = false;
@@ -179,6 +183,7 @@ public class GestorTurnos implements Dibujable,Proceso {
                 this.tipoProceso = 1;
                 equipo2.desbloquear();
                 equipo2.setJugando(true);
+                this.equipoJugandoTurnoAnterior = equipo2;
                 ProcesosContinuos.añadirProceso(this);
                 this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
                 forzarCambioTurno = false;
@@ -193,6 +198,41 @@ public class GestorTurnos implements Dibujable,Proceso {
        return false;
 
     }
+
+
+    public void reiniciarFases(){
+
+        Equipo equipo1 = ComponentesJuego.getComponentes().getEquipo1();
+        Equipo equipo2 = ComponentesJuego.getComponentes().getEquipo2();
+
+        if(equipoJugandoTurnoAnterior.equals(equipo2)) {
+            this.tipoProceso =1;
+            equipo2.setJugando(false);
+            equipo1.setJugando(true);
+            this.equipoJugandoTurnoAnterior = equipo1;
+            ProcesosContinuos.añadirProceso(this);
+            this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
+            forzarCambioTurno = false;
+            arbitro.mover();
+            equipo2.bloquear();
+            equipo1.desbloquear();
+
+        }
+
+        else{
+            this.tipoProceso = 1;
+            equipo2.desbloquear();
+            equipo2.setJugando(true);
+            equipo1.setJugando(false);
+            this.equipoJugandoTurnoAnterior = equipo2;
+            ProcesosContinuos.añadirProceso(this);
+            this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
+            forzarCambioTurno = false;
+            arbitro.mover();
+            equipo1.bloquear();
+        }
+    }
+
 
     /**
      * Indica si los dos equipos han finalizado el turno.

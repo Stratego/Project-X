@@ -65,7 +65,7 @@ public class SkeletonMain extends Game {
     public void create() {
 
         this.simulador = Simulador.getInstance();
-        this.simulador.iniciarSimulacion();
+
 
         this.constantes = new ConstantesJuego();
         this.constantes.setResolucionPantalla(ResolucionPantalla.pequeña);
@@ -250,14 +250,19 @@ public class SkeletonMain extends Game {
                 Gdx.input.setInputProcessor(multiplexer);
                 this.gestor.iniciarPartida();
                 this.calculandoEquipoInicio = false;
+                this.botons.get(0).mostrar();
+                this.botons.get(1).mostrar();
+                this.botons.get(2).mostrar();
+                this.botons.get(3).mostrar();
             }
 
            this.gestor.CambiarTurno();
 
 
-        if(GestorTurnos.finTurnoJugadores()){
+        if(GestorTurnos.finTurnoJugadores() && !this.simular){
             System.out.println("Iniciando simulacion");
             this.simular = true;
+            this.simulador.iniciarSimulacion();
         }
 
 
@@ -277,7 +282,17 @@ public class SkeletonMain extends Game {
             }
 
             if(!this.botons.get(4).isEscondido() && !this.botons.get(4).isProcesando()){
-                this.simulador.simular();
+                if(this.simulador.simular()){
+                    this.simular = false;
+                    this.gestor.reiniciarFases();
+                    this.botons.get(0).mostrar();
+                    this.botons.get(1).mostrar();
+                    this.botons.get(2).mostrar();
+                    this.botons.get(3).mostrar();
+
+                    this.botons.get(4).esconder();
+                    this.botons.get(5).esconder();
+                }
             }
 
 

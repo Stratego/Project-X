@@ -208,17 +208,19 @@ public class Lista {
 
             x = ConstantesJuego.POSICION_BOTON_CHUTEPASE;
             y = ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES;
+            int distanciaObjetoCercano = ConstantesJuego.DISTANCIA_OBJETO_PRIMERA_LINIA;
+            int distanciaObjetoLejano = ConstantesJuego.DISTANCIA_OBJETO_SEGUNDA_LINIA;
 
-            listaObjetos.add(new BotonObjeto(x +30, y +115, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(0).getId()));
+            listaObjetos.add(new BotonObjeto(x +distanciaObjetoCercano, y +distanciaObjetoLejano, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(0).getId()));
 
             if(objetosJugador.size()>=2){
-                listaObjetos.add(new BotonObjeto(x+115, y+115, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(1).getId()));
+                listaObjetos.add(new BotonObjeto(x+distanciaObjetoLejano, y+distanciaObjetoLejano, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(1).getId()));
             }
             if(objetosJugador.size()>=3){
-                listaObjetos.add(new BotonObjeto(x+30, y+30, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(2).getId()));
+                listaObjetos.add(new BotonObjeto(x+distanciaObjetoCercano, y+distanciaObjetoCercano, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(2).getId()));
             }
             if(objetosJugador.size()>=4){
-                listaObjetos.add(new BotonObjeto(x+115, y+30, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(3).getId()));
+                listaObjetos.add(new BotonObjeto(x+distanciaObjetoLejano, y+distanciaObjetoCercano, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(3).getId()));
             }
 
             estadoObjeto=true;

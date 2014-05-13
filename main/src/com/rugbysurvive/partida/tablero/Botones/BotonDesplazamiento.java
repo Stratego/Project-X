@@ -29,6 +29,7 @@ public class BotonDesplazamiento extends Boton {
         super(posX, posY, entrada, textura, 0,ConstantesJuego.ANCHO_BOTON,ConstantesJuego.ALTO_BOTON);
         this.direccion = direccion;
         this.lista = lista;
+
     }
 
     @Override

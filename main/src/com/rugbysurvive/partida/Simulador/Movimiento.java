@@ -44,7 +44,7 @@ public class Movimiento extends Accion {
     {
 
             /*Si un jugador se sale del campo se llama a la funcion arbitrar de saquebanda*/
-        if((this.camino[contador][1] > 18 || this.camino[contador][1] < 1) && (this.jugador.getEstado() instanceof ConPelota))
+       if((this.camino[contador][1] > 18 || this.camino[contador][1] < 1) && (this.jugador.getEstado() instanceof ConPelota))
         {
             Equipo equipoRival = ComponentesJuego.getComponentes().getEquipo1();
             if(this.jugador.getMiEquipo() == ComponentesJuego.getComponentes().getEquipo1())

@@ -367,10 +367,14 @@ public class Jugador implements GestionEntrada {
 
         this.bloqueado = bloqueado;
 
-          System.out.println("bloqueo:"+bloqueado);
-        if(this.bloqueado && this.bloqueo == null)  {
-                this.generarTexturaBloqueado();
-            System.out.println("generando textura bloqueo");
+        if(this.bloqueado)  {
+
+            if(this.bloqueo != null && this.texturas.contains(this.bloqueo)){
+                ElementoDibujable texturaBloqueado = this.texturas.get(this.texturas.indexOf(this.bloqueo));
+                texturaBloqueado.borrar();
+                this.texturas.remove(texturaBloqueado);
+            }
+            this.generarTexturaBloqueado();
         }
 
         else {
@@ -379,7 +383,6 @@ public class Jugador implements GestionEntrada {
                      texturaBloqueado.borrar();
                      this.texturas.remove(texturaBloqueado);
                      this.bloqueo = null;
-                 System.out.println("Eliminando textura bloqueo");
             }
         }
     }
