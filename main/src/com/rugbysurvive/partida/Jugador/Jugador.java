@@ -161,6 +161,7 @@ public class Jugador implements GestionEntrada {
      */
     public void colocar(Casilla casilla){
         this.casilla= casilla;
+        casilla.setJugador(this);
         if(this.casilla != null)
         {
             this.enJuego = true;
@@ -615,6 +616,10 @@ public class Jugador implements GestionEntrada {
     public void setAtaque(int ataque) {
         this.Ataque = ataque;
     }
+
+    public Casilla getCasilla(){ return this.casilla;}
+
+    public void setCasilla(Casilla casilla) { this.casilla = casilla;}
 
     /**
      *

@@ -3,7 +3,6 @@ package com.rugbysurvive.partida.jugadores;
 import com.partido.GestorTurnos;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
-import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
@@ -217,12 +216,12 @@ public class Posicionamiento {
 
         jugadaequipo1.clear();
         jugadaequipo2.clear();
+        simulador.iniciarSimulacion();
     }
 
     public static void generarPenalty(Equipo equipo, int posX, int posY){
         Campo campo = ComponentesJuego.getComponentes().getCampo();
         simulador.eliminarAccionsSimulador();
-        simulador.iniciarSimulacion();
         ComponentesJuego.getComponentes().getEquipo1().quitarPelota();
         ComponentesJuego.getComponentes().getEquipo2().quitarPelota();
         if (ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador()==null){
@@ -231,18 +230,22 @@ public class Posicionamiento {
                 jugadaequipo1.get(0).setEstado(new ConPelota());
                 if (jugadaequipo1.get(0).getMiEquipo().getLado()==Lado.derecha){
                     chute = new Chute(jugadaequipo1.get(0),new Random().nextInt()%2,(int)(Math.random()*(11-8+1)+8));
+                    Simulador.getInstance().añadirAccion(chute);
                     System.out.println("chute izquierda jugador cercano jugador 1");
                 }else{
                     chute = new Chute(jugadaequipo1.get(0),(int)(Math.random()*(29-28+1)+28),(int)(Math.random()*(11-8+1)+8));
+                    Simulador.getInstance().añadirAccion(chute);
                     System.out.println("chute derecha jugador cercano jugador 1");
                 }
             }else{
                 jugadaequipo2.get(0).setEstado(new ConPelota());
                 if (jugadaequipo2.get(0).getMiEquipo().getLado()==Lado.derecha){
                     chute = new Chute(jugadaequipo2.get(0),new Random().nextInt()%2,(int)(Math.random()*(11-8+1)+8));
+                    Simulador.getInstance().añadirAccion(chute);
                     System.out.println("chute izquierda jugador cercano jugador 2");
                 }else{
                     chute = new Chute(jugadaequipo2.get(0),(int)(Math.random()*(29-28+1)+28),(int)(Math.random()*(11-8+1)+8));
+                    Simulador.getInstance().añadirAccion(chute);
                     System.out.println("chute derecha jugador cercano jugador 2");
                 }
             }
@@ -252,15 +255,17 @@ public class Posicionamiento {
             ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador().setEstado(new ConPelota());
             if (ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador().getMiEquipo().getLado()==Lado.derecha){
                 chute = new Chute(ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador(),new Random().nextInt()%2,(int)(Math.random()*(11-8+1)+8));
+                Simulador.getInstance().añadirAccion(chute);
                 System.out.println("chute izquierda");
             }else{
                 chute = new Chute(ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador(),(int)(Math.random()*(29-28+1)+28),(int)(Math.random()*(11-8+1)+8));
+                Simulador.getInstance().añadirAccion(chute);
                 System.out.println("chute derecha");
             }
 
         }
 
-        //simulador.iniciarSimulacion();
+        simulador.iniciarSimulacion();
 
     }
 
@@ -380,6 +385,7 @@ public class Posicionamiento {
 
         jugadaequipo1.clear();
         jugadaequipo2.clear();
+        simulador.iniciarSimulacion();
     }
 
 
