@@ -120,16 +120,16 @@ public class Lista {
 
            int posicionX = ConstantesJuego.POSICION_BOTON_CHUTEPASE+ (int)(ConstantesJuego.LARGO_TABLON_SUSITUCION/3) + ConstantesJuego.LARGO_TABLON_SUSITUCION / 9;
 
-            for(ElementoDibujable dibujo : this.tablonInformacionHabilidades) {
+           for(ElementoDibujable dibujo : this.tablonInformacionHabilidades) {
 
                 if(this.tablonInformacionHabilidades.indexOf(dibujo)==0) {
                     this.tablonInformacionHabilidades.get(0).dibujar(ConstantesJuego.POSICION_BOTON_CHUTEPASE + 200,y);
                 }
                 else {
-                dibujo.dibujar(posicionX,y+10);
-                posicionX = posicionX + ConstantesJuego.LARGO_TABLON_SUSITUCION/8;
+                    dibujo.dibujar(posicionX,y+10);
+                    posicionX = posicionX + ConstantesJuego.LARGO_TABLON_SUSITUCION/8;
                 }
-            }
+           }
 
 
 
@@ -137,11 +137,12 @@ public class Lista {
             if(posicionInicial >0){
                 this.botonAbajo = new BotonDesplazamiento(ConstantesJuego.POSICION_BOTON_CHUTEPASE-100,100,Entrada.listasuplente,
                         "Menu/fletxaAvall.png",1,this);
-                this.botonArriba.mostrar();
+                this.botonAbajo.mostrar();
             }
-            if(posicionInicial +3 < suplentes.size()- 1){
-                this.botonArriba = new BotonDesplazamiento(ConstantesJuego.POSICION_BOTON_CHUTEPASE-100,200,Entrada.listasuplente,
-                        "Menu/fletxaAmunt.png",0,this);
+            if(posicionInicial +2 < suplentes.size()- 1){
+
+                this.botonArriba = new BotonDesplazamiento(ConstantesJuego.POSICION_BOTON_CHUTEPASE-100,200,Entrada.listasuplente
+                        ,"Menu/fletxaAmunt.png",0,this);
                 this.botonArriba.mostrar();
             }
 
