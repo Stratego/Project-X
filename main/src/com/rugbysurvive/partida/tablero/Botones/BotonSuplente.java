@@ -7,6 +7,7 @@ import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.tablero.Boton;
+import com.sun.swing.internal.plaf.synth.resources.synth_sv;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,11 @@ public class BotonSuplente extends Boton {
     private final static String NIVEL_1 = "Menu/Habilidades/nivel1.png";
     private final static String NIVEL_2 = "Menu/Habilidades/nivel2.png";
     private final static String NIVEL_3 = "Menu/Habilidades/nivel3.png";
+    private final static double LIMITE_VALOR_NIVEL_1 = 1/3;
+    private final static double LIMITE_VALOR_NIVEL_2 = 2/3;
+    private final static double LIMITE_VALOR_NIVEL_3 = 1;
+
+
     private final static String FUERZA = "Menu/Habilidades/fuerza.png";
 
     private Jugador jugador;
@@ -49,7 +55,6 @@ public class BotonSuplente extends Boton {
 
     @Override
     public void accionEntrada(Entrada entrada) {
-        System.out.println("INTERCAMBIO De JUGADOres");
         //obteniendo la instansacion de equipo y realizar cambio en la lista de jugadores
         ComponentesJuego.getComponentes().getEquipo1().intercambioJugadores(this.jugador);
         ComponentesJuego.getComponentes().getEquipo2().intercambioJugadores(this.jugador);
@@ -61,11 +66,12 @@ public class BotonSuplente extends Boton {
         this.capacidadHabilidades = new ArrayList<ElementoDibujable>();
         this.dibujoJugador = new ArrayList<ElementoDibujable>();
 
-        this.capacidadHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,NIVEL_1));
-        this.capacidadHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,NIVEL_3));
-        this.capacidadHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,NIVEL_2));
-        this.capacidadHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,NIVEL_2));
-        this.capacidadHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,NIVEL_1));
+        this.generarIndicadorHabilidad(jugador.getAtaque(),Jugador.MAX_ATAQUE);
+        this.generarIndicadorHabilidad(jugador.getDefensa(),Jugador.MAX_DEFENSA);
+        this.generarIndicadorHabilidad(jugador.getHabilidad(),Jugador.MAX_HABILIDAD);
+        this.generarIndicadorHabilidad(jugador.getResistencia(),Jugador.MAX_RESISTENCIA);
+        this.generarIndicadorHabilidad(jugador.getFuerza(),Jugador.MAX_FUERZA);
+
 
         int posicionX = this.getPosicionX()+ (int)(ConstantesJuego.LARGO_TABLON_SUSITUCION/3);
         int posicionY = this.getPosicionY() + 5;
@@ -105,6 +111,24 @@ public class BotonSuplente extends Boton {
             elemento.borrar();
         }
 
+    }
 
+    private void generarIndicadorHabilidad(int valor,int valorMaximo){
+        String textura;
+
+        double proporcionHabilidad = (double)valor/( double)valorMaximo;
+
+        System.out.println("habilidad:"+proporcionHabilidad+","+valor+","+valorMaximo);
+         if(proporcionHabilidad <= LIMITE_VALOR_NIVEL_1){
+             textura = NIVEL_1;
+         }
+        else if(proporcionHabilidad <= LIMITE_VALOR_NIVEL_2){
+             textura = NIVEL_2;
+        }
+         else {
+            textura = NIVEL_3;
+        }
+
+        this.capacidadHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,textura));
     }
 }

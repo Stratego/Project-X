@@ -120,16 +120,16 @@ public class Lista {
 
            int posicionX = ConstantesJuego.POSICION_BOTON_CHUTEPASE+ (int)(ConstantesJuego.LARGO_TABLON_SUSITUCION/3) + ConstantesJuego.LARGO_TABLON_SUSITUCION / 9;
 
-            for(ElementoDibujable dibujo : this.tablonInformacionHabilidades) {
+           for(ElementoDibujable dibujo : this.tablonInformacionHabilidades) {
 
                 if(this.tablonInformacionHabilidades.indexOf(dibujo)==0) {
                     this.tablonInformacionHabilidades.get(0).dibujar(ConstantesJuego.POSICION_BOTON_CHUTEPASE + 200,y);
                 }
                 else {
-                dibujo.dibujar(posicionX,y+10);
-                posicionX = posicionX + ConstantesJuego.LARGO_TABLON_SUSITUCION/8;
+                    dibujo.dibujar(posicionX,y+10);
+                    posicionX = posicionX + ConstantesJuego.LARGO_TABLON_SUSITUCION/8;
                 }
-            }
+           }
 
 
 
@@ -137,11 +137,12 @@ public class Lista {
             if(posicionInicial >0){
                 this.botonAbajo = new BotonDesplazamiento(ConstantesJuego.POSICION_BOTON_CHUTEPASE-100,100,Entrada.listasuplente,
                         "Menu/fletxaAvall.png",1,this);
-                this.botonArriba.mostrar();
+                this.botonAbajo.mostrar();
             }
-            if(posicionInicial +3 < suplentes.size()- 1){
-                this.botonArriba = new BotonDesplazamiento(ConstantesJuego.POSICION_BOTON_CHUTEPASE-100,200,Entrada.listasuplente,
-                        "Menu/fletxaAmunt.png",0,this);
+            if(posicionInicial +2 < suplentes.size()- 1){
+
+                this.botonArriba = new BotonDesplazamiento(ConstantesJuego.POSICION_BOTON_CHUTEPASE-100,200,Entrada.listasuplente
+                        ,"Menu/fletxaAmunt.png",0,this);
                 this.botonArriba.mostrar();
             }
 
@@ -208,17 +209,19 @@ public class Lista {
 
             x = ConstantesJuego.POSICION_BOTON_CHUTEPASE;
             y = ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES;
+            int distanciaObjetoCercano = ConstantesJuego.DISTANCIA_OBJETO_PRIMERA_LINIA;
+            int distanciaObjetoLejano = ConstantesJuego.DISTANCIA_OBJETO_SEGUNDA_LINIA;
 
-            listaObjetos.add(new BotonObjeto(x +30, y +115, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(0).getId()));
+            listaObjetos.add(new BotonObjeto(x +distanciaObjetoCercano, y +distanciaObjetoLejano, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(0).getId()));
 
             if(objetosJugador.size()>=2){
-                listaObjetos.add(new BotonObjeto(x+115, y+115, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(1).getId()));
+                listaObjetos.add(new BotonObjeto(x+distanciaObjetoLejano, y+distanciaObjetoLejano, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(1).getId()));
             }
             if(objetosJugador.size()>=3){
-                listaObjetos.add(new BotonObjeto(x+30, y+30, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(2).getId()));
+                listaObjetos.add(new BotonObjeto(x+distanciaObjetoCercano, y+distanciaObjetoCercano, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(2).getId()));
             }
             if(objetosJugador.size()>=4){
-                listaObjetos.add(new BotonObjeto(x+115, y+30, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(3).getId()));
+                listaObjetos.add(new BotonObjeto(x+distanciaObjetoLejano, y+distanciaObjetoCercano, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(3).getId()));
             }
 
             estadoObjeto=true;

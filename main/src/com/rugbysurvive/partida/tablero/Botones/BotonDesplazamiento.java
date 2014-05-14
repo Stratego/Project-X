@@ -29,6 +29,7 @@ public class BotonDesplazamiento extends Boton {
         super(posX, posY, entrada, textura, 0,ConstantesJuego.ANCHO_BOTON,ConstantesJuego.ALTO_BOTON);
         this.direccion = direccion;
         this.lista = lista;
+
     }
 
     @Override
@@ -48,7 +49,7 @@ public class BotonDesplazamiento extends Boton {
 
         if(direccion == 0) {
 
-           if(posInicial+3 < suplentes.size()-1){
+           if(posInicial+2 < suplentes.size()-1){
                 this.lista.setPosicionListaSuplentesInicial(posInicial+1);
                 this.lista.eliminarListaSuplentes();
                 this.lista.crearLista(Entrada.listasuplente);

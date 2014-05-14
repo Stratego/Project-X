@@ -25,6 +25,8 @@ public class BotonInterfaz extends Boton{
     public BotonInterfaz(float posX, float posY, Entrada entrada, String textura, int posicion) {
         super(posX, posY, entrada, textura, posicion,ConstantesJuego.ANCHO_BOTON,ConstantesJuego.ALTO_BOTON);
         this.entradaBoton = entrada;
+        this.posY = ConstantesJuego.POSICION_BOTON_ESCONDIDO;
+        this.setEscondido(true);
 
 
 

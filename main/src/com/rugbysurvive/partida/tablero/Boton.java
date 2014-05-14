@@ -22,6 +22,7 @@ package com.rugbysurvive.partida.tablero;
 public abstract class Boton implements GestionEntrada,Dibujable,Proceso{
 
 
+
     protected float posX;
 
     protected float posY;
@@ -146,7 +147,7 @@ public abstract class Boton implements GestionEntrada,Dibujable,Proceso{
     public boolean procesar(){
 
        if(!this.escondido){
-           if(this.posY > -140){
+           if(this.posY > ConstantesJuego.POSICION_BOTON_ESCONDIDO){
                 this.posY = posY -10;
            }
 

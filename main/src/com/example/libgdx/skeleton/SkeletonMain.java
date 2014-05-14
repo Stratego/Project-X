@@ -66,7 +66,7 @@ public class SkeletonMain extends Game {
     public void create() {
 
         this.simulador = Simulador.getInstance();
-        this.simulador.iniciarSimulacion();
+
 
         this.constantes = new ConstantesJuego();
         this.constantes.setResolucionPantalla(ResolucionPantalla.pequeña);
@@ -217,7 +217,7 @@ public class SkeletonMain extends Game {
         this.calculandoEquipoInicio = true;
         this.simular = false;
         //arbitro = new Arbitro();
-        this.gestor = new GestorTurnos();
+        this.gestor = new GestorTurnos(this);
 
         //Posicionamiento posicionamiento = new Posicionamiento();
         //posicionamiento.generarPenalty(componentesJuego.getEquipo2(),3,3);
@@ -237,29 +237,36 @@ public class SkeletonMain extends Game {
     @Override
     public void render() {
 
+        // La presentacion se realiza unicamente una vez
         if(!this.gestor.isAnimacionInicializadaAnteriormente()){
             this.gestor.iniciarPresentacion();
         }
 
+        // Bucle principal del juego , se inicia una vez finalizada la animacion
        if(this.gestor.isAnimacionInicialFinalizada())
        {
+           // Proceso por el cual se inicia el partido
             if(this.calculandoEquipoInicio) {
                 multiplexer.addProcessor(gestureDetector);
                 multiplexer.addProcessor(this.gestorGrafico.getCamara());
                 Gdx.input.setInputProcessor(multiplexer);
-                this.gestor.iniciarPartido();
+                this.gestor.iniciarPartida();
                 this.calculandoEquipoInicio = false;
 
 
-       }
-       else {
-          this.gestor.CambiarTurno();
-       }
+            }
 
-        if(GestorTurnos.finTurnoJugadores()){
+           this.gestor.CambiarTurno();
+
+
+        if(GestorTurnos.finTurnoJugadores() && !this.simular){
+            System.out.println("Iniciando simulacion");
             this.simular = true;
+            this.simulador.iniciarSimulacion();
         }
-        if(simular==true) {
+
+
+        if(simular) {
 
             int i=0;
             for(Boton boton : this.botons){
@@ -275,11 +282,22 @@ public class SkeletonMain extends Game {
             }
 
             if(!this.botons.get(4).isEscondido() && !this.botons.get(4).isProcesando()){
-                this.simulador.simular();
+                if(this.simulador.simular()){
+                    this.simular = false;
+                    this.gestor.reiniciarFases();
+                    this.botons.get(0).mostrar();
+                    this.botons.get(1).mostrar();
+                    this.botons.get(2).mostrar();
+                    this.botons.get(3).mostrar();
+
+                    this.botons.get(4).esconder();
+                    this.botons.get(5).esconder();
+                }
             }
 
 
         }
+
 
        }
 
@@ -306,6 +324,13 @@ public class SkeletonMain extends Game {
 
     @Override
     public void resume() {
+    }
+
+    public void mostrarBotones(){
+        this.botons.get(0).mostrar();
+        this.botons.get(1).mostrar();
+        this.botons.get(2).mostrar();
+        this.botons.get(3).mostrar();
     }
 }
 
