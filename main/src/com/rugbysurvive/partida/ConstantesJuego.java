@@ -12,7 +12,7 @@ public class ConstantesJuego {
     //private static int multiplicador = 1;
 
 
-    private static double constanteRescalado = 0.1777777778* getWidth()/128;
+    public static double constanteRescalado = 0.1777777778* getWidth()/128;
 
     public static final int ANCHO_CASILLA = 64;
     public static final int ALTO_CASILLA = 64;
@@ -96,6 +96,10 @@ public class ConstantesJuego {
 
     public static int ANCHO_TABLERO_CON_ZOOM =  (int)(ANCHO_TABLERO*(1/multiplicado));
     public static int ALTO_TABLERO_CON_ZOOM =  (int)(ALTO_TABLERO*(1/multiplicado));
+
+    public static final int TAMAÑO_PUÑO = (int)(512* constanteRescalado);
+
+
 
     public ConstantesJuego()
     {

@@ -1,5 +1,9 @@
 package com.rugbysurvive.partida.Simulador;
 
+import com.badlogic.gdx.Gdx;
+import com.rugbysurvive.partida.ConstantesJuego;
+import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
+import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
@@ -10,6 +14,8 @@ import com.rugbysurvive.partida.arbitro.SaqueBanda;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.Marcador;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
+import com.rugbysurvive.partida.gestores.Procesos.Proceso;
+import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
 import com.rugbysurvive.partida.jugadores.Equipo;
 import com.rugbysurvive.partida.tablero.Campo;
 import com.rugbysurvive.partida.tablero.Lado;
@@ -17,12 +23,27 @@ import com.rugbysurvive.partida.tablero.Lado;
 /**
  * Created by Victor on 27/03/14.
  */
-public class Movimiento extends Accion {
+public class Movimiento extends Accion implements Proceso {
+    private static final int POSICION_INICIAL_IZQUIERDA = ConstantesJuego.getHeight()/2 - 2*ConstantesJuego.TAMAÑO_PUÑO;
+    private static final int POSICION_INICIAL_DERECHA =ConstantesJuego.getHeight()/2 + ConstantesJuego.TAMAÑO_PUÑO;
+    private static final int POSICION_FINAL_IZQUIERDA = ConstantesJuego.getHeight()/2 -1 -ConstantesJuego.TAMAÑO_PUÑO;
+    private static final int POSICION_FINAL_DERECHA = ConstantesJuego.getHeight()/2 + 1;
+    private static final int VELOCIDAD = (int)(10 * ConstantesJuego.constanteRescalado);
+
+    private int posicionPuñoIzquierda;
+    private int posicionPuñoDerecha;
+    private int posicionPuñoY;
+
+
+    private ElementoDibujable puñoIzquierda;
+    private ElementoDibujable puñoDerecha;
+
     private int camino[][];
     private Jugador jugador;
     private int contador  = 0;//test
     private IndicadorMovimientos indicadorMovimientos;
 
+    private boolean animacionInicializada;
     /**
      * Constructor de la acción movimiento
      * @param jugador
@@ -34,6 +55,9 @@ public class Movimiento extends Accion {
         this.jugador = jugador;
         this.contador = 1;
         this.indicadorMovimientos = indicadorMovimientos;
+        this.animacionInicializada = false;
+        this.puñoIzquierda = new ElementoDibujable(TipoDibujo.interficieUsuario,"simulacion/izquierda.png");
+        this.puñoDerecha = new ElementoDibujable(TipoDibujo.interficieUsuario,"simulacion/derecha.png");
     }
 
 
@@ -72,7 +96,15 @@ public class Movimiento extends Accion {
         if((this.jugador.getEstado() instanceof SinPelota) && (Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).getJugador().getEstado() instanceof SinPelota))
         {
             Choque choque = new Choque(this.jugador, Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).getJugador());
-            return choque.arbitrar();
+
+            ProcesosContinuos.añadirProceso(this);
+
+            if(choque.arbitrar()) {
+               Simulador.getInstance().eliminarAccionsSimulador();
+
+            }
+
+            return true;
         }
 
         return false;
@@ -86,7 +118,10 @@ public class Movimiento extends Accion {
     public boolean simular() {
         System.out.println("mover");
 
-        boolean incrementa = true;
+        if(!this.animacionInicializada)
+        {
+
+            boolean incrementa = true;
 
         if(contador <= this.camino.length)
         {
@@ -139,10 +174,9 @@ public class Movimiento extends Accion {
                         else
                         {
                             /*Llamamos a la función choque de jugadores, para ver si hay dos jugadores que colisionan entre ellos*/
-                            if(this.ChoqueJugadores() == true)
+                            if(this.ChoqueJugadores())
                             {
-                                //AQUI SE HACE UN CHOQUE
-                                return true;
+                                return false;
                             }
                         }
                     }
@@ -270,7 +304,18 @@ public class Movimiento extends Accion {
             return true;//test
         }
         return false;
-    }
+
+        }
+
+        // Si hay un proceso de animacion bloqueo
+        else
+        {
+            if(this.posicionPuñoDerecha <= POSICION_FINAL_DERECHA && this.posicionPuñoIzquierda >= POSICION_FINAL_IZQUIERDA){
+                return true;
+            }
+        }
+        return false;
+     }
 
     /**
      * Permite decidir que jugador ganara o mantendrá la posesión del valón
@@ -315,5 +360,39 @@ public class Movimiento extends Accion {
     @Override
     public void simularAnimacion() {
 
+    }
+
+    @Override
+    public boolean procesar() {
+        if(!this.animacionInicializada) {
+            this.posicionPuñoDerecha = POSICION_INICIAL_DERECHA;
+            this.posicionPuñoIzquierda = POSICION_INICIAL_IZQUIERDA;
+            this.posicionPuñoY = (ConstantesJuego.getWidth()-ConstantesJuego.TAMAÑO_PUÑO)/2;
+            this.puñoDerecha.dibujar(this.posicionPuñoDerecha,this.posicionPuñoY);
+            this.puñoDerecha.dibujar(this.posicionPuñoIzquierda,this.posicionPuñoY);
+            this.animacionInicializada = true;
+        }
+
+        else{
+
+            this.puñoDerecha.borrar();
+            this.puñoIzquierda.borrar();
+            this.puñoDerecha.dibujar(this.posicionPuñoDerecha,this.posicionPuñoY);
+            this.puñoIzquierda.dibujar(this.posicionPuñoIzquierda,this.posicionPuñoY);
+
+            this.posicionPuñoIzquierda = this.posicionPuñoIzquierda + VELOCIDAD;
+            this.posicionPuñoDerecha= this.posicionPuñoDerecha-VELOCIDAD;
+
+            if(this.posicionPuñoDerecha <= POSICION_FINAL_DERECHA && this.posicionPuñoIzquierda >= POSICION_FINAL_IZQUIERDA){
+
+                this.puñoDerecha.borrar();
+                this.puñoIzquierda.borrar();
+                return true;
+            }
+
+        }
+
+
+        return false;
     }
 }

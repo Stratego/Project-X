@@ -175,6 +175,9 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("jugador/bloqueado/jugador4Congelat.png");
         nombresTexturas.add("jugador/bloqueado/jugador5Congelat.png");
         nombresTexturas.add("banderas/peixetEscut.png");
+        nombresTexturas.add("simulacion/izquierda.png");
+        nombresTexturas.add("simulacion/derecha.png");
+
 
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
 
@@ -259,6 +262,7 @@ public class SkeletonMain extends Game {
 
 
         if(GestorTurnos.finTurnoJugadores() && !this.simular){
+
             System.out.println("Iniciando simulacion");
             this.simular = true;
             this.simulador.iniciarSimulacion();
