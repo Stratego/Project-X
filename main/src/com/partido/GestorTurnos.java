@@ -7,7 +7,7 @@ import com.example.libgdx.skeleton.SkeletonMain;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
-import com.rugbysurvive.partida.Jugador.Jugador;
+
 import com.rugbysurvive.partida.arbitro.Arbitro;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.gestores.Dibujable;
@@ -63,7 +63,9 @@ public class GestorTurnos implements Dibujable,Proceso {
     private static boolean forzarCambioTurno = false;
     private SkeletonMain main;
 
+
     public GestorTurnos(SkeletonMain main){
+
          this.posicionTexturaX = Gdx.graphics.getWidth();
          this.posicionTexturaY = 0;
         this.tipoProceso = 0;
@@ -120,6 +122,7 @@ public class GestorTurnos implements Dibujable,Proceso {
        else {
             equipo2.desbloquear();
             equipo2.setJugando(true);
+
         }
 
     }
@@ -264,6 +267,7 @@ public class GestorTurnos implements Dibujable,Proceso {
         equipo1.bloquear();
         equipo2.desbloquear();
         equipo2.setJugando(true);
+
 
     }
 

@@ -269,7 +269,7 @@ public class Movimiento extends Accion implements Proceso {
                         {
                             if(this.camino[contador][0] >= 28)
                             {
-                                Marcador.getInstanceMarcador().sumarPuntuacion(7, jugador);
+                                Marcador.getInstanceMarcador().sumarPuntuacion(5, jugador);
                                 return true;
                             }
                         }
@@ -277,7 +277,7 @@ public class Movimiento extends Accion implements Proceso {
                         {
                             if(this.camino[contador][0] <= 1)
                             {
-                                Marcador.getInstanceMarcador().sumarPuntuacion(7, jugador);
+                                Marcador.getInstanceMarcador().sumarPuntuacion(5, jugador);
                                 return true;
                             }
                         }
