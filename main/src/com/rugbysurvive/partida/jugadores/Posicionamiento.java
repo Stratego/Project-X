@@ -57,13 +57,13 @@ public class Posicionamiento {
                  posicionX = equipo.getAlineacion().get(i).posicionX;
                  posicionY = equipo.getAlineacion().get(i).posicionY;
                  if(lado == Lado.izquierda){
-                        jugador.setDireccion(DireccionJugador.izquierda);
+                        jugador.setDireccion(DireccionJugador.derecha);
                         campo.añadirElemento(jugador,posicionX,posicionY);
                         equipo.setLado(lado);
                  }
                  else
                  {
-                     jugador.setDireccion(DireccionJugador.derecha);
+                     jugador.setDireccion(DireccionJugador.izquierda);
                      posicionY =ConstantesJuego.NUMERO_CASILLAS_LARGO_TABLERO - posicionY -1;
                      posicionX = ConstantesJuego.NUMERO_CASILLAS_ANCHO_TABLERO  -posicionX- 1;
                      campo.añadirElemento(jugador,posicionX,posicionY);

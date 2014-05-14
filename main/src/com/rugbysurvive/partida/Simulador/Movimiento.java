@@ -229,14 +229,13 @@ public class Movimiento extends Accion {
                 if(contador < this.camino.length)
                 {
                     /*Solo un jugador con pelota puede marcar*/
-                    System.out.println("ESTADOOOOOOOOOOOOOOOOOOOOOO "+jugador.getEstado());
                     if(jugador.getEstado() instanceof ConPelota)
                     {
-                        if(this.jugador.getMiEquipo().getLado() == Lado.derecha)
+                        if(this.jugador.getMiEquipo().getLado() == Lado.izquierda)
                         {
                             if(this.camino[contador][0] >= 28)
                             {
-                                Marcador.getInstanceMarcador().sumarPuntuacion(7, jugador);
+                                Marcador.getInstanceMarcador().sumarPuntuacion(5, jugador);
                                 return true;
                             }
                         }
@@ -244,7 +243,7 @@ public class Movimiento extends Accion {
                         {
                             if(this.camino[contador][0] <= 1)
                             {
-                                Marcador.getInstanceMarcador().sumarPuntuacion(7, jugador);
+                                Marcador.getInstanceMarcador().sumarPuntuacion(5, jugador);
                                 return true;
                             }
                         }
