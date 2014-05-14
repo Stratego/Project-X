@@ -247,7 +247,7 @@ public class Arbitro implements Dibujable{
 
     @Override
     public String getTextura() {
-        String textura="jugador1.png" ;
+        String textura=  "arbitro/arbitre4.png";;
         switch (this.direccion)
         {
             case arriba:
@@ -262,6 +262,7 @@ public class Arbitro implements Dibujable{
             case derecha:
                 textura = "arbitro/arbitre3.png";
                 break;
+
         }
         return textura;
 

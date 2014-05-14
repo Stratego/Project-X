@@ -6,6 +6,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+import com.rugbysurvive.partida.IA.IA;
 import com.rugbysurvive.partida.arbitro.Arbitro;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.gestores.Dibujable;
@@ -59,6 +60,7 @@ public class GestorTurnos implements Dibujable,Proceso {
 
     private static boolean forzarCambioTurno = false;
 
+    boolean ia = true;
 
     public GestorTurnos(){
          this.posicionTexturaX = Gdx.graphics.getWidth();
@@ -112,6 +114,7 @@ public class GestorTurnos implements Dibujable,Proceso {
        else {
             equipo1.bloquear();
             equipo2.setJugando(true);
+
         }
 
     }
@@ -212,6 +215,7 @@ public class GestorTurnos implements Dibujable,Proceso {
         equipo1.bloquear();
         equipo2.desbloquear();
         equipo2.setJugando(true);
+
 
     }
 
