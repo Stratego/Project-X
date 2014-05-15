@@ -227,7 +227,7 @@ public class SkeletonMain extends Game {
 
         //Posicionamiento posicionamiento = new Posicionamiento();
         //posicionamiento.generarPenalty(componentesJuego.getEquipo2(),3,3);
-
+        //posicionamiento.generarMele(15,15);
         //posicionamiento.generarSaqueBanda(20,18,ComponentesJuego.getComponentes().getEquipo1());
         //MovimentoIA movimentoIA= new MovimentoIA(ComponentesJuego.getComponentes().getCampo().getCasilla(0,0),ComponentesJuego.getComponentes().getCampo().getCasilla(5,0));
         //System.out.println("Resultado camino: " + movimentoIA.calcularCamino());
@@ -268,8 +268,11 @@ public class SkeletonMain extends Game {
         if(GestorTurnos.finTurnoJugadores() && !this.simular){
 
             System.out.println("Iniciando simulacion");
+
+            //IA ia = new IA();
             this.simular = true;
             this.simulador.iniciarSimulacion();
+
         }
 
 
