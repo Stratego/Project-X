@@ -117,6 +117,96 @@ public class Movimiento extends Accion implements Proceso {
      @Override
     public boolean simular() {
 
+        System.out.println("mover");
+
+        boolean incrementa = true;
+
+        if(contador <= this.camino.length)
+        {
+            /*Verificamos si sale de banda*/
+            if(this.SaleDeBanda(contador,this.camino) == true)
+            {
+                return true;
+            }
+
+            /*Comprobamos si en la siguiente casilla hay un jugador ya que si no no se podra llamar a la funcion getMiEquipo*/
+            if(Campo.getInstanciaCampo().getCasilla(this.camino[contador][1], this.camino[contador][0]).getJugador() != null)
+            {
+                /*Comprobamos si pertenecen al mismo equipo*/
+                if(jugador.getMiEquipo() != Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).getJugador().getMiEquipo())
+                {
+                    /*Si uno de los dos tiene la pelota, se pelearan por ella
+                    * En el primera caso, el propietaro de la pelota es el que esta haciendo la acción de movimiento
+                    * En el segundo caso, el propietario de la pelota es el jugador que esta en la casilla por la que el jugador de la accion movimiento va a pasar
+                    */
+
+                    /*Si en esta función hay un choque entre jugadores y lo ve el arbitro, entonces devolvera true*/
+                    if(encuentroEntreJugadores() == true)
+                    {
+                        return true;
+                    }
+
+                    incrementa = false;
+                }
+                /*Si son del mismo equipo, comprobamos que al pasarle por encima, que no se quedara superpuesto, es decir, que seguira avanzando*/
+                else
+                {
+                    incrementa = false;
+                    if(puedeAvanzar() == true)
+                    {
+                        incrementa = true;
+                    }
+                }
+            }
+            else
+            {
+                /*Verifica si hay un objeto y se lo aplica al jugador*/
+                efectoObjeto();
+            }
+
+        }
+
+        if(incrementa == true)
+        {
+            /*Giramos la textura del jugador segun convenga*/
+             posicionarTexturaJugador();
+
+            /*Referenciamos jugador y casillas en ambos sentidos*/
+            this.jugador.colocar(Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]));
+
+
+            Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).setJugador(this.jugador);
+            GestorGrafico.getCamara().variarPosicion(this.camino[contador][0]*64,this.camino[contador][1]*64);
+
+
+            /*Quitamos la referencia de la posicion anterior del jugador en la casilla*/
+            if(contador > 0)
+            {
+                Campo.getInstanciaCampo().getCasilla(this.camino[contador-1][1],this.camino[contador-1][0]).setJugador(null);
+                if(marcarPunto()== true)
+                {
+                    return true;
+                }
+            }
+
+            contador = contador + 1;
+        }
+        else
+        {
+            contador = this.camino.length;
+        }
+
+        //System.out.println(this.camino[contador][1]+"-"+this.camino[contador][0]);
+
+        if(contador == this.camino.length)
+        {
+            if(this.indicadorMovimientos != null)
+            {
+                this.indicadorMovimientos.borrar();
+            }
+
+            return true;//test
+        }
         return false;
      }
 
@@ -159,7 +249,152 @@ public class Movimiento extends Accion implements Proceso {
         }
     }
 
+    /**
+     * Verifica si se le debe aplicar un efecto de un objeto a un jugador
+     */
+    public void efectoObjeto()
+    {
+        if(Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1], this.camino[this.contador][0]).getObjeto() != null)
+        {
+            Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1], this.camino[this.contador][0]).getObjeto().efecto(this.jugador);
+        }
+    }
 
+    /**
+     * Verifica si un jugador marca un punto
+     * @return Boolean Ha marcado un punto
+     */
+    public boolean marcarPunto()
+    {
+        if(this.contador < this.camino.length)
+        {
+                    /*Solo un jugador con pelota puede marcar*/
+            if(this.jugador.getEstado() instanceof ConPelota)
+            {
+                if(this.jugador.getMiEquipo().getLado() == Lado.izquierda)
+                {
+                    if(this.camino[this.contador][0] >= 28)
+                    {
+                        Marcador.getInstanceMarcador().sumarPuntuacion(5, this.jugador);
+                        return true;
+                    }
+                }
+                else
+                {
+                    if(this.camino[this.contador][0] <= 1)
+                    {
+                        Marcador.getInstanceMarcador().sumarPuntuacion(5, this.jugador);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Posiciona las texturas acorde al movimiento que realiza el jugador
+     */
+    public void posicionarTexturaJugador()
+    {
+        if((this.camino[this.contador][0] > this.camino[this.contador-1][0]) && (this.camino[this.contador][1] == this.camino[this.contador-1][1]))
+        {
+            this.jugador.setDireccion(DireccionJugador.derecha);
+        }
+        else
+        {
+            if((this.camino[this.contador][0] < this.camino[this.contador-1][0]) && (this.camino[this.contador][1] == this.camino[this.contador-1][1]))
+            {
+                this.jugador.setDireccion(DireccionJugador.izquierda);
+            }
+            else
+            {
+                if((this.camino[this.contador][0] == this.camino[this.contador-1][0]) && (this.camino[this.contador][1] > this.camino[this.contador-1][1]))
+                {
+                    this.jugador.setDireccion(DireccionJugador.arriba);
+                }
+                else
+                {
+                    if((this.camino[this.contador][0] == this.camino[this.contador-1][0]) && (this.camino[this.contador][1] < this.camino[this.contador-1][1]))
+                    {
+                        this.jugador.setDireccion(DireccionJugador.abajo);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Verifica si dos jugadores se encuentran, y aplica las acciones pertinentes segun en el estado que se encuentren los jugadores
+     * @return
+     */
+    public boolean encuentroEntreJugadores()
+    {
+        /*AQUI SE HACE OTRO CHOQUE*/
+        if(this.jugador.getEstado() instanceof ConPelota)
+        {
+            int Fuerza = this.jugador.getFuerza();
+            int Defensa = Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1],this.camino[this.contador][0]).getJugador().getDefensa();
+
+            if(luchaPelota(Fuerza, Defensa))
+            {
+                this.jugador.setEstado(new SinPelota());
+                this.jugador.lesionar();
+                Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1],this.camino[this.contador][0]).getJugador().setEstado(new ConPelota());
+                System.out.println("Me quitan la pelota-----------------<");
+            }
+        }
+        else
+        {
+            if(Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1],this.camino[this.contador][0]).getJugador().getEstado() instanceof ConPelota)
+            {
+                int Fuerza = Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1],this.camino[this.contador][0]).getJugador().getFuerza();
+                int Defensa = this.jugador.getDefensa();
+
+                if(luchaPelota(Fuerza, Defensa))
+                {
+                    this.jugador.setEstado(new ConPelota());
+                    Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1],this.camino[this.contador][0]).getJugador().setEstado(new SinPelota());
+                    Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1],this.camino[this.contador][0]).getJugador().lesionar();
+                    System.out.println("Quito la pelota------------->");
+                }
+            }
+            else
+            {
+                            /*Llamamos a la función choque de jugadores, para ver si hay dos jugadores que colisionan entre ellos*/
+                if(this.ChoqueJugadores() == true)
+                {
+                    //AQUI SE HACE UN CHOQUE
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Comprueba si un jugador puede ir realizando el movimiento de forma correcta
+     * @return Boolean Puede mover
+     */
+    public boolean puedeAvanzar()
+    {
+        /*Verificamos que es posible que el jugador pueda seguir avanzando sin problemas*/
+        for(int i=contador; i<this.camino.length; i++)
+        {
+            if(Campo.getInstanciaCampo().getCasilla(this.camino[i][1],this.camino[i][0]).getJugador() == null)
+            {
+                return true;
+            }
+            else
+            {
+                if(jugador.getMiEquipo() != Campo.getInstanciaCampo().getCasilla(this.camino[i][1],this.camino[i][0]).getJugador().getMiEquipo())
+                {
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
     @Override
     public void simularAnimacion() {
 
