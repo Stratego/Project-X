@@ -288,12 +288,14 @@ public class Posicionamiento {
 
         colocarSaqueEquipo2(x, y, posX, posY, direccion2, arbitro, campo, equipo);
 
-
+//jugadaequipo1.size()-2
         if (new Random().nextInt()%2 != 0){
-            jugadaequipo1.get(jugadaequipo1.size()-2).setEstado(new ConPelota(jugadaequipo1.get(jugadaequipo1.size()-2)));
+            Jugador jugador = jugadaequipo1.get(jugadaequipo1.size() - 2);
+            jugador.setEstado(new ConPelota(jugador));
             GestorTurnos.iniciarTurnoEquipo(ComponentesJuego.getComponentes().getEquipo2(),ComponentesJuego.getComponentes().getEquipo1());
         }else{
-            jugadaequipo2.get(jugadaequipo2.size()-2).setEstado(new ConPelota(jugadaequipo2.get(jugadaequipo2.size()-2)));
+            Jugador jugador = jugadaequipo2.get(jugadaequipo2.size() - 2);
+            jugador.setEstado(new ConPelota(jugador));
             GestorTurnos.iniciarTurnoEquipo(ComponentesJuego.getComponentes().getEquipo1(),ComponentesJuego.getComponentes().getEquipo2());
         }
 

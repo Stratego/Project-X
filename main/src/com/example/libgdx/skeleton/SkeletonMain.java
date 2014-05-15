@@ -268,7 +268,6 @@ public class SkeletonMain extends Game {
         if(GestorTurnos.finTurnoJugadores() && !this.simular){
 
             System.out.println("Iniciando simulacion");
-
             //IA ia = new IA();
             this.simular = true;
             this.simulador.iniciarSimulacion();

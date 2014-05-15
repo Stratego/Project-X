@@ -2,7 +2,10 @@ package com.rugbysurvive.partida.tablero;
 
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+import com.rugbysurvive.partida.Jugador.ConPelota;
+import com.rugbysurvive.partida.Jugador.Estado;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoCampo;
 import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.gestores.Dibujante;
@@ -180,6 +183,31 @@ public class Campo implements GestionEntrada,Dibujable {
                 this.eliminarElemento(iter.getPosicionY(), iter.getPosicionX());
             }
         }
+    }
+
+    public Casilla posicionPelota(){
+        Casilla casilla = null;
+
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 30; j++) {
+
+                if(casillas[i][j].hayPelota()==true){
+                    casilla = casillas[i][j];
+                }
+
+            }
+        }
+
+        if (casilla==null){
+            for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo1().listaJugadoresCampo()){
+
+                if (jugador.getEstado() instanceof ConPelota){
+                    casilla = jugador.getCasilla();
+                }
+            }
+        }
+
+        return casilla;
     }
 
     /**
