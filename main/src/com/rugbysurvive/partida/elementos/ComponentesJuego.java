@@ -71,11 +71,11 @@ public class ComponentesJuego {
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo1);
         jugador.setDireccion(DireccionJugador.arriba);
         this.equipo1.añadirJugador(jugador, 7, 7);
+
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo1);
         jugador.setDireccion(DireccionJugador.abajo);
-        jugador.setEstado(new ConPelota());
-
         this.equipo1.añadirJugador(jugador,9,22);
+
 
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),9,9);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),11,25);
@@ -124,6 +124,7 @@ public class ComponentesJuego {
 
         Posicionamiento.generarSaqueCampo(this.campo,this.equipo1, Lado.izquierda);
         Posicionamiento.generarSaqueCampo(this.campo,this.equipo2, Lado.derecha);
+
     }
 
 

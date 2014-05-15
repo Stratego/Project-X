@@ -19,10 +19,17 @@ public class ConPelota implements Estado, Proceso {
     public boolean bloqueado = false;
     ElementoDibujable indicadorPelota;
     ElementoDibujable atencionJugador;
+    ElementoDibujable indicarJugadorConPelota;
+
     int count;
 
     public Jugador jugador;
 
+    public ConPelota(Jugador jugador){
+        this.jugador = jugador;
+        this.indicadorPelota = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/estado/conPelota.png");
+        this.indicadorPelota.dibujar(this.jugador.getPosicionX(),this.jugador.getPosicionY());
+    }
 
     public boolean generarAccion(Jugador jugador) {
 

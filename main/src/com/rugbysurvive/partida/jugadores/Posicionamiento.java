@@ -70,6 +70,11 @@ public class Posicionamiento {
                      equipo.setLado(lado);
                  }
 
+                // PRueba de peloteo
+                if(i==1 && lado == Lado.izquierda){
+                    jugador.setEstado(new ConPelota(jugador));
+                }
+
             }
         }
 
@@ -206,10 +211,12 @@ public class Posicionamiento {
         }
 
         if (new Random().nextInt()%2 != 0){
-            jugadaequipo1.get(jugadaequipo1.size()-1).setEstado(new ConPelota());
+            Jugador jugador = jugadaequipo1.get(jugadaequipo1.size() - 1);
+            jugador.setEstado(new ConPelota(jugador));
             GestorTurnos.iniciarTurnoEquipo(ComponentesJuego.getComponentes().getEquipo2(),ComponentesJuego.getComponentes().getEquipo1());
         }else{
-            jugadaequipo2.get(jugadaequipo2.size()-1).setEstado(new ConPelota());
+            Jugador jugador = jugadaequipo2.get(jugadaequipo2.size() - 1);
+            jugador.setEstado(new ConPelota(jugador));
             GestorTurnos.iniciarTurnoEquipo(ComponentesJuego.getComponentes().getEquipo1(),ComponentesJuego.getComponentes().getEquipo2());
         }
 
@@ -227,7 +234,7 @@ public class Posicionamiento {
         if (ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador()==null){
             jugadoresCercanos(posX,posY);
             if (jugadaequipo1.get(0).getMiEquipo()==equipo){
-                jugadaequipo1.get(0).setEstado(new ConPelota());
+                jugadaequipo1.get(0).setEstado(new ConPelota(jugadaequipo1.get(0)));
                 if (jugadaequipo1.get(0).getMiEquipo().getLado()==Lado.derecha){
                     chute = new Chute(jugadaequipo1.get(0),new Random().nextInt()%2,(int)(Math.random()*(11-8+1)+8));
                     Simulador.getInstance().añadirAccion(chute);
@@ -238,7 +245,7 @@ public class Posicionamiento {
                     System.out.println("chute derecha jugador cercano jugador 1");
                 }
             }else{
-                jugadaequipo2.get(0).setEstado(new ConPelota());
+                jugadaequipo2.get(0).setEstado(new ConPelota(jugadaequipo2.get(0)));
                 if (jugadaequipo2.get(0).getMiEquipo().getLado()==Lado.derecha){
                     chute = new Chute(jugadaequipo2.get(0),new Random().nextInt()%2,(int)(Math.random()*(11-8+1)+8));
                     Simulador.getInstance().añadirAccion(chute);
@@ -252,7 +259,8 @@ public class Posicionamiento {
 
 
         }else{
-            ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador().setEstado(new ConPelota());
+            Jugador jugador = ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador();
+            jugador.setEstado(new ConPelota(jugador));
             if (ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador().getMiEquipo().getLado()==Lado.derecha){
                 chute = new Chute(ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador(),new Random().nextInt()%2,(int)(Math.random()*(11-8+1)+8));
                 Simulador.getInstance().añadirAccion(chute);
@@ -376,10 +384,10 @@ public class Posicionamiento {
         }
 
         if (new Random().nextInt()%2 != 0){
-            jugadaequipo1.get(jugadaequipo1.size()-2).setEstado(new ConPelota());
+            jugadaequipo1.get(jugadaequipo1.size()-2).setEstado(new ConPelota(jugadaequipo1.get(jugadaequipo1.size()-2)));
             GestorTurnos.iniciarTurnoEquipo(ComponentesJuego.getComponentes().getEquipo2(),ComponentesJuego.getComponentes().getEquipo1());
         }else{
-            jugadaequipo2.get(jugadaequipo2.size()-2).setEstado(new ConPelota());
+            jugadaequipo2.get(jugadaequipo2.size()-2).setEstado(new ConPelota(jugadaequipo2.get(jugadaequipo2.size()-2)));
             GestorTurnos.iniciarTurnoEquipo(ComponentesJuego.getComponentes().getEquipo1(),ComponentesJuego.getComponentes().getEquipo2());
         }
 

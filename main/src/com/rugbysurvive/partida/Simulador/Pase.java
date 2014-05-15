@@ -1,19 +1,32 @@
 package com.rugbysurvive.partida.Simulador;
 
+import com.partido.GestorTurnos;
 import com.rugbysurvive.partida.ConstantesJuego;
+import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
+import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.SinPelota;
+import com.rugbysurvive.partida.gestores.Procesos.Proceso;
+import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
 import com.rugbysurvive.partida.tablero.Campo;
 
 /**
  * Created by Victor on 27/03/14.
  */
-public class Pase extends Accion {
+public class Pase extends Accion implements Proceso {
 
+
+    private static final int POSICION_X_TEXTURA = 100;
+    private static final int POSICION_Y_TEXTURA = 100;
+    private static final int TIEMPO_VIDA_TEXTURA =100;
     int posXObjetivo;
     int posYObjetivo;
     private Jugador jugador;
+    private boolean animacionInicializada;
+    private ElementoDibujable pelotaCogida;
+    private int tiempo;
+
 
     public Pase(Jugador jugador, int posX, int posY) {
         this.posXObjetivo = posX;
@@ -106,13 +119,16 @@ public class Pase extends Accion {
 
         /*En caso de que la pelota vaya a ser atrapada por un jugador, entonces se le cambia el estado a este jugador, sino, entonces se coloca la pelota en una casilla del campo*/
         if (pelotaAtrapada == true){
-           Campo.getInstanciaCampo().getCasilla(posYObjetivo, posXObjetivo).getJugador().setEstado(new ConPelota());
+            Jugador jugador = Campo.getInstanciaCampo().getCasilla(posYObjetivo, posXObjetivo).getJugador();
+           jugador.setEstado(new ConPelota(jugador));
+           ProcesosContinuos.añadirProceso(this);
         }
         else
         {
             if(Campo.getInstanciaCampo().getCasilla(posYObjetivo, posXObjetivo).getJugador() != null)
             {
-                Campo.getInstanciaCampo().getCasilla(posYObjetivo, posXObjetivo).getJugador().setEstado(new ConPelota());
+                Jugador jugador = Campo.getInstanciaCampo().getCasilla(posYObjetivo, posXObjetivo).getJugador();
+                jugador.setEstado(new ConPelota(jugador));
             }
             else
             {
@@ -131,4 +147,32 @@ public class Pase extends Accion {
     public void simularAnimacion() {
 
     }
+
+
+    @Override
+    public boolean procesar() {
+        if(!this.animacionInicializada) {
+
+            this.tiempo = 0;
+            this.pelotaCogida = new ElementoDibujable(TipoDibujo.fondo,"simulacion/izquierda.png");
+            this.pelotaCogida.dibujar(POSICION_X_TEXTURA,POSICION_Y_TEXTURA);
+            this.animacionInicializada = true;
+            Simulador.getInstance().setParado(false);
+        }
+
+        else{
+
+            if(this.tiempo>= TIEMPO_VIDA_TEXTURA){
+
+               this.pelotaCogida .borrar();
+                return true;
+            }
+            this.tiempo++;
+        }
+
+
+        return false;
+    }
 }
+
+

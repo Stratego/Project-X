@@ -340,7 +340,8 @@ public class Movimiento extends Accion implements Proceso {
             {
                 this.jugador.setEstado(new SinPelota());
                 this.jugador.lesionar();
-                Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1],this.camino[this.contador][0]).getJugador().setEstado(new ConPelota());
+                Jugador jugador = Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1],this.camino[this.contador][0]).getJugador();
+                jugador.setEstado(new ConPelota(jugador));
                 System.out.println("Me quitan la pelota-----------------<");
             }
         }
@@ -353,7 +354,7 @@ public class Movimiento extends Accion implements Proceso {
 
                 if(luchaPelota(Fuerza, Defensa))
                 {
-                    this.jugador.setEstado(new ConPelota());
+                    this.jugador.setEstado(new ConPelota(this.jugador));
                     Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1],this.camino[this.contador][0]).getJugador().setEstado(new SinPelota());
                     Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1],this.camino[this.contador][0]).getJugador().lesionar();
                     System.out.println("Quito la pelota------------->");
