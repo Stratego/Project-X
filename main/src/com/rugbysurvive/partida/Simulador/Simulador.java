@@ -25,7 +25,8 @@ public class Simulador {
     private List<Accion> accionesEquipo1 = null;
     private List<Accion> accionesEquipo2 = null;
     private Equipo equipoInicial = null;
-
+    private boolean iniciarParado;
+    private boolean parado;
 
     private Simulador()
     {
@@ -35,6 +36,8 @@ public class Simulador {
         this.acciones = new ArrayList<Accion>();
         this.accionesEquipo1 = new ArrayList<Accion>();
         this.accionesEquipo2 = new ArrayList<Accion>();
+        this.parado = false;
+        this.iniciarParado = false;
 
     }
 
@@ -134,44 +137,73 @@ public class Simulador {
 
     public boolean simular()
     {
-        if(simulando && this.acciones.size() > 0){
-            accionFinalizada = false;
-            this.contador++;
-            if(contador == TIEMPO_EJECUCION)
-            {
+        if(!this.parado) {
+            if(simulando && this.acciones.size() > 0){
+                accionFinalizada = false;
+                this.contador++;
+                if(contador == TIEMPO_EJECUCION)
+                {
+                    accionFinalizada = this.acciones.get(0).simular();
 
-                accionFinalizada = this.acciones.get(0).simular();
-                this.contador =0;
-                if(accionFinalizada){
-                    System.out.println("Accion finalizada");
-                    this.acciones.remove(0);
+                    if(this.accionFinalizada && this.iniciarParado){
+                        this.parado =true;
+                        this.iniciarParado = false;
+                    }
+                    this.contador =0;
+                    if(accionFinalizada){
+                        this.acciones.remove(0);
+                    }
+                 }
+
+                if(this.acciones.size() == 0){
+                    this.accionesEquipo1 = new ArrayList<Accion>();
+                    this.accionesEquipo2 = new ArrayList<Accion>();
+                    return true;
                 }
-            }
-            if(this.acciones.size() == 0){
-                System.out.println("Simulacion finalizada");
-                this.accionesEquipo1 = new ArrayList<Accion>();
-                this.accionesEquipo2 = new ArrayList<Accion>();
-                return true;
-            }
-            else {
-                return false;
-            }
+                else {
+                    return false;
+                }
 
-        }
-        else if(this.simulando && this.acciones.size() ==0){
-            return true;
+            }
+                else if(this.simulando && this.acciones.size() ==0){
+                    return true;
+                }
+
         }
 
 
         return false;
     }
 
+
     public void eliminarAccionsSimulador()
     {
-           this.acciones = new ArrayList<Accion>();
+        //   this.acciones = new ArrayList<Accion>();
     }
 
     public int listSize(){
         return this.acciones.size();
     }
+
+    public boolean isParado() {
+        return parado;
+    }
+
+    /**
+     * Si se envia cierto se para el simulador
+     * hasta que se vuelve a enviar falso
+     * El parado se realiza una vez finaliaza la accion
+     * que se esta realizando..
+     * @param parado indica si se para el simulador
+     */
+    public void setParado(boolean parado) {
+        if(!this.parado && parado) {
+            this.iniciarParado = parado;
+        }
+        else if(!parado){
+            this.parado = false;
+        }
+    }
+
+
 }

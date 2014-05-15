@@ -364,6 +364,8 @@ public class Movimiento extends Accion implements Proceso {
                             /*Llamamos a la función choque de jugadores, para ver si hay dos jugadores que colisionan entre ellos*/
                 if(this.ChoqueJugadores() == true)
                 {
+                    ProcesosContinuos.añadirProceso(this);
+                    Simulador.getInstance().setParado(true);
                     //AQUI SE HACE UN CHOQUE
                     return true;
                 }
@@ -425,6 +427,7 @@ public class Movimiento extends Accion implements Proceso {
 
                 this.puñoDerecha.borrar();
                 this.puñoIzquierda.borrar();
+                Simulador.getInstance().setParado(false);
                 return true;
             }
 
