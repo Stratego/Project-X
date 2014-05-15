@@ -18,7 +18,7 @@ public class MenuPrincipal extends BaseActivity {
     private Intent intent;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_meny_principal);
+        setContentView(R.layout.activity_menu_principal);
 
         SharedPreferences preferencias = getSharedPreferences("firstEje", Context.MODE_PRIVATE);
         final int userID = preferencias.getInt("usuarioID",-1);
@@ -71,8 +71,8 @@ public class MenuPrincipal extends BaseActivity {
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MenuPrincipal.this);
-                builder.setTitle("Selecciona el ribal");
-                builder.setMessage("Selecciona el tipo de ribal contra el que deseas jugar");
+                builder.setTitle("Selecciona el rival");
+                builder.setMessage("Selecciona el tipo de rival contra el que deseas jugar");
                 builder.setPositiveButton("P vs P", positive);
                 builder.setNegativeButton("P vs IA",negative);
                 builder.create().show();

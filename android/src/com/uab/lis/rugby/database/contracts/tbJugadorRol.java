@@ -11,7 +11,7 @@ public class tbJugadorRol implements BaseColumns {
 
     public static final String COL_JUGADOR = "idJugador";
 
-    public static final String COL_ROL = "idrol";
+    public static final String COL_ROL = "idRol";
 
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE + " ("

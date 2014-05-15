@@ -55,7 +55,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         db.execSQL("INSERT INTO ROLES VALUES(1,'atacante','es un jugador especializado en ataque');");
         db.execSQL("INSERT INTO ROLES VALUES(2,'defensa','su contundencia en la defensa es memorable');");
-        db.execSQL("INSERT INTO ROLES VALUES(3,'chutador','quanto mas chuta... mas inutil es');");
+        db.execSQL("INSERT INTO ROLES VALUES(3,'chutador','cuanto mas chuta... mas inutil es');");
 
 
         db.execSQL("INSERT INTO HABILIDADES VALUES(1,'Fuerza','def fuerza');");

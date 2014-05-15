@@ -17,6 +17,11 @@ public class UrisGenerated {
         return Uri.withAppendedPath(base, tbUsuarios.TABLE + "/" + id);
     }
 
+    public static Uri getUriAllJugadores() {
+        Uri base = MyAppContentProvider.URI_BASE;
+        return Uri.withAppendedPath(base, tbJugadores.TABLE);
+    }
+
     public static Uri getUriEquipos(int idusuario) {
         Uri base = getUriUsuario(idusuario);
         return Uri.withAppendedPath(base, tbEquipos.TABLE);

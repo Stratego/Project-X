@@ -17,4 +17,9 @@
     <string name="activity_tiendafichajes_titulo">Tienda de fichajes</string>
     <string name="activity_tiendaobjetos_titulo">Tienda de objetos</string>
     <string name="activity_tiendaotros_titulo">Tienda de otros</string>
+    <string name="activity_tiendafichajes_sinjugadores">Actualmente no hay jugadores en la base de datos</string>
+    <string name="activity_tiendafichajes_rol">Filtrar por rol:</string>
+    <string name="activity_tiendafichajes_tagNombre">Nombre:</string>
+    <string name="activity_tiendafichajes_tagRol">Rol:</string>
+    <string name="activity_tiendafichajes_tagEquipo">Equipo:</string>
 </resources>

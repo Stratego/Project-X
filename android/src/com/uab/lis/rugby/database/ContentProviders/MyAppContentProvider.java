@@ -21,6 +21,7 @@ public class MyAppContentProvider extends DespicableContentProvider {
     public void recruitMinions() {
         addMinion(new UsuariosMinion());
         addMinion(new JugadoresMinion());
+        addMinion(new AllJugadoresMinion());
         addMinion(new EquiposMinion());
         addMinion(new HabilidadesMinion());
         addMinion(new ObjetosMinion());
