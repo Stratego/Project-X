@@ -55,6 +55,8 @@ public class Jugador implements GestionEntrada {
     public int Habilidad;
     public int Resistencia;
     public int Ataque;
+    public final int vidaOriginal;
+    public final int resistenciaOriginal;
 
     /*contMovimientos indicara la cantidad de acciones movimiento que ha hecho hasta el momento, y de esta manera podremos ir haciendo que el jugador pierda resistencia segun interese*/
     public int contMovimientos;
@@ -86,6 +88,9 @@ public class Jugador implements GestionEntrada {
         this.Resistencia = resistencia;
         this.Ataque = ataque;
 
+        this.vidaOriginal = this.Vida;
+        this.resistenciaOriginal = this.Resistencia;
+
         this.miEquipo = equipo;
 
         this.powerup= new ArrayList<ObjetoJugador>();
@@ -104,11 +109,12 @@ public class Jugador implements GestionEntrada {
 
         this.contMovimientos = 0;
 
+
     }
 
     public void cansancio()
     {
-        if(this.contMovimientos == 2)
+        if(this.contMovimientos == 1)
         {
             this.setResistencia(this.getResistencia() - 3);
             this.contMovimientos = 0;
@@ -116,6 +122,10 @@ public class Jugador implements GestionEntrada {
         else
         {
             this.contMovimientos += 1;
+        }
+
+        if(this.resistenciaOriginal >= this.Resistencia -3){
+            this.texturas.add(new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/estado/cansancio.png"));
         }
     }
 

@@ -90,30 +90,31 @@ public class Simulador {
         Equipo equipo2= ComponentesJuego.getComponentes().getEquipo2();
         int posicion =1;
 
-        if(this.accionesEquipo1.size() !=0 && this.accionesEquipo2.size() != 0) {
+         if(this.accionesEquipo1.size() == 0 && this.accionesEquipo2.size() == 0){
+             this.equipoInicial = equipo1;
+         }
+         if(this.equipoInicial.equals(equipo1)) {
+                this.acciones.addAll(this.accionesEquipo1);
+
+                for(Accion accion : this.accionesEquipo2){
+                    if(this.acciones.size()>= posicion){
+                        this.acciones.add(posicion,accion);
+                        posicion = posicion +2;
+                    }
+                    else {
+                       this.acciones.add(accion);
+                    }
+                }
+             }
 
 
-        if(this.equipoInicial.equals(equipo1)){
-            this.acciones.addAll(this.accionesEquipo1);
+          else {
+                this.acciones.addAll(this.accionesEquipo2);
 
-            for(Accion accion : this.accionesEquipo2){
-               if(this.acciones.size()>= posicion){
-                this.acciones.add(posicion,accion);
-                   posicion = posicion +2;
-               }
-                else{
-                   this.acciones.add(accion);
-               }
-
-            }
-        }
-        else{
-            this.acciones.addAll(this.accionesEquipo2);
-
-            for(Accion accion : this.accionesEquipo1){
-                if(this.acciones.size()>= posicion){
-                    this.acciones.add(posicion,accion);
-                    posicion = posicion +2;
+                for(Accion accion : this.accionesEquipo1){
+                    if(this.acciones.size()>= posicion){
+                        this.acciones.add(posicion,accion);
+                         posicion = posicion +2;
                 }
                 else{
                     this.acciones.add(accion);
@@ -121,17 +122,24 @@ public class Simulador {
 
             }
         }
-        }
+
+
         this.simulando = true;
     }
 
     public void forzarFinal(){
-        while(!simular());
+        if(!(this.parado || this.iniciarParado))
+        {
+            while(!simular());
+        }
     }
 
     public void finalizarAccion(){
-        while(!accionFinalizada){
-            simular();
+        if(!(this.parado || this.iniciarParado))
+        {
+             while(!accionFinalizada){
+                simular();
+             }
         }
     }
 
@@ -141,6 +149,7 @@ public class Simulador {
             if(simulando && this.acciones.size() > 0){
                 accionFinalizada = false;
                 this.contador++;
+
                 if(contador == TIEMPO_EJECUCION)
                 {
                     accionFinalizada = this.acciones.get(0).simular();
