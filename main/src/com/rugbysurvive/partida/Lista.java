@@ -215,13 +215,13 @@ public class Lista {
             listaObjetos.add(new BotonObjeto(x +distanciaObjetoCercano, y +distanciaObjetoLejano, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(0).getId()));
 
             if(objetosJugador.size()>=2){
-                listaObjetos.add(new BotonObjeto(x+distanciaObjetoLejano, y+distanciaObjetoLejano, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(1).getId()));
+                listaObjetos.add(new BotonObjeto(x+distanciaObjetoLejano, y+distanciaObjetoLejano, Entrada.listaobjetos, objetosJugador.get(1).getTextura(),objetosJugador.get(1).getId()));
             }
             if(objetosJugador.size()>=3){
-                listaObjetos.add(new BotonObjeto(x+distanciaObjetoCercano, y+distanciaObjetoCercano, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(2).getId()));
+                listaObjetos.add(new BotonObjeto(x+distanciaObjetoCercano, y+distanciaObjetoCercano, Entrada.listaobjetos, objetosJugador.get(2).getTextura(),objetosJugador.get(2).getId()));
             }
             if(objetosJugador.size()>=4){
-                listaObjetos.add(new BotonObjeto(x+distanciaObjetoLejano, y+distanciaObjetoCercano, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(3).getId()));
+                listaObjetos.add(new BotonObjeto(x+distanciaObjetoLejano, y+distanciaObjetoCercano, Entrada.listaobjetos, objetosJugador.get(3).getTextura(),objetosJugador.get(3).getId()));
             }
 
             estadoObjeto=true;

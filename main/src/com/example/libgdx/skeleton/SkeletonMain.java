@@ -177,6 +177,9 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("jugador/estado/vida.png");
         nombresTexturas.add("jugador/estado/cansancio.png");
         nombresTexturas.add("jugador/estado/conPelota.png");
+        nombresTexturas.add("objetos/fondo.png");
+        nombresTexturas.add("objetos/positivo.png");
+        nombresTexturas.add("objetos/flechaGrande.png");
 
 
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
