@@ -49,10 +49,15 @@ public class ConPelota implements Estado, Proceso {
 
         this.jugador = jugador;
 
-        System.out.println("ENTRA CONTINUAMENTE EN CONPELOTA:"+entrada+"-"+jugador.getPaseOChute()+"-"+jugador.getMiEquipo().getLado()+"posX: "+posX+"<="+jugador.getPosicionX());
         if(entrada == Entrada.arrastrar)
         {
-            jugador.setEstado(new EnMovimiento((int)(jugador.getResistencia()/100),this));
+            int distancia = jugador.getResistencia()/10;
+            if(distancia <=0)
+            {
+                distancia = 1;
+            }
+
+            jugador.setEstado(new EnMovimiento(distancia,this));
             return false;
         }
         else
