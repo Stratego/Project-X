@@ -182,6 +182,9 @@ public class Jugador implements GestionEntrada {
 
             this.seleccion = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/seleccionado.png");
 
+            if(this.estado instanceof ConPelota){
+                ((ConPelota) this.estado).actualizarTexturas();
+            }
         }
     }
 
@@ -297,6 +300,11 @@ public class Jugador implements GestionEntrada {
      */
     public void setEstado(Estado estado)
     {
+        if(this.estado != null) {
+            if(this.estado instanceof ConPelota && estado instanceof SinPelota){
+                ((ConPelota)this.estado).borrarTexturas();
+            }
+        }
         this.estado = estado;
     }
 

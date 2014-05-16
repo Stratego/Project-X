@@ -27,8 +27,8 @@ public class ConPelota implements Estado, Proceso {
 
     public ConPelota(Jugador jugador){
         this.jugador = jugador;
-        this.indicadorPelota = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/estado/conPelota.png");
-        this.indicadorPelota.dibujar(this.jugador.getPosicionX(),this.jugador.getPosicionY());
+        this.indicarJugadorConPelota = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/estado/conPelota.png");
+        this.indicarJugadorConPelota.dibujar(this.jugador.getPosicionX(),this.jugador.getPosicionY());
     }
 
     public boolean generarAccion(Jugador jugador) {
@@ -210,5 +210,27 @@ public class ConPelota implements Estado, Proceso {
             return true;
         }
         return false;
+    }
+
+    /**
+     * El estado con pelota contiene un conjunto de texturas
+     * que deben ser eliminadas antes de realizar cualquier dibujado
+     */
+    public void borrarTexturas() {
+        if(this.indicarJugadorConPelota!= null){
+            this.indicarJugadorConPelota.borrar();
+        }
+        if(this.indicadorPelota!= null){
+            this.indicadorPelota.borrar();
+        }
+    }
+
+    /**
+     * Si hay una pelota dibujandose es necesario
+     * que vaya actualizandose con la posicion del jugador
+     */
+    public void actualizarTexturas(){
+        this.indicarJugadorConPelota.borrar();
+        this.indicarJugadorConPelota.dibujar(this.jugador.getPosicionX(),this.jugador.getPosicionY());
     }
 }
