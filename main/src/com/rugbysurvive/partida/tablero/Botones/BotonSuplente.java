@@ -20,8 +20,8 @@ public class BotonSuplente extends Boton {
     private final static String NIVEL_1 = "Menu/Habilidades/nivel1.png";
     private final static String NIVEL_2 = "Menu/Habilidades/nivel2.png";
     private final static String NIVEL_3 = "Menu/Habilidades/nivel3.png";
-    private final static double LIMITE_VALOR_NIVEL_1 = 1/3;
-    private final static double LIMITE_VALOR_NIVEL_2 = 2/3;
+    private final static double LIMITE_VALOR_NIVEL_1 = 0.33333333;
+    private final static double LIMITE_VALOR_NIVEL_2 = 0.66666666;
     private final static double LIMITE_VALOR_NIVEL_3 = 1;
 
 

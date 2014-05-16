@@ -77,16 +77,16 @@ public class ComponentesJuego {
         this.equipo1.añadirJugador(jugador,9,22);
 
 
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),9,9);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),11,25);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 34, 90, 80, 70, this.equipo1),9,9);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 12, 90, 80, 70, this.equipo1),11,25);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),11,11);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),12,12);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),13,13);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 13, 70, this.equipo1),12,12);
+        this.equipo1.añadirJugador(new Jugador(80, 68, 100, 90, 80, 70, this.equipo1),13,13);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),14,14);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),15,15);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),16,16);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 51, 90, 80, 70, this.equipo1),15,15);
+        this.equipo1.añadirJugador(new Jugador(80, 34, 56, 22, 80, 70, this.equipo1),16,16);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),17,17);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),12,12);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 56, 90, 80, 70, this.equipo1),12,12);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),4,4);
 
 
