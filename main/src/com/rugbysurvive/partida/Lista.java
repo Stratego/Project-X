@@ -79,8 +79,9 @@ public class Lista {
 
 
         int y = ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES;
-
+        this.eliminarListaSuplentes();
         listaSuplentes = new ArrayList<Boton>();
+
         Equipo equipo1 = ComponentesJuego.getComponentes().getEquipo1();
         Equipo equipo2 = ComponentesJuego.getComponentes().getEquipo2();
         Equipo equipoSeleccionado = equipo2;
@@ -93,19 +94,17 @@ public class Lista {
         if (equipoSeleccionado.hayJugadorSelecionado()){
 
             ArrayList<Jugador> suplentes= equipoSeleccionado.listaSuplentes();
-            int posicion = posicionInicial;
-            this.reiniciarPosicionamientoLista();
-
+            int posicion = 0;
 
 
              for (Jugador iterador : suplentes) {
 
-                 if(posicion < posicionInicial +3) {
+                 if(posicion >= posicionInicial && posicion < posicionInicial +3) {
                     listaSuplentes.add(new BotonSuplente(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y,
                                         Entrada.listasuplente,"TauloCanviJugadors.png",iterador));
                     y += ConstantesJuego.ANCHO_TABLON_SUSTITUCION;
-                    posicion++;
                  }
+                 posicion++;
              }
 
             this.tablonInformacionHabilidades = new ArrayList<ElementoDibujable>();
@@ -137,6 +136,7 @@ public class Lista {
             if(posicionInicial >0){
                 this.botonAbajo = new BotonDesplazamiento(ConstantesJuego.POSICION_BOTON_CHUTEPASE-100,100,Entrada.listasuplente,
                         "Menu/fletxaAvall.png",1,this);
+                System.out.println("BOTON ABAJO MOSTRANDOSE");
                 this.botonAbajo.mostrar();
             }
             if(posicionInicial +2 < suplentes.size()- 1){
