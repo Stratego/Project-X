@@ -2,9 +2,7 @@ package com.rugbysurvive.partida.IA;
 
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Simulador.Movimiento;
-import com.rugbysurvive.partida.Simulador.Pase;
 import com.rugbysurvive.partida.Simulador.Simulador;
-import com.rugbysurvive.partida.arbitro.UsoObjetos;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.tablero.Lado;
 
@@ -49,7 +47,7 @@ public class IA {
 
                     movimentoIA.imprimirLista(movimentoIA.calcularCamino());
 
-                    simulador.añadirAccion(new Movimiento(jugador,movimentoIA.arraymovimento(), null));
+                    simulador.añadirAccion(new Movimiento(jugador,movimentoIA.arraymovimento(jugador), null));
                 }
             }
         }

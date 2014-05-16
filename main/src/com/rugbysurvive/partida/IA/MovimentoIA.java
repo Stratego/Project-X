@@ -1,12 +1,10 @@
 package com.rugbysurvive.partida.IA;
 
+import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.tablero.Casilla;
-import com.sun.deploy.util.ArrayUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * Created by Victor on 9/05/14.
@@ -216,15 +214,27 @@ public class MovimentoIA {
         }
     }
 
-    public int[][] arraymovimento(){
+    public int[][] arraymovimento(Jugador jugador){
 
         int iteraciones = 0;
         ArrayList <NodoIA> lista = calcularCamino();
-        int[][] movimiento = new int [lista.size()][2];
+
+        int cantidadMovimientos = jugador.getResistencia()/10;
+
+        if(cantidadMovimientos <= 0)
+        {
+            cantidadMovimientos = 1;
+        }
+
+        int[][] movimiento = new int [cantidadMovimientos][2];
+
         for (NodoIA nodo :  lista){
 
-            movimiento[iteraciones][0]= nodo.getX();
-            movimiento[iteraciones][1]= nodo.getY();
+            if(iteraciones < cantidadMovimientos)
+            {
+                movimiento[iteraciones][0]= nodo.getX();
+                movimiento[iteraciones][1]= nodo.getY();
+            }
             iteraciones++;
         }
         return movimiento;

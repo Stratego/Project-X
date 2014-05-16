@@ -8,7 +8,6 @@ import com.models.Equipo;
 import com.partido.GestorTurnos;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.IA.IA;
-import com.rugbysurvive.partida.IA.MovimentoIA;
 import com.rugbysurvive.partida.ResolucionPantalla;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.arbitro.Arbitro;
@@ -20,13 +19,11 @@ import com.rugbysurvive.partida.gestores.Entrada.GestorEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
 import com.rugbysurvive.partida.gestores.Prueba;
-import com.rugbysurvive.partida.jugadores.Posicionamiento;
 import com.rugbysurvive.partida.tablero.Boton;
 import com.rugbysurvive.partida.tablero.Botones.BotonCambioTurno;
 import com.rugbysurvive.partida.tablero.Botones.BotonFinalizarAccion;
 import com.rugbysurvive.partida.tablero.Botones.BotonFinalizarSimulacion;
 import com.rugbysurvive.partida.tablero.Botones.BotonInterfaz;
-import com.rugbysurvive.partida.tablero.Casilla;
 
 import java.util.ArrayList;
 
@@ -268,7 +265,7 @@ public class SkeletonMain extends Game {
         if(GestorTurnos.finTurnoJugadores() && !this.simular){
 
             System.out.println("Iniciando simulacion");
-            //IA ia = new IA();
+            IA ia = new IA();
             this.simular = true;
             this.simulador.iniciarSimulacion();
 
