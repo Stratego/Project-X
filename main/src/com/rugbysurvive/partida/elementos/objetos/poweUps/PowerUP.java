@@ -52,11 +52,26 @@ public class PowerUP extends Objeto {
 
                 jugador.setFuerza(jugador.getFuerza() + modificacion);
                 break;
+
             case defensa:
 
                 jugador.setDefensa(jugador.getDefensa() + modificacion);
                 break;
 
+            case resistencia:
+
+                jugador.setResistencia(jugador.getResistencia() + modificacion);
+                break;
+
+            case habilidad:
+
+                jugador.setHabilidad(jugador.getHabilidad() + modificacion);
+                break;
+
+            case ataque:
+
+                jugador.setAtaque(jugador.getAtaque() + modificacion);
+                break;
         }
 
 
@@ -84,10 +99,26 @@ public class PowerUP extends Objeto {
                 jugador.setDefensa(jugador.getDefensa()-modificacion);
                 break;
 
+            case resistencia:
+
+                jugador.setResistencia(jugador.getResistencia() - modificacion);
+                break;
+
+            case habilidad:
+
+                jugador.setHabilidad(jugador.getHabilidad() - modificacion);
+                break;
+
+            case ataque:
+
+                jugador.setAtaque(jugador.getAtaque() - modificacion);
+                break;
         }
 
-        System.out.println("vida jugador al finalizar objeto "+ jugador.getVida());
+        //System.out.println("vida jugador al finalizar objeto "+ jugador.getVida());
         System.out.println("FINALIZAR");
 
     }
+
+
 }
