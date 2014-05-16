@@ -49,10 +49,10 @@ public class ConPelota implements Estado, Proceso {
 
         this.jugador = jugador;
 
+        System.out.println("ENTRA CONTINUAMENTE EN CONPELOTA:"+entrada+"-"+jugador.getPaseOChute()+"-"+jugador.getMiEquipo().getLado()+"posX: "+posX+"<="+jugador.getPosicionX());
         if(entrada == Entrada.arrastrar)
         {
-            jugador.setEstado(new EnMovimiento(8,this));
-            System.out.println("<ME PONGO EN MOVIMIENTO>");
+            jugador.setEstado(new EnMovimiento((int)(jugador.getResistencia()/100),this));
             return false;
         }
         else
@@ -76,7 +76,7 @@ public class ConPelota implements Estado, Proceso {
                         count = 0;
 
                     }
-
+                }
                 if(jugador.getMiEquipo().getLado()== Lado.derecha){
 
                         if (posX >= jugador.getPosicionX()){
@@ -93,8 +93,6 @@ public class ConPelota implements Estado, Proceso {
 
                         }
                 }
-            }
-
             }
 
             else
@@ -115,9 +113,9 @@ public class ConPelota implements Estado, Proceso {
                         ProcesosContinuos.añadirProceso(this);
                         count = 0;
                     }
-
+                }
                 if (jugador.getMiEquipo().getLado() == Lado.derecha){
-                        if(posX >= jugador.getPosicionX()){
+                        if(posX <= jugador.getPosicionX()){
 
                             jugador.setAccion(new Chute(jugador, posX, posY));
                             System.out.println("La CHUTOOO!!!");
@@ -130,9 +128,6 @@ public class ConPelota implements Estado, Proceso {
 
                         }
                     }
-
-                }
-
             }
         }
 

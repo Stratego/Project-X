@@ -74,6 +74,7 @@ public class ComponentesJuego {
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo1);
         jugador.setDireccion(DireccionJugador.abajo);
+        jugador.setEstado(new ConPelota(jugador));
         this.equipo1.añadirJugador(jugador,9,22);
 
 
@@ -103,7 +104,11 @@ public class ComponentesJuego {
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),15,22);
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),16,23);
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),17,24);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),18,25);
+
+        jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo2);
+        jugador.setEstado(new ConPelota(jugador));
+        this.equipo2.añadirJugador(jugador,18,25);
+
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo2);
         objeto = new PowerUP(0,10,"casilla.png", Habilidades.vida,50,jugador);
         objeto2 = new ColocadorObjetosCampo(1,10,"mina.png",jugador,new MinaCampo("mina.png"));

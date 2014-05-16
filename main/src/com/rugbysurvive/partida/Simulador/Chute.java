@@ -143,7 +143,7 @@ public class Chute extends Accion {
                 System.out.println("Contador"+contPrecision);
             }
 
-            Campo.getInstanciaCampo().colocarPelota(ejesDestinoPelota[casillaChute][1], +ejesDestinoPelota[casillaChute][0]);
+            Campo.getInstanciaCampo().colocarPelota(ejesDestinoPelota[casillaChute][1], ejesDestinoPelota[casillaChute][0]);
 
             System.out.println("La pelota va a la posicion: "+ejesDestinoPelota[casillaChute][0]+"-"+ejesDestinoPelota[casillaChute][1]);
             jugador.setEstado(new SinPelota());

@@ -1,6 +1,5 @@
 package com.rugbysurvive.partida.Simulador;
 
-import com.badlogic.gdx.Gdx;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
@@ -174,6 +173,9 @@ public class Movimiento extends Accion implements Proceso {
             /*Referenciamos jugador y casillas en ambos sentidos*/
             this.jugador.colocar(Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]));
 
+            /*Si pasa por encima de una casilla con pelota, entonces la recoge*/
+            recogerPelota();
+
 
             Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).setJugador(this.jugador);
             GestorGrafico.getCamara().variarPosicion(this.camino[contador][0]*64,this.camino[contador][1]*64);
@@ -209,6 +211,23 @@ public class Movimiento extends Accion implements Proceso {
         }
         return false;
      }
+
+    /**
+     * Recoge la pelota del campo
+     */
+    public void recogerPelota()
+    {
+        if(this.jugador.getEstado() instanceof SinPelota)
+        {
+
+
+            if(Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1],this.camino[this.contador][0]).hayPelota())
+            {
+                this.jugador.setEstado(new ConPelota(this.jugador));
+                Campo.getInstanciaCampo().quitarPelota(this.camino[this.contador][1], this.camino[this.contador][0]);
+            }
+        }
+    }
 
     /**
      * Permite decidir que jugador ganara o mantendrá la posesión del valón
