@@ -20,13 +20,13 @@ public class AllJugadoresMinion extends MinionContentProvider {
     @Override
     public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        queryBuilder.setTables(tbJugadores.TABLE + " AS j, " + tbJugadorRol.TABLE + " AS jr, " + tbRoles.TABLE +
-                " AS r, " + tbJugadorEquipo.TABLE + " AS je, " + tbEquipos.TABLE + " AS e");
+        queryBuilder.setTables(tbJugadores.TABLE + " as j, " + tbJugadorRol.TABLE + " as jr, " + tbRoles.TABLE +
+                " as r, " + tbJugadorEquipo.TABLE + " as je, " + tbEquipos.TABLE + " as e");
         String where = "j." + tbJugadores._ID + " = jr." + tbJugadorRol.COL_JUGADOR +
-                " AND jr." + tbJugadorRol.COL_ROL + " = r." + tbRoles._ID +
-                " AND j." + tbJugadores._ID + " = je." + tbJugadorEquipo.COL_JUGADOR +
-                " AND je." + tbJugadorEquipo.COL_EQUIPO + " = e." + tbEquipos._ID;
-        String[] columnas = new String[]{"j."+tbJugadores._ID, "j."+tbJugadores.COL_NOMBRE, "j."+tbJugadores.COL_NOMBRE, "r."+tbRoles.COL_NOMBRE, "e."+tbEquipos.COL_NOMBRE};
+                " and jr." + tbJugadorRol.COL_ROL + " = r." + tbRoles._ID +
+                " and j." + tbJugadores._ID + " = je." + tbJugadorEquipo.COL_JUGADOR +
+                " and je." + tbJugadorEquipo.COL_EQUIPO + " = e." + tbEquipos._ID;
+        String[] columnas = new String[]{"j."+tbJugadores._ID + " as _id", "j."+tbJugadores.COL_NOMBRE + " as jugador", "r."+tbRoles.COL_NOMBRE + " as rol", "e."+tbEquipos.COL_NOMBRE + " as equipo"};
         return queryBuilder.query(db,columnas,where,null,null,null,null);
     }
 

@@ -26,19 +26,48 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:textColor="#ffffff"
+                android:layout_gravity="center_vertical"
                 android:text="@string/activity_tiendafichajes_rol"
                 android:id="@+id/textView2"/>
-        <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Atacante"
-                android:id="@+id/radioButton" android:checked="false"/>
-        <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Defensa"
-                android:id="@+id/radioButton2" android:checked="false"/>
+
+        <RadioGroup android:id="@+id/gruporb"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/fusta2"
+                    android:baselineAligned="false">
+
+            <RadioButton android:id="@+id/atacante"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_gravity="center_vertical"
+                         android:onClick="onRadioButtonClicked"
+                         android:text="@string/activity_tiendafichajes_atacante" />
+
+            <RadioButton android:id="@+id/defensa"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_gravity="center_vertical"
+                         android:onClick="onRadioButtonClicked"
+                         android:text="@string/activity_tiendafichajes_defensa" />
+
+            <RadioButton android:id="@+id/chutador"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_gravity="center_vertical"
+                         android:onClick="onRadioButtonClicked"
+                         android:text="@string/activity_tiendafichajes_chutador" />
+        </RadioGroup>
+
     </LinearLayout>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="6dp"
+            android:text="Mostrar todos"
+            android:background="@drawable/fusta2"
+            android:id="@+id/button"/>
     <ListView
             android:layout_marginTop="24dp"
             android:id="@android:id/list"
