@@ -67,7 +67,8 @@
             android:layout_marginTop="6dp"
             android:text="Mostrar todos"
             android:background="@drawable/fusta2"
-            android:id="@+id/button"/>
+            android:onClick="onButtonClicked"
+            android:id="@+id/todos"/>
     <ListView
             android:layout_marginTop="24dp"
             android:id="@android:id/list"
