@@ -244,8 +244,7 @@ public class Lista {
         }
 
         for (Boton iterador : listaObjetos ){
-            ID = iterador.getID();
-            GestorGrafico.generarDibujante().eliminarTextura(ID);
+            iterador.borrar();
         }
         listaObjetos.clear();
         estadoObjeto=false;

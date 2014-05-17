@@ -3,8 +3,11 @@ package com.rugbysurvive.partida.Simulador;
 
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
+import com.rugbysurvive.partida.gestores.Procesos.Proceso;
+import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
 import com.rugbysurvive.partida.jugadores.Equipo;
 
+import javax.rmi.CORBA.Tie;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +16,8 @@ import java.util.List;
  */
 
 /*Esta clase es un Singleton*/
-public class Simulador {
+public class Simulador implements Proceso{
+    private static final int TIEMPO_ESPERA =100;
     private static final int ACCIONES_SEGUNDO = 3;
     private static final int ITERACIONES_SEGUNDO = 50;
     private static final double TIEMPO_EJECUCION = ITERACIONES_SEGUNDO / ACCIONES_SEGUNDO;
@@ -27,6 +31,7 @@ public class Simulador {
     private Equipo equipoInicial = null;
     private boolean iniciarParado;
     private boolean parado;
+    private int tiempo;
 
     private Simulador()
     {
@@ -38,6 +43,7 @@ public class Simulador {
         this.accionesEquipo2 = new ArrayList<Accion>();
         this.parado = false;
         this.iniciarParado = false;
+        this.tiempo = 0;
 
     }
 
@@ -146,7 +152,7 @@ public class Simulador {
     public boolean simular()
     {
         if(!this.parado) {
-            if(simulando && this.acciones.size() > 0){
+            if(simulando && this.acciones.size() > 0) {
                 accionFinalizada = false;
                 this.contador++;
 
@@ -174,9 +180,16 @@ public class Simulador {
                 }
 
             }
-                else if(this.simulando && this.acciones.size() ==0){
+            else if(this.simulando && this.acciones.size() ==0){
+
+                if(tiempo==0) {
+                    ProcesosContinuos.añadirProceso(this);
+                }
+                else if (this.tiempo==TIEMPO_ESPERA) {
                     return true;
                 }
+                return false;
+            }
 
         }
 
@@ -215,4 +228,13 @@ public class Simulador {
     }
 
 
+    @Override
+    public boolean procesar() {
+        if(this.tiempo > TIEMPO_ESPERA){
+            this.tiempo =0;
+            return true;
+        }
+        this.tiempo++;
+        return false;
+    }
 }

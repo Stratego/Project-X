@@ -131,4 +131,6 @@ public class BotonSuplente extends Boton {
 
         this.capacidadHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,textura));
     }
+
+
 }

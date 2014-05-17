@@ -180,6 +180,13 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("objetos/fondo.png");
         nombresTexturas.add("objetos/positivo.png");
         nombresTexturas.add("objetos/flechaGrande.png");
+        nombresTexturas.add("simulacion/rebrePassada.png");
+        nombresTexturas.add("objetos/explosion/explosio1.png");
+        nombresTexturas.add("objetos/explosion/explosio2.png");
+        nombresTexturas.add("objetos/explosion/explosio3.png");
+        nombresTexturas.add("objetos/explosion/explosio4.png");
+        nombresTexturas.add("objetos/explosion/explosio5.png");
+        nombresTexturas.add("objetos/explosion/explosio6.png");
 
 
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
@@ -268,7 +275,7 @@ public class SkeletonMain extends Game {
         if(GestorTurnos.finTurnoJugadores() && !this.simular){
 
             System.out.println("Iniciando simulacion");
-            IA ia = new IA();
+           // IA ia = new IA();
             this.simular = true;
             this.simulador.iniciarSimulacion();
 

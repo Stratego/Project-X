@@ -57,7 +57,7 @@ public class ComponentesJuego {
         PowerUP objeto = new PowerUP(0,10,Habilidades.ataque,50,jugador);
         PowerUP objeto3 = new PowerUP(1,10,Habilidades.defensa,50,jugador);
         PowerUP objeto4 = new PowerUP(2,10,Habilidades.resistencia,50,jugador);
-        ColocadorObjetosCampo objeto2 = new ColocadorObjetosCampo(1,10,"mina.png",jugador,new MinaCampo("mina.png"));
+        ColocadorObjetosCampo objeto2 = new ColocadorObjetosCampo(1,10,"mina.png",jugador,new MinaCampo("mina.png",jugador));
 
         jugador.añadirObjeto(objeto);
         jugador.añadirObjeto(objeto2);
@@ -113,7 +113,7 @@ public class ComponentesJuego {
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo2);
         objeto = new PowerUP(0,10,"casilla.png", Habilidades.vida,50,jugador);
-        objeto2 = new ColocadorObjetosCampo(1,10,"mina.png",jugador,new MinaCampo("mina.png"));
+        objeto2 = new ColocadorObjetosCampo(1,10,"mina.png",jugador,new MinaCampo("mina.png",jugador));
 
         jugador.añadirObjeto(objeto);
         jugador.añadirObjeto(objeto2);

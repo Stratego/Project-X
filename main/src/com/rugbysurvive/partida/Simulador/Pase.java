@@ -17,21 +17,22 @@ import com.rugbysurvive.partida.tablero.Campo;
 public class Pase extends Accion implements Proceso {
 
 
-    private static final int POSICION_X_TEXTURA = 100;
-    private static final int POSICION_Y_TEXTURA = 100;
     private static final int TIEMPO_VIDA_TEXTURA =100;
     int posXObjetivo;
     int posYObjetivo;
     private Jugador jugador;
     private boolean animacionInicializada;
+    private boolean animacionActivada;
     private ElementoDibujable pelotaCogida;
     private int tiempo;
-
+    private boolean animacionFinalizada;
 
     public Pase(Jugador jugador, int posX, int posY) {
         this.posXObjetivo = posX;
         this.posYObjetivo = posY;
         this.jugador = jugador;
+        this.animacionFinalizada = false;
+        this.animacionActivada = false;
     }
 
 
@@ -39,6 +40,7 @@ public class Pase extends Accion implements Proceso {
     public boolean simular() {
         //jugador.setEstado(new SinPelota());
 
+     if(!this.animacionInicializada) {
         boolean pelotaAtrapada = false;
 
 
@@ -120,8 +122,10 @@ public class Pase extends Accion implements Proceso {
         /*En caso de que la pelota vaya a ser atrapada por un jugador, entonces se le cambia el estado a este jugador, sino, entonces se coloca la pelota en una casilla del campo*/
         if (pelotaAtrapada == true){
             Jugador jugador = Campo.getInstanciaCampo().getCasilla(posYObjetivo, posXObjetivo).getJugador();
-           jugador.setEstado(new ConPelota(jugador));
-           ProcesosContinuos.añadirProceso(this);
+            jugador.setEstado(new ConPelota(jugador));
+            ProcesosContinuos.añadirProceso(this);
+            this.animacionActivada = true;
+
         }
         else
         {
@@ -140,7 +144,22 @@ public class Pase extends Accion implements Proceso {
 
         System.out.println("Pase lanzado a la posición: "+this.posXObjetivo+"-"+this.posYObjetivo);
         jugador.setEstado(new SinPelota());
-        return true;
+
+        if(this.animacionActivada) {
+            return false;
+        }
+        else{
+            return true;
+        }
+     }
+
+     else{
+          if(this.animacionFinalizada){
+              return true;
+          }
+         return false;
+     }
+
     }
 
     @Override
@@ -154,17 +173,19 @@ public class Pase extends Accion implements Proceso {
         if(!this.animacionInicializada) {
 
             this.tiempo = 0;
-            this.pelotaCogida = new ElementoDibujable(TipoDibujo.fondo,"simulacion/izquierda.png");
-            this.pelotaCogida.dibujar(POSICION_X_TEXTURA,POSICION_Y_TEXTURA);
+            this.pelotaCogida = new ElementoDibujable(TipoDibujo.interficieUsuario,"simulacion/rebrePassada.png");
+            this.pelotaCogida.dibujar(ConstantesJuego.getHeight()/2-ConstantesJuego.TAMAÑO_PUÑO/2,
+                                            ConstantesJuego.getWidth()/2-ConstantesJuego.TAMAÑO_PUÑO/2);
             this.animacionInicializada = true;
             Simulador.getInstance().setParado(false);
         }
 
         else{
 
-            if(this.tiempo>= TIEMPO_VIDA_TEXTURA){
+            if(this.tiempo>= TIEMPO_VIDA_TEXTURA) {
 
-               this.pelotaCogida .borrar();
+                this.pelotaCogida .borrar();
+                this.animacionFinalizada = true;
                 return true;
             }
             this.tiempo++;

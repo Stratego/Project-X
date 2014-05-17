@@ -68,15 +68,16 @@ public class BotonObjeto extends Boton {
                              this.fondo.borrar();
                              GestorGrafico.generarDibujante().eliminarTextura(this.ID);
                              break;
+                     }
                  }
             }
 
-
     }
 
-
-
-
-
+    @Override
+    public void borrar() {
+        super.borrar();
+        this.fondo.borrar();
+        this.flecha.borrar();
     }
 }
