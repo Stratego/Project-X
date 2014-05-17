@@ -67,6 +67,8 @@ public class BotonObjeto extends Boton {
                              this.flecha.borrar();
                              this.fondo.borrar();
                              GestorGrafico.generarDibujante().eliminarTextura(this.ID);
+                             jugador.setBloqueado(true);
+                             jugador.setSeleccionado(false);
                              break;
                      }
                  }

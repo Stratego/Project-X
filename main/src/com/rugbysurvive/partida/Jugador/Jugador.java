@@ -362,9 +362,11 @@ public class Jugador implements GestionEntrada {
         }
         else
         {
-            if(this.seleccion == null)
+            if(this.seleccion == null) {
                 this.seleccion = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/seleccionado.png");
+            }
             this.seleccion.borrar();
+            GestorGrafico.getCamara().desbloquear();
         }
     }
 

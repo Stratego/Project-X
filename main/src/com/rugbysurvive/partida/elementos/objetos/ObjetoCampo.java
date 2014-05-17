@@ -84,9 +84,8 @@ public abstract class ObjetoCampo implements Dibujable ,Proceso{
         return finalizarProceso;
        }
 
-       else{
-                return this.animacion();
-       }
+       return this.animacion();
+
     }
 
     protected abstract boolean animacion();

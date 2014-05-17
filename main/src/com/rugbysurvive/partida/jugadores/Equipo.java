@@ -212,6 +212,12 @@ public  class Equipo {
         return true;
     }
 
+    public void deseleccionar(){
+        for(Jugador jugador : this.jugadores) {
+            jugador.setSeleccionado(false);
+        }
+    }
+
     /**
      * Intercambia un jugador de la lista de suplentes por un jugador que este
      * en la partida .

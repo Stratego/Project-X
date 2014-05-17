@@ -175,6 +175,8 @@ public class GestorTurnos implements Dibujable,Proceso {
             if(equipo2.isJugando()) {
                 this.tipoProceso =1;
                 equipo1.desbloquear();
+                equipo1.deseleccionar();
+                equipo2.deseleccionar();
                 equipo1.setJugando(true);
                 this.equipoJugandoTurnoAnterior = equipo1;
                 ProcesosContinuos.añadirProceso(this);
@@ -182,11 +184,14 @@ public class GestorTurnos implements Dibujable,Proceso {
                 forzarCambioTurno = false;
                 arbitro.mover();
                 equipo2.bloquear();
+
             }
 
             else{
                 this.tipoProceso = 1;
                 equipo2.desbloquear();
+                equipo1.deseleccionar();
+                equipo2.deseleccionar();
                 equipo2.setJugando(true);
                 this.equipoJugandoTurnoAnterior = equipo2;
                 ProcesosContinuos.añadirProceso(this);
@@ -214,6 +219,8 @@ public class GestorTurnos implements Dibujable,Proceso {
             this.tipoProceso =1;
             equipo2.setJugando(false);
             equipo1.setJugando(true);
+            equipo1.deseleccionar();
+            equipo2.deseleccionar();
             this.equipoJugandoTurnoAnterior = equipo1;
             ProcesosContinuos.añadirProceso(this);
             this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
@@ -229,6 +236,8 @@ public class GestorTurnos implements Dibujable,Proceso {
             equipo2.desbloquear();
             equipo2.setJugando(true);
             equipo1.setJugando(false);
+            equipo1.deseleccionar();
+            equipo2.deseleccionar();
             this.equipoJugandoTurnoAnterior = equipo2;
             ProcesosContinuos.añadirProceso(this);
             this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
@@ -258,6 +267,8 @@ public class GestorTurnos implements Dibujable,Proceso {
             forzarCambioTurno = false;
             equipo1.bloquear();
             equipo2.bloquear();
+            equipo1.deseleccionar();
+            equipo2.deseleccionar();
            return true;
         }
        return false;
