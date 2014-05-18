@@ -31,6 +31,26 @@ public class MenuPrincipal extends BaseActivity {
         Button jugar = (Button)findViewById(R.id.btnJugar);
         Button tienda = (Button)findViewById(R.id.btnTienda);
         Button configuracion = (Button)findViewById(R.id.btnConfigurar);
+        Button liga = (Button)findViewById(R.id.btnLiga);
+
+        jugar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences preferencias = getSharedPreferences("firstEje", Context.MODE_PRIVATE);
+                final int userID = preferencias.getInt("usuarioID",-1);
+                final int equipoID = preferencias.getInt("equipoID", -1);
+
+                Intent intent = new Intent(MenuPrincipal.this,AndroidStarter.class);
+                intent.putExtra(AndroidStarter.IA,true);
+                intent.putExtra(AndroidStarter.IDEQUIPO,equipoID);
+                intent.putExtra(AndroidStarter.IDRIBAL,Math.round(Math.random()*3)+1);
+                intent.putExtra(AndroidStarter.IDUSER,userID);
+                intent.putExtra(AndroidStarter.LIGA,true);
+                intent.putExtra(AndroidStarter.LIGAID,1);
+                //todo devemos guardar los partidos i la liga para poder hacer un efecto de jugar una liguilla.
+                startActivity(intent);
+            }
+        });
 
         jugar.setOnClickListener(new View.OnClickListener() {
             @Override

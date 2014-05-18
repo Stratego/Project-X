@@ -23,8 +23,11 @@ public class AndroidStarter extends AndroidApplication implements SkeletonMain.C
     public static final String IDEQUIPO = "idequipo";
     public static final String IDRIBAL = "idribal";
     public static final String IDUSER = "iduser";
+    public static final String LIGA = "liga";
+    public static final String LIGAID = "ligaid";
 
-
+    private boolean isLiga;
+    private int idLiga;
     @Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -40,6 +43,9 @@ public class AndroidStarter extends AndroidApplication implements SkeletonMain.C
         int idUser = intent.getIntExtra(IDUSER, -1);
         boolean ia = intent.getBooleanExtra(IA,false);
 
+        isLiga = intent.getBooleanExtra(LIGA,false);
+        idLiga = intent.getIntExtra(LIGAID,-1);
+
         Uri uriEquipo1 = UrisGenerated.getUriEquipo(idUser,idEquipo1);
         Uri uriEquipo2 = UrisGenerated.getUriEquipo(0,idEquipo2);
 
@@ -52,11 +58,15 @@ public class AndroidStarter extends AndroidApplication implements SkeletonMain.C
         Equipo equipo1 = EquipoCursor.newInstance(this,cursorEquipo1,idUser);
         Equipo equipo2 = EquipoCursor.newInstance(this,cursorEquipo2,1);
 
+        cursorEquipo1.close();
+        cursorEquipo2.close();
+
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         boolean musuc = pref.getBoolean("musicPower",true);
-		initialize(new SkeletonMain(equipo1,equipo2,ia,musuc,this), cfg);
 
-        finichMatch(50,20,equipo1,equipo2);
+        //initialize(new SkeletonMain(equipo1,equipo2,ia,musuc,this), cfg);
+        initialize(new SkeletonMain(equipo1,equipo2,ia,musuc,this), cfg);
+
 	}
 
     @Override

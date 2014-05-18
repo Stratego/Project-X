@@ -17,6 +17,11 @@
             android:text="@string/activity_menu_principal_jugar"
             android:id="@+id/btnJugar"/>
         <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Liga"
+                android:id="@+id/btnLiga"/>
+        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/activity_menu_principal_tienda"

@@ -1,6 +1,5 @@
 package com.example.libgdx.skeleton;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
 public class DesktopStarter {
@@ -44,6 +43,6 @@ public class DesktopStarter {
 		}
 		cfg.resizable = false;
 		cfg.vSyncEnabled = false;
-		new LwjglApplication(new SkeletonMain(null,null,false,false,null), cfg);
+		//new LwjglApplication(new SkeletonMain(null,null,false,false,null), cfg);
 	}
 }
