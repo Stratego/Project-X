@@ -27,8 +27,9 @@ public class IA {
         for (Jugador jugador: ComponentesJuego.getComponentes().getEquipo2().listaJugadoresCampo()){
 
             if (usoObjetos.usarObjeto(jugador)==false){
+                System.out.println("no usa objeto");
                 if (paseChuteIA.hacerPaseChute(jugador)==false){
-
+                    System.out.println("no usa objetos");
                     if (ComponentesJuego.getComponentes().getCampo().posicionPelota()==null){
                         if (jugador.getMiEquipo().getLado()== Lado.izquierda){
                             movimentoIA= new MovimentoIA(jugador.getCasilla(),

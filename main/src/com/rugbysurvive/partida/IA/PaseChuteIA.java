@@ -3,10 +3,14 @@ package com.rugbysurvive.partida.IA;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.Simulador.Chute;
 import com.rugbysurvive.partida.Simulador.Pase;
+import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
+import com.rugbysurvive.partida.tablero.Lado;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Victor on 15/05/14.
@@ -25,7 +29,7 @@ public class PaseChuteIA {
 
             if (jugador.getPosicionX()>=7 && jugador.getPosicionX()<= ConstantesJuego.LIMITE_CASILLAS_LARGO_TABLERO-7){
                return hacerPase(jugador);
-            } else{
+            } else {
                 return  hacerChute(jugador);
             }
 
@@ -35,17 +39,38 @@ public class PaseChuteIA {
 
 
     public boolean hacerChute(Jugador jugador){
+        Chute chute;
+        if (jugador.getMiEquipo().getLado()== Lado.derecha && jugador.getPosicionX()<7 && jugador.getPosicionY()<=7
+                &&jugador.getPosicionY()>=12){
+            chute = new Chute(jugador,new Random().nextInt()%2,(int)(Math.random()*(11-8+1)+8));
+            Simulador.getInstance().añadirAccion(chute);
+            System.out.println("chute izquierda IA");
+            return true;
+        }else if(jugador.getMiEquipo().getLado()== Lado.izquierda && jugador.getPosicionX()<ConstantesJuego.LIMITE_CASILLAS_LARGO_TABLERO-7 &&
+                jugador.getPosicionY()<=7 &&jugador.getPosicionY()>=12){
+            chute = new Chute(jugador,(int)(Math.random()*(29-28+1)+28),(int)(Math.random()*(11-8+1)+8));
+            Simulador.getInstance().añadirAccion(chute);
+            System.out.println("chute derecha IA");
+            return true;
+
+        }
+        return false;
+    }
+
+    public boolean hacerPase(Jugador jugador){
+
 
         jugadoresCercanos(jugador.getPosicionX(),jugador.getPosicionY());
 
         if (jugadaequipo1.size()>0 && jugadaequipo2.size()>0){
             Pase pase = new Pase(jugador,jugadaequipo2.get(jugadaequipo2.size()-1).getPosicionX(),jugadaequipo2.get(jugadaequipo2.size()-1).getPosicionY());
+            Simulador.getInstance().añadirAccion(pase);
+            System.out.println("pase IA");
             return true;
         }
+
         return false;
     }
-
-    public boolean hacerPase(Jugador jugador){return false;}
 
     public static  void jugadoresCercanos (int posX,int posY){
 
