@@ -97,6 +97,7 @@ public  class Equipo {
     public ArrayList<Jugador> listaJugadoresCampo (){
         ArrayList<Jugador> JugadoresCampo = new ArrayList <Jugador>();
         for (int i=0; i<ConstantesJuego.JUGADORES_CAMPO; i++){
+
             //System.out.println(jugadores.get(i).getFuerza());
             JugadoresCampo.add(jugadores.get(i));
 

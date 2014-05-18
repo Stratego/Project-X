@@ -93,9 +93,9 @@ public class ComponentesJuego {
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),4,4);
 
 
-        /*this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),3,12);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),3,12);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),4,13);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),5,14);*/
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),5,14);
 
 
 
@@ -110,6 +110,7 @@ public class ComponentesJuego {
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo2);
         jugador.setEstado(new ConPelota(jugador));
         this.equipo2.añadirJugador(jugador,18,25);
+
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo2);
         objeto = new PowerUP(0,10,"casilla.png", Habilidades.vida,50,jugador);
