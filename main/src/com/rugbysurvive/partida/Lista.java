@@ -79,8 +79,9 @@ public class Lista {
 
 
         int y = ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES;
-
+        this.eliminarListaSuplentes();
         listaSuplentes = new ArrayList<Boton>();
+
         Equipo equipo1 = ComponentesJuego.getComponentes().getEquipo1();
         Equipo equipo2 = ComponentesJuego.getComponentes().getEquipo2();
         Equipo equipoSeleccionado = equipo2;
@@ -93,19 +94,17 @@ public class Lista {
         if (equipoSeleccionado.hayJugadorSelecionado()){
 
             ArrayList<Jugador> suplentes= equipoSeleccionado.listaSuplentes();
-            int posicion = posicionInicial;
-            this.reiniciarPosicionamientoLista();
-
+            int posicion = 0;
 
 
              for (Jugador iterador : suplentes) {
 
-                 if(posicion < posicionInicial +3) {
+                 if(posicion >= posicionInicial && posicion < posicionInicial +3) {
                     listaSuplentes.add(new BotonSuplente(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y,
                                         Entrada.listasuplente,"TauloCanviJugadors.png",iterador));
                     y += ConstantesJuego.ANCHO_TABLON_SUSTITUCION;
-                    posicion++;
                  }
+                 posicion++;
              }
 
             this.tablonInformacionHabilidades = new ArrayList<ElementoDibujable>();
@@ -120,16 +119,16 @@ public class Lista {
 
            int posicionX = ConstantesJuego.POSICION_BOTON_CHUTEPASE+ (int)(ConstantesJuego.LARGO_TABLON_SUSITUCION/3) + ConstantesJuego.LARGO_TABLON_SUSITUCION / 9;
 
-            for(ElementoDibujable dibujo : this.tablonInformacionHabilidades) {
+           for(ElementoDibujable dibujo : this.tablonInformacionHabilidades) {
 
                 if(this.tablonInformacionHabilidades.indexOf(dibujo)==0) {
                     this.tablonInformacionHabilidades.get(0).dibujar(ConstantesJuego.POSICION_BOTON_CHUTEPASE + 200,y);
                 }
                 else {
-                dibujo.dibujar(posicionX,y+10);
-                posicionX = posicionX + ConstantesJuego.LARGO_TABLON_SUSITUCION/8;
+                    dibujo.dibujar(posicionX,y+10);
+                    posicionX = posicionX + ConstantesJuego.LARGO_TABLON_SUSITUCION/8;
                 }
-            }
+           }
 
 
 
@@ -137,11 +136,13 @@ public class Lista {
             if(posicionInicial >0){
                 this.botonAbajo = new BotonDesplazamiento(ConstantesJuego.POSICION_BOTON_CHUTEPASE-100,100,Entrada.listasuplente,
                         "Menu/fletxaAvall.png",1,this);
-                this.botonArriba.mostrar();
+                System.out.println("BOTON ABAJO MOSTRANDOSE");
+                this.botonAbajo.mostrar();
             }
-            if(posicionInicial +3 < suplentes.size()- 1){
-                this.botonArriba = new BotonDesplazamiento(ConstantesJuego.POSICION_BOTON_CHUTEPASE-100,200,Entrada.listasuplente,
-                        "Menu/fletxaAmunt.png",0,this);
+            if(posicionInicial +2 < suplentes.size()- 1){
+
+                this.botonArriba = new BotonDesplazamiento(ConstantesJuego.POSICION_BOTON_CHUTEPASE-100,200,Entrada.listasuplente
+                        ,"Menu/fletxaAmunt.png",0,this);
                 this.botonArriba.mostrar();
             }
 
@@ -208,17 +209,19 @@ public class Lista {
 
             x = ConstantesJuego.POSICION_BOTON_CHUTEPASE;
             y = ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES;
+            int distanciaObjetoCercano = ConstantesJuego.DISTANCIA_OBJETO_PRIMERA_LINIA;
+            int distanciaObjetoLejano = ConstantesJuego.DISTANCIA_OBJETO_SEGUNDA_LINIA;
 
-            listaObjetos.add(new BotonObjeto(x +30, y +115, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(0).getId()));
+            listaObjetos.add(new BotonObjeto(x +distanciaObjetoCercano, y +distanciaObjetoLejano, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(0).getId()));
 
             if(objetosJugador.size()>=2){
-                listaObjetos.add(new BotonObjeto(x+115, y+115, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(1).getId()));
+                listaObjetos.add(new BotonObjeto(x+distanciaObjetoLejano, y+distanciaObjetoLejano, Entrada.listaobjetos, objetosJugador.get(1).getTextura(),objetosJugador.get(1).getId()));
             }
             if(objetosJugador.size()>=3){
-                listaObjetos.add(new BotonObjeto(x+30, y+30, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(2).getId()));
+                listaObjetos.add(new BotonObjeto(x+distanciaObjetoCercano, y+distanciaObjetoCercano, Entrada.listaobjetos, objetosJugador.get(2).getTextura(),objetosJugador.get(2).getId()));
             }
             if(objetosJugador.size()>=4){
-                listaObjetos.add(new BotonObjeto(x+115, y+30, Entrada.listaobjetos, objetosJugador.get(0).getTextura(),objetosJugador.get(3).getId()));
+                listaObjetos.add(new BotonObjeto(x+distanciaObjetoLejano, y+distanciaObjetoCercano, Entrada.listaobjetos, objetosJugador.get(3).getTextura(),objetosJugador.get(3).getId()));
             }
 
             estadoObjeto=true;
@@ -241,8 +244,7 @@ public class Lista {
         }
 
         for (Boton iterador : listaObjetos ){
-            ID = iterador.getID();
-            GestorGrafico.generarDibujante().eliminarTextura(ID);
+            iterador.borrar();
         }
         listaObjetos.clear();
         estadoObjeto=false;

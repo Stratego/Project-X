@@ -15,8 +15,6 @@ import com.rugbysurvive.partida.tablero.Campo;
 public abstract class Objeto extends ObjetoJugador {
 
         protected int vida;
-        protected int id;
-        protected String imagen;
         protected Habilidades habilidad;
         protected int modificacion;
         protected Jugador jugador;
@@ -29,10 +27,7 @@ public abstract class Objeto extends ObjetoJugador {
 
     public Objeto(int id,int vida,String imagen,Jugador jugador){
             super(id,imagen);
-            this.id=id;
             this.vida = vida;
-            this.imagen = imagen;
-
             this.jugador = jugador;
         }
 
@@ -152,13 +147,6 @@ public abstract class Objeto extends ObjetoJugador {
         this.id = id;
     }
 
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
 
     public Habilidades getHabilidad() {
         return habilidad;

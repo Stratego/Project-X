@@ -69,6 +69,7 @@ public class Casilla implements GestionEntrada ,Dibujable{
      * @return Boolean existe pelota
      */
     public boolean hayPelota(){
+        System.out.println("La posicion de esta casilla es la"+this.getPosicionX()+"-"+this.getPosicionY());
         return this.existePelota;
     }
 
@@ -106,6 +107,7 @@ public class Casilla implements GestionEntrada ,Dibujable{
         if(this.jugador == null && this.objeto == null)
         {
             this.jugador = jugador;
+            jugador.setCasilla(this);
             this.jugador.colocar(this);
             return true;
         }

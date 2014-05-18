@@ -19,10 +19,17 @@ public class ConPelota implements Estado, Proceso {
     public boolean bloqueado = false;
     ElementoDibujable indicadorPelota;
     ElementoDibujable atencionJugador;
+    ElementoDibujable indicarJugadorConPelota;
+
     int count;
 
     public Jugador jugador;
 
+    public ConPelota(Jugador jugador){
+        this.jugador = jugador;
+        this.indicarJugadorConPelota = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/estado/conPelota.png");
+        this.indicarJugadorConPelota.dibujar(this.jugador.getPosicionX(),this.jugador.getPosicionY());
+    }
 
     public boolean generarAccion(Jugador jugador) {
 
@@ -44,8 +51,13 @@ public class ConPelota implements Estado, Proceso {
 
         if(entrada == Entrada.arrastrar)
         {
-            jugador.setEstado(new EnMovimiento(8,this));
-            System.out.println("<ME PONGO EN MOVIMIENTO>");
+            int distancia = jugador.getResistencia()/10;
+            if(distancia <=0)
+            {
+                distancia = 1;
+            }
+
+            jugador.setEstado(new EnMovimiento(distancia,this));
             return false;
         }
         else
@@ -69,7 +81,7 @@ public class ConPelota implements Estado, Proceso {
                         count = 0;
 
                     }
-
+                }
                 if(jugador.getMiEquipo().getLado()== Lado.derecha){
 
                         if (posX >= jugador.getPosicionX()){
@@ -86,8 +98,6 @@ public class ConPelota implements Estado, Proceso {
 
                         }
                 }
-            }
-
             }
 
             else
@@ -108,9 +118,9 @@ public class ConPelota implements Estado, Proceso {
                         ProcesosContinuos.añadirProceso(this);
                         count = 0;
                     }
-
+                }
                 if (jugador.getMiEquipo().getLado() == Lado.derecha){
-                        if(posX >= jugador.getPosicionX()){
+                        if(posX <= jugador.getPosicionX()){
 
                             jugador.setAccion(new Chute(jugador, posX, posY));
                             System.out.println("La CHUTOOO!!!");
@@ -123,9 +133,6 @@ public class ConPelota implements Estado, Proceso {
 
                         }
                     }
-
-                }
-
             }
         }
 
@@ -203,5 +210,27 @@ public class ConPelota implements Estado, Proceso {
             return true;
         }
         return false;
+    }
+
+    /**
+     * El estado con pelota contiene un conjunto de texturas
+     * que deben ser eliminadas antes de realizar cualquier dibujado
+     */
+    public void borrarTexturas() {
+        if(this.indicarJugadorConPelota!= null){
+            this.indicarJugadorConPelota.borrar();
+        }
+        if(this.indicadorPelota!= null){
+            this.indicadorPelota.borrar();
+        }
+    }
+
+    /**
+     * Si hay una pelota dibujandose es necesario
+     * que vaya actualizandose con la posicion del jugador
+     */
+    public void actualizarTexturas(){
+        this.indicarJugadorConPelota.borrar();
+        this.indicarJugadorConPelota.dibujar(this.jugador.getPosicionX(),this.jugador.getPosicionY());
     }
 }

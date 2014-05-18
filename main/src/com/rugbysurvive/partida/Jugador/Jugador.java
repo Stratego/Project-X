@@ -55,6 +55,8 @@ public class Jugador implements GestionEntrada {
     public int Habilidad;
     public int Resistencia;
     public int Ataque;
+    public final int vidaOriginal;
+    public final int resistenciaOriginal;
 
     /*contMovimientos indicara la cantidad de acciones movimiento que ha hecho hasta el momento, y de esta manera podremos ir haciendo que el jugador pierda resistencia segun interese*/
     public int contMovimientos;
@@ -86,6 +88,9 @@ public class Jugador implements GestionEntrada {
         this.Resistencia = resistencia;
         this.Ataque = ataque;
 
+        this.vidaOriginal = this.Vida;
+        this.resistenciaOriginal = this.Resistencia;
+
         this.miEquipo = equipo;
 
         this.powerup= new ArrayList<ObjetoJugador>();
@@ -104,11 +109,12 @@ public class Jugador implements GestionEntrada {
 
         this.contMovimientos = 0;
 
+
     }
 
     public void cansancio()
     {
-        if(this.contMovimientos == 2)
+        if(this.contMovimientos == 1)
         {
             this.setResistencia(this.getResistencia() - 3);
             this.contMovimientos = 0;
@@ -116,6 +122,10 @@ public class Jugador implements GestionEntrada {
         else
         {
             this.contMovimientos += 1;
+        }
+
+        if(this.resistenciaOriginal >= this.Resistencia -3){
+            this.texturas.add(new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/estado/cansancio.png"));
         }
     }
 
@@ -160,7 +170,10 @@ public class Jugador implements GestionEntrada {
      * @param casilla casilla donde se situa el jugador
      */
     public void colocar(Casilla casilla){
-        this.casilla= casilla;
+
+        casilla.setJugador(this);
+        this.setCasilla(casilla);
+
         if(this.casilla != null)
         {
             this.enJuego = true;
@@ -171,6 +184,9 @@ public class Jugador implements GestionEntrada {
 
             this.seleccion = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/seleccionado.png");
 
+            if(this.estado instanceof ConPelota){
+                ((ConPelota) this.estado).actualizarTexturas();
+            }
         }
     }
 
@@ -254,6 +270,10 @@ public class Jugador implements GestionEntrada {
         }
         this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,direccion);
 
+        if(this.bloqueado && this.bloqueo != null){
+                this.generarTexturaBloqueado();
+                this.texturas.add(this.bloqueo);
+        }
     }
 
 
@@ -282,6 +302,11 @@ public class Jugador implements GestionEntrada {
      */
     public void setEstado(Estado estado)
     {
+        if(this.estado != null) {
+            if(this.estado instanceof ConPelota && estado instanceof SinPelota){
+                ((ConPelota)this.estado).borrarTexturas();
+            }
+        }
         this.estado = estado;
     }
 
@@ -339,9 +364,11 @@ public class Jugador implements GestionEntrada {
         }
         else
         {
-            if(this.seleccion == null)
+            if(this.seleccion == null) {
                 this.seleccion = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/seleccionado.png");
+            }
             this.seleccion.borrar();
+            GestorGrafico.getCamara().desbloquear();
         }
     }
 
@@ -363,8 +390,14 @@ public class Jugador implements GestionEntrada {
 
         this.bloqueado = bloqueado;
 
-        if(this.bloqueado && this.bloqueo == null)  {
-                this.generarTexturaBloqueado();
+        if(this.bloqueado)  {
+
+            if(this.bloqueo != null && this.texturas.contains(this.bloqueo)){
+                ElementoDibujable texturaBloqueado = this.texturas.get(this.texturas.indexOf(this.bloqueo));
+                texturaBloqueado.borrar();
+                this.texturas.remove(texturaBloqueado);
+            }
+            this.generarTexturaBloqueado();
         }
 
         else {
@@ -605,6 +638,10 @@ public class Jugador implements GestionEntrada {
     public void setAtaque(int ataque) {
         this.Ataque = ataque;
     }
+
+    public Casilla getCasilla(){ return this.casilla;}
+
+    public void setCasilla(Casilla casilla) { this.casilla = casilla;}
 
     /**
      *

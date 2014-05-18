@@ -1,6 +1,8 @@
 package com.rugbysurvive.partida.tablero.Botones;
 
 import com.rugbysurvive.partida.ConstantesJuego;
+import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
+import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
@@ -18,6 +20,8 @@ public class BotonObjeto extends Boton {
 
 
     private boolean objetoElegido;
+    private ElementoDibujable fondo;
+    private ElementoDibujable flecha;
 
     /**
      * Constructor del elemento boton
@@ -29,8 +33,14 @@ public class BotonObjeto extends Boton {
      * @param posicion
      */
     public BotonObjeto(float posX, float posY, Entrada entrada, String textura, int posicion) {
-        super(posX, posY, entrada,textura,posicion,ConstantesJuego.getAnchoBotonObjetos(),ConstantesJuego.getAltoBotonObjetos());
+        super(posX, posY, entrada,textura,posicion,ConstantesJuego.ANCHO_BOTON_OBJETOS,ConstantesJuego.ALTO_BOTON_OBJETOS);
         this.objetoElegido = false;
+        GestorGrafico.generarDibujante().eliminarTextura(this.ID);
+        this.fondo = new ElementoDibujable(TipoDibujo.interficieUsuario,"objetos/fondo.png");
+        this.flecha = new ElementoDibujable(TipoDibujo.interficieUsuario,"objetos/positivo.png");
+        this.fondo.dibujar(this.getPosicionX(),this.getPosicionY());
+        this.flecha.dibujar(this.getPosicionX(),this.getPosicionY());
+        this.ID = GestorGrafico.generarDibujante().añadirDibujable(this,TipoDibujo.interficieUsuario);
 
     }
 
@@ -54,17 +64,22 @@ public class BotonObjeto extends Boton {
                              iter.activar();
                              jugador.getPowerUP().remove(iter);
                              this.objetoElegido = true;
+                             this.flecha.borrar();
+                             this.fondo.borrar();
                              GestorGrafico.generarDibujante().eliminarTextura(this.ID);
+                             jugador.setBloqueado(true);
+                             jugador.setSeleccionado(false);
                              break;
+                     }
                  }
             }
 
-
     }
 
-
-
-
-
+    @Override
+    public void borrar() {
+        super.borrar();
+        this.fondo.borrar();
+        this.flecha.borrar();
     }
 }

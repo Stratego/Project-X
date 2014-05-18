@@ -3,9 +3,11 @@ package com.partido;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.example.libgdx.skeleton.SkeletonMain;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
+
 import com.rugbysurvive.partida.arbitro.Arbitro;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.gestores.Dibujable;
@@ -32,7 +34,7 @@ public class GestorTurnos implements Dibujable,Proceso {
     private static final int TIEMPO_PRESENTACION = 400;
     private static final int POSICION_CAMARA_INCIAL_X = 12*64;
     private static final int POSICION_CAMARA_INICIAL_Y = 11*64;
-    private static final int TIEMPO_MUESTRA_ESCUDO = 100;
+    private static final int TIEMPO_MUESTRA_ESCUDO = 50;
 
     private int posicionTexturaX;
     private int posicionTexturaY;
@@ -56,11 +58,14 @@ public class GestorTurnos implements Dibujable,Proceso {
 
     Arbitro arbitro=Arbitro.getInstancia();
 
+    private Equipo equipoJugandoTurnoAnterior;
 
     private static boolean forzarCambioTurno = false;
+    private SkeletonMain main;
 
 
-    public GestorTurnos(){
+    public GestorTurnos(SkeletonMain main){
+
          this.posicionTexturaX = Gdx.graphics.getWidth();
          this.posicionTexturaY = 0;
         this.tipoProceso = 0;
@@ -72,6 +77,7 @@ public class GestorTurnos implements Dibujable,Proceso {
         this.tiempoMuestraEscudo =0;
         this.escudo = new ElementoDibujable(TipoDibujo.interficieUsuario,"banderas/peixetEscut.png");
         this.procesoPrePartidoFinalizado = false;
+        this.main = main;
     }
 
 
@@ -90,28 +96,33 @@ public class GestorTurnos implements Dibujable,Proceso {
     }
 
 
+    public void iniciarPartida(){
+        this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
+        ProcesosContinuos.añadirProceso(this);
+    }
     /**
      * Inicializa el primer turno del partido
      */
-    public void iniciarPartido() {
+    private void gestionarInicioPartido() {
 
-        this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
-        ProcesosContinuos.añadirProceso(this);
 
         Equipo equipo1 = ComponentesJuego.getComponentes().getEquipo1();
         Equipo equipo2 = ComponentesJuego.getComponentes().getEquipo2();
 
         Random random = new Random();
-
+        equipo1.bloquear();
+        equipo2.bloquear();
 
        if(random.nextInt()%2 != 0) {
-             equipo2.bloquear();
+
+            equipo1.desbloquear();
             equipo1.setJugando(true);
        }
 
        else {
-            equipo1.bloquear();
+            equipo2.desbloquear();
             equipo2.setJugando(true);
+
         }
 
     }
@@ -124,6 +135,7 @@ public class GestorTurnos implements Dibujable,Proceso {
      */
     public boolean CambiarTurno() {
 
+
         Equipo equipo1 = ComponentesJuego.getComponentes().getEquipo1();
         Equipo equipo2 = ComponentesJuego.getComponentes().getEquipo2();
 
@@ -132,19 +144,24 @@ public class GestorTurnos implements Dibujable,Proceso {
             this.tipoProceso = 1;
             equipo2.desbloquear();
             equipo2.setJugando(true);
+            this.equipoJugandoTurnoAnterior = equipo2;
             ProcesosContinuos.añadirProceso(this);
             this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
             arbitro.mover();
+            equipo1.bloquear();
+            System.out.println("Cambiando turno");
             return true;
         }
 
         else if (equipo2.bloqueado() && equipo2.isJugando()  && equipo1.bloqueado() && !equipo1.isJugando() ) {
             this.tipoProceso = 1;
+            this.equipoJugandoTurnoAnterior = equipo1;
             equipo1.desbloquear();
             equipo1.setJugando(true);
             ProcesosContinuos.añadirProceso(this);
             this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
-
+            equipo2.bloquear();
+            System.out.println("Cambiando turno");
             arbitro.mover();
 
 
@@ -154,21 +171,29 @@ public class GestorTurnos implements Dibujable,Proceso {
         else if(forzarCambioTurno  && ((equipo2.isJugando()  && !equipo1.isJugando())
                 || (!equipo2.isJugando()  && equipo1.isJugando())))
         {
+
             if(equipo2.isJugando()) {
                 this.tipoProceso =1;
                 equipo1.desbloquear();
+                equipo1.deseleccionar();
+                equipo2.deseleccionar();
                 equipo1.setJugando(true);
+                this.equipoJugandoTurnoAnterior = equipo1;
                 ProcesosContinuos.añadirProceso(this);
                 this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
                 forzarCambioTurno = false;
                 arbitro.mover();
                 equipo2.bloquear();
+
             }
 
             else{
                 this.tipoProceso = 1;
                 equipo2.desbloquear();
+                equipo1.deseleccionar();
+                equipo2.deseleccionar();
                 equipo2.setJugando(true);
+                this.equipoJugandoTurnoAnterior = equipo2;
                 ProcesosContinuos.añadirProceso(this);
                 this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
                 forzarCambioTurno = false;
@@ -183,6 +208,45 @@ public class GestorTurnos implements Dibujable,Proceso {
        return false;
 
     }
+
+
+    public void reiniciarFases(){
+
+        Equipo equipo1 = ComponentesJuego.getComponentes().getEquipo1();
+        Equipo equipo2 = ComponentesJuego.getComponentes().getEquipo2();
+
+        if(equipoJugandoTurnoAnterior.equals(equipo2)) {
+            this.tipoProceso =1;
+            equipo2.setJugando(false);
+            equipo1.setJugando(true);
+            equipo1.deseleccionar();
+            equipo2.deseleccionar();
+            this.equipoJugandoTurnoAnterior = equipo1;
+            ProcesosContinuos.añadirProceso(this);
+            this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
+            forzarCambioTurno = false;
+            arbitro.mover();
+            equipo2.bloquear();
+            equipo1.desbloquear();
+
+        }
+
+        else{
+            this.tipoProceso = 1;
+            equipo2.desbloquear();
+            equipo2.setJugando(true);
+            equipo1.setJugando(false);
+            equipo1.deseleccionar();
+            equipo2.deseleccionar();
+            this.equipoJugandoTurnoAnterior = equipo2;
+            ProcesosContinuos.añadirProceso(this);
+            this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
+            forzarCambioTurno = false;
+            arbitro.mover();
+            equipo1.bloquear();
+        }
+    }
+
 
     /**
      * Indica si los dos equipos han finalizado el turno.
@@ -203,6 +267,8 @@ public class GestorTurnos implements Dibujable,Proceso {
             forzarCambioTurno = false;
             equipo1.bloquear();
             equipo2.bloquear();
+            equipo1.deseleccionar();
+            equipo2.deseleccionar();
            return true;
         }
        return false;
@@ -212,6 +278,7 @@ public class GestorTurnos implements Dibujable,Proceso {
         equipo1.bloquear();
         equipo2.desbloquear();
         equipo2.setJugando(true);
+
 
     }
 
@@ -255,9 +322,11 @@ public class GestorTurnos implements Dibujable,Proceso {
                 else if(this.tiempoMuestraEscudo == 0){
                     this.ambiente = Gdx.audio.newMusic(Gdx.files.internal("sonido/golpe.wav"));
                     this.ambiente.play();
+                    this.main.mostrarBotones();
                     this.escudo.dibujar(ConstantesJuego.POS_BANDERA_CAMBIO_TURNO_X,ConstantesJuego.POS_BANDERA_CAMBIO_TURNO_Y);
                     if(!this.procesoPrePartidoFinalizado){
                         ComponentesJuego.getComponentes().generarSaque();
+                        this.gestionarInicioPartido();
                         this.procesoPrePartidoFinalizado = true;
                     }
                 }

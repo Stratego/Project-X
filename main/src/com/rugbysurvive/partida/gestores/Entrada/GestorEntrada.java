@@ -2,16 +2,15 @@ package com.rugbysurvive.partida.gestores.Entrada;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.rugbysurvive.partida.ConstantesJuego;
-import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Lista;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.gestores.Dibujante;
-import com.rugbysurvive.partida.jugadores.Equipo;
 import com.rugbysurvive.partida.tablero.Boton;
 import com.rugbysurvive.partida.tablero.Campo;
 
@@ -50,6 +49,8 @@ public class GestorEntrada implements GestureDetector.GestureListener {
 
     Lista lista = new Lista();
 
+    private Sound botonsound ;
+
     /**
      * constructor del elemento GestorImput
      * @param camera camare que visualizara el juego
@@ -61,6 +62,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
         this.botons = botons;
         this.dibujante = dibujante;
         campo = ComponentesJuego.getComponentes().getCampo();
+        this.botonsound = Gdx.audio.newSound(Gdx.files.internal("sonido/botones/Boton.mp3"));
 
     }
 
@@ -112,6 +114,9 @@ public class GestorEntrada implements GestureDetector.GestureListener {
 
     @Override
     public boolean tap(float screenX, float screenY, int i, int i2) {
+
+
+
         if (longclick==false){
             Vector3 touchPos = new Vector3();
             touchPos.set(screenX, screenY,0);
@@ -122,6 +127,7 @@ public class GestorEntrada implements GestureDetector.GestureListener {
             for (Boton iterador : botons){
                 if (iterador.esSeleccionado(screenX,screenY)==true){
                     lista.crearLista(iterador.obtenerEntrada());
+                    this.botonsound.play();
 
                     return false;
                 }
@@ -135,16 +141,21 @@ public class GestorEntrada implements GestureDetector.GestureListener {
                     //System.out.println("itera bucle de listas");
                     if (iteradorLista.esSeleccionado(screenX,screenY)){
                         lista.crearLista(iteradorLista.obtenerEntrada());
+                        this.botonsound.play();
                         return false;
                     }
                 }
 
                 if(this.lista.getBotonAbajo() != null) {
-                    if(this.lista.getBotonAbajo().esSeleccionado(screenX,screenY)){return true;}
+                    if(this.lista.getBotonAbajo().esSeleccionado(screenX,screenY)){
+                        this.botonsound.play();
+                        return true;}
                 }
 
                 if(this.lista.getBotonArriba() != null) {
-                    if(this.lista.getBotonArriba().esSeleccionado(screenX,screenY)){return true;}
+                    if(this.lista.getBotonArriba().esSeleccionado(screenX,screenY)){
+                        this.botonsound.play();
+                        return true;}
                 }
             }
             // comprieba si hay lista y no se ha clicado en sus botones se elimina

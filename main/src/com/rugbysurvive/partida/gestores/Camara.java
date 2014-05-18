@@ -3,7 +3,6 @@ package com.rugbysurvive.partida.gestores;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -27,19 +26,19 @@ public class Camara implements InputProcessor {
     private OrthographicCamera camera;
     private float width;
     private float height;
-    private int boardWidth;
+    private int MAXIMO_ANCHURA = ConstantesJuego.ANCHO_TABLERO_CON_ZOOM- Gdx.graphics.getWidth()/2;
+    private int MAXIMO_ALTURA = ConstantesJuego.ALTO_TABLERO_CON_ZOOM - Gdx.graphics.getHeight()/2;
     private int boardHeight;
     private int absoluteVariationY; // Number of pixels the camera have been moved.
     private int absoluteVariationX;
     private Rectangle glViewport;
     private boolean bloqueada;
 
+
     public Camara(int maxWidth, int maxHeight)
     {
         this.absoluteVariationX = 0;
         this.absoluteVariationY = 0;
-        this.boardHeight =  maxHeight;
-        this.boardWidth = maxWidth;
         this.width = Gdx.graphics.getWidth();
         this.height = Gdx.graphics.getHeight();
 
@@ -113,10 +112,13 @@ public class Camara implements InputProcessor {
 
     private boolean isCameraInsideBoard(int variationX,int variationY)
     {
-        return (variationY + this.camera.position.y > MIN_POSITION_Y
+
+        return true;
+
+        /*return (variationY + this.camera.position.y > MIN_POSITION_Y
                 && (-variationX)+ this.camera.position.x > MIN_POSITION_X
-                && variationY + this.camera.position.y < this.boardHeight
-                && (-variationX)+ this.camera.position.x < this.boardWidth);
+                && variationY + this.camera.position.y < MAXIMO_ANCHURA
+                && (-variationX)+ this.camera.position.x < MAXIMO_ALTURA);*/
     }
 
     public void bloquear(){this.bloqueada = true;}

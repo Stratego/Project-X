@@ -38,8 +38,13 @@ public class SinPelota implements Estado {
     public boolean generarAccion(Jugador jugador, int posX, int posY, Entrada entrada) {
 
         if (entrada == Entrada.arrastrar){
-            jugador.setEstado(new EnMovimiento(8,this));
-            System.out.println("<EM POSO EN MOVIMENT!!!>");
+            int distancia = jugador.getResistencia()/10;
+            if(distancia <=0)
+            {
+                distancia = 1;
+            }
+
+            jugador.setEstado(new EnMovimiento(distancia,this));
             return false;
         }
 

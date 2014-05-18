@@ -8,11 +8,11 @@ import com.badlogic.gdx.Gdx;
  */
 public class ConstantesJuego {
 
-    protected double multiplicado = 1;
+    protected static double multiplicado = 1;
     //private static int multiplicador = 1;
 
 
-    private static double constanteRescalado = 0.1777777778* getWidth()/128;
+    public static double constanteRescalado = 0.1777777778* getWidth()/128;
 
     public static final int ANCHO_CASILLA = 64;
     public static final int ALTO_CASILLA = 64;
@@ -40,15 +40,15 @@ public class ConstantesJuego {
     //public static final int POSICION_BOTON_OBJETOS = POSICION_BOTON_SUPLENTE - separacionBotones;
     //public static final int POSICION_BOTON_CHUTEPASE = POSICION_BOTON_OBJETOS - separacionBotones;
 
-    public static final int ALTO_BOTON_OBJETOS = 64 ;
-    public static final int ANCHO_BOTON_OBJETOS = 64;
+    public static final int ALTO_BOTON_OBJETOS = (int)(64 *constanteRescalado);
+    public static final int ANCHO_BOTON_OBJETOS = (int)(64*constanteRescalado);
 
     public static  int POSICION_INICIAL_Y_BOTON_SUPLENTES=(int)((ALTO_BOTON_REAL * constanteRescalado)+2);
-    //public static final int POSICION_INICIAL_Y_BOTON_OBJETOS=Gdx.graphics.getHeight()-80;
-    // public static final int POSICION_INICIAL_X_BOTON_OBJETOS=Gdx.graphics.getWidth()-230;
+
     public static  int POSICION_INICIAL_Y_BOTON_OBJETOS=(int)(((ALTO_BOTON_REAL * constanteRescalado)+2)+(ALTO_BOTON_OBJETOS*constanteRescalado *2)+((ALTO_BOTON_OBJETOS*constanteRescalado)/2));
-    //public static final int POSICION_INICIAL_X_BOTON_OBJETOS=Gdx.graphics.getWidth() - 798;
     public static final int POSICION_INICIAL_X_BOTON_OBJETOS=POSICION_BOTON_CHUTEPASE +32;
+
+
     public static final int POSICION_INICIAL_X_PLANTILLAOBJETOS=POSICION_INICIAL_X_BOTON_OBJETOS-32;
     public static final int POSICION_INICIAL_Y_PLANTILLAOBJETOS=Gdx.graphics.getHeight()-256;
 
@@ -77,6 +77,8 @@ public class ConstantesJuego {
     public static final int POSICION_SAQUE_BANDA_INFERIOR = 1;
     public static final int POSICION_SAQUE_BANDA_SUPERIOR = 18;
 
+    public static final int DISTANCIA_OBJETO_PRIMERA_LINIA = (int)(43*constanteRescalado);
+    public static final int DISTANCIA_OBJETO_SEGUNDA_LINIA = (int)(43*2*constanteRescalado+ANCHO_BOTON_OBJETOS);
 
     public static final int ANCHO_TABLON_SUSTITUCION = (int) (96 * constanteRescalado);
     public static final int LARGO_TABLON_SUSITUCION = (int) (768 * constanteRescalado);
@@ -89,6 +91,13 @@ public class ConstantesJuego {
     protected static ConstantesJuego constantes ;
     private static ResolucionPantalla resolucionPantalla = ResolucionPantalla.pequeña;
 
+    public static final int POSICION_BOTON_ESCONDIDO = -(int)(160 *constanteRescalado);
+
+
+    public static int ANCHO_TABLERO_CON_ZOOM =  (int)(ANCHO_TABLERO*(1/multiplicado));
+    public static int ALTO_TABLERO_CON_ZOOM =  (int)(ALTO_TABLERO*(1/multiplicado));
+
+    public static final int TAMAÑO_PUÑO = (int)(512* constanteRescalado);
 
 
 
@@ -109,13 +118,6 @@ public class ConstantesJuego {
     public double getAnchoCasilla(){return ANCHO_CASILLA * this.multiplicado;}
     public double getLargoCasilla(){return (double)(ALTO_CASILLA* this.multiplicado);}
 
-    public static int getAltoBotonObjetos() {
-        return generarTamaño(ALTO_BOTON_OBJETOS);
-    }
-
-    public static  int getAnchoBotonObjetos() {
-        return generarTamaño(ANCHO_BOTON_OBJETOS);
-    }
 
 
     public void sumarMultiplicado(){

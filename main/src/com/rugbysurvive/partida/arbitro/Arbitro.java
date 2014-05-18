@@ -218,9 +218,12 @@ public class Arbitro implements Dibujable{
 
                 if (x>=0 && x<=ConstantesJuego.LIMITE_CASILLAS_LARGO_TABLERO && y<=ConstantesJuego.LIMITE_CASILLAS_ANCHO_TABLERO && y>=0){
                     if (control==true){
-                        if (ComponentesJuego.getComponentes().getCampo().getCasilla(y,x).sinJugador()==true){
-                            colocable=true;
+                        if(x>=2 && x<=ConstantesJuego.LIMITE_CASILLAS_LARGO_TABLERO-2 && y<=ConstantesJuego.LIMITE_CASILLAS_ANCHO_TABLERO-2 && y>=2){
+                            if (ComponentesJuego.getComponentes().getCampo().getCasilla(y,x).sinJugador()==true){
+                                colocable=true;
+                            }
                         }
+
                     }else{
                         colocable=true;
                     }
@@ -247,7 +250,7 @@ public class Arbitro implements Dibujable{
 
     @Override
     public String getTextura() {
-        String textura="jugador1.png" ;
+        String textura=  "arbitro/arbitre4.png";;
         switch (this.direccion)
         {
             case arriba:
@@ -262,6 +265,7 @@ public class Arbitro implements Dibujable{
             case derecha:
                 textura = "arbitro/arbitre3.png";
                 break;
+
         }
         return textura;
 

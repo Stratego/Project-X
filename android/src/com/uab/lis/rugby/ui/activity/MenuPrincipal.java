@@ -16,13 +16,17 @@ import com.uab.lis.rugby.R;
  */
 public class MenuPrincipal extends BaseActivity {
     private Intent intent;
+
+    private int userID;
+    private int equipoID;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
 
         SharedPreferences preferencias = getSharedPreferences("firstEje", Context.MODE_PRIVATE);
-        final int userID = preferencias.getInt("usuarioID",-1);
-        final int equipoID = preferencias.getInt("equipoID", -1);
+        userID = preferencias.getInt("usuarioID",-1);
+        equipoID = preferencias.getInt("equipoID", -1);
 
         intent = new Intent(MenuPrincipal.this, SelectPositionPlayers.class);
         intent.putExtra(SelectPositionPlayers.ID_EQUIP,equipoID);
@@ -33,17 +37,14 @@ public class MenuPrincipal extends BaseActivity {
         Button configuracion = (Button)findViewById(R.id.btnConfigurar);
         Button liga = (Button)findViewById(R.id.btnLiga);
 
-        jugar.setOnClickListener(new View.OnClickListener() {
+        liga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences preferencias = getSharedPreferences("firstEje", Context.MODE_PRIVATE);
-                final int userID = preferencias.getInt("usuarioID",-1);
-                final int equipoID = preferencias.getInt("equipoID", -1);
 
                 Intent intent = new Intent(MenuPrincipal.this,AndroidStarter.class);
                 intent.putExtra(AndroidStarter.IA,true);
                 intent.putExtra(AndroidStarter.IDEQUIPO,equipoID);
-                intent.putExtra(AndroidStarter.IDRIBAL,Math.round(Math.random()*3)+1);
+                intent.putExtra(AndroidStarter.IDRIBAL,(int)(Math.round(Math.random()*3)+1));
                 intent.putExtra(AndroidStarter.IDUSER,userID);
                 intent.putExtra(AndroidStarter.LIGA,true);
                 intent.putExtra(AndroidStarter.LIGAID,1);

@@ -1,5 +1,7 @@
 package com.rugbysurvive.partida.Simulador;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.SinPelota;
 import com.rugbysurvive.partida.tablero.Campo;
@@ -12,12 +14,14 @@ public class Chute extends Accion {
     int posXObjetivo;
     int posYObjetivo;
     private Jugador jugador;
+    private Sound soundChute;
 
 
     public Chute(Jugador jugador, int posX, int posY) {
         this.posXObjetivo = posX;
         this.posYObjetivo = posY;
         this.jugador = jugador;
+        this.soundChute = Gdx.audio.newSound(Gdx.files.internal("sonido/acciones/Chute.mp3"));
     }
 
     @Override
@@ -27,7 +31,7 @@ public class Chute extends Accion {
         //jugador.setEstado(new SinPelota());
         //return true;
 
-
+        this.soundChute.play();
         this.precisionChute();
 
         return true;
@@ -41,6 +45,8 @@ public class Chute extends Accion {
         int TotalCasillasX = FinalX - InicialX;
         int TotalCasillasY = FinalY - InicialY;
         int DistanciaXute  = ((int) Math.hypot (TotalCasillasX, TotalCasillasY))*64;
+        System.out.println("__________________"+((jugador.getFuerza()/10)*64)+"---------"+DistanciaXute);
+        System.out.println("InicialX "+InicialX+" FinalX "+FinalX);
         if (((jugador.getFuerza()/10)*64) >= DistanciaXute)
         {
             int ejesDestinoPelota[][] = new int[25][2];
@@ -139,7 +145,7 @@ public class Chute extends Accion {
                 System.out.println("Contador"+contPrecision);
             }
 
-            Campo.getInstanciaCampo().colocarPelota(ejesDestinoPelota[casillaChute][1], +ejesDestinoPelota[casillaChute][0]);
+            Campo.getInstanciaCampo().colocarPelota(ejesDestinoPelota[casillaChute][1], ejesDestinoPelota[casillaChute][0]);
 
             System.out.println("La pelota va a la posicion: "+ejesDestinoPelota[casillaChute][0]+"-"+ejesDestinoPelota[casillaChute][1]);
             jugador.setEstado(new SinPelota());
