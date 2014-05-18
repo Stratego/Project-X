@@ -10,7 +10,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="8dp"
-            android:src="@drawable/jugador" >
+            android:src="@drawable/icon" >
     </ImageView>
 
     <LinearLayout
@@ -27,11 +27,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="6dp"
                     android:textColor="#ffffff"
-                    android:text="@string/activity_tiendafichajes_nombre"
+                    android:text="@string/activity_tiendaobjetos_nombre"
                     android:textSize="17dp"
                     android:id="@+id/textView"/>
             <TextView
-                    android:id="@+id/txtNombreJugador"
+                    android:id="@+id/txtNombreObjeto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lines="1"
@@ -51,10 +51,10 @@
                     android:layout_marginRight="6dp"
                     android:textColor="#ffffff"
                     android:textSize="17dp"
-                    android:text="@string/activity_tiendafichajes_rol"
+                    android:text="@string/activity_tiendaobjetos_descripcion"
                     android:id="@+id/textView"/>
             <TextView
-                    android:id="@+id/txtNombreRol"
+                    android:id="@+id/txtDescripcion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lines="1"
@@ -74,15 +74,38 @@
                     android:layout_marginRight="6dp"
                     android:textColor="#ffffff"
                     android:textSize="17dp"
-                    android:text="@string/activity_tiendafichajes_equipo"
+                    android:text="@string/activity_tiendaobjetos_habilidad"
                     android:id="@+id/textView"/>
             <TextView
-                    android:id="@+id/txtNombreEquipo"
+                    android:id="@+id/txtHabilidad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lines="1"
                     android:textSize="17dp"
                     android:textStyle="bold"
+                    android:text="@+id/TextView01"
+                    >
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:textColor="#ffffff"
+                    android:textSize="17dp"
+                    android:text="@string/activity_tiendaobjetos_efecto"
+                    android:id="@+id/textView"/>
+            <TextView
+                    android:id="@+id/txtEfecto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textStyle="bold"
+                    android:textSize="17dp"
                     android:text="@+id/TextView01"
                     >
             </TextView>

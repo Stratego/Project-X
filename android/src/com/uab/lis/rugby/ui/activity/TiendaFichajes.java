@@ -7,10 +7,9 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
 import com.uab.lis.rugby.R;
 import com.uab.lis.rugby.database.UrisGenerated;
 import com.uab.lis.rugby.database.contracts.*;
@@ -57,6 +56,7 @@ public class TiendaFichajes extends ListActivity implements LoaderManager.Loader
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tiendafichajes);
+
         this.getListView().setDividerHeight(2);
 
         fillData();

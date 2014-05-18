@@ -17,11 +17,6 @@ public class UrisGenerated {
         return Uri.withAppendedPath(base, tbUsuarios.TABLE + "/" + id);
     }
 
-    public static Uri getUriAllJugadores() {
-        Uri base = MyAppContentProvider.URI_BASE;
-        return Uri.withAppendedPath(base, tbJugadores.TABLE);
-    }
-
     public static Uri getUriEquipos(int idusuario) {
         Uri base = getUriUsuario(idusuario);
         return Uri.withAppendedPath(base, tbEquipos.TABLE);
@@ -62,5 +57,15 @@ public class UrisGenerated {
     public static Uri getUriHistorialPArtida() {
         Uri base = MyAppContentProvider.URI_BASE;
         return Uri.withAppendedPath(base, tbHistorialPartido.TABLE);
+    }
+
+    public static Uri getUriAllJugadores() {
+        Uri base = MyAppContentProvider.URI_BASE;
+        return Uri.withAppendedPath(base, tbJugadores.TABLE);
+    }
+
+    public static Uri getUriAllObjetos() {
+        Uri base = MyAppContentProvider.URI_BASE;
+        return Uri.withAppendedPath(base, tbObjetos.TABLE);
     }
 }
