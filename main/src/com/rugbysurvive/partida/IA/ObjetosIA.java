@@ -62,25 +62,38 @@ public class ObjetosIA {
                             case arriba:
                                 if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()+i,
                                         jugador.getPosicionX()).sinJugador()==false){
-                                    objetos.activar();
+                                    if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()+i,
+                                            jugador.getPosicionX()).getJugador().getMiEquipo()==ComponentesJuego.getComponentes().getEquipo1()){
+                                        objetos.activar();
+                                    }
+
                                 }
                                 break;
                             case abajo:
                                 if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()-i,
                                         jugador.getPosicionX()).sinJugador()==false){
-                                    objetos.activar();
+                                    if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()-i,
+                                            jugador.getPosicionX()).getJugador().getMiEquipo()==ComponentesJuego.getComponentes().getEquipo1()){
+                                        objetos.activar();
+                                    }
                                 }
                                 break;
                             case izquierda:
                                 if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY(),
                                         jugador.getPosicionX()-i).sinJugador()==false){
-                                    objetos.activar();
+                                    if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY(),
+                                            jugador.getPosicionX()-i).getJugador().getMiEquipo()==ComponentesJuego.getComponentes().getEquipo1()){
+                                        objetos.activar();
+                                    }
                                 }
                                 break;
                             case derecha:
                                 if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY(),
                                         jugador.getPosicionX()+i).sinJugador()==false){
-                                    objetos.activar();
+                                    if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()+i,
+                                            jugador.getPosicionX()+i).getJugador().getMiEquipo()==ComponentesJuego.getComponentes().getEquipo1()){
+                                        objetos.activar();
+                                    }
                                 }
                                 break;
 
