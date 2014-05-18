@@ -116,7 +116,6 @@ public class Movimiento extends Accion implements Proceso {
      @Override
     public boolean simular() {
 
-        System.out.println("mover");
 
         boolean incrementa = true;
 
@@ -187,6 +186,13 @@ public class Movimiento extends Accion implements Proceso {
                 Campo.getInstanciaCampo().getCasilla(this.camino[contador-1][1],this.camino[contador-1][0]).setJugador(null);
                 if(marcarPunto()== true)
                 {
+                    Campo.getInstanciaCampo().recolocarJugadoresDespuesDelPunto(this.jugador);
+
+                    if(this.indicadorMovimientos != null)
+                    {
+                        this.indicadorMovimientos.borrar();
+                    }
+
                     return true;
                 }
             }

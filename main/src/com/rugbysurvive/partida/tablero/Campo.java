@@ -3,8 +3,8 @@ package com.rugbysurvive.partida.tablero;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.ConPelota;
-import com.rugbysurvive.partida.Jugador.Estado;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.Jugador.SinPelota;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoCampo;
 import com.rugbysurvive.partida.gestores.Dibujable;
@@ -236,5 +236,101 @@ public class Campo implements GestionEntrada,Dibujable {
     @Override
     public int getPosicionY() {
         return 0;
+    }
+
+    public void recolocarJugadoresDespuesDelPunto(Jugador jugador)
+    {
+        if(jugador.getMiEquipo().getLado() == Lado.izquierda)
+        {
+            recolocarIzquierda();
+        }
+        else
+        {
+            recolocarDerecha();
+        }
+    }
+
+    public void recolocarIzquierda()
+    {
+        int posX = 13;
+        int posY = 6;
+        for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo1().listaJugadoresCampo()){
+
+            jugador.getCasilla().setJugador(null);
+            jugador.colocar(getCasilla(posY,posX));
+            jugador.setEstado(new SinPelota());
+
+            posY += 1;
+        }
+
+        posX = 16;
+        posY = 6;
+        for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo2().listaJugadoresCampo()){
+
+            jugador.getCasilla().setJugador(null);
+            jugador.colocar(getCasilla(posY,posX));
+
+            if(posX == 18)
+            {
+                jugador.setEstado(new ConPelota(jugador));
+            }
+            else
+            {
+                jugador.setEstado(new SinPelota());
+            }
+
+            if(posY == 12)
+            {
+                posX = 18;
+                posY = 9;
+            }
+            else
+            {
+                posY += 1;
+            }
+
+
+        }
+    }
+
+    public void recolocarDerecha()
+    {
+        int posX = 16;
+        int posY = 6;
+        for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo2().listaJugadoresCampo()){
+
+            jugador.getCasilla().setJugador(null);
+            jugador.colocar(getCasilla(posY,posX));
+            jugador.setEstado(new SinPelota());
+            posY += 1;
+
+        }
+
+        posX = 13;
+        posY = 6;
+        for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo1().listaJugadoresCampo()){
+
+            jugador.getCasilla().setJugador(null);
+            jugador.colocar(getCasilla(posY,posX));
+
+            if(posX == 11)
+            {
+                jugador.setEstado(new ConPelota(jugador));
+            }
+            else
+            {
+                jugador.setEstado(new SinPelota());
+            }
+
+            if(posY == 12)
+            {
+                posX = 11;
+                posY = 9;
+            }
+            else
+            {
+                posY += 1;
+            }
+        }
     }
 }
