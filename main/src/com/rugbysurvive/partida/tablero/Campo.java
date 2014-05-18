@@ -5,6 +5,7 @@ import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.SinPelota;
+import com.rugbysurvive.partida.Simulador.Chute;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoCampo;
 import com.rugbysurvive.partida.gestores.Dibujable;
@@ -240,18 +241,43 @@ public class Campo implements GestionEntrada,Dibujable {
 
     public void recolocarJugadoresDespuesDelPunto(Jugador jugador)
     {
+        Jugador jugadorChute;
+
         if(jugador.getMiEquipo().getLado() == Lado.izquierda)
         {
-            recolocarIzquierda();
+            jugadorChute = recolocarIzquierda();
+            int fuerzaDecimal = obtenerHabilidadValorDecimal(jugador.getFuerza());
+
+            Chute chute = new Chute(jugadorChute, jugadorChute.getPosicionX()-fuerzaDecimal, 9);
+            chute.simular();
         }
         else
         {
-            recolocarDerecha();
+            jugadorChute = recolocarDerecha();
+            int fuerzaDecimal = obtenerHabilidadValorDecimal(jugador.getFuerza());
+
+            Chute chute = new Chute(jugadorChute, jugadorChute.getPosicionX()+fuerzaDecimal, 9);
+            chute.simular();
         }
+
     }
 
-    public void recolocarIzquierda()
+    public int obtenerHabilidadValorDecimal(int valor)
     {
+        int valorDecimal = valor/10;
+
+        if(valorDecimal <= 0)
+        {
+            valorDecimal = 1;
+        }
+
+        return valorDecimal;
+    }
+
+    public Jugador recolocarIzquierda()
+    {
+        Jugador jugadorChuta = null;
+
         int posX = 13;
         int posY = 6;
         for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo1().listaJugadoresCampo()){
@@ -273,6 +299,7 @@ public class Campo implements GestionEntrada,Dibujable {
             if(posX == 18)
             {
                 jugador.setEstado(new ConPelota(jugador));
+                jugadorChuta = jugador;
             }
             else
             {
@@ -291,10 +318,13 @@ public class Campo implements GestionEntrada,Dibujable {
 
 
         }
+        return jugadorChuta;
     }
 
-    public void recolocarDerecha()
+    public Jugador recolocarDerecha()
     {
+        Jugador jugadorChuta = null;
+
         int posX = 16;
         int posY = 6;
         for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo2().listaJugadoresCampo()){
@@ -316,6 +346,7 @@ public class Campo implements GestionEntrada,Dibujable {
             if(posX == 11)
             {
                 jugador.setEstado(new ConPelota(jugador));
+                jugadorChuta = jugador;
             }
             else
             {
@@ -332,5 +363,7 @@ public class Campo implements GestionEntrada,Dibujable {
                 posY += 1;
             }
         }
+        return jugadorChuta;
     }
+
 }
