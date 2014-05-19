@@ -99,7 +99,7 @@ public class Movimiento extends Accion implements Proceso {
             ProcesosContinuos.añadirProceso(this);
 
             if(choque.arbitrar()) {
-               Simulador.getInstance().eliminarAccionsSimulador();
+               Simulador.getInstance().reiniciar();
 
             }
 

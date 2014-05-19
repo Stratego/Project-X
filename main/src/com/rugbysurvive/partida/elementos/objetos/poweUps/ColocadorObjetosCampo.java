@@ -45,7 +45,9 @@ public class ColocadorObjetosCampo extends Objeto {
 
         if (controlPosicion()){
             usoObjetos = new UsoObjetos(this.jugador);
-            this.objetoCampo.colocar(super.getX(),super.getY());
+            usoObjetos.arbitrar();
+            this.objetoCampo.colocar(super.getX(), super.getY());
+
         }else{
             System.out.println("elemento no colocado");
         }

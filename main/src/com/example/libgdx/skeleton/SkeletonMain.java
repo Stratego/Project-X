@@ -52,6 +52,7 @@ public class SkeletonMain extends Game {
     boolean simular = false;
     Arbitro arbitro;
 
+
     public SkeletonMain(Equipo equipo1, Equipo equipo2, boolean ia,CollBack collBack) {
 
     }
@@ -263,6 +264,7 @@ public class SkeletonMain extends Game {
                 multiplexer.addProcessor(gestureDetector);
                 multiplexer.addProcessor(this.gestorGrafico.getCamara());
                 Gdx.input.setInputProcessor(multiplexer);
+
                 this.gestor.iniciarPartida();
                 this.calculandoEquipoInicio = false;
 
@@ -275,9 +277,11 @@ public class SkeletonMain extends Game {
         if(GestorTurnos.finTurnoJugadores() && !this.simular){
 
             System.out.println("Iniciando simulacion");
-           // IA ia = new IA();
+            GestorTurnos.sumarTurno();
+            IA ia = new IA();
             this.simular = true;
             this.simulador.iniciarSimulacion();
+
 
         }
 

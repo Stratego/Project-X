@@ -71,6 +71,7 @@ public class Jugador implements GestionEntrada {
     public Entrada paseOChute = Entrada.pase;
 
     public int aspecto;
+    private boolean expulsado;
     /**
      * Constructor de jugador
      * @param fuerza Indica la fuerza de un jugador
@@ -108,6 +109,7 @@ public class Jugador implements GestionEntrada {
         this.bloqueo =null;
 
         this.contMovimientos = 0;
+        this.expulsado = false;
 
 
     }
@@ -670,4 +672,11 @@ public class Jugador implements GestionEntrada {
         this.enJuego = enJuego;
     }
 
+    public boolean isExpulsado() {
+        return expulsado;
+    }
+
+    public void setExpulsado(boolean expulsado) {
+        this.expulsado = expulsado;
+    }
 }

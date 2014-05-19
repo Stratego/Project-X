@@ -198,7 +198,15 @@ public class Arbitro implements Dibujable{
                     posXAux-=ancho;
                     break;
             }
+        }
 
+        // CODIGO PRUEBA
+        this.casilla.clear();
+        for(int i=0;i<20;i++) {
+            for(int j=0;j<30;j++) {
+                this.casilla.add(new Casilla(j,i));
+
+            }
         }
     }
 
@@ -229,8 +237,6 @@ public class Arbitro implements Dibujable{
                     }
                 }
 
-
-
         return colocable;
 
     }
@@ -238,7 +244,7 @@ public class Arbitro implements Dibujable{
     /**
      * quita el arbitro del campo y lo borra graficamente
      */
-    private void quitar(){
+    private void quitar() {
 
         GestorGrafico.generarDibujante().eliminarTextura(id);
         ComponentesJuego.getComponentes().getCampo().eliminarElemento(posY,posX);

@@ -80,12 +80,10 @@ public class Simulador implements Proceso{
         // Añadimos segun el equipo que esta jugando y buscamos que sus jugadores
         if(equipo1.isJugando() && !equipo1.bloqueado()){
             this.accionesEquipo1.add(accion);
-           System.out.println("Añadiendo accion equipo1");
         }
 
         else {
             this.accionesEquipo2.add(accion);
-            System.out.println("Añadiendo accion equipo2");
         }
     }
 
@@ -165,7 +163,7 @@ public class Simulador implements Proceso{
                         this.iniciarParado = false;
                     }
                     this.contador =0;
-                    if(accionFinalizada){
+                    if(accionFinalizada && this.acciones.size() > 0){
                         this.acciones.remove(0);
                     }
                  }
@@ -198,9 +196,9 @@ public class Simulador implements Proceso{
     }
 
 
-    public void eliminarAccionsSimulador()
+    public void reiniciar()
     {
-        //   this.acciones = new ArrayList<Accion>();
+        this.acciones = new ArrayList<Accion>();
     }
 
     public int listSize(){

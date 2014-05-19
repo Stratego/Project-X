@@ -71,7 +71,7 @@ public class Posicionamiento {
                  }
 
                 // PRueba de peloteo
-                if(i==1 && lado == Lado.izquierda){
+                if(i==0 && lado == Lado.izquierda){
                     jugador.setEstado(new ConPelota(jugador));
                 }
 
@@ -147,7 +147,6 @@ public class Posicionamiento {
 
 
         Campo campo = ComponentesJuego.getComponentes().getCampo();
-        simulador.eliminarAccionsSimulador();
         ComponentesJuego.getComponentes().getEquipo1().quitarPelota();
         ComponentesJuego.getComponentes().getEquipo2().quitarPelota();
         jugadoresCercanos(posX, posY);
@@ -198,7 +197,6 @@ public class Posicionamiento {
 
     public static void generarPenalty(Equipo equipo, int posX, int posY){
         Campo campo = ComponentesJuego.getComponentes().getCampo();
-        simulador.eliminarAccionsSimulador();
         ComponentesJuego.getComponentes().getEquipo1().quitarPelota();
         ComponentesJuego.getComponentes().getEquipo2().quitarPelota();
         if (ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador()==null){
@@ -254,7 +252,6 @@ public class Posicionamiento {
     public static void  generarSaqueBanda(int posX,int posY,Equipo equipo){
 
         Campo campo = ComponentesJuego.getComponentes().getCampo();
-        simulador.eliminarAccionsSimulador();
         ComponentesJuego.getComponentes().getEquipo1().quitarPelota();
         ComponentesJuego.getComponentes().getEquipo2().quitarPelota();
         jugadoresCercanos(posX,posY);

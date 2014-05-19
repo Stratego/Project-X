@@ -1,6 +1,7 @@
 package com.rugbysurvive.partida.arbitro;
 
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.jugadores.Posicionamiento;
 import com.rugbysurvive.partida.tablero.Lado;
 
@@ -16,7 +17,6 @@ public class Choque extends Regla{
 
 
     public Choque(Jugador jugadorAtacante, Jugador jugadorDefensor) {
-        super();
         this.jugadorAtacante = jugadorAtacante;
         this.jugadorDefensor = jugadorDefensor;
     }
@@ -33,7 +33,7 @@ public class Choque extends Regla{
             }else{
                 this.posicionamiento.generarMele(this.jugadorDefensor.getPosicionX(),this.jugadorDefensor.getPosicionY());
             }
-
+            Simulador.getInstance().reiniciar();
             return true;
         }
 
