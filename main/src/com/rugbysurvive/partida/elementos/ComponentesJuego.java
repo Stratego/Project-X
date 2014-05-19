@@ -64,7 +64,7 @@ public class ComponentesJuego {
         jugador.añadirObjeto(objeto3);
         jugador.añadirObjeto(objeto4);
 
-        this.equipo1.añadirJugador(jugador,17,23);
+        this.equipo1.añadirJugador(jugador,7,6);
         //this.equipo1.añadirJugador(jugador,17,22);
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo1);
@@ -108,8 +108,8 @@ public class ComponentesJuego {
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),17,24);
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo2);
-        jugador.setEstado(new ConPelota(jugador));
-        this.equipo2.añadirJugador(jugador,18,25);
+        //jugador.setEstado(new ConPelota(jugador));
+        this.equipo2.añadirJugador(jugador,5,5);
 
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo2);
@@ -120,9 +120,9 @@ public class ComponentesJuego {
         jugador.añadirObjeto(objeto2);
         jugador.añadirObjeto(objeto);
         jugador.añadirObjeto(objeto);
-        this.equipo2.añadirJugador(jugador,19,26);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),20,27);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),21,21);
+        this.equipo2.añadirJugador(jugador,2,3);
+        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),19,27);
+        //this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),21,21);
 
 
     }
