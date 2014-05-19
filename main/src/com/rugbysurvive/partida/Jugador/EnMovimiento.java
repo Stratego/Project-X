@@ -144,6 +144,7 @@ public class EnMovimiento implements Estado {
             jugador.setBloqueado(true);
             jugador.setSeleccionado(false);
 
+
             this.indicador.procesar();
 
             /*Le devolvemos su estado anterior*/

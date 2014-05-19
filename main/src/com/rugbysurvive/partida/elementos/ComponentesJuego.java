@@ -64,7 +64,7 @@ public class ComponentesJuego {
         jugador.añadirObjeto(objeto3);
         jugador.añadirObjeto(objeto4);
 
-        this.equipo1.añadirJugador(jugador,17,23);
+        this.equipo1.añadirJugador(jugador,7,6);
         //this.equipo1.añadirJugador(jugador,17,22);
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo1);
@@ -76,7 +76,7 @@ public class ComponentesJuego {
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo1);
         jugador.setDireccion(DireccionJugador.abajo);
-        jugador.setEstado(new ConPelota(jugador));
+        //jugador.setEstado(new ConPelota(jugador));
         this.equipo1.añadirJugador(jugador,9,22);
 
 
@@ -93,9 +93,9 @@ public class ComponentesJuego {
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),4,4);
 
 
-        /*this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),3,12);
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),3,12);
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),4,13);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),5,14);*/
+        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),5,14);
 
 
 
@@ -108,8 +108,9 @@ public class ComponentesJuego {
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),17,24);
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo2);
-        jugador.setEstado(new ConPelota(jugador));
-        this.equipo2.añadirJugador(jugador,18,25);
+        //jugador.setEstado(new ConPelota(jugador));
+        this.equipo2.añadirJugador(jugador,5,5);
+
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo2);
         objeto = new PowerUP(0,10,"casilla.png", Habilidades.vida,50,jugador);
@@ -119,9 +120,9 @@ public class ComponentesJuego {
         jugador.añadirObjeto(objeto2);
         jugador.añadirObjeto(objeto);
         jugador.añadirObjeto(objeto);
-        this.equipo2.añadirJugador(jugador,19,26);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),20,27);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),21,21);
+        this.equipo2.añadirJugador(jugador,2,3);
+       // this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),19,27);
+        //this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),21,21);
 
 
     }

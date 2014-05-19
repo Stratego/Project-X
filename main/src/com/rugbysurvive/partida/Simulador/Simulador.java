@@ -1,13 +1,11 @@
 package com.rugbysurvive.partida.Simulador;
 
 
-import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.gestores.Procesos.Proceso;
 import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
 import com.rugbysurvive.partida.jugadores.Equipo;
 
-import javax.rmi.CORBA.Tie;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +30,7 @@ public class Simulador implements Proceso{
     private boolean iniciarParado;
     private boolean parado;
     private int tiempo;
+    private Boolean eliminarAcciones = false;
 
     private Simulador()
     {
@@ -158,6 +157,7 @@ public class Simulador implements Proceso{
                 {
                     accionFinalizada = this.acciones.get(0).simular();
 
+
                     if(this.accionFinalizada && this.iniciarParado){
                         this.parado =true;
                         this.iniciarParado = false;
@@ -168,6 +168,15 @@ public class Simulador implements Proceso{
                     }
                  }
 
+                if(this.eliminarAcciones == true)
+                {
+                    this.eliminarAcciones = false;
+                    this.acciones = new ArrayList<Accion>();
+                    this.accionesEquipo1 = new ArrayList<Accion>();
+                    this.accionesEquipo2 = new ArrayList<Accion>();
+
+                    return true;
+                }
                 if(this.acciones.size() == 0){
                     this.accionesEquipo1 = new ArrayList<Accion>();
                     this.accionesEquipo2 = new ArrayList<Accion>();
@@ -195,10 +204,18 @@ public class Simulador implements Proceso{
         return false;
     }
 
+<<<<<<< HEAD
 
     public void reiniciar()
     {
         this.acciones = new ArrayList<Accion>();
+=======
+    public void eliminarAcciones()
+    {
+
+        this.eliminarAcciones = true;
+
+>>>>>>> 79ff453ebb307c8a42f41b9cff2bf71812ae458f
     }
 
     public int listSize(){

@@ -70,18 +70,19 @@ public class Movimiento extends Accion implements Proceso {
     {
 
             /*Si un jugador se sale del campo se llama a la funcion arbitrar de saquebanda*/
-       if((this.camino[contador][1] > 18 || this.camino[contador][1] < 1) && (this.jugador.getEstado() instanceof ConPelota))
-        {
-            Equipo equipoRival = ComponentesJuego.getComponentes().getEquipo1();
-            if(this.jugador.getMiEquipo() == ComponentesJuego.getComponentes().getEquipo1())
+       if (contador<=camino.length){
+           if((this.camino[contador][1] > 18 || this.camino[contador][1] < 1) && (this.jugador.getEstado() instanceof ConPelota))
             {
-                equipoRival = ComponentesJuego.getComponentes().getEquipo2();
+                Equipo equipoRival = ComponentesJuego.getComponentes().getEquipo1();
+                if(this.jugador.getMiEquipo() == ComponentesJuego.getComponentes().getEquipo1())
+                {
+                    equipoRival = ComponentesJuego.getComponentes().getEquipo2();
+                }
+
+                SaqueBanda saquebanda = new SaqueBanda(this.camino[contador][1],this.camino[contador][0],equipoRival);
+                return saquebanda.arbitrar();
             }
-
-            SaqueBanda saquebanda = new SaqueBanda(this.camino[contador][1],this.camino[contador][0],equipoRival);
-            return saquebanda.arbitrar();
-        }
-
+       }
         return false;
     }
 
@@ -99,7 +100,11 @@ public class Movimiento extends Accion implements Proceso {
             ProcesosContinuos.añadirProceso(this);
 
             if(choque.arbitrar()) {
+<<<<<<< HEAD
                Simulador.getInstance().reiniciar();
+=======
+               Simulador.getInstance().eliminarAcciones();
+>>>>>>> 79ff453ebb307c8a42f41b9cff2bf71812ae458f
 
             }
 
@@ -116,7 +121,6 @@ public class Movimiento extends Accion implements Proceso {
      @Override
     public boolean simular() {
 
-        System.out.println("mover");
 
         boolean incrementa = true;
 
@@ -187,6 +191,13 @@ public class Movimiento extends Accion implements Proceso {
                 Campo.getInstanciaCampo().getCasilla(this.camino[contador-1][1],this.camino[contador-1][0]).setJugador(null);
                 if(marcarPunto()== true)
                 {
+                    Campo.getInstanciaCampo().recolocarJugadoresDespuesDelPunto(this.jugador);
+
+                    if(this.indicadorMovimientos != null)
+                    {
+                        this.indicadorMovimientos.borrar();
+                    }
+
                     return true;
                 }
             }

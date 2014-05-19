@@ -3,8 +3,10 @@ package com.rugbysurvive.partida.tablero;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.ConPelota;
-import com.rugbysurvive.partida.Jugador.Estado;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.Jugador.SinPelota;
+import com.rugbysurvive.partida.Simulador.Chute;
+import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoCampo;
 import com.rugbysurvive.partida.gestores.Dibujable;
@@ -237,4 +239,140 @@ public class Campo implements GestionEntrada,Dibujable {
     public int getPosicionY() {
         return 0;
     }
+
+    public void recolocarJugadoresDespuesDelPunto(Jugador jugador)
+    {
+        Jugador jugadorChute;
+        Chute chute = null;
+
+        if(jugador.getMiEquipo().getLado() == Lado.izquierda)
+        {
+            jugadorChute = recolocarIzquierda();
+            int fuerzaDecimal = obtenerHabilidadValorDecimal(jugador.getFuerza());
+
+
+
+
+            chute = new Chute(jugadorChute, jugadorChute.getPosicionX()-fuerzaDecimal, 9);
+
+        }
+        else
+        {
+            jugadorChute = recolocarDerecha();
+            int fuerzaDecimal = obtenerHabilidadValorDecimal(jugador.getFuerza());
+
+
+            chute = new Chute(jugadorChute, jugadorChute.getPosicionX()+fuerzaDecimal, 9);
+
+        }
+
+        Simulador.getInstance().eliminarAcciones();
+        chute.simular();
+
+    }
+
+    public int obtenerHabilidadValorDecimal(int valor)
+    {
+        int valorDecimal = valor/10;
+
+        if(valorDecimal <= 0)
+        {
+            valorDecimal = 1;
+        }
+
+        return valorDecimal;
+    }
+
+    public Jugador recolocarIzquierda()
+    {
+        Jugador jugadorChuta = null;
+
+        int posX = 13;
+        int posY = 6;
+        for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo1().listaJugadoresCampo()){
+
+            jugador.getCasilla().setJugador(null);
+            jugador.colocar(getCasilla(posY,posX));
+            jugador.setEstado(new SinPelota());
+
+            posY += 1;
+        }
+
+        posX = 16;
+        posY = 6;
+        for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo2().listaJugadoresCampo()){
+
+            jugador.getCasilla().setJugador(null);
+            jugador.colocar(getCasilla(posY,posX));
+
+            if(posX == 18)
+            {
+                jugador.setEstado(new ConPelota(jugador));
+                jugadorChuta = jugador;
+            }
+            else
+            {
+                jugador.setEstado(new SinPelota());
+            }
+
+            if(posY == 12)
+            {
+                posX = 18;
+                posY = 9;
+            }
+            else
+            {
+                posY += 1;
+            }
+
+
+        }
+        return jugadorChuta;
+    }
+
+    public Jugador recolocarDerecha()
+    {
+        Jugador jugadorChuta = null;
+
+        int posX = 16;
+        int posY = 6;
+        for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo2().listaJugadoresCampo()){
+
+            jugador.getCasilla().setJugador(null);
+            jugador.colocar(getCasilla(posY,posX));
+            jugador.setEstado(new SinPelota());
+            posY += 1;
+
+        }
+
+        posX = 13;
+        posY = 6;
+        for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo1().listaJugadoresCampo()){
+
+            jugador.getCasilla().setJugador(null);
+            jugador.colocar(getCasilla(posY,posX));
+
+            if(posX == 11)
+            {
+                jugador.setEstado(new ConPelota(jugador));
+                jugadorChuta = jugador;
+            }
+            else
+            {
+                jugador.setEstado(new SinPelota());
+            }
+
+            if(posY == 12)
+            {
+                posX = 11;
+                posY = 9;
+            }
+            else
+            {
+                posY += 1;
+            }
+        }
+        return jugadorChuta;
+    }
+
 }

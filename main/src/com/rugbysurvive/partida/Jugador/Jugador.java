@@ -172,8 +172,10 @@ public class Jugador implements GestionEntrada {
      * @param casilla casilla donde se situa el jugador
      */
     public void colocar(Casilla casilla){
-        this.casilla= casilla;
+
         casilla.setJugador(this);
+        this.setCasilla(casilla);
+
         if(this.casilla != null)
         {
             this.enJuego = true;
@@ -513,6 +515,7 @@ public class Jugador implements GestionEntrada {
                             if(entrada == Entrada.clic)
                             {
                                 this.setSeleccionado(true);
+                                System.out.println("ESTADO:"+this.getEstado());
                                 System.out.println(">---------Me seleccionan-------------<"+this.getEstado());
                                 GestorGrafico.getCamara().bloquear();
                             }
