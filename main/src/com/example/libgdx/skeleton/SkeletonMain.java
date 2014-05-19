@@ -7,7 +7,6 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.models.Equipo;
 import com.partido.GestorTurnos;
 import com.rugbysurvive.partida.ConstantesJuego;
-import com.rugbysurvive.partida.IA.IA;
 import com.rugbysurvive.partida.ResolucionPantalla;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.arbitro.Arbitro;
@@ -277,7 +276,7 @@ public class SkeletonMain extends Game {
 
             System.out.println("Iniciando simulacion");
             if (contolIA ==true){
-                IA ia = new IA();
+                //IA ia = new IA();
             }
 
             this.simular = true;
