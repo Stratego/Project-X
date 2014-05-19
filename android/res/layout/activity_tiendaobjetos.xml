@@ -25,7 +25,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="@string/activity_tiendaobjetos_vertodos"
-            android:background="@drawable/fusta2"
+            android:background="@drawable/botofusta"
             android:onClick="onButtonClicked"
             android:id="@+id/tiendaobjetos_todos"/>
     <ListView

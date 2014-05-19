@@ -5,9 +5,13 @@ import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.SimpleCursorAdapter;
 import com.uab.lis.rugby.R;
@@ -28,6 +32,7 @@ public class TiendaFichajes extends ListActivity implements LoaderManager.Loader
     public static final String ATACANTE = "'atacante'";
     public static final String DEFENSA = "'defensa'";
     public static final String CHUTADOR = "'chutador'";
+    public String nombre = null;
 
     String selection_todos = "j." + tbJugadores._ID + " = jr." + tbJugadorRol.COL_JUGADOR +
             " and jr." + tbJugadorRol.COL_ROL + " = r." + tbRoles._ID +
@@ -57,25 +62,55 @@ public class TiendaFichajes extends ListActivity implements LoaderManager.Loader
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tiendafichajes);
 
-        this.getListView().setDividerHeight(2);
+        final EditText campoNombre = (EditText)findViewById(R.id.tiendafichajes_edtNombre);
+        campoNombre.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {
+            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                nombre = "'%"+campoNombre.getText().toString()+"%'";
+                String selection_nombre = "j." + tbJugadores._ID + " = jr." + tbJugadorRol.COL_JUGADOR +
+                        " and jr." + tbJugadorRol.COL_ROL + " = r." + tbRoles._ID +
+                        " and j." + tbJugadores._ID + " = je." + tbJugadorEquipo.COL_JUGADOR +
+                        " and je." + tbJugadorEquipo.COL_EQUIPO + " = e." + tbEquipos._ID +
+                        " and j." + tbJugadores.COL_NOMBRE + " like " + nombre;
+                selection = selection_nombre;
+                getLoaderManager().restartLoader(0, null, TiendaFichajes.this);
+            }
+        });
 
+        this.getListView().setDividerHeight(2);
         fillData();
         registerForContextMenu(getListView());
     }
 
     public void onRadioButtonClicked(View view) {
 
+        RadioButton botonAtacante=(RadioButton)findViewById(R.id.atacante);
+        RadioButton botonDefensa=(RadioButton)findViewById(R.id.defensa);
+        RadioButton botonChutador=(RadioButton)findViewById(R.id.chutador);
+
         // Check which radio button was clicked
         switch(view.getId()) {
             case R.id.atacante:
+                botonAtacante.setBackgroundColor(Color.RED);
+                botonDefensa.setBackgroundColor(Color.parseColor("#669900"));
+                botonChutador.setBackgroundColor(Color.parseColor("#669900"));
                 selection = selection_atacante;
                 getLoaderManager().restartLoader(0, null, this);
                 break;
             case R.id.defensa:
+                botonAtacante.setBackgroundColor(Color.parseColor("#669900"));
+                botonDefensa.setBackgroundColor(Color.RED);
+                botonChutador.setBackgroundColor(Color.parseColor("#669900"));
                 selection = selection_defensa;
                 getLoaderManager().restartLoader(0, null, this);
                 break;
             case R.id.chutador:
+                botonAtacante.setBackgroundColor(Color.parseColor("#669900"));
+                botonDefensa.setBackgroundColor(Color.parseColor("#669900"));
+                botonChutador.setBackgroundColor(Color.RED);
                 selection = selection_chutador;
                 getLoaderManager().restartLoader(0, null, this);
                 break;
@@ -84,15 +119,18 @@ public class TiendaFichajes extends ListActivity implements LoaderManager.Loader
 
     public void onButtonClicked(View view) {
 
+        RadioButton botonAtacante=(RadioButton)findViewById(R.id.atacante);
+        RadioButton botonDefensa=(RadioButton)findViewById(R.id.defensa);
+        RadioButton botonChutador=(RadioButton)findViewById(R.id.chutador);
+        Button botonTodos=(Button)findViewById(R.id.todos);
+
         // Check which radio button was clicked
         switch(view.getId()) {
             case R.id.todos:
-                RadioButton btnAtacante=(RadioButton)findViewById(R.id.atacante);
-                RadioButton btnDefensa=(RadioButton)findViewById(R.id.defensa);
-                RadioButton btnChutador=(RadioButton)findViewById(R.id.chutador);
-                if (btnAtacante.isChecked()) btnAtacante.setChecked(false);
-                if (btnDefensa.isChecked()) btnDefensa.setChecked(false);
-                if (btnChutador.isChecked()) btnChutador.setChecked(false);
+                botonAtacante.setBackgroundColor(Color.parseColor("#669900"));
+                botonDefensa.setBackgroundColor(Color.parseColor("#669900"));
+                botonChutador.setBackgroundColor(Color.parseColor("#669900"));
+                botonTodos.setBackgroundResource(R.drawable.selector_boton);
                 selection = selection_todos;
                 getLoaderManager().restartLoader(0, null, this);
                 break;
@@ -107,8 +145,7 @@ public class TiendaFichajes extends ListActivity implements LoaderManager.Loader
         int[] to = new int[] { R.id.txtNombreJugador, R.id.txtNombreRol, R.id.txtNombreEquipo };
 
         getLoaderManager().initLoader(0, null, this);
-        adapter = new SimpleCursorAdapter(this, R.layout.activity_tiendafichajes_filajugador, null, from,
-                to, 0);
+        adapter = new SimpleCursorAdapter(this, R.layout.activity_tiendafichajes_filajugador, null, from, to, 0);
 
         setListAdapter(adapter);
     }

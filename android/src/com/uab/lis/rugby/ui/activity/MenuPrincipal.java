@@ -66,7 +66,7 @@ public class MenuPrincipal extends BaseActivity {
                         };
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(MenuPrincipal.this);
-                        builder.setTitle("Selecciona el ribal");
+                        builder.setTitle("Selecciona el rival");
                         //builder.setMessage("Selecciona el quipo ribal que deseas ganar");
                         builder.setItems(items,new DialogInterface.OnClickListener() {
                                     @Override
