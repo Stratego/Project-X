@@ -513,6 +513,7 @@ public class Jugador implements GestionEntrada {
                             if(entrada == Entrada.clic)
                             {
                                 this.setSeleccionado(true);
+                                System.out.println("ESTADO:"+this.getEstado());
                                 System.out.println(">---------Me seleccionan-------------<"+this.getEstado());
                                 GestorGrafico.getCamara().bloquear();
                             }

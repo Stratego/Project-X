@@ -243,25 +243,41 @@ public class Campo implements GestionEntrada,Dibujable {
     public void recolocarJugadoresDespuesDelPunto(Jugador jugador)
     {
         Jugador jugadorChute;
+        Chute chute = null;
 
         if(jugador.getMiEquipo().getLado() == Lado.izquierda)
         {
             jugadorChute = recolocarIzquierda();
             int fuerzaDecimal = obtenerHabilidadValorDecimal(jugador.getFuerza());
+<<<<<<< HEAD
             Simulador.getInstance().eliminarAccionsSimulador();
             Chute chute = new Chute(jugadorChute, jugadorChute.getPosicionX()-fuerzaDecimal, 9);
             Simulador.getInstance().iniciarSimulacion();
             chute.simular();
+=======
+
+
+            chute = new Chute(jugadorChute, jugadorChute.getPosicionX()-fuerzaDecimal, 9);
+>>>>>>> 512627c3a9421b8d19cd90ef5f35f40cc9cbbcfd
         }
         else
         {
             jugadorChute = recolocarDerecha();
             int fuerzaDecimal = obtenerHabilidadValorDecimal(jugador.getFuerza());
+<<<<<<< HEAD
             Simulador.getInstance().eliminarAccionsSimulador();
             Chute chute = new Chute(jugadorChute, jugadorChute.getPosicionX()+fuerzaDecimal, 9);
             Simulador.getInstance().iniciarSimulacion();
             chute.simular();
+=======
+
+            chute = new Chute(jugadorChute, jugadorChute.getPosicionX()+fuerzaDecimal, 9);
+
+>>>>>>> 512627c3a9421b8d19cd90ef5f35f40cc9cbbcfd
         }
+
+        Simulador.getInstance().eliminarAcciones();
+        chute.simular();
 
     }
 
