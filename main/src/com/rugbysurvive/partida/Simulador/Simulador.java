@@ -208,11 +208,9 @@ public class Simulador implements Proceso{
 
     public void eliminarAcciones()
     {
-<<<<<<< HEAD
-           this.acciones = new ArrayList<Accion>();
-=======
+
         this.eliminarAcciones = true;
->>>>>>> 512627c3a9421b8d19cd90ef5f35f40cc9cbbcfd
+
     }
 
     public int listSize(){
