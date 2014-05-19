@@ -204,18 +204,17 @@ public class Simulador implements Proceso{
         return false;
     }
 
-<<<<<<< HEAD
+
 
     public void reiniciar()
     {
         this.acciones = new ArrayList<Accion>();
-=======
+    }
     public void eliminarAcciones()
     {
+      this.eliminarAcciones = true;
 
-        this.eliminarAcciones = true;
 
->>>>>>> 79ff453ebb307c8a42f41b9cff2bf71812ae458f
     }
 
     public int listSize(){
