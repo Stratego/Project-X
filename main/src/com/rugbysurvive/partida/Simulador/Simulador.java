@@ -200,7 +200,7 @@ public class Simulador implements Proceso{
 
     public void eliminarAccionsSimulador()
     {
-        //   this.acciones = new ArrayList<Accion>();
+           this.acciones = new ArrayList<Accion>();
     }
 
     public int listSize(){

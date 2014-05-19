@@ -70,18 +70,19 @@ public class Movimiento extends Accion implements Proceso {
     {
 
             /*Si un jugador se sale del campo se llama a la funcion arbitrar de saquebanda*/
-       if((this.camino[contador][1] > 18 || this.camino[contador][1] < 1) && (this.jugador.getEstado() instanceof ConPelota))
-        {
-            Equipo equipoRival = ComponentesJuego.getComponentes().getEquipo1();
-            if(this.jugador.getMiEquipo() == ComponentesJuego.getComponentes().getEquipo1())
+       if (contador<=camino.length){
+           if((this.camino[contador][1] > 18 || this.camino[contador][1] < 1) && (this.jugador.getEstado() instanceof ConPelota))
             {
-                equipoRival = ComponentesJuego.getComponentes().getEquipo2();
+                Equipo equipoRival = ComponentesJuego.getComponentes().getEquipo1();
+                if(this.jugador.getMiEquipo() == ComponentesJuego.getComponentes().getEquipo1())
+                {
+                    equipoRival = ComponentesJuego.getComponentes().getEquipo2();
+                }
+
+                SaqueBanda saquebanda = new SaqueBanda(this.camino[contador][1],this.camino[contador][0],equipoRival);
+                return saquebanda.arbitrar();
             }
-
-            SaqueBanda saquebanda = new SaqueBanda(this.camino[contador][1],this.camino[contador][0],equipoRival);
-            return saquebanda.arbitrar();
-        }
-
+       }
         return false;
     }
 

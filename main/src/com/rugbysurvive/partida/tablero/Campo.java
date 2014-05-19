@@ -6,6 +6,7 @@ import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.SinPelota;
 import com.rugbysurvive.partida.Simulador.Chute;
+import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoCampo;
 import com.rugbysurvive.partida.gestores.Dibujable;
@@ -247,16 +248,18 @@ public class Campo implements GestionEntrada,Dibujable {
         {
             jugadorChute = recolocarIzquierda();
             int fuerzaDecimal = obtenerHabilidadValorDecimal(jugador.getFuerza());
-
+            Simulador.getInstance().eliminarAccionsSimulador();
             Chute chute = new Chute(jugadorChute, jugadorChute.getPosicionX()-fuerzaDecimal, 9);
+            Simulador.getInstance().iniciarSimulacion();
             chute.simular();
         }
         else
         {
             jugadorChute = recolocarDerecha();
             int fuerzaDecimal = obtenerHabilidadValorDecimal(jugador.getFuerza());
-
+            Simulador.getInstance().eliminarAccionsSimulador();
             Chute chute = new Chute(jugadorChute, jugadorChute.getPosicionX()+fuerzaDecimal, 9);
+            Simulador.getInstance().iniciarSimulacion();
             chute.simular();
         }
 
