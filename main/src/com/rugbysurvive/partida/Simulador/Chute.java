@@ -167,6 +167,7 @@ public class Chute extends Accion {
                 if(ejesDestinoPelota[index][0] >= 28)
                 {
                     Marcador.getInstanceMarcador().sumarPuntuacion(2, this.jugador);
+                    Campo.getInstanciaCampo().recolocarJugadoresDespuesDelPunto(this.jugador);
                 }
             }
             else
@@ -174,6 +175,7 @@ public class Chute extends Accion {
                 if(ejesDestinoPelota[index][0] <= 2)
                 {
                     Marcador.getInstanceMarcador().sumarPuntuacion(2, this.jugador);
+                    Campo.getInstanciaCampo().recolocarJugadoresDespuesDelPunto(this.jugador);
                 }
             }
         }
