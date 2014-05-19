@@ -52,6 +52,7 @@ public class SkeletonMain extends Game {
     boolean simular = false;
     Arbitro arbitro;
 
+    boolean IA = true;
     public SkeletonMain(Equipo equipo1, Equipo equipo2, boolean ia,CollBack collBack) {
 
     }
@@ -275,7 +276,10 @@ public class SkeletonMain extends Game {
         if(GestorTurnos.finTurnoJugadores() && !this.simular){
 
             System.out.println("Iniciando simulacion");
-            //IA ia = new IA();
+            if (IA ==true){
+                IA ia = new IA();
+            }
+
             this.simular = true;
             this.simulador.iniciarSimulacion();
 
