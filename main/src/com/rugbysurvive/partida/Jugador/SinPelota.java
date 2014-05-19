@@ -39,9 +39,9 @@ public class SinPelota implements Estado {
 
         if (entrada == Entrada.arrastrar){
             int distancia = jugador.getResistencia()/10;
-            if(distancia <=0)
+            if(distancia <=2)
             {
-                distancia = 1;
+                distancia = 3;
             }
 
             jugador.setEstado(new EnMovimiento(distancia,this));
