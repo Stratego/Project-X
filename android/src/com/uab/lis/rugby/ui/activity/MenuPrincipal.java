@@ -41,14 +41,8 @@ public class MenuPrincipal extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MenuPrincipal.this,AndroidStarter.class);
-                intent.putExtra(AndroidStarter.IA,true);
-                intent.putExtra(AndroidStarter.IDEQUIPO,equipoID);
-                intent.putExtra(AndroidStarter.IDRIBAL,(int)(Math.round(Math.random()*3)+1));
-                intent.putExtra(AndroidStarter.IDUSER,userID);
-                intent.putExtra(AndroidStarter.LIGA,true);
-                intent.putExtra(AndroidStarter.LIGAID,1);
-                //todo devemos guardar los partidos i la liga para poder hacer un efecto de jugar una liguilla.
+                Intent intent = new Intent(MenuPrincipal.this,LigaActivity.class);
+                intent.putExtra(LigaActivity.IDUSER,userID);
                 startActivity(intent);
             }
         });
