@@ -185,7 +185,7 @@ public class MovimentoIA {
         if (casilla.hayPelota()){
             nodo.setCoste(0);
         }else if (casilla.sinJugador()==false && casilla.sinObjeto()==false && casilla.sinArbitro()==false){
-            nodo.setCoste(2);
+            nodo.setCoste(4);
         }else{
             nodo.setCoste(1);
         }
