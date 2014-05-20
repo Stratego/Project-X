@@ -13,10 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.CursorAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
 import com.models.Equipo;
 import com.uab.lis.rugby.R;
 import com.uab.lis.rugby.database.ContentProviders.MyAppContentProvider;
@@ -35,31 +32,40 @@ import java.util.HashMap;
 public class LigaActivity extends ListActivity {
     public static final String IDUSER = "iduser";
     private int idUser;
+    private Cursor cursor;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         idUser = getIntent().getIntExtra(IDUSER,-1);
 
         String where = tbLiga.COL_ID_LIGA + " = " + 0;
-        final Cursor cursor = getContentResolver().query(Uri.withAppendedPath(MyAppContentProvider.URI_BASE,tbLiga.TABLE),null,where,null,null);
+        cursor = getContentResolver().query(Uri.withAppendedPath(MyAppContentProvider.URI_BASE,tbLiga.TABLE),null,where,null,null);
         LigaAdaper adaper = new LigaAdaper(this,cursor);
         setListAdapter(adaper);
-        this.getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                cursor.moveToPosition(position);
-                int idEquipo1 = cursor.getInt(cursor.getColumnIndex(tbLiga.COL_ID_EQUIPO_1));
-                int idEquipo2 = cursor.getInt(cursor.getColumnIndex(tbLiga.COL_ID_EQUIPO_2));
 
-                Intent intent = new Intent(LigaActivity.this,AndroidStarter.class);
-                intent.putExtra(AndroidStarter.IA,true);
-                intent.putExtra(AndroidStarter.IDEQUIPO,idEquipo1);
-                intent.putExtra(AndroidStarter.IDRIBAL,idEquipo2);
-                intent.putExtra(AndroidStarter.LIGA,true);
-                intent.putExtra(AndroidStarter.LIGAID,id);
-                intent.putExtra(AndroidStarter.IDUSER,idUser);
-            }
-        });
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        cursor.moveToPosition(position);
+        int idEquipo1 = cursor.getInt(cursor.getColumnIndex(tbLiga.COL_ID_EQUIPO_1));
+        int idEquipo2 = cursor.getInt(cursor.getColumnIndex(tbLiga.COL_ID_EQUIPO_2));
+        int puntuacio1 = cursor.getInt(cursor.getColumnIndex(tbLiga.COL_PUNTUACION_EQUIPO_1));
+        int puntuacio2 = cursor.getInt(cursor.getColumnIndex(tbLiga.COL_PUNTUACION_EQUIPO_2));
+
+        if(puntuacio1 == 0 && puntuacio2 == 0){
+            Toast.makeText(this,"Partido ya jugado",Toast.LENGTH_LONG).show();
+        }else {
+            Intent intent = new Intent(LigaActivity.this, AndroidStarter.class);
+            intent.putExtra(AndroidStarter.IA, true);
+            intent.putExtra(AndroidStarter.IDEQUIPO, idEquipo1);
+            intent.putExtra(AndroidStarter.IDRIBAL, idEquipo2);
+            intent.putExtra(AndroidStarter.LIGA, true);
+            intent.putExtra(AndroidStarter.LIGAID, id);
+            intent.putExtra(AndroidStarter.IDUSER, idUser);
+
+            startActivity(intent);
+        }
     }
 
     private class LigaAdaper extends CursorAdapter{
