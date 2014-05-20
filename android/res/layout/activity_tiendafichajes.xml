@@ -103,7 +103,8 @@
             android:id="@+id/todos"/>
     <ListView
             android:layout_marginTop="24dp"
-            android:id="@android:id/list"
+            android:id="@+id/listaJugadores"
+            android:choiceMode="singleChoice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
     </ListView>
@@ -114,6 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:layout_marginLeft="10dp"
+            android:textSize="17dp"
             android:textColor="#ffffff"
             android:textStyle="bold"
             android:text="@string/activity_tiendafichajes_sinjugadores" />
