@@ -7,10 +7,13 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.models.Equipo;
 import com.partido.GestorTurnos;
 import com.rugbysurvive.partida.ConstantesJuego;
-import com.rugbysurvive.partida.Jugador.extras.GestorIndicadorMovimientos;
+
+import com.rugbysurvive.partida.IA.IA;
+
 import com.rugbysurvive.partida.ResolucionPantalla;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.arbitro.Arbitro;
+import com.rugbysurvive.partida.arbitro.SaqueBanda;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.Marcador;
 import com.rugbysurvive.partida.elementos.objetos.GestorObjetos;
@@ -19,6 +22,7 @@ import com.rugbysurvive.partida.gestores.Entrada.GestorEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
 import com.rugbysurvive.partida.gestores.Prueba;
+import com.rugbysurvive.partida.jugadores.Posicionamiento;
 import com.rugbysurvive.partida.tablero.Boton;
 import com.rugbysurvive.partida.tablero.Botones.BotonCambioTurno;
 import com.rugbysurvive.partida.tablero.Botones.BotonFinalizarAccion;
@@ -272,6 +276,7 @@ public class SkeletonMain extends Game {
 
             }
 
+
            this.gestor.CambiarTurno();
 
 
@@ -281,7 +286,10 @@ public class SkeletonMain extends Game {
             GestorTurnos.sumarTurno();
 
             if (contolIA ==true){
-                //IA ia = new IA();
+                //SaqueBanda saqueBanda = new SaqueBanda(0,0,ComponentesJuego.getComponentes().getEquipo1());
+                //saqueBanda.arbitrar();
+
+                IA ia = new IA();
             }
 
             this.simular = true;

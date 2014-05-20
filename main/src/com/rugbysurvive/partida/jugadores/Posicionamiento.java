@@ -316,7 +316,7 @@ public class Posicionamiento {
 
         int posXAux=posX-1;
         int posYAux =posY+1;
-        int rango = 2;
+        int rango = 3;
         boolean salida=false;
 
         while (salida==false){
