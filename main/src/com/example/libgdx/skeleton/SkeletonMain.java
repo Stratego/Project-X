@@ -193,7 +193,8 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("objetos/explosion/explosio4.png");
         nombresTexturas.add("objetos/explosion/explosio5.png");
         nombresTexturas.add("objetos/explosion/explosio6.png");
-
+        nombresTexturas.add("objetos/agujero.png");
+        nombresTexturas.add("objetos/hielo.png");
 
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
 
@@ -289,7 +290,7 @@ public class SkeletonMain extends Game {
                 //SaqueBanda saqueBanda = new SaqueBanda(0,0,ComponentesJuego.getComponentes().getEquipo1());
                 //saqueBanda.arbitrar();
 
-                IA ia = new IA();
+                //IA ia = new IA();
             }
 
             this.simular = true;

@@ -152,7 +152,10 @@ public class Movimiento extends Accion implements Proceso {
             else
             {
                 /*Verifica si hay un objeto y se lo aplica al jugador*/
-                efectoObjeto();
+                if(efectoObjeto()){
+                    this.jugador.setBloqueado(true);
+                    return true;
+                }
             }
 
         }
@@ -270,12 +273,14 @@ public class Movimiento extends Accion implements Proceso {
     /**
      * Verifica si se le debe aplicar un efecto de un objeto a un jugador
      */
-    public void efectoObjeto()
+    public boolean efectoObjeto()
     {
         if(Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1], this.camino[this.contador][0]).getObjeto() != null)
         {
             Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1], this.camino[this.contador][0]).getObjeto().efecto(this.jugador);
+            return true;
         }
+        return false;
     }
 
     /**

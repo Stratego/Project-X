@@ -19,9 +19,9 @@ import org.omg.CORBA.COMM_FAILURE;
  */
 public abstract class ObjetoCampo implements Dibujable ,Proceso{
 
-    private int id;
-    private int posX;
-    private int posY;
+    protected int id;
+    protected int posX;
+    protected int posY;
     private String textura;
     private Jugador jugador;
     private boolean finalizarProceso;
