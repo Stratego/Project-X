@@ -42,6 +42,10 @@ public class LigaActivity extends ListActivity {
         cursor = getContentResolver().query(Uri.withAppendedPath(MyAppContentProvider.URI_BASE,tbLiga.TABLE),null,where,null,null);
         LigaAdaper adaper = new LigaAdaper(this,cursor);
         setListAdapter(adaper);
+        ListView list = getListView();
+        list.setDividerHeight(10);
+        list.setPadding(10,10,10,10);
+        list.setBackgroundResource(R.drawable.herba);
 
     }
 
@@ -53,7 +57,7 @@ public class LigaActivity extends ListActivity {
         int puntuacio1 = cursor.getInt(cursor.getColumnIndex(tbLiga.COL_PUNTUACION_EQUIPO_1));
         int puntuacio2 = cursor.getInt(cursor.getColumnIndex(tbLiga.COL_PUNTUACION_EQUIPO_2));
 
-        if(puntuacio1 == 0 && puntuacio2 == 0){
+        if(puntuacio1 != -1 && puntuacio2 != -1){
             Toast.makeText(this,"Partido ya jugado",Toast.LENGTH_LONG).show();
         }else {
             Intent intent = new Intent(LigaActivity.this, AndroidStarter.class);
@@ -115,8 +119,8 @@ public class LigaActivity extends ListActivity {
             ImageView imgEquipo1 = (ImageView) view.findViewById(R.id.imgEquipo1);
             ImageView imgEquipo2 = (ImageView) view.findViewById(R.id.imgEquipo2);
 
-            txtPuntuacio1.setText(puntuacio1 + "");
-            txtPuntuacio2.setText(puntuacio2 + "");
+            txtPuntuacio1.setText((puntuacio1 == -1 ? 0 : puntuacio1) + "");
+            txtPuntuacio2.setText((puntuacio2 == -1 ? 0 : puntuacio2) + "");
             txtFecha.setText(fecha);
 
             imgEquipo1.setImageDrawable(escudos.get(escudo1));

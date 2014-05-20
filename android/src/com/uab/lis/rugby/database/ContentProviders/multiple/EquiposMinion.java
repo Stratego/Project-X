@@ -45,23 +45,24 @@ public class EquiposMinion extends MinionContentProvider {
         }
 
         //Creamos una liga para nuestro equipo
-        Cursor cursor = getContext().getContentResolver().query(UrisGenerated.getUriEquipos(0),null,null,null,null);
+        String where = tbEquipos._ID + " <> " + i ;
+        Cursor cursor = getContext().getContentResolver().query(UrisGenerated.getUriEquipos(0),null,where,null,null);
         while (cursor.moveToNext()){
             int idRibal = cursor.getInt(cursor.getColumnIndex(tbEquipos._ID));
 
             ContentValues values = new ContentValues();
             values.put(tbLiga.COL_ID_EQUIPO_1,i);
             values.put(tbLiga.COL_ID_EQUIPO_2,idRibal);
-            values.put(tbLiga.COL_PUNTUACION_EQUIPO_1,0);
-            values.put(tbLiga.COL_PUNTUACION_EQUIPO_2,0);
+            values.put(tbLiga.COL_PUNTUACION_EQUIPO_1,-1);
+            values.put(tbLiga.COL_PUNTUACION_EQUIPO_2,-1);
             values.put(tbLiga.COL_ID_LIGA,0);
             values.put(tbLiga.COL_FECHA,new SimpleDateFormat().format(new Date()));
 
             ContentValues values2 = new ContentValues();
             values2.put(tbLiga.COL_ID_EQUIPO_1,idRibal);
             values2.put(tbLiga.COL_ID_EQUIPO_2,i);
-            values2.put(tbLiga.COL_PUNTUACION_EQUIPO_1,0);
-            values2.put(tbLiga.COL_PUNTUACION_EQUIPO_2,0);
+            values2.put(tbLiga.COL_PUNTUACION_EQUIPO_1,-1);
+            values2.put(tbLiga.COL_PUNTUACION_EQUIPO_2,-1);
             values2.put(tbLiga.COL_ID_LIGA,0);
             values2.put(tbLiga.COL_FECHA,new SimpleDateFormat().format(new Date()));
 
