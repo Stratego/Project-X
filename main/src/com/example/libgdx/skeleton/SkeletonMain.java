@@ -7,6 +7,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.models.Equipo;
 import com.partido.GestorTurnos;
 import com.rugbysurvive.partida.ConstantesJuego;
+import com.rugbysurvive.partida.Jugador.extras.GestorIndicadorMovimientos;
 import com.rugbysurvive.partida.ResolucionPantalla;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.arbitro.Arbitro;

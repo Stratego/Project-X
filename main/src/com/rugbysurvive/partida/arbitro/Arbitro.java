@@ -1,5 +1,6 @@
 package com.rugbysurvive.partida.arbitro;
 
+import com.badlogic.gdx.Gdx;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
@@ -7,6 +8,8 @@ import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.gestores.Dibujable;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
+import com.rugbysurvive.partida.gestores.Procesos.Proceso;
+import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
 import com.rugbysurvive.partida.tablero.Casilla;
 
 import java.util.ArrayList;
@@ -20,8 +23,10 @@ import java.util.Random;
  * concreta. Fuera de esta linia visual las reglas no se evaluan
  *
  */
-public class Arbitro implements Dibujable{
+public class Arbitro implements Dibujable,Proceso{
 
+    private static final int TIEMPO_PITADA = 50;
+    private int tiempo;
 
     public static Arbitro arbitro = null;
 
@@ -45,6 +50,7 @@ public class Arbitro implements Dibujable{
         arbitro=this;
         ComponentesJuego.getComponentes().getCampo().getCasilla(this.posY,this.posX).añadirElemento(arbitro);
         generarCampoVision();
+        this.tiempo = 0;
     }
 
     public static Arbitro getInstancia() {
@@ -117,6 +123,8 @@ public class Arbitro implements Dibujable{
 
         for (Casilla iter: casilla){
             if (posicionX==iter.getPosicionX() && posicionY==iter.getPosicionY() ){
+                 Gdx.audio.newMusic(Gdx.files.internal("sonido/acciones/pito.mp3")).play();
+                ProcesosContinuos.añadirProceso(this);
                 return true;
             }
         }
@@ -285,5 +293,16 @@ public class Arbitro implements Dibujable{
     @Override
     public int getPosicionY() {
         return posY;
+    }
+
+    @Override
+    public boolean procesar() {
+        if(tiempo == TIEMPO_PITADA){
+            Gdx.audio.newMusic(Gdx.files.internal("sonido/acciones/quejas.mp3")).play();
+            this.tiempo =0;
+            return true;
+        }
+        tiempo++;
+        return false;
     }
 }

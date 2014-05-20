@@ -81,10 +81,10 @@ public abstract class ObjetoCampo implements Dibujable ,Proceso{
         else if(equipo2.jugadorEnEquipo(jugador) && !equipo2.bloqueado() && this.id == -1){
             this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
         }
-        return finalizarProceso;
+
        }
 
-       return this.animacion();
+        return this.animacion();
 
     }
 

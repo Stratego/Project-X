@@ -1,5 +1,7 @@
 package com.rugbysurvive.partida.Jugador.extras;
 
+import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
+
 import java.util.ArrayList;
 
 /**
@@ -14,7 +16,7 @@ public class GestorIndicadorMovimientos {
         this.indicadores = new ArrayList<IndicadorMovimientos>();
     }
 
-    public GestorIndicadorMovimientos getInstancia(){
+    public static GestorIndicadorMovimientos getInstancia(){
        return gestor;
     }
 
@@ -25,6 +27,9 @@ public class GestorIndicadorMovimientos {
 
     public void Borrar()
     {
+        for(IndicadorMovimientos movimiento : this.indicadores){
+            movimiento.borrar();
+        }
         this.indicadores = new ArrayList<IndicadorMovimientos>();
     }
 

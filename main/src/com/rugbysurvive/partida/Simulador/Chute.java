@@ -49,6 +49,8 @@ public class Chute extends Accion {
         int DistanciaXute  = ((int) Math.hypot (TotalCasillasX, TotalCasillasY))*64;
         System.out.println("__________________"+((jugador.getFuerza()/10)*64)+"---------"+DistanciaXute);
         System.out.println("InicialX "+InicialX+" FinalX "+FinalX);
+
+
         if (((jugador.getFuerza()/10)*64) >= DistanciaXute)
         {
             int ejesDestinoPelota[][] = new int[25][2];

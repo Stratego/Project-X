@@ -31,8 +31,6 @@ public abstract class Objeto extends ObjetoJugador {
             this.jugador = jugador;
         }
 
-
-
     /**
          * Activa los efectos del objeto
          */

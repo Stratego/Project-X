@@ -1,5 +1,6 @@
 package com.rugbysurvive.partida.tablero.Botones;
 
+import com.badlogic.gdx.Gdx;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
@@ -69,6 +70,7 @@ public class BotonObjeto extends Boton {
                              GestorGrafico.generarDibujante().eliminarTextura(this.ID);
                              jugador.setBloqueado(true);
                              jugador.setSeleccionado(false);
+                             Gdx.audio.newMusic(Gdx.files.internal("sonido/poderes/powerUp.wav")).play();
                              break;
                      }
                  }

@@ -53,7 +53,6 @@ public class Movimiento extends Accion implements Proceso {
         this.camino = camino;
         this.jugador = jugador;
         this.contador = 1;
-        this.indicadorMovimientos = indicadorMovimientos;
         this.animacionInicializada = false;
         this.puñoIzquierda = new ElementoDibujable(TipoDibujo.interficieUsuario,"simulacion/izquierda.png");
         this.puñoDerecha = new ElementoDibujable(TipoDibujo.interficieUsuario,"simulacion/derecha.png");
@@ -358,7 +357,7 @@ public class Movimiento extends Accion implements Proceso {
             if(luchaPelota(Fuerza, Defensa))
             {
                 this.jugador.setEstado(new SinPelota());
-                this.jugador.lesionar();
+                this.jugador.lesionar(10);
                 Jugador jugador = Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1],this.camino[this.contador][0]).getJugador();
                 jugador.setEstado(new ConPelota(jugador));
                 System.out.println("Me quitan la pelota-----------------<");
@@ -375,7 +374,7 @@ public class Movimiento extends Accion implements Proceso {
                 {
                     this.jugador.setEstado(new ConPelota(this.jugador));
                     Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1],this.camino[this.contador][0]).getJugador().setEstado(new SinPelota());
-                    Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1],this.camino[this.contador][0]).getJugador().lesionar();
+                    Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1],this.camino[this.contador][0]).getJugador().lesionar(10);
                     System.out.println("Quito la pelota------------->");
                 }
             }

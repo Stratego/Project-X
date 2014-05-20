@@ -8,6 +8,7 @@ import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 
+import com.rugbysurvive.partida.Jugador.extras.GestorIndicadorMovimientos;
 import com.rugbysurvive.partida.arbitro.Arbitro;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.gestores.Dibujable;
@@ -166,6 +167,7 @@ public class GestorTurnos implements Dibujable,Proceso {
             arbitro.mover();
             equipo1.bloquear();
             System.out.println("Cambiando turno");
+            GestorIndicadorMovimientos.getInstancia().Borrar();
             return true;
         }
 
@@ -178,6 +180,7 @@ public class GestorTurnos implements Dibujable,Proceso {
             this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
             equipo2.bloquear();
             System.out.println("Cambiando turno");
+            GestorIndicadorMovimientos.getInstancia().Borrar();
             arbitro.mover();
 
 
@@ -200,6 +203,7 @@ public class GestorTurnos implements Dibujable,Proceso {
                 forzarCambioTurno = false;
                 arbitro.mover();
                 equipo2.bloquear();
+                GestorIndicadorMovimientos.getInstancia().Borrar();
 
             }
 
@@ -215,6 +219,7 @@ public class GestorTurnos implements Dibujable,Proceso {
                 forzarCambioTurno = false;
                 arbitro.mover();
                 equipo1.bloquear();
+                GestorIndicadorMovimientos.getInstancia().Borrar();
             }
 
 
@@ -244,6 +249,7 @@ public class GestorTurnos implements Dibujable,Proceso {
             arbitro.mover();
             equipo2.bloquear();
             equipo1.desbloquear();
+            GestorIndicadorMovimientos.getInstancia().Borrar();
 
         }
 
@@ -260,6 +266,7 @@ public class GestorTurnos implements Dibujable,Proceso {
             forzarCambioTurno = false;
             arbitro.mover();
             equipo1.bloquear();
+            GestorIndicadorMovimientos.getInstancia().Borrar();
         }
     }
 
@@ -277,7 +284,7 @@ public class GestorTurnos implements Dibujable,Proceso {
 
 
         if(equipo1.bloqueado() && equipo1.isJugando()  && equipo2.bloqueado() && equipo2.isJugando() ) {
-
+            GestorIndicadorMovimientos.getInstancia().Borrar();
             return true;
         }
         else if(equipo1.isJugando()  && equipo2.isJugando()  && forzarCambioTurno ){
@@ -286,6 +293,7 @@ public class GestorTurnos implements Dibujable,Proceso {
             equipo2.bloquear();
             equipo1.deseleccionar();
             equipo2.deseleccionar();
+            GestorIndicadorMovimientos.getInstancia().Borrar();
 
            return true;
         }
