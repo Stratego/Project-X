@@ -148,11 +148,10 @@ public class Posicionamiento {
 
 
         Campo campo = ComponentesJuego.getComponentes().getCampo();
-
-        simulador.eliminarAcciones();
-
         ComponentesJuego.getComponentes().getEquipo1().quitarPelota();
         ComponentesJuego.getComponentes().getEquipo2().quitarPelota();
+
+
         jugadoresCercanos(posX, posY);
         int x = posX;
         if (posY<=ConstantesJuego.POSICION_SAQUE_BANDA_INFERIOR+1){
@@ -196,13 +195,12 @@ public class Posicionamiento {
 
         jugadaequipo1.clear();
         jugadaequipo2.clear();
-        simulador.iniciarSimulacion();
+
     }
 
     public static void generarPenalty(Equipo equipo, int posX, int posY){
         Campo campo = ComponentesJuego.getComponentes().getCampo();
 
-        simulador.eliminarAcciones();
         ComponentesJuego.getComponentes().getEquipo1().quitarPelota();
         ComponentesJuego.getComponentes().getEquipo2().quitarPelota();
         if (ComponentesJuego.getComponentes().getCampo().getCasilla(posY,posX).getJugador()==null){
@@ -243,7 +241,6 @@ public class Posicionamiento {
                 System.out.println("chute derecha");
             }
         }
-        simulador.iniciarSimulacion();
 
     }
 
@@ -259,7 +256,6 @@ public class Posicionamiento {
 
         Campo campo = ComponentesJuego.getComponentes().getCampo();
 
-        simulador.eliminarAcciones();
 
         ComponentesJuego.getComponentes().getEquipo1().quitarPelota();
         ComponentesJuego.getComponentes().getEquipo2().quitarPelota();
@@ -307,7 +303,6 @@ public class Posicionamiento {
 
         jugadaequipo1.clear();
         jugadaequipo2.clear();
-        simulador.iniciarSimulacion();
     }
 
 
@@ -384,14 +379,16 @@ public class Posicionamiento {
      * @param campo campo de juego
      */
     public static void colocarMeeleEquipo1(int x, int y,int posY, DireccionJugador direccion, Arbitro arbitro, Campo campo){
-        for (Jugador jugador1:jugadaequipo1){
-            campo.eliminarElemento(jugador1.getPosicionY(),jugador1.getPosicionX());
+        for (Jugador jugador1:jugadaequipo1) {
+            if(jugador1.getPosicionX() > 0 && jugador1.getPosicionY() >0) {
+                campo.eliminarElemento(jugador1.getPosicionY(),jugador1.getPosicionX());
+            }
             jugador1.setDireccion(direccion);
             if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
                 arbitro.mover();
             }
-            campo.añadirElemento(jugador1, y, x);
-            System.out.println("estado casilla"+campo.getCasilla(y,x).sinArbitro());
+            campo.eliminarElemento( y, x);
+            System.out.println("ELEMENTO COLOCADO:"+campo.añadirElemento(jugador1, y, x));
 
             y -=1;
             if (y==(posY-2)){
@@ -413,14 +410,17 @@ public class Posicionamiento {
     public static void colocarMeeleEquipo2 (int x, int y,int posY, DireccionJugador direccion, Arbitro arbitro, Campo campo){
 
         for (Jugador jugador2:jugadaequipo2){
-            campo.eliminarElemento(jugador2.getPosicionY(),jugador2.getPosicionX());
+            if(jugador2.getPosicionX() > 0 && jugador2.getPosicionY() >0) {
+                campo.eliminarElemento(jugador2.getPosicionY(),jugador2.getPosicionX());
+            }
             jugador2.setDireccion(direccion);
             //jugador2.colocar(new Casilla((float) x, (float) y));
 
             if (arbitro.getPosicionX()==x && arbitro.getPosicionY()==y){
                 arbitro.mover();
             }
-            campo.añadirElemento(jugador2, y, x);
+            campo.eliminarElemento(y, x);
+            System.out.println("ELEMENTO COLOCADO:"+campo.añadirElemento(jugador2, y, x));
 
             y -=1;
             if (y==(posY-2)){

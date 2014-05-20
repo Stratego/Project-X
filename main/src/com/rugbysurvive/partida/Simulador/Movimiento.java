@@ -96,16 +96,7 @@ public class Movimiento extends Accion implements Proceso {
         if((this.jugador.getEstado() instanceof SinPelota) && (Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).getJugador().getEstado() instanceof SinPelota))
         {
             Choque choque = new Choque(this.jugador, Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).getJugador());
-
-            ProcesosContinuos.añadirProceso(this);
-
-            if(choque.arbitrar()) {
-
-               Simulador.getInstance().reiniciar();
-
-
-            }
-
+            choque.arbitrar();
             return true;
         }
 
