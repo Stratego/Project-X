@@ -44,6 +44,7 @@ public class MyAppContentProvider extends DespicableContentProvider {
         addMinion(new RolMinion());
         addMinion(new UsuarioMinion());
 
+        addMinion(new LigaMinion());
         addMinion(new HistorialPartidosMinion());
     }
 
