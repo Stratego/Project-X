@@ -6,6 +6,7 @@ import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.Jugador.SinPelota;
 import com.rugbysurvive.partida.Simulador.Chute;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.arbitro.Arbitro;
@@ -136,6 +137,142 @@ public class Posicionamiento {
      {
 
      }
+
+    public static void generarSaquePredeterminado(Jugador jugador)
+    {
+        Jugador jugadorChute;
+        Chute chute = null;
+
+        if(jugador.getMiEquipo().getLado() == Lado.izquierda)
+        {
+            jugadorChute = recolocarIzquierda();
+            int fuerzaDecimal = obtenerHabilidadValorDecimal(jugador.getFuerza());
+
+
+
+
+            chute = new Chute(jugadorChute, jugadorChute.getPosicionX()-fuerzaDecimal, 9);
+
+        }
+        else
+        {
+            jugadorChute = recolocarDerecha();
+            int fuerzaDecimal = obtenerHabilidadValorDecimal(jugador.getFuerza());
+
+
+            chute = new Chute(jugadorChute, jugadorChute.getPosicionX()+fuerzaDecimal, 9);
+
+        }
+
+        Simulador.getInstance().eliminarAcciones();
+        chute.simular();
+    }
+
+    private static  int obtenerHabilidadValorDecimal(int valor)
+    {
+        int valorDecimal = valor/10;
+
+        if(valorDecimal <= 0)
+        {
+            valorDecimal = 1;
+        }
+
+        return valorDecimal;
+    }
+
+    private static Jugador recolocarIzquierda()
+    {
+        Jugador jugadorChuta = null;
+
+        int posX = 13;
+        int posY = 6;
+        for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo1().listaJugadoresCampo()){
+
+            jugador.getCasilla().setJugador(null);
+            jugador.colocar(Campo.getInstanciaCampo().getCasilla(posY, posX));
+            jugador.setEstado(new SinPelota());
+
+            posY += 1;
+        }
+
+        posX = 16;
+        posY = 6;
+        for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo2().listaJugadoresCampo()){
+
+            jugador.getCasilla().setJugador(null);
+            jugador.colocar(Campo.getInstanciaCampo().getCasilla(posY, posX));
+
+            if(posX == 18)
+            {
+                jugador.setEstado(new ConPelota(jugador));
+                jugadorChuta = jugador;
+            }
+            else
+            {
+                jugador.setEstado(new SinPelota());
+            }
+
+            if(posY == 12)
+            {
+                posX = 18;
+                posY = 9;
+            }
+            else
+            {
+                posY += 1;
+            }
+
+
+        }
+        return jugadorChuta;
+    }
+
+    private static  Jugador recolocarDerecha()
+    {
+        Jugador jugadorChuta = null;
+
+        int posX = 16;
+        int posY = 6;
+        for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo2().listaJugadoresCampo()){
+
+            jugador.getCasilla().setJugador(null);
+            jugador.colocar(Campo.getInstanciaCampo().getCasilla(posY, posX));
+            jugador.setEstado(new SinPelota());
+            posY += 1;
+
+        }
+
+        posX = 13;
+        posY = 6;
+        for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo1().listaJugadoresCampo()){
+
+            jugador.getCasilla().setJugador(null);
+            jugador.colocar(Campo.getInstanciaCampo().getCasilla(posY, posX));
+
+            if(posX == 11)
+            {
+                jugador.setEstado(new ConPelota(jugador));
+                jugadorChuta = jugador;
+            }
+            else
+            {
+                jugador.setEstado(new SinPelota());
+            }
+
+            if(posY == 12)
+            {
+                posX = 11;
+                posY = 9;
+            }
+            else
+            {
+                posY += 1;
+            }
+        }
+        return jugadorChuta;
+    }
+
+
 
     /**
      * Coloca los dos equipos en posicion de mele en la posicion determinada
