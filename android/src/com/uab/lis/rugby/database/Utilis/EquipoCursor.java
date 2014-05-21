@@ -9,6 +9,8 @@ import com.models.Jugador;
 import com.uab.lis.rugby.database.UrisGenerated;
 import com.uab.lis.rugby.database.contracts.tbEquipos;
 
+import java.util.ArrayList;
+
 /**
  * Created by adria on 12/05/14.
  */
@@ -28,11 +30,13 @@ public class EquipoCursor {
         Uri uri = UrisGenerated.getUriJugadoresEquipo(iduser,(int)equipo.getId());
         Cursor jugadors = context.getContentResolver().query(uri,null,null,null,null);
         jugadors.moveToFirst();
+        ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
         do{
             Jugador j = JugadorCursor.newInstance(context, jugadors);
+            jugadores.add(j);
         }while (jugadors.moveToNext());
 
-
+        equipo.setJugadores(jugadores);
 
         return equipo;
     }

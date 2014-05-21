@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">libGDX Skeleton</string>
-    <string name="mainActivity_button_newUser">CrearUsuario</string>
-    <string name="activity_create_user_nombre">Nombre Usuario</string>
-    <string name="activity_create_user_name_equipo">Nombre Equipo</string>
+    <string name="mainActivity_button_newUser">Crear usuario</string>
+    <string name="activity_create_user_nombre">Nombre de usuario</string>
+    <string name="activity_create_user_name_equipo">Nombre de equipo</string>
     <string name="activity_menu_principal_jugar">Jugar</string>
     <string name="activity_menu_principal_tienda">Tienda</string>
     <string name="activity_menu_principal_configurar">Configuración</string>
-    <string name="activity_create_user_escuts">Escuts</string>
-    <string name="activity_create_user_ropa">Color Ropa</string>
+    <string name="activity_create_user_escuts">Escudos</string>
+    <string name="activity_create_user_ropa">Color de ropa</string>
     <string name="activity_configuracion_titulo">Configuración</string>
     <string name="activity_tienda_titulo">Tienda</string>
     <string name="activity_tienda_fichajes">Fichajes</string>
@@ -17,4 +17,19 @@
     <string name="activity_tiendafichajes_titulo">Tienda de fichajes</string>
     <string name="activity_tiendaobjetos_titulo">Tienda de objetos</string>
     <string name="activity_tiendaotros_titulo">Tienda de otros</string>
+    <string name="activity_tiendafichajes_sinjugadores">No se han encontrado jugadores.</string>
+    <string name="activity_tiendafichajes_atacante">Atacante</string>
+    <string name="activity_tiendafichajes_defensa">Defensa</string>
+    <string name="activity_tiendafichajes_chutador">Chutador</string>
+    <string name="activity_tiendafichajes_nombre">Nombre:</string>
+    <string name="activity_tiendafichajes_rol">Rol:</string>
+    <string name="activity_tiendafichajes_equipo">Equipo:</string>
+    <string name="activity_tiendafichajes_vertodos">Ver todos</string>
+    <string name="activity_tiendaobjetos_sinobjetos">No se han encontrado objetos.</string>
+    <string name="activity_tiendaobjetos_nombre">Nombre:</string>
+    <string name="activity_tiendaobjetos_descripcion">Descripción:</string>
+    <string name="activity_tiendaobjetos_habilidad">Habilidad afectada:</string>
+    <string name="activity_tiendaobjetos_efecto">Efecto:</string>
+    <string name="activity_tiendaobjetos_vertodos">Ver todos</string>
+    <string name="Liga">Jugar Liga</string>
 </resources>

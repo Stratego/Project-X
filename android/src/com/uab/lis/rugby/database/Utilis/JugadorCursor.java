@@ -5,11 +5,16 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import com.models.Habilidad;
 import com.models.Jugador;
 import com.models.Rol;
 import com.uab.lis.rugby.database.UrisGenerated;
+import com.uab.lis.rugby.database.contracts.tbHabilidades;
+import com.uab.lis.rugby.database.contracts.tbJugadorHabilidad;
 import com.uab.lis.rugby.database.contracts.tbJugadores;
 import com.uab.lis.rugby.database.contracts.tbRoles;
+
+import java.util.ArrayList;
 
 /**
  * Created by adria on 12/05/14.
@@ -43,9 +48,28 @@ public class JugadorCursor {
                 jugador.setRol(rol);
             }while (cursorRol.moveToNext());
         }
-        //es lo k falta
-        jugador.getExtrasVisuales();
-        jugador.getHabilidades();
+
+        Uri uriHabilidad = UrisGenerated.getUriHabilidades(0, 0, jugador.getId());
+        cr = context.getContentResolver();
+        Cursor cursorHabilidad = cr.query(uriHabilidad,null,null,null,null);
+        cursorHabilidad.moveToFirst();
+        ArrayList<Habilidad> habilidades = new ArrayList<Habilidad>();
+        if(cursorHabilidad.getCount() > 0){
+            do{
+                Habilidad habil = new Habilidad();
+                String nombre = cursorHabilidad.getString(cursorHabilidad.getColumnIndex(tbHabilidades.COL_NOMBRE));
+                String descri = cursorHabilidad.getString(cursorHabilidad.getColumnIndex(tbHabilidades.COL_DESCRIPCION));
+                int idR = cursorHabilidad.getInt(cursorHabilidad.getColumnIndex(tbHabilidades._ID));
+                int valor = cursorHabilidad.getInt(cursorHabilidad.getColumnIndex(tbJugadorHabilidad.COL_VALOR));
+                habil.setId(idR);
+                habil.setNombre(nombre);
+                habil.setDescripcion(descri);
+                habil.setValor(valor);
+                habilidades.add(habil);
+            }while (cursorHabilidad.moveToNext());
+        }
+
+        jugador.setHabilidades(habilidades);
 
         return jugador;
     }

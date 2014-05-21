@@ -39,7 +39,9 @@
         <activity android:name=".ui.activity.TiendaObjetos"/>
         <activity android:name=".ui.activity.TiendaOtros"/>
         <activity android:name=".ui.activity.SelectPositionPlayers"
+                android:noHistory="true"
                 android:screenOrientation="landscape"/>
+        <activity android:name=".ui.activity.LigaActivity" android:label="Liga"/>
 
         <service android:name=".service.MusicService" />
     </application>

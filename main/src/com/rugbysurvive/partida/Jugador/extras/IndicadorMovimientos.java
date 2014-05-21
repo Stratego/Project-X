@@ -47,6 +47,7 @@ public class IndicadorMovimientos {
         this.direccion = this.jugador.getDireccion();
         this.longitud = longitud;
         this.recorridoGrafico = new ArrayList<ElementoDibujable>();
+        GestorIndicadorMovimientos.getInstancia().añadirIndicadorMovimientos(this);
     }
 
     /**

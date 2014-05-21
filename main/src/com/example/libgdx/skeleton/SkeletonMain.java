@@ -7,7 +7,9 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.models.Equipo;
 import com.partido.GestorTurnos;
 import com.rugbysurvive.partida.ConstantesJuego;
+
 import com.rugbysurvive.partida.IA.IA;
+
 import com.rugbysurvive.partida.ResolucionPantalla;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.arbitro.Arbitro;
@@ -54,9 +56,9 @@ public class SkeletonMain extends Game {
     boolean simular = false;
     Arbitro arbitro;
 
-    //boolean contolIA = true;
 
-    public SkeletonMain(Equipo equipo1, Equipo equipo2, boolean ia,CollBack collBack) {
+    public SkeletonMain(Equipo equipo1, Equipo equipo2, boolean ia,boolean musica,CollBack collBack) {
+
 
     }
     public interface CollBack{
@@ -191,7 +193,8 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("objetos/explosion/explosio4.png");
         nombresTexturas.add("objetos/explosion/explosio5.png");
         nombresTexturas.add("objetos/explosion/explosio6.png");
-
+        nombresTexturas.add("objetos/agujero.png");
+        nombresTexturas.add("objetos/hielo.png");
 
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
 
@@ -287,7 +290,7 @@ public class SkeletonMain extends Game {
                 //SaqueBanda saqueBanda = new SaqueBanda(0,0,ComponentesJuego.getComponentes().getEquipo1());
                 //saqueBanda.arbitrar();
 
-                IA ia = new IA();
+                //IA ia = new IA();
             }
 
             this.simular = true;

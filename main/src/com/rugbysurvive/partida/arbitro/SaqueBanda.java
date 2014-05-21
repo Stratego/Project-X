@@ -20,6 +20,7 @@ public class SaqueBanda extends Regla{
     }
     @Override
     public boolean arbitrar() {
+
         if(this.arbitro.esSucesoVisible(this.x,this.y)==true){
             if (this.x<=2){
                 this.x=3;
@@ -31,7 +32,7 @@ public class SaqueBanda extends Regla{
             }else if(this.y<=ConstantesJuego.POSICION_SAQUE_BANDA_INFERIOR){
                 this.posicionamiento.generarSaqueBanda(this.x,ConstantesJuego.POSICION_SAQUE_BANDA_INFERIOR,this.equipo);
             }
-            Simulador.getInstance().reiniciar();
+
             return  true;
         }
         return false;

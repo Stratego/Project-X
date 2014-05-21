@@ -79,14 +79,14 @@ public class SelectPositionPlayers extends Activity {
 
         jugadores = new ArrayList<Jugador>();
         equipaciones = new ArrayList<Drawable>();
-        initList(IDequipo);
-        initList(ribal);
+        initList(IDuser,IDequipo);
+        initList(1,ribal);
         adapter = new Adapter(this,jugadores,equipaciones);
         lista.setAdapter(adapter);
     }
 
-    private void initList(int idequipo){
-        Uri urijugadores = UrisGenerated.getUriJugadoresEquipo(IDuser,idequipo);
+    private void initList(int iduser, int idequipo){
+        Uri urijugadores = UrisGenerated.getUriJugadoresEquipo(iduser,idequipo);
         Cursor cursor = getContentResolver().query(urijugadores,null,null,null,null);
         cursor.moveToFirst();
         Drawable equipacion = null;

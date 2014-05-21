@@ -21,9 +21,11 @@ public class MyAppContentProvider extends DespicableContentProvider {
     public void recruitMinions() {
         addMinion(new UsuariosMinion());
         addMinion(new JugadoresMinion());
+        addMinion(new AllJugadoresMinion());
         addMinion(new EquiposMinion());
         addMinion(new HabilidadesMinion());
         addMinion(new ObjetosMinion());
+        addMinion(new AllObjetosMinion());
         addMinion(new RolesMinion());
         addMinion(new UsuarioEquipoMinion());
         addMinion(new JugadorEquipoMinion());
@@ -41,6 +43,9 @@ public class MyAppContentProvider extends DespicableContentProvider {
         addMinion(new ObjetoMinion());
         addMinion(new RolMinion());
         addMinion(new UsuarioMinion());
+
+        addMinion(new LigaMinion());
+        addMinion(new HistorialPartidosMinion());
     }
 
     @Override
