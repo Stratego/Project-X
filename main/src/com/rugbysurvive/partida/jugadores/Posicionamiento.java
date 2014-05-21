@@ -299,16 +299,14 @@ public class Posicionamiento {
         int y = posY +1;
 
         Arbitro arbitro = Arbitro.getInstancia();
-        DireccionJugador direccion1 ;
-        DireccionJugador direccion2 ;
+        DireccionJugador direccion1 = DireccionJugador.derecha;
+        DireccionJugador direccion2 = DireccionJugador.izquierda;
         if (jugadaequipo1.get(0).getMiEquipo().getLado()==Lado.derecha){
-            direccion1= DireccionJugador.izquierda;
-            direccion2= DireccionJugador.derecha;
+
+            ArrayList<Jugador> jugadaequipoaux = jugadaequipo1;
+            jugadaequipo1 = jugadaequipo2;
+            jugadaequipo2 = jugadaequipoaux;
             System.out.println("entra condicion 1");
-        }else{
-            direccion1= DireccionJugador.derecha;
-            direccion2= DireccionJugador.izquierda;
-            System.out.println("entra condicion 2");
         }
 
         colocarMeeleEquipo1(x,y,posY,direccion1,arbitro,campo);
@@ -400,16 +398,14 @@ public class Posicionamiento {
         int x = posX-1;
         int y;
         Arbitro arbitro = Arbitro.getInstancia();
-        DireccionJugador direccion1 ;
-        DireccionJugador direccion2 ;
+        DireccionJugador direccion1 = DireccionJugador.derecha;
+        DireccionJugador direccion2 = DireccionJugador.izquierda;
         if (jugadaequipo1.get(0).getMiEquipo().getLado()==Lado.derecha){
-            direccion1= DireccionJugador.izquierda;
-            direccion2= DireccionJugador.derecha;
+
+            ArrayList<Jugador> jugadaequipoaux = jugadaequipo1;
+            jugadaequipo1 = jugadaequipo2;
+            jugadaequipo2 = jugadaequipoaux;
             System.out.println("entra condicion 1");
-        }else{
-            direccion1= DireccionJugador.derecha;
-            direccion2= DireccionJugador.izquierda;
-            System.out.println("entra condicion 2");
         }
         if (posY>=ConstantesJuego.POSICION_SAQUE_BANDA_SUPERIOR){
             y = posY -3;
@@ -582,6 +578,8 @@ public class Posicionamiento {
      */
     public static void colocarSaqueEquipo1(int x, int y,int posX, int posY, DireccionJugador direccion, Arbitro arbitro, Campo campo, Equipo equipo){
 
+
+
         for (Jugador jugador1:jugadaequipo1){
             if(jugador1.getPosicionX() > 0 && jugador1.getPosicionY() >0) {
                 campo.eliminarElemento(jugador1.getPosicionY(),jugador1.getPosicionX());
@@ -654,6 +652,9 @@ public class Posicionamiento {
 
             if (y==(posY)){
                 x+=1;
+                if (direccion==DireccionJugador.izquierda){
+                    x-=2;
+                }
                 y=posY;
                 if (equipo!=jugador2.getMiEquipo()){
                     break;

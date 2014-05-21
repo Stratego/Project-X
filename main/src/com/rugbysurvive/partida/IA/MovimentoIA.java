@@ -237,6 +237,7 @@ public class MovimentoIA {
             }
             iteraciones++;
         }
+
         return movimiento;
     }
 
