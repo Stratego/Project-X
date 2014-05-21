@@ -201,13 +201,13 @@ public class Arbitro implements Dibujable{
         }
 
         // CODIGO PRUEBA
-        this.casilla.clear();
+        /*this.casilla.clear();
         for(int i=0;i<20;i++) {
             for(int j=0;j<30;j++) {
                 this.casilla.add(new Casilla(j,i));
 
             }
-        }
+        }*/
     }
 
 

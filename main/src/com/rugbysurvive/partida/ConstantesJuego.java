@@ -99,6 +99,8 @@ public class ConstantesJuego {
 
     public static final int TAMAÑO_PUÑO = (int)(512* constanteRescalado);
 
+    public static boolean RIVAL_IA = true;
+
 
 
     public ConstantesJuego()
