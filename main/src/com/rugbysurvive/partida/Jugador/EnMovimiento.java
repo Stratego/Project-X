@@ -29,12 +29,10 @@ public class EnMovimiento implements Estado {
     public EnMovimiento(int nPosiciones,Estado estadoAnterior)
     {
         /*De momento declaramos una matriz de 8*2, hasta que logremos obtener cuanto podra mover cada jugador*/
-
         this.movimientos = new int[nPosiciones][2];
         this.posicionActual = 0;
         this.estadoAnterior = estadoAnterior;
         GestorGrafico.getCamara().bloquear();
-
     }
 
 

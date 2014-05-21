@@ -145,20 +145,25 @@ public class Pase extends Accion implements Proceso {
         System.out.println("Pase lanzado a la posición: "+this.posXObjetivo+"-"+this.posYObjetivo);
         jugador.setEstado(new SinPelota());
 
-        if(this.animacionActivada) {
-            return false;
-        }
-        else{
+       if(animacionParada) {
+            return true;
+       }
+       else if(this.animacionActivada) {
+           return false;
+       }
+        else {
             return true;
         }
      }
 
-     else{
+
+     else {
           if(this.animacionFinalizada){
               return true;
           }
          return false;
      }
+
 
     }
 
@@ -170,27 +175,33 @@ public class Pase extends Accion implements Proceso {
 
     @Override
     public boolean procesar() {
-        if(!this.animacionInicializada) {
+        if(!animacionParada) {
+            System.out.println("ANIMACION PARADA:"+animacionParada);
+            System.out.println("SIMULANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+            if(!this.animacionInicializada) {
 
-            this.tiempo = 0;
-            this.pelotaCogida = new ElementoDibujable(TipoDibujo.interficieUsuario,"simulacion/rebrePassada.png");
-            this.pelotaCogida.dibujar(ConstantesJuego.getHeight()/2-ConstantesJuego.TAMAÑO_PUÑO/2,
+                this.tiempo = 0;
+                this.pelotaCogida = new ElementoDibujable(TipoDibujo.interficieUsuario,"simulacion/rebrePassada.png");
+                this.pelotaCogida.dibujar(ConstantesJuego.getHeight()/2-ConstantesJuego.TAMAÑO_PUÑO/2,
                                             ConstantesJuego.getWidth()/2-ConstantesJuego.TAMAÑO_PUÑO/2);
-            this.animacionInicializada = true;
-            Simulador.getInstance().setParado(false);
-        }
-
-        else{
-
-            if(this.tiempo>= TIEMPO_VIDA_TEXTURA) {
-
-                this.pelotaCogida .borrar();
-                this.animacionFinalizada = true;
-                return true;
+                this.animacionInicializada = true;
+                Simulador.getInstance().setParado(false);
             }
+
+            else {
+
+                if(this.tiempo>= TIEMPO_VIDA_TEXTURA) {
+
+                    this.pelotaCogida .borrar();
+                    this.animacionFinalizada = true;
+                    return true;
+                }
             this.tiempo++;
         }
-
+    }
+    else {
+           return true;
+        }
 
         return false;
     }

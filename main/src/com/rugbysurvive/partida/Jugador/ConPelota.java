@@ -20,9 +20,7 @@ public class ConPelota implements Estado, Proceso {
     ElementoDibujable indicadorPelota;
     ElementoDibujable atencionJugador;
     ElementoDibujable indicarJugadorConPelota;
-
     int count;
-
     public Jugador jugador;
 
     public ConPelota(Jugador jugador){
@@ -52,8 +50,8 @@ public class ConPelota implements Estado, Proceso {
         if(entrada == Entrada.arrastrar)
         {
             int distancia = jugador.getResistencia()/10;
-            if(distancia <=2)
-            {
+
+            if(distancia <=2) {
                 distancia = 3;
             }
 

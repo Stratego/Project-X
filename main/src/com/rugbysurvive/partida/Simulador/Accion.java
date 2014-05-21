@@ -6,12 +6,14 @@ import com.rugbysurvive.partida.tablero.Campo;
 /**
  * Created by Victor on 27/03/14.
  */
-public abstract class Accion{
+public abstract class Accion {
+
+    protected boolean animacionParada = false;
     private Campo campo;
     protected boolean finalizado = false;
 
-    public Accion()
-    {
+
+    public Accion() {
         this.campo = Campo.getInstanciaCampo();
     }
     /**
@@ -29,4 +31,11 @@ public abstract class Accion{
 
     public boolean getFinalizado(){return this.finalizado;}
 
+    public void  evitarAnimacion() {
+        this.animacionParada = true;
+    }
+
+    public void permitirAnimacion() {
+        this.animacionParada = false;
+    }
 }

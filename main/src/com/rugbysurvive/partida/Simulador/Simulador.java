@@ -130,10 +130,23 @@ public class Simulador implements Proceso{
         this.simulando = true;
     }
 
-    public void forzarFinal(){
-        if(!(this.parado || this.iniciarParado))
-        {
+    public void forzarFinal() {
+        if(!(this.parado || this.iniciarParado)) {
+            this.evitarAnimaciones();
             while(!simular());
+            this.permitirAnimaciones();
+        }
+    }
+
+    private void evitarAnimaciones() {
+        for(Accion accion : this.acciones) {
+            accion.evitarAnimacion();
+        }
+    }
+
+    private void permitirAnimaciones() {
+        for(Accion accion : this.acciones) {
+            accion.permitirAnimacion();
         }
     }
 
@@ -145,6 +158,7 @@ public class Simulador implements Proceso{
              }
         }
     }
+
 
     public boolean simular()
     {
@@ -187,14 +201,16 @@ public class Simulador implements Proceso{
                 }
 
             }
-            else if(this.simulando && this.acciones.size() ==0){
+            else if(this.simulando && this.acciones.size() == 0){
 
-                if(tiempo==0) {
+                if(tiempo == 0) {
                     ProcesosContinuos.añadirProceso(this);
                 }
-                else if (this.tiempo==TIEMPO_ESPERA) {
+
+                else if (this.tiempo == TIEMPO_ESPERA) {
                     return true;
                 }
+
                 return false;
             }
 
@@ -206,15 +222,12 @@ public class Simulador implements Proceso{
 
 
 
-    public void reiniciar()
-    {
+    public void reiniciar() {
         this.acciones = new ArrayList<Accion>();
     }
-    public void eliminarAcciones()
-    {
-      this.eliminarAcciones = true;
 
-
+    public void eliminarAcciones() {
+       this.eliminarAcciones = true;
     }
 
     public int listSize(){
