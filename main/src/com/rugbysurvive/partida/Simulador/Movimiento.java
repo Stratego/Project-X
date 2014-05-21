@@ -109,7 +109,7 @@ public class Movimiento extends Accion implements Proceso {
      @Override
     public boolean simular() {
 
-
+        boolean haceEfectoObjeto = false;
         boolean incrementa = true;
 
         if(contador <= this.camino.length)
@@ -153,8 +153,7 @@ public class Movimiento extends Accion implements Proceso {
             {
                 /*Verifica si hay un objeto y se lo aplica al jugador*/
                 if(efectoObjeto()){
-                    this.jugador.setBloqueado(true);
-                    return true;
+                    haceEfectoObjeto = true;
                 }
             }
 
@@ -167,6 +166,12 @@ public class Movimiento extends Accion implements Proceso {
 
             /*Referenciamos jugador y casillas en ambos sentidos*/
             this.jugador.colocar(Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]));
+
+            if(haceEfectoObjeto)
+            {
+                this.jugador.setBloqueado(true);
+                return true;
+            }
 
             /*Si pasa por encima de una casilla con pelota, entonces la recoge*/
             recogerPelota();
