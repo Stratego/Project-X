@@ -15,7 +15,7 @@ import java.nio.channels.FileChannel;
 public class SQLiteHelper extends SQLiteOpenHelper {
     private Context context;
     private static String nomBD = "DB_RugbySurvive";
-    private static int versionBD = 3;
+    private static int versionBD = 4;
     private SQLiteHelper(Context context){
         super(context,nomBD,null,versionBD);
         this.context = context;
@@ -41,22 +41,40 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(tbExtras.CREATE_TABLE);
         db.execSQL(tbJugadorExtra.CREATE_TABLE);
         db.execSQL(tbPowerups.CREATE_TABLE);
+        db.execSQL(tbHistorialPartido.CREATE_TABLE);
+        db.execSQL(tbLiga.CREATE_TABLE);
 
         db.execSQL("INSERT INTO USUARIOS VALUES(1,'ANDROID');");
-        db.execSQL("INSERT INTO EQUIPOS VALUES(1,'Equipo 1','Logo1.png','Jugador3E1.png');");
+        db.execSQL("INSERT INTO EQUIPOS VALUES(1,'Equipo 1','logo1.png','Jugador3E1.png');");
         db.execSQL("INSERT INTO EQUIPOS VALUES(2,'Equipo 2','Logo2.png','Jugador3E2.png');");
-        db.execSQL("INSERT INTO EQUIPOS VALUES(3,'Equipo 3','Logo3.png','Jugador3E3.png');");
-        db.execSQL("INSERT INTO EQUIPOS VALUES(4,'Equipo 4','Logo4.png','Jugador3E4.png');");
+        db.execSQL("INSERT INTO EQUIPOS VALUES(3,'Equipo 3','logo3.png','Jugador3E3.png');");
+        db.execSQL("INSERT INTO EQUIPOS VALUES(4,'Equipo 4','logo4.png','Jugador3E4.png');");
         db.execSQL("INSERT INTO USUARIO_EQUIPO VALUES(1,1,1);");
         db.execSQL("INSERT INTO USUARIO_EQUIPO VALUES(2,1,4);");
         db.execSQL("INSERT INTO USUARIO_EQUIPO VALUES(3,1,2);");
         db.execSQL("INSERT INTO USUARIO_EQUIPO VALUES(4,1,3);");
+
+        db.execSQL("INSERT INTO ROLES VALUES(1,'atacante','es un jugador especializado en ataque');");
+        db.execSQL("INSERT INTO ROLES VALUES(2,'defensa','su contundencia en la defensa es memorable');");
+        db.execSQL("INSERT INTO ROLES VALUES(3,'chutador','cuanto mas chuta... mas inutil es');");
+
+
+        db.execSQL("INSERT INTO HABILIDADES VALUES(1,'Fuerza','def fuerza');");
+        db.execSQL("INSERT INTO HABILIDADES VALUES(2,'Defensa','def defensa');");
+        db.execSQL("INSERT INTO HABILIDADES VALUES(3,'Habilidad','def habilidad');");
+        db.execSQL("INSERT INTO HABILIDADES VALUES(4,'Resistencia','def resistencia');");
+        db.execSQL("INSERT INTO HABILIDADES VALUES(5,'Ataque','def ataque');");
+
 
         int count = 1;
         for(int i : new int[]{1,2,3,4}) {
             for(String nom : new String[]{"Manu","Aitor","Victor","Victor M","Nicoleta","Suki","Aleix","Carles","Adria","Esther","Aureli","Ruben","Richi","La Sombra","Ivan"}){
                 db.execSQL("INSERT INTO JUGADORES VALUES("+(count)+",'"+nom+"',NULL,NULL);");
                 db.execSQL("INSERT INTO JUGADOR_EQUIPO VALUES("+count+","+i+");");
+                db.execSQL("INSERT INTO JUGADOR_ROL VALUES('"+count+"',"+count+","+(Math.round(Math.random() * 2)+1)+");");
+                for(int j : new int[]{1,2,3,4,5}) {
+                    db.execSQL("INSERT INTO JUGADOR_HABILIDAD VALUES(" + count + "," + j + "," + Math.round(Math.random() * 100) + ");");
+                }
                 count++;
             }
         }
@@ -80,6 +98,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             tbExtras.TABLE,
             tbJugadorExtra.TABLE,
             tbPowerups.TABLE,
+            tbHistorialPartido.TABLE,
+            tbLiga.TABLE
         };
         for(String tab : tablas){
             db.execSQL("DROP TABLE IF EXISTS "+tab);

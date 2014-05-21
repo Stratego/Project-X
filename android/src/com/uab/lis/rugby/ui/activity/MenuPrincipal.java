@@ -16,13 +16,17 @@ import com.uab.lis.rugby.R;
  */
 public class MenuPrincipal extends BaseActivity {
     private Intent intent;
+
+    private int userID;
+    private int equipoID;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_meny_principal);
+        setContentView(R.layout.activity_menu_principal);
 
         SharedPreferences preferencias = getSharedPreferences("firstEje", Context.MODE_PRIVATE);
-        final int userID = preferencias.getInt("usuarioID",-1);
-        final int equipoID = preferencias.getInt("equipoID", -1);
+        userID = preferencias.getInt("usuarioID",-1);
+        equipoID = preferencias.getInt("equipoID", -1);
 
         intent = new Intent(MenuPrincipal.this, SelectPositionPlayers.class);
         intent.putExtra(SelectPositionPlayers.ID_EQUIP,equipoID);
@@ -31,6 +35,17 @@ public class MenuPrincipal extends BaseActivity {
         Button jugar = (Button)findViewById(R.id.btnJugar);
         Button tienda = (Button)findViewById(R.id.btnTienda);
         Button configuracion = (Button)findViewById(R.id.btnConfigurar);
+        Button liga = (Button)findViewById(R.id.btnLiga);
+
+        liga.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MenuPrincipal.this,LigaActivity.class);
+                intent.putExtra(LigaActivity.IDUSER,userID);
+                startActivity(intent);
+            }
+        });
 
         jugar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +60,7 @@ public class MenuPrincipal extends BaseActivity {
                         };
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(MenuPrincipal.this);
-                        builder.setTitle("Selecciona el ribal");
+                        builder.setTitle("Selecciona el rival");
                         //builder.setMessage("Selecciona el quipo ribal que deseas ganar");
                         builder.setItems(items,new DialogInterface.OnClickListener() {
                                     @Override
@@ -71,8 +86,8 @@ public class MenuPrincipal extends BaseActivity {
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MenuPrincipal.this);
-                builder.setTitle("Selecciona el ribal");
-                builder.setMessage("Selecciona el tipo de ribal contra el que deseas jugar");
+                builder.setTitle("Selecciona el rival");
+                builder.setMessage("Selecciona el tipo de rival contra el que deseas jugar");
                 builder.setPositiveButton("P vs P", positive);
                 builder.setNegativeButton("P vs IA",negative);
                 builder.create().show();

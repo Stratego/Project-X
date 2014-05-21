@@ -11,14 +11,11 @@ public class tbJugadorRol implements BaseColumns {
 
     public static final String COL_JUGADOR = "idJugador";
 
-    public static final String COL_ROL = "idHabilidad";
-
-    public static final String COL_NOMBRE_ROL = "nombreRol";
+    public static final String COL_ROL = "idRol";
 
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE + " ("
                     + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + COL_JUGADOR + " INTEGER, "
-                    + COL_ROL + " INTEGER, "
-                    + COL_NOMBRE_ROL + " TEXT)";
+                    + COL_ROL + " INTEGER )";
 }

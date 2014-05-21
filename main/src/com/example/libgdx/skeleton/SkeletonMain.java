@@ -56,9 +56,9 @@ public class SkeletonMain extends Game {
     boolean simular = false;
     Arbitro arbitro;
 
-    boolean contolIA = true;
 
-    public SkeletonMain(Equipo equipo1, Equipo equipo2, boolean ia,CollBack collBack) {
+    public SkeletonMain(Equipo equipo1, Equipo equipo2, boolean ia,boolean musica,CollBack collBack) {
+
 
     }
     public interface CollBack{
@@ -286,7 +286,7 @@ public class SkeletonMain extends Game {
             System.out.println("Iniciando simulacion");
             GestorTurnos.sumarTurno();
 
-            if (contolIA ==true){
+            if (ConstantesJuego.RIVAL_IA ==true){
                 //SaqueBanda saqueBanda = new SaqueBanda(0,0,ComponentesJuego.getComponentes().getEquipo1());
                 //saqueBanda.arbitrar();
 

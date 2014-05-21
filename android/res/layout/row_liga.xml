@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:padding="8dp"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:background="@drawable/fusta">
+
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight=".8"
+            android:id="@+id/imgEquipo1"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/icon" android:scaleType="centerCrop"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight=".5">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="5"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    android:id="@+id/txtPuntosEquipo1"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="-"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    android:id="@+id/textView3"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="10"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    android:id="@+id/txtPuntuacionEquipo2"/>
+        </LinearLayout>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="10/05/2014"
+                android:layout_gravity="center"
+                android:id="@+id/txtFecha"/>
+    </LinearLayout>
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight=".8"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/imgEquipo2"
+            android:src="@drawable/icon" android:scaleType="centerCrop"/>
+</LinearLayout>
