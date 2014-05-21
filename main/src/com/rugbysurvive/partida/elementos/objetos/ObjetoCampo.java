@@ -19,9 +19,9 @@ import org.omg.CORBA.COMM_FAILURE;
  */
 public abstract class ObjetoCampo implements Dibujable ,Proceso{
 
-    private int id;
-    private int posX;
-    private int posY;
+    protected int id;
+    protected int posX;
+    protected int posY;
     private String textura;
     private Jugador jugador;
     private boolean finalizarProceso;
@@ -81,10 +81,10 @@ public abstract class ObjetoCampo implements Dibujable ,Proceso{
         else if(equipo2.jugadorEnEquipo(jugador) && !equipo2.bloqueado() && this.id == -1){
             this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
         }
-        return finalizarProceso;
+
        }
 
-       return this.animacion();
+        return this.animacion();
 
     }
 

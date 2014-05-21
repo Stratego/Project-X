@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.SinPelota;
+import com.rugbysurvive.partida.elementos.Marcador;
 import com.rugbysurvive.partida.tablero.Campo;
+import com.rugbysurvive.partida.tablero.Lado;
 
 /**
  * Created by Aleix on 31/03/14.
@@ -47,6 +49,8 @@ public class Chute extends Accion {
         int DistanciaXute  = ((int) Math.hypot (TotalCasillasX, TotalCasillasY))*64;
         System.out.println("__________________"+((jugador.getFuerza()/10)*64)+"---------"+DistanciaXute);
         System.out.println("InicialX "+InicialX+" FinalX "+FinalX);
+
+
         if (((jugador.getFuerza()/10)*64) >= DistanciaXute)
         {
             int ejesDestinoPelota[][] = new int[25][2];
@@ -147,6 +151,8 @@ public class Chute extends Accion {
 
             Campo.getInstanciaCampo().colocarPelota(ejesDestinoPelota[casillaChute][1], ejesDestinoPelota[casillaChute][0]);
 
+            comprobarPunto(ejesDestinoPelota, casillaChute);
+
             System.out.println("La pelota va a la posicion: "+ejesDestinoPelota[casillaChute][0]+"-"+ejesDestinoPelota[casillaChute][1]);
             jugador.setEstado(new SinPelota());
             return true;
@@ -154,6 +160,30 @@ public class Chute extends Accion {
         return false;
     }
 
+    public void comprobarPunto(int ejesDestinoPelota[][], int index)
+    {
+        if(ejesDestinoPelota[index][1] >= 8 && ejesDestinoPelota[index][1] <= 11)
+        {
+            if(this.jugador.getMiEquipo().getLado() == Lado.izquierda)
+            {
+                if(ejesDestinoPelota[index][0] >= 28)
+                {
+                    Marcador.getInstanceMarcador().sumarPuntuacion(2, this.jugador);
+                    Campo.getInstanciaCampo().recolocarJugadoresDespuesDelPunto(this.jugador);
+                    Campo.getInstanciaCampo().quitarPelota(ejesDestinoPelota[index][1],ejesDestinoPelota[index][0]);
+                }
+            }
+            else
+            {
+                if(ejesDestinoPelota[index][0] <= 2)
+                {
+                    Marcador.getInstanceMarcador().sumarPuntuacion(2, this.jugador);
+                    Campo.getInstanciaCampo().recolocarJugadoresDespuesDelPunto(this.jugador);
+                    Campo.getInstanciaCampo().quitarPelota(ejesDestinoPelota[index][1],ejesDestinoPelota[index][0]);
+                }
+            }
+        }
+    }
 
     @Override
     public void simularAnimacion() {

@@ -44,19 +44,25 @@ public class Jugador implements GestionEntrada {
     private boolean seleccionado = false;
     private boolean bloqueado = false;
 
+    private boolean lesionado;
 
     private ArrayList<ElementoDibujable> texturas;
-
+    private ElementoDibujable indicador;
     private ArrayList<ObjetoJugador> powerup;
 
-    public int Fuerza;
-    public int Vida;
-    public int Defensa;
-    public int Habilidad;
-    public int Resistencia;
-    public int Ataque;
+    private int Fuerza;
+    private int Vida;
+    private int Defensa;
+    private int Habilidad;
+    private int Resistencia;
+    private int Ataque;
+
+    private final int fuerzaOriginal;
+    private final int defensaOriginal;
+    private final int habilidadOriginal;
+    private final int ataqueOriginal;
     public final int vidaOriginal;
-    public final int resistenciaOriginal;
+    private final int resistenciaOriginal;
 
     /*contMovimientos indicara la cantidad de acciones movimiento que ha hecho hasta el momento, y de esta manera podremos ir haciendo que el jugador pierda resistencia segun interese*/
     public int contMovimientos;
@@ -71,6 +77,7 @@ public class Jugador implements GestionEntrada {
     public Entrada paseOChute = Entrada.pase;
 
     public int aspecto;
+    private boolean expulsado;
     /**
      * Constructor de jugador
      * @param fuerza Indica la fuerza de un jugador
@@ -88,8 +95,12 @@ public class Jugador implements GestionEntrada {
         this.Resistencia = resistencia;
         this.Ataque = ataque;
 
-        this.vidaOriginal = this.Vida;
-        this.resistenciaOriginal = this.Resistencia;
+        this.fuerzaOriginal = fuerza;
+        this.vidaOriginal = vida;
+        this.defensaOriginal = defensa;
+        this.habilidadOriginal = habilidad;
+        this.ataqueOriginal = ataque;
+        this.resistenciaOriginal = resistencia;
 
         this.miEquipo = equipo;
 
@@ -106,17 +117,18 @@ public class Jugador implements GestionEntrada {
         this.direccion = DireccionJugador.izquierda;
         this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,DireccionJugador.izquierda);
         this.bloqueo =null;
-
+        this.lesionado = false;
         this.contMovimientos = 0;
+        this.expulsado = false;
 
 
     }
 
     public void cansancio()
     {
-        if(this.contMovimientos == 1)
+        if(this.contMovimientos == 3)
         {
-            this.setResistencia(this.getResistencia() - 3);
+            this.setResistencia(this.getResistencia() - 30);
             this.contMovimientos = 0;
         }
         else
@@ -124,23 +136,44 @@ public class Jugador implements GestionEntrada {
             this.contMovimientos += 1;
         }
 
-        if(this.resistenciaOriginal >= this.Resistencia -3){
-            this.texturas.add(new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/estado/cansancio.png"));
+        if(this.Resistencia <= this.resistenciaOriginal/2 && !this.lesionado){
+            this.indicador  = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/estado/cansancio.png");
+            this.indicador.dibujar(this.getPosicionX(), this.getPosicionY());
         }
     }
 
     /*Le va quitando vida al jugador hasta que se lesiona*/
-    public void lesionar()
+    public void lesionar(int daño)
     {
-        if(this.getVida() > 0)
+        if(this.Vida > 0)
         {
-            this.setVida(this.getVida() - 10);
-            if(this.getVida() <= 0)
+            this.setVida(this.getVida() - daño);
+            if(this.Vida <= 0)
             {
                 this.setVida(0);
                 this.setResistencia(0);
                 this.setFuerza(0);
+                if(!this.lesionado){
+                    this.indicador  = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/estado/vida.png");
+                    this.indicador.dibujar(this.getPosicionX(),this.getPosicionY());
+                }
+                this.lesionado = true;
             }
+
+            else if(this.Vida <= this.vidaOriginal/2){
+                 if(this.Resistencia > this.resistenciaOriginal /2) {
+                    this.setResistencia(this.resistenciaOriginal/2);
+                 }
+                if(this.Fuerza > this.fuerzaOriginal /2) {
+                    this.setFuerza(this.resistenciaOriginal/2);
+                }
+                if(!this.lesionado){
+                    this.indicador  = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/estado/vida.png");
+                    this.indicador.dibujar(this.getPosicionX(), this.getPosicionY());
+                }
+                this.lesionado = true;
+            }
+
         }
     }
 
@@ -180,6 +213,9 @@ public class Jugador implements GestionEntrada {
             for(ElementoDibujable textura: this.texturas){
                 textura.dibujar(this.getPosicionX(),this.getPosicionY());
 
+            }
+            if(this.indicador!= null){
+                this.indicador.dibujar(this.getPosicionX(),this.getPosicionY());
             }
 
             this.seleccion = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/seleccionado.png");
@@ -513,6 +549,7 @@ public class Jugador implements GestionEntrada {
                             if(entrada == Entrada.clic)
                             {
                                 this.setSeleccionado(true);
+                                System.out.println("ESTADO:"+this.getEstado());
                                 System.out.println(">---------Me seleccionan-------------<"+this.getEstado());
                                 GestorGrafico.getCamara().bloquear();
                             }
@@ -672,4 +709,11 @@ public class Jugador implements GestionEntrada {
         this.enJuego = enJuego;
     }
 
+    public boolean isExpulsado() {
+        return expulsado;
+    }
+
+    public void setExpulsado(boolean expulsado) {
+        this.expulsado = expulsado;
+    }
 }

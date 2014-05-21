@@ -8,6 +8,7 @@ import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 
+import com.rugbysurvive.partida.Jugador.extras.GestorIndicadorMovimientos;
 import com.rugbysurvive.partida.arbitro.Arbitro;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.gestores.Dibujable;
@@ -36,6 +37,8 @@ public class GestorTurnos implements Dibujable,Proceso {
     private static final int POSICION_CAMARA_INICIAL_Y = 11*64;
     private static final int TIEMPO_MUESTRA_ESCUDO = 50;
 
+
+    private static int turno = 0;
     private int posicionTexturaX;
     private int posicionTexturaY;
     private static String estandarteEquipo1 ="Menu/CanviTorn.png";
@@ -80,6 +83,20 @@ public class GestorTurnos implements Dibujable,Proceso {
         this.main = main;
     }
 
+
+    public void reiniciarCiclo(){
+        Equipo equipo1 = ComponentesJuego.getComponentes().getEquipo1();
+        Equipo equipo2 = ComponentesJuego.getComponentes().getEquipo2();
+        if(equipo1.jugadorConPelota()){
+            equipo1.desbloquear();
+            equipo1.deseleccionar();
+            equipo2.desbloquear();
+        }
+        else{
+            equipo2.desbloquear();
+            equipo2.bloquear();
+        }
+    }
 
 
     public void iniciarPresentacion(){
@@ -150,6 +167,7 @@ public class GestorTurnos implements Dibujable,Proceso {
             arbitro.mover();
             equipo1.bloquear();
             System.out.println("Cambiando turno");
+            GestorIndicadorMovimientos.getInstancia().Borrar();
             return true;
         }
 
@@ -162,6 +180,7 @@ public class GestorTurnos implements Dibujable,Proceso {
             this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
             equipo2.bloquear();
             System.out.println("Cambiando turno");
+            GestorIndicadorMovimientos.getInstancia().Borrar();
             arbitro.mover();
 
 
@@ -184,6 +203,7 @@ public class GestorTurnos implements Dibujable,Proceso {
                 forzarCambioTurno = false;
                 arbitro.mover();
                 equipo2.bloquear();
+                GestorIndicadorMovimientos.getInstancia().Borrar();
 
             }
 
@@ -199,6 +219,7 @@ public class GestorTurnos implements Dibujable,Proceso {
                 forzarCambioTurno = false;
                 arbitro.mover();
                 equipo1.bloquear();
+                GestorIndicadorMovimientos.getInstancia().Borrar();
             }
 
 
@@ -228,6 +249,7 @@ public class GestorTurnos implements Dibujable,Proceso {
             arbitro.mover();
             equipo2.bloquear();
             equipo1.desbloquear();
+            GestorIndicadorMovimientos.getInstancia().Borrar();
 
         }
 
@@ -244,6 +266,7 @@ public class GestorTurnos implements Dibujable,Proceso {
             forzarCambioTurno = false;
             arbitro.mover();
             equipo1.bloquear();
+            GestorIndicadorMovimientos.getInstancia().Borrar();
         }
     }
 
@@ -261,6 +284,7 @@ public class GestorTurnos implements Dibujable,Proceso {
 
 
         if(equipo1.bloqueado() && equipo1.isJugando()  && equipo2.bloqueado() && equipo2.isJugando() ) {
+            GestorIndicadorMovimientos.getInstancia().Borrar();
             return true;
         }
         else if(equipo1.isJugando()  && equipo2.isJugando()  && forzarCambioTurno ){
@@ -269,6 +293,8 @@ public class GestorTurnos implements Dibujable,Proceso {
             equipo2.bloquear();
             equipo1.deseleccionar();
             equipo2.deseleccionar();
+            GestorIndicadorMovimientos.getInstancia().Borrar();
+
            return true;
         }
        return false;
@@ -372,6 +398,12 @@ public class GestorTurnos implements Dibujable,Proceso {
     public boolean isAnimacionInicializadaAnteriormente() {
         return animacionInicializadaAnteriormente;
     }
+
+
+    public static int getTurno() {
+        return turno;
+    }
+    public static void sumarTurno(){turno++;}
 
 
 }

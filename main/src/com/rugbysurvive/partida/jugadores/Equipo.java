@@ -71,10 +71,18 @@ public  class Equipo {
      */
     public void crearEquipo(){
 
-
-
-
     }
+
+    public boolean jugadorConPelota()
+    {
+        for(Jugador jugador :this.jugadores){
+            if(jugador.getEstado() instanceof  ConPelota) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * devuelve una lista con todos los jugadores suplentes del equipo
@@ -94,13 +102,13 @@ public  class Equipo {
      * devuelve una lista con todos los jugadores que estan en el campo
      * @return lista de jugadores en campo
      */
-    public ArrayList<Jugador> listaJugadoresCampo (){
+    public ArrayList<Jugador> listaJugadoresCampo() {
         ArrayList<Jugador> JugadoresCampo = new ArrayList <Jugador>();
         for (int i=0; i<ConstantesJuego.JUGADORES_CAMPO; i++){
-
             //System.out.println(jugadores.get(i).getFuerza());
-            JugadoresCampo.add(jugadores.get(i));
-
+           if(!jugadores.get(i).isExpulsado()) {
+                JugadoresCampo.add(jugadores.get(i));
+           }
         }
         return JugadoresCampo;
     }
@@ -175,7 +183,9 @@ public  class Equipo {
 
     public void dibujarEquipo(){
         for (Jugador iter :this.getJugadores()){
-            campo.añadirElemento(iter, iter.getPosicionX(), iter.getPosicionY());
+            if(!iter.isExpulsado()) {
+                campo.añadirElemento(iter, iter.getPosicionX(), iter.getPosicionY());
+            }
         }
     }
 
@@ -185,7 +195,9 @@ public  class Equipo {
     public void desbloquear()
     {
         for(Jugador jugador : this.jugadores){
-            jugador.setBloqueado(false);
+            if(!jugador.isExpulsado()) {
+                jugador.setBloqueado(false);
+            }
         }
     }
     /**
@@ -194,7 +206,9 @@ public  class Equipo {
     public void bloquear()
     {
         for(Jugador jugador : this.jugadores){
-            jugador.setBloqueado(true);
+            if(!jugador.isExpulsado()) {
+                jugador.setBloqueado(true);
+            }
         }
     }
 
@@ -207,8 +221,9 @@ public  class Equipo {
     public boolean bloqueado(){
 
         for(Jugador jugador : this.jugadores){
-            if(jugador.getBloqueado() == false)
+            if(jugador.getBloqueado() == false && !jugador.isExpulsado()) {
                 return false;
+             }
         }
         return true;
     }

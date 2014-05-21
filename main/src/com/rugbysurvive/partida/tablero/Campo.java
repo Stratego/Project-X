@@ -6,6 +6,7 @@ import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.SinPelota;
 import com.rugbysurvive.partida.Simulador.Chute;
+import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoCampo;
 import com.rugbysurvive.partida.gestores.Dibujable;
@@ -242,23 +243,31 @@ public class Campo implements GestionEntrada,Dibujable {
     public void recolocarJugadoresDespuesDelPunto(Jugador jugador)
     {
         Jugador jugadorChute;
+        Chute chute = null;
 
         if(jugador.getMiEquipo().getLado() == Lado.izquierda)
         {
             jugadorChute = recolocarIzquierda();
             int fuerzaDecimal = obtenerHabilidadValorDecimal(jugador.getFuerza());
 
-            Chute chute = new Chute(jugadorChute, jugadorChute.getPosicionX()-fuerzaDecimal, 9);
-            chute.simular();
+
+
+
+            chute = new Chute(jugadorChute, jugadorChute.getPosicionX()-fuerzaDecimal, 9);
+
         }
         else
         {
             jugadorChute = recolocarDerecha();
             int fuerzaDecimal = obtenerHabilidadValorDecimal(jugador.getFuerza());
 
-            Chute chute = new Chute(jugadorChute, jugadorChute.getPosicionX()+fuerzaDecimal, 9);
-            chute.simular();
+
+            chute = new Chute(jugadorChute, jugadorChute.getPosicionX()+fuerzaDecimal, 9);
+
         }
+
+        Simulador.getInstance().eliminarAcciones();
+        chute.simular();
 
     }
 

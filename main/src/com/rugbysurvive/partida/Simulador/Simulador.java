@@ -1,13 +1,11 @@
 package com.rugbysurvive.partida.Simulador;
 
 
-import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.gestores.Procesos.Proceso;
 import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
 import com.rugbysurvive.partida.jugadores.Equipo;
 
-import javax.rmi.CORBA.Tie;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +30,7 @@ public class Simulador implements Proceso{
     private boolean iniciarParado;
     private boolean parado;
     private int tiempo;
+    private Boolean eliminarAcciones = false;
 
     private Simulador()
     {
@@ -80,12 +79,10 @@ public class Simulador implements Proceso{
         // Añadimos segun el equipo que esta jugando y buscamos que sus jugadores
         if(equipo1.isJugando() && !equipo1.bloqueado()){
             this.accionesEquipo1.add(accion);
-           System.out.println("Añadiendo accion equipo1");
         }
 
         else {
             this.accionesEquipo2.add(accion);
-            System.out.println("Añadiendo accion equipo2");
         }
     }
 
@@ -160,16 +157,26 @@ public class Simulador implements Proceso{
                 {
                     accionFinalizada = this.acciones.get(0).simular();
 
+
                     if(this.accionFinalizada && this.iniciarParado){
                         this.parado =true;
                         this.iniciarParado = false;
                     }
                     this.contador =0;
-                    if(accionFinalizada){
+                    if(accionFinalizada && this.acciones.size() > 0){
                         this.acciones.remove(0);
                     }
                  }
 
+                if(this.eliminarAcciones == true)
+                {
+                    this.eliminarAcciones = false;
+                    this.acciones = new ArrayList<Accion>();
+                    this.accionesEquipo1 = new ArrayList<Accion>();
+                    this.accionesEquipo2 = new ArrayList<Accion>();
+
+                    return true;
+                }
                 if(this.acciones.size() == 0){
                     this.accionesEquipo1 = new ArrayList<Accion>();
                     this.accionesEquipo2 = new ArrayList<Accion>();
@@ -198,9 +205,16 @@ public class Simulador implements Proceso{
     }
 
 
-    public void eliminarAccionsSimulador()
+
+    public void reiniciar()
     {
-        //   this.acciones = new ArrayList<Accion>();
+        this.acciones = new ArrayList<Accion>();
+    }
+    public void eliminarAcciones()
+    {
+      this.eliminarAcciones = true;
+
+
     }
 
     public int listSize(){

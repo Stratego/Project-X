@@ -82,7 +82,7 @@ public class PaseChuteIA {
     public boolean hacerPase(Jugador jugador){
 
 
-        jugadoresCercanos(jugador.getPosicionX(),jugador.getPosicionY());
+        jugadoresCercanos(jugador.getPosicionX(),jugador.getPosicionY(),jugador);
 
         if (jugadaequipo1.size()>0 && jugadaequipo2.size()>0 && jugadaequipo1.size()>jugadaequipo2.size()){
             Pase pase = new Pase(jugador,jugadaequipo2.get(jugadaequipo2.size()-1).getPosicionX(),jugadaequipo2.get(jugadaequipo2.size()-1).getPosicionY());
@@ -99,11 +99,14 @@ public class PaseChuteIA {
      * @param posX pos x de la casilla que central del rango.
      * @param posY pos y de la casilla que central del rango.
      */
-    public static  void jugadoresCercanos (int posX,int posY){
+    public static  void jugadoresCercanos (int posX,int posY,Jugador jugador){
 
         int posXAux=posX-3;
         int posYAux =posY+3;
-        int rango = 6;
+        int rango = (int)(jugador.getFuerza()/10);
+        if (rango ==0){
+            rango =1;
+        }
         boolean salida=false;
 
         //while (salida==false){

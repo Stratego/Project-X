@@ -2,6 +2,7 @@ package com.rugbysurvive.partida.IA;
 
 
 import com.models.Powerup;
+import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
@@ -75,40 +76,48 @@ public class ObjetosIA {
                         switch (jugador.getDireccion())
                         {
                             case arriba:
-                                if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()+i,
-                                        jugador.getPosicionX()).sinJugador()==false){
-                                    if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()+i,
-                                            jugador.getPosicionX()).getJugador().getMiEquipo()==ComponentesJuego.getComponentes().getEquipo1()){
-                                        objetos.activar();
+                                if (controlPosicion(jugador.getPosicionX(),jugador.getPosicionY()+i)){
+                                    if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY() + i,
+                                            jugador.getPosicionX()).sinJugador()==false){
+                                        if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()+i,
+                                                jugador.getPosicionX()).getJugador().getMiEquipo()==ComponentesJuego.getComponentes().getEquipo1()){
+                                            objetos.activar();
+                                          
+                                        }
                                     }
-
                                 }
                                 break;
                             case abajo:
-                                if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()-i,
-                                        jugador.getPosicionX()).sinJugador()==false){
+                                if (controlPosicion(jugador.getPosicionX(),jugador.getPosicionY()-i)){
                                     if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()-i,
-                                            jugador.getPosicionX()).getJugador().getMiEquipo()==ComponentesJuego.getComponentes().getEquipo1()){
-                                        objetos.activar();
+                                            jugador.getPosicionX()).sinJugador()==false){
+                                        if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()-i,
+                                                jugador.getPosicionX()).getJugador().getMiEquipo()==ComponentesJuego.getComponentes().getEquipo1()){
+                                            objetos.activar();
+                                        }
                                     }
                                 }
                                 break;
                             case izquierda:
-                                if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY(),
-                                        jugador.getPosicionX()-i).sinJugador()==false){
+                                if (controlPosicion(jugador.getPosicionX()-i,jugador.getPosicionY())){
                                     if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY(),
-                                            jugador.getPosicionX()-i).getJugador().getMiEquipo()==ComponentesJuego.getComponentes().getEquipo1()){
-                                        objetos.activar();
+                                            jugador.getPosicionX() - i).sinJugador()==false){
+                                        if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY(),
+                                                jugador.getPosicionX()-i).getJugador().getMiEquipo()==ComponentesJuego.getComponentes().getEquipo1()){
+                                            objetos.activar();
+                                        }
                                     }
                                 }
                                 break;
                             case derecha:
+                                if (controlPosicion(jugador.getPosicionX()+i,jugador.getPosicionY())){
                                 if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY(),
-                                        jugador.getPosicionX()+i).sinJugador()==false){
+                                        jugador.getPosicionX() + i).sinJugador()==false){
                                     if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY(),
                                             jugador.getPosicionX()+i).getJugador().getMiEquipo()==ComponentesJuego.getComponentes().getEquipo1()){
                                         objetos.activar();
                                     }
+                                }
                                 }
                                 break;
 
@@ -118,5 +127,24 @@ public class ObjetosIA {
             }
         }
         return false;
+    }
+
+    /**
+     * Controla que laposicion que queremos cojer este dentro del tablero de juego
+     * @param x posicion x que queremos comprobar
+     * @param y posicion y que queremos comprobar
+     * @return indica si la posicion es correcta o no
+     */
+    public static   boolean controlPosicion(int x, int y){
+
+        boolean colocable = false;
+
+        if (x>=0 && x<= ConstantesJuego.LIMITE_CASILLAS_LARGO_TABLERO && y<=ConstantesJuego.LIMITE_CASILLAS_ANCHO_TABLERO && y>=0){
+
+            colocable=true;
+        }
+
+        return colocable;
+
     }
 }

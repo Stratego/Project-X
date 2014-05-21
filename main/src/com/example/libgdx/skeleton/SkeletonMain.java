@@ -7,10 +7,13 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.models.Equipo;
 import com.partido.GestorTurnos;
 import com.rugbysurvive.partida.ConstantesJuego;
+
 import com.rugbysurvive.partida.IA.IA;
+
 import com.rugbysurvive.partida.ResolucionPantalla;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.arbitro.Arbitro;
+import com.rugbysurvive.partida.arbitro.SaqueBanda;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.Marcador;
 import com.rugbysurvive.partida.elementos.objetos.GestorObjetos;
@@ -19,6 +22,7 @@ import com.rugbysurvive.partida.gestores.Entrada.GestorEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
 import com.rugbysurvive.partida.gestores.Prueba;
+import com.rugbysurvive.partida.jugadores.Posicionamiento;
 import com.rugbysurvive.partida.tablero.Boton;
 import com.rugbysurvive.partida.tablero.Botones.BotonCambioTurno;
 import com.rugbysurvive.partida.tablero.Botones.BotonFinalizarAccion;
@@ -187,7 +191,8 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("objetos/explosion/explosio4.png");
         nombresTexturas.add("objetos/explosion/explosio5.png");
         nombresTexturas.add("objetos/explosion/explosio6.png");
-
+        nombresTexturas.add("objetos/agujero.png");
+        nombresTexturas.add("objetos/hielo.png");
 
         this.gestorGrafico = new GestorGrafico(nombresTexturas,64);
 
@@ -263,11 +268,13 @@ public class SkeletonMain extends Game {
                 multiplexer.addProcessor(gestureDetector);
                 multiplexer.addProcessor(this.gestorGrafico.getCamara());
                 Gdx.input.setInputProcessor(multiplexer);
+
                 this.gestor.iniciarPartida();
                 this.calculandoEquipoInicio = false;
 
 
             }
+
 
            this.gestor.CambiarTurno();
 
@@ -275,9 +282,18 @@ public class SkeletonMain extends Game {
         if(GestorTurnos.finTurnoJugadores() && !this.simular){
 
             System.out.println("Iniciando simulacion");
-            //IA ia = new IA();
+            GestorTurnos.sumarTurno();
+
+            if (contolIA ==true){
+                //SaqueBanda saqueBanda = new SaqueBanda(0,0,ComponentesJuego.getComponentes().getEquipo1());
+                //saqueBanda.arbitrar();
+
+                //IA ia = new IA();
+            }
+
             this.simular = true;
             this.simulador.iniciarSimulacion();
+
 
         }
 

@@ -5,6 +5,9 @@ import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.extras.Color;
 import com.rugbysurvive.partida.arbitro.Arbitro;
+import com.rugbysurvive.partida.elementos.objetos.Objeto;
+import com.rugbysurvive.partida.elementos.objetos.objetosCampo.Agujero;
+import com.rugbysurvive.partida.elementos.objetos.objetosCampo.Hielo;
 import com.rugbysurvive.partida.elementos.objetos.objetosCampo.MinaCampo;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.ColocadorObjetosCampo;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
@@ -54,17 +57,17 @@ public class ComponentesJuego {
         Jugador jugador = new Jugador(80, 90, 100, 90, 80, 70, equipo1);
 
         jugador.setDireccion(DireccionJugador.derecha);
-        PowerUP objeto = new PowerUP(0,10,Habilidades.ataque,50,jugador);
-        PowerUP objeto3 = new PowerUP(1,10,Habilidades.defensa,50,jugador);
-        PowerUP objeto4 = new PowerUP(2,10,Habilidades.resistencia,50,jugador);
-        ColocadorObjetosCampo objeto2 = new ColocadorObjetosCampo(1,10,"mina.png",jugador,new MinaCampo("mina.png",jugador));
 
+        PowerUP objeto3 = new PowerUP(1,10,Habilidades.defensa,50,jugador);
+        ColocadorObjetosCampo objeto4 = new ColocadorObjetosCampo(2,10,"mina.png",jugador,new MinaCampo("mina.png",jugador));
+        ColocadorObjetosCampo objeto2 = new ColocadorObjetosCampo(3,10,"objetos/agujero.png",jugador,new Agujero("objetos/agujero.png",jugador));
+        ColocadorObjetosCampo objeto = new ColocadorObjetosCampo(3,10,"objetos/hielo.png",jugador,new Hielo("objetos/hielo.png",jugador));
         jugador.añadirObjeto(objeto);
         jugador.añadirObjeto(objeto2);
         jugador.añadirObjeto(objeto3);
         jugador.añadirObjeto(objeto4);
 
-        this.equipo1.añadirJugador(jugador,17,23);
+        this.equipo1.añadirJugador(jugador,7,6);
         //this.equipo1.añadirJugador(jugador,17,22);
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo1);
@@ -76,7 +79,7 @@ public class ComponentesJuego {
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo1);
         jugador.setDireccion(DireccionJugador.abajo);
-        jugador.setEstado(new ConPelota(jugador));
+        //jugador.setEstado(new ConPelota(jugador));
         this.equipo1.añadirJugador(jugador,9,22);
 
 
@@ -108,21 +111,21 @@ public class ComponentesJuego {
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),17,24);
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo2);
-        jugador.setEstado(new ConPelota(jugador));
-        this.equipo2.añadirJugador(jugador,18,25);
+        //jugador.setEstado(new ConPelota(jugador));
+        this.equipo2.añadirJugador(jugador,5,5);
 
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo2);
-        objeto = new PowerUP(0,10,"casilla.png", Habilidades.vida,50,jugador);
+        PowerUP objeto5 = new PowerUP(0,10,"casilla.png", Habilidades.vida,50,jugador);
         objeto2 = new ColocadorObjetosCampo(1,10,"mina.png",jugador,new MinaCampo("mina.png",jugador));
 
         jugador.añadirObjeto(objeto);
         jugador.añadirObjeto(objeto2);
         jugador.añadirObjeto(objeto);
         jugador.añadirObjeto(objeto);
-        this.equipo2.añadirJugador(jugador,19,26);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),20,27);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),21,21);
+        this.equipo2.añadirJugador(jugador,2,3);
+       // this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),19,27);
+        //this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),21,21);
 
 
     }

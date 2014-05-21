@@ -1,6 +1,7 @@
 package com.rugbysurvive.partida.arbitro;
 
 import com.rugbysurvive.partida.ConstantesJuego;
+import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.jugadores.Equipo;
 
 /**
@@ -13,19 +14,25 @@ public class SaqueBanda extends Regla{
     private Equipo equipo;
 
     public SaqueBanda(int x, int y, Equipo equipo){
-        super();
         this.x = x;
         this.y = y;
         this.equipo = equipo;
     }
     @Override
     public boolean arbitrar() {
+
         if(this.arbitro.esSucesoVisible(this.x,this.y)==true){
+            if (this.x<=2){
+                this.x=3;
+            }else if (this.x>=27){
+                this.x=26;
+            }
             if (this.y>=ConstantesJuego.POSICION_SAQUE_BANDA_SUPERIOR){
                 this.posicionamiento.generarSaqueBanda(this.x,ConstantesJuego.POSICION_SAQUE_BANDA_SUPERIOR,this.equipo);
-            }else{
+            }else if(this.y<=ConstantesJuego.POSICION_SAQUE_BANDA_INFERIOR){
                 this.posicionamiento.generarSaqueBanda(this.x,ConstantesJuego.POSICION_SAQUE_BANDA_INFERIOR,this.equipo);
             }
+
             return  true;
         }
         return false;
