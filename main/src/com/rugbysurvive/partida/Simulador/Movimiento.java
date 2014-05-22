@@ -433,36 +433,36 @@ public class Movimiento extends Accion implements Proceso {
 
     @Override
     public boolean procesar() {
-        if(!this.animacionInicializada) {
-            this.posicionPuñoDerecha = POSICION_INICIAL_DERECHA;
-            this.posicionPuñoIzquierda = POSICION_INICIAL_IZQUIERDA;
-            this.posicionPuñoY = (ConstantesJuego.getWidth()-ConstantesJuego.TAMAÑO_PUÑO)/2;
-            this.puñoDerecha.dibujar(this.posicionPuñoDerecha,this.posicionPuñoY);
-            this.puñoDerecha.dibujar(this.posicionPuñoIzquierda,this.posicionPuñoY);
-            this.animacionInicializada = true;
-        }
+        if(!animacionParada && !this.animacionInicializada) {
+                this.posicionPuñoDerecha = POSICION_INICIAL_DERECHA;
+                this.posicionPuñoIzquierda = POSICION_INICIAL_IZQUIERDA;
+                this.posicionPuñoY = (ConstantesJuego.getWidth()-ConstantesJuego.TAMAÑO_PUÑO)/2;
+                this.puñoDerecha.dibujar(this.posicionPuñoDerecha,this.posicionPuñoY);
+                this.puñoDerecha.dibujar(this.posicionPuñoIzquierda,this.posicionPuñoY);
+                this.animacionInicializada = true;
+            }
 
-        else{
-
-            this.puñoDerecha.borrar();
-            this.puñoIzquierda.borrar();
-            this.puñoDerecha.dibujar(this.posicionPuñoDerecha,this.posicionPuñoY);
-            this.puñoIzquierda.dibujar(this.posicionPuñoIzquierda,this.posicionPuñoY);
-
-            this.posicionPuñoIzquierda = this.posicionPuñoIzquierda + VELOCIDAD;
-            this.posicionPuñoDerecha= this.posicionPuñoDerecha-VELOCIDAD;
-
-            if(this.posicionPuñoDerecha <= POSICION_FINAL_DERECHA && this.posicionPuñoIzquierda >= POSICION_FINAL_IZQUIERDA){
+       else if(this.animacionInicializada){
 
                 this.puñoDerecha.borrar();
                 this.puñoIzquierda.borrar();
-                Simulador.getInstance().setParado(false);
-                return true;
-            }
+                this.puñoDerecha.dibujar(this.posicionPuñoDerecha,this.posicionPuñoY);
+                this.puñoIzquierda.dibujar(this.posicionPuñoIzquierda,this.posicionPuñoY);
+
+                this.posicionPuñoIzquierda = this.posicionPuñoIzquierda + VELOCIDAD;
+                this.posicionPuñoDerecha= this.posicionPuñoDerecha-VELOCIDAD;
+
+                if((this.posicionPuñoDerecha <= POSICION_FINAL_DERECHA && this.posicionPuñoIzquierda >= POSICION_FINAL_IZQUIERDA)
+                        || this.animacionParada) {
+
+                    this.puñoDerecha.borrar();
+                    this.puñoIzquierda.borrar();
+                    Simulador.getInstance().setParado(false);
+                    return true;
+                }
 
         }
-
-
+        else{return true;}
         return false;
     }
 }

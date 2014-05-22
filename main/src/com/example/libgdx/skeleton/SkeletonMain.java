@@ -55,12 +55,17 @@ public class SkeletonMain extends Game {
     boolean calculandoEquipoInicio = false;
     boolean simular = false;
     Arbitro arbitro;
+    com.models.Equipo equipo1;
+    com.models.Equipo equipo2;
     boolean rival_IA = false;
 
     public SkeletonMain(Equipo equipo1, Equipo equipo2, boolean ia,boolean musica,CollBack collBack) {
+        this.equipo1 = equipo1;
+        this.equipo2 = equipo2;
         this.rival_IA=ia;
 
     }
+
     public interface CollBack{
         public void finichMatch(int rEquipo1,int rEquipo2,Equipo equipo1, Equipo equipo2);
     }
@@ -209,8 +214,8 @@ public class SkeletonMain extends Game {
         // COLOCAR EL RESTO DE BOTONES DEPSUES DE ESTOS
 
 
-        this.componentesJuego = new ComponentesJuego();
 
+        this.componentesJuego = new ComponentesJuego(equipo1,equipo2);
 
         this.gestorEntrada = new GestorEntrada(this.gestorGrafico.getCamara().getOrthographicCamera(),botons,this.gestorGrafico);
 

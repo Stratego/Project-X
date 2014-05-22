@@ -288,8 +288,7 @@ public class Jugador implements GestionEntrada {
      */
     public void setPowerUP(PowerUP powerup, int index)
     {
-        if(index>=0 && index<4)
-        {
+        if(index>=0 && index<4) {
             this.powerup.add(index, powerup);
         }
     }
@@ -302,15 +301,14 @@ public class Jugador implements GestionEntrada {
     public void setDireccion(DireccionJugador direccion)
     {
         this.direccion = direccion;
-        for(ElementoDibujable dibujo: this.texturas)
-        {
+        for(ElementoDibujable dibujo: this.texturas) {
             dibujo.borrar();
         }
         this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,direccion);
 
-        if(this.bloqueado && this.bloqueo != null){
+        if(this.bloqueado && this.bloqueo != null) {
+                this.texturas.remove(this.bloqueo);
                 this.generarTexturaBloqueado();
-                this.texturas.add(this.bloqueo);
         }
     }
 
@@ -428,21 +426,20 @@ public class Jugador implements GestionEntrada {
      */
     public void setBloqueado(boolean bloqueado)
     {
-
         this.bloqueado = bloqueado;
 
         if(this.bloqueado)  {
-
             if(this.bloqueo != null && this.texturas.contains(this.bloqueo)){
                 ElementoDibujable texturaBloqueado = this.texturas.get(this.texturas.indexOf(this.bloqueo));
                 texturaBloqueado.borrar();
                 this.texturas.remove(texturaBloqueado);
+
             }
             this.generarTexturaBloqueado();
         }
 
         else {
-             if(this.texturas.contains(this.bloqueo)){
+             if(this.bloqueo != null && this.texturas.contains(this.bloqueo)){
                     ElementoDibujable texturaBloqueado = this.texturas.get(this.texturas.indexOf(this.bloqueo));
                      texturaBloqueado.borrar();
                      this.texturas.remove(texturaBloqueado);
@@ -632,8 +629,7 @@ public class Jugador implements GestionEntrada {
      */
 
     public int getPosicionX() {
-        if(this.casilla != null)
-        {
+        if(this.casilla != null) {
             return (int)this.casilla.getPosX();
         }
         else return -1;
@@ -712,6 +708,7 @@ public class Jugador implements GestionEntrada {
 
     public void setColor(Color color) {
         this.color = color;
+        System.out.println("color equipacion jugador"+this.color);
         this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,this.direccion);
     }
 
