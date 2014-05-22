@@ -241,12 +241,18 @@ public class MovimentoIA {
 
         for(int i=0; i<cantidadMovimientos; i++)
         {
-            System.out.println("matriz movimiento:");
-            movimientosAux[i][0] = movimiento[i][0];
-            System.out.println(movimientosAux[i][0]);
-            movimientosAux[i][1] = movimiento[i][1];
-            System.out.println(movimientosAux[i][0]);
+
+            if (movimiento[i][0]!=0 && movimiento[i][1]!=0 ){
+                System.out.println("matriz movimiento:");
+
+                movimientosAux[i][0] = movimiento[i][0];
+
+                System.out.println(movimientosAux[i][0]);
+                movimientosAux[i][1] = movimiento[i][1];
+                System.out.println(movimientosAux[i][1]);
+            }
         }
+
 
         return movimientosAux;
     }
