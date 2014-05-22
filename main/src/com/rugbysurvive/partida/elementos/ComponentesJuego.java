@@ -1,11 +1,9 @@
 package com.rugbysurvive.partida.elementos;
 
-import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.extras.Color;
 import com.rugbysurvive.partida.arbitro.Arbitro;
-import com.rugbysurvive.partida.elementos.objetos.Objeto;
 import com.rugbysurvive.partida.elementos.objetos.objetosCampo.Agujero;
 import com.rugbysurvive.partida.elementos.objetos.objetosCampo.Hielo;
 import com.rugbysurvive.partida.elementos.objetos.objetosCampo.MinaCampo;
@@ -67,7 +65,7 @@ public class ComponentesJuego {
         jugador.añadirObjeto(objeto3);
         jugador.añadirObjeto(objeto4);
 
-        this.equipo1.añadirJugador(jugador,7,6);
+        this.equipo1.añadirJugador(jugador,7,4);
         //this.equipo1.añadirJugador(jugador,17,22);
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo1);
@@ -80,7 +78,7 @@ public class ComponentesJuego {
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo1);
         jugador.setDireccion(DireccionJugador.abajo);
         //jugador.setEstado(new ConPelota(jugador));
-        this.equipo1.añadirJugador(jugador,9,22);
+        this.equipo1.añadirJugador(jugador,9,4);
 
 
         this.equipo1.añadirJugador(new Jugador(80, 90, 34, 90, 80, 70, this.equipo1),9,9);

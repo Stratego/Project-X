@@ -184,7 +184,7 @@ public class Posicionamiento {
     {
         Jugador jugadorChuta = null;
 
-        int posX = 13;
+        /*int posX = 13;
         int posY = 6;
         for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo1().listaJugadoresCampo()){
 
@@ -193,14 +193,28 @@ public class Posicionamiento {
             jugador.setEstado(new SinPelota());
 
             posY += 1;
+        }*/
+
+        int cont = 1;
+        for (PosicionInicial alineacion: ComponentesJuego.getComponentes().getEquipo1().getAlineacion()){
+            alineacion.getJugador().getCasilla().setJugador(null);
+            alineacion.getJugador().colocar(Campo.getInstanciaCampo().getCasilla(alineacion.getPosicionX(), alineacion.getPosicionY()));
+            alineacion.getJugador().setEstado(new SinPelota());
+           // alineacion.getJugador().setDireccion(DireccionJugador.derecha);
+            cont += 1;
+
+            if(cont == ConstantesJuego.JUGADORES_CAMPO)
+                break;
         }
 
-        posX = 16;
-        posY = 6;
+
+        int posX = 16;
+        int posY = 6;
         for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo2().listaJugadoresCampo()){
 
             jugador.getCasilla().setJugador(null);
             jugador.colocar(Campo.getInstanciaCampo().getCasilla(posY, posX));
+           // jugador.setDireccion(DireccionJugador.izquierda);
 
             if(posX == 18)
             {
@@ -231,7 +245,7 @@ public class Posicionamiento {
     {
         Jugador jugadorChuta = null;
 
-        int posX = 16;
+        /*int posX = 16;
         int posY = 6;
         for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo2().listaJugadoresCampo()){
 
@@ -240,14 +254,28 @@ public class Posicionamiento {
             jugador.setEstado(new SinPelota());
             posY += 1;
 
+        }*/
+
+        int cont = 1;
+        for (PosicionInicial alineacion: ComponentesJuego.getComponentes().getEquipo2().getAlineacion()){
+            alineacion.getJugador().getCasilla().setJugador(null);
+            alineacion.getJugador().colocar(Campo.getInstanciaCampo().getCasilla((ConstantesJuego.LIMITE_CASILLAS_ANCHO_TABLERO - alineacion.getPosicionX()), (ConstantesJuego.LIMITE_CASILLAS_LARGO_TABLERO - alineacion.getPosicionY())));
+            alineacion.getJugador().setEstado(new SinPelota());
+            // alineacion.getJugador().setDireccion(DireccionJugador.izquierda);
+
+            cont += 1;
+            /*Este contador nos ayuda a evitar que se coloquen mas de 8 jugadores en el campo*/
+            if(cont == ConstantesJuego.JUGADORES_CAMPO)
+                break;
         }
 
-        posX = 13;
-        posY = 6;
+        int posX = 13;
+        int posY = 6;
         for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo1().listaJugadoresCampo()){
 
             jugador.getCasilla().setJugador(null);
             jugador.colocar(Campo.getInstanciaCampo().getCasilla(posY, posX));
+            //jugador.setDireccion(DireccionJugador.derecha);
 
             if(posX == 11)
             {
