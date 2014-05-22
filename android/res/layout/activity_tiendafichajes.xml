@@ -300,9 +300,7 @@
             android:textStyle="bold"
             android:background="@drawable/botofusta"
             android:onClick="onButtonClicked"
-
             android:id="@+id/todos"/>
-
     <ListView
             android:id="@+id/listaJugadores"
             android:choiceMode="singleChoice"

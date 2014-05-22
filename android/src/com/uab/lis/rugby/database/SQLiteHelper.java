@@ -58,13 +58,18 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO ROLES VALUES(2,'defensa','su contundencia en la defensa es memorable');");
         db.execSQL("INSERT INTO ROLES VALUES(3,'chutador','cuanto mas chuta... mas inutil es');");
 
-
         db.execSQL("INSERT INTO HABILIDADES VALUES(1,'Fuerza','def fuerza');");
         db.execSQL("INSERT INTO HABILIDADES VALUES(2,'Defensa','def defensa');");
         db.execSQL("INSERT INTO HABILIDADES VALUES(3,'Habilidad','def habilidad');");
         db.execSQL("INSERT INTO HABILIDADES VALUES(4,'Resistencia','def resistencia');");
         db.execSQL("INSERT INTO HABILIDADES VALUES(5,'Ataque','def ataque');");
 
+        db.execSQL("INSERT INTO OBJETOS VALUES(1,'Mina','Coloca este objeto en una posición determinada del campo, y el jugador rival que lo coja morirá.');");
+        db.execSQL("INSERT INTO OBJETOS VALUES(2,'Beer','El jugador llama a un hooligan de su equipo que ayuda a hacer bloqueos hasta que el árbitro lo vea y lo expulse.');");
+        db.execSQL("INSERT INTO OBJETOS VALUES(3,'Mario','Aparece Mario en el campo y quita todos los objetos y powerups que perjudiquen a su equipo.');");
+        db.execSQL("INSERT INTO OBJETOS VALUES(4,'Cheerleader','El jugador coloca en el campo una cheerleader que distrae a todos los jugadores del equipo contrario que se encuentren cerca durante ese turno.');");
+        db.execSQL("INSERT INTO OBJETOS VALUES(5,'The Hole','Coloca este objeto en una posición determinada del campo, y cuando un jugador rival pase por encima desaparecerá hasta que tu equipo consiga un punto o llegue el descanso.');");
+        db.execSQL("INSERT INTO OBJETOS VALUES(6,'Cripple','Coloca este objeto en una posición determinada del camp, y el jugador rival que lo coja se verá ralentizado durante el resto del partido.');");
 
         int count = 1;
         for(int i : new int[]{1,2,3,4}) {

@@ -8,7 +8,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:id="@+id/textViewTiendaFichajesPopup"/>
+            android:id="@+id/textViewTiendaPopup"/>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

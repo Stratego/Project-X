@@ -22,58 +22,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:padding="10dp"
+            android:padding="15dp"
             android:orientation="vertical" >
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:textColor="#ffffff"
-                    android:textSize="17dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/activity_tiendafichajes_rol"
-                    android:id="@+id/textView2"/>
-            <RadioGroup android:id="@+id/tiendafichajes_radiogroup"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:baselineAligned="false">
-                <RadioButton android:id="@+id/atacante"
-                             android:layout_gravity="center_vertical"
-                             android:background="#669900"
-                             android:textColor="#ffffff"
-                             android:button="@null"
-                             android:layout_width="wrap_content"
-                             android:layout_height="match_parent"
-                             android:layout_marginRight="10dp"
-                             android:onClick="onRadioButtonClicked"
-                             android:text="@string/activity_tiendafichajes_atacante" />
-                <RadioButton android:id="@+id/defensa"
-                             android:layout_gravity="center_vertical"
-                             android:background="#669900"
-                             android:textColor="#ffffff"
-                             android:button="@null"
-                             android:layout_width="wrap_content"
-                             android:layout_height="match_parent"
-                             android:layout_marginRight="10dp"
-                             android:onClick="onRadioButtonClicked"
-                             android:text="@string/activity_tiendafichajes_defensa" />
-                <RadioButton android:id="@+id/chutador"
-                             android:layout_gravity="center_vertical"
-                             android:background="#669900"
-                             android:textColor="#ffffff"
-                             android:button="@null"
-                             android:layout_width="wrap_content"
-                             android:layout_height="match_parent"
-                             android:onClick="onRadioButtonClicked"
-                             android:text="@string/activity_tiendafichajes_chutador" />
-            </RadioGroup>
-        </LinearLayout>
 
         <LinearLayout
                 android:orientation="horizontal"
@@ -82,200 +32,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.35"
                     android:layout_marginRight="20dp"
                     android:textColor="#ffffff"
                     android:textSize="17dp"
                     android:textStyle="bold"
                     android:layout_gravity="center_vertical"
-                    android:text="@string/activity_tiendafichajes_nombre"
+                    android:text="@string/activity_tiendaobjetos_nombre"
                     android:id="@+id/textView2"/>
             <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tiendafichajes_edtNombre" android:layout_weight="1"/>
+                    android:id="@+id/tiendaobjetos_edtNombre"
+                    android:layout_weight="0.65"/>
 
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_height="wrap_content">
-                <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.40"
-                        android:textColor="#ffffff"
-                        android:textSize="17dp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:text="Fuerza:"
-                        android:id="@+id/textView3" />
-                <LinearLayout
-                        android:layout_weight="0.60"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content">
-                    <TextView
-                            android:id="@+id/txtMayorIgual"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.05"
-                            android:textColor="#ffffff"
-                            android:textSize="17dp"
-                            android:layout_gravity="center_vertical" />
-                    <TextView
-                            android:id="@+id/txtValorFuerzaSeekBar"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.17"
-                            android:textColor="#ffffff"
-                            android:textSize="17dp"
-                            android:layout_gravity="center_vertical" />
-                    <SeekBar
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.78"
-                            android:max="100"
-                            android:thumb="@drawable/thumb_pelota"
-                            android:id="@+id/sbFuerza" />
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_height="wrap_content">
-                <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.40"
-                        android:textColor="#ffffff"
-                        android:textSize="17dp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:text="Defensa:"
-                        android:id="@+id/textView3" />
-                <LinearLayout
-                        android:layout_weight="0.60"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content">
-                    <TextView
-                            android:id="@+id/txtMayorIgual2"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.05"
-                            android:textColor="#ffffff"
-                            android:textSize="17dp"
-                            android:layout_gravity="center_vertical" />
-                    <TextView
-                            android:id="@+id/txtValorDefensaSeekBar"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.17"
-                            android:textColor="#ffffff"
-                            android:textSize="17dp"
-                            android:layout_gravity="center_vertical" />
-                    <SeekBar
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.78"
-                            android:max="100"
-                            android:thumb="@drawable/thumb_pelota"
-                            android:id="@+id/sbDefensa" />
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_height="wrap_content">
-                <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.40"
-                        android:textColor="#ffffff"
-                        android:textSize="17dp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:text="Resistencia:"
-                        android:id="@+id/textView3" />
-                <LinearLayout
-                        android:layout_weight="0.60"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content">
-                    <TextView
-                            android:id="@+id/txtMayorIgual3"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.05"
-                            android:textColor="#ffffff"
-                            android:textSize="17dp"
-                            android:layout_gravity="center_vertical" />
-                    <TextView
-                            android:id="@+id/txtValorResistenciaSeekBar"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.17"
-                            android:textColor="#ffffff"
-                            android:textSize="17dp"
-                            android:layout_gravity="center_vertical" />
-                    <SeekBar
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.78"
-                            android:max="100"
-                            android:thumb="@drawable/thumb_pelota"
-                            android:id="@+id/sbResistencia" />
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.40"
-                        android:textColor="#ffffff"
-                        android:textSize="17dp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:text="Ataque:"
-                        android:id="@+id/textView3" />
-                <LinearLayout
-                        android:layout_weight="0.60"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content">
-                    <TextView
-                            android:id="@+id/txtMayorIgual4"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.05"
-                            android:textColor="#ffffff"
-                            android:textSize="17dp"
-                            android:layout_gravity="center_vertical" />
-                    <TextView
-                            android:id="@+id/txtValorAtaqueSeekBar"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.17"
-                            android:textColor="#ffffff"
-                            android:textSize="17dp"
-                            android:layout_gravity="center_vertical" />
-                    <SeekBar
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.78"
-                            android:max="100"
-                            android:thumb="@drawable/thumb_pelota"
-                            android:id="@+id/sbAtaque" />
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     <Button
@@ -283,17 +55,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="10dp"
-            android:text="@string/activity_tiendafichajes_vertodos"
+            android:text="@string/activity_tiendaobjetos_vertodos"
             android:textColor="#ffffff"
             android:textSize="17dp"
             android:textStyle="bold"
             android:background="@drawable/botofusta"
             android:onClick="onButtonClicked"
-
             android:id="@+id/todos"/>
 
     <ListView
-            android:id="@+id/listaJugadores"
+            android:id="@+id/listaObjetos"
             android:choiceMode="singleChoice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
@@ -308,6 +79,6 @@
             android:textSize="17dp"
             android:textColor="#ffffff"
             android:textStyle="bold"
-            android:text="@string/activity_tiendafichajes_sinjugadores" />
+            android:text="@string/activity_tiendaobjetos_sinobjetos" />
 
 </LinearLayout> 

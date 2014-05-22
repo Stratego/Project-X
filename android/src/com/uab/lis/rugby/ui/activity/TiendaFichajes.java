@@ -2,12 +2,10 @@ package com.uab.lis.rugby.ui.activity;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.ListActivity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
@@ -26,10 +24,10 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
 
     private SimpleCursorAdapter adapter;
 
-    public static final String JUGADOR = "jugador";
-    public static final String ROL = "rol";
-    public static final String EQUIPO = "equipo";
-    public static final String HABILIDAD = "habilidad";
+    public static final String NOMBRE_JUGADOR = "jugador";
+    public static final String NOMBRE_ROL = "rol";
+    public static final String NOMBRE_EQUIPO = "equipo";
+    public static final String NOMBRE_HABILIDAD = "habilidad";
     public static final String VALOR_HABILIDAD = "valor_habilidad";
     public static final String ATACANTE = "'atacante'";
     public static final String DEFENSA = "'defensa'";
@@ -51,10 +49,10 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
 
     String[] projection = new String[]{
             "j."+tbJugadores._ID + " as _id",
-            "j."+tbJugadores.COL_NOMBRE + " as " + JUGADOR,
-            "r."+tbRoles.COL_NOMBRE + " as " + ROL,
-            "e."+tbEquipos.COL_NOMBRE + " as " + EQUIPO,
-            "h."+tbHabilidades.COL_NOMBRE + " as " + HABILIDAD,
+            "j."+tbJugadores.COL_NOMBRE + " as " + NOMBRE_JUGADOR,
+            "r."+tbRoles.COL_NOMBRE + " as " + NOMBRE_ROL,
+            "e."+tbEquipos.COL_NOMBRE + " as " + NOMBRE_EQUIPO,
+            "h."+tbHabilidades.COL_NOMBRE + " as " + NOMBRE_HABILIDAD,
             "jh."+tbJugadorHabilidad.COL_VALOR + " as " + VALOR_HABILIDAD
     };
 
@@ -103,11 +101,11 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
 
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
                 item_id = cursor.getInt(cursor.getColumnIndex("_id"));
-                String item_nombre = cursor.getString(cursor.getColumnIndex(JUGADOR));
+                String item_nombre = cursor.getString(cursor.getColumnIndex(NOMBRE_JUGADOR));
                 Dialog dialog = new Dialog(TiendaFichajes.this);
-                dialog.setContentView(R.layout.activity_tiendafichajes_popup);
+                dialog.setContentView(R.layout.activity_tienda_popup);
                 dialog.setTitle(item_nombre);
-                TextView textView = (TextView)dialog.findViewById(R.id.textViewTiendaFichajesPopup);
+                TextView textView = (TextView)dialog.findViewById(R.id.textViewTiendaPopup);
                 textView.setText("Has clickado sobre el jugador con ID=" + item_id);
                 //TODO adri: implementar funcionalidad del boton Comprar
                 dialog.show();
@@ -326,9 +324,9 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
 
         // Campos de la base de datos (projection)
         String[] from = new String[] {
-                JUGADOR,
-                ROL,
-                EQUIPO,
+                NOMBRE_JUGADOR,
+                NOMBRE_ROL,
+                NOMBRE_EQUIPO,
                 VALOR_HABILIDAD
         };
         // Campos de la interfaz a los que mapeamos
@@ -470,12 +468,12 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
             case JUGADORES_LOADER:
                 //Retorna un CursorLoader
                 return new CursorLoader(
-                    this,                               // Parent activity context
-                    UrisGenerated.getUriAllJugadores(), // Table to query
-                    projection,                         // Projection to return
-                    selection,                               // No selection clause
-                    null,                               // No selection arguments
-                    null                                // Default sort order
+                    this,
+                    UrisGenerated.getUriAllJugadores(),
+                    projection,
+                    selection,
+                    null,
+                    null
                 );
             //TODO adri: crear otro Loader que acceda a TODAS las habilidades de cada jugador y las muestre
             default:

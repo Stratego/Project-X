@@ -26,88 +26,44 @@ public class TiendaObjetos extends Activity implements LoaderManager.LoaderCallb
 
     private SimpleCursorAdapter adapter;
 
-    public static final String VERDE = "#669900";
-    public static final String JUGADOR = "jugador";
-    public static final String ROL = "rol";
-    public static final String EQUIPO = "equipo";
-    public static final String HABILIDAD = "habilidad";
-    public static final String VALOR_FUERZA = "valor_fuerza";
-    public static final String ATACANTE = "'atacante'";
-    public static final String DEFENSA = "'defensa'";
-    public static final String CHUTADOR = "'chutador'";
-    public static final String SELECTION_TODOS =
-            "j." + tbJugadores._ID + " = jr." + tbJugadorRol.COL_JUGADOR +
-                    " and jr." + tbJugadorRol.COL_ROL + " = r." + tbRoles._ID +
-                    " and j." + tbJugadores._ID + " = je." + tbJugadorEquipo.COL_JUGADOR +
-                    " and je." + tbJugadorEquipo.COL_EQUIPO + " = e." + tbEquipos._ID +
-                    " and j." + tbJugadores._ID + " = jh." + tbJugadorHabilidad.COL_JUGADOR +
-                    " and jh." + tbJugadorHabilidad.COL_HABILIDAD + " = h." + tbHabilidades._ID;
-    public static final String SELECTION_ATACANTE = SELECTION_TODOS + " and r." + tbRoles.COL_NOMBRE + " = " + ATACANTE;
-    public static final String SELECTION_DEFENSA = SELECTION_TODOS + " and r." + tbRoles.COL_NOMBRE + " = " + DEFENSA;
-    public static final String SELECTION_CHUTADOR = SELECTION_TODOS + " and r." + tbRoles.COL_NOMBRE + " = " + CHUTADOR;
-    String selection = SELECTION_TODOS;
+    public static final String NOMBRE_OBJETO = "objeto";
+    public static final String DESCRIPCION = "descripcion";
+    String selection = null;
     public int item_id;
 
     String[] projection = new String[]{
-            "j."+tbJugadores._ID + " as _id",
-            "j."+tbJugadores.COL_NOMBRE + " as " + JUGADOR,
-            "r."+tbRoles.COL_NOMBRE + " as " + ROL,
-            "e."+tbEquipos.COL_NOMBRE + " as " + EQUIPO,
-            "h."+tbHabilidades.COL_NOMBRE + " as " + HABILIDAD,
-            "jh."+tbJugadorHabilidad.COL_VALOR + " as " + VALOR_FUERZA
+            "o."+tbObjetos._ID + " as _id",
+            "o."+tbObjetos.COL_NOMBRE + " as " + NOMBRE_OBJETO,
+            "o."+tbObjetos.COL_DESCRIPCION + " as " + DESCRIPCION
     };
 
     //Identifica el Loader particular que se esta utilizando
-    private static final int JUGADORES_LOADER = 0;
+    private static final int OBJETOS_LOADER = 0;
 
     //Se ejecuta cuando se crea la actividad por primera vez
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tiendafichajes);
+        setContentView(R.layout.activity_tiendaobjetos);
 
-        final EditText campoNombre = (EditText)findViewById(R.id.tiendafichajes_edtNombre);
+        final EditText campoNombre = (EditText)findViewById(R.id.tiendaobjetos_edtNombre);
 
-        TextView tvMayorIgual = (TextView) findViewById(R.id.txtMayorIgual);
-        tvMayorIgual.setText(Html.fromHtml("&#8805;"));
-        TextView tvMayorIgual2 = (TextView) findViewById(R.id.txtMayorIgual2);
-        tvMayorIgual2.setText(Html.fromHtml("&#8805;"));
-        TextView tvMayorIgual3 = (TextView) findViewById(R.id.txtMayorIgual3);
-        tvMayorIgual3.setText(Html.fromHtml("&#8805;"));
-        TextView tvMayorIgual4 = (TextView) findViewById(R.id.txtMayorIgual4);
-        tvMayorIgual4.setText(Html.fromHtml("&#8805;"));
-
-        SeekBar sbFuerza=(SeekBar)findViewById(R.id.sbFuerza);
-        TextView txtValorFuerzaSeekBar = (TextView)findViewById(R.id.txtValorFuerzaSeekBar);
-        txtValorFuerzaSeekBar.setText(String.valueOf(sbFuerza.getProgress()));
-
-        SeekBar sbDefensa=(SeekBar)findViewById(R.id.sbDefensa);
-        TextView txtValorDefensaSeekBar = (TextView)findViewById(R.id.txtValorDefensaSeekBar);
-        txtValorDefensaSeekBar.setText(String.valueOf(sbDefensa.getProgress()));
-
-        SeekBar sbResistencia=(SeekBar)findViewById(R.id.sbResistencia);
-        TextView txtValorResistenciaSeekBar = (TextView)findViewById(R.id.txtValorResistenciaSeekBar);
-        txtValorResistenciaSeekBar.setText(String.valueOf(sbResistencia.getProgress()));
-
-        SeekBar sbAtaque=(SeekBar)findViewById(R.id.sbAtaque);
-        TextView txtValorAtaqueSeekBar = (TextView)findViewById(R.id.txtValorAtaqueSeekBar);
-        txtValorAtaqueSeekBar.setText(String.valueOf(sbAtaque.getProgress()));
-
-        ListView lvJugadores = (ListView) findViewById(R.id.listaJugadores);
-        lvJugadores.setDividerHeight(2);
+        ListView lvObjetos = (ListView) findViewById(R.id.listaObjetos);
+        lvObjetos.setDividerHeight(2);
         fillData();
-        registerForContextMenu(lvJugadores);
-        lvJugadores.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        registerForContextMenu(lvObjetos);
+        lvObjetos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
                 item_id = cursor.getInt(cursor.getColumnIndex("_id"));
-                String item_nombre = cursor.getString(cursor.getColumnIndex(JUGADOR));
+                String item_nombre = cursor.getString(cursor.getColumnIndex(NOMBRE_OBJETO));
                 Dialog dialog = new Dialog(TiendaObjetos.this);
-                dialog.setContentView(R.layout.activity_tiendafichajes_popup);
+                dialog.setContentView(R.layout.activity_tienda_popup);
                 dialog.setTitle(item_nombre);
-                TextView textView = (TextView)dialog.findViewById(R.id.textViewTiendaFichajesPopup);
-                textView.setText("Has clickado sobre el jugador con ID=" + item_id);
+                TextView textView = (TextView)dialog.findViewById(R.id.textViewTiendaPopup);
+                textView.setText("Has clickado sobre el objeto con ID=" + item_id);
+                //TODO adri: implementar funcionalidad del boton Comprar
                 dialog.show();
 
             }
@@ -121,316 +77,44 @@ public class TiendaObjetos extends Activity implements LoaderManager.LoaderCallb
             }
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                RadioButton botonAtacante=(RadioButton)findViewById(R.id.atacante);
-                RadioButton botonDefensa=(RadioButton)findViewById(R.id.defensa);
-                RadioButton botonChutador=(RadioButton)findViewById(R.id.chutador);
-
-                //Ponemos verdes los botones de roles
-                botonAtacante.setBackgroundColor(Color.parseColor(VERDE));
-                botonDefensa.setBackgroundColor(Color.parseColor(VERDE));
-                botonChutador.setBackgroundColor(Color.parseColor(VERDE));
-
                 //Obtenemos el nombre introducido por el usuario
                 String nombre = "'%"+campoNombre.getText().toString()+"%'";
 
-                //Ponemos el where que selecciona los jugadores con el nombre introducido
-                String selection_nombre = SELECTION_TODOS + " and j." + tbJugadores.COL_NOMBRE + " like " + nombre;
+                //Ponemos el where que selecciona los objetos con el nombre introducido
+                String selection_nombre = "o." + tbObjetos.COL_NOMBRE + " like " + nombre;
                 selection = selection_nombre;
 
                 //Refrescamos el loader con la nueva consulta
-                getLoaderManager().restartLoader(JUGADORES_LOADER, null, TiendaObjetos.this);
+                getLoaderManager().restartLoader(OBJETOS_LOADER, null, TiendaObjetos.this);
             }
         });
 
-        sbFuerza.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int progressChanged = 0;
-
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-                progressChanged = progress;
-                // change progress text label with current seekbar value
-                TextView txtValorFuerzaSeekBar = (TextView)findViewById(R.id.txtValorFuerzaSeekBar);
-                txtValorFuerzaSeekBar.setText(String.valueOf(progressChanged));
-            }
-
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-                //Ponemos las demas barras de habilidades a 0
-                SeekBar sbDefensa=(SeekBar)findViewById(R.id.sbDefensa);
-                SeekBar sbResistencia=(SeekBar)findViewById(R.id.sbResistencia);
-                SeekBar sbAtaque=(SeekBar)findViewById(R.id.sbAtaque);
-                sbDefensa.setProgress(0);
-                sbResistencia.setProgress(0);
-                sbAtaque.setProgress(0);
-            }
-
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-                //Ponemos verdes los botones de roles
-                RadioButton botonAtacante=(RadioButton)findViewById(R.id.atacante);
-                RadioButton botonDefensa=(RadioButton)findViewById(R.id.defensa);
-                RadioButton botonChutador=(RadioButton)findViewById(R.id.chutador);
-                botonAtacante.setBackgroundColor(Color.parseColor(VERDE));
-                botonDefensa.setBackgroundColor(Color.parseColor(VERDE));
-                botonChutador.setBackgroundColor(Color.parseColor(VERDE));
-
-                //hacemos un clear del campo 'Nombre'
-                campoNombre.setText("");
-
-                //Ponemos el where que selecciona los jugadores con la fuerza introducida
-                String selection_fuerza = SELECTION_TODOS +
-                        " and jh." + tbJugadorHabilidad.COL_HABILIDAD + " = 1" +
-                        " and jh." + tbJugadorHabilidad.COL_VALOR + " >= " + progressChanged;
-                selection = selection_fuerza;
-
-                //Refrescamos el loader con la nueva consulta
-                getLoaderManager().restartLoader(JUGADORES_LOADER, null, TiendaObjetos.this);
-            }
-        });
-        sbDefensa.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int progressChanged = 0;
-
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-                progressChanged = progress;
-                // change progress text label with current seekbar value
-                TextView txtValorDefensaSeekBar = (TextView)findViewById(R.id.txtValorDefensaSeekBar);
-                txtValorDefensaSeekBar.setText(String.valueOf(progressChanged));
-            }
-
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-                //Ponemos las demas barras de habilidades a 0
-                SeekBar sbFuerza=(SeekBar)findViewById(R.id.sbFuerza);
-                SeekBar sbResistencia=(SeekBar)findViewById(R.id.sbResistencia);
-                SeekBar sbAtaque=(SeekBar)findViewById(R.id.sbAtaque);
-                sbFuerza.setProgress(0);
-                sbResistencia.setProgress(0);
-                sbAtaque.setProgress(0);
-            }
-
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-                //Ponemos verdes los botones de roles
-                RadioButton botonAtacante=(RadioButton)findViewById(R.id.atacante);
-                RadioButton botonDefensa=(RadioButton)findViewById(R.id.defensa);
-                RadioButton botonChutador=(RadioButton)findViewById(R.id.chutador);
-                botonAtacante.setBackgroundColor(Color.parseColor(VERDE));
-                botonDefensa.setBackgroundColor(Color.parseColor(VERDE));
-                botonChutador.setBackgroundColor(Color.parseColor(VERDE));
-
-                //hacemos un clear del campo 'Nombre'
-                campoNombre.setText("");
-
-                //Ponemos el where que selecciona los jugadores con la defensa introducida
-                String selection_defensa = SELECTION_TODOS +
-                        " and jh." + tbJugadorHabilidad.COL_HABILIDAD + " = 2" +
-                        " and jh." + tbJugadorHabilidad.COL_VALOR + " >= " + progressChanged;
-                selection = selection_defensa;
-
-                //Refrescamos el loader con la nueva consulta
-                getLoaderManager().restartLoader(JUGADORES_LOADER, null, TiendaObjetos.this);
-            }
-        });
-        sbResistencia.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int progressChanged = 0;
-
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-                progressChanged = progress;
-                // change progress text label with current seekbar value
-                TextView txtValorResistenciaSeekBar = (TextView)findViewById(R.id.txtValorResistenciaSeekBar);
-                txtValorResistenciaSeekBar.setText(String.valueOf(progressChanged));
-            }
-
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-                //Ponemos las demas barras de habilidades a 0
-                SeekBar sbFuerza=(SeekBar)findViewById(R.id.sbFuerza);
-                SeekBar sbDefensa=(SeekBar)findViewById(R.id.sbDefensa);
-                SeekBar sbAtaque=(SeekBar)findViewById(R.id.sbAtaque);
-                sbFuerza.setProgress(0);
-                sbDefensa.setProgress(0);
-                sbAtaque.setProgress(0);
-            }
-
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-                //Ponemos verdes los botones de roles
-                RadioButton botonAtacante=(RadioButton)findViewById(R.id.atacante);
-                RadioButton botonDefensa=(RadioButton)findViewById(R.id.defensa);
-                RadioButton botonChutador=(RadioButton)findViewById(R.id.chutador);
-                botonAtacante.setBackgroundColor(Color.parseColor(VERDE));
-                botonDefensa.setBackgroundColor(Color.parseColor(VERDE));
-                botonChutador.setBackgroundColor(Color.parseColor(VERDE));
-
-                //hacemos un clear del campo 'Nombre'
-                campoNombre.setText("");
-
-                //Ponemos el where que selecciona los jugadores con la fuerza introducida
-                String selection_resistencia = SELECTION_TODOS +
-                        " and jh." + tbJugadorHabilidad.COL_HABILIDAD + " = 4" +
-                        " and jh." + tbJugadorHabilidad.COL_VALOR + " >= " + progressChanged;
-                selection = selection_resistencia;
-
-                //Refrescamos el loader con la nueva consulta
-                getLoaderManager().restartLoader(JUGADORES_LOADER, null, TiendaObjetos.this);
-            }
-        });
-        sbAtaque.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int progressChanged = 0;
-
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-                progressChanged = progress;
-                // change progress text label with current seekbar value
-                TextView txtValorAtaqueSeekBar = (TextView)findViewById(R.id.txtValorAtaqueSeekBar);
-                txtValorAtaqueSeekBar.setText(String.valueOf(progressChanged));
-            }
-
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-                //Ponemos las demas barras de habilidades a 0
-                SeekBar sbFuerza=(SeekBar)findViewById(R.id.sbFuerza);
-                SeekBar sbDefensa=(SeekBar)findViewById(R.id.sbDefensa);
-                SeekBar sbResistencia=(SeekBar)findViewById(R.id.sbResistencia);
-                sbFuerza.setProgress(0);
-                sbDefensa.setProgress(0);
-                sbResistencia.setProgress(0);
-            }
-
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-                //Ponemos verdes los botones de roles
-                RadioButton botonAtacante=(RadioButton)findViewById(R.id.atacante);
-                RadioButton botonDefensa=(RadioButton)findViewById(R.id.defensa);
-                RadioButton botonChutador=(RadioButton)findViewById(R.id.chutador);
-                botonAtacante.setBackgroundColor(Color.parseColor(VERDE));
-                botonDefensa.setBackgroundColor(Color.parseColor(VERDE));
-                botonChutador.setBackgroundColor(Color.parseColor(VERDE));
-
-                //hacemos un clear del campo 'Nombre'
-                campoNombre.setText("");
-
-                //Ponemos el where que selecciona los jugadores con la fuerza introducida
-                String selection_ataque = SELECTION_TODOS +
-                        " and jh." + tbJugadorHabilidad.COL_HABILIDAD + " = 5" +
-                        " and jh." + tbJugadorHabilidad.COL_VALOR + " >= " + progressChanged;
-                selection = selection_ataque;
-
-                //Refrescamos el loader con la nueva consulta
-                getLoaderManager().restartLoader(JUGADORES_LOADER, null, TiendaObjetos.this);
-            }
-        });
     }
 
     private void fillData() {
 
         // Campos de la base de datos (projection)
         String[] from = new String[] {
-                JUGADOR,
-                ROL,
-                EQUIPO,
-                VALOR_FUERZA
+                NOMBRE_OBJETO,
+                DESCRIPCION
         };
         // Campos de la interfaz a los que mapeamos
         int[] to = new int[] {
-                R.id.txtNombreJugador,
-                R.id.txtNombreRol,
-                R.id.txtNombreEquipo,
-                R.id.txtValorFuerza
+                R.id.txtNombreObjeto,
+                R.id.txtDescripcion
         };
 
-        getLoaderManager().initLoader(JUGADORES_LOADER, null, this);
-        adapter = new SimpleCursorAdapter(this, R.layout.activity_tiendafichajes_filajugador, null, from, to, 0);
-        ListView lvJugadores = (ListView) findViewById(R.id.listaJugadores);
-        lvJugadores.setAdapter(adapter);
-    }
-
-    //Cuando se clicka alguno de los botones de 'Rol'
-    public void onRadioButtonClicked(View view) {
-
-        RadioButton botonAtacante=(RadioButton)findViewById(R.id.atacante);
-        RadioButton botonDefensa=(RadioButton)findViewById(R.id.defensa);
-        RadioButton botonChutador=(RadioButton)findViewById(R.id.chutador);
-        EditText campoNombre = (EditText)findViewById(R.id.tiendafichajes_edtNombre);
-
-        //Ponemos las barras de habilidades a 0
-        SeekBar sbFuerza=(SeekBar)findViewById(R.id.sbFuerza);
-        SeekBar sbDefensa=(SeekBar)findViewById(R.id.sbDefensa);
-        SeekBar sbResistencia=(SeekBar)findViewById(R.id.sbResistencia);
-        SeekBar sbAtaque=(SeekBar)findViewById(R.id.sbAtaque);
-        sbFuerza.setProgress(0);
-        sbDefensa.setProgress(0);
-        sbResistencia.setProgress(0);
-        sbAtaque.setProgress(0);
-
-        //hacemos un clear del campo 'Nombre'
-        campoNombre.setText("");
-
-        // Comprobar que radio button ha sido clickado
-        switch(view.getId()) {
-            case R.id.atacante:
-
-                //Ponemos rojo el boton 'Atacante' y verdes los demas
-                botonAtacante.setBackgroundColor(Color.RED);
-                botonDefensa.setBackgroundColor(Color.parseColor(VERDE));
-                botonChutador.setBackgroundColor(Color.parseColor(VERDE));
-
-                //Ponemos el where que selecciona los jugadores con rol 'atacante'
-                selection = SELECTION_ATACANTE;
-
-                //Refrescamos el loader con la nueva consulta
-                getLoaderManager().restartLoader(JUGADORES_LOADER, null, this);
-
-                break;
-
-            case R.id.defensa:
-
-                //Ponemos rojo el boton 'Defensa' y verdes los demas
-                botonAtacante.setBackgroundColor(Color.parseColor(VERDE));
-                botonDefensa.setBackgroundColor(Color.RED);
-                botonChutador.setBackgroundColor(Color.parseColor(VERDE));
-
-                //Ponemos el where que selecciona los jugadores con rol 'defensa'
-                selection = SELECTION_DEFENSA;
-
-                //Refrescamos el loader con la nueva consulta
-                getLoaderManager().restartLoader(JUGADORES_LOADER, null, this);
-
-                break;
-
-            case R.id.chutador:
-
-                //Ponemos rojo el boton 'Chutador' y verdes los demas
-                botonAtacante.setBackgroundColor(Color.parseColor(VERDE));
-                botonDefensa.setBackgroundColor(Color.parseColor(VERDE));
-                botonChutador.setBackgroundColor(Color.RED);
-
-                //Ponemos el where que selecciona los jugadores con rol 'chutador'
-                selection = SELECTION_CHUTADOR;
-
-                //Refrescamos el loader con la nueva consulta
-                getLoaderManager().restartLoader(JUGADORES_LOADER, null, this);
-
-                break;
-        }
+        getLoaderManager().initLoader(OBJETOS_LOADER, null, this);
+        adapter = new SimpleCursorAdapter(this, R.layout.activity_tiendaobjetos_filaobjeto, null, from, to, 0);
+        ListView lvObjetos = (ListView) findViewById(R.id.listaObjetos);
+        lvObjetos.setAdapter(adapter);
     }
 
     //Cuando se clicka el boton 'Ver todos'
     public void onButtonClicked(View view) {
 
-        RadioButton botonAtacante=(RadioButton)findViewById(R.id.atacante);
-        RadioButton botonDefensa=(RadioButton)findViewById(R.id.defensa);
-        RadioButton botonChutador=(RadioButton)findViewById(R.id.chutador);
         Button botonTodos=(Button)findViewById(R.id.todos);
-        EditText campoNombre = (EditText)findViewById(R.id.tiendafichajes_edtNombre);
-
-        //Ponemos las barras de habilidades a 0
-        SeekBar sbFuerza=(SeekBar)findViewById(R.id.sbFuerza);
-        SeekBar sbDefensa=(SeekBar)findViewById(R.id.sbDefensa);
-        SeekBar sbResistencia=(SeekBar)findViewById(R.id.sbResistencia);
-        SeekBar sbAtaque=(SeekBar)findViewById(R.id.sbAtaque);
-        sbFuerza.setProgress(0);
-        sbDefensa.setProgress(0);
-        sbResistencia.setProgress(0);
-        sbAtaque.setProgress(0);
+        EditText campoNombre = (EditText)findViewById(R.id.tiendaobjetos_edtNombre);
 
         //hacemos un clear del campo 'Nombre'
         campoNombre.setText("");
@@ -439,19 +123,14 @@ public class TiendaObjetos extends Activity implements LoaderManager.LoaderCallb
         switch(view.getId()) {
             case R.id.todos:
 
-                //Ponemos verdes los botones de roles
-                botonAtacante.setBackgroundColor(Color.parseColor(VERDE));
-                botonDefensa.setBackgroundColor(Color.parseColor(VERDE));
-                botonChutador.setBackgroundColor(Color.parseColor(VERDE));
-
                 //Cambiamos la imagen del boton 'Ver todos' en funcion de su estado
                 botonTodos.setBackgroundResource(R.drawable.selector_boton);
 
-                //Ponemos el where que selecciona todos los jugadores
-                selection = SELECTION_TODOS;
+                //Ponemos el where que selecciona todos los objetos
+                selection = null;
 
                 //Refrescamos el loader con la nueva consulta
-                getLoaderManager().restartLoader(JUGADORES_LOADER, null, this);
+                getLoaderManager().restartLoader(OBJETOS_LOADER, null, this);
 
                 break;
         }
@@ -465,15 +144,15 @@ public class TiendaObjetos extends Activity implements LoaderManager.LoaderCallb
         * Takes action based on the ID of the Loader that's being created
         */
         switch (loaderID) {
-            case JUGADORES_LOADER:
+            case OBJETOS_LOADER:
                 //Retorna un CursorLoader
                 return new CursorLoader(
-                        this,                               // Parent activity context
-                        UrisGenerated.getUriAllJugadores(), // Table to query
-                        projection,                         // Projection to return
-                        selection,                               // No selection clause
-                        null,                               // No selection arguments
-                        null                                // Default sort order
+                        this,
+                        UrisGenerated.getUriAllObjetos(),
+                        projection,
+                        selection,
+                        null,
+                        null
                 );
 
             default:

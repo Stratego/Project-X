@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:background="@drawable/fusta"
+              android:background="@drawable/selector_listitem"
               android:layout_width="match_parent"
               android:layout_height="wrap_content" >
 
@@ -29,17 +29,13 @@
                     android:textColor="#ffffff"
                     android:text="@string/activity_tiendaobjetos_nombre"
                     android:textSize="17dp"
-                    android:id="@+id/textView"/>
+                    android:id="@+id/textView" />
             <TextView
                     android:id="@+id/txtNombreObjeto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="1"
                     android:textStyle="bold"
-                    android:textSize="17dp"
-                    android:text="@+id/TextView01"
-                    >
-            </TextView>
+                    android:textSize="17dp" />
         </LinearLayout>
         <LinearLayout
                 android:layout_width="match_parent"
@@ -52,63 +48,13 @@
                     android:textColor="#ffffff"
                     android:textSize="17dp"
                     android:text="@string/activity_tiendaobjetos_descripcion"
-                    android:id="@+id/textView"/>
+                    android:id="@+id/textView" />
             <TextView
                     android:id="@+id/txtDescripcion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="1"
                     android:textStyle="bold"
-                    android:textSize="17dp"
-                    android:text="@+id/TextView01"
-                    >
-            </TextView>
-        </LinearLayout>
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
-                    android:textColor="#ffffff"
-                    android:textSize="17dp"
-                    android:text="@string/activity_tiendaobjetos_habilidad"
-                    android:id="@+id/textView"/>
-            <TextView
-                    android:id="@+id/txtHabilidad"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:lines="1"
-                    android:textSize="17dp"
-                    android:textStyle="bold"
-                    android:text="@+id/TextView01"
-                    >
-            </TextView>
-        </LinearLayout>
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
-                    android:textColor="#ffffff"
-                    android:textSize="17dp"
-                    android:text="@string/activity_tiendaobjetos_efecto"
-                    android:id="@+id/textView"/>
-            <TextView
-                    android:id="@+id/txtEfecto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:lines="1"
-                    android:textStyle="bold"
-                    android:textSize="17dp"
-                    android:text="@+id/TextView01"
-                    >
-            </TextView>
+                    android:textSize="17dp" />
         </LinearLayout>
     </LinearLayout>
 
