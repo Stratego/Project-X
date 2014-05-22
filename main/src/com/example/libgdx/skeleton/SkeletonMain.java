@@ -57,22 +57,22 @@ public class SkeletonMain extends Game {
     Arbitro arbitro;
     com.models.Equipo equipo1;
     com.models.Equipo equipo2;
+    boolean rival_IA = false;
 
     public SkeletonMain(Equipo equipo1, Equipo equipo2, boolean ia,boolean musica,CollBack collBack) {
         this.equipo1 = equipo1;
         this.equipo2 = equipo2;
-        if(this.equipo1 == null){
-            System.out.println("MALLLLLLLLLLLLLLLLLLLLLl");
-        }
+        this.rival_IA=ia;
 
     }
+
     public interface CollBack{
         public void finichMatch(int rEquipo1,int rEquipo2,Equipo equipo1, Equipo equipo2);
     }
 
     @Override
     public void create() {
-
+        constantes.setRIVAL_IA(rival_IA);
         this.simulador = Simulador.getInstance();
 
 
@@ -292,10 +292,10 @@ public class SkeletonMain extends Game {
             GestorTurnos.sumarTurno();
 
             if (ConstantesJuego.RIVAL_IA ==true){
-                //SaqueBanda saqueBanda = new SaqueBanda(0,0,ComponentesJuego.getComponentes().getEquipo1());
+                //SaqueBanda saqueBanda = new SaqueBanda(0,19,ComponentesJuego.getComponentes().getEquipo2());
                 //saqueBanda.arbitrar();
 
-                //IA ia = new IA();
+                IA ia = new IA();
             }
 
             this.simular = true;

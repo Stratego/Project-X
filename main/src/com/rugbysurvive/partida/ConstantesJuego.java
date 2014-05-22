@@ -152,7 +152,9 @@ public class ConstantesJuego {
         return (int)(tamaño * constanteRescalado);
 
     }
-
+    public static void setRIVAL_IA (boolean ia){
+        RIVAL_IA=ia;
+    }
     public static int getHeight()
     {
         if(Gdx.graphics.getHeight() > Gdx.graphics.getWidth()) {

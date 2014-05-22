@@ -1,10 +1,12 @@
 package com.rugbysurvive.partida.Jugador;
 
+import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.extras.Color;
 import com.rugbysurvive.partida.Jugador.extras.GeneradorImagenJugador;
 import com.rugbysurvive.partida.Simulador.Accion;
+import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
 import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
@@ -377,7 +379,10 @@ public class Jugador implements GestionEntrada {
      */
     public void setSeleccionado(boolean seleccionado)
     {
+
         this.seleccionado = seleccionado;
+
+
 
         if(this.seleccionado )
         {
@@ -545,7 +550,12 @@ public class Jugador implements GestionEntrada {
                         {
                             if(entrada == Entrada.clic)
                             {
-                                this.setSeleccionado(true);
+                                if (ConstantesJuego.RIVAL_IA==false){
+                                    this.setSeleccionado(true);
+                                } else if (this.miEquipo== ComponentesJuego.getComponentes().getEquipo1() ){
+                                    this.setSeleccionado(true);
+                                }
+
                                 System.out.println("ESTADO:"+this.getEstado());
                                 System.out.println(">---------Me seleccionan-------------<"+this.getEstado());
                                 GestorGrafico.getCamara().bloquear();

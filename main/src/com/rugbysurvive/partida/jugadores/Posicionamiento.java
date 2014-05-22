@@ -6,6 +6,7 @@ import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
+import com.rugbysurvive.partida.Jugador.SinPelota;
 import com.rugbysurvive.partida.Simulador.Chute;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.arbitro.Arbitro;
@@ -137,6 +138,142 @@ public class Posicionamiento {
 
      }
 
+    public static void generarSaquePredeterminado(Jugador jugador)
+    {
+        Jugador jugadorChute;
+        Chute chute = null;
+
+        if(jugador.getMiEquipo().getLado() == Lado.izquierda)
+        {
+            jugadorChute = recolocarIzquierda();
+            int fuerzaDecimal = obtenerHabilidadValorDecimal(jugador.getFuerza());
+
+
+
+
+            chute = new Chute(jugadorChute, jugadorChute.getPosicionX()-fuerzaDecimal, 9);
+
+        }
+        else
+        {
+            jugadorChute = recolocarDerecha();
+            int fuerzaDecimal = obtenerHabilidadValorDecimal(jugador.getFuerza());
+
+
+            chute = new Chute(jugadorChute, jugadorChute.getPosicionX()+fuerzaDecimal, 9);
+
+        }
+
+        Simulador.getInstance().eliminarAcciones();
+        chute.simular();
+    }
+
+    private static  int obtenerHabilidadValorDecimal(int valor)
+    {
+        int valorDecimal = valor/10;
+
+        if(valorDecimal <= 0)
+        {
+            valorDecimal = 1;
+        }
+
+        return valorDecimal;
+    }
+
+    private static Jugador recolocarIzquierda()
+    {
+        Jugador jugadorChuta = null;
+
+        int posX = 13;
+        int posY = 6;
+        for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo1().listaJugadoresCampo()){
+
+            jugador.getCasilla().setJugador(null);
+            jugador.colocar(Campo.getInstanciaCampo().getCasilla(posY, posX));
+            jugador.setEstado(new SinPelota());
+
+            posY += 1;
+        }
+
+        posX = 16;
+        posY = 6;
+        for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo2().listaJugadoresCampo()){
+
+            jugador.getCasilla().setJugador(null);
+            jugador.colocar(Campo.getInstanciaCampo().getCasilla(posY, posX));
+
+            if(posX == 18)
+            {
+                jugador.setEstado(new ConPelota(jugador));
+                jugadorChuta = jugador;
+            }
+            else
+            {
+                jugador.setEstado(new SinPelota());
+            }
+
+            if(posY == 12)
+            {
+                posX = 18;
+                posY = 9;
+            }
+            else
+            {
+                posY += 1;
+            }
+
+
+        }
+        return jugadorChuta;
+    }
+
+    private static  Jugador recolocarDerecha()
+    {
+        Jugador jugadorChuta = null;
+
+        int posX = 16;
+        int posY = 6;
+        for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo2().listaJugadoresCampo()){
+
+            jugador.getCasilla().setJugador(null);
+            jugador.colocar(Campo.getInstanciaCampo().getCasilla(posY, posX));
+            jugador.setEstado(new SinPelota());
+            posY += 1;
+
+        }
+
+        posX = 13;
+        posY = 6;
+        for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo1().listaJugadoresCampo()){
+
+            jugador.getCasilla().setJugador(null);
+            jugador.colocar(Campo.getInstanciaCampo().getCasilla(posY, posX));
+
+            if(posX == 11)
+            {
+                jugador.setEstado(new ConPelota(jugador));
+                jugadorChuta = jugador;
+            }
+            else
+            {
+                jugador.setEstado(new SinPelota());
+            }
+
+            if(posY == 12)
+            {
+                posX = 11;
+                posY = 9;
+            }
+            else
+            {
+                posY += 1;
+            }
+        }
+        return jugadorChuta;
+    }
+
+
+
     /**
      * Coloca los dos equipos en posicion de mele en la posicion determinada
      * por el jugador
@@ -162,16 +299,14 @@ public class Posicionamiento {
         int y = posY +1;
 
         Arbitro arbitro = Arbitro.getInstancia();
-        DireccionJugador direccion1 ;
-        DireccionJugador direccion2 ;
+        DireccionJugador direccion1 = DireccionJugador.derecha;
+        DireccionJugador direccion2 = DireccionJugador.izquierda;
         if (jugadaequipo1.get(0).getMiEquipo().getLado()==Lado.derecha){
-            direccion1= DireccionJugador.izquierda;
-            direccion2= DireccionJugador.derecha;
+
+            ArrayList<Jugador> jugadaequipoaux = jugadaequipo1;
+            jugadaequipo1 = jugadaequipo2;
+            jugadaequipo2 = jugadaequipoaux;
             System.out.println("entra condicion 1");
-        }else{
-            direccion1= DireccionJugador.derecha;
-            direccion2= DireccionJugador.izquierda;
-            System.out.println("entra condicion 2");
         }
 
         colocarMeeleEquipo1(x,y,posY,direccion1,arbitro,campo);
@@ -263,16 +398,14 @@ public class Posicionamiento {
         int x = posX-1;
         int y;
         Arbitro arbitro = Arbitro.getInstancia();
-        DireccionJugador direccion1 ;
-        DireccionJugador direccion2 ;
+        DireccionJugador direccion1 = DireccionJugador.derecha;
+        DireccionJugador direccion2 = DireccionJugador.izquierda;
         if (jugadaequipo1.get(0).getMiEquipo().getLado()==Lado.derecha){
-            direccion1= DireccionJugador.izquierda;
-            direccion2= DireccionJugador.derecha;
+
+            ArrayList<Jugador> jugadaequipoaux = jugadaequipo1;
+            jugadaequipo1 = jugadaequipo2;
+            jugadaequipo2 = jugadaequipoaux;
             System.out.println("entra condicion 1");
-        }else{
-            direccion1= DireccionJugador.derecha;
-            direccion2= DireccionJugador.izquierda;
-            System.out.println("entra condicion 2");
         }
         if (posY>=ConstantesJuego.POSICION_SAQUE_BANDA_SUPERIOR){
             y = posY -3;
@@ -445,6 +578,8 @@ public class Posicionamiento {
      */
     public static void colocarSaqueEquipo1(int x, int y,int posX, int posY, DireccionJugador direccion, Arbitro arbitro, Campo campo, Equipo equipo){
 
+
+
         for (Jugador jugador1:jugadaequipo1){
             if(jugador1.getPosicionX() > 0 && jugador1.getPosicionY() >0) {
                 campo.eliminarElemento(jugador1.getPosicionY(),jugador1.getPosicionX());
@@ -517,6 +652,9 @@ public class Posicionamiento {
 
             if (y==(posY)){
                 x+=1;
+                if (direccion==DireccionJugador.izquierda){
+                    x-=2;
+                }
                 y=posY;
                 if (equipo!=jugador2.getMiEquipo()){
                     break;
