@@ -31,6 +31,7 @@ public class GeneradorImagenJugador {
         texturas.add(generarAspecto(direccion,aspecto));
         texturas.add(generarPerfil(direccion));
 
+
         return texturas;
     }
 

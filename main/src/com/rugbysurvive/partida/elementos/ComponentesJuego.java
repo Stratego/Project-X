@@ -1,5 +1,6 @@
 package com.rugbysurvive.partida.elementos;
 
+import com.models.Habilidad;
 import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
@@ -17,6 +18,8 @@ import com.rugbysurvive.partida.jugadores.Posicionamiento;
 import com.rugbysurvive.partida.tablero.Campo;
 import com.rugbysurvive.partida.tablero.Lado;
 
+import java.util.List;
+
 /**
  * Created by aitor on 15/04/14.
  */
@@ -25,34 +28,62 @@ public class ComponentesJuego {
     private Equipo equipo1;
     private Equipo equipo2;
     private Marcador marcador;
+    com.models.Equipo equipo1Modelado;
+    com.models.Equipo equipo2Modelado;
 
     private static ComponentesJuego componentesJuego;
 
 
 
 
-    public ComponentesJuego()
+    public ComponentesJuego(com.models.Equipo equipo1,com.models.Equipo equipo2)
     {
         this.equipo1 = new Equipo();
         this.equipo2 = new Equipo();
-        this.equipo1.setColor(Color.rojo);
-        this.equipo2.setColor(Color.azul);
+
         this.campo = new Campo();
         campo = new Campo();
+        this.equipo1Modelado = equipo1;
+        this.equipo2Modelado = equipo2;
+        this.equipo1.setColor(generarColorEquipacion(this.equipo1Modelado.getEquipacion()));
+        this.equipo2.setColor(generarColorEquipacion(this.equipo2Modelado.getEquipacion()));
         this.generarEquipos();
         this.marcador = new Marcador(this.equipo1,this.equipo2);
         componentesJuego = this;
         Arbitro arbitro = new Arbitro();
 
 
+
+
     }
     public static ComponentesJuego getComponentes(){return componentesJuego;}
 
+    public Color generarColorEquipacion(String equipacion) {
+
+        if(equipacion.equals("Jugador3E1.png")){
+            return Color.rojo;
+        }
+        else if(equipacion.equals("Jugador3E2.png")){
+            return Color.amarillo;
+        }
+        else if(equipacion.equals("Jugador3E3.png")){
+            return Color.azul;
+        }
+        else{
+            return Color.verde;
+        }
+    }
 
 
     private void generarEquipos()
     {
 
+       /* for(com.models.Jugador auxJugador : this.equipo2Modelado.getJugadoes()){
+            System.out.println("jugador"+auxJugador.getPosX()+","+auxJugador.getPosY());
+            List<Habilidad> hab = auxJugador.getHabilidades();
+            Jugador jugadorReal =  new Jugador(hab.get(0).getValor(),hab.get(0).getValor(),hab.get(0).getValor(),hab.get(0).getValor(),hab.get(0).getValor(),hab.get(0).getValor(), this.equipo1);
+            this.equipo1.añadirJugador(jugadorReal,auxJugador.getPosX(),auxJugador.getPosY());
+        }*/
         // falta añadir los objetos a cada jugador
         Jugador jugador = new Jugador(80, 90, 100, 90, 80, 70, equipo1);
 
@@ -101,8 +132,6 @@ public class ComponentesJuego {
         this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),5,14);
 
 
-
-
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),12,19);
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),13,20);
         this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),14,21);
@@ -117,12 +146,13 @@ public class ComponentesJuego {
 
         jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo2);
         PowerUP objeto5 = new PowerUP(0,10,"casilla.png", Habilidades.vida,50,jugador);
-        objeto2 = new ColocadorObjetosCampo(1,10,"mina.png",jugador,new MinaCampo("mina.png",jugador));
+       /* objeto2 = new ColocadorObjetosCampo(1,10,"mina.png",jugador,new MinaCampo("mina.png",jugador));
 
         jugador.añadirObjeto(objeto);
         jugador.añadirObjeto(objeto2);
         jugador.añadirObjeto(objeto);
-        jugador.añadirObjeto(objeto);
+        jugador.añadirObjeto(objeto);*/
+
         this.equipo2.añadirJugador(jugador,2,3);
        // this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),19,27);
         //this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),21,21);

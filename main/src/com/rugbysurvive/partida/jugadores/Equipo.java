@@ -51,7 +51,6 @@ public  class Equipo {
         this.alineacion = new ArrayList<PosicionInicial>();
         this.jugadores =  new ArrayList<Jugador>();
         this.descartados = new ArrayList<Jugador>();
-
         this.jugando = false;
         equipo = this;
         this.color = Color.azul;

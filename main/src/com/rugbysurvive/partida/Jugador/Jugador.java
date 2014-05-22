@@ -286,8 +286,7 @@ public class Jugador implements GestionEntrada {
      */
     public void setPowerUP(PowerUP powerup, int index)
     {
-        if(index>=0 && index<4)
-        {
+        if(index>=0 && index<4) {
             this.powerup.add(index, powerup);
         }
     }
@@ -300,13 +299,12 @@ public class Jugador implements GestionEntrada {
     public void setDireccion(DireccionJugador direccion)
     {
         this.direccion = direccion;
-        for(ElementoDibujable dibujo: this.texturas)
-        {
+        for(ElementoDibujable dibujo: this.texturas) {
             dibujo.borrar();
         }
         this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,direccion);
 
-        if(this.bloqueado && this.bloqueo != null){
+        if(this.bloqueado && this.bloqueo != null) {
                 this.texturas.remove(this.bloqueo);
                 this.generarTexturaBloqueado();
         }
@@ -700,6 +698,7 @@ public class Jugador implements GestionEntrada {
 
     public void setColor(Color color) {
         this.color = color;
+        System.out.println("color equipacion jugador"+this.color);
         this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,this.direccion);
     }
 
