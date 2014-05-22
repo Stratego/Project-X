@@ -18,91 +18,246 @@
                 android:gravity="center"/>
 
     <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginBottom="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="20dp"
-                android:textColor="#ffffff"
-                android:textSize="17dp"
-                android:textStyle="bold"
-                android:layout_gravity="center_vertical"
-                android:text="@string/activity_tiendafichajes_rol"
-                android:id="@+id/textView2"/>
-        <RadioGroup android:id="@+id/tiendafichajes_radiogroup"
+        android:background="@drawable/fusta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="10dp"
+        android:orientation="vertical" >
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:textColor="#ffffff"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/activity_tiendafichajes_rol"
+                    android:id="@+id/textView2"/>
+            <RadioGroup android:id="@+id/tiendafichajes_radiogroup"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:baselineAligned="false">
+                <RadioButton android:id="@+id/atacante"
+                             android:layout_gravity="center_vertical"
+                             android:background="#669900"
+                             android:textColor="#ffffff"
+                             android:button="@null"
+                             android:layout_width="wrap_content"
+                             android:layout_height="match_parent"
+                             android:layout_marginRight="10dp"
+                             android:onClick="onRadioButtonClicked"
+                             android:text="@string/activity_tiendafichajes_atacante" />
+                <RadioButton android:id="@+id/defensa"
+                             android:layout_gravity="center_vertical"
+                             android:background="#669900"
+                             android:textColor="#ffffff"
+                             android:button="@null"
+                             android:layout_width="wrap_content"
+                             android:layout_height="match_parent"
+                             android:layout_marginRight="10dp"
+                             android:onClick="onRadioButtonClicked"
+                             android:text="@string/activity_tiendafichajes_defensa" />
+                <RadioButton android:id="@+id/chutador"
+                             android:layout_gravity="center_vertical"
+                             android:background="#669900"
+                             android:textColor="#ffffff"
+                             android:button="@null"
+                             android:layout_width="wrap_content"
+                             android:layout_height="match_parent"
+                             android:onClick="onRadioButtonClicked"
+                             android:text="@string/activity_tiendafichajes_chutador" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:textColor="#ffffff"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/activity_tiendafichajes_nombre"
+                    android:id="@+id/textView2"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tiendafichajes_edtNombre" android:layout_weight="1"/>
+
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:baselineAligned="false">
-            <RadioButton android:id="@+id/atacante"
-                         android:layout_gravity="center_vertical"
-                         android:background="#669900"
-                         android:button="@null"
-                         android:layout_width="wrap_content"
-                         android:layout_height="match_parent"
-                         android:layout_marginRight="10dp"
-                         android:onClick="onRadioButtonClicked"
-                         android:text="@string/activity_tiendafichajes_atacante" />
-            <RadioButton android:id="@+id/defensa"
-                         android:layout_gravity="center_vertical"
-                         android:background="#669900"
-                         android:button="@null"
-                         android:layout_width="wrap_content"
-                         android:layout_height="match_parent"
-                         android:layout_marginRight="10dp"
-                         android:onClick="onRadioButtonClicked"
-                         android:text="@string/activity_tiendafichajes_defensa" />
-            <RadioButton android:id="@+id/chutador"
-                         android:layout_gravity="center_vertical"
-                         android:background="#669900"
-                         android:button="@null"
-                         android:layout_width="wrap_content"
-                         android:layout_height="match_parent"
-                         android:onClick="onRadioButtonClicked"
-                         android:text="@string/activity_tiendafichajes_chutador" />
-        </RadioGroup>
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:textColor="#ffffff"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_vertical"
+                        android:text="Fuerza:"
+                        android:id="@+id/textView3" />
+                <TextView
+                        android:id="@+id/txtMayorIgual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:textSize="17dp"
+                        android:layout_gravity="center_vertical" />
+                <TextView
+                        android:id="@+id/txtValorFuerzaSeekBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:textSize="17dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_gravity="center_vertical" />
+                <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="100"
+                        android:id="@+id/sbFuerza" />
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:textColor="#ffffff"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_vertical"
+                        android:text="Defensa:"
+                        android:id="@+id/textView3" />
+                <TextView
+                        android:id="@+id/txtMayorIgual2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:textSize="17dp"
+                        android:layout_gravity="center_vertical" />
+                <TextView
+                        android:id="@+id/txtValorDefensaSeekBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:textSize="17dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_gravity="center_vertical" />
+                <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="100"
+                        android:id="@+id/sbDefensa" />
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:textColor="#ffffff"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_vertical"
+                        android:text="Resistencia:"
+                        android:id="@+id/textView3" />
+                <TextView
+                        android:id="@+id/txtMayorIgual3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:textSize="17dp"
+                        android:layout_gravity="center_vertical" />
+                <TextView
+                        android:id="@+id/txtValorResistenciaSeekBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:textSize="17dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_gravity="center_vertical" />
+                <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="100"
+                        android:id="@+id/sbResistencia" />
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:textColor="#ffffff"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_vertical"
+                        android:text="Ataque:"
+                        android:id="@+id/textView3" />
+                <TextView
+                        android:id="@+id/txtMayorIgual4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:textSize="17dp"
+                        android:layout_gravity="center_vertical" />
+                <TextView
+                        android:id="@+id/txtValorAtaqueSeekBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:textSize="17dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_gravity="center_vertical" />
+                <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="100"
+                        android:id="@+id/sbAtaque" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-            android:orientation="horizontal"
-            android:descendantFocusability="beforeDescendants"
-            android:focusableInTouchMode="true"
-            android:layout_marginBottom="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
-                android:textColor="#ffffff"
-                android:textSize="17dp"
-                android:textStyle="bold"
-                android:layout_gravity="center_vertical"
-                android:text="@string/activity_tiendafichajes_nombre"
-                android:id="@+id/textView2"/>
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tiendafichajes_edtNombre" android:layout_weight="1"/>
-
-    </LinearLayout>
-
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
             android:text="@string/activity_tiendafichajes_vertodos"
+            android:textColor="#ffffff"
+            android:textSize="17dp"
+            android:textStyle="bold"
             android:background="@drawable/botofusta"
             android:onClick="onButtonClicked"
 
             android:id="@+id/todos"/>
+
     <ListView
-            android:layout_marginTop="24dp"
             android:id="@+id/listaJugadores"
             android:choiceMode="singleChoice"
             android:layout_width="match_parent"

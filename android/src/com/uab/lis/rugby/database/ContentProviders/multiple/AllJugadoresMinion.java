@@ -25,7 +25,9 @@ public class AllJugadoresMinion extends MinionContentProvider {
                 tbJugadorRol.TABLE + " as jr, " +
                 tbRoles.TABLE + " as r, " +
                 tbJugadorEquipo.TABLE + " as je, " +
-                tbEquipos.TABLE + " as e"
+                tbEquipos.TABLE + " as e, " +
+                tbJugadorHabilidad.TABLE + " as jh, " +
+                tbHabilidades.TABLE + " as h"
         );
         return queryBuilder.query(db,projection,selection,selectionArgs,null,null,null);
     }

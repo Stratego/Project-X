@@ -24,6 +24,7 @@
     <string name="activity_tiendafichajes_nombre">Nombre:</string>
     <string name="activity_tiendafichajes_rol">Rol:</string>
     <string name="activity_tiendafichajes_equipo">Equipo:</string>
+    <string name="activity_tiendafichajes_habilidades">Habilidades:</string>
     <string name="activity_tiendafichajes_vertodos">Ver todos</string>
     <string name="activity_tiendaobjetos_sinobjetos">No se han encontrado objetos.</string>
     <string name="activity_tiendaobjetos_nombre">Nombre:</string>
