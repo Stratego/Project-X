@@ -26,12 +26,11 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
 
     private SimpleCursorAdapter adapter;
 
-    public static final String VERDE = "#669900";
     public static final String JUGADOR = "jugador";
     public static final String ROL = "rol";
     public static final String EQUIPO = "equipo";
     public static final String HABILIDAD = "habilidad";
-    public static final String VALOR_FUERZA = "valor_fuerza";
+    public static final String VALOR_HABILIDAD = "valor_habilidad";
     public static final String ATACANTE = "'atacante'";
     public static final String DEFENSA = "'defensa'";
     public static final String CHUTADOR = "'chutador'";
@@ -41,7 +40,9 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
             " and j." + tbJugadores._ID + " = je." + tbJugadorEquipo.COL_JUGADOR +
             " and je." + tbJugadorEquipo.COL_EQUIPO + " = e." + tbEquipos._ID +
             " and j." + tbJugadores._ID + " = jh." + tbJugadorHabilidad.COL_JUGADOR +
-            " and jh." + tbJugadorHabilidad.COL_HABILIDAD + " = h." + tbHabilidades._ID;
+            " and jh." + tbJugadorHabilidad.COL_HABILIDAD + " = h." + tbHabilidades._ID +
+            " and jh." + tbJugadorHabilidad.COL_HABILIDAD + " = 1"; // FIXME adri: por ahora solo selecciona la habilidad de tipo "fuerza" de cada jugador
+                                                                // hay que cambiarlo para que seleccione todas las habilidades
     public static final String SELECTION_ATACANTE = SELECTION_TODOS + " and r." + tbRoles.COL_NOMBRE + " = " + ATACANTE;
     public static final String SELECTION_DEFENSA = SELECTION_TODOS + " and r." + tbRoles.COL_NOMBRE + " = " + DEFENSA;
     public static final String SELECTION_CHUTADOR = SELECTION_TODOS + " and r." + tbRoles.COL_NOMBRE + " = " + CHUTADOR;
@@ -54,7 +55,7 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
             "r."+tbRoles.COL_NOMBRE + " as " + ROL,
             "e."+tbEquipos.COL_NOMBRE + " as " + EQUIPO,
             "h."+tbHabilidades.COL_NOMBRE + " as " + HABILIDAD,
-            "jh."+tbJugadorHabilidad.COL_VALOR + " as " + VALOR_FUERZA
+            "jh."+tbJugadorHabilidad.COL_VALOR + " as " + VALOR_HABILIDAD
     };
 
     //Identifica el Loader particular que se esta utilizando
@@ -108,6 +109,7 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
                 dialog.setTitle(item_nombre);
                 TextView textView = (TextView)dialog.findViewById(R.id.textViewTiendaFichajesPopup);
                 textView.setText("Has clickado sobre el jugador con ID=" + item_id);
+                //TODO adri: implementar funcionalidad del boton Comprar
                 dialog.show();
 
             }
@@ -125,10 +127,10 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
                 RadioButton botonDefensa=(RadioButton)findViewById(R.id.defensa);
                 RadioButton botonChutador=(RadioButton)findViewById(R.id.chutador);
 
-                //Ponemos verdes los botones de roles
-                botonAtacante.setBackgroundColor(Color.parseColor(VERDE));
-                botonDefensa.setBackgroundColor(Color.parseColor(VERDE));
-                botonChutador.setBackgroundColor(Color.parseColor(VERDE));
+                //Ponemos fondo sin seleccionar a los botones de roles
+                botonAtacante.setBackgroundResource(R.drawable.botofusta);
+                botonDefensa.setBackgroundResource(R.drawable.botofusta);
+                botonChutador.setBackgroundResource(R.drawable.botofusta);
 
                 //Obtenemos el nombre introducido por el usuario
                 String nombre = "'%"+campoNombre.getText().toString()+"%'";
@@ -169,9 +171,9 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
                 RadioButton botonAtacante=(RadioButton)findViewById(R.id.atacante);
                 RadioButton botonDefensa=(RadioButton)findViewById(R.id.defensa);
                 RadioButton botonChutador=(RadioButton)findViewById(R.id.chutador);
-                botonAtacante.setBackgroundColor(Color.parseColor(VERDE));
-                botonDefensa.setBackgroundColor(Color.parseColor(VERDE));
-                botonChutador.setBackgroundColor(Color.parseColor(VERDE));
+                botonAtacante.setBackgroundResource(R.drawable.botofusta);
+                botonDefensa.setBackgroundResource(R.drawable.botofusta);
+                botonChutador.setBackgroundResource(R.drawable.botofusta);
 
                 //hacemos un clear del campo 'Nombre'
                 campoNombre.setText("");
@@ -213,9 +215,9 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
                 RadioButton botonAtacante=(RadioButton)findViewById(R.id.atacante);
                 RadioButton botonDefensa=(RadioButton)findViewById(R.id.defensa);
                 RadioButton botonChutador=(RadioButton)findViewById(R.id.chutador);
-                botonAtacante.setBackgroundColor(Color.parseColor(VERDE));
-                botonDefensa.setBackgroundColor(Color.parseColor(VERDE));
-                botonChutador.setBackgroundColor(Color.parseColor(VERDE));
+                botonAtacante.setBackgroundResource(R.drawable.botofusta);
+                botonDefensa.setBackgroundResource(R.drawable.botofusta);
+                botonChutador.setBackgroundResource(R.drawable.botofusta);
 
                 //hacemos un clear del campo 'Nombre'
                 campoNombre.setText("");
@@ -257,9 +259,9 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
                 RadioButton botonAtacante=(RadioButton)findViewById(R.id.atacante);
                 RadioButton botonDefensa=(RadioButton)findViewById(R.id.defensa);
                 RadioButton botonChutador=(RadioButton)findViewById(R.id.chutador);
-                botonAtacante.setBackgroundColor(Color.parseColor(VERDE));
-                botonDefensa.setBackgroundColor(Color.parseColor(VERDE));
-                botonChutador.setBackgroundColor(Color.parseColor(VERDE));
+                botonAtacante.setBackgroundResource(R.drawable.botofusta);
+                botonDefensa.setBackgroundResource(R.drawable.botofusta);
+                botonChutador.setBackgroundResource(R.drawable.botofusta);
 
                 //hacemos un clear del campo 'Nombre'
                 campoNombre.setText("");
@@ -301,9 +303,9 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
                 RadioButton botonAtacante=(RadioButton)findViewById(R.id.atacante);
                 RadioButton botonDefensa=(RadioButton)findViewById(R.id.defensa);
                 RadioButton botonChutador=(RadioButton)findViewById(R.id.chutador);
-                botonAtacante.setBackgroundColor(Color.parseColor(VERDE));
-                botonDefensa.setBackgroundColor(Color.parseColor(VERDE));
-                botonChutador.setBackgroundColor(Color.parseColor(VERDE));
+                botonAtacante.setBackgroundResource(R.drawable.botofusta);
+                botonDefensa.setBackgroundResource(R.drawable.botofusta);
+                botonChutador.setBackgroundResource(R.drawable.botofusta);
 
                 //hacemos un clear del campo 'Nombre'
                 campoNombre.setText("");
@@ -327,7 +329,7 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
                 JUGADOR,
                 ROL,
                 EQUIPO,
-                VALOR_FUERZA
+                VALOR_HABILIDAD
         };
         // Campos de la interfaz a los que mapeamos
         int[] to = new int[] {
@@ -369,9 +371,9 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
             case R.id.atacante:
 
                 //Ponemos rojo el boton 'Atacante' y verdes los demas
-                botonAtacante.setBackgroundColor(Color.RED);
-                botonDefensa.setBackgroundColor(Color.parseColor(VERDE));
-                botonChutador.setBackgroundColor(Color.parseColor(VERDE));
+                botonAtacante.setBackgroundResource(R.drawable.botofusta_seleccionat);
+                botonDefensa.setBackgroundResource(R.drawable.botofusta);
+                botonChutador.setBackgroundResource(R.drawable.botofusta);
 
                 //Ponemos el where que selecciona los jugadores con rol 'atacante'
                 selection = SELECTION_ATACANTE;
@@ -384,9 +386,9 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
             case R.id.defensa:
 
                 //Ponemos rojo el boton 'Defensa' y verdes los demas
-                botonAtacante.setBackgroundColor(Color.parseColor(VERDE));
-                botonDefensa.setBackgroundColor(Color.RED);
-                botonChutador.setBackgroundColor(Color.parseColor(VERDE));
+                botonAtacante.setBackgroundResource(R.drawable.botofusta);
+                botonDefensa.setBackgroundResource(R.drawable.botofusta_seleccionat);
+                botonChutador.setBackgroundResource(R.drawable.botofusta);
 
                 //Ponemos el where que selecciona los jugadores con rol 'defensa'
                 selection = SELECTION_DEFENSA;
@@ -399,9 +401,9 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
             case R.id.chutador:
 
                 //Ponemos rojo el boton 'Chutador' y verdes los demas
-                botonAtacante.setBackgroundColor(Color.parseColor(VERDE));
-                botonDefensa.setBackgroundColor(Color.parseColor(VERDE));
-                botonChutador.setBackgroundColor(Color.RED);
+                botonAtacante.setBackgroundResource(R.drawable.botofusta);
+                botonDefensa.setBackgroundResource(R.drawable.botofusta);
+                botonChutador.setBackgroundResource(R.drawable.botofusta_seleccionat);
 
                 //Ponemos el where que selecciona los jugadores con rol 'chutador'
                 selection = SELECTION_CHUTADOR;
@@ -440,9 +442,9 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
             case R.id.todos:
 
                 //Ponemos verdes los botones de roles
-                botonAtacante.setBackgroundColor(Color.parseColor(VERDE));
-                botonDefensa.setBackgroundColor(Color.parseColor(VERDE));
-                botonChutador.setBackgroundColor(Color.parseColor(VERDE));
+                botonAtacante.setBackgroundResource(R.drawable.botofusta);
+                botonDefensa.setBackgroundResource(R.drawable.botofusta);
+                botonChutador.setBackgroundResource(R.drawable.botofusta);
 
                 //Cambiamos la imagen del boton 'Ver todos' en funcion de su estado
                 botonTodos.setBackgroundResource(R.drawable.selector_boton);
@@ -475,7 +477,7 @@ public class TiendaFichajes extends Activity implements LoaderManager.LoaderCall
                     null,                               // No selection arguments
                     null                                // Default sort order
                 );
-
+            //TODO adri: crear otro Loader que acceda a TODAS las habilidades de cada jugador y las muestre
             default:
                 //Se le ha pasado una id no valida
                 return null;
