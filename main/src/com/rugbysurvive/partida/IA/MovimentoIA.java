@@ -221,9 +221,9 @@ public class MovimentoIA {
 
         int cantidadMovimientos = jugador.getResistencia()/10;
 
-        if(cantidadMovimientos <= 0)
+        if(cantidadMovimientos <= 2)
         {
-            cantidadMovimientos = 1;
+            cantidadMovimientos = 3;
         }
 
         int[][] movimiento = new int [cantidadMovimientos][2];
@@ -237,8 +237,18 @@ public class MovimentoIA {
             }
             iteraciones++;
         }
+        int [][] movimientosAux = new int[cantidadMovimientos][2];
 
-        return movimiento;
+        for(int i=0; i<cantidadMovimientos; i++)
+        {
+            System.out.println("matriz movimiento:");
+            movimientosAux[i][0] = movimiento[i][0];
+            System.out.println(movimientosAux[i][0]);
+            movimientosAux[i][1] = movimiento[i][1];
+            System.out.println(movimientosAux[i][0]);
+        }
+
+        return movimientosAux;
     }
 
 }
