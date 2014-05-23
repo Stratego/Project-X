@@ -25,8 +25,8 @@ public class ComponentesJuego {
     private Equipo equipo1;
     private Equipo equipo2;
     private Marcador marcador;
-    com.models.Equipo equipo1Modelado;
-    com.models.Equipo equipo2Modelado;
+    private com.models.Equipo equipo1Modelado;
+    private com.models.Equipo equipo2Modelado;
 
     private static ComponentesJuego componentesJuego;
 
@@ -39,7 +39,6 @@ public class ComponentesJuego {
         this.equipo2 = new Equipo();
 
         this.campo = new Campo();
-        campo = new Campo();
         this.equipo1Modelado = equipo1;
         this.equipo2Modelado = equipo2;
         this.equipo1.setColor(generarColorEquipacion(this.equipo1Modelado.getEquipacion()));
@@ -47,29 +46,12 @@ public class ComponentesJuego {
         this.generarEquipos();
         this.marcador = new Marcador(this.equipo1,this.equipo2);
         componentesJuego = this;
-        Arbitro arbitro = new Arbitro();
 
 
 
 
     }
     public static ComponentesJuego getComponentes(){return componentesJuego;}
-
-    public Color generarColorEquipacion(String equipacion) {
-
-        if(equipacion.equals("Jugador3E1.png")){
-            return Color.rojo;
-        }
-        else if(equipacion.equals("Jugador3E2.png")){
-            return Color.amarillo;
-        }
-        else if(equipacion.equals("Jugador3E3.png")){
-            return Color.azul;
-        }
-        else{
-            return Color.verde;
-        }
-    }
 
 
     private void generarEquipos()
@@ -165,7 +147,21 @@ public class ComponentesJuego {
 
     }
 
+    public Color generarColorEquipacion(String equipacion) {
 
+        if(equipacion.equals("Jugador3E1.png")){
+            return Color.rojo;
+        }
+        else if(equipacion.equals("Jugador3E2.png")){
+            return Color.amarillo;
+        }
+        else if(equipacion.equals("Jugador3E3.png")){
+            return Color.azul;
+        }
+        else{
+            return Color.verde;
+        }
+    }
 
     public Campo getCampo(){
         return this.campo;
@@ -181,3 +177,5 @@ public class ComponentesJuego {
     public Marcador getMarcador(){return this.marcador;}
 
 }
+
+
