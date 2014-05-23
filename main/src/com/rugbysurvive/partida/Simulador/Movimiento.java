@@ -167,11 +167,7 @@ public class Movimiento extends Accion implements Proceso {
             /*Referenciamos jugador y casillas en ambos sentidos*/
             this.jugador.colocar(Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]));
 
-            if(haceEfectoObjeto)
-            {
-                this.jugador.setBloqueado(true);
-                return true;
-            }
+
 
             /*Si pasa por encima de una casilla con pelota, entonces la recoge*/
             recogerPelota();
@@ -181,10 +177,18 @@ public class Movimiento extends Accion implements Proceso {
             GestorGrafico.getCamara().variarPosicion(this.camino[contador][0]*64,this.camino[contador][1]*64);
 
 
+
             /*Quitamos la referencia de la posicion anterior del jugador en la casilla*/
             if(contador > 0)
             {
                 Campo.getInstanciaCampo().getCasilla(this.camino[contador-1][1],this.camino[contador-1][0]).setJugador(null);
+
+                if(haceEfectoObjeto)
+                {
+                    this.jugador.setBloqueado(true);
+                    return true;
+                }
+                
                 if(marcarPunto()== true)
                 {
                     Campo.getInstanciaCampo().recolocarJugadoresDespuesDelPunto(this.jugador);
