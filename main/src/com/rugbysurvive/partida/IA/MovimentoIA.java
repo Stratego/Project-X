@@ -143,9 +143,9 @@ public class MovimentoIA {
                     {
                         int nuevoG = nodoActual.getG();
                         if (nodoAdyacente.getX()==nodoActual.getX() || nodoAdyacente.getY()==nodoActual.getY())
-                            nuevoG += 10;
+                            nuevoG += 1;
                         else
-                            nuevoG += 14;
+                            nuevoG += 4;
 
                         if (nuevoG < nodoAdyacente.getG())
                         {
@@ -185,7 +185,7 @@ public class MovimentoIA {
         if (casilla.hayPelota()){
             nodo.setCoste(0);
         }else if (casilla.sinJugador()==false && casilla.sinObjeto()==false && casilla.sinArbitro()==false){
-            nodo.setCoste(4);
+            nodo.setCoste(20);
         }else{
             nodo.setCoste(1);
         }
