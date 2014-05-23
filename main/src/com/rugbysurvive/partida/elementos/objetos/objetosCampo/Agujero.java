@@ -27,6 +27,8 @@ public class Agujero extends ObjetoCampo {
     public boolean animando;
     public int turno;
     public Jugador jugador;
+    private int posicionX;
+    private int posicionY;
 
     public Agujero(String textura,Jugador jugador){
         super(textura,jugador);
@@ -40,20 +42,11 @@ public class Agujero extends ObjetoCampo {
 
         Gdx.audio.newMusic(Gdx.files.internal("sonido/acciones/explosion.mp3")).play();
          turno = GestorTurnos.getTurno();
-        int posicionX = jugador.getPosicionX();
-        int posicionY = jugador.getPosicionY();
-
-        ComponentesJuego.getComponentes().getCampo().eliminarElemento(posicionY,posicionX);
-        if(jugador.getEstado() instanceof ConPelota){
-            dejarPelotaSuelo(jugador,posicionX,posicionY);
-        }
-        this.jugador = jugador;
-         jugador.setExpulsado(true);
-        ProcesosContinuos.añadirProceso(this);
+         this.jugador = jugador;
+         this.posicionX = this.jugador.getPosicionX();
+        this.posicionY = this.jugador.getPosicionY();
         this.animando = true;
-
-        Campo campo = ComponentesJuego.getComponentes().getCampo();
-        campo.eliminarElemento(this.posY,this.posX);
+        ProcesosContinuos.añadirProceso(this);
 
 
     }
@@ -61,21 +54,34 @@ public class Agujero extends ObjetoCampo {
 
     @Override
     protected boolean animacion() {
-        if(this.animando){
+        if(this.animando) {
             if(tiempo == TIEMPO_VIDA_AGUJERO_POST_CAIDA) {
                 GestorGrafico.generarDibujante().eliminarTextura(id);
-            return false;
-        }
-       if(GestorTurnos.getTurno()== this.turno + NUMERO_TURNOS_CASTIGADO) {
+                 return false;
+            }
+
+            else if(this.tiempo==4){
+
+                ComponentesJuego.getComponentes().getCampo().eliminarElemento(this.posicionY,this.posicionX);
+                ComponentesJuego.getComponentes().getCampo().getCasilla(this.posicionY,this.posicionX).añadirElemento(this);
+                if(jugador.getEstado() instanceof ConPelota){
+                    dejarPelotaSuelo(jugador,jugador.getPosicionX(),jugador.getPosicionY());
+                }
+                 jugador.setExpulsado(true);
+            }
+
+
+
+            if(GestorTurnos.getTurno()== this.turno + NUMERO_TURNOS_CASTIGADO) {
                 this.añadirBorde();
                 this.jugador.setExpulsado(false);
                 return true;
-            }
-            this.tiempo++;
        }
+            this.tiempo++;
+    }
 
         return false;
-    }
+}
 
     /**
      * Una vez el jugador deja de estar expulsado

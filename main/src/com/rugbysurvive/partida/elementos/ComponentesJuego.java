@@ -92,7 +92,7 @@ public class ComponentesJuego {
         PowerUP objeto3 = new PowerUP(1,10,Habilidades.defensa,50,jugador);
         ColocadorObjetosCampo objeto4 = new ColocadorObjetosCampo(2,10,"mina.png",jugador,new MinaCampo("mina.png",jugador));
         ColocadorObjetosCampo objeto2 = new ColocadorObjetosCampo(3,10,"objetos/agujero.png",jugador,new Agujero("objetos/agujero.png",jugador));
-        ColocadorObjetosCampo objeto = new ColocadorObjetosCampo(3,10,"objetos/hielo.png",jugador,new Hielo("objetos/hielo.png",jugador));
+        ColocadorObjetosCampo objeto = new ColocadorObjetosCampo(4,10,"objetos/hielo.png",jugador,new Hielo("objetos/hielo.png",jugador));
         jugador.añadirObjeto(objeto);
         jugador.añadirObjeto(objeto2);
         jugador.añadirObjeto(objeto3);

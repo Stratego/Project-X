@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Victor on 27/03/14.
+ * Created by aitor on 27/03/14.
  */
 
 /*Esta clase es un Singleton*/
@@ -34,7 +34,6 @@ public class Simulador implements Proceso{
 
     private Simulador()
     {
-
         this.contador =0;
         this.simulando= false;
         this.acciones = new ArrayList<Accion>();
@@ -43,7 +42,6 @@ public class Simulador implements Proceso{
         this.parado = false;
         this.iniciarParado = false;
         this.tiempo = 0;
-
     }
 
     public static Simulador getInstance()
@@ -182,20 +180,18 @@ public class Simulador implements Proceso{
                     }
                  }
 
-                if(this.eliminarAcciones == true)
-                {
+                if(this.eliminarAcciones) {
                     this.eliminarAcciones = false;
                     this.acciones = new ArrayList<Accion>();
                     this.accionesEquipo1 = new ArrayList<Accion>();
                     this.accionesEquipo2 = new ArrayList<Accion>();
+                }
 
-                    return true;
-                }
-                if(this.acciones.size() == 0){
+                if(this.acciones.size() == 0) {
                     this.accionesEquipo1 = new ArrayList<Accion>();
-                    this.accionesEquipo2 = new ArrayList<Accion>();
-                    return true;
+                    this.accionesEquipo2 = new ArrayList<Accion>();;
                 }
+
                 else {
                     return false;
                 }

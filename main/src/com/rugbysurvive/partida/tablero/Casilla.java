@@ -13,6 +13,8 @@ import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.gestores.Entrada.GestionEntrada;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 
+import javax.security.sasl.SaslServer;
+
 
 /**
  * Definicion de la casilla, elemento basico del que se compone el tablero de juego

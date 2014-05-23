@@ -23,6 +23,7 @@ public class Hielo  extends ObjetoCampo {
     @Override
     public void efecto(Jugador jugador) {
         this.animacion = true;
+        Gdx.audio.newMusic(Gdx.files.internal("sonido/acciones/hielo.mp3")).play();
         quitar();
     }
 
