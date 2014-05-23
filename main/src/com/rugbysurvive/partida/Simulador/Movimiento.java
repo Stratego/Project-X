@@ -95,7 +95,7 @@ public class Movimiento extends Accion implements Proceso {
         if((this.jugador.getEstado() instanceof SinPelota) && (Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).getJugador().getEstado() instanceof SinPelota))
         {
             Choque choque = new Choque(this.jugador, Campo.getInstanciaCampo().getCasilla(this.camino[contador][1],this.camino[contador][0]).getJugador());
-            choque.arbitrar();
+            //choque.arbitrar();
             return true;
         }
 
@@ -188,7 +188,7 @@ public class Movimiento extends Accion implements Proceso {
                     this.jugador.setBloqueado(true);
                     return true;
                 }
-                
+
                 if(marcarPunto()== true)
                 {
                     Campo.getInstanciaCampo().recolocarJugadoresDespuesDelPunto(this.jugador);
