@@ -237,20 +237,22 @@ public class MovimentoIA {
             }
             iteraciones++;
         }
-        int [][] movimientosAux = new int[cantidadMovimientos][2];
 
+        /*Antes de pasar los movimientos a la variable movimientosAux, necesitamos saber la cantidad de movimientos reales que se deben hacer*/
+        int contTotalMovimientos = 0;
         for(int i=0; i<cantidadMovimientos; i++)
         {
-
             if (movimiento[i][0]!=0 && movimiento[i][1]!=0 ){
-                System.out.println("matriz movimiento:");
-
-                movimientosAux[i][0] = movimiento[i][0];
-
-                System.out.println(movimientosAux[i][0]);
-                movimientosAux[i][1] = movimiento[i][1];
-                System.out.println(movimientosAux[i][1]);
+                contTotalMovimientos += 1;
             }
+        }
+
+        /*Como ya tenemos la cantidad de movimientos reales que se haran, se crea el vector con el tamaño pertinente y se le pasan los valores*/
+        int [][] movimientosAux = new int[contTotalMovimientos][2];
+        for(int i=0; i<contTotalMovimientos; i++)
+        {
+            movimientosAux[i][0] = movimiento[i][0];
+            movimientosAux[i][1] = movimiento[i][1];
         }
 
 
