@@ -184,10 +184,10 @@ public class MovimentoIA {
         nodo.setTransitable(true);
         if (casilla.hayPelota()){
             nodo.setCoste(0);
-        }else if (casilla.sinJugador()==false && casilla.sinObjeto()==false && casilla.sinArbitro()==false){
+        }else if (casilla.sinJugador()==false || casilla.sinObjeto()==false || casilla.sinArbitro()==false){
             nodo.setCoste(20);
         }else{
-            nodo.setCoste(1);
+            nodo.setCoste(5);
         }
         return nodo;
     }
