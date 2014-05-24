@@ -58,29 +58,63 @@ public class Pase extends Accion implements Proceso {
         int pixelsDistanciaX = Math.abs(pixelsJugadorX-pixelsDestinoX);
         int pixelsDistanciaY = Math.abs(pixelsJugadorY-pixelsDestinoY);
 
+         int pixelsDistanciaXSigno = pixelsDestinoX-pixelsJugadorX;
+         int pixelsDistanciaYSigno = pixelsDestinoY-pixelsJugadorY;
+
+         System.out.print("DESTINO elegida jugador X:"+pixelsDestinoX/64);
+         System.out.print("DESTINO elegida jugador Y:"+pixelsDestinoY/64);
+
+         if (((jugador.getFuerza()/20)*64) < Math.hypot(pixelsDistanciaX,pixelsDistanciaY)) {
+
+             if(pixelsDistanciaX!= 0 && pixelsDistanciaY ==0){
+                 pixelsDistanciaXSigno = (jugador.getFuerza()/20)*64 *  (pixelsDistanciaXSigno/ Math.abs(pixelsDistanciaXSigno));
+                 pixelsDestinoX = pixelsDistanciaXSigno + pixelsJugadorX;
+                 pixelsDistanciaX = Math.abs(pixelsDistanciaXSigno);
+             }
+             else if(pixelsDistanciaY!= 0 && pixelsDistanciaX ==0){
+                 pixelsDistanciaYSigno = (jugador.getFuerza()/20) *64  *(pixelsDistanciaYSigno/ Math.abs(pixelsDistanciaYSigno));
+                 pixelsDestinoY = pixelsDistanciaYSigno + pixelsJugadorY;
+                 pixelsDistanciaY = Math.abs(pixelsDistanciaYSigno);
+             }
+
+
+             else{
+                 double proporcion = Math.abs(pixelsDistanciaX/pixelsDistanciaY);
+                 for(int i=64;i<= Math.abs(pixelsDistanciaXSigno) ;i = i+64) {
+                     if((jugador.getFuerza()/20)*64 < Math.hypot (i, i/proporcion)) {
+                         pixelsDistanciaXSigno = (i-64)*((pixelsDistanciaXSigno/ Math.abs(pixelsDistanciaXSigno)));
+                         pixelsDistanciaYSigno = (int)((i-64)/proporcion) *((pixelsDistanciaYSigno/ Math.abs(pixelsDistanciaYSigno)));
+                         pixelsDestinoX = pixelsDistanciaXSigno + pixelsJugadorX;
+                         pixelsDestinoY = pixelsDistanciaYSigno + pixelsJugadorY;
+                         pixelsDistanciaX = Math.abs(pixelsDistanciaXSigno);
+                         pixelsDistanciaY = Math.abs(pixelsDistanciaYSigno);
+                     }
+                 }
+             }
+
+         }
+
+
         /*Incremento X Y para el bucle*/
         float incrementoX = 0;
         float incrementoY = 0;
 
-        if(pixelsJugadorX > pixelsDestinoX)
-        {
+        if(pixelsJugadorX > pixelsDestinoX) {
             incrementoX = ((float)pixelsJugadorX/(float)pixelsDestinoX) - 1;
         }
-        else
-        {
+        else {
             incrementoX = ((float)pixelsDestinoX/(float)pixelsJugadorX) - 1;
         }
 
-        if(pixelsJugadorY > pixelsDestinoY)
-        {
+        if(pixelsJugadorY > pixelsDestinoY) {
             incrementoY = ((float)pixelsJugadorY/pixelsDestinoY) - 1;
         }
-        else
-        {
+        else {
             incrementoY = ((float)pixelsDestinoY/pixelsJugadorY) - 1;
         }
 
-
+         pixelsDestinoX = pixelsDestinoX /64;
+         pixelsDestinoY = pixelsDestinoY /64;
 
         float incrementoXTotal = 0;
         float incrementoYTotal = 0;
@@ -92,12 +126,10 @@ public class Pase extends Accion implements Proceso {
             //Comprovem si hi ha un jugador
             int x = (int)Math.abs((pixelsJugadorX-incrementoXTotal)/64);
             int y = 0;
-            if(jugador.getPosicionY() > this.posYObjetivo)
-            {
+            if(jugador.getPosicionY() >  pixelsDestinoY) {
                 y =  (int)Math.abs((pixelsJugadorY-incrementoYTotal)/64);
             }
-            else
-            {
+            else {
                 y =  (int)Math.abs((pixelsJugadorY+incrementoYTotal)/64);
             }
 
@@ -107,8 +139,8 @@ public class Pase extends Accion implements Proceso {
                 if(jugador.getMiEquipo() != Campo.getInstanciaCampo().getCasilla(y,x).getJugador().getMiEquipo())
                 {
                     //Campo.getInstanciaCampo().getCasilla(x, y).getJugador().setEstado(new ConPelota());
-                    posXObjetivo = x;
-                    posYObjetivo = y;
+                    pixelsDestinoX = x;
+                    pixelsDestinoY = y;
 
                     pelotaAtrapada = true;
                 }
@@ -121,7 +153,7 @@ public class Pase extends Accion implements Proceso {
 
         /*En caso de que la pelota vaya a ser atrapada por un jugador, entonces se le cambia el estado a este jugador, sino, entonces se coloca la pelota en una casilla del campo*/
         if (pelotaAtrapada == true){
-            Jugador jugador = Campo.getInstanciaCampo().getCasilla(posYObjetivo, posXObjetivo).getJugador();
+            Jugador jugador = Campo.getInstanciaCampo().getCasilla( pixelsDestinoY,  pixelsDestinoX).getJugador();
             jugador.setEstado(new ConPelota(jugador));
             ProcesosContinuos.añadirProceso(this);
             this.animacionActivada = true;
@@ -129,20 +161,20 @@ public class Pase extends Accion implements Proceso {
         }
         else
         {
-            if(Campo.getInstanciaCampo().getCasilla(posYObjetivo, posXObjetivo).getJugador() != null)
+            if(Campo.getInstanciaCampo().getCasilla( pixelsDestinoY,  pixelsDestinoX).getJugador() != null)
             {
-                Jugador jugador = Campo.getInstanciaCampo().getCasilla(posYObjetivo, posXObjetivo).getJugador();
+                Jugador jugador = Campo.getInstanciaCampo().getCasilla(pixelsDestinoY, pixelsDestinoX).getJugador();
                 jugador.setEstado(new ConPelota(jugador));
             }
             else
             {
-                Campo.getInstanciaCampo().colocarPelota(posYObjetivo, posXObjetivo);
+                Campo.getInstanciaCampo().colocarPelota( pixelsDestinoY,  pixelsDestinoX);
             }
 
         }
 
 
-        System.out.println("Pase lanzado a la posición: "+this.posXObjetivo+"-"+this.posYObjetivo);
+        System.out.println("Pase lanzado a la posición: "+ pixelsDestinoY+","+  pixelsDestinoX);
         jugador.setEstado(new SinPelota());
 
        if(animacionParada) {
