@@ -51,8 +51,31 @@ public class Chute extends Accion {
         System.out.println("InicialX "+InicialX+" FinalX "+FinalX);
 
 
-        if (((jugador.getFuerza()/10)*64) >= DistanciaXute)
-        {
+        if (((jugador.getFuerza()/10)*64) < DistanciaXute){
+
+             if(TotalCasillasX != 0 && TotalCasillasY ==0){
+                    TotalCasillasX = jugador.getFuerza()/10 *  (TotalCasillasX/ Math.abs(TotalCasillasX));
+                    FinalX = TotalCasillasX + InicialX;
+             }
+             else if(TotalCasillasY != 0 && TotalCasillasX ==0){
+                    TotalCasillasY = jugador.getFuerza()/10 *  (TotalCasillasY/ Math.abs(TotalCasillasY));
+                    FinalY = TotalCasillasY + InicialY;
+             }
+
+
+            else{
+                double proporcion = Math.abs(TotalCasillasX/TotalCasillasY);
+                for(int i=1;i<= Math.abs(TotalCasillasX) ;i++) {
+                    if((jugador.getFuerza()/10) < Math.hypot (i, i/proporcion)) {
+                        TotalCasillasX = (i-1)*((TotalCasillasX/ Math.abs(TotalCasillasX)));
+                        TotalCasillasY = (int)((i-1)/proporcion) *((TotalCasillasY/ Math.abs(TotalCasillasY)));
+                        FinalX = TotalCasillasX + InicialX;
+                        FinalY = TotalCasillasY +InicialY;
+                    }
+                }
+            }
+
+        }
             int ejesDestinoPelota[][] = new int[25][2];
             ejesDestinoPelota[24][0] = FinalX;
             ejesDestinoPelota[24][1] = FinalY;
@@ -141,8 +164,7 @@ public class Chute extends Accion {
                         }
                     }
                 }
-                if(contPrecision == 8)
-                {
+                if(contPrecision == 8) {
                     casillaChute = 24;
                 }
                 contPrecision = contPrecision + 1;
@@ -156,8 +178,8 @@ public class Chute extends Accion {
             System.out.println("La pelota va a la posicion: "+ejesDestinoPelota[casillaChute][0]+"-"+ejesDestinoPelota[casillaChute][1]);
             jugador.setEstado(new SinPelota());
             return true;
-        }
-        return false;
+
+
     }
 
     public void comprobarPunto(int ejesDestinoPelota[][], int index)
