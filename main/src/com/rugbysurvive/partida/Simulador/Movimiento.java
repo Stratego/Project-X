@@ -1,5 +1,6 @@
 package com.rugbysurvive.partida.Simulador;
 
+import com.badlogic.gdx.Gdx;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
@@ -27,12 +28,13 @@ public class Movimiento extends Accion implements Proceso {
     private static final int POSICION_INICIAL_DERECHA =ConstantesJuego.getHeight()/2 + ConstantesJuego.TAMAÑO_PUÑO;
     private static final int POSICION_FINAL_IZQUIERDA = ConstantesJuego.getHeight()/2 -1 -ConstantesJuego.TAMAÑO_PUÑO;
     private static final int POSICION_FINAL_DERECHA = ConstantesJuego.getHeight()/2 + 1;
-    private static final int VELOCIDAD = (int)(10 * ConstantesJuego.constanteRescalado);
+    private static final int VELOCIDAD = (int)(13 * ConstantesJuego.constanteRescalado);
+    private static final int TIEMPO_ANTES_RESCALADO = 30;
 
     private int posicionPuñoIzquierda;
     private int posicionPuñoDerecha;
     private int posicionPuñoY;
-
+    private int tiempo;
 
     private ElementoDibujable puñoIzquierda;
     private ElementoDibujable puñoDerecha;
@@ -440,25 +442,36 @@ public class Movimiento extends Accion implements Proceso {
                 this.puñoDerecha.dibujar(this.posicionPuñoDerecha,this.posicionPuñoY);
                 this.puñoDerecha.dibujar(this.posicionPuñoIzquierda,this.posicionPuñoY);
                 this.animacionInicializada = true;
+                this.tiempo =0;
             }
 
        else if(this.animacionInicializada){
 
-                this.puñoDerecha.borrar();
-                this.puñoIzquierda.borrar();
-                this.puñoDerecha.dibujar(this.posicionPuñoDerecha,this.posicionPuñoY);
-                this.puñoIzquierda.dibujar(this.posicionPuñoIzquierda,this.posicionPuñoY);
-
-                this.posicionPuñoIzquierda = this.posicionPuñoIzquierda + VELOCIDAD;
-                this.posicionPuñoDerecha= this.posicionPuñoDerecha-VELOCIDAD;
-
                 if((this.posicionPuñoDerecha <= POSICION_FINAL_DERECHA && this.posicionPuñoIzquierda >= POSICION_FINAL_IZQUIERDA)
                         || this.animacionParada) {
 
+                    if(tiempo == 0){
+                         Gdx.audio.newMusic(Gdx.files.internal("sonido/acciones/golpe.mp3")).play();
+                    }
+                    if(tiempo == TIEMPO_ANTES_RESCALADO){
+                        this.puñoDerecha.borrar();
+                        this.puñoIzquierda.borrar();
+                        Simulador.getInstance().setParado(false);
+                        return true;
+                    }
+                    tiempo++;
+                }
+
+                else{
+
                     this.puñoDerecha.borrar();
                     this.puñoIzquierda.borrar();
-                    Simulador.getInstance().setParado(false);
-                    return true;
+                    this.puñoDerecha.dibujar(this.posicionPuñoDerecha,this.posicionPuñoY);
+                    this.puñoIzquierda.dibujar(this.posicionPuñoIzquierda,this.posicionPuñoY);
+
+                    this.posicionPuñoIzquierda = this.posicionPuñoIzquierda + VELOCIDAD;
+                    this.posicionPuñoDerecha= this.posicionPuñoDerecha-VELOCIDAD;
+
                 }
 
         }
