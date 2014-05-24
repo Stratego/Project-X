@@ -177,6 +177,7 @@ public class Pase extends Accion implements Proceso {
         System.out.println("Pase lanzado a la posición: "+ pixelsDestinoY+","+  pixelsDestinoX);
         jugador.setEstado(new SinPelota());
 
+
        if(animacionParada) {
             return true;
        }

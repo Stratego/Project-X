@@ -68,6 +68,7 @@ public class ConPelota implements Estado, Proceso {
                     if(posX <= jugador.getPosicionX()){
 
                         jugador.setAccion(new Pase(jugador, posX, posY));
+                        jugador.setSeleccionado(false);
                         System.out.println("La PASOOOOO!!!");
                     }
 
@@ -84,6 +85,7 @@ public class ConPelota implements Estado, Proceso {
 
                         if (posX >= jugador.getPosicionX()){
                             jugador.setAccion(new Pase(jugador, posX, posY));
+                            jugador.setSeleccionado(false);
                             System.out.println("La PASOOOOO!!!");
                         }
 
@@ -107,6 +109,7 @@ public class ConPelota implements Estado, Proceso {
                     if(posX >= jugador.getPosicionX()){
 
                         jugador.setAccion(new Chute(jugador, posX, posY));
+                        jugador.setSeleccionado(false);
                         System.out.println("La CHUTOOO!!!");
                     }
                     else{
@@ -121,6 +124,7 @@ public class ConPelota implements Estado, Proceso {
                         if(posX <= jugador.getPosicionX()){
 
                             jugador.setAccion(new Chute(jugador, posX, posY));
+                            jugador.setSeleccionado(false);
                             System.out.println("La CHUTOOO!!!");
                         }
                     else{
