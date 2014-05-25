@@ -38,16 +38,18 @@ public class Agujero extends ObjetoCampo {
 
     }
     @Override
-    public void efecto(Jugador jugador) {
+    public void efecto(Jugador jugador,boolean animacionParada) {
 
-        Gdx.audio.newMusic(Gdx.files.internal("sonido/acciones/explosion.mp3")).play();
-         turno = GestorTurnos.getTurno();
-         this.jugador = jugador;
-         this.posicionX = this.jugador.getPosicionX();
+        this.turno = GestorTurnos.getTurno();
+        this.jugador = jugador;
+        this.posicionX = this.jugador.getPosicionX();
         this.posicionY = this.jugador.getPosicionY();
-        this.animando = true;
-        ProcesosContinuos.añadirProceso(this);
-
+       if(!animacionParada) {
+            this.animando = true;
+            Gdx.audio.newMusic(Gdx.files.internal("sonido/acciones/explosion.mp3")).play();
+            ProcesosContinuos.añadirProceso(this);
+       }
+        this.quitar();
 
     }
 

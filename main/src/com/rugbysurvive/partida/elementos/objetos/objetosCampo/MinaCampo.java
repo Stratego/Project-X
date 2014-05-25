@@ -28,16 +28,19 @@ public class MinaCampo extends ObjetoCampo {
 
     }
     @Override
-    public void efecto(Jugador jugador) {
+    public void efecto(Jugador jugador,boolean animacionParada) {
         jugador.lesionar(100);
-         Gdx.audio.newMusic(Gdx.files.internal("sonido/acciones/explosion.mp3")).play();
 
-        this.animando = true;
+       if(!animacionParada){
+             Gdx.audio.newMusic(Gdx.files.internal("sonido/acciones/explosion.mp3")).play();
+            this.animando = true;
+        }
         quitar();
     }
 
     @Override
     protected boolean animacion() {
+
         if(this.animando){
        if(tiempo%TIEMPO_ENTRE_TEXTURAS == 0 && tiempo >0) {
                this.animacion.borrar();

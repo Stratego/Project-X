@@ -288,7 +288,7 @@ public class Movimiento extends Accion implements Proceso {
     {
         if(Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1], this.camino[this.contador][0]).getObjeto() != null)
         {
-            Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1], this.camino[this.contador][0]).getObjeto().efecto(this.jugador);
+            Campo.getInstanciaCampo().getCasilla(this.camino[this.contador][1], this.camino[this.contador][0]).getObjeto().efecto(jugador,this.animacionParada);
             return true;
         }
         return false;

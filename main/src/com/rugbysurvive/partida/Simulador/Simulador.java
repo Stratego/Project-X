@@ -153,9 +153,11 @@ public class Simulador implements Proceso{
     public void finalizarAccion(){
         if(!(this.parado || this.iniciarParado))
         {
+             this.evitarAnimaciones();
              while(!accionFinalizada){
                 simular();
              }
+            this.permitirAnimaciones();
         }
     }
 

@@ -55,7 +55,7 @@ public abstract class ObjetoCampo implements Dibujable ,Proceso{
         this.finalizarProceso = true;
     }
 
-    public abstract void efecto(Jugador jugador);
+    public abstract void efecto(Jugador jugador,boolean animacionParada);
 
     @Override
     public boolean procesar(){
