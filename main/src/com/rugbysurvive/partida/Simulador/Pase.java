@@ -155,8 +155,10 @@ public class Pase extends Accion implements Proceso {
         if (pelotaAtrapada == true){
             Jugador jugador = Campo.getInstanciaCampo().getCasilla( pixelsDestinoY,  pixelsDestinoX).getJugador();
             jugador.setEstado(new ConPelota(jugador));
-            ProcesosContinuos.añadirProceso(this);
-            this.animacionActivada = true;
+            if(!this.animacionParada) {
+                ProcesosContinuos.añadirProceso(this);
+                this.animacionActivada = true;
+            }
 
         }
         else
@@ -209,8 +211,6 @@ public class Pase extends Accion implements Proceso {
     @Override
     public boolean procesar() {
         if(!animacionParada) {
-            System.out.println("ANIMACION PARADA:"+animacionParada);
-            System.out.println("SIMULANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
             if(!this.animacionInicializada) {
 
                 this.tiempo = 0;

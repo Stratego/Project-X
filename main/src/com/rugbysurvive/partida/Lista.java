@@ -74,9 +74,7 @@ public class Lista {
     /**
      * Obtiene la lista de suplentes del equipo y la dibuja en pantalla
      */
-    public void listaSuplentes(){
-
-
+    public void listaSuplentes() {
 
         int y = ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES;
         this.eliminarListaSuplentes();
@@ -91,7 +89,7 @@ public class Lista {
         }
         estadoSuplente =true;
 
-        if (equipoSeleccionado.hayJugadorSelecionado()){
+        if (equipoSeleccionado.hayJugadorSelecionado() && equipoSeleccionado.listaSuplentes().size()>0 ){
 
             ArrayList<Jugador> suplentes= equipoSeleccionado.listaSuplentes();
             int posicion = 0;
@@ -101,7 +99,7 @@ public class Lista {
 
                  if(posicion >= posicionInicial && posicion < posicionInicial +3) {
                     listaSuplentes.add(new BotonSuplente(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y,
-                                        Entrada.listasuplente,"TauloCanviJugadors.png",iterador));
+                                        Entrada.listasuplente,"Menu/tauloCanvi.png",iterador));
                     y += ConstantesJuego.ANCHO_TABLON_SUSTITUCION;
                  }
                  posicion++;
@@ -129,9 +127,6 @@ public class Lista {
                     posicionX = posicionX + ConstantesJuego.LARGO_TABLON_SUSITUCION/8;
                 }
            }
-
-
-
 
             if(posicionInicial >0){
                 this.botonAbajo = new BotonDesplazamiento(ConstantesJuego.POSICION_BOTON_CHUTEPASE-100,100,Entrada.listasuplente,

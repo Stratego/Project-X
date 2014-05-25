@@ -131,7 +131,9 @@ public class Simulador implements Proceso{
     public void forzarFinal() {
         if(!(this.parado || this.iniciarParado)) {
             this.evitarAnimaciones();
-            while(!simular());
+            while(this.acciones.size()>0){
+                simular();
+            }
             this.permitirAnimaciones();
         }
     }
@@ -189,13 +191,8 @@ public class Simulador implements Proceso{
 
                 if(this.acciones.size() == 0) {
                     this.accionesEquipo1 = new ArrayList<Accion>();
-                    this.accionesEquipo2 = new ArrayList<Accion>();;
+                    this.accionesEquipo2 = new ArrayList<Accion>();
                 }
-
-                else {
-                    return false;
-                }
-
             }
             else if(this.simulando && this.acciones.size() == 0){
 

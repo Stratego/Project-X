@@ -173,6 +173,7 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("Menu/Habilidades/defensa.png");
         nombresTexturas.add("Menu/Habilidades/fuerza.png");
         nombresTexturas.add("Menu/Habilidades/resistencia.png");
+        nombresTexturas.add("Menu/tauloCanvi.png");
         nombresTexturas.add("arbitro/arbitre1.png");
         nombresTexturas.add("arbitro/arbitre2.png");
         nombresTexturas.add("arbitro/arbitre3.png");
