@@ -205,6 +205,12 @@ public class Campo implements GestionEntrada,Dibujable {
                     casilla = jugador.getCasilla();
                 }
             }
+            for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo2().listaJugadoresCampo()){
+
+                if (jugador.getEstado() instanceof ConPelota){
+                    casilla = jugador.getCasilla();
+                }
+            }
         }
 
         return casilla;

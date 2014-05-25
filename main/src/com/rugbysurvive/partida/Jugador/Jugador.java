@@ -479,7 +479,7 @@ public class Jugador implements GestionEntrada {
 
 
             this.texturas.get(this.texturas.size()-1).dibujar(this.getPosicionX(),this.getPosicionY());
-            System.out.println("Dibujando textura: "+this.getPosicionX()+","+this.getPosicionY());
+            //System.out.println("Dibujando textura: "+this.getPosicionX()+","+this.getPosicionY());
 
         }
     }

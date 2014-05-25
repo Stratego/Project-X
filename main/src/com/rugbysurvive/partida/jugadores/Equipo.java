@@ -83,6 +83,7 @@ public  class Equipo {
     }
 
 
+
     /**
      * devuelve una lista con todos los jugadores suplentes del equipo
      * @return lista de jugadores suplentes
