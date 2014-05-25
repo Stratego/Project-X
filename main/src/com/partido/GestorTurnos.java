@@ -307,7 +307,9 @@ public class GestorTurnos implements Dibujable,Proceso {
 
 
     }
-
+    public static int turno(){
+        return turno;
+    }
     @Override
     public String getTextura() {
         return estandarteEquipo1;

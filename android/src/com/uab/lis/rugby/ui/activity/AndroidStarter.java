@@ -81,7 +81,7 @@ public class AndroidStarter extends AndroidApplication implements SkeletonMain.C
         Uri uri = UrisGenerated.getUriHistorialPArtida();
         Uri uriItem = getContentResolver().insert(uri,values);
 
-        Toast.makeText(this,uriItem.toString(),Toast.LENGTH_LONG).show();
+//        Toast.makeText(this,uriItem.toString(),Toast.LENGTH_LONG).show();
 
         Intent intent = new Intent(this,MenuPrincipal.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -2,6 +2,7 @@ package com.example.libgdx.skeleton;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.input.GestureDetector;
 import com.models.Equipo;
@@ -34,7 +35,7 @@ import java.util.ArrayList;
 
 public class SkeletonMain extends Game {
 
-
+    static final int NUMERO_TURNOS_FINAL =10;
     private InputMultiplexer multiplexer;
     private GestorGrafico gestorGrafico;
 
@@ -58,11 +59,13 @@ public class SkeletonMain extends Game {
     com.models.Equipo equipo1;
     com.models.Equipo equipo2;
     boolean rival_IA = false;
+    CollBack regreso;
 
     public SkeletonMain(Equipo equipo1, Equipo equipo2, boolean ia,boolean musica,CollBack collBack) {
         this.equipo1 = equipo1;
         this.equipo2 = equipo2;
         this.rival_IA=ia;
+        regreso = collBack;
 
     }
 
@@ -330,6 +333,10 @@ public class SkeletonMain extends Game {
     this.gestorGrafico.dibujar();
     ProcesosContinuos.procesar();
     this.contador++;
+
+        if(Gdx.input.isKeyPressed(Input.Keys.BACK) || GestorTurnos.turno() == NUMERO_TURNOS_FINAL){
+            regreso.finichMatch(Marcador.resultadoEquipo1(), Marcador.resultadoEquipo2(), equipo1, equipo2);
+        }
 
        //this.prueba2.render();
 

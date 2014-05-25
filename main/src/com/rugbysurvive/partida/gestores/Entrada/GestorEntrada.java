@@ -2,6 +2,7 @@ package com.rugbysurvive.partida.gestores.Entrada;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
@@ -94,6 +95,8 @@ public class GestorEntrada implements GestureDetector.GestureListener {
      * acciones que se ejecutaran al realizar un click en la pantalla
      */
     public boolean touchDown(float screenX, float screenY, int pointer, int button) {
+
+
 
         /*Vector3 touchPos = new Vector3();
         touchPos.set(screenX, screenY,0);

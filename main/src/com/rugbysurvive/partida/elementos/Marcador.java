@@ -57,7 +57,12 @@ public class Marcador implements Dibujable{
     {
         return marcador;
     }
-
+    public static int resultadoEquipo1(){
+        return puntuacionEquipo1;
+    }
+    public static int resultadoEquipo2(){
+        return puntuacionEquipo2;
+    }
     /**
      * Añade la puntuacion al equipo al que pertenece el jugador.
      *
