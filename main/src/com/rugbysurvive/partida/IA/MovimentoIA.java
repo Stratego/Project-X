@@ -186,6 +186,17 @@ public class MovimentoIA {
             nodo.setCoste(0);
         }else if (casilla.sinJugador()==false || casilla.sinObjeto()==false || casilla.sinArbitro()==false){
             nodo.setCoste(20);
+            if (casilla != ComponentesJuego.getComponentes().getCampo().posicionPelota() ){
+                nodo.setTransitable(false);
+            }
+            if (casilla.getJugador()!=null){
+                if (casilla.getJugador().miEquipo == ComponentesJuego.getComponentes().getEquipo2()){
+                    if (casilla.getJugador().getPosicionX()==1 ||casilla.getJugador().getPosicionX()==28)
+                    nodo.setTransitable(true);
+                    nodo.setCoste(5);
+                }
+
+            }
         }else{
             nodo.setCoste(5);
         }
@@ -228,6 +239,8 @@ public class MovimentoIA {
 
         int[][] movimiento = new int [cantidadMovimientos][2];
 
+        if (calcularCamino() != null){
+
         for (NodoIA nodo :  lista){
 
             if(iteraciones < cantidadMovimientos)
@@ -257,6 +270,8 @@ public class MovimentoIA {
 
 
         return movimientosAux;
+        }
+        return null;
     }
 
 }

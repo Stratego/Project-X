@@ -4,6 +4,7 @@ import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Simulador.Movimiento;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
+import com.rugbysurvive.partida.tablero.Casilla;
 import com.rugbysurvive.partida.tablero.Lado;
 
 /**Clase principal de la inteligencia artificial.
@@ -34,31 +35,100 @@ public class IA {
      */
     public void ejecutar(){
 
+        Casilla casillaPelota = ComponentesJuego.getComponentes().getCampo().posicionPelota();
+        int rangoInicialPelota =0;
+        int rangoFinalPelota = 0;
+        if (casillaPelota.getJugador()!= null && casillaPelota.getJugador().getMiEquipo()==ComponentesJuego.getComponentes().getEquipo2()){
+            rangoInicialPelota= casillaPelota.getPosicionX()-5;
+            rangoFinalPelota= casillaPelota.getPosicionX()+5;
+        }
+
+
+
         for (Jugador jugador: ComponentesJuego.getComponentes().getEquipo2().listaJugadoresCampo()){
+
 
             if (usoObjetos.usarObjeto(jugador)==false){
                 System.out.println("no usa objeto");
                 if (paseChuteIA.hacerPaseChute(jugador)==false){
                     System.out.println("no usa pase chute");
-                    if (ComponentesJuego.getComponentes().getCampo().posicionPelota()==null){
+                    if (casillaPelota.getJugador()!= null && casillaPelota.getJugador().miEquipo==ComponentesJuego.getComponentes().getEquipo2()){
                         if (jugador.getMiEquipo().getLado()== Lado.izquierda){
-                            movimentoIA= new MovimentoIA(jugador.getCasilla(),
-                                    ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY(),28));
+
+                            if (jugador.getPosicionX()> rangoInicialPelota && jugador.getPosicionX()<rangoFinalPelota){
+
+                                int correccion = 1;
+                                boolean colocado = false;
+                                while (colocado==false){
+                                    if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY(), 28).getJugador()==null){
+                                        movimentoIA= new MovimentoIA(jugador.getCasilla(),
+                                                ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY(), 28));
+                                        colocado = true;
+                                    }else if (jugador.getPosicionY()>10){
+                                        movimentoIA= new MovimentoIA(jugador.getCasilla(),
+                                                ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()-correccion, 28));
+                                        colocado = true;
+                                    }else if (jugador.getPosicionY()<10){
+                                        movimentoIA= new MovimentoIA(jugador.getCasilla(),
+                                                ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()+correccion, 28));
+                                        colocado = true;
+                                    }
+                                    if (correccion<9){
+                                        correccion+=1;
+                                    }else {
+                                        correccion=1;
+                                    }
+                                }
+
+
+                            }else{
+                                System.out.println("jugador va hacia pelota");
+                                movimentoIA= new MovimentoIA(jugador.getCasilla(), casillaPelota);
+                            }
                         }else{
-                            movimentoIA= new MovimentoIA(jugador.getCasilla(),
-                                    ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY(),1));
+
+
+                            if (jugador.getPosicionX()> rangoInicialPelota && jugador.getPosicionX()<rangoFinalPelota){
+
+                                int correccion = 1;
+                                boolean colocado = false;
+                                while (colocado==false){
+                                if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY(), 1).getJugador()==null){
+                                        movimentoIA= new MovimentoIA(jugador.getCasilla(),
+                                        ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY(), 1));
+                                        colocado = true;
+                                }else if (jugador.getPosicionY()>10){
+                                    movimentoIA= new MovimentoIA(jugador.getCasilla(),
+                                            ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()-correccion, 1));
+                                        colocado = true;
+                                }else if (jugador.getPosicionY()<10){
+                                    movimentoIA= new MovimentoIA(jugador.getCasilla(),
+                                            ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()+correccion, 1));
+                                        colocado = true;
+                                }
+                                    if (correccion<9){
+                                        correccion+=1;
+                                    } else {
+                                        correccion=1;
+                                    }
+                                }
+                            }else{
+                                System.out.println("jugador va hacia pelota");
+                                movimentoIA= new MovimentoIA(jugador.getCasilla(), casillaPelota);
+                            }
+
                         }
 
                     }else{
-                        movimentoIA= new MovimentoIA(jugador.getCasilla(),
-                                ComponentesJuego.getComponentes().getCampo().posicionPelota());
+                        movimentoIA= new MovimentoIA(jugador.getCasilla(), casillaPelota);
                     }
 
                     Simulador simulador = Simulador.getInstance();
 
-                    movimentoIA.imprimirLista(movimentoIA.calcularCamino());
-
-                    simulador.añadirAccion(new Movimiento(jugador,movimentoIA.arraymovimento(jugador), null));
+                    //movimentoIA.imprimirLista(movimentoIA.calcularCamino());
+                    if (movimentoIA.arraymovimento(jugador)!=null){
+                        simulador.añadirAccion(new Movimiento(jugador,movimentoIA.arraymovimento(jugador), null));
+                    }
                 }
             }
         }

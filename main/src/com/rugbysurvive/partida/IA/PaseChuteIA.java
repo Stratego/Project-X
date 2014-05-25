@@ -59,7 +59,7 @@ public class PaseChuteIA {
         Chute chute;
         if (jugador.getMiEquipo().getLado()== Lado.derecha && jugador.getPosicionX()<7 && jugador.getPosicionY()>=7
                 && jugador.getPosicionY()<=12){
-            chute = new Chute(jugador,new Random().nextInt()%2,(int)(Math.random()*(11-8+1)+8));
+            chute = new Chute(jugador,0,(int)(Math.random()*(11-8+1)+8));
             Simulador.getInstance().añadirAccion(chute);
             System.out.println("chute izquierda IA");
             return true;
