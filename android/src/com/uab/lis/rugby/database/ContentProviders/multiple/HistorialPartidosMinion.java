@@ -17,7 +17,8 @@ public class HistorialPartidosMinion extends MinionContentProvider {
     }
 
     @Override
-    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs,
+                        String sortOrder) {
         return db.query(tbHistorialPartido.TABLE, projection, selection, selectionArgs, null, null, sortOrder);
     }
 

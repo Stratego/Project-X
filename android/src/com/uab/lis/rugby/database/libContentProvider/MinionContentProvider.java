@@ -18,8 +18,8 @@ public abstract class MinionContentProvider {
 
 
     /**
-     * Returns the impl path of this entity. For example "sports". Will be added to the getAuthority of the DespicableContentProvider
-     * in the shape content://{DespicableContentProvider.getAuthority()}/{getBasePath()}
+     * Returns the impl path of this entity. For example "sports". Will be added to the getAuthority of the
+     * DespicableContentProvider in the shape content://{DespicableContentProvider.getAuthority()}/{getBasePath()}
      * @return The impl path
      */
     public abstract String getBasePath();
@@ -34,7 +34,8 @@ public abstract class MinionContentProvider {
      * @paramsortOrder	How the rows in the cursor should be sorted. If null then the provider is free to define the sort order.
      * @return a Cursor or null.
      */
-    public abstract Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder);
+    public abstract Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection,
+                                 String[] selectionArgs, String sortOrder);
 
     /**
      * Inserts value in the entity managed by this minion

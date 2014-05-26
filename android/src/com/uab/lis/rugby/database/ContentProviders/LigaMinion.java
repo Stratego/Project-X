@@ -20,10 +20,15 @@ public class LigaMinion extends MinionContentProvider {
     }
 
     @Override
-    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs,
+                        String sortOrder) {
 
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        queryBuilder.setTables(tbEquipos.TABLE + " as e, " + tbEquipos.TABLE + " as e2, " + tbLiga.TABLE + " as l");
+        queryBuilder.setTables(
+                tbEquipos.TABLE + " as e, " +
+                tbEquipos.TABLE + " as e2, " +
+                tbLiga.TABLE + " as l"
+        );
         String[] columnas = new String[]{
                 "l."+tbLiga._ID,
                 "e."+tbEquipos.COL_ESCUDO,

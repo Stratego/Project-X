@@ -19,10 +19,13 @@ public class JugadorEquipoMinion extends MinionContentProvider {
     }
 
     @Override
-    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs,
+                        String sortOrder) {
         String id = uri.getPathSegments().get(0);
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        queryBuilder.setTables(tbEquipos.TABLE+" JOIN "+tbJugadorEquipo.TABLE+" ON "+tbEquipos._ID+" = "+tbJugadorEquipo.COL_EQUIPO);
+        queryBuilder.setTables(
+                tbEquipos.TABLE+" JOIN "+tbJugadorEquipo.TABLE+" ON "+tbEquipos._ID+" = "+tbJugadorEquipo.COL_EQUIPO
+        );
         return queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
     }
 

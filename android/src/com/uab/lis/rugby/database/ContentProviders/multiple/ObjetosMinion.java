@@ -13,11 +13,13 @@ import com.uab.lis.rugby.database.libContentProvider.MinionContentProvider;
 public class ObjetosMinion extends MinionContentProvider {
     @Override
     public String getBasePath() {
-        return tbUsuarios.TABLE + "/#/" + tbEquipos.TABLE + "/#/" + tbJugadores.TABLE + "/#/" + tbHabilidades.TABLE + "/#/" + tbObjetos.TABLE;
+        return tbUsuarios.TABLE + "/#/" + tbEquipos.TABLE + "/#/" + tbJugadores.TABLE + "/#/" + tbHabilidades.TABLE
+                + "/#/" + tbObjetos.TABLE;
     }
 
     @Override
-    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs,
+                        String sortOrder) {
         String id = uri.getPathSegments().get(0);
         return db.query(tbObjetos.TABLE, projection, selection, selectionArgs, null, null, sortOrder);
     }

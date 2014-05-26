@@ -319,4 +319,4 @@
             android:textStyle="bold"
             android:text="@string/activity_tiendafichajes_sinjugadores" />
 
-</LinearLayout> 
+</LinearLayout>
