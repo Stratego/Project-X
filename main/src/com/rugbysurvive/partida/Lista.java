@@ -15,6 +15,7 @@ import com.rugbysurvive.partida.tablero.Boton;
 import com.rugbysurvive.partida.tablero.Botones.BotonDesplazamiento;
 import com.rugbysurvive.partida.tablero.Botones.BotonObjeto;
 import com.rugbysurvive.partida.tablero.Botones.BotonSuplente;
+import org.omg.CosNaming._NamingContextStub;
 
 import java.util.ArrayList;
 
@@ -55,6 +56,10 @@ public class Lista {
      */
     private Equipo equipo;
 
+
+    private static final int POSICION_TABLON_INFORMACION=  ConstantesJuego.getHeight()-ConstantesJuego.LARGO_TABLON_HABILIDADES -(int)(20*ConstantesJuego.constanteRescalado);
+    private static final int POSICION_TABLON_JUGADOR= ConstantesJuego.getHeight()-ConstantesJuego.LARGO_TABLON_SUSITUCION -(int)(20*ConstantesJuego.constanteRescalado);
+    private static final int  POSICION_BOTON_DESPLAZAMIENTO = POSICION_TABLON_JUGADOR-(int)(120* ConstantesJuego.constanteRescalado);
     //int idPlantillaObjetos=0;
 
     ElementoDibujable plantillaObjetos;
@@ -71,12 +76,16 @@ public class Lista {
 
     private Boton botonAbajo =null;
 
+
+
+
+
     /**
      * Obtiene la lista de suplentes del equipo y la dibuja en pantalla
      */
     public void listaSuplentes() {
 
-        int y = ConstantesJuego.POSICION_INICIAL_Y_BOTON_SUPLENTES;
+        int y = ConstantesJuego.ALTO_BOTON +(int)(30*ConstantesJuego.constanteRescalado);
         this.eliminarListaSuplentes();
         listaSuplentes = new ArrayList<Boton>();
 
@@ -98,7 +107,7 @@ public class Lista {
              for (Jugador iterador : suplentes) {
 
                  if(posicion >= posicionInicial && posicion < posicionInicial +3) {
-                    listaSuplentes.add(new BotonSuplente(ConstantesJuego.POSICION_BOTON_CHUTEPASE,y,
+                    listaSuplentes.add(new BotonSuplente(POSICION_TABLON_JUGADOR,y,
                                         Entrada.listasuplente,"Menu/tauloCanvi.png",iterador));
                     y += ConstantesJuego.ANCHO_TABLON_SUSTITUCION;
                  }
@@ -114,13 +123,14 @@ public class Lista {
             this.tablonInformacionHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,"Menu/Habilidades/defensa.png"));
             this.tablonInformacionHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,"Menu/Habilidades/fuerza.png"));
             this.tablonInformacionHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,"Menu/Habilidades/resistencia.png"));
+            this.tablonInformacionHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,"Menu/Habilidades/habilidad.png"));
+           int posicionX = POSICION_TABLON_INFORMACION;
 
-           int posicionX = ConstantesJuego.POSICION_BOTON_CHUTEPASE+ (int)(ConstantesJuego.LARGO_TABLON_SUSITUCION/3) + ConstantesJuego.LARGO_TABLON_SUSITUCION / 9;
-
+          // DIBUJAR TODAS LAS HABILIDADES DEL TABLO DE INFORMACION
            for(ElementoDibujable dibujo : this.tablonInformacionHabilidades) {
 
                 if(this.tablonInformacionHabilidades.indexOf(dibujo)==0) {
-                    this.tablonInformacionHabilidades.get(0).dibujar(ConstantesJuego.POSICION_BOTON_CHUTEPASE + 200,y);
+                    this.tablonInformacionHabilidades.get(0).dibujar(POSICION_TABLON_INFORMACION ,y);
                 }
                 else {
                     dibujo.dibujar(posicionX,y+10);
@@ -128,15 +138,18 @@ public class Lista {
                 }
            }
 
+            int posicionBotonAbajo =ConstantesJuego.ALTO_BOTON +(int)(60*ConstantesJuego.constanteRescalado);
+            int posicionBotonArriba = posicionBotonAbajo+(int)(140*ConstantesJuego.constanteRescalado);
+
             if(posicionInicial >0){
-                this.botonAbajo = new BotonDesplazamiento(ConstantesJuego.POSICION_BOTON_CHUTEPASE-100,100,Entrada.listasuplente,
+                this.botonAbajo = new BotonDesplazamiento(POSICION_BOTON_DESPLAZAMIENTO,posicionBotonAbajo,Entrada.listasuplente,
                         "Menu/fletxaAvall.png",1,this);
                 System.out.println("BOTON ABAJO MOSTRANDOSE");
                 this.botonAbajo.mostrar();
             }
             if(posicionInicial +2 < suplentes.size()- 1){
 
-                this.botonArriba = new BotonDesplazamiento(ConstantesJuego.POSICION_BOTON_CHUTEPASE-100,200,Entrada.listasuplente
+                this.botonArriba = new BotonDesplazamiento(POSICION_BOTON_DESPLAZAMIENTO,posicionBotonArriba,Entrada.listasuplente
                         ,"Menu/fletxaAmunt.png",0,this);
                 this.botonArriba.mostrar();
             }

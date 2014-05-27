@@ -33,7 +33,7 @@ public class ConstantesJuego {
     public static  int POSICION_BOTON_SUPLENTE = (int)(getHeight() - (separacionBotones*2));
     public static  int POSICION_BOTON_OBJETOS = (int)(getHeight() - (separacionBotones*3));
     public static  int POSICION_BOTON_CHUTEPASE = (int)(getHeight() - (separacionBotones*4));
-
+    public static final int LARGO_TABLON_HABILIDADES = (int)(512*constanteRescalado);
 
 
     //public static final int POSICION_BOTON_SUPLENTE = POSICION_BOTON_FINALIZAR-separacionBotones;

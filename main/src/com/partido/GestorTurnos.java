@@ -31,7 +31,7 @@ import java.util.Random;
  */
 public class GestorTurnos implements Dibujable,Proceso {
 
-    private static final int VELOCIDAD = 15;
+    private static final int VELOCIDAD = (int)(20*ConstantesJuego.constanteRescalado);
     private static final int TIEMPO_PRESENTACION = 400;
     private static final int POSICION_CAMARA_INCIAL_X = 12*64;
     private static final int POSICION_CAMARA_INICIAL_Y = 11*64;
