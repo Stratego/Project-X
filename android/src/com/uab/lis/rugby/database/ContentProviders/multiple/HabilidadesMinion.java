@@ -18,16 +18,19 @@ public class HabilidadesMinion extends MinionContentProvider {
     }
 
     @Override
-    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs,
+                        String sortOrder) {
         String idUser = uri.getPathSegments().get(1);
         String idEquipo = uri.getPathSegments().get(3);
         String idJugador = uri.getPathSegments().get(5);
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        queryBuilder.setTables(tbJugadores.TABLE + " as j, " + tbJugadorHabilidad.TABLE + " as jh, " + tbHabilidades.TABLE + " as h");
+        queryBuilder.setTables(tbJugadores.TABLE + " as j, " + tbJugadorHabilidad.TABLE + " as jh, "
+                + tbHabilidades.TABLE + " as h");
         String where = "j." + tbJugadores._ID + " = jh." + tbJugadorHabilidad.COL_JUGADOR +
                 " and jh." + tbJugadorHabilidad.COL_HABILIDAD + " = h." + tbHabilidades._ID +
                 " and j." + tbJugadores._ID + " = " + idJugador;
-        String[] columnas = new String[]{"h."+tbHabilidades._ID,"h."+tbHabilidades.COL_NOMBRE,"h."+tbHabilidades.COL_DESCRIPCION,"jh."+tbJugadorHabilidad.COL_VALOR};
+        String[] columnas = new String[]{"h."+tbHabilidades._ID,"h."+tbHabilidades.COL_NOMBRE,"h."
+                +tbHabilidades.COL_DESCRIPCION,"jh."+tbJugadorHabilidad.COL_VALOR};
         return queryBuilder.query(db,columnas,where,null,null,null,null);
     }
 

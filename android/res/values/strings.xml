@@ -28,8 +28,6 @@
     <string name="activity_tiendaobjetos_sinobjetos">No se han encontrado objetos.</string>
     <string name="activity_tiendaobjetos_nombre">Nombre:</string>
     <string name="activity_tiendaobjetos_descripcion">Descripción:</string>
-    <string name="activity_tiendaobjetos_habilidad">Habilidad afectada:</string>
-    <string name="activity_tiendaobjetos_efecto">Efecto:</string>
     <string name="activity_tiendaobjetos_vertodos">Ver todos</string>
     <string name="Liga">Jugar Liga</string>
 </resources>

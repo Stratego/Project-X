@@ -4,7 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -135,19 +137,24 @@ public class CreateUser extends BaseActivity {
                 Log.e("focus",list.get(position)[1]);
                 Log.e("normal",list.get(position)[0]);
 
-                Drawable pressed = Utils.getDrawableFromAssets(ctx,list.get(position)[1]);
                 Drawable normal = Utils.getDrawableFromAssets(ctx,list.get(position)[0]);
 
+                Resources r = getResources();
+                Drawable[] layers = new Drawable[2];
+                layers[0] = r.getDrawable(R.drawable.escut_selected);
+                layers[1] = normal;
+                LayerDrawable layerDrawable = new LayerDrawable(layers);
+
                 StateListDrawable states = new StateListDrawable();
-                states.addState(new int[] {android.R.attr.state_pressed},pressed);
-                states.addState(new int[] {android.R.attr.state_focused},pressed);
-                states.addState(new int[] {android.R.attr.state_selected},pressed);
+                states.addState(new int[] {android.R.attr.state_pressed},layerDrawable);
+                states.addState(new int[] {android.R.attr.state_focused},layerDrawable);
+                states.addState(new int[] {android.R.attr.state_selected},layerDrawable);
                 states.addState(new int[]{}, normal);
 
                 view.setImageDrawable(states);
                 //view.setImageResource(R.drawable.selector_imagen);
                 view.setOnClickListener(new ClickItem(this,position));
-                ((ViewPager) collection).addView(view, position);
+                ((ViewPager) collection).addView(view);
                 elements.put(position,view);
 
 

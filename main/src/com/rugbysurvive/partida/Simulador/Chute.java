@@ -2,6 +2,7 @@ package com.rugbysurvive.partida.Simulador;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.SinPelota;
 import com.rugbysurvive.partida.elementos.Marcador;
@@ -171,9 +172,19 @@ public class Chute extends Accion {
                 System.out.println("Contador"+contPrecision);
             }
 
-            Campo.getInstanciaCampo().colocarPelota(ejesDestinoPelota[casillaChute][1], ejesDestinoPelota[casillaChute][0]);
+
 
             comprobarPunto(ejesDestinoPelota, casillaChute);
+
+            if(Campo.getInstanciaCampo().getCasilla(ejesDestinoPelota[casillaChute][1],ejesDestinoPelota[casillaChute][0]).getJugador() != null)
+            {
+                Jugador receptor = Campo.getInstanciaCampo().getCasilla(ejesDestinoPelota[casillaChute][1],ejesDestinoPelota[casillaChute][0]).getJugador();
+                receptor.setEstado(new ConPelota(receptor));
+            }
+            else
+            {
+                Campo.getInstanciaCampo().colocarPelota(ejesDestinoPelota[casillaChute][1], ejesDestinoPelota[casillaChute][0]);
+            }
 
             System.out.println("La pelota va a la posicion: "+ejesDestinoPelota[casillaChute][0]+"-"+ejesDestinoPelota[casillaChute][1]);
             jugador.setEstado(new SinPelota());

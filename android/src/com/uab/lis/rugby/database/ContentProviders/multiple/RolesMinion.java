@@ -18,12 +18,17 @@ public class RolesMinion extends MinionContentProvider {
     }
 
     @Override
-    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs,
+                        String sortOrder) {
         String idUser = uri.getPathSegments().get(1);
         String idEquipo = uri.getPathSegments().get(3);
         String idJugador = uri.getPathSegments().get(5);
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        queryBuilder.setTables(tbJugadores.TABLE + " as j, " + tbJugadorRol.TABLE + " as jr, " + tbRoles.TABLE + " as r");
+        queryBuilder.setTables(
+                tbJugadores.TABLE + " as j, " +
+                tbJugadorRol.TABLE + " as jr, " +
+                tbRoles.TABLE + " as r"
+        );
         String where = "j." + tbJugadores._ID + " = jr." + tbJugadorRol.COL_JUGADOR +
                 " and jr." + tbJugadorRol.COL_ROL + " = r." + tbRoles._ID +
                 " and j." + tbJugadores._ID + " = " + idJugador;

@@ -25,7 +25,8 @@ public class EquiposMinion extends MinionContentProvider {
     }
 
     @Override
-    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs,
+                        String sortOrder) {
         String id = uri.getPathSegments().get(0);
         return db.query(tbEquipos.TABLE, projection, selection, selectionArgs, null, null, sortOrder);
     }
@@ -33,14 +34,16 @@ public class EquiposMinion extends MinionContentProvider {
     @Override
     public long insert(SQLiteDatabase db, Uri uri, ContentValues contentValues) {
         long i = db.insert(tbEquipos.TABLE,null,contentValues);
-        for(String nom : new String[]{"Manu","Aitor","Victor","Victor M","Nicoleta","Suki","Aleix","Carles","Adria","Esther","Aureli","Ruben","Richi","La Sombra","Ivan"}){
+        for(String nom : new String[]{"Manu","Aitor","Victor","Victor M","Nicoleta","Suki","Aleix","Carles","Adria",
+                "Esther","Aureli","Ruben","Richi","La Sombra","Ivan"}){
             ContentValues values = new ContentValues();
             values.put(tbJugadores.COL_NOMBRE,nom);
             long id = db.insertOrThrow(tbJugadores.TABLE,null,values);
             db.execSQL("INSERT INTO JUGADOR_EQUIPO VALUES("+id+","+i+");");
             db.execSQL("INSERT INTO JUGADOR_ROL VALUES('"+id+"',"+id+","+(Math.round(Math.random() * 2)+1)+");");
             for(int j : new int[]{1,2,3,4,5}) {
-                db.execSQL("INSERT INTO JUGADOR_HABILIDAD VALUES(" + id + "," + j + "," + Math.round(Math.random() * 100) + ");");
+                db.execSQL("INSERT INTO JUGADOR_HABILIDAD VALUES(" + id + "," + j + ","
+                        + Math.round(Math.random() * 100) + ");");
             }
         }
 

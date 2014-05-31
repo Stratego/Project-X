@@ -6,8 +6,8 @@
               android:orientation="vertical" >
 
     <TextView
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -17,20 +17,55 @@
             android:textSize="26dp"
             android:gravity="center"/>
 
+    <LinearLayout
+            android:background="@drawable/fusta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="15dp"
+            android:orientation="vertical" >
 
+        <LinearLayout
+                android:orientation="horizontal"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.35"
+                    android:layout_marginRight="20dp"
+                    android:textColor="#ffffff"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/activity_tiendaobjetos_nombre"
+                    android:id="@+id/textView2"/>
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tiendaobjetos_edtNombre"
+                    android:layout_weight="0.65"/>
 
+        </LinearLayout>
+    </LinearLayout>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_margin="10dp"
             android:text="@string/activity_tiendaobjetos_vertodos"
+            android:textColor="#ffffff"
+            android:textSize="17dp"
+            android:textStyle="bold"
             android:background="@drawable/botofusta"
             android:onClick="onButtonClicked"
-            android:id="@+id/tiendaobjetos_todos"/>
+            android:id="@+id/todos"/>
+
     <ListView
-            android:layout_marginTop="24dp"
-            android:id="@android:id/list"
+            android:id="@+id/listaObjetos"
+            android:choiceMode="singleChoice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
     </ListView>
@@ -41,6 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:layout_marginLeft="10dp"
+            android:textSize="17dp"
             android:textColor="#ffffff"
             android:textStyle="bold"
             android:text="@string/activity_tiendaobjetos_sinobjetos" />

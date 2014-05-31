@@ -29,17 +29,14 @@
                     android:textColor="#ffffff"
                     android:text="@string/activity_tiendafichajes_nombre"
                     android:textSize="17dp"
-                    android:id="@+id/textView"/>
+                    android:id="@+id/textView" />
             <TextView
                     android:id="@+id/txtNombreJugador"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="1"
                     android:textStyle="bold"
                     android:textSize="17dp"
-                    android:text="@+id/TextView01"
-                    >
-            </TextView>
+                    android:text="@+id/TextView01" />
         </LinearLayout>
         <LinearLayout
                 android:layout_width="match_parent"
@@ -52,17 +49,14 @@
                     android:textColor="#ffffff"
                     android:textSize="17dp"
                     android:text="@string/activity_tiendafichajes_rol"
-                    android:id="@+id/textView"/>
+                    android:id="@+id/textView" />
             <TextView
                     android:id="@+id/txtNombreRol"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="1"
                     android:textStyle="bold"
                     android:textSize="17dp"
-                    android:text="@+id/TextView01"
-                    >
-            </TextView>
+                    android:text="@+id/TextView01" />
         </LinearLayout>
         <LinearLayout
                 android:layout_width="match_parent"
@@ -75,17 +69,32 @@
                     android:textColor="#ffffff"
                     android:textSize="17dp"
                     android:text="@string/activity_tiendafichajes_equipo"
-                    android:id="@+id/textView"/>
+                    android:id="@+id/textView" />
             <TextView
                     android:id="@+id/txtNombreEquipo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="1"
                     android:textSize="17dp"
-                    android:textStyle="bold"
-                    android:text="@+id/TextView01"
-                    >
-            </TextView>
+                    android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/txtNombreFuerza"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:layout_marginRight="6dp"
+                android:textSize="17dp"
+                android:text="Fuerza: " />
+            <TextView
+                android:id="@+id/txtValorFuerza"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 
