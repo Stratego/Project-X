@@ -39,7 +39,8 @@ public class LigaActivity extends ListActivity {
         idUser = getIntent().getIntExtra(IDUSER,-1);
 
         String where = tbLiga.COL_ID_LIGA + " = " + 0;
-        cursor = getContentResolver().query(Uri.withAppendedPath(MyAppContentProvider.URI_BASE,tbLiga.TABLE),null,where,null,null);
+        cursor = getContentResolver().query(Uri.withAppendedPath(MyAppContentProvider.URI_BASE,tbLiga.TABLE),null,where,
+                null,null);
         LigaAdaper adaper = new LigaAdaper(this,cursor);
         setListAdapter(adaper);
         ListView list = getListView();

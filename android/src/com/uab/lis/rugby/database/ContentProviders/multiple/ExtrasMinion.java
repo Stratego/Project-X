@@ -21,7 +21,8 @@ public class ExtrasMinion extends MinionContentProvider {
     }
 
     @Override
-    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs,
+                        String sortOrder) {
         String id = uri.getPathSegments().get(0);
         return db.query(tbExtras.TABLE, projection, selection, selectionArgs, null, null, sortOrder);
     }

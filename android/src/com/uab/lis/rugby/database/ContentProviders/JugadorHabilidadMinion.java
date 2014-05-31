@@ -20,7 +20,8 @@ public class JugadorHabilidadMinion extends MinionContentProvider {
     }
 
     @Override
-    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs,
+                        String sortOrder) {
         String id = uri.getPathSegments().get(0);
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables(

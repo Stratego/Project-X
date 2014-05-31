@@ -18,14 +18,17 @@ public class AllJugadoresMinion extends MinionContentProvider {
     }
 
     @Override
-    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs,
+                        String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables(
                 tbJugadores.TABLE + " as j, " +
                 tbJugadorRol.TABLE + " as jr, " +
                 tbRoles.TABLE + " as r, " +
                 tbJugadorEquipo.TABLE + " as je, " +
-                tbEquipos.TABLE + " as e"
+                tbEquipos.TABLE + " as e, " +
+                tbJugadorHabilidad.TABLE + " as jh, " +
+                tbHabilidades.TABLE + " as h"
         );
         return queryBuilder.query(db,projection,selection,selectionArgs,null,null,null);
     }
