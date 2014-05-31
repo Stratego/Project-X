@@ -122,6 +122,7 @@ public class Jugador implements GestionEntrada {
         this.lesionado = false;
         this.contMovimientos = 0;
         this.expulsado = false;
+        this.indicador = null;
 
 
     }
@@ -132,16 +133,18 @@ public class Jugador implements GestionEntrada {
         {
             this.setResistencia(this.getResistencia() - 30);
             this.contMovimientos = 0;
+            if(this.indicador == null){
+                this.indicador  = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/estado/cansancio.png");
+                this.indicador.dibujar(this.getPosicionX(), this.getPosicionY());
+            }
+
         }
         else
         {
             this.contMovimientos += 1;
         }
 
-        if(this.Resistencia <= this.resistenciaOriginal/2 && !this.lesionado){
-            this.indicador  = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/estado/cansancio.png");
-            this.indicador.dibujar(this.getPosicionX(), this.getPosicionY());
-        }
+
     }
 
     /*Le va quitando vida al jugador hasta que se lesiona*/

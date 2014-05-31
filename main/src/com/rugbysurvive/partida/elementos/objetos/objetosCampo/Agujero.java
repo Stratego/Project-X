@@ -12,7 +12,9 @@ import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoCampo;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
+import com.rugbysurvive.partida.jugadores.Equipo;
 import com.rugbysurvive.partida.tablero.Campo;
+import org.omg.CORBA.COMM_FAILURE;
 
 /**
  * Created by aitor on 20/05/14.
@@ -36,6 +38,7 @@ public class Agujero extends ObjetoCampo {
         this.animando = false;
         this.contador = 1;
 
+
     }
     @Override
     public void efecto(Jugador jugador,boolean animacionParada) {
@@ -44,12 +47,16 @@ public class Agujero extends ObjetoCampo {
         this.jugador = jugador;
         this.posicionX = this.jugador.getPosicionX();
         this.posicionY = this.jugador.getPosicionY();
-       if(!animacionParada) {
+
+
             this.animando = true;
-            Gdx.audio.newMusic(Gdx.files.internal("sonido/acciones/explosion.mp3")).play();
+
             ProcesosContinuos.añadirProceso(this);
-       }
-        this.quitar();
+
+        if(animacionParada){
+            Gdx.audio.newMusic(Gdx.files.internal("sonido/acciones/explosion.mp3")).play();
+        }
+
 
     }
 
@@ -58,27 +65,28 @@ public class Agujero extends ObjetoCampo {
     protected boolean animacion() {
         if(this.animando) {
             if(tiempo == TIEMPO_VIDA_AGUJERO_POST_CAIDA) {
-                GestorGrafico.generarDibujante().eliminarTextura(id);
-                 return false;
+                this.quitar();
+                return true;
             }
 
             else if(this.tiempo==4){
+                int posicionX = this.jugador.getPosicionX();
+                int posicionY = this.jugador.getPosicionY();
 
-                ComponentesJuego.getComponentes().getCampo().eliminarElemento(this.posicionY,this.posicionX);
-                ComponentesJuego.getComponentes().getCampo().getCasilla(this.posicionY,this.posicionX).añadirElemento(this);
+                this.jugador.quitar();
+                ComponentesJuego.getComponentes().getCampo().getCasilla(posicionY,posicionX).setJugador(null);
+
                 if(jugador.getEstado() instanceof ConPelota){
                     dejarPelotaSuelo(jugador,jugador.getPosicionX(),jugador.getPosicionY());
                 }
                  jugador.setExpulsado(true);
+
             }
 
-
-
-            if(GestorTurnos.getTurno()== this.turno + NUMERO_TURNOS_CASTIGADO) {
+         /* if(GestorTurnos.getTurno()== this.turno + NUMERO_TURNOS_CASTIGADO) {
                 this.añadirBorde();
-                this.jugador.setExpulsado(false);
                 return true;
-       }
+       }*/
             this.tiempo++;
     }
 
@@ -96,6 +104,11 @@ public class Agujero extends ObjetoCampo {
         int posicionInicialX = ConstantesJuego.NUMERO_CASILLAS_LARGO_TABLERO/2;
         int posicionInicialY = 0;
         Campo campo =  ComponentesJuego.getComponentes().getCampo();
+        Equipo equipo = ComponentesJuego.getComponentes().getEquipo1();
+
+        if(!equipo.jugadorEnEquipo(this.jugador)){
+            equipo = ComponentesJuego.getComponentes().getEquipo2();
+        }
 
         while(!colocado){
             if(!campo.añadirElemento(this.jugador,posicionInicialY,posicionInicialX)){
@@ -104,10 +117,11 @@ public class Agujero extends ObjetoCampo {
             else{
                 colocado = true;
                 this.jugador.setExpulsado(false);
-                this.jugador.setBloqueado(true);
+            }
+
             }
         }
-    }
+
 
     /**
      * Si el jugador tiene la pelota el arbitro lo dejara en el juego

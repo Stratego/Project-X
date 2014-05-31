@@ -198,6 +198,7 @@ public  class Equipo {
             if(!jugador.isExpulsado()) {
                 jugador.setBloqueado(false);
             }
+
         }
     }
     /**

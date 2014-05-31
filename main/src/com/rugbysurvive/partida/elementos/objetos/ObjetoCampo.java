@@ -52,6 +52,7 @@ public abstract class ObjetoCampo implements Dibujable ,Proceso{
         GestorGrafico.generarDibujante().eliminarTextura(id);
         Campo campo = ComponentesJuego.getComponentes().getCampo();
         campo.eliminarElemento(this.posY,this.posX);
+        this.vistualizacion = false;
         this.finalizarProceso = true;
     }
 

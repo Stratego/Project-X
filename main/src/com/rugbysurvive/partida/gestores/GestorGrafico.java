@@ -138,7 +138,9 @@ public class GestorGrafico implements Dibujante{
                      posicionX = posicionX - this.camara.getVariationX();
                      posicionY = posicionY + this.camara.getVariationY();
 
+
                      font.draw(this.sprite,imagen.dibujable.getTextura(), posicionX,posicionY);
+
                  }
 
 
