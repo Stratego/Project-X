@@ -7,6 +7,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
+import com.uab.lis.rugby.R;
 import com.uab.lis.rugby.database.contracts.*;
 
 import java.io.*;
@@ -38,6 +39,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(tbJugadorRol.CREATE_TABLE);
         db.execSQL(tbJugadorHabilidad.CREATE_TABLE);
         db.execSQL(tbJugadorObjeto.CREATE_TABLE);
+        db.execSQL(tbJugadorPowerup.CREATE_TABLE);
         db.execSQL(tbExtras.CREATE_TABLE);
         db.execSQL(tbJugadorExtra.CREATE_TABLE);
         db.execSQL(tbPowerups.CREATE_TABLE);
@@ -64,12 +66,15 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO HABILIDADES VALUES(4,'Resistencia','def resistencia');");
         db.execSQL("INSERT INTO HABILIDADES VALUES(5,'Ataque','def ataque');");
 
-        db.execSQL("INSERT INTO OBJETOS VALUES(1,'Mina','Coloca este objeto en una posición determinada del campo, y el jugador rival que lo coja morirá.');");
-        db.execSQL("INSERT INTO OBJETOS VALUES(2,'Beer','El jugador llama a un hooligan de su equipo que ayuda a hacer bloqueos hasta que el árbitro lo vea y lo expulse.');");
-        db.execSQL("INSERT INTO OBJETOS VALUES(3,'Mario','Aparece Mario en el campo y quita todos los objetos y powerups que perjudiquen a su equipo.');");
-        db.execSQL("INSERT INTO OBJETOS VALUES(4,'Cheerleader','El jugador coloca en el campo una cheerleader que distrae a todos los jugadores del equipo contrario que se encuentren cerca durante ese turno.');");
-        db.execSQL("INSERT INTO OBJETOS VALUES(5,'The Hole','Coloca este objeto en una posición determinada del campo, y cuando un jugador rival pase por encima desaparecerá hasta que tu equipo consiga un punto o llegue el descanso.');");
-        db.execSQL("INSERT INTO OBJETOS VALUES(6,'Cripple','Coloca este objeto en una posición determinada del camp, y el jugador rival que lo coja se verá ralentizado durante el resto del partido.');");
+        db.execSQL("INSERT INTO OBJETOS VALUES(1,'Mina','l jugador rival que pase por encima morirá.', 'android.resource://com.uab.lis.rugby/" + R.drawable.mina +"');");
+        db.execSQL("INSERT INTO OBJETOS VALUES(2,'Agujero','El jugador rival que pase por encima desaparecerá hasta que tu equipo consiga un punto o llegue el descanso.', 'android.resource://com.uab.lis.rugby/" + R.drawable.agujero +"');");
+        db.execSQL("INSERT INTO OBJETOS VALUES(3,'Hielo','Congela la acción del jugador rival que pase por encima', 'android.resource://com.uab.lis.rugby/" + R.drawable.hielo +"');");
+
+        db.execSQL("INSERT INTO POWERUPS VALUES(4,'Power-up Fuerza', 'Fuerza +20', 1, 20);");
+        db.execSQL("INSERT INTO POWERUPS VALUES(5,'Power-up Defensa', 'Defensa +20', 2, 20);");
+        db.execSQL("INSERT INTO POWERUPS VALUES(6,'Power-up Habilidad', 'Habilidad +20', 3, 20);");
+        db.execSQL("INSERT INTO POWERUPS VALUES(7,'Power-up Resistencia', 'Resistencia +20', 4, 20);");
+        db.execSQL("INSERT INTO POWERUPS VALUES(8,'Power-up Ataque', 'Ataque +20', 5, 20);");
 
         int count = 1;
         for(int i : new int[]{1,2,3,4}) {
@@ -80,6 +85,20 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 for(int j : new int[]{1,2,3,4,5}) {
                     db.execSQL("INSERT INTO JUGADOR_HABILIDAD VALUES(" + count + "," + j + "," + Math.round(Math.random() * 100) + ");");
                 }
+                count++;
+            }
+        }
+        count = 1;
+        for(int i : new int[]{1,2,3,4}) {
+            for(String nom : new String[]{"Manu","Aitor","Victor","Victor M","Nicoleta","Suki","Aleix","Carles","Adria"}){
+                db.execSQL("INSERT INTO JUGADOR_OBJETO VALUES('"+count+"',"+count+","+(Math.round(Math.random() * 2)+1)+");");
+                count++;
+            }
+        }
+        count = 1;
+        for(int i : new int[]{1,2,3,4}) {
+            for(String nom : new String[]{"Esther","Aureli","Ruben","Richi","La Sombra","Ivan"}){
+                db.execSQL("INSERT INTO JUGADOR_POWERUP VALUES('"+count+"',"+count+","+(Math.round(Math.random() * 4)+4)+");");
                 count++;
             }
         }
@@ -99,6 +118,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             tbJugadorEquipo.TABLE,
             tbJugadorRol.TABLE,
             tbJugadorObjeto.TABLE,
+            tbJugadorPowerup.TABLE,
             tbJugadorHabilidad.TABLE,
             tbExtras.TABLE,
             tbJugadorExtra.TABLE,

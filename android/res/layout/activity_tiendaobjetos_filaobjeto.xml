@@ -5,12 +5,11 @@
               android:layout_height="wrap_content" >
 
     <ImageView
-            android:id="@+id/icon"
+            android:id="@+id/imgIconoObjeto"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="4dp"
-            android:layout_marginRight="8dp"
-            android:src="@drawable/icon" >
+            android:layout_marginRight="8dp" >
     </ImageView>
 
     <LinearLayout
@@ -28,13 +27,14 @@
                     android:layout_marginRight="6dp"
                     android:textColor="#ffffff"
                     android:text="@string/activity_tiendaobjetos_nombre"
+                    android:textStyle="bold"
                     android:textSize="17dp"
                     android:id="@+id/textView" />
             <TextView
                     android:id="@+id/txtNombreObjeto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    android:textColor="#ffffff"
                     android:textSize="17dp" />
         </LinearLayout>
         <LinearLayout
@@ -48,12 +48,13 @@
                     android:textColor="#ffffff"
                     android:textSize="17dp"
                     android:text="@string/activity_tiendaobjetos_descripcion"
+                    android:textStyle="bold"
                     android:id="@+id/textView" />
             <TextView
                     android:id="@+id/txtDescripcion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    android:textColor="#ffffff"
                     android:textSize="17dp" />
         </LinearLayout>
     </LinearLayout>
