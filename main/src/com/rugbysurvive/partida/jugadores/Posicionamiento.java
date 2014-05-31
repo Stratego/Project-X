@@ -71,11 +71,7 @@ public class Posicionamiento {
                      equipo.setLado(lado);
                  }
 
-                // PRueba de peloteo
-                if(i==0 && lado == Lado.izquierda){
 
-                    jugador.setEstado(new ConPelota(jugador));
-                }
 
             }
         }

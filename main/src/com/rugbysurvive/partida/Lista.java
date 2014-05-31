@@ -57,7 +57,7 @@ public class Lista {
     private Equipo equipo;
 
 
-    private static final int POSICION_TABLON_INFORMACION=  ConstantesJuego.getHeight()-ConstantesJuego.LARGO_TABLON_HABILIDADES -(int)(20*ConstantesJuego.constanteRescalado);
+    private static final int POSICION_TABLON_INFORMACION=  ConstantesJuego.getHeight()-ConstantesJuego.LARGO_TABLON_SUSITUCION -(int)(20*ConstantesJuego.constanteRescalado)+50;
     private static final int POSICION_TABLON_JUGADOR= ConstantesJuego.getHeight()-ConstantesJuego.LARGO_TABLON_SUSITUCION -(int)(20*ConstantesJuego.constanteRescalado);
     private static final int  POSICION_BOTON_DESPLAZAMIENTO = POSICION_TABLON_JUGADOR-(int)(120* ConstantesJuego.constanteRescalado);
     //int idPlantillaObjetos=0;
@@ -124,7 +124,7 @@ public class Lista {
             this.tablonInformacionHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,"Menu/Habilidades/fuerza.png"));
             this.tablonInformacionHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,"Menu/Habilidades/resistencia.png"));
             this.tablonInformacionHabilidades.add(new ElementoDibujable(TipoDibujo.interficieUsuario,"Menu/Habilidades/habilidad.png"));
-           int posicionX = POSICION_TABLON_INFORMACION;
+           int posicionX = POSICION_TABLON_JUGADOR+ (int)( ConstantesJuego.LARGO_TABLON_SUSITUCION/3);
 
           // DIBUJAR TODAS LAS HABILIDADES DEL TABLO DE INFORMACION
            for(ElementoDibujable dibujo : this.tablonInformacionHabilidades) {

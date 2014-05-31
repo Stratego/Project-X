@@ -68,9 +68,9 @@ public class BotonSuplente extends Boton {
 
         this.generarIndicadorHabilidad(jugador.getAtaque(),Jugador.MAX_ATAQUE);
         this.generarIndicadorHabilidad(jugador.getDefensa(),Jugador.MAX_DEFENSA);
-        this.generarIndicadorHabilidad(jugador.getHabilidad(),Jugador.MAX_HABILIDAD);
-        this.generarIndicadorHabilidad(jugador.getResistencia(),Jugador.MAX_RESISTENCIA);
         this.generarIndicadorHabilidad(jugador.getFuerza(),Jugador.MAX_FUERZA);
+        this.generarIndicadorHabilidad(jugador.getResistencia(),Jugador.MAX_RESISTENCIA);
+        this.generarIndicadorHabilidad(jugador.getHabilidad(),Jugador.MAX_HABILIDAD);
 
 
         int posicionX = this.getPosicionX()+ (int)(ConstantesJuego.LARGO_TABLON_SUSITUCION/3);

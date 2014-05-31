@@ -1,5 +1,7 @@
 package com.rugbysurvive.partida.elementos;
 
+import com.models.Habilidad;
+import com.rugbysurvive.partida.Jugador.ConPelota;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.extras.Color;
@@ -16,6 +18,7 @@ import com.rugbysurvive.partida.tablero.Campo;
 import com.rugbysurvive.partida.tablero.Lado;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by aitor on 15/04/14.
@@ -57,12 +60,13 @@ public class ComponentesJuego {
     private void generarEquipos()
     {
 
-       /* for(com.models.Jugador auxJugador : this.equipo2Modelado.getJugadoes()){
+        for(com.models.Jugador auxJugador : this.equipo2Modelado.getJugadoes()){
             System.out.println("jugador"+auxJugador.getPosX()+","+auxJugador.getPosY());
             List<Habilidad> hab = auxJugador.getHabilidades();
-            Jugador jugadorReal =  new Jugador(hab.get(0).getValor(),hab.get(0).getValor(),hab.get(0).getValor(),hab.get(0).getValor(),hab.get(0).getValor(),hab.get(0).getValor(), this.equipo1);
-            this.equipo1.añadirJugador(jugadorReal,auxJugador.getPosX(),auxJugador.getPosY());
-        }*/
+            System.out.println("jugador" + hab.get(0).getValor() + "'" + hab.get(1).getValor() + "'" + hab.get(2).getValor() + "'" + hab.get(3).getValor() + "'" + hab.get(4).getValor());
+            //Jugador jugadorReal =  new Jugador(hab.get(0).getValor(),hab.get(0).getValor(),hab.get(0).getValor(),hab.get(0).getValor(),hab.get(0).getValor(),hab.get(0).getValor(), this.equipo1);
+            //this.equipo1.añadirJugador(jugadorReal,auxJugador.getPosX(),auxJugador.getPosY());
+        }
         // falta añadir los objetos a cada jugador
         Jugador jugador = new Jugador(80, 90, 100, 90, 80, 70, equipo1);
 
@@ -141,9 +145,16 @@ public class ComponentesJuego {
 
     public void generarSaque(){
 
-
         Posicionamiento.generarSaqueCampo(this.campo,this.equipo1, Lado.izquierda);
         Posicionamiento.generarSaqueCampo(this.campo,this.equipo2, Lado.derecha);
+
+        Random random = new Random();
+        Equipo equipo = this.equipo1;
+        if(random.nextInt()%2 != 0) {
+            equipo = this.equipo2;
+        }
+        Jugador jugador = equipo.getJugadores().get(random.nextInt() % 6);
+        jugador.setEstado(new ConPelota(jugador));
 
     }
 

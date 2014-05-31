@@ -53,8 +53,8 @@ public class Agujero extends ObjetoCampo {
 
             ProcesosContinuos.añadirProceso(this);
 
-        if(animacionParada){
-            Gdx.audio.newMusic(Gdx.files.internal("sonido/acciones/explosion.mp3")).play();
+        if(!animacionParada){
+            Gdx.audio.newMusic(Gdx.files.internal("sonido/acciones/caida.wav")).play();
         }
 
 
