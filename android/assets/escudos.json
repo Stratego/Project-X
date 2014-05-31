@@ -1,20 +1,84 @@
 {
     "escudos": [
         {
-            "normal": "logo1.png",
+            "normal": "banderas/logos/Logo1E1.png",
             "focus": "logo1seleccionat.png"
         },
-        {
-            "normal": "Logo2.png",
-            "focus": "logo2seleccionat.png"
-        },
-        {
-            "normal": "logo3.png",
-            "focus": "logo3seleccionat.png"
-        },
-        {
-            "normal": "logo4.png",
-            "focus": "logo4seleccionat.png"
-        }
+                {
+                    "normal": "banderas/logos/Logo1E2.png",
+                    "focus": "logo1seleccionat.png"
+                },
+                        {
+                            "normal": "banderas/logos/Logo1E3.png",
+                            "focus": "logo1seleccionat.png"
+                        },
+                                {
+                                    "normal": "banderas/logos/Logo1E4.png",
+                                    "focus": "logo1seleccionat.png"
+                                },
+                                        {
+                                            "normal": "banderas/logos/Logo2E1.png",
+                                            "focus": "logo1seleccionat.png"
+                                        },
+                                                {
+                                                    "normal": "banderas/logos/Logo2E2.png",
+                                                    "focus": "logo1seleccionat.png"
+                                                },
+                                                        {
+                                                            "normal": "banderas/logos/Logo2E3.png",
+                                                            "focus": "logo1seleccionat.png"
+                                                        },
+                                                                {
+                                                                    "normal": "banderas/logos/Logo2E4.png",
+                                                                    "focus": "logo1seleccionat.png"
+                                                                },
+                                                                        {
+                                                                            "normal": "banderas/logos/Logo3E1.png",
+                                                                            "focus": "logo1seleccionat.png"
+                                                                        },
+                                                                                {
+                                                                                    "normal": "banderas/logos/Logo3E2.png",
+                                                                                    "focus": "logo1seleccionat.png"
+                                                                                },
+                                                                                        {
+                                                                                            "normal": "banderas/logos/Logo3E3.png",
+                                                                                            "focus": "logo1seleccionat.png"
+                                                                                        },
+                                                                                                {
+                                                                                                    "normal": "banderas/logos/Logo3E4.png",
+                                                                                                    "focus": "logo1seleccionat.png"
+                                                                                                },
+                                                                                                        {
+                                                                                                            "normal": "banderas/logos/Logo4E1.png",
+                                                                                                            "focus": "logo1seleccionat.png"
+                                                                                                        },
+                                                                                                                {
+                                                                                                                    "normal": "banderas/logos/Logo4E2.png",
+                                                                                                                    "focus": "logo1seleccionat.png"
+                                                                                                                },
+                                                                                                                        {
+                                                                                                                            "normal": "banderas/logos/Logo4E3.png",
+                                                                                                                            "focus": "logo1seleccionat.png"
+                                                                                                                        },
+                                                                                                                                {
+                                                                                                                                    "normal": "banderas/logos/Logo4E4.png",
+                                                                                                                                    "focus": "logo1seleccionat.png"
+                                                                                                                                },
+                                                                                                                                        {
+                                                                                                                                            "normal": "banderas/logos/Logo5E1.png",
+                                                                                                                                            "focus": "logo1seleccionat.png"
+                                                                                                                                        },
+                                                                                                                                                {
+                                                                                                                                                    "normal": "banderas/logos/Logo5E2.png",
+                                                                                                                                                    "focus": "logo1seleccionat.png"
+                                                                                                                                                },
+                                                                                                                                                        {
+                                                                                                                                                            "normal": "banderas/logos/Logo5E3.png",
+                                                                                                                                                            "focus": "logo1seleccionat.png"
+                                                                                                                                                        },
+                                                                                                                                                                {
+                                                                                                                                                                    "normal": "banderas/logos/Logo5E4.png",
+                                                                                                                                                                    "focus": "logo1seleccionat.png"
+                                                                                                                                                                }
     ]
 }
