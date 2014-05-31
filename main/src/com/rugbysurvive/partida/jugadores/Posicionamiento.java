@@ -208,7 +208,7 @@ public class Posicionamiento {
         }
 
 
-        int posX = 16;
+        int posX = 27;
         int posY = 6;
         for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo2().listaJugadoresCampo()){
 
@@ -216,7 +216,7 @@ public class Posicionamiento {
             jugador.colocar(Campo.getInstanciaCampo().getCasilla(posY, posX));
            // jugador.setDireccion(DireccionJugador.izquierda);
 
-            if(posX == 18)
+            if(posX == 28)
             {
                 jugador.setEstado(new ConPelota(jugador));
                 jugadorChuta = jugador;
@@ -228,7 +228,7 @@ public class Posicionamiento {
 
             if(posY == 12)
             {
-                posX = 18;
+                posX = 28;
                 posY = 9;
             }
             else
@@ -269,7 +269,7 @@ public class Posicionamiento {
                 break;
         }
 
-        int posX = 13;
+        int posX = 2;
         int posY = 6;
         for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo1().listaJugadoresCampo()){
 
@@ -277,7 +277,7 @@ public class Posicionamiento {
             jugador.colocar(Campo.getInstanciaCampo().getCasilla(posY, posX));
             //jugador.setDireccion(DireccionJugador.derecha);
 
-            if(posX == 11)
+            if(posX == 1)
             {
                 jugador.setEstado(new ConPelota(jugador));
                 jugadorChuta = jugador;
@@ -289,7 +289,7 @@ public class Posicionamiento {
 
             if(posY == 12)
             {
-                posX = 11;
+                posX = 1;
                 posY = 9;
             }
             else
