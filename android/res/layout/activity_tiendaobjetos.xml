@@ -46,6 +46,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/tiendaobjetos_edtNombre"
+                    android:textColor="#ffffff"
                     android:layout_weight="0.65"/>
 
         </LinearLayout>

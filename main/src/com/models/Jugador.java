@@ -10,6 +10,8 @@ public class Jugador {
     private String nombre;
     private Rol rol;
     private List<Habilidad> habilidades;
+    private List<Objeto> objetos;
+    private List<Powerup> powerups;
     private int posX;
     private int posY;
     private String extrasVisuales;
@@ -28,6 +30,10 @@ public class Jugador {
 
     public List<Habilidad> getHabilidades() {
         return habilidades;
+    }
+
+    public List<Powerup> getPowerups() {
+        return powerups;
     }
 
     public int getPosX() {
@@ -56,6 +62,14 @@ public class Jugador {
 
     public void setHabilidades(List<Habilidad> habilidades) {
         this.habilidades = habilidades;
+    }
+
+    public void setObjetos(List<Objeto> objetos) {
+        this.objetos = objetos;
+    }
+
+    public void setPowerups(List<Powerup> powerups) {
+        this.powerups = powerups;
     }
 
     public void setPosX(int posX) {

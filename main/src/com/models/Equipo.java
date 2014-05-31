@@ -33,7 +33,7 @@ public class Equipo {
         return alineacion;
     }
 
-    public List<Jugador> getJugadoes() {
+    public List<Jugador> getJugadores() {
         return jugadores;
     }
 
