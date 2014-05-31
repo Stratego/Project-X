@@ -15,7 +15,9 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.*;
 import com.uab.lis.rugby.R;
+import com.uab.lis.rugby.database.ContentProviders.multiple.AllObjetosMinion;
 import com.uab.lis.rugby.database.UrisGenerated;
+import com.uab.lis.rugby.database.Utilis.ObjetoCursor;
 import com.uab.lis.rugby.database.contracts.*;
 
 /**
@@ -28,13 +30,15 @@ public class TiendaObjetos extends Activity implements LoaderManager.LoaderCallb
 
     public static final String NOMBRE_OBJETO = "objeto";
     public static final String DESCRIPCION = "descripcion";
+    public static final String TEXTURA = "textura";
     String selection = null;
     public int item_id;
 
     String[] projection = new String[]{
             "o."+tbObjetos._ID + " as _id",
             "o."+tbObjetos.COL_NOMBRE + " as " + NOMBRE_OBJETO,
-            "o."+tbObjetos.COL_DESCRIPCION + " as " + DESCRIPCION
+            "o."+tbObjetos.COL_DESCRIPCION + " as " + DESCRIPCION,
+            "o."+tbObjetos.COL_TEXTURA+ " as " + TEXTURA
     };
 
     //Identifica el Loader particular que se esta utilizando
@@ -96,17 +100,18 @@ public class TiendaObjetos extends Activity implements LoaderManager.LoaderCallb
         // Campos de la base de datos (projection)
         String[] from = new String[] {
                 NOMBRE_OBJETO,
-                DESCRIPCION
+                DESCRIPCION,
+                TEXTURA
         };
         // Campos de la interfaz a los que mapeamos
         int[] to = new int[] {
                 R.id.txtNombreObjeto,
-                R.id.txtDescripcion
+                R.id.txtDescripcion,
+                R.id.imgIconoObjeto
         };
-
         getLoaderManager().initLoader(OBJETOS_LOADER, null, this);
-        adapter = new SimpleCursorAdapter(this, R.layout.activity_tiendaobjetos_filaobjeto, null, from, to, 0);
         ListView lvObjetos = (ListView) findViewById(R.id.listaObjetos);
+        adapter = new SimpleCursorAdapter(this, R.layout.activity_tiendaobjetos_filaobjeto, null, from, to, 0);
         lvObjetos.setAdapter(adapter);
     }
 

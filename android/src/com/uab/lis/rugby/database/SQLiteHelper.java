@@ -7,6 +7,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
+import com.uab.lis.rugby.R;
 import com.uab.lis.rugby.database.contracts.*;
 
 import java.io.*;
@@ -64,12 +65,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO HABILIDADES VALUES(4,'Resistencia','def resistencia');");
         db.execSQL("INSERT INTO HABILIDADES VALUES(5,'Ataque','def ataque');");
 
-        db.execSQL("INSERT INTO OBJETOS VALUES(1,'Mina','Coloca este objeto en una posición determinada del campo, y el jugador rival que lo coja morirá.');");
-        db.execSQL("INSERT INTO OBJETOS VALUES(2,'Beer','El jugador llama a un hooligan de su equipo que ayuda a hacer bloqueos hasta que el árbitro lo vea y lo expulse.');");
-        db.execSQL("INSERT INTO OBJETOS VALUES(3,'Mario','Aparece Mario en el campo y quita todos los objetos y powerups que perjudiquen a su equipo.');");
-        db.execSQL("INSERT INTO OBJETOS VALUES(4,'Cheerleader','El jugador coloca en el campo una cheerleader que distrae a todos los jugadores del equipo contrario que se encuentren cerca durante ese turno.');");
-        db.execSQL("INSERT INTO OBJETOS VALUES(5,'The Hole','Coloca este objeto en una posición determinada del campo, y cuando un jugador rival pase por encima desaparecerá hasta que tu equipo consiga un punto o llegue el descanso.');");
-        db.execSQL("INSERT INTO OBJETOS VALUES(6,'Cripple','Coloca este objeto en una posición determinada del camp, y el jugador rival que lo coja se verá ralentizado durante el resto del partido.');");
+        db.execSQL("INSERT INTO OBJETOS VALUES(1,'Mina','Coloca este objeto en el campo y el jugador rival que lo coja morirá.', 'android.resource://com.uab.lis.rugby/" + R.drawable.mina +"');");
+        db.execSQL("INSERT INTO OBJETOS VALUES(2,'Agujero','Coloca este objeto en el campo y cuando un jugador rival pase por encima desaparecerá hasta que tu equipo consiga un punto o llegue el descanso.', 'android.resource://com.uab.lis.rugby/" + R.drawable.agujero +"');");
+        db.execSQL("INSERT INTO OBJETOS VALUES(3,'Hielo','(desconocida)', 'android.resource://com.uab.lis.rugby/" + R.drawable.hielo +"');");
 
         int count = 1;
         for(int i : new int[]{1,2,3,4}) {
@@ -80,6 +78,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 for(int j : new int[]{1,2,3,4,5}) {
                     db.execSQL("INSERT INTO JUGADOR_HABILIDAD VALUES(" + count + "," + j + "," + Math.round(Math.random() * 100) + ");");
                 }
+                count++;
+            }
+        }
+        count = 1;
+        for(int i : new int[]{1,2,3,4}) {
+            for(String nom : new String[]{"Manu","Aitor","Victor","Victor M","Nicoleta","Suki","Aleix","Carles","Adria"}){
+                db.execSQL("INSERT INTO JUGADOR_OBJETO VALUES('"+count+"',"+count+","+(Math.round(Math.random() * 2)+1)+");");
                 count++;
             }
         }

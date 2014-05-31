@@ -8,6 +8,7 @@ public class Objeto {
     private int id;
     private String nombre;
     private String descripcion;
+    private String textura;
 
     public int getId() {
         return id;
@@ -19,6 +20,10 @@ public class Objeto {
 
     public String getDescripcion() {
         return descripcion;
+    }
+
+    public String getTextura() {
+        return textura;
     }
 
     public void setId(int id) {
@@ -33,13 +38,18 @@ public class Objeto {
         this.descripcion = descripcion;
     }
 
+    public void setTextura(String textura) {
+        this.textura = textura;
+    }
+
 
     @Override
     public String toString() {
         return "tbObjeto{" +
                 "id=" + id +
                 ", nombre='" + nombre +
-                ", descripcion='" + descripcion + '\'' +
+                ", descripcion='" + descripcion +
+                ", textura='" + descripcion + '\'' +
                 '}';
     }
 }
