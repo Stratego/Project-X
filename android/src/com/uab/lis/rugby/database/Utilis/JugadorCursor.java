@@ -77,9 +77,12 @@ public class JugadorCursor {
         ContentValues values = new ContentValues();
         values.put(tbJugadores._ID, jugador.getId());
         values.put(tbJugadores.COL_NOMBRE,jugador.getNombre());
-        if(jugador.getPosX() != -1 && jugador.getPosY() != -1) {
+        if(jugador.getPosX() != 0 && jugador.getPosY() != 0) {
             values.put(tbJugadores.COL_POSX, jugador.getPosX());
             values.put(tbJugadores.COL_POSY, jugador.getPosY());
+        }else{
+            values.put(tbJugadores.COL_POSX, Math.round(Math.random()*30));
+            values.put(tbJugadores.COL_POSY, Math.round(Math.random()*20));
         }
         // FALTA COMPLETAR
         return values;
