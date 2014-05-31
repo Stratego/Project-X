@@ -3,6 +3,8 @@ package com.uab.lis.rugby.ui.activity;
 import android.app.Activity;
 import android.content.*;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -267,7 +269,9 @@ public class SelectPositionPlayers extends Activity {
             Jugador jugador = getItem(position);
             Drawable equipacion = equipaciones.get(position);
             if(equipacion != null) {
-                image.setImageDrawable(equipacion);
+                Bitmap bm = ((BitmapDrawable)equipacion).getBitmap();
+                Bitmap b = Bitmap.createScaledBitmap(bm,200,200,true);
+                image.setImageBitmap(b);
             }else{
                 image.setImageResource(R.drawable.icon);
             }
