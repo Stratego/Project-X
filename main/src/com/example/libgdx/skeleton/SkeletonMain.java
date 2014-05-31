@@ -124,6 +124,14 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("Menu/Habilidades/nivel2.png");
         nombresTexturas.add("Menu/Habilidades/nivel3.png");
 
+        // BANDERAS
+        nombresTexturas.add(this.equipo1.getEscudo());
+        String[] split = this.equipo1.getEscudo().split("/");
+        nombresTexturas.add("banderas/cambioTurno/"+split[split.length-1]);
+
+
+
+
 
         nombresTexturas.add("Menu/Habilidades/fuerza.png");
 

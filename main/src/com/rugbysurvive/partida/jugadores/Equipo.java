@@ -30,7 +30,8 @@ public  class Equipo {
 
     private ArrayList<Jugador> jugadores = new ArrayList <Jugador>();
     private ArrayList<Jugador> descartados = new ArrayList<Jugador>();
-
+    private String logo;
+    private String estandarte;
 
     private Color color;
 
@@ -325,5 +326,23 @@ public  class Equipo {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public String getEstandarte() {
+        return estandarte;
+    }
+
+    public void setEstandarte(String estandarte) {
+        String[] split = estandarte.split("/");
+        this.estandarte = "banderas/cambioTurno/"+split[split.length-1];
+        System.out.println("ESTANDARTE:"+this.estandarte);
     }
 }

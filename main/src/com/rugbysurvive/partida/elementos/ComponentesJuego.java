@@ -59,7 +59,13 @@ public class ComponentesJuego {
 
     private void generarEquipos()
     {
+        System.out.println("Escudo eq2" + this.equipo2Modelado.getEscudo());
+        System.out.println("Escudo eq1"+this.equipo1Modelado.getEscudo());
 
+        this.equipo1.setLogo(this.equipo1Modelado.getEscudo());
+        this.equipo1.setEstandarte(this.equipo1Modelado.getEscudo());
+        this.equipo2.setLogo(this.equipo1Modelado.getEscudo());
+        this.equipo2.setEstandarte(this.equipo1Modelado.getEscudo());
         for(com.models.Jugador auxJugador : this.equipo2Modelado.getJugadoes()){
             System.out.println("jugador"+auxJugador.getPosX()+","+auxJugador.getPosY());
             List<Habilidad> hab = auxJugador.getHabilidades();
@@ -153,7 +159,7 @@ public class ComponentesJuego {
         if(random.nextInt()%2 != 0) {
             equipo = this.equipo2;
         }
-        Jugador jugador = equipo.getJugadores().get(random.nextInt() % 6);
+        Jugador jugador = equipo.getJugadores().get(Math.abs(random.nextInt() % 6));
         jugador.setEstado(new ConPelota(jugador));
 
     }

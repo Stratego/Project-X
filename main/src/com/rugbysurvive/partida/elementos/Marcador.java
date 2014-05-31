@@ -42,8 +42,8 @@ public class Marcador implements Dibujable{
         this.puntuacionGraficaEquipo2 = new ElementoDibujable(TipoDibujo.texto,"0");
         this.puntuacionGraficaEquipo1.dibujar(ConstantesJuego.POSICION_X_PUNTUACION_EQUIPO1,ConstantesJuego.POSICION_Y_PUNTUACION );
         this.puntuacionGraficaEquipo2.dibujar(ConstantesJuego.POSICION_X_PUNTUACION_EQUIPO2,ConstantesJuego.POSICION_Y_PUNTUACION);
-        this.banderaEquipo1 = new ElementoDibujable(TipoDibujo.interficieUsuario,"banderas/logo1.png");
-        this.banderaEquipo2 = new ElementoDibujable(TipoDibujo.interficieUsuario,"banderas/logo4.png");
+        this.banderaEquipo1 = new ElementoDibujable(TipoDibujo.interficieUsuario,equipo1.getLogo());
+        this.banderaEquipo2 = new ElementoDibujable(TipoDibujo.interficieUsuario,equipo2.getLogo());
         this.banderaEquipo1.dibujar(ConstantesJuego.POSICION_X_ESCUDO_EQUIPO1,ConstantesJuego.POSICION_Y_ESCUDO);
         this.banderaEquipo2.dibujar(ConstantesJuego.POSICION_X_ESCUDO_EQUIPO2,ConstantesJuego.POSICION_Y_ESCUDO);
         this.equipo1 = equipo1;

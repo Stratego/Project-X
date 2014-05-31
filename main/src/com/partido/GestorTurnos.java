@@ -41,8 +41,12 @@ public class GestorTurnos implements Dibujable,Proceso {
     private static int turno = 0;
     private int posicionTexturaX;
     private int posicionTexturaY;
-    private static String estandarteEquipo1 ="Menu/CanviTorn.png";
-    private static String estandarteEquipo2 = "banderas/logo4.png";
+
+
+    private  String estandarteEquipo1 ="Menu/CanviTorn.png";
+    private String estandarteEquipo2 = "banderas/logo4.png";
+
+
     private static int equipoCambiado = 0;
     private int id;
     private int tipoProceso;
@@ -78,9 +82,11 @@ public class GestorTurnos implements Dibujable,Proceso {
         this.animacionInicializadaAnteriormente = false;
         this.ambiente = Gdx.audio.newMusic(Gdx.files.internal("sonido/ambiente/ambiente1.mp3"));
         this.tiempoMuestraEscudo =0;
-        this.escudo = new ElementoDibujable(TipoDibujo.interficieUsuario,"banderas/peixetEscut.png");
         this.procesoPrePartidoFinalizado = false;
         this.main = main;
+        this.estandarteEquipo1 =  ComponentesJuego.getComponentes().getEquipo1().getEstandarte();
+        this.estandarteEquipo2 = ComponentesJuego.getComponentes().getEquipo2().getEstandarte();
+        this.escudo = new ElementoDibujable(TipoDibujo.interficieUsuario,this.estandarteEquipo1);
     }
 
 
@@ -158,6 +164,7 @@ public class GestorTurnos implements Dibujable,Proceso {
 
 
         if(equipo1.bloqueado() && equipo1.isJugando()  && equipo2.bloqueado() && !equipo2.isJugando() ) {
+            this.escudo = new ElementoDibujable(TipoDibujo.interficieUsuario,this.estandarteEquipo2);
             this.tipoProceso = 1;
             equipo2.desbloquear();
             equipo2.setJugando(true);
@@ -174,6 +181,7 @@ public class GestorTurnos implements Dibujable,Proceso {
         else if (equipo2.bloqueado() && equipo2.isJugando()  && equipo1.bloqueado() && !equipo1.isJugando() ) {
             this.tipoProceso = 1;
             this.equipoJugandoTurnoAnterior = equipo1;
+            this.escudo = new ElementoDibujable(TipoDibujo.interficieUsuario,this.estandarteEquipo1);
             equipo1.desbloquear();
             equipo1.setJugando(true);
             ProcesosContinuos.añadirProceso(this);
@@ -193,6 +201,7 @@ public class GestorTurnos implements Dibujable,Proceso {
 
             if(equipo2.isJugando()) {
                 this.tipoProceso =1;
+                this.escudo = new ElementoDibujable(TipoDibujo.interficieUsuario,this.estandarteEquipo1);
                 equipo1.desbloquear();
                 equipo1.deseleccionar();
                 equipo2.deseleccionar();
@@ -208,6 +217,7 @@ public class GestorTurnos implements Dibujable,Proceso {
             }
 
             else{
+                this.escudo = new ElementoDibujable(TipoDibujo.interficieUsuario,this.estandarteEquipo2);
                 this.tipoProceso = 1;
                 equipo2.desbloquear();
                 equipo1.deseleccionar();
@@ -238,6 +248,7 @@ public class GestorTurnos implements Dibujable,Proceso {
 
         if(equipoJugandoTurnoAnterior.equals(equipo2)) {
             this.tipoProceso =1;
+            this.escudo = new ElementoDibujable(TipoDibujo.interficieUsuario,this.estandarteEquipo1);
             equipo2.setJugando(false);
             equipo1.setJugando(true);
             equipo1.deseleccionar();
@@ -254,6 +265,7 @@ public class GestorTurnos implements Dibujable,Proceso {
         }
 
         else{
+            this.escudo = new ElementoDibujable(TipoDibujo.interficieUsuario,this.estandarteEquipo2);
             this.tipoProceso = 1;
             equipo2.desbloquear();
             equipo2.setJugando(true);
@@ -312,7 +324,7 @@ public class GestorTurnos implements Dibujable,Proceso {
     }
     @Override
     public String getTextura() {
-        return estandarteEquipo1;
+        return "Menu/CanviTorn.png";
     }
 
     @Override
