@@ -11,9 +11,19 @@ import java.util.ArrayList;
  * Esto permite centralizar todas las funcionalidades de los objetos
  */
 public class GestorObjetos {
+    /**
+     * objetos bajo el control del gestor de objetos
+     */
     protected ArrayList<Objeto> objectos;
+
+    /**
+     * instancia de la clase gestor objetos
+     */
     protected static GestorObjetos gestor;
 
+    /**
+     * constructor de la clase gestor objetos
+     */
     public GestorObjetos()
     {
         objectos = new ArrayList<Objeto>();

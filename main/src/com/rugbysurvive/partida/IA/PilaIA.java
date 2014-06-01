@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
+ * Clase que implementa una pila de nodos que representara el camino que tiene
+ * que hacer un jugador de IA de su posicion a su destino
  * Created by Victor on 12/05/14.
  */
 public class PilaIA {
@@ -32,17 +34,6 @@ public class PilaIA {
         boolean insertado = false;
         if (objeto != null)
         {
-                        /*
-                         * Evidentemente, ésta no es la implementación de inserción de
-                         * un montículo doble ya que lo único que hace es ordenar todos
-                         * los elementos.
-                         * Cuando se inserta un elemento en un montículo, se realiza una
-                         * ordenación parcial que mantiene el elemento máximo y mínimo
-                         * en la cima del montículo. En este caso, se realiza una ordenación
-                         * total (con su correspondiente pérdida de eficiencia).
-                         * El borrado también debería reestructurar el montículo cuando se
-                         * mejore este método.
-                         */
             elementos.add(objeto);
             Collections.sort(elementos);
             insertado = true;
@@ -129,10 +120,8 @@ public class PilaIA {
     }
 
     /**
-     * Fuerza la reordenación del montículo. Si algún elemento del montículo
-     * sufre una modificación, será necesario forzar la reordenación por si
-     * ese elemento ha dejado de ser un máximo o un mínimo, o por si ahora
-     * es un máximo o un mínimo.
+     * Fuerza la reordenación del montículo por si ese elemento ha dejado
+     * de ser un máximo o un mínimo, o por si ahora es un máximo o un mínimo.
      */
     public void reordenar()
     {
@@ -167,9 +156,6 @@ public class PilaIA {
 
     /**
      * Obtiene una cadena de caracteres con el contenido del montículo.
-     * El formato coincide con el de un ArrayList (corchetes al principio y
-     * al final y una coma y un espacio entre cada elemento). Los objetos
-     * introducidos en el montículo deben sobreescribir el método toString.
      * @return Devuelve una cadena de caracteres con los elementos del montículo.
      */
     @Override

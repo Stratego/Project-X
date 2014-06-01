@@ -14,36 +14,58 @@ import com.rugbysurvive.partida.tablero.Campo;
  */
 public abstract class Objeto extends ObjetoJugador {
 
-        protected int vida;
-        protected Habilidades habilidad;
-        protected int modificacion;
-        protected Jugador jugador;
+    /**
+     * tiempo de vida que tendra un objeto
+     */
+    protected int vida;
 
-        protected int x;
-        protected int y;
+    /**
+     * habilidad a la que afectara el objeto
+     */
+    protected Habilidades habilidad;
+
+    protected int modificacion;
+
+    /**
+     * jugador que usara el objeto
+     */
+    protected Jugador jugador;
+
+    /**
+     * posicion x en la que se usara el objeto
+     */
+    protected int x;
+
+    /**
+     * posicion y en la que se usara el objeto
+     */
+    protected int y;
 
 
-
-
+    /**
+     * constructor de la clase objeto
+     * @param id identificacon del objeto
+     * @param vida tiempo de vida del objeto
+     * @param imagen representacion grafica del objeto
+     * @param jugador jugador que va a usar el objeto
+     */
     public Objeto(int id,int vida,String imagen,Jugador jugador){
             super(id,imagen);
             this.vida = vida;
             this.jugador = jugador;
-        }
+    }
 
-    /**
-         * Activa los efectos del objeto
-         */
-        @Override
-        public void activar(){
-            this.iniciar();
-            GestorObjetos.getGestor().añadirObjeto(this);
-        }
+
+    @Override
+    public void activar(){
+         this.iniciar();
+         GestorObjetos.getGestor().añadirObjeto(this);
+    }
 
         /**
          * Inicia el efecto del objeto
          *
-        */
+         */
         protected abstract void iniciar();
 
         /**
@@ -70,7 +92,10 @@ public abstract class Objeto extends ObjetoJugador {
         }
 
 
-
+    /**
+     * controla que la posicion en la que se desea colocar el objeto sea posible
+     * @return el objeto es colocable en la posicion o no
+     */
     public boolean controlPosicion(){
 
         x = jugador.getPosicionX();

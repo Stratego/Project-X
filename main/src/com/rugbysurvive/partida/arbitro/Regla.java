@@ -11,9 +11,19 @@ import com.rugbysurvive.partida.jugadores.Posicionamiento;
  */
 public abstract class Regla {
 
+    /**
+     * instancia de la clase arbitro
+     */
     protected Arbitro arbitro;
+
+    /**
+     * clase posicionamiento que nos permitara realizar meeles, penaltys y saques de banda
+     */
     protected Posicionamiento posicionamiento = new Posicionamiento();
 
+    /**
+     * constructor que crea la regla obteniendo la instacia del arbitro
+     */
     public Regla() {
        this.arbitro = Arbitro.getInstancia();
     }
@@ -21,7 +31,7 @@ public abstract class Regla {
 
     /**
      * Realiza el proceso de arbitre de la jugada.
-     * Si el arbitro l'ha visto y la jugada es arbitrable
+     * Si el arbitro la ha visto y la jugada es arbitrable
      * bloquea la simulacion , coloca todos los elementos en las
      * posiciones necesarias y realiza todos los castigos necesarios.
      * Despues del proceso de arbitraje debe seguir el siguiente turno del

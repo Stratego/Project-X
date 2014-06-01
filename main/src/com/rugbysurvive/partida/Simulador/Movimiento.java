@@ -309,6 +309,7 @@ public class Movimiento extends Accion implements Proceso {
                 {
                     if(this.camino[this.contador][0] >= 28)
                     {
+                        Gdx.audio.newMusic(Gdx.files.internal("sonido/ambiente/celebracion.mp3")).play();
                         Marcador.getInstanceMarcador().sumarPuntuacion(5, this.jugador);
                         return true;
                     }
@@ -317,6 +318,7 @@ public class Movimiento extends Accion implements Proceso {
                 {
                     if(this.camino[this.contador][0] <= 1)
                     {
+                        Gdx.audio.newMusic(Gdx.files.internal("sonido/ambiente/celebracion.mp3")).play();
                         Marcador.getInstanceMarcador().sumarPuntuacion(5, this.jugador);
                         return true;
                     }

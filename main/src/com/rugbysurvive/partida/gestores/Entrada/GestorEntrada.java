@@ -18,8 +18,10 @@ import com.rugbysurvive.partida.tablero.Campo;
 import java.util.ArrayList;
 
 /**
- * Esta clase recibira nuestras acciones en la pantalla del telefono y en funcion de cada accion ejecuara lo que le hallamos definido
  * Created by Victor on 24/03/14.
+ * Clase que permite recibir las acciones que se recibiran en la pantalla del dispositivo
+ * como click, long click, arrastre o pinza. en funcion de cada accion
+ * podemos definir un comportamiento para ella.
  */
 public class GestorEntrada implements GestureDetector.GestureListener {
 
@@ -43,11 +45,15 @@ public class GestorEntrada implements GestureDetector.GestureListener {
      */
     private ArrayList<Boton> botons= new ArrayList <Boton>();
 
-
+    /**
+     * Definicion de la interfaz que permite dibujar elementos
+     */
     Dibujante dibujante;
 
-    //private Equipo equipo=new Equipo();
 
+    /**
+     * crea un elemento de tipo lista para guardar suplentes o objetos
+     */
     Lista lista = new Lista();
 
     private Sound botonsound ;
@@ -69,7 +75,10 @@ public class GestorEntrada implements GestureDetector.GestureListener {
 
     @Override
     /**
-     * acciones que se realizan al hacer longpress
+     * Al hacer longpress mandamos la accion hacia el campo que lo mandara a la casilla donde se
+     * tratara la informacion. tambien permite seleccioar los botones de la interfaz
+     * @param screenX posicion X donde hemos puldado en la pantalla
+     * @param screenY posicion X donde hemos puldado en la pantalla
      */
     public boolean longPress (float screenX, float screenY) {
         Vector3 touchPos = new Vector3();
@@ -95,30 +104,18 @@ public class GestorEntrada implements GestureDetector.GestureListener {
      * acciones que se ejecutaran al realizar un click en la pantalla
      */
     public boolean touchDown(float screenX, float screenY, int pointer, int button) {
-
-
-
-        /*Vector3 touchPos = new Vector3();
-        touchPos.set(screenX, screenY,0);
-        camera.unproject(touchPos);
-        //System.out.println("Posicion tocada: x: " + screenX + " y: "+ screenY );
-        //System.out.println("Posicion mundo: x: " + touchPos.x + " y: "+ touchPos.y );
-
-        for (Boton iterador : botons){
-            if (iterador.esSeleccionado(touchPos.x,touchPos.y)){
-                campo.accionEntrada(iterador.obtenerEntrada());
-                return false;
-            }
-        }
-
-        campo.accionEntrada(Entrada.clic,touchPos.x, touchPos.y );*/
         return false;
     }
 
     @Override
+    /**
+     * Al levantar el dedo al hacer click mandamos la accion hacia el campo que lo mandara a la casilla donde se
+     * tratara la informacion. tambien permite seleccioar los botones de la interfaz o de las listas
+     * de suplentes o de objetos
+     * @param screenX posicion X donde hemos puldado en la pantalla
+     * @param screenY posicion X donde hemos puldado en la pantalla
+     */
     public boolean tap(float screenX, float screenY, int i, int i2) {
-
-
 
         if (longclick==false){
             Vector3 touchPos = new Vector3();
@@ -137,7 +134,6 @@ public class GestorEntrada implements GestureDetector.GestureListener {
             }
             //si hay lista comprueba que se haya clicado en uno se sus botones
             if (lista.hayLista()){
-
 
                 //System.out.println("entra en bucle de listas");
                 for (Boton iteradorLista : lista.listaActiva()){
@@ -185,7 +181,10 @@ public class GestorEntrada implements GestureDetector.GestureListener {
 
     @Override
     /**
-     * acciones que se realizan al ejecutar un arrastre por la pantalla
+     * Al arrastrar el dedo por la pantalla mandamos la accion hacia el campo que lo mandara a la casilla donde se
+     * tratara la informacion.
+     * @param screenX posicion X donde hemos puldado en la pantalla
+     * @param screenY posicion X donde hemos puldado en la pantalla
      */
     public boolean pan(float screenX, float screenY, float v3, float v4) {
 

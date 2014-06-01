@@ -17,21 +17,66 @@ import com.rugbysurvive.partida.tablero.Campo;
 import org.omg.CORBA.COMM_FAILURE;
 
 /**
+ * Objeto colocable en el campo que retirara a un jugador
+ * enemigo que lo pise de la partida durante unos turnos
+ * Se ejecutara una animacion de caida
  * Created by aitor on 20/05/14.
  */
 public class Agujero extends ObjetoCampo {
 
+    /**
+     * tiempo de vida del agujero en el campo
+     */
     private static final int TIEMPO_VIDA_AGUJERO_POST_CAIDA = 500;
+
+    /**
+     * numero de turnos que el juguador enemigo no esta disponible
+     */
     private static final int  NUMERO_TURNOS_CASTIGADO = 2;
+
+    /**
+     * tiempo que se ejecutara la animacion
+     */
     private int tiempo;
+
+    /**
+     * dibujo de la animacion en el campo
+     */
     private ElementoDibujable animacion;
+
+
     private int contador;
+
+    /**
+     * indica si se esta ejecutando la animacion
+     */
     public boolean animando;
+
+    /**
+     * turno del jugador
+     */
     public int turno;
+
+    /**
+     * jugador que cae en el agujero
+     */
     public Jugador jugador;
+
+    /**
+     * posicion X donde se colocara el agujero
+     */
     private int posicionX;
+
+    /**
+     * posicion Y donde se colocara el agujero
+     */
     private int posicionY;
 
+    /**
+     * constructor del agujero
+     * @param textura textura que representara graficamente el agujero en el campo
+     * @param jugador jugador que ha colocado el agujero
+     */
     public Agujero(String textura,Jugador jugador){
         super(textura,jugador);
         this.tiempo = 0;
