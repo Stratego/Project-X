@@ -215,7 +215,21 @@ public class Campo implements GestionEntrada,Dibujable {
 
         return casilla;
     }
+    /**
+     * Eliminamos la pelota del tablero
+     */
+    public void quitarPelotaTablero(){
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 30; j++) {
 
+                if (casillas[i][j].hayPelota()==true){
+                    casillas[i][j].quitarPelota();
+                }
+            }
+
+
+        }
+    }
     /**
      * retorna la lista de casillas que forman el tablero, necesario, para la IA
      * @return

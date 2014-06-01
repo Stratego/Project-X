@@ -6,39 +6,39 @@ import com.rugbysurvive.partida.tablero.Casilla;
 
 import java.util.ArrayList;
 
-/**
+/**Clase que implementara el movimento que tendra que realizar un
+ * jugador IA desde su posicion hasta el detino especifocado en la
+ * clase principal de IA usando el algoritmo a*
  * Created by Victor on 9/05/14.
  */
 public class MovimentoIA {
 
 
     /**
-     * Matriz con una serie de filas y una serie de columnas que representa el tablero sobre
-     * el que se buscará el camino. Cada celda de la matriz es un nodo que puede
-     * ser transitable o no y que tiene un coste particular ).
+     * Matriz con una serie de filas y una serie de columnas
+     * que representa el tablero sobre el que se buscará el camino.
      */
     private NodoIA[][] matriz;
 
     /**
      * Nodo de partida que indica una posición (x,y) en la matriz de celdas.
-     * No importa si es un nodo intransitable y tampoco se considera el coste.
      */
     private NodoIA nodoInicial;
 
     /**
      * Nodo de llegada que indica una posición (x,y) en la matriz de celdas.
-     * Debe ser un nodo transitable.
      */
     private NodoIA nodoFinal;
 
+    /**
+     * array que representara el camino final que se ejecutara en la simulacion
+     */
     private ArrayList caminoFinal = new ArrayList<NodoIA>();
 
     /**
      * Constructor por defecto.
-
-     * @param casillaInicial Casilla de partida que indica una posición (x,y) en la matriz de celdas.
-     * @param casillaFinal Casilla de llegada que indica una posición (x,y) en la matriz de celdas.
-
+     * @param casillaInicial Casilla de partida que representa la posicion del jugador.
+     * @param casillaFinal Casilla de llegada que representa la posicion de destino del jugador.
      */
     public MovimentoIA (Casilla casillaInicial,Casilla casillaFinal)
     {
@@ -46,11 +46,14 @@ public class MovimentoIA {
         this.nodoInicial = conversorNodo(casillaInicial);
         this.nodoFinal = conversorNodo(casillaFinal);
         FinalCamino();
-
-
     }
 
-
+    /**
+     * Calcula el camino ue tendra que realizar un
+     * jugador IA desde su posicion hasta el detino especifocado en la
+     * clase principal de IA, usando el algotimo de a*
+     * @return camino a realizar por el jugador de IA
+     */
     public ArrayList calcularCamino()
     {
         PilaIA listaAbierta = new PilaIA();
@@ -79,7 +82,8 @@ public class MovimentoIA {
             ArrayList nodosAdyacentes = new ArrayList<NodoIA>();
 
             boolean derecha = false, izquierda = false, arriba = false, abajo = false;
-            if (0 <= nodoActual.getX()+1 && nodoActual.getX()+1 < columnas && 0 <= nodoActual.getY() && nodoActual.getY() < filas)
+            if (0 <= nodoActual.getX()+1 && nodoActual.getX()+1 < columnas && 0 <=
+                    nodoActual.getY() && nodoActual.getY() < filas)
             {
                 if (matriz[nodoActual.getY()][nodoActual.getX()+1].getTransitable())
                 {
@@ -87,7 +91,8 @@ public class MovimentoIA {
                     derecha = true;
                 }
             }
-            if (0 <= nodoActual.getX()-1 && nodoActual.getX()-1 < columnas && 0 <= nodoActual.getY() && nodoActual.getY() < filas)
+            if (0 <= nodoActual.getX()-1 && nodoActual.getX()-1 < columnas && 0 <=
+                    nodoActual.getY() && nodoActual.getY() < filas)
             {
                 if (matriz[nodoActual.getY()][nodoActual.getX()-1].getTransitable())
                 {
@@ -95,7 +100,8 @@ public class MovimentoIA {
                     izquierda = true;
                 }
             }
-            if (0 <= nodoActual.getX() && nodoActual.getX() < columnas && 0 <= nodoActual.getY()-1 && nodoActual.getY()-1 < filas)
+            if (0 <= nodoActual.getX() && nodoActual.getX() < columnas && 0 <=
+                    nodoActual.getY()-1 && nodoActual.getY()-1 < filas)
             {
                 if (matriz[nodoActual.getY()-1][nodoActual.getX()].getTransitable())
                 {
@@ -103,7 +109,8 @@ public class MovimentoIA {
                     arriba = true;
                 }
             }
-            if (0 <= nodoActual.getX() && nodoActual.getX() < columnas && 0 <= nodoActual.getY()+1 && nodoActual.getY()+1 < filas)
+            if (0 <= nodoActual.getX() && nodoActual.getX() < columnas && 0 <=
+                    nodoActual.getY()+1 && nodoActual.getY()+1 < filas)
             {
                 if (matriz[nodoActual.getY()+1][nodoActual.getX()].getTransitable())
                 {
@@ -168,7 +175,10 @@ public class MovimentoIA {
         }
     }
 
-
+    /**
+     * imprime la lista en formato texto para poder comprobarla
+     * @param lista lista que se represtara en formato texto
+     */
     public void imprimirLista(ArrayList <NodoIA> lista){
         System.out.print("imprimiendo lista");
         for (NodoIA casilla: lista){
@@ -176,6 +186,14 @@ public class MovimentoIA {
         }
 
     }
+
+    /**
+     * tranforma una casilla en un nodo para que pueda funcionar en
+     * el algoritmo a*. en funcion de los parametros se le asignara un coste
+     * o una propiedad especifica.
+     * @param casilla casilla que se transformara en un nodo
+     * @return nodo resultado de la conversion
+     */
     public NodoIA conversorNodo(Casilla casilla){
 
         NodoIA nodo = new NodoIA();
@@ -203,6 +221,12 @@ public class MovimentoIA {
         return nodo;
     }
 
+    /**
+     * transforma la matriz de casillas que representa el campo a
+     * una matriz de nodos para ser usada en el algoritmo a*
+     * @param campo la matriz de casillas que representa el campo
+     * @return matriz resultante de la conversion
+     */
     public NodoIA [][] comversorMatriz(Casilla[][] campo){
 
         NodoIA[][] matriz = new NodoIA[20][30] ;
@@ -216,6 +240,9 @@ public class MovimentoIA {
 
     }
 
+    /**
+     * añade a todos los nodos el nodo final como destino
+     */
     public void FinalCamino(){
 
         for (int i = 0; i < 20; i++) {
@@ -225,6 +252,13 @@ public class MovimentoIA {
         }
     }
 
+    /**
+     * transforma el array de nodos que representa el camino que hara el jugador IA
+     * al formata que usa la funcion movimiento de la simulacion y evita que se
+     * cometan errores en la interprestacion y delimita el movimento a la resistencia del jugador
+     * @param jugador jugador que hara el movimiento
+     * @return matriz en el formato de la funcion movimento de simulacion
+     */
     public int[][] arraymovimento(Jugador jugador){
 
         int iteraciones = 0;

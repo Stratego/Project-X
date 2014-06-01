@@ -12,8 +12,8 @@ import com.rugbysurvive.partida.jugadores.Habilidades;
 
 /**
  * Clase que indica las condiciones en las que un jugador controlado por la IA usara un objeto si es que posee alguno.
- * en caso de que sus estado en alguna habilidad suean bajos se usara un powerUP,
- * si tiene un jugador enemigo cerca usara una mina de campo.
+ * en caso de que sus estado en alguna habilidad sean bajos se usara un powerUP,
+ * si tiene un jugador enemigo cerca usara un objeto de campo.
  * Created by Victor on 15/05/14.
  */
 public class ObjetosIA {

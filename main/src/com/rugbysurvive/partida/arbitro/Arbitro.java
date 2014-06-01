@@ -2,7 +2,6 @@ package com.rugbysurvive.partida.arbitro;
 
 import com.badlogic.gdx.Gdx;
 import com.rugbysurvive.partida.ConstantesJuego;
-import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.DireccionJugador;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
@@ -18,41 +17,76 @@ import java.util.Random;
 /**
  * Created by victor on 26/04/14.
  *
- * Personaje encargado de visualizar las jugadas.
- * Se mueve y gira durante el campo con una linia visual
- * concreta. Fuera de esta linia visual las reglas no se evaluan
- *
+ * Personaje encargado de hacer cumplir la reglas del juego.
+ * Sin enbargo solo hara cumplir la reglas cuando se infrinjan dentro de su rango de vision.
+ * En caso contrario los jugadores pueden hacer lo que quieran.
+ * el arbitro se mueve aleatoriamente por el campo, y en cada MOVIMIENTO mira a una direccion diferente.
  */
 public class Arbitro implements Dibujable,Proceso{
 
     private static final int TIEMPO_PITADA = 50;
     private int tiempo;
 
-    public static Arbitro arbitro = null;
+    /**
+     * instancia de arbitro que se envia a otras clases
+     */
+    private static Arbitro arbitro = null;
 
-    private DireccionJugador direccion = DireccionJugador.izquierda;
+    /**
+     * direccion hacia la que mira el arbitro
+     */
+    private DireccionJugador direccion = DireccionJugador.abajo;
 
-    private int posX =5;
+    /**
+     * posicion X donde se movera el arbitro
+     */
+    private int posicionX =15;
 
-    private int posY = 0;
+    /**
+     * posicion Y donde se movera el arbitro
+     */
+    private int posicionY = 13;
 
-    private int rangoVision = 5;
-    private int movimiento = 8;
+    /**
+     * largo y ancho maximo del cono de vision del arbitro
+     */
+    private int RANGO_VISION = 5;
 
+    /**
+     * limite de movimento del arbitro
+     */
+    private int MOVIMIENTO = 8;
+
+    /**
+     * identificador textura del arbitro
+     */
     private int id = 0;
 
+    /**
+     * coleccion de casillas que estan bajo la vision del arbitro
+     */
     private ArrayList<Casilla> casilla = new ArrayList<Casilla>();
 
-    ElementoDibujable casillaVision;
+    //ElementoDibujable casillaVision;
 
+    /**
+     * Constructor de la clase que dibjuara el arbitro y
+     * lo colocara en su posicion inicial.
+     */
     public Arbitro() {
-        this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
+        this.id = GestorGrafico.generarDibujante().añadirDibujable(this,
+                TipoDibujo.elementosJuego);
         arbitro=this;
-        ComponentesJuego.getComponentes().getCampo().getCasilla(this.posY,this.posX).añadirElemento(arbitro);
+        ComponentesJuego.getComponentes().getCampo().getCasilla(this.posicionY,
+                this.posicionX).añadirElemento(arbitro);
         generarCampoVision();
         this.tiempo = 0;
     }
 
+    /**
+     * devuelve la instancia de la calse para que pueda ser usada en otras clases.
+     * @return instancia de la clase arbitro.
+     */
     public static Arbitro getInstancia() {
 
         if(arbitro == null) {
@@ -71,58 +105,49 @@ public class Arbitro implements Dibujable,Proceso{
     public void mover(){
         if(arbitro == null){
             arbitro = new Arbitro();
-
             System.out.println("Creacion en mover");
-
         }
         else {
 
-            int rangoAleatorio = new Random().nextInt(movimiento);
+            int rangoAleatorio = new Random().nextInt(MOVIMIENTO);
             if (new Random().nextInt()%2 != 0){
                 rangoAleatorio*=-1;
             }
 
-            int rangoX = posX + rangoAleatorio;
+            int rangoX = posicionX + rangoAleatorio;
             int rangoY;
             if (new Random().nextInt()%2 != 0){
-                rangoY = posY-(movimiento-rangoAleatorio);
+                rangoY = posicionY -(MOVIMIENTO -rangoAleatorio);
             }else{
-                rangoY = posY+(movimiento-rangoAleatorio);
+                rangoY = posicionY +(MOVIMIENTO -rangoAleatorio);
             }
 
             if (controlPosicion(rangoX,rangoY,true)==true){
-                ComponentesJuego.getComponentes().getCampo().getCasilla(this.posY,this.posX).eliminarElemento();
+                ComponentesJuego.getComponentes().getCampo().getCasilla(this.posicionY,this.posicionX).eliminarElemento();
                 this.quitar();
                 System.out.println("moviendo arbitro");
-                this.posX= rangoX;
-                this.posY = rangoY;
+                this.posicionX = rangoX;
+                this.posicionY = rangoY;
                 this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
                 this.direccion = DireccionJugador.getRandom();
-                System.out.println(rangoX);
-                System.out.println(rangoY);
-                System.out.println(direccion);
                 generarCampoVision();
-                ComponentesJuego.getComponentes().getCampo().getCasilla(this.posY,this.posX).añadirElemento(this);
+                ComponentesJuego.getComponentes().getCampo().getCasilla(this.posicionY,this.posicionX).añadirElemento(this);
             }else{
-
                 arbitro.mover();
-
             }
-
-
         }
     }
 
     /**
      * Indica se una jugada ha sido visualizada o no por el arbitro
-     * @param posicionX Posicion
-     * @param posicionY
-     * @return
+     * @param posicionX Posicion x donde se ha efectuado una jugada.
+     * @param posicionY Posicion y donde se ha efectuado una jugada.
+     * @return indica si la posicion esta en el rango de vision del arbitro.
      */
     public boolean esSucesoVisible(int posicionX,int posicionY){
 
-        for (Casilla iter: casilla){
-            if (posicionX==iter.getPosicionX() && posicionY==iter.getPosicionY() ){
+        for (Casilla iteracion: casilla){
+            if (posicionX==iteracion.getPosicionX() && posicionY==iteracion.getPosicionY() ){
                  Gdx.audio.newMusic(Gdx.files.internal("sonido/acciones/pito.mp3")).play();
                 ProcesosContinuos.añadirProceso(this);
                 return true;
@@ -132,54 +157,54 @@ public class Arbitro implements Dibujable,Proceso{
     }
 
     /**
-     * genera el campo de vision en que las faltas van a ser pitadas.
+     * Genera el campo de vision del arbitro que es donde las faltas seran pitadas.
+     * el campo se representa como un conjunto conico de casillas que surge de la
+     * direccion desde donde esta mirando el arbitro.
      */
-    public void generarCampoVision(){
+    private void generarCampoVision(){
         int ancho =2;
-        int posXAux=0;
+        int posicionXAux=0;
 
-        int posYAux=0;
+        int posicionYAux=0;
 
         System.out.println("angulo vision");
 
         switch (this.direccion)
         {
             case derecha:
-                posXAux = posX +1;
-                posYAux = posY -1;
+                posicionXAux = posicionX +1;
+                posicionYAux = posicionY -1;
                 break;
 
             case izquierda:
-                posXAux = posX -1;
-                posYAux = posY -1;
+                posicionXAux = posicionX -1;
+                posicionYAux = posicionY -1;
                 break;
 
             case arriba:
-                posXAux = posX -1;
-                posYAux = posY +1;
+                posicionXAux = posicionX -1;
+                posicionYAux = posicionY +1;
                 break;
 
             case abajo:
-                posXAux = posX -1;
-                posYAux = posY -1;
+                posicionXAux = posicionX -1;
+                posicionYAux = posicionY -1;
                 break;
         }
 
-
-
-        for (int i=0; i<rangoVision; i++){
+        for (int i=0; i< RANGO_VISION; i++){
 
             for (int j=0; j<=ancho; j++){
-                if (controlPosicion(posXAux,posYAux,false)==true){
+                if (controlPosicion(posicionXAux,posicionYAux,false)==true){
                     //this.casillaVision = new ElementoDibujable(TipoDibujo.elementosJuego,"casilla.png");
                     //this.casillaVision.dibujar(posXAux,posYAux);
-                    this.casilla.add(new Casilla((float)posXAux,(float)posYAux));
+                    this.casilla.add(new Casilla((float)posicionXAux,(float)posicionYAux));
                 }
 
                 if (this.direccion == DireccionJugador.abajo ||this.direccion == DireccionJugador.arriba){
-                    posXAux+=1;
+                    posicionXAux+=1;
                 }else {
-                    posYAux+=1;
+                    posicionYAux+=1;
                 }
 
             }
@@ -187,23 +212,23 @@ public class Arbitro implements Dibujable,Proceso{
             switch (this.direccion)
             {
                 case derecha:
-                    posXAux += 1;
-                    posYAux-=ancho;
+                    posicionXAux += 1;
+                    posicionYAux-=ancho;
                     break;
 
                 case izquierda:
-                        posXAux -= 1;
-                        posYAux-=ancho;
+                        posicionXAux -= 1;
+                        posicionYAux-=ancho;
                     break;
 
                 case arriba:
-                    posYAux+=1;
-                    posXAux-=ancho;
+                    posicionYAux+=1;
+                    posicionXAux-=ancho;
                     break;
 
                 case abajo:
-                    posYAux-=1;
-                    posXAux-=ancho;
+                    posicionYAux-=1;
+                    posicionXAux-=ancho;
                     break;
             }
         }
@@ -224,18 +249,19 @@ public class Arbitro implements Dibujable,Proceso{
      * @param x posible cordenada x
      * @param y posible cordenada y
      * @param control indica si la casilla es para el arbritro o la zona de vision
-     * @return
+     * @return la casilla es apta para colocar el arbitro o no
      */
-    public boolean controlPosicion(int x, int y, boolean control){
-
+    private boolean controlPosicion(int x, int y, boolean control){
 
         boolean colocable = false;
 
-
-                if (x>=0 && x<=ConstantesJuego.LIMITE_CASILLAS_LARGO_TABLERO && y<=ConstantesJuego.LIMITE_CASILLAS_ANCHO_TABLERO && y>=0){
+                if (x>=0 && x<=ConstantesJuego.LIMITE_CASILLAS_LARGO_TABLERO &&
+                        y<=ConstantesJuego.LIMITE_CASILLAS_ANCHO_TABLERO && y>=0){
                     if (control==true){
-                        if(x>=2 && x<=ConstantesJuego.LIMITE_CASILLAS_LARGO_TABLERO-2 && y<=ConstantesJuego.LIMITE_CASILLAS_ANCHO_TABLERO-2 && y>=2){
-                            if (ComponentesJuego.getComponentes().getCampo().getCasilla(y,x).sinJugador()==true && ComponentesJuego.getComponentes().getCampo().getCasilla(y,x).hayPelota()==false){
+                        if(x>=2 && x<=ConstantesJuego.LIMITE_CASILLAS_LARGO_TABLERO-2 &&
+                                y<=ConstantesJuego.LIMITE_CASILLAS_ANCHO_TABLERO-2 && y>=2){
+                            if (ComponentesJuego.getComponentes().getCampo().getCasilla(y,x).sinJugador()==true
+                                    && ComponentesJuego.getComponentes().getCampo().getCasilla(y,x).hayPelota()==false){
                                 colocable=true;
                             }
                         }
@@ -255,7 +281,7 @@ public class Arbitro implements Dibujable,Proceso{
     private void quitar() {
 
         GestorGrafico.generarDibujante().eliminarTextura(id);
-        ComponentesJuego.getComponentes().getCampo().eliminarElemento(posY,posX);
+        ComponentesJuego.getComponentes().getCampo().eliminarElemento(posicionY, posicionX);
 
         this.casilla.clear();
     }
@@ -287,12 +313,12 @@ public class Arbitro implements Dibujable,Proceso{
 
     @Override
     public int getPosicionX() {
-        return posX;
+        return posicionX;
     }
 
     @Override
     public int getPosicionY() {
-        return posY;
+        return posicionY;
     }
 
     @Override

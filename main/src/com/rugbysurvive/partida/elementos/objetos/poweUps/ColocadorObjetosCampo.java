@@ -11,20 +11,57 @@ import com.rugbysurvive.partida.jugadores.Habilidades;
 
 
 /**
+ * Coloca los objetos de campo en el campo de juego, indica al arbitro si
+ * se han colocado y tambien los elimina del campo
  * Created by Victor on 15/04/14.
  */
 public class ColocadorObjetosCampo extends Objeto {
 
 
-    //private final int vida;
+    /**
+     * tiempo de vida del objeto
+     */
     protected int vida;
+
+    /**
+     * identificacon del objeto
+     */
     protected int id;
+
+    /**
+     * representacion grafica del objeto
+     */
     protected String imagen;
+
+    /**
+     * jugador que va a usar el objeto
+     */
     protected Jugador jugador;
+
+    /**
+     * el objeto es colocable en campo o no
+     */
     boolean colocable = false;
+
+    /**
+     * instancia de objeto campo
+     */
     private ObjetoCampo objetoCampo;
+
+    /**
+     * instancia del uso de objetos
+     */
     UsoObjetos usoObjetos;
 
+    /**
+     * Constructor de objetos campo
+     *
+     * @param id identificacon del objeto
+     * @param vida tiempo de vida del objeto
+     * @param imagen representacion grafica del objeto
+     * @param jugador jugador que va a usar el objeto
+     * @param objetoCampo objeto que se va a usar en el campo
+     */
     public ColocadorObjetosCampo(int id, int vida, String imagen, Jugador jugador, ObjetoCampo objetoCampo) {
 
         super(id, vida, imagen, jugador);

@@ -10,16 +10,23 @@ import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.tablero.Lado;
 
 import java.util.ArrayList;
-import java.util.Random;
+
 
 /**
- * Clase que estipula cuando realiza un pase o un chute un jugador controlado por la IA
+ * Clase que estipula cuando realiza un pase o un chute un jugador controlado por la IA,
+ * en funcion de su posicion y el numero de jugadores enemigos y amigos cercanos
  * Created by Victor on 15/05/14.
  */
 public class PaseChuteIA {
 
+    /**
+     * jugadores del equipo 1 cercanos al jugador
+    */
     public static ArrayList<Jugador> jugadaequipo1 = new ArrayList<Jugador>();
 
+    /**
+     * jugadores del equipo 2 cercanos al jugador
+     */
     public static ArrayList<Jugador> jugadaequipo2 = new ArrayList<Jugador>();
 
     /**
@@ -29,6 +36,8 @@ public class PaseChuteIA {
 
     /**
      * Comprueba que se pueda realizar un chute o un pase y si es asi lo realiza
+     * para realizar un chute se tiene que estar cerca de los palos de la zona de marque.
+     * para realizar un pase se tiene que estar rodeado de enemigos y tener jugadores amigos cercanos.
      * @param jugador jugador que realizara el pase o chute
      * @return indica si se ha realizado alguna accion sea pase o chute
      */
@@ -37,7 +46,8 @@ public class PaseChuteIA {
         if (jugador.getEstado() instanceof ConPelota){
             System.out.println(jugador.getPosicionX());
             System.out.println(jugador.getPosicionY());
-            if (jugador.getPosicionX()>=7 && jugador.getPosicionX()<= ConstantesJuego.LIMITE_CASILLAS_LARGO_TABLERO-7){
+            if (jugador.getPosicionX()>=7 && jugador.getPosicionX()<=
+                    ConstantesJuego.LIMITE_CASILLAS_LARGO_TABLERO-7){
                 System.out.println("zona de pase");
                return hacerPase(jugador);
 
@@ -51,19 +61,22 @@ public class PaseChuteIA {
     }
 
     /**
+     * Comprueba que se pueda realizar un chute y si es asi lo realiza
      * Si el jugador esta cerca de los palos de su zona de marque realizara un chute
      * @param jugador jugador que hara el chute
      * @return indica si se a realizado un chuete
      */
     public boolean hacerChute(Jugador jugador){
         Chute chute;
-        if (jugador.getMiEquipo().getLado()== Lado.derecha && jugador.getPosicionX()<7 && jugador.getPosicionY()>=7
+        if (jugador.getMiEquipo().getLado()== Lado.derecha && jugador.getPosicionX()<7
+                && jugador.getPosicionY()>=7
                 && jugador.getPosicionY()<=12){
             chute = new Chute(jugador,0,(int)(Math.random()*(11-8+1)+8));
             Simulador.getInstance().añadirAccion(chute);
             System.out.println("chute izquierda IA");
             return true;
-        }else if(jugador.getMiEquipo().getLado()== Lado.izquierda && jugador.getPosicionX()>ConstantesJuego.LIMITE_CASILLAS_LARGO_TABLERO-7 &&
+        }else if(jugador.getMiEquipo().getLado()== Lado.izquierda && jugador.getPosicionX()>
+                ConstantesJuego.LIMITE_CASILLAS_LARGO_TABLERO-7 &&
                 jugador.getPosicionY()>=7 && jugador.getPosicionY()<=12){
             chute = new Chute(jugador,(int)(Math.random()*(29-28+1)+28),(int)(Math.random()*(11-8+1)+8));
             Simulador.getInstance().añadirAccion(chute);
@@ -75,7 +88,9 @@ public class PaseChuteIA {
     }
 
     /**
-     * Si el jugador tiene muchos jugadores rivales a su alrederor realizara un pase al mas lejano dentro de su rango de pase
+     * Comprueba que se pueda realizar un pasey si es asi lo realiza
+     * Si el jugador tiene muchos jugadores rivales a su alrederor realizara
+     * un pase al mas lejano dentro de su rango de pase
      * @param jugador jugador que hara el pase
      * @return indica si se ha realizado el pase
      */
@@ -84,8 +99,10 @@ public class PaseChuteIA {
 
         jugadoresCercanos(jugador.getPosicionX(),jugador.getPosicionY(),jugador);
 
-        if (jugadaequipo1.size()>0 && jugadaequipo2.size()>0 && jugadaequipo1.size()>jugadaequipo2.size()){
-            Pase pase = new Pase(jugador,jugadaequipo2.get(jugadaequipo2.size()-1).getPosicionX(),jugadaequipo2.get(jugadaequipo2.size()-1).getPosicionY());
+        if (jugadaequipo1.size()>0 && jugadaequipo2.size()>0 && jugadaequipo1.size()
+                >jugadaequipo2.size()){
+            Pase pase = new Pase(jugador,jugadaequipo2.get(jugadaequipo2.size()-1).getPosicionX(),
+                    jugadaequipo2.get(jugadaequipo2.size()-1).getPosicionY());
             Simulador.getInstance().añadirAccion(pase);
             System.out.println("pase IA");
             return true;
@@ -109,25 +126,25 @@ public class PaseChuteIA {
         }
         boolean salida=false;
 
-        //while (salida==false){
-
             for (int x=0; x<=rango; x++){
                 for (int y=0; y<=rango; y++){
 
                     if (controlPosicion(posXAux+x,posYAux-y)==true){
-                        //casillaVision = new ElementoDibujable(TipoDibujo.elementosJuego,"casilla.png");
-                        //casillaVision.dibujar(posXAux+x,posYAux-y);
-                        if (ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador()!=null){
-                            //System.out.println("entra selecion jugador");
-                            if (ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador().getMiEquipo()==ComponentesJuego.getComponentes().getEquipo1()){
-                                //if (ComponentesJuego.getComponentes().getEquipo1().jugadorEnEquipo(ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador())==true){
 
-                                if (jugadaequipo1.contains(ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador())==false && jugadaequipo1.size()<4){
+                        if (ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,
+                                posXAux+x).getJugador()!=null){
+                            if (ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador().getMiEquipo()==
+                                    ComponentesJuego.getComponentes().getEquipo1()){
+
+
+                                if (jugadaequipo1.contains(ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador())==
+                                        false && jugadaequipo1.size()<4){
                                     jugadaequipo1.add(ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador());
                                     System.out.println("añadido jugador equipo1: " + jugadaequipo1.size());
                                 }
                             }else{
-                                if (jugadaequipo2.contains(ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador())==false  && jugadaequipo2.size()<4){
+                                if (jugadaequipo2.contains(ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador())==
+                                        false  && jugadaequipo2.size()<4){
                                     jugadaequipo2.add(ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador());
                                     System.out.println("añadido jugador equipo2 :" + jugadaequipo2.size());
                                 }
@@ -138,19 +155,11 @@ public class PaseChuteIA {
 
                 }
             }
-            /*if ( jugadaequipo1.size()>3 && jugadaequipo2.size()>3){
-                salida=true;
-                break;
-            }
-            posYAux+=1;
-            posXAux-=2;
-            rango +=3;
-        }*/
     }
 
 
     /**
-     * Controla que laposicion que queremos cojer este dentro del tablero de juego
+     * Controla que la posicion que queremos cojer este dentro del tablero de juego
      * @param x posicion x que queremos comprobar
      * @param y posicion y que queremos comprobar
      * @return indica si la posicion es correcta o no
@@ -159,7 +168,8 @@ public class PaseChuteIA {
 
         boolean colocable = false;
 
-        if (x>=0 && x<= ConstantesJuego.LIMITE_CASILLAS_LARGO_TABLERO && y<=ConstantesJuego.LIMITE_CASILLAS_ANCHO_TABLERO && y>=0){
+        if (x>=0 && x<= ConstantesJuego.LIMITE_CASILLAS_LARGO_TABLERO &&
+                y<=ConstantesJuego.LIMITE_CASILLAS_ANCHO_TABLERO && y>=0){
 
             colocable=true;
         }

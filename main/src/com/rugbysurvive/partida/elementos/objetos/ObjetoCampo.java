@@ -19,16 +19,38 @@ import org.omg.CORBA.COMM_FAILURE;
  */
 public abstract class ObjetoCampo implements Dibujable ,Proceso{
 
+    /**
+     * identificador de la textura
+     */
     protected int id;
+
+    /**
+     * posicion X donde se colocara el objeto
+     */
     protected int posX;
+
+    /**
+     * posicion Y donde se colocara el objeto
+     */
     protected int posY;
+
+    /**
+     * textura que representara al objeto
+     */
     private String textura;
+
+    /**
+     * jugador que coloca el objeto
+     */
     private Jugador jugador;
     private boolean finalizarProceso;
     private boolean vistualizacion;
 
-
-
+    /**
+     * constructor de objetos de campo
+     * @param textura textura que representara graficamente el objeto de campo
+     * @param jugador jugador que ha colocado el objeto de campo
+     */
     public ObjetoCampo(String textura,Jugador jugador){
 
         this.textura=textura;
@@ -37,17 +59,25 @@ public abstract class ObjetoCampo implements Dibujable ,Proceso{
         this.vistualizacion = false;
     }
 
-
+    /**
+     * coloca el objeto campo de un jugador en el campo
+     * @param posicionX posicion X donde se colocara el objeto
+     * @param posicionY posicion Y donde se colocara el objeto
+     */
     public void colocar(int posicionX,int posicionY){
         this.posX = posicionX;
         this.posY = posicionY;
-        this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.elementosJuego);
+        this.id = GestorGrafico.generarDibujante().añadirDibujable(this,
+                TipoDibujo.elementosJuego);
         Campo campo = ComponentesJuego.getComponentes().getCampo();
         campo.añadirElemento(this,this.posY,this.posX);
         ProcesosContinuos.añadirProceso(this);
         this.vistualizacion = true;
     }
 
+    /**
+     * elimina el objeto del campo y de la simulacion
+     */
     public void quitar(){
         GestorGrafico.generarDibujante().eliminarTextura(id);
         Campo campo = ComponentesJuego.getComponentes().getCampo();
@@ -56,6 +86,12 @@ public abstract class ObjetoCampo implements Dibujable ,Proceso{
         this.finalizarProceso = true;
     }
 
+    /**
+     * define el comportamiento de un objeto colocado en campo asi como
+     * las consequencias que tendra el jugador que ha pisado el objeto
+     * @param jugador jugador enemigo que pisa el objeto en el campo
+     * @param animacionParada indica el estado de la ejecucion de la animacion
+     */
     public abstract void efecto(Jugador jugador,boolean animacionParada);
 
     @Override
@@ -89,6 +125,11 @@ public abstract class ObjetoCampo implements Dibujable ,Proceso{
 
     }
 
+    /**
+     * Define la ejecucion de un proceso de animacion de texturas,
+     * desde el tiempo hasta las texturas que se usaran
+     * @return indica si la animacion se esta ejecutando
+     */
     protected abstract boolean animacion();
 
 

@@ -1,21 +1,20 @@
 package com.rugbysurvive.partida.IA;
 
-/**
- * Created by Victor on 12/05/14.
- */
+
 /**
  * Esta clase representa un nodo del mapa de celdas del algoritmo del A*.
  * Indica cuál es su posición (x,y) en ese mapa, así como su valor F, G, H.
+ * Created by Victor on 12/05/14.
  */
 public class NodoIA implements Comparable
 {
     /**
-     * Componente x (columna) de la posición del nodo en el mapa.
+     * posicion x del campo
      */
     private int x;
 
     /**
-     * Componente y (fila) de la posición del nodo en el mapa.
+     * posicion y del campo
      */
     private int y;
 
@@ -25,8 +24,7 @@ public class NodoIA implements Comparable
     private boolean transitable;
 
     /**
-     * Coste extra del nodo. Por ejemplo, sería más costoso caminar sobre el
-     * barro que sobre tierra firme.
+     * Coste del nodo.
      */
     private int coste;
 
@@ -38,14 +36,13 @@ public class NodoIA implements Comparable
 
     /**
      * Valor desde el nodo hasta el nodo inicial.
-     * Las diagonales suman 14 y las ortogonales 10.
+     *
      */
     private int G;
 
     /**
      * Valor desde el nodo hasta el nodo final.
-     * Se considera el peor caso, en el no se pueden hacer diagonales, por lo
-     * tanto, H + 10*(diferencia de filas + diferencia de columnas entre el nodo
+     * H + 10*(diferencia de filas + diferencia de columnas entre el nodo
      * y el nodo final).
      */
     private int H;
@@ -60,10 +57,9 @@ public class NodoIA implements Comparable
      */
     private NodoIA nodoFinal;
 
-    /**
-     * Constructor por defecto.
-     * Inicializa a unos valores neutros del nodo.
-     */
+   /**
+    * Constructor de la clase nodo Ia
+    */
     public NodoIA()
     {
         x = -1;
@@ -94,55 +90,7 @@ public class NodoIA implements Comparable
         else return 0;
     }
 
-    /**
-     * Obtiene la componente x de la posición del nodo.
-     * @return Devuelve un valor entero con el número de columna de la posición
-     * del nodo.
-     */
-    public int getX()
-    {
-        return x;
-    }
 
-    /**
-     * Establece un nuevo valor para la componente x (columna).
-     * @param x Nuevo valor para la componente x.
-     * @return Devuelve verdadero si se ha establecido el nuevo valor.
-     */
-    public boolean setX(int x)
-    {
-        if (x >= 0)
-        {
-            this.x = x;
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Obtiene la componente y de la posición del nodo.
-     * @return Devuelve un valor entero con el número de fila de la posición
-     * del nodo.
-     */
-    public int getY()
-    {
-        return y;
-    }
-
-    /**
-     * Establece un nuevo valor para la componente y (fila).
-     * @param y Nuevo valor para la componente y.
-     * @return Devuelve verdadero si se ha establecido el nuevo valor.
-     */
-    public boolean setY(int y)
-    {
-        if (y >= 0)
-        {
-            this.y = y;
-            return true;
-        }
-        return false;
-    }
 
     /**
      * Recalcula el valor de F. Normalmente, cuando G, H o coste han cambiado.
@@ -179,6 +127,16 @@ public class NodoIA implements Comparable
             H = 0;
         }
         recalcularF();
+    }
+
+    /**
+     * Genera una cadena de caracteres con la posición del nodo (fila, columna).
+     * @return Devuelve una cadena con la posición (fila, columna).
+     */
+    @Override
+    public String toString()
+    {
+        return "(" + y + ", " + x + ")";
     }
 
     /**
@@ -289,14 +247,56 @@ public class NodoIA implements Comparable
         return false;
     }
 
+
+
     /**
-     * Genera una cadena de caracteres con la posición del nodo (fila, columna).
-     * @return Devuelve una cadena con la posición (fila, columna).
+     * Obtiene la componente x de la posición del nodo.
+     * @return Devuelve un valor entero con el número de columna de la posición
+     * del nodo.
      */
-    @Override
-    public String toString()
+    public int getX()
     {
-        return "(" + y + ", " + x + ")";
+        return x;
+    }
+
+    /**
+     * Establece un nuevo valor para la componente x (columna).
+     * @param x Nuevo valor para la componente x.
+     * @return Devuelve verdadero si se ha establecido el nuevo valor.
+     */
+    public boolean setX(int x)
+    {
+        if (x >= 0)
+        {
+            this.x = x;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Obtiene la componente y de la posición del nodo.
+     * @return Devuelve un valor entero con el número de fila de la posición
+     * del nodo.
+     */
+    public int getY()
+    {
+        return y;
+    }
+
+    /**
+     * Establece un nuevo valor para la componente y (fila).
+     * @param y Nuevo valor para la componente y.
+     * @return Devuelve verdadero si se ha establecido el nuevo valor.
+     */
+    public boolean setY(int y)
+    {
+        if (y >= 0)
+        {
+            this.y = y;
+            return true;
+        }
+        return false;
     }
 }
 

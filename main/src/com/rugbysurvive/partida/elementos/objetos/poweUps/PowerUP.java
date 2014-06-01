@@ -12,20 +12,50 @@ import com.rugbysurvive.partida.jugadores.Habilidades;
 
 
 /**
- * Created by aitor on 11/04/14.
+ * Objeto que sera usado por el jugador sobre si mismo.
+ * afectara una habilidad durante un tiempo limitado despues del cual se desactiva
+ * ademas se efectuara una animacion para mostrar su uso.
+ * Created by Victor on 11/04/14.
  */
 public class PowerUP extends Objeto implements Proceso {
 
 
     UsoObjetos usoObjetos;
+
+    /**
+     * indica se esta efectuando una animacion
+     */
     private boolean animacionIniciada;
+
+    /**
+     * representacion del la textura que se dibujara en la animacion
+     */
     private ElementoDibujable flecha;
+
+    /**
+     * posicion y de la textura de la animacion
+     */
     private int posicionYFlecha;
 
-
+    /**
+     * posicion x en la que se usara el objeto
+     */
     protected int x;
+
+    /**
+     * posicion y en la que se usara el objeto
+     */
     protected int y;
 
+    /**
+     * constructor del objeto power up
+     * @param id identificador del objeto
+     * @param vida vida util del objeto
+     * @param imagen imagen que representa el objeto graficamente
+     * @param habilidad habilidad a la que afecta el objeto
+     * @param modificacion cantidad de habilidad dara el objeto
+     * @param jugador jugador que usa el objeto
+     */
     public PowerUP(int id,int vida,String imagen, Habilidades habilidad,int modificacion,Jugador jugador) {
 
         super(id, vida, imagen,jugador);
@@ -35,6 +65,14 @@ public class PowerUP extends Objeto implements Proceso {
         this.flecha = new ElementoDibujable(TipoDibujo.interficieUsuario,"objetos/flechaGrande.png");
     }
 
+    /**
+     * constructor del objeto power up
+     * @param id identificador del objeto
+     * @param vida vida util del objeto
+     * @param habilidad habilidad a la que afecta el objeto
+     * @param modificacion cantidad de habilidad dara el objeto
+     * @param jugador jugador que usa el objeto
+     */
     public PowerUP(int id,int vida, Habilidades habilidad,int modificacion,Jugador jugador){
         super(id,vida,generarTextura(habilidad),jugador);
         this.habilidad = habilidad;
@@ -43,6 +81,11 @@ public class PowerUP extends Objeto implements Proceso {
         this.flecha = new ElementoDibujable(TipoDibujo.interficieUsuario,"objetos/flechaGrande.png");
     }
 
+    /**
+     * genera una textura para la representacion grafica en funcion de la habilidad del objeto
+     * @param habilidad habilidad del objeto
+     * @return textura para la representacion grafica
+     */
     private static String generarTextura(Habilidades habilidad){
 
         switch(habilidad){

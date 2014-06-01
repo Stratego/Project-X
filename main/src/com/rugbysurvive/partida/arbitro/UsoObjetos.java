@@ -8,25 +8,38 @@ import com.rugbysurvive.partida.Jugador.SinPelota;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.gestores.Procesos.Proceso;
 import com.rugbysurvive.partida.gestores.Procesos.ProcesosContinuos;
-import com.rugbysurvive.partida.jugadores.Equipo;
 import com.rugbysurvive.partida.tablero.Campo;
-import com.rugbysurvive.partida.tablero.Lado;
 
 /**
  * Created by Victor on 30/04/14.
- * Regla que determina si el arbitro sanciona el uso del objetos.
+ * Regla que determina si el uso del objetos es falta o no en funcion
+ * de la posicion y si esta a la vista del arbitro.
+ * En caso afirmativo se expulsa al jugador durante unos turnos.
  */
 public class UsoObjetos extends Regla implements Proceso{
+
+    /**
+     * numero de turnos en los que el jugador estara castigado
+     */
     private static final int NUMERO_TURNOS_CASTIGADO = 2;
 
+    /**
+     * jugador que usa un objeto
+     */
     private Jugador jugador;
+
+
     private int turno;
 
-
+    /**
+     * Constructor de la regla uso de objetos
+     * @param jugador jugador que usa un objeto
+     */
     public UsoObjetos (Jugador jugador){
         super();
         this.jugador = jugador;
     }
+
     @Override
     public boolean arbitrar() {
         System.out.println("arbitrando uso de objetos");
