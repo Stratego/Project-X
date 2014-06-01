@@ -59,22 +59,105 @@ public class ComponentesJuego {
 
     private void generarEquipos()
     {
-        System.out.println("Escudo eq2" + this.equipo2Modelado.getEscudo());
-        System.out.println("Escudo eq1"+this.equipo1Modelado.getEscudo());
+
 
         this.equipo1.setLogo(this.equipo1Modelado.getEscudo());
         this.equipo1.setEstandarte(this.equipo1Modelado.getEscudo());
-        this.equipo2.setLogo(this.equipo1Modelado.getEscudo());
-        this.equipo2.setEstandarte(this.equipo1Modelado.getEscudo());
-        for(com.models.Jugador auxJugador : this.equipo2Modelado.getJugadoes()){
-            System.out.println("jugador"+auxJugador.getPosX()+","+auxJugador.getPosY());
+
+        if(this.equipo2.getColor() == Color.verde){
+            this.equipo2.setLogo("banderas/logos/Logo5E4.png");
+             this.equipo2.setEstandarte("banderas/logos/Logo5E4.png");
+         }
+        else if(this.equipo2.getColor() == Color.rojo)
+        {
+            this.equipo2.setLogo("banderas/logos/Logo3E1.png");
+            this.equipo2.setEstandarte("banderas/logos/Logo3E1.png");
+
+        }
+        else if(this.equipo2.getColor() == Color.azul)
+        {
+            this.equipo2.setLogo("banderas/logos/Logo5E3.png");
+            this.equipo2.setEstandarte("banderas/logos/Logo5E3.png");
+        }
+
+         else if(this.equipo2.getColor() == Color.amarillo)
+        {
+            this.equipo2.setLogo("banderas/logos/Logo4E2.png");
+            this.equipo2.setEstandarte("banderas/logos/Logo4E2.png");
+
+        }
+
+
+            for(com.models.Jugador auxJugador : this.equipo1Modelado.getJugadores()){
+           System.out.println("jugador equipo 1"+auxJugador.getPosX()+","+auxJugador.getPosY());
             List<Habilidad> hab = auxJugador.getHabilidades();
-            System.out.println("jugador" + hab.get(0).getValor() + "'" + hab.get(1).getValor() + "'" + hab.get(2).getValor() + "'" + hab.get(3).getValor() + "'" + hab.get(4).getValor());
-            //Jugador jugadorReal =  new Jugador(hab.get(0).getValor(),hab.get(0).getValor(),hab.get(0).getValor(),hab.get(0).getValor(),hab.get(0).getValor(),hab.get(0).getValor(), this.equipo1);
-            //this.equipo1.añadirJugador(jugadorReal,auxJugador.getPosX(),auxJugador.getPosY());
+          //  System.out.println("jugador" + hab.get(0).getValor() + "'" + hab.get(1).getValor() + "'" + hab.get(2).getValor() + "'" + hab.get(3).getValor() + "'" + hab.get(4).getValor());
+/*            if(auxJugador.getPowerups().size()>0){
+                System.out.print("HAY OBJETOSSSSSSSSSSSSSSSs");
+            }*/
+            //
+            Jugador jugadorReal;
+            if(this.equipo1Modelado.getJugadores().indexOf(auxJugador) == 2 || this.equipo1Modelado.getJugadores().indexOf(auxJugador) == 4)
+            {
+                jugadorReal =  new Jugador(hab.get(0).getValor(),100,hab.get(1).getValor(),hab.get(2).getValor(),30,hab.get(4).getValor(), this.equipo1);
+                PowerUP objeto3 = new PowerUP(1,10,Habilidades.resistencia,50,jugadorReal);
+                ColocadorObjetosCampo objeto4 = new ColocadorObjetosCampo(2,10,"mina.png",jugadorReal,new MinaCampo("mina.png",jugadorReal));
+                ColocadorObjetosCampo objeto2 = new ColocadorObjetosCampo(3,10,"objetos/agujero.png",jugadorReal,new Agujero("objetos/agujero.png",jugadorReal));
+                ColocadorObjetosCampo objeto = new ColocadorObjetosCampo(4,10,"objetos/hielo.png",jugadorReal,new Hielo("objetos/hielo.png",jugadorReal));
+                jugadorReal.añadirObjeto(objeto);
+                jugadorReal.añadirObjeto(objeto2);
+                jugadorReal.añadirObjeto(objeto3);
+                jugadorReal.añadirObjeto(objeto4);
+            }
+            else{
+               jugadorReal =  new Jugador(hab.get(0).getValor(),100,hab.get(1).getValor(),hab.get(2).getValor(),hab.get(3).getValor(),hab.get(4).getValor(), this.equipo1);
+            }
+
+          int posY = auxJugador.getPosY();
+          int posX = auxJugador.getPosX();
+            if(posY<14){
+
+                posX = translacionPosicionX(posX);
+            }
+
+          if(posY>14){
+              posY = this.translacionPosicion(posY);
+              posY = posY +1;
+          }
+            else{
+              posY = posY-1;
+          }
+
+           this.equipo1.añadirJugador(jugadorReal,posX,posY);
+        }
+
+        for(com.models.Jugador auxJugador : this.equipo2Modelado.getJugadores()){
+           System.out.println("jugador equipo2"+auxJugador.getPosX()+","+auxJugador.getPosY());
+            List<Habilidad> hab = auxJugador.getHabilidades();
+            //System.out.println("jugador" + hab.get(0).getValor() + "'" + hab.get(1).getValor() + "'" + hab.get(2).getValor() + "'" + hab.get(3).getValor() + "'" + hab.get(4).getValor());
+/*            if(auxJugador.getObjetos().size()>0){
+                System.out.print("HAY OBJETOSSSSSSSSSSSSSSSs");
+            }*/
+            Jugador jugadorReal =  new Jugador(hab.get(0).getValor(),100,hab.get(1).getValor(),hab.get(2).getValor(),hab.get(3).getValor(),hab.get(4).getValor(), this.equipo2);
+            int posY = auxJugador.getPosY();
+            int posX = auxJugador.getPosX();
+            if(posY<14){
+
+                posX = translacionPosicionX(posX);
+            }
+            if(posY>14){
+                posY = this.translacionPosicion(posY);
+                 posY = posY +1;
+            }
+            else{
+                posY = posY-1;
+            }
+
+            this.equipo2.añadirJugador(jugadorReal,posX,posY);
+
         }
         // falta añadir los objetos a cada jugador
-        Jugador jugador = new Jugador(80, 90, 100, 90, 80, 70, equipo1);
+       /* Jugador jugador = new Jugador(80, 90, 100, 90, 80, 70, equipo1);
 
         jugador.setDireccion(DireccionJugador.derecha);
 
@@ -142,7 +225,7 @@ public class ComponentesJuego {
         jugador.añadirObjeto(objeto);
         jugador.añadirObjeto(objeto);*/
 
-        this.equipo2.añadirJugador(jugador,2,3);
+        //this.equipo2.añadirJugador(jugador,2,3);
        // this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),19,27);
         //this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),21,21);
 
@@ -179,7 +262,55 @@ public class ComponentesJuego {
             return Color.verde;
         }
     }
+    private int translacionPosicion(int posicion){
 
+        switch (posicion){
+            case 29:
+                return 0;
+            case 28:
+                return 1;
+            case 27:
+                return 2;
+            case 26:
+                return 3;
+            case 25:
+                return 4;
+            case 24:
+                return 5;
+            case 23:
+                return 6;
+            case 22:
+                return 7;
+            case 21:
+                return 8;
+            case 20:
+                return 9;
+            case 19:
+                return 10;
+            case 18:
+                return 11;
+            case 17:
+                return 12;
+            case 16:
+                return 13;
+            case 15:
+                return 14;
+        }
+        return 0;
+    }
+
+    private int translacionPosicionX(int posicion){
+        if(posicion<=9){
+            int diferencia = 9-posicion;
+            posicion = 9+diferencia;
+            return posicion;
+        }
+        else{
+            int diferencia = posicion -9;
+            posicion = 9- diferencia;
+            return posicion;
+        }
+    }
     public Campo getCampo(){
         return this.campo;
     }

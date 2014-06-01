@@ -95,4 +95,8 @@ public class Jugador {
                 ", posY=" + posY +
                 '}';
     }
+
+    public List<Objeto> getObjetos() {
+        return objetos;
+    }
 }

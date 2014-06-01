@@ -11,6 +11,7 @@ import com.rugbysurvive.partida.ConstantesJuego;
 
 import com.rugbysurvive.partida.IA.IA;
 
+import com.rugbysurvive.partida.Jugador.extras.Color;
 import com.rugbysurvive.partida.ResolucionPantalla;
 import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.arbitro.Arbitro;
@@ -125,12 +126,33 @@ public class SkeletonMain extends Game {
         nombresTexturas.add("Menu/Habilidades/nivel3.png");
 
         // BANDERAS
+
+
         nombresTexturas.add(this.equipo1.getEscudo());
         String[] split = this.equipo1.getEscudo().split("/");
         nombresTexturas.add("banderas/cambioTurno/"+split[split.length-1]);
 
+        String bandera = "banderas/logos/Logo5E4.png";
+        nombresTexturas.add(bandera);
+        split = bandera.split("/");
+        nombresTexturas.add("banderas/cambioTurno/"+split[split.length-1]);
+
+        bandera ="banderas/logos/Logo3E1.png";
+        nombresTexturas.add(bandera);
+        split = bandera.split("/");
+        nombresTexturas.add("banderas/cambioTurno/"+split[split.length-1]);
 
 
+        bandera ="banderas/logos/Logo5E3.png";
+        nombresTexturas.add(bandera);
+        split = bandera.split("/");
+        nombresTexturas.add("banderas/cambioTurno/"+split[split.length-1]);
+
+
+        bandera ="banderas/logos/Logo4E2.png";
+        nombresTexturas.add(bandera);
+        split = bandera.split("/");
+        nombresTexturas.add("banderas/cambioTurno/"+split[split.length-1]);
 
 
         nombresTexturas.add("Menu/Habilidades/fuerza.png");
