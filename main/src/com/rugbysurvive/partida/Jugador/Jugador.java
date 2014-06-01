@@ -129,7 +129,7 @@ public class Jugador implements GestionEntrada {
 
     public void cansancio()
     {
-        if(this.contMovimientos == 3)
+        if(this.contMovimientos == 6)
         {
             this.setResistencia(this.getResistencia() - 30);
             this.contMovimientos = 0;

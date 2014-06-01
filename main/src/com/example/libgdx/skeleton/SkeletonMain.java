@@ -36,7 +36,7 @@ import java.util.ArrayList;
 
 public class SkeletonMain extends Game {
 
-    static final int NUMERO_TURNOS_FINAL =10;
+    static final int NUMERO_TURNOS_FINAL =15;
     private InputMultiplexer multiplexer;
     private GestorGrafico gestorGrafico;
 

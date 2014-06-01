@@ -99,8 +99,8 @@ public class ComponentesJuego {
             Jugador jugadorReal;
             if(this.equipo1Modelado.getJugadores().indexOf(auxJugador) == 2 || this.equipo1Modelado.getJugadores().indexOf(auxJugador) == 4)
             {
-                jugadorReal =  new Jugador(hab.get(0).getValor(),100,hab.get(1).getValor(),hab.get(2).getValor(),30,hab.get(4).getValor(), this.equipo1);
-                PowerUP objeto3 = new PowerUP(1,10,Habilidades.resistencia,50,jugadorReal);
+                jugadorReal =  new Jugador(hab.get(0).getValor(),100,hab.get(1).getValor(),hab.get(2).getValor(),40,hab.get(4).getValor(), this.equipo1);
+                PowerUP objeto3 = new PowerUP(1,40,Habilidades.resistencia,50,jugadorReal);
                 ColocadorObjetosCampo objeto4 = new ColocadorObjetosCampo(2,10,"mina.png",jugadorReal,new MinaCampo("mina.png",jugadorReal));
                 ColocadorObjetosCampo objeto2 = new ColocadorObjetosCampo(3,10,"objetos/agujero.png",jugadorReal,new Agujero("objetos/agujero.png",jugadorReal));
                 ColocadorObjetosCampo objeto = new ColocadorObjetosCampo(4,10,"objetos/hielo.png",jugadorReal,new Hielo("objetos/hielo.png",jugadorReal));
@@ -110,7 +110,9 @@ public class ComponentesJuego {
                 jugadorReal.añadirObjeto(objeto4);
             }
             else{
-               jugadorReal =  new Jugador(hab.get(0).getValor(),100,hab.get(1).getValor(),hab.get(2).getValor(),hab.get(3).getValor(),hab.get(4).getValor(), this.equipo1);
+                int velocidad = hab.get(3).getValor()+30;
+                if (velocidad>100){velocidad = 100;}
+                  jugadorReal =  new Jugador(hab.get(0).getValor(),100,hab.get(1).getValor(),hab.get(2).getValor(),velocidad,hab.get(4).getValor(), this.equipo1);
             }
 
           int posY = auxJugador.getPosY();
@@ -138,7 +140,9 @@ public class ComponentesJuego {
 /*            if(auxJugador.getObjetos().size()>0){
                 System.out.print("HAY OBJETOSSSSSSSSSSSSSSSs");
             }*/
-            Jugador jugadorReal =  new Jugador(hab.get(0).getValor(),100,hab.get(1).getValor(),hab.get(2).getValor(),hab.get(3).getValor(),hab.get(4).getValor(), this.equipo2);
+            int velocidad = hab.get(3).getValor()+30;
+            if (velocidad>100){velocidad = 100;}
+            Jugador jugadorReal =  new Jugador(hab.get(0).getValor(),100,hab.get(1).getValor(),hab.get(2).getValor(),velocidad,hab.get(4).getValor(), this.equipo2);
             int posY = auxJugador.getPosY();
             int posX = auxJugador.getPosX();
             if(posY<14){
