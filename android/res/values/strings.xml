@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">libGDX Skeleton</string>
+    <string name="app_name">Rugby Survive</string>
     <string name="mainActivity_button_newUser">Crear usuario</string>
     <string name="activity_create_user_nombre">Nombre de usuario</string>
     <string name="activity_create_user_name_equipo">Nombre de equipo</string>

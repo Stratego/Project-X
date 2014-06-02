@@ -66,7 +66,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO HABILIDADES VALUES(4,'Resistencia','def resistencia');");
         db.execSQL("INSERT INTO HABILIDADES VALUES(5,'Ataque','def ataque');");
 
-        db.execSQL("INSERT INTO OBJETOS VALUES(1,'Mina','l jugador rival que pase por encima morirá.', 'android.resource://com.uab.lis.rugby/" + R.drawable.mina +"');");
+        db.execSQL("INSERT INTO OBJETOS VALUES(1,'Mina','El jugador rival que pase por encima morirá.', 'android.resource://com.uab.lis.rugby/" + R.drawable.mina +"');");
         db.execSQL("INSERT INTO OBJETOS VALUES(2,'Agujero','El jugador rival que pase por encima desaparecerá hasta que tu equipo consiga un punto o llegue el descanso.', 'android.resource://com.uab.lis.rugby/" + R.drawable.agujero +"');");
         db.execSQL("INSERT INTO OBJETOS VALUES(3,'Hielo','Congela la acción del jugador rival que pase por encima', 'android.resource://com.uab.lis.rugby/" + R.drawable.hielo +"');");
 
