@@ -202,10 +202,6 @@ public class Pase extends Accion implements Proceso {
 
     }
 
-    @Override
-    public void simularAnimacion() {
-
-    }
 
 
     @Override

@@ -436,10 +436,7 @@ public class Movimiento extends Accion implements Proceso {
         }
         return false;
     }
-    @Override
-    public void simularAnimacion() {
 
-    }
 
     @Override
     public boolean procesar() {

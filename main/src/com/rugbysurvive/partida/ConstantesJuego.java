@@ -14,7 +14,7 @@ import com.badlogic.gdx.Gdx;
  */
 public class ConstantesJuego {
     /*
-    * NO se sigue el orden estipulado por el estilo de codigo para tener las constantes
+    * No se sigue el orden estipulado por el estilo de codigo para tener las constantes
     * agrupadas por tematica. Ademas hay ciertas variables constantes que dependen de otras
     * y deben seguir un orden concreto
     * */

@@ -218,8 +218,5 @@ public class Chute extends Accion {
         }
     }
 
-    @Override
-    public void simularAnimacion() {
 
-    }
 }

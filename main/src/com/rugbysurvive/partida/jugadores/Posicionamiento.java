@@ -19,6 +19,10 @@ import java.util.Random;
 
 /**
  * Created by aitor on 27/03/14.
+ * Gestiona la colocacion de los jugadores teniendo en cuenta ciertas
+ * posiciones predeterminadas.
+ * Ofrece un conjunto de funciones que se pueden acceder de forma estatica
+ * y que permite facilitar el trabajo de colocacion.
  */
 public class Posicionamiento {
 
@@ -93,13 +97,20 @@ public class Posicionamiento {
 
     }
 
-
+    /**
+     * Coloca los jugadores  del equipo indicado en linia a mitad del campo y en el lado del campo
+     * que les corresponde.
+     * Esta posicion se realiza como presentacion del juego.
+     * @param campo lugar donde seran colocados los jugadores
+     * @param equipo conjunto de jugadores que deben ser colocados
+     * @param lado lado del campo en qeu seran colocados
+     */
     public static void generarPosicionSaludo(Campo campo,Equipo equipo,Lado lado){
 
         campo.borrarEquipo(equipo);
         Jugador jugador;
 
-        int posicionX = 0;
+        int posicionX;
         int posicionY = POS_LINIA_SALUDO_Y;
 
         if(lado == Lado.izquierda){
@@ -118,14 +129,14 @@ public class Posicionamiento {
             if(equipo.getAlineacion().size()>i){
                 jugador = equipo.getAlineacion().get(i).jugador;
                 jugador.setDireccion(DireccionJugador.frontal);
-                if(lado == Lado.izquierda){
+
+                if(lado == Lado.izquierda) {
 
                     campo.añadirElemento(jugador,posicionY,posicionX);
                     posicionX--;
                 }
 
-                else
-                {
+                else {
                     campo.añadirElemento(jugador,posicionY,posicionX);
                     posicionX++;
                 }
@@ -135,22 +146,17 @@ public class Posicionamiento {
 
     }
 
+
+
     /**
-     * Coloca al equipo en posicion de saque determinado por las reglas
-     * de juego
+     * Coloca al jugador en posicion de saque determinado por las reglas
+     * de juego del rugby .
+     * Eso consiste en una linia recta al final del campo
+     * con el jugador que chuta detras.
      *
-     * @param campo Zona de juego
-     * @param equipo Conjunto de jugadores que seran situados en el campo
-     * @param lado Mitad del campo donde seran situados los jugadores
+     * @param jugador Elemento que se desea colocar usando la posicion indicada
      *
-     */
-     public static void generarSaquePredeterminado(Campo campo,Equipo equipo,Lado lado)
-     {
-
-     }
-
-    public static void generarSaquePredeterminado(Jugador jugador)
-    {
+     */ public static void generarSaquePredeterminado(Jugador jugador) {
         Jugador jugadorChute;
         Chute chute = null;
 
@@ -191,27 +197,17 @@ public class Posicionamiento {
         return valorDecimal;
     }
 
+
     private static Jugador recolocarIzquierda()
     {
         Jugador jugadorChuta = null;
 
-        /*int posX = 13;
-        int posY = 6;
-        for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo1().listaJugadoresCampo()){
-
-            jugador.getCasilla().setJugador(null);
-            jugador.colocar(Campo.getInstanciaCampo().getCasilla(posY, posX));
-            jugador.setEstado(new SinPelota());
-
-            posY += 1;
-        }*/
 
         int cont = 1;
         for (PosicionInicial alineacion: ComponentesJuego.getComponentes().getEquipo1().getAlineacion()){
             alineacion.getJugador().getCasilla().setJugador(null);
             alineacion.getJugador().colocar(Campo.getInstanciaCampo().getCasilla(alineacion.getPosicionX(), alineacion.getPosicionY()));
             alineacion.getJugador().setEstado(new SinPelota());
-           // alineacion.getJugador().setDireccion(DireccionJugador.derecha);
             cont += 1;
 
             if(cont == ConstantesJuego.JUGADORES_CAMPO)
@@ -437,7 +433,7 @@ public class Posicionamiento {
      * Coloca los dos equipos en posicion de saque de banda en la posicion donde un jugador o
      * la pelota a salido fuera de los limites y lo ha visto el arbitro.
      * Una vez se han colocado los jugadores mas cercanos a la posicion de saque se
-     * asigna aleatoriamente la pelota a uno de los dos equipos
+     * asigna aleatoriamente la pelota a uno de los dos equipos.
      *
      * @param posicionX posicion del eje x central del saque
      * @param posicionY posicion del eje y central del saque
@@ -577,7 +573,7 @@ public class Posicionamiento {
     }
 
     /**
-     * coloca los jugadores del equipo 1 en la meele
+     * coloca los jugadores del equipo 1 en en posicion de melee
      *
      * @param x posicion del eje  x donde se empieza a colocar
      * @param y posicion del eje  y donde se empieza a colocar
