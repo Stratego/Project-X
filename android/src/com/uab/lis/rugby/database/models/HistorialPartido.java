@@ -1,7 +1,7 @@
 package com.uab.lis.rugby.database.models;
 
 /**
- * Created by Adria on 12/05/2014.
+ * Define el modelo de un historial de partido
  */
 public class HistorialPartido {
     private int idEquipo1;

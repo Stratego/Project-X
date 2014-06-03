@@ -15,6 +15,7 @@ import java.util.ArrayList;
  * Created by adria on 12/05/14.
  */
 public class EquipoCursor {
+
     public static Equipo newInstance(Context context, Cursor cursor,int iduser){
         int colId = cursor.getColumnIndex(tbEquipos._ID);
         int colNombre = cursor.getColumnIndex(tbEquipos.COL_NOMBRE);
@@ -40,6 +41,7 @@ public class EquipoCursor {
 
         return equipo;
     }
+
     public static ContentValues generateValues(Equipo equipo){
         ContentValues values = new ContentValues();
         if(equipo.getId() != -1){

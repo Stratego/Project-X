@@ -1,9 +1,5 @@
 package com.uab.lis.rugby.database.ContentProviders;
 
-/**
- * Created by Manuel on 29/03/2014.
- */
-
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import com.uab.lis.rugby.database.ContentProviders.multiple.*;
@@ -11,6 +7,9 @@ import com.uab.lis.rugby.database.ContentProviders.single.*;
 import com.uab.lis.rugby.database.SQLiteHelper;
 import com.uab.lis.rugby.database.libContentProvider.DespicableContentProvider;
 
+/**
+ * Esta clase es la responsable de gestionar todos los minions.
+ */
 public class MyAppContentProvider extends DespicableContentProvider {
 
     public static final String AUTHORITY = "com.uab.lis.rugby";

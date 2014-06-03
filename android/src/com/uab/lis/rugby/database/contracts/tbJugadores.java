@@ -3,7 +3,7 @@ package com.uab.lis.rugby.database.contracts;
 import android.provider.BaseColumns;
 
 /**
- * Created by adria on 27/03/14.
+ * Define la tabla de jugadores.
  */
 public class tbJugadores implements BaseColumns{
 

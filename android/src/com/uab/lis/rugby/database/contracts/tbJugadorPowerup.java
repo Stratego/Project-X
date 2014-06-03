@@ -3,7 +3,7 @@ package com.uab.lis.rugby.database.contracts;
 import android.provider.BaseColumns;
 
 /**
- * Created by Manuel on 20/04/2014.
+ * Define la tabla que relaciona jugadores y powerups.
  */
 public class tbJugadorPowerup implements BaseColumns {
 

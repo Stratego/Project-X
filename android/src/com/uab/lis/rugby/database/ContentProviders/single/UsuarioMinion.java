@@ -1,8 +1,5 @@
 package com.uab.lis.rugby.database.ContentProviders.single;
 
-/**
- * Created by Adria on 20/04/2014.
- */
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +7,9 @@ import android.net.Uri;
 import com.uab.lis.rugby.database.contracts.tbUsuarios;
 import com.uab.lis.rugby.database.libContentProvider.MinionContentProvider;
 
+/**
+ * Gestiona el content provider de un usuario.
+ */
 public class UsuarioMinion extends MinionContentProvider {
     @Override
     public String getBasePath() {

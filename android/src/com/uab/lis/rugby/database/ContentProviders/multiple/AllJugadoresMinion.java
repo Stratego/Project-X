@@ -9,7 +9,7 @@ import com.uab.lis.rugby.database.contracts.*;
 import com.uab.lis.rugby.database.libContentProvider.MinionContentProvider;
 
 /**
- * Created by Manuel on 14/05/14.
+ * Gestiona el content provider de la tabla de jugadores
  */
 public class AllJugadoresMinion extends MinionContentProvider {
     @Override

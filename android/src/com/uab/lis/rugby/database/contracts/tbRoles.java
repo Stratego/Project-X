@@ -3,7 +3,7 @@ package com.uab.lis.rugby.database.contracts;
 import android.provider.BaseColumns;
 
 /**
- * Created by Manuel on 19/04/2014.
+ * Define la tabla de roles.
  */
 public class tbRoles implements BaseColumns {
 

@@ -1,19 +1,18 @@
 package com.uab.lis.rugby.service;
 
 import android.app.Service;
-import android.content.*;
-import android.media.AudioManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-import android.widget.Toast;
 import com.uab.lis.rugby.R;
 
 /**
- * Created by Adria on 25/03/14.
+ * Servicio que gestiona la reproducción de la música en el juego.
  */
 public class MusicService extends Service {
     private static final String TAG = "MusicService";

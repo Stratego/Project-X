@@ -8,7 +8,7 @@ import com.uab.lis.rugby.database.contracts.*;
 import com.uab.lis.rugby.database.libContentProvider.MinionContentProvider;
 
 /**
- * Created by Adria on 12/05/2014.
+ * Gestiona el content provider de la tabla del historial de partidos.
  */
 public class HistorialPartidosMinion extends MinionContentProvider {
     @Override

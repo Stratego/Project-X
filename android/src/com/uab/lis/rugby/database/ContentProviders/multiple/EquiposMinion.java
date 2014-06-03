@@ -1,8 +1,5 @@
 package com.uab.lis.rugby.database.ContentProviders.multiple;
 
-/**
- * Created by Manuel on 20/04/2014.
- */
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,10 +11,12 @@ import com.uab.lis.rugby.database.contracts.tbLiga;
 import com.uab.lis.rugby.database.contracts.tbUsuarios;
 import com.uab.lis.rugby.database.libContentProvider.MinionContentProvider;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Gestiona el content provider de los equipos de un usuario.
+ */
 public class EquiposMinion extends MinionContentProvider {
     @Override
     public String getBasePath() {

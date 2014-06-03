@@ -11,7 +11,7 @@ import com.uab.lis.rugby.database.contracts.tbLiga;
 import com.uab.lis.rugby.database.libContentProvider.MinionContentProvider;
 
 /**
- * Created by Adria on 20/05/2014.
+ * Gestiona el content provider de la tabla de ligas.
  */
 public class LigaMinion extends MinionContentProvider {
     @Override

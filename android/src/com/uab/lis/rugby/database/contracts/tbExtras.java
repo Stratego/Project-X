@@ -3,7 +3,7 @@ package com.uab.lis.rugby.database.contracts;
 import android.provider.BaseColumns;
 
 /**
- * Created by Manuel on 28/04/14.
+ * Define la tabla de extras.
  */
 public class tbExtras implements BaseColumns {
 

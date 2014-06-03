@@ -11,7 +11,7 @@ import com.uab.lis.rugby.database.contracts.tbUsuarios;
 import com.uab.lis.rugby.database.libContentProvider.MinionContentProvider;
 
 /**
- * Created by Adria on 28/04/14.
+ * Gestiona el content provider de un extra de un jugador de un equipo de un usuario.
  */
 public class ExtraMinion extends MinionContentProvider {
     @Override

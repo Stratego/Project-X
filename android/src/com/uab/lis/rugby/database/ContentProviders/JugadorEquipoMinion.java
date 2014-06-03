@@ -1,8 +1,5 @@
 package com.uab.lis.rugby.database.ContentProviders;
 
-/**
- * Created by Manuel on 20/04/2014.
- */
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +9,9 @@ import com.uab.lis.rugby.database.contracts.tbEquipos;
 import com.uab.lis.rugby.database.contracts.tbJugadorEquipo;
 import com.uab.lis.rugby.database.libContentProvider.MinionContentProvider;
 
+/**
+ * Gestiona el content provider de la tabla que relaciona jugadores y equipos.
+ */
 public class JugadorEquipoMinion extends MinionContentProvider {
     @Override
     public String getBasePath() {

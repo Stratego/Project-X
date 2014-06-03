@@ -1,8 +1,5 @@
 package com.uab.lis.rugby.database.ContentProviders.single;
 
-/**
- * Created by Adria on 20/04/2014.
- */
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +10,9 @@ import com.uab.lis.rugby.database.contracts.tbJugadores;
 import com.uab.lis.rugby.database.contracts.tbUsuarios;
 import com.uab.lis.rugby.database.libContentProvider.MinionContentProvider;
 
+/**
+ * Gestiona el content provider de una habilidad de un jugador de un equipo de un usuario.
+ */
 public class HabilidadMinion extends MinionContentProvider {
     @Override
     public String getBasePath() {

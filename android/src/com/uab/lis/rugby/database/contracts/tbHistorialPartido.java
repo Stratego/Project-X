@@ -3,7 +3,7 @@ package com.uab.lis.rugby.database.contracts;
 import android.provider.BaseColumns;
 
 /**
- * Created by Adria on 12/05/2014.
+ * Define la tabla del historial de partidos.
  */
 public class tbHistorialPartido implements BaseColumns {
 

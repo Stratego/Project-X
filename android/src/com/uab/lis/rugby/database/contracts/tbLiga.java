@@ -3,7 +3,7 @@ package com.uab.lis.rugby.database.contracts;
 import android.provider.BaseColumns;
 
 /**
- * Created by Adria on 20/05/2014.
+ * Define la tabla de ligas.
  */
 public class tbLiga implements BaseColumns {
     public static final String TABLE = "LIGA";

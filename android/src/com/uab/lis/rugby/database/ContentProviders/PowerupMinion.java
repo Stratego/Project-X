@@ -8,7 +8,7 @@ import com.uab.lis.rugby.database.contracts.tbPowerups;
 import com.uab.lis.rugby.database.libContentProvider.MinionContentProvider;
 
 /**
- * Created by Manuel on 28/04/14.
+ * Gestiona el content provider de la tabla de powerups.
  */
 public class PowerupMinion extends MinionContentProvider {
     @Override

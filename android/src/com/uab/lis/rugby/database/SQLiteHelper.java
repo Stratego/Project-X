@@ -1,18 +1,18 @@
 package com.uab.lis.rugby.database;
 
-/**
- * Created by Manuel on 24/03/14.
- */
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import com.uab.lis.rugby.R;
 import com.uab.lis.rugby.database.contracts.*;
-
 import java.io.*;
 import java.nio.channels.FileChannel;
 
+/**
+ * Clase que hereda de SQLiteOpenHelper.
+ * Esta clase nos permite crear la base de datos y actualizar la estructura de tablas y datos iniciales.
+ */
 public class SQLiteHelper extends SQLiteOpenHelper {
     private Context context;
     private static String nomBD = "DB_RugbySurvive";
@@ -22,10 +22,21 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         this.context = context;
     }
 
+    /**
+     * Obtiene la instancia por defecto de la clase para mantener el patrón singleton
+     *
+     * @param context El contexto de la aplicación.
+     */
     public static SQLiteHelper getInstance(Context context){
         return new SQLiteHelper(context);
     }
 
+    /**
+     * Llamado cuando la base de datos es creada por primera vez. Aquí es donde se define la estructura de las tablas
+     * y se cargan los datos iniciales.
+     *
+     * @param db La base de datos.
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(tbUsuarios.CREATE_TABLE);
@@ -105,6 +116,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         backupDatabase();
     }
 
+    /**
+     * Es llamado cuando la base de datos debe ser actualizada. Su objetivo eliminar tablas, añadir tablas, o hacer
+     * cualquier otra cosa necesaria para actualizar la base de datos a la nueva versión.
+     *
+     * @param db La base de datos.
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int versionAnterior, int versionNueva) {
         String[] tablas = new String[]{
@@ -132,6 +149,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /**
+     * Realiza una copia del archivo que contiene la base de datos y la almacena en la memoria SD del dispositivo.
+     */
     public static void backupDatabase() {
         File sd = Environment.getExternalStorageDirectory();
         File data = Environment.getDataDirectory();
