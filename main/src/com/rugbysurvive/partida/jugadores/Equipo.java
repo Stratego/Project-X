@@ -1,42 +1,52 @@
 package com.rugbysurvive.partida.jugadores;
 
 import com.rugbysurvive.partida.ConstantesJuego;
-import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
-import com.rugbysurvive.partida.Dibujables.TipoDibujo;
 import com.rugbysurvive.partida.Jugador.ConPelota;
-import com.rugbysurvive.partida.Jugador.Estado;
 import com.rugbysurvive.partida.Jugador.Jugador;
 import com.rugbysurvive.partida.Jugador.SinPelota;
 import com.rugbysurvive.partida.Jugador.extras.Color;
 import com.rugbysurvive.partida.elementos.ComponentesJuego;
 import com.rugbysurvive.partida.elementos.objetos.ObjetoJugador;
-import com.rugbysurvive.partida.elementos.objetos.poweUps.PowerUP;
 import com.rugbysurvive.partida.gestores.GestorGrafico;
 import com.rugbysurvive.partida.tablero.Campo;
-import com.rugbysurvive.partida.tablero.Casilla;
 import com.rugbysurvive.partida.tablero.Lado;
-
-
 import java.util.ArrayList;
 
 
 
 /**
- * Clase que contiene todos los jugadores de un equipo, tambien jestiona el tema de suplentes
+ * Clase que contiene todos los jugadores de un equipo.
+ * Los jugadores se divien en suplentes , en jugadores jugando y descartados
+ * Los jugadores descartados no se pueden usar en ningun momento de la partida
+ * una vez indicado.
+ * Los jugadores suplentes solo pueden ser usados mediante cambio
+ * Un jugador en juego podra ser gestionado en cualqueir momento.
+ *
+ *Gestiona todos los elementos comunes como el lado del campo en que juegan, el color
+ * de la equipacion o la bandera identificativa
+ *
+ * Ofrece ademas un conjunto de elementos que facilin el trabajo
+ * del conjunto de jugadores como bloqueo, desbloqueo o saber que jugador esta seleccionado.
+ *
+ * Tambien gestiona la alineacion por la cual seran colocados cada vez
+ * que haya un punto o al inicio del partido.
+ *
  * Created by aitor on 25/03/14.
  */
 public  class Equipo {
 
 
-    private ArrayList<Jugador> jugadores = new ArrayList <Jugador>();
-    private ArrayList<Jugador> descartados = new ArrayList<Jugador>();
+    private ArrayList<Jugador> jugadores ;
+    private ArrayList<Jugador> descartados ;
+    private ArrayList<PosicionInicial> alineacion;
+
     private String logo;
     private String estandarte;
 
     private Color color;
 
     private Lado lado;
-    private ArrayList<PosicionInicial> alineacion;
+
     private boolean jugando; // indica si el equipo esta siendo usado
 
     private static Equipo equipo;
@@ -58,21 +68,20 @@ public  class Equipo {
 
     }
 
+    /**
+     * Se obtiene la instancia de la clase del equio de forma estatica
+     * @return instancia de la calse
+     */
     public static Equipo getEquipo() {
         return equipo;
     }
 
-    public static void setEquipo(Equipo equipo) {
-        Equipo.equipo = equipo;
-    }
 
     /**
-     * crea el equipo
+     * Indica si dentro del equipo hay un jugador con pelota
+     * @return devuelve cierto si hay un jugador con pelota ,
+     *          falso en caso contrario
      */
-    public void crearEquipo(){
-
-    }
-
     public boolean jugadorConPelota()
     {
         for(Jugador jugador :this.jugadores){
@@ -86,7 +95,7 @@ public  class Equipo {
 
 
     /**
-     * devuelve una lista con todos los jugadores suplentes del equipo
+     * Devuelve una lista con todos los jugadores suplentes del equipo
      * @return lista de jugadores suplentes
      */
     public ArrayList<Jugador> listaSuplentes (){
@@ -100,7 +109,7 @@ public  class Equipo {
     }
 
     /**
-     * devuelve una lista con todos los jugadores que estan en el campo
+     * Devuelve una lista con todos los jugadores que estan en el campo
      * @return lista de jugadores en campo
      */
     public ArrayList<Jugador> listaJugadoresCampo() {
@@ -143,19 +152,28 @@ public  class Equipo {
     }
 
 
-
+    /**
+     * Indica si hay algun jugador seleccionado
+     * @return devuelve cierto si hay algun jugador seleccionado
+     */
     public boolean hayJugadorSelecionado(){
         boolean hayJugador = false;
+
         for (Jugador iter :jugadores){
-            if (iter.getSeleccionado()==true){
+            if (iter.getSeleccionado()==true) {
                 jugadorSelecionado = iter;
                 hayJugador=true;
                 return  hayJugador;
             }
         }
-
         return  hayJugador;
     }
+
+    /**
+     *Indica si el jugador existe en el equipo indicado
+     * @param jugador Elemento que se desea buscar
+     * @return Si el jugador existe o no en el equipo
+     */
     public boolean jugadorEnEquipo(Jugador jugador){
         if(this.jugadores.indexOf(jugador) !=  -1)
             return true;
@@ -163,25 +181,9 @@ public  class Equipo {
     }
 
 
-    public ArrayList<Jugador> getJugadores() {
-        return jugadores;
-    }
-
-    public void setJugadores(ArrayList<Jugador> jugadores) {
-        this.jugadores = jugadores;
-    }
-
-    public ArrayList<PosicionInicial> getAlineacion() {
-        return alineacion;
-    }
-
-    public void setAlineacion(ArrayList<PosicionInicial> alineacion) {
-        this.alineacion = alineacion;
-    }
-
-
-
-
+    /**
+     *
+     */
     public void dibujarEquipo(){
         for (Jugador iter :this.getJugadores()){
             if(!iter.isExpulsado()) {
@@ -230,6 +232,10 @@ public  class Equipo {
         return true;
     }
 
+    /**
+     * Cualquier jugador en estado seleccionado pasa a estado
+     * deseleccionado.
+     */
     public void deseleccionar(){
         for(Jugador jugador : this.jugadores) {
             jugador.setSeleccionado(false);
@@ -288,6 +294,10 @@ public  class Equipo {
 
     }
 
+    /**
+     * Cambio el estado del jugador que tenga la pelota
+     * a sin pelota.
+     */
     public void quitarPelota(){
         for (Jugador jugador: listaJugadoresCampo()){
             if (jugador.getEstado()instanceof ConPelota){
@@ -295,9 +305,7 @@ public  class Equipo {
             }
         }
     }
-    /* public boolean desalojarCampo(Campo campo){}
-    public boolean bloquear(){}
-    public boolean desbloquear(){}*/
+
 
     public Jugador getJugadorActivo (){
         return  this.jugadorSelecionado;
@@ -345,4 +353,23 @@ public  class Equipo {
         this.estandarte = "banderas/cambioTurno/"+split[split.length-1];
         System.out.println("ESTANDARTE:"+this.estandarte);
     }
+
+    public ArrayList<Jugador> getJugadores() {
+        return jugadores;
+    }
+
+    public void setJugadores(ArrayList<Jugador> jugadores) {
+        this.jugadores = jugadores;
+    }
+
+    public ArrayList<PosicionInicial> getAlineacion() {
+        return alineacion;
+    }
+
+    public void setAlineacion(ArrayList<PosicionInicial> alineacion) {
+        this.alineacion = alineacion;
+    }
+
+
+
 }

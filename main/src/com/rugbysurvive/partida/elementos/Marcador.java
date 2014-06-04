@@ -16,21 +16,26 @@ import com.rugbysurvive.partida.jugadores.Equipo;
  */
 public class Marcador implements Dibujable{
 
+    // texturas que seran dibujadas
     private ElementoDibujable puntuacionGraficaEquipo1;
     private ElementoDibujable puntuacionGraficaEquipo2;
     private ElementoDibujable banderaEquipo1;
     private ElementoDibujable banderaEquipo2;
-
+    private String textura;
+    // puntuacion
     private static int puntuacionEquipo1 = 0;
     private static int puntuacionEquipo2= 0;
+
+    // equipos que participan
     private  Equipo equipo1 ;
     private   Equipo equipo2;
-    private String textura;
+
 
     private static Marcador marcador;
 
     /**
-     *
+     *Genera todos los elementos para dibujar el marcador junto a los equipos
+     * que participan en el juego y a cuyo marcador haran referencia.
      * @param equipo1 Equipo que se mostrara el resultado en la izquierda del marcador
      * @param equipo2 Equipo qeu se mostrara el resultado en la derecha del marcador
      */
@@ -53,16 +58,31 @@ public class Marcador implements Dibujable{
 
     }
 
+    /**
+     * Singleton del marcador.
+     * @return instancia del marcador
+     */
     public static Marcador getInstanceMarcador()
     {
         return marcador;
     }
+
+    /**
+     * Devuelve el resultado del marcador del equipo 1
+     * @return resultado realizado
+     */
     public static int resultadoEquipo1(){
         return puntuacionEquipo1;
     }
+
+    /**
+     * Devuelve el resultado del marcador del equipo 2
+     * @return resultado realizado
+     */
     public static int resultadoEquipo2(){
         return puntuacionEquipo2;
     }
+
     /**
      * Añade la puntuacion al equipo al que pertenece el jugador.
      *

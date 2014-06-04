@@ -17,7 +17,7 @@ public interface Entrada {
      * Indicamos el imput que se ha realizado
      * @param imput tipo de entrada
      */
-   // public void accionEntrada(Imput imput);
+   //public void accionEntrada(Imput imput);
 
 
     /**

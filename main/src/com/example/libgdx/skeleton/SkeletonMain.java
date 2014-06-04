@@ -81,7 +81,7 @@ public class SkeletonMain extends Game {
 
 
         this.constantes = new ConstantesJuego();
-        this.constantes.setResolucionPantalla(ResolucionPantalla.pequeña);
+
         ArrayList<String> nombresTexturas = new ArrayList<String>();
         nombresTexturas.add("jugador1.png");
         nombresTexturas.add("tablero/campo.png");

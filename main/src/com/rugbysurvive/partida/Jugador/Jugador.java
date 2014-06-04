@@ -19,15 +19,48 @@ import java.util.ArrayList;
 
 /**
  * Created by Victor on 27/03/14.
+ * Gestiona todos los elementos principales que debe tener
+ * un jugador de rugby.
+ * En primer termino gestiona todos los datos de entrada del usuario
+ * y realiza los cambios de estado necesarios por los cuales se realizaran las
+ * diferentes acciones.
+ * Tambien contiene todos los atributos necesarios que lo caracterizan
+ *
+ * Cada jugador debe gestionar su proceso de dibujado y borrado asi como el dibujado
+ * de sus diferentes indicadores de estado como herido o cansado.
+ *
+ *Gestiona tambien el conjunto de texturas que lo definen como el color y aspecto
+ *
  */
 public class Jugador implements GestionEntrada {
 
+    //Limite superior que puede alcanzar los atributos de un jugador
     private static final int MAXIMO_OBJETOS = 4;
     public static final int MAX_HABILIDAD = 100;
     public static final int MAX_DEFENSA = 100;
     public static final int MAX_ATAQUE = 100;
     public static final int MAX_FUERZA = 100;
     public static final int MAX_RESISTENCIA = 100;
+    public static final int MOVIMIENTOS_CANSANCIO = 6;
+
+
+    // Habilidades del jugador
+    private int Fuerza;
+    private int Vida;
+    private int Defensa;
+    private int Habilidad;
+    private int Resistencia;
+    private int Ataque;
+
+    // Habilidades del jugador originales al iniciar el juego
+    private final int fuerzaOriginal;
+    private final int defensaOriginal;
+    private final int habilidadOriginal;
+    private final int ataqueOriginal;
+    public final int vidaOriginal;
+    private final int resistenciaOriginal;
+
+
 
     private String textura;
     private DireccionJugador direccion;
@@ -37,34 +70,23 @@ public class Jugador implements GestionEntrada {
 
 
     private Color color;
-    private Estado estado;
+
     private Accion accion = null;
-    /*Le asignamos aquí tambien la posicion en la que se encuentra el jugador?*/
     private Casilla casilla = null;
 
-    /*Estas dos variables las ponemos aquí y no en estado, ya que si cambiamos el estado perdemos el valor de las variables*/
+    //Estado del jugador
     private boolean seleccionado = false;
     private boolean bloqueado = false;
-
+    private Estado estado;
     private boolean lesionado;
 
     private ArrayList<ElementoDibujable> texturas;
     private ElementoDibujable indicador;
     private ArrayList<ObjetoJugador> powerup;
 
-    private int Fuerza;
-    private int Vida;
-    private int Defensa;
-    private int Habilidad;
-    private int Resistencia;
-    private int Ataque;
 
-    private final int fuerzaOriginal;
-    private final int defensaOriginal;
-    private final int habilidadOriginal;
-    private final int ataqueOriginal;
-    public final int vidaOriginal;
-    private final int resistenciaOriginal;
+
+
 
     /*contMovimientos indicara la cantidad de acciones movimiento que ha hecho hasta el momento, y de esta manera podremos ir haciendo que el jugador pierda resistencia segun interese*/
     public int contMovimientos;
@@ -80,16 +102,35 @@ public class Jugador implements GestionEntrada {
 
     public int aspecto;
     private boolean expulsado;
+
     /**
-     * Constructor de jugador
+     * Inicializa todos los atributos que caracterizan al jugador y lo une
+     * al equipo que pertenece.
+     *
      * @param fuerza Indica la fuerza de un jugador
      * @param vida Indica la vida de un jugador
      * @param defensa Indica la defensa de un jugador
+     * @param ataque Indica que el ataque te tendra originalmente el jugador
+     * @param habilidad Indica que la habiliadd te tendra originalmente el jugador
+     * @param resistencia Indica la resistencia  te tendra originalmente el jugador
      * @param equipo Indica a que equipo pertenece un jugador
      */
     public Jugador(int fuerza, int vida, int defensa, int habilidad, int resistencia, int ataque, Equipo equipo)
     {
+        // Caracteristicas del equipo que afectan al jugador
+        this.color = Color.azul;
+        this.direccion = DireccionJugador.izquierda;
+
+
+        // Inicializacion de las texturas
         this.aspecto = GeneradorImagenJugador.generarAspecto();
+        this.bloqueo =null;
+        this.indicador = null;
+        this.id = -1;
+        this.textura = "jugador1.png";
+        this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,DireccionJugador.izquierda);
+
+        // Inicializacion de las habilidades
         this.Fuerza= fuerza;
         this.Vida = vida;
         this.Defensa = defensa;
@@ -105,42 +146,34 @@ public class Jugador implements GestionEntrada {
         this.resistenciaOriginal = resistencia;
 
         this.miEquipo = equipo;
-
         this.powerup= new ArrayList<ObjetoJugador>();
 
+        // Inicializacion de los estados
         this.estado = new SinPelota();
-
-        this.estado.setBloqueado(false);
-        this.setSeleccionado(false);
-        this.id = -1;
-        this.enJuego = false;
-        this.textura = "jugador1.png";
-        this.color = Color.azul;
-        this.direccion = DireccionJugador.izquierda;
-        this.texturas = GeneradorImagenJugador.generarTexturas(this.color,this.aspecto,DireccionJugador.izquierda);
-        this.bloqueo =null;
         this.lesionado = false;
         this.contMovimientos = 0;
         this.expulsado = false;
-        this.indicador = null;
-
+        this.estado.setBloqueado(false);
+        this.setSeleccionado(false);
+        this.enJuego = false;
 
     }
 
+
     public void cansancio()
     {
-        if(this.contMovimientos == 6)
+        if(this.contMovimientos == MOVIMIENTOS_CANSANCIO)
         {
             this.setResistencia(this.getResistencia() - 30);
             this.contMovimientos = 0;
-            if(this.indicador == null){
+            if(this.indicador == null) {
                 this.indicador  = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/estado/cansancio.png");
                 this.indicador.dibujar(this.getPosicionX(), this.getPosicionY());
             }
 
         }
-        else
-        {
+
+        else {
             this.contMovimientos += 1;
         }
 

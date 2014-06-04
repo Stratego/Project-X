@@ -9,8 +9,11 @@ import com.rugbysurvive.partida.gestores.GestorGrafico;
  *
  * Realiza el proceso de dibujado de una textura concreta .
  * Permite definir un conjunto de texturas sobre una misma clase
- * teniendo calla una de ellas vida propia para ser dibujada
+ * teniendo cada una de ellas vida propia para ser dibujada
  * o desdibujada cuando sera necesario
+ *
+ * Una vez creada debera controlarse su ciclo de vida mediante el
+ * dibujado y borrado
  */
 public class ElementoDibujable implements Dibujable {
 
@@ -20,7 +23,11 @@ public class ElementoDibujable implements Dibujable {
     private int posicionY;
     private int id;
 
-    /**
+    /**Inicializa el elemento a partir del tipo de dibujo que se quiera realizar
+     * y la textura a dibujar.
+     * Cada tippo de dibujo tiene unas caracteristicas propias y unicas que afectan
+     * directamente al dibujado del elemento.
+     *
      * @param tipoDibujo caracteristicas de la textura dentro del juego
      * @param textura direccion donde esta guardada la textura
      */
