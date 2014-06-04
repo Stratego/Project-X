@@ -212,6 +212,7 @@ public class Chute extends Accion {
                 {
                     Marcador.getInstanceMarcador().sumarPuntuacion(2, this.jugador);
                     Campo.getInstanciaCampo().recolocarJugadoresDespuesDelPunto(this.jugador);
+                    //Campo.getInstanciaCampo().quitarPelotaTablero();
                     Campo.getInstanciaCampo().quitarPelota(ejesDestinoPelota[index][1],ejesDestinoPelota[index][0]);
                 }
             }
