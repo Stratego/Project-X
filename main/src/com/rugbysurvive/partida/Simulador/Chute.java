@@ -20,6 +20,12 @@ public class Chute extends Accion {
     private Sound soundChute;
 
 
+    /**
+     * Constructor de la Acción chute
+     * @param jugador Jugador que realiza el chute
+     * @param posX Posición X del chute
+     * @param posY Posición Y del chute
+     */
     public Chute(Jugador jugador, int posX, int posY) {
         this.posXObjetivo = posX;
         this.posYObjetivo = posY;
@@ -27,6 +33,10 @@ public class Chute extends Accion {
         this.soundChute = Gdx.audio.newSound(Gdx.files.internal("sonido/acciones/Chute.mp3"));
     }
 
+    /**
+     * Simula el chute
+     * @return
+     */
     @Override
     public boolean simular() {
         System.out.println("Chute hecho");
@@ -40,6 +50,10 @@ public class Chute extends Accion {
         return true;
     }
 
+    /**
+     * Le asigna la posicion final de la pelota despues del chute segun la precisión del jugador que realiza el chute
+     * @return Boolean el chute se ha podido realizar
+     */
     public boolean precisionChute (){
         int InicialX = jugador.getPosicionX();
         int InicialY = jugador.getPosicionY();
@@ -193,6 +207,11 @@ public class Chute extends Accion {
 
     }
 
+    /**
+     * Verificamos si mediante un chute se le puede asignar puntos a un equipo concreto
+     * @param ejesDestinoPelota Vector de tipo integer con ejes X y Y del destino de la pelota
+     * @param index Posición concreta del vector en donde se localiza los ejes concretos X y Y del destino de la pelota
+     */
     public void comprobarPunto(int ejesDestinoPelota[][], int index)
     {
         if(ejesDestinoPelota[index][1] >= 8 && ejesDestinoPelota[index][1] <= 11)
@@ -212,12 +231,14 @@ public class Chute extends Accion {
                 {
                     Marcador.getInstanceMarcador().sumarPuntuacion(2, this.jugador);
                     Campo.getInstanciaCampo().recolocarJugadoresDespuesDelPunto(this.jugador);
-                    //Campo.getInstanciaCampo().quitarPelotaTablero();
                     Campo.getInstanciaCampo().quitarPelota(ejesDestinoPelota[index][1],ejesDestinoPelota[index][0]);
                 }
             }
         }
     }
 
+    @Override
+    public void simularAnimacion() {
 
+    }
 }

@@ -34,6 +34,14 @@ public class SinPelota implements Estado {
         return false;
     }
 
+    /**
+     *
+     * @param jugador Jugador que genera la Accion
+     * @param posX Posición X del jugador
+     * @param posY Posicion Y del jugador
+     * @param entrada Tipo de evento que recibe el jugador
+     * @return Boolean Accion Generada
+     */
     @Override
     public boolean generarAccion(Jugador jugador, int posX, int posY, Entrada entrada) {
 

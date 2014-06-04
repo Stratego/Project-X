@@ -51,9 +51,9 @@ public class EnMovimiento implements Estado {
 
     /**
      * Genera la acción
-     * @param jugador
-     * @param posX
-     * @param posY
+     * @param jugador Jugador que posee el estado
+     * @param posX Posición X del jugador
+     * @param posY Posición Y del jugador
      * @return false
      */
     @Override
@@ -67,10 +67,10 @@ public class EnMovimiento implements Estado {
 
     /**
      * Genera la acción
-     * @param jugador
-     * @param posX
-     * @param posY
-     * @param entrada
+     * @param jugador Jugador que posee el estado
+     * @param posX Posición X de la siguiente casilla a mover
+     * @param posY Posición y de la siguiente casilla a mover
+     * @param entrada Tipo de evento que le llega a un jugador
      * @return Boolean acción generada
      */
     @Override
@@ -158,9 +158,9 @@ public class EnMovimiento implements Estado {
 
     /**
      * Finalización de movimiento de un jugador
-     * @param entrada
-     * @param posicionX
-     * @param posicionY
+     * @param entrada Tipo de evento que le llega a un jugador
+     * @param posicionX Posición X de la casilla a mover
+     * @param posicionY Posición Y de la casilla a mover
      * @return
      */
     private boolean jugadorFinalizaMovimiento(Entrada entrada ,int posicionX,int posicionY)

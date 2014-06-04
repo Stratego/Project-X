@@ -23,6 +23,10 @@ public class ConPelota implements Estado, Proceso {
     int count;
     public Jugador jugador;
 
+    /**
+     * Constructor Estado ConPelota
+     * @param jugador Jugador al que se le asigna el estado
+     */
     public ConPelota(Jugador jugador){
         this.jugador = jugador;
         this.indicarJugadorConPelota = new ElementoDibujable(TipoDibujo.elementosJuego,"jugador/estado/conPelota.png");
@@ -42,6 +46,14 @@ public class ConPelota implements Estado, Proceso {
         return false;
     }
 
+    /**
+     *
+     * @param jugador Jugador que genera la Accion
+     * @param posX Posición X del jugador
+     * @param posY Posicion Y del jugador
+     * @param entrada Tipo de evento que recibe el jugador
+     * @return Boolean Accion Generada
+     */
     @Override
     public boolean generarAccion(Jugador jugador, int posX, int posY, Entrada entrada) {
 

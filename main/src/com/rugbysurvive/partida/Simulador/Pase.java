@@ -1,6 +1,5 @@
 package com.rugbysurvive.partida.Simulador;
 
-import com.partido.GestorTurnos;
 import com.rugbysurvive.partida.ConstantesJuego;
 import com.rugbysurvive.partida.Dibujables.ElementoDibujable;
 import com.rugbysurvive.partida.Dibujables.TipoDibujo;
@@ -27,6 +26,12 @@ public class Pase extends Accion implements Proceso {
     private int tiempo;
     private boolean animacionFinalizada;
 
+    /**
+     * Constructor de Pase
+     * @param jugador Jugador que realiza el pase
+     * @param posX Posición X del destino del pase
+     * @param posY Posición Y del destino del pase
+     */
     public Pase(Jugador jugador, int posX, int posY) {
         this.posXObjetivo = posX;
         this.posYObjetivo = posY;
@@ -36,6 +41,10 @@ public class Pase extends Accion implements Proceso {
     }
 
 
+    /**
+     * Simular pase
+     * @return Boolean Pase realizado correctamente
+     */
     @Override
     public boolean simular() {
         //jugador.setEstado(new SinPelota());
@@ -202,8 +211,15 @@ public class Pase extends Accion implements Proceso {
 
     }
 
+    @Override
+    public void simularAnimacion() {
 
+    }
 
+    /**
+     * Procesar texturas
+     * @return Boolean Procesada
+     */
     @Override
     public boolean procesar() {
         if(!animacionParada) {
