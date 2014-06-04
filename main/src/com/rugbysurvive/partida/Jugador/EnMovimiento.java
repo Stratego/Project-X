@@ -10,6 +10,9 @@ import com.rugbysurvive.partida.gestores.GestorGrafico;
 
 /**
  * Created by Victor on 27/03/14.
+ * Gestiona el estado EnMovimiento de un jugador,
+ * el cual va rellenando una lista de posiciones
+ * para posteriormente crear la accion Movimiento
  */
 public class EnMovimiento implements Estado {
 

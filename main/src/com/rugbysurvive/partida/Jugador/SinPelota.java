@@ -8,6 +8,9 @@ import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 
 /**
  * Created by Victor on 27/03/14.
+ * Gestiona el estado SinPelota, si un
+ * jugador se encuentra en este estado
+ * solo se le permitira cambiar al estado EnMovimiento
  */
 public class SinPelota implements Estado {
     public boolean seleccionado = false;

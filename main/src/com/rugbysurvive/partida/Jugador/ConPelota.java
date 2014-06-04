@@ -13,6 +13,9 @@ import com.rugbysurvive.partida.tablero.Lado;
 
 /**
  * Created by Victor on 27/03/14.
+ * Gestiona el estado ConPelota, en el que
+ * a un jugador se le permitira chuta, pasar o cambiar al
+ * estado EnMovimiento
  */
 public class ConPelota implements Estado, Proceso {
     public boolean seleccionado = false;

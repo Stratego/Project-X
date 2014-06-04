@@ -22,7 +22,12 @@ import com.rugbysurvive.partida.tablero.Lado;
 
 /**
  * Created by Victor on 27/03/14.
+ * La Acción movimiento se encarga de la correcta simulación
+ * de la accion Movimiento, verificando si un jugador cruza
+ * la linea de TouchDown, si se va fuera, si impacta con otro jugador,
+ * o si le roban la pelota
  */
+
 public class Movimiento extends Accion implements Proceso {
     private static final int POSICION_INICIAL_IZQUIERDA = ConstantesJuego.getHeight()/2 - 2*ConstantesJuego.TAMAÑO_PUÑO;
     private static final int POSICION_INICIAL_DERECHA =ConstantesJuego.getHeight()/2 + ConstantesJuego.TAMAÑO_PUÑO;
@@ -224,6 +229,15 @@ public class Movimiento extends Accion implements Proceso {
         }
         return false;
      }
+
+    /**
+     * Cada vez que se llama esta función se realiza un proceso de
+     * animacion.Las animmaciones se realizan entre dos simulaciones.
+     */
+    @Override
+    public void simularAnimacion() {
+
+    }
 
     /**
      * Recoge la pelota del campo

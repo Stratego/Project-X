@@ -12,6 +12,8 @@ import com.rugbysurvive.partida.tablero.Campo;
 
 /**
  * Created by Victor on 27/03/14.
+ * Esta clase sera la encargada de hacer la Simulación
+ * correcta de un pase, que solo podra hacerse hacia detras
  */
 public class Pase extends Accion implements Proceso {
 

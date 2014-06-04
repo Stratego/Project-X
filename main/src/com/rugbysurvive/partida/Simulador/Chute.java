@@ -11,6 +11,9 @@ import com.rugbysurvive.partida.tablero.Lado;
 
 /**
  * Created by Aleix on 31/03/14.
+ * Esta clase sera la encargada de hacer la Simulación
+ * correcta de un chute, que solo podra hacerse hacia delante y
+ * también si al realizar un chute si el balon cruza los 3 palos
  */
 public class Chute extends Accion {
 
