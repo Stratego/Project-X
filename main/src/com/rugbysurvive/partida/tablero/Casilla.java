@@ -63,7 +63,9 @@ public class Casilla implements GestionEntrada ,Dibujable{
 
     public void quitarPelota(){
         this.existePelota = false;
+        //if (this.pelota !=null){
         this.pelota.borrar();
+        //}
     }
 
     /**

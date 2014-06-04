@@ -205,9 +205,14 @@ public class Posicionamiento {
 
         int cont = 1;
         for (PosicionInicial alineacion: ComponentesJuego.getComponentes().getEquipo1().getAlineacion()){
+
+            //ComponentesJuego.getComponentes().getCampo().eliminarElemento(alineacion.getJugador().getCasilla().getPosicionY(),alineacion.getJugador().getCasilla().getPosicionX());
             alineacion.getJugador().getCasilla().setJugador(null);
             alineacion.getJugador().colocar(Campo.getInstanciaCampo().getCasilla(alineacion.getPosicionX(), alineacion.getPosicionY()));
             alineacion.getJugador().setEstado(new SinPelota());
+            //alineacion.getJugador().setBloqueado(false);
+           // alineacion.getJugador().setDireccion(DireccionJugador.derecha);
+
             cont += 1;
 
             if(cont == ConstantesJuego.JUGADORES_CAMPO)
@@ -220,7 +225,9 @@ public class Posicionamiento {
         for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo2().listaJugadoresCampo()){
 
             jugador.getCasilla().setJugador(null);
+            //ComponentesJuego.getComponentes().getCampo().eliminarElemento(jugador.getCasilla().getPosicionY(),jugador.getCasilla().getPosicionX());
             jugador.colocar(Campo.getInstanciaCampo().getCasilla(posY, posX));
+            //jugador.setBloqueado(false);
            // jugador.setDireccion(DireccionJugador.izquierda);
 
             if(posX == 28)
@@ -265,9 +272,12 @@ public class Posicionamiento {
 
         int cont = 1;
         for (PosicionInicial alineacion: ComponentesJuego.getComponentes().getEquipo2().getAlineacion()){
+
+            //ComponentesJuego.getComponentes().getCampo().eliminarElemento(alineacion.getJugador().getCasilla().getPosicionY(),alineacion.getJugador().getCasilla().getPosicionX());
             alineacion.getJugador().getCasilla().setJugador(null);
             alineacion.getJugador().colocar(Campo.getInstanciaCampo().getCasilla((ConstantesJuego.LIMITE_CASILLAS_ANCHO_TABLERO - alineacion.getPosicionX()), (ConstantesJuego.LIMITE_CASILLAS_LARGO_TABLERO - alineacion.getPosicionY())));
             alineacion.getJugador().setEstado(new SinPelota());
+            //alineacion.getJugador().setBloqueado(false);
             // alineacion.getJugador().setDireccion(DireccionJugador.izquierda);
 
             cont += 1;
@@ -280,8 +290,10 @@ public class Posicionamiento {
         int posY = 6;
         for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo1().listaJugadoresCampo()){
 
+            //ComponentesJuego.getComponentes().getCampo().eliminarElemento(jugador.getCasilla().getPosicionY(),jugador.getCasilla().getPosicionX());
             jugador.getCasilla().setJugador(null);
             jugador.colocar(Campo.getInstanciaCampo().getCasilla(posY, posX));
+            //jugador.setBloqueado(false);
             //jugador.setDireccion(DireccionJugador.derecha);
 
             if(posX == 1)
