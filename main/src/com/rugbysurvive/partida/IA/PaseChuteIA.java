@@ -135,8 +135,6 @@ public class PaseChuteIA {
                                 posXAux+x).getJugador()!=null){
                             if (ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador().getMiEquipo()==
                                     ComponentesJuego.getComponentes().getEquipo1()){
-
-
                                 if (jugadaequipo1.contains(ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador())==
                                         false && jugadaequipo1.size()<4){
                                     jugadaequipo1.add(ComponentesJuego.getComponentes().getCampo().getCasilla(posYAux-y,posXAux+x).getJugador());

@@ -57,7 +57,7 @@ public class IA {
             rangoInicialPelota= casillaPelota.getPosicionX()-5;
             rangoFinalPelota= casillaPelota.getPosicionX()+5;
         }
-
+        // recorremos todos los jugadores del equipo 2
         for (Jugador jugador: ComponentesJuego.getComponentes().getEquipo2().listaJugadoresCampo()){
 
 
@@ -67,22 +67,26 @@ public class IA {
                     System.out.println("no usa pase chute");
                     if (casillaPelota.getJugador()!= null && casillaPelota.getJugador().miEquipo==
                             ComponentesJuego.getComponentes().getEquipo2()){
+                        //condiciones para cada zona de marque
                         if (jugador.getMiEquipo().getLado()== Lado.izquierda){
-
+                            // condiciones si el equipo tiene la posicion de la pelota
                             if (jugador.getPosicionX()> rangoInicialPelota && jugador.getPosicionX()<rangoFinalPelota){
 
                                 int correccion = 1;
                                 boolean colocado = false;
+                                // buscamos el camino hasta que encontramos uno posible
                                 while (colocado==false){
                                     if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY(), 28).getJugador()==null){
                                         movimentoIA= new MovimentoIA(jugador.getCasilla(),
                                                 ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY(), 28));
                                         colocado = true;
                                     }else if (jugador.getPosicionY()>10){
+                                        //si esta cerca del jugador  con pelota va hacia zona de marque
                                         movimentoIA= new MovimentoIA(jugador.getCasilla(),
                                                 ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()-correccion, 28));
                                         colocado = true;
                                     }else if (jugador.getPosicionY()<10){
+                                        //si esta lejos del jugador  con pelota va hacia el
                                         movimentoIA= new MovimentoIA(jugador.getCasilla(),
                                                 ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()+correccion, 28));
                                         colocado = true;
@@ -112,10 +116,12 @@ public class IA {
                                         ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY(), 1));
                                         colocado = true;
                                 }else if (jugador.getPosicionY()>10){
+                                    //si esta cerca del jugador  con pelota va hacia zona de marque
                                     movimentoIA= new MovimentoIA(jugador.getCasilla(),
                                             ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()-correccion, 1));
                                         colocado = true;
                                 }else if (jugador.getPosicionY()<10){
+                                    //si esta lejos del jugador  con pelota va hacia el
                                     movimentoIA= new MovimentoIA(jugador.getCasilla(),
                                             ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY()+correccion, 1));
                                         colocado = true;
@@ -134,12 +140,13 @@ public class IA {
                         }
 
                     }else{
+                        // el jugador va hacia la pelota
                         movimentoIA= new MovimentoIA(jugador.getCasilla(), casillaPelota);
                     }
 
                     Simulador simulador = Simulador.getInstance();
 
-                    //movimentoIA.imprimirLista(movimentoIA.calcularCamino());
+
                     if (movimentoIA.arraymovimento(jugador)!=null){
                         simulador.añadirAccion(new Movimiento(jugador,movimentoIA.arraymovimento(jugador), null));
                     }

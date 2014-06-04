@@ -30,12 +30,14 @@ public class ObjetosIA {
      */
     public boolean usarObjeto(Jugador jugador){
         if (jugador.getPowerUP().size()>0){
-
+            // recorremos los objetos
             for(ObjetoJugador objetos : jugador.getPowerUP()){
 
                 if (objetos instanceof ColocadorObjetosCampo == false){
 
                     if (objetos instanceof PowerUP == true){
+
+                        // si el jugador esta a un 1/3 de una habilidad y tiene un  objeto que lo potencia lo usa
 
                         PowerUP powerUP = (PowerUP)objetos;
 
@@ -75,6 +77,8 @@ public class ObjetosIA {
 
                         switch (jugador.getDireccion())
                         {
+                            // si el jugador tiene a un enigo a tres 3 casillas o menos de la
+                            // posicion de la que esta mirando usa un objeto de campo
                             case arriba:
                                 if (controlPosicion(jugador.getPosicionX(),jugador.getPosicionY()+i)){
                                     if (ComponentesJuego.getComponentes().getCampo().getCasilla(jugador.getPosicionY() + i,
