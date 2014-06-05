@@ -24,8 +24,7 @@ import java.util.Iterator;
  * Agrupa todas las texturas que tiene que ser dibujadas .
  * Cada textura sera dibujada acorde a las necesidades establecidas
  * por el usuario.
- *
- *
+
  */
 public class GestorGrafico implements Dibujante{
 
@@ -72,28 +71,34 @@ public class GestorGrafico implements Dibujante{
         this.configurarFuente();
     }
 
-
-    public static Dibujante generarDibujante()
-    {
+    /**
+     * Patron singleon del gestor grafica
+     * @return referencia al gestor
+     */
+    public static Dibujante generarDibujante(){
         return instancia;
     }
+
+
+    /**
+     * Realiza el dibujado de todas las texturas teniendo en cuenta
+     * los tipos de dibujo , las posiciones de las texturas y el tamaño
+     */
     public void dibujar() {
 
         this.camara.render(this.sprite);
         this.sprite.begin();
 
+        // Orden de dibujado
         ArrayList<TipoDibujo> tiposDibujo = new ArrayList<TipoDibujo>();
         tiposDibujo.add(TipoDibujo.fondo);
         tiposDibujo.add(TipoDibujo.elementosJuego);
         tiposDibujo.add(TipoDibujo.interficieUsuario);
         tiposDibujo.add(TipoDibujo.texto);
 
-        //Log.i(TAG,"num iteraciones: "+this.vueltas);
-
-
         ConstantesJuego constantes = ConstantesJuego.variables();
 
-
+        // Se recorrde todos los tipos de dibujo hasta finalizar el dibujado
         for(int i=0;i<3;i++)
         {
             for(TipoImagen imagen : this.dibujables)
@@ -102,7 +107,7 @@ public class GestorGrafico implements Dibujante{
                 {
                     Texture textura = this.manager.get(imagen.dibujable.getTextura());
 
-
+                    // Dibujado del tipo interficie usuario
                     if(TipoDibujo.interficieUsuario == tiposDibujo.get(i)){
 
                         int posicionX = imagen.dibujable.getPosicionX();
@@ -110,12 +115,6 @@ public class GestorGrafico implements Dibujante{
                         posicionX = posicionX - this.camara.getVariationX();
                         posicionY = posicionY + this.camara.getVariationY();
 
-                        //constantes.setResolucionPantalla(constantes.calcularResolucion());
-                        //constantes.setMultiplicador(constantes.multiplicador());
-
-
-                    //    double ancho = constantes.generarTamaño(textura.getWidth());
-                      //  double alto = constantes.generarTamaño(textura.getHeight());
 
                         double ancho = constantes.generarTamaño(textura.getWidth());
                         double alto = constantes.generarTamaño(textura.getHeight());
@@ -123,6 +122,8 @@ public class GestorGrafico implements Dibujante{
                         this.sprite.draw(textura,(float)posicionX,(float)posicionY,(float)ancho,(float)alto);
 
                     }
+
+                    // Dibujado del tipo elementos juego
                     else
                     {
                         double posicionX = this.filtroX(imagen.dibujable.getPosicionX());
@@ -140,6 +141,8 @@ public class GestorGrafico implements Dibujante{
 
 
                 }
+
+                 // Dibujado del tipo texto
                  if(TipoDibujo.interficieUsuario== tiposDibujo.get(i) && imagen.tipoDibujo == TipoDibujo.texto){
 
                      int posicionX = imagen.dibujable.getPosicionX();
@@ -157,15 +160,22 @@ public class GestorGrafico implements Dibujante{
 
         }
 
-
         this.sprite.end();
 
 
     }
 
+    /**
+     * Borrado de la memoria de las texturas
+     */
     public void dispose(){
         this.sprite.dispose();
     }
+
+    /**
+     * camara que utitilza el gestor
+     * @return camara utilizada por el gestor
+     */
     public static Camara getCamara()
     {
         return camara;
@@ -234,11 +244,13 @@ public class GestorGrafico implements Dibujante{
     }
 
 
-
-
+    /**
+     * Carga las texturas en memoria
+     * @param texturas texturas que se deben dibujar
+     */
     private void generarTexturas(ArrayList<String> texturas) {
 
-         Iterator it = texturas.iterator();
+        Iterator it = texturas.iterator();
 
         while (it.hasNext()) {
             String nombre =  (String)it.next();
@@ -248,8 +260,13 @@ public class GestorGrafico implements Dibujante{
     }
 
 
-
-
+    /**
+     * Permite utilizar tanto posiciones de tablero
+     * como posiciones absolutas con indiferencia desde
+     * el punto de vista de las clases externas
+     * @param posicionX posicion sin filtrar
+     * @return posicion filtrada
+     */
     private double filtroX(double posicionX)
     {
         double tamañoCasilla = ConstantesJuego.variables().getAnchoCasilla();
@@ -259,8 +276,15 @@ public class GestorGrafico implements Dibujante{
         return posicionX;
     }
 
-    private double filtroY(double posicionY)
-    {
+    /**
+    * Permite utilizar tanto posiciones de tablero
+    * como posiciones absolutas con indiferencia desde
+    * el punto de vista de las clases externas
+    * @param posicionY posicion sin filtrar
+    * @return posicion filtrada
+    */
+
+    private double filtroY(double posicionY) {
         double tamañoCasilla = ConstantesJuego.variables().getLargoCasilla();
         if(posicionY > 0 && posicionY < tamañoCasilla){
             posicionY = posicionY * tamañoCasilla;
@@ -268,6 +292,10 @@ public class GestorGrafico implements Dibujante{
         return posicionY;
     }
 
+    /**
+     * Clase auxiliar que permite agrupar todos los atributos
+     * que necesita una textura para ser dibujada
+     */
     private class TipoImagen
     {
         public TipoDibujo tipoDibujo;
@@ -292,9 +320,10 @@ public class GestorGrafico implements Dibujante{
         }
     }
 
-    private void configurarFuente()
-    {
-        // Aqui se configura la fuente
+    /**
+     * Configura el tamaño de la escritura
+     */
+    private void configurarFuente(){
             this.font.scale(2);
     }
 }
