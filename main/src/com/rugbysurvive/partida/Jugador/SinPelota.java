@@ -13,17 +13,13 @@ import com.rugbysurvive.partida.gestores.Entrada.Entrada;
  * solo se le permitira cambiar al estado EnMovimiento
  */
 public class SinPelota implements Estado {
+
+    // estados
     public boolean seleccionado = false;
     public boolean bloqueado = false;
 
     public Jugador jugador;
 
-    /*public boolean generarAccion(Jugador jugador) {
-
-        Simulador.getInstance().addAccionesSimulador(jugador.getAccion());
-
-        return false;
-    }*/
 
 
     public Accion generarAccion(Jugador jugador) {
@@ -38,20 +34,20 @@ public class SinPelota implements Estado {
     }
 
     /**
+     *cambio al estado movimiento uan vez indicado el jugador
      *
      * @param jugador Jugador que genera la Accion
      * @param posX Posición X del jugador
      * @param posY Posicion Y del jugador
      * @param entrada Tipo de evento que recibe el jugador
-     * @return Boolean Accion Generada
+     * @return Boolean indicacion de accion finalizada
      */
     @Override
     public boolean generarAccion(Jugador jugador, int posX, int posY, Entrada entrada) {
 
         if (entrada == Entrada.arrastrar){
             int distancia = jugador.getResistencia()/10;
-            if(distancia <=2)
-            {
+            if(distancia <=2) {
                 distancia = 3;
             }
 
@@ -59,8 +55,7 @@ public class SinPelota implements Estado {
             return false;
         }
 
-        if (jugador.getAccion() != null)
-        {
+        if (jugador.getAccion() != null) {
             Simulador.getInstance().añadirAccion(jugador.getAccion());
             jugador.setBloqueado(true);
             return true;

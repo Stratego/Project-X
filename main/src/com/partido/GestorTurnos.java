@@ -27,7 +27,10 @@ import java.util.Random;
  *
  * Se encarga de procesar los turnos de cada equipo
  * Dibuja y gestiona las transiciones entre un
- * turno y el otro
+ * turno y el otro.
+ * Gestiona todos los elementos del juego para que se coordinen
+ * una vez de ha cambiado de turno.
+ *
  */
 public class GestorTurnos implements Dibujable,Proceso {
 
@@ -73,8 +76,8 @@ public class GestorTurnos implements Dibujable,Proceso {
 
     public GestorTurnos(SkeletonMain main){
 
-         this.posicionTexturaX = Gdx.graphics.getWidth();
-         this.posicionTexturaY = 0;
+       this.posicionTexturaX = Gdx.graphics.getWidth();
+       this.posicionTexturaY = 0;
         this.tipoProceso = 0;
         this.posicionCamaraX = POSICION_CAMARA_INCIAL_X;
         this.posicionCamaraY = POSICION_CAMARA_INICIAL_Y;
@@ -90,6 +93,10 @@ public class GestorTurnos implements Dibujable,Proceso {
     }
 
 
+    /**
+     * Una vez han pasado los dos turnos de los usuarios y la simulacion
+     * se reinicia  el proceso
+     */
     public void reiniciarCiclo(){
         Equipo equipo1 = ComponentesJuego.getComponentes().getEquipo1();
         Equipo equipo2 = ComponentesJuego.getComponentes().getEquipo2();
@@ -104,7 +111,9 @@ public class GestorTurnos implements Dibujable,Proceso {
         }
     }
 
-
+    /**
+     * Inicia la presentacion del juego una vez se ha entrado en la partida
+     */
     public void iniciarPresentacion(){
         Equipo equipo1 = ComponentesJuego.getComponentes().getEquipo1();
         Equipo equipo2 = ComponentesJuego.getComponentes().getEquipo2();
@@ -118,7 +127,9 @@ public class GestorTurnos implements Dibujable,Proceso {
 
     }
 
-
+    /**
+     * Inicializa la partida una vez finalizada la presentacion
+     */
     public void iniciarPartida(){
         this.id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.interficieUsuario);
         ProcesosContinuos.añadirProceso(this);
@@ -162,7 +173,7 @@ public class GestorTurnos implements Dibujable,Proceso {
         Equipo equipo1 = ComponentesJuego.getComponentes().getEquipo1();
         Equipo equipo2 = ComponentesJuego.getComponentes().getEquipo2();
 
-
+        //Para que haya cambio de turno el equipo debe estar bloqueado y jugando y el otro bloqueado y sin jugar
         if(equipo1.bloqueado() && equipo1.isJugando()  && equipo2.bloqueado() && !equipo2.isJugando() ) {
             this.escudo = new ElementoDibujable(TipoDibujo.interficieUsuario,this.estandarteEquipo2);
             this.tipoProceso = 1;
@@ -177,7 +188,7 @@ public class GestorTurnos implements Dibujable,Proceso {
             GestorIndicadorMovimientos.getInstancia().Borrar();
             return true;
         }
-
+        //Para que haya cambio de turno el equipo debe estar bloqueado y jugando y el otro bloqueado y sin jugar
         else if (equipo2.bloqueado() && equipo2.isJugando()  && equipo1.bloqueado() && !equipo1.isJugando() ) {
             this.tipoProceso = 1;
             this.equipoJugandoTurnoAnterior = equipo1;
@@ -195,6 +206,8 @@ public class GestorTurnos implements Dibujable,Proceso {
             return true;
         }
 
+
+        // Se puede forzar el cambio de turno en cualquier momento del juego
         else if(forzarCambioTurno  && ((equipo2.isJugando()  && !equipo1.isJugando())
                 || (!equipo2.isJugando()  && equipo1.isJugando())))
         {
@@ -216,6 +229,7 @@ public class GestorTurnos implements Dibujable,Proceso {
 
             }
 
+            // Se puede forzar tanto el equipo 1 como el equipo 2
             else{
                 this.escudo = new ElementoDibujable(TipoDibujo.interficieUsuario,this.estandarteEquipo2);
                 this.tipoProceso = 1;
@@ -240,7 +254,10 @@ public class GestorTurnos implements Dibujable,Proceso {
 
     }
 
-
+    /**
+     * Una vez han pasado los dos turnos de los usuarios y la simulacion
+     * se reinicia  el proceso
+     */
     public void reiniciarFases(){
 
         Equipo equipo1 = ComponentesJuego.getComponentes().getEquipo1();
@@ -312,31 +329,15 @@ public class GestorTurnos implements Dibujable,Proceso {
        return false;
     }
 
-    public static void iniciarTurnoEquipo(Equipo equipo1, Equipo equipo2){
-        equipo1.bloquear();
-        equipo2.desbloquear();
-        equipo2.setJugando(true);
 
-
-    }
-    public static int turno(){
-        return turno;
-    }
-    @Override
-    public String getTextura() {
-        return "Menu/CanviTorn.png";
-    }
-
-    @Override
-    public int getPosicionX() {
-        return posicionTexturaX;
-    }
-
-    @Override
-    public int getPosicionY() {
-        return posicionTexturaY;
-    }
-
+    /**
+     * Realiza el dibujado de las transiciones entre turnos.
+     * La transicion es una animacion que dura un tiempo determinado
+     * y que permite situar al usuario.
+     *
+     * Ademas tambien se realiza la presentacion inicial
+     * @return si el proceso ha finalizado o no
+     */
     @Override
     public boolean procesar() {
 
@@ -371,7 +372,7 @@ public class GestorTurnos implements Dibujable,Proceso {
                     }
                 }
                 this.tiempoMuestraEscudo++;
-               return false;
+                return false;
             }
         }
 
@@ -401,10 +402,42 @@ public class GestorTurnos implements Dibujable,Proceso {
         return false;
     }
 
-    public static void cambiarTurno()
-    {
+    /**
+     * Fuerza el cambio de turno
+     */
+    public static void cambiarTurno(){
         forzarCambioTurno = true;
     }
+
+
+    public static void iniciarTurnoEquipo(Equipo equipo1, Equipo equipo2){
+        equipo1.bloquear();
+        equipo2.desbloquear();
+        equipo2.setJugando(true);
+
+
+    }
+    public static int turno(){
+        return turno;
+    }
+    @Override
+    public String getTextura() {
+        return "Menu/CanviTorn.png";
+    }
+
+    @Override
+    public int getPosicionX() {
+        return posicionTexturaX;
+    }
+
+    @Override
+    public int getPosicionY() {
+        return posicionTexturaY;
+    }
+
+
+
+
 
     public boolean isAnimacionInicialFinalizada() {
         return animacionInicialFinalizada;

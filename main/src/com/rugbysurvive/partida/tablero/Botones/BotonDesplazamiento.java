@@ -12,6 +12,10 @@ import java.util.ArrayList;
 
 /**
  * Created by aitor on 2/05/14.
+ * Permite el desplazamiento dentro de la lista de jugadores
+ * de la lista de suplentes.
+ * Puede desplazarse hacia arriba de la lista o hacia abajo.
+ *
  */
 public class BotonDesplazamiento extends Boton {
 
@@ -23,8 +27,12 @@ public class BotonDesplazamiento extends Boton {
      * @param posX     posicion x en el tablero
      * @param posY     posicion y en el tablero
      * @param entrada  tipo de boton que sera
-     * @param textura
+     * @param textura  textura que identifica al boton
+     * @param direccion indica la direccion de desplazamiento puediendo ser hacia
+     *                  arriba o hacia abajo
+     * @param lista elementos de la lista de suplentes por los que se ha de desplazar
      */
+
     public BotonDesplazamiento(float posX, float posY, Entrada entrada, String textura, int direccion,Lista lista) {
         super(posX, posY, entrada, textura, 0,ConstantesJuego.ANCHO_BOTON,ConstantesJuego.ALTO_BOTON);
         this.direccion = direccion;
@@ -32,6 +40,11 @@ public class BotonDesplazamiento extends Boton {
 
     }
 
+    /**
+     * Deplaza la lista hacia arriba o hacia abajo
+     * segun el boton que se haya creado.
+     * @param entrada entrada de datos de usuario.
+     */
     @Override
     public void accionEntrada(Entrada entrada) {
 
@@ -46,6 +59,7 @@ public class BotonDesplazamiento extends Boton {
         ArrayList<Jugador> suplentes= equipoSeleccionado.listaSuplentes();
 
         int posInicial = this.lista.getPosicionListaSuplentesInicial();
+
 
         if(direccion == 0) {
 

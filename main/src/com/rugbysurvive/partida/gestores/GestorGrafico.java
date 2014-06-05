@@ -21,31 +21,40 @@ import java.util.Iterator;
 
 /**
  * Created by aitor on 25/03/14.
+ * Agrupa todas las texturas que tiene que ser dibujadas .
+ * Cada textura sera dibujada acorde a las necesidades establecidas
+ * por el usuario.
  *
  *
  */
 public class GestorGrafico implements Dibujante{
 
-    protected int contador;
-    protected AssetManager manager;
-    protected ArrayList<TipoImagen> dibujables ;
-    protected SpriteBatch sprite;
-    protected static Camara camara;
-    protected int tamañoCasilla;
+    private int contador;
+    private AssetManager manager;
+    private ArrayList<TipoImagen> dibujables ;
+    private SpriteBatch sprite;
+    private static Camara camara;
+    private int tamañoCasilla;
 
-    protected String TAG = "GESTOR GRAFICO";
-    protected int vueltas = 0;
-    protected static Dibujante instancia = null;
-    protected int ultimaPosicionFondos ;
-    BitmapFont font;
-    protected int posXPaseInicial = 0;
-    protected int posYPaseInicial = 0;
-    protected int posXPaseFinal = 0;
-    protected int posYPaseFinal = 0;
+    private String TAG = "GESTOR GRAFICO";
+    private int vueltas = 0;
+    private static Dibujante instancia = null;
+    private int ultimaPosicionFondos ;
+    private BitmapFont font;
+    private int posXPaseInicial = 0;
+    private int posYPaseInicial = 0;
+    private int posXPaseFinal = 0;
+    private int posYPaseFinal = 0;
 
     private Pixmap pixmap;
-    Texture texture ;
+    private Texture texture ;
 
+    /**
+     * Carga en memoria todas las texturas
+     * Genera toda la estructura necesariapara el dibujado
+     * @param nombresTexturas listado de texturas que se desean cargan
+     * @param tamañoCasilla tamaño de una casilla del juego.
+     */
     public GestorGrafico(ArrayList<String> nombresTexturas,int tamañoCasilla)
     {
         this.contador = 0;

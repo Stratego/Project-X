@@ -10,16 +10,23 @@ import com.rugbysurvive.partida.tablero.Campo;
 
 /**
  * Created by Victor on 24/04/14.
+ * Permite al usuario seleccionar si el jugador
+ * hara un chute o un pase .
+ * Cada vez que se selecciona el boton pasa de un estado
+ * a otro consecutivamente.El estado se mantiene hasta que el usuario
+ * decida cambiarlo.
  */
 public class BotonInterfaz extends Boton{
     private Entrada entradaBoton;
+
+
     /**
      * Constructor del elemento boton
      *
      * @param posX     posicion x en el tablero
      * @param posY     posicion y en el tablero
      * @param entrada  tipo de boton que sera
-     * @param textura
+     * @param textura textura que identifica el boton
      * @param posicion
      */
     public BotonInterfaz(float posX, float posY, Entrada entrada, String textura, int posicion) {

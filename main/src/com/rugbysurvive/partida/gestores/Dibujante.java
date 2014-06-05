@@ -34,6 +34,13 @@ public interface Dibujante {
      */
     public void eliminarTextura(int ID);
 
+    /**
+     * Dibuja una linia a lo largo del tablero
+     * @param posicionXInicial posicion inicial en el eje X de la linia
+     * @param posicionYInicial posicion inicial en el eje y de la linia
+     * @param posicionXFinal posicion final en el eje X de la linia
+     * @param posicionYFinal posicion final en el eje y de la linia
+     */
     public void dibujarLinia(int posicionXInicial,int posicionYInicial,int posicionXFinal,int posicionYFinal);
 
     /**

@@ -7,7 +7,7 @@ public interface Proceso {
 
     /**
      * Una vez cargado el proceso se llama en cada iteracion
-     * una vez hasta que devuelva cierto.
+     * uhasta que devuelva cierto.
      * @return cierto si finaliza el proceso ,falso en caso contrario
      */
     public boolean procesar();

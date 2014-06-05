@@ -17,39 +17,34 @@ package com.rugbysurvive.partida.tablero;
 
 /**
  * Clase que define la posicion y comportamiento de un boron dentro del tablero de juego
+ * Un boton puede ser seleccionado realizando una accion concreta.
+ * Esta clase genera la interfaz basica necesaria para el uso de botones
+ * con funcionalidades diversas
  * Created by Victor on 24/03/14.
  */
 public abstract class Boton implements GestionEntrada,Dibujable,Proceso{
 
 
-
+    // Posicionamiento del tablero
     protected float posX;
-
     protected float posY;
-
     protected float posYOriginal;
-
     protected float posXOriginal;
-
-    protected Entrada entrada;
-
-    protected boolean selecionado;
-
-    protected int ID;
-
-    protected String textura;
-
+    protected int ancho;
+    protected int alto;
     protected int posicion;
 
-    protected int ancho;
-
-    protected int alto;
-
+    // estados del boton
+    protected boolean selecionado;
     protected boolean escondido;
-
-
-
     protected boolean procesando;
+
+
+    protected int ID;
+    protected String textura;
+    protected Entrada entrada;
+
+
 
 
     /**
@@ -99,26 +94,94 @@ public abstract class Boton implements GestionEntrada,Dibujable,Proceso{
         return selecionado;
     }
 
-    public Entrada obtenerEntrada()
-    {
+    /**
+     * Permite al boton esconderse o aparecer. Gracias a esto se pueden crear
+     * interfaces personalizadas segun el momento del juego.
+     * Al proceso de ocultacion se le añade una pequeña animacion extra.
+     * Cuando finaliza el proceso se devuelve cierto.
+     * @return indicacion de proceso finalizado
+     */
+    @Override
+    public boolean procesar(){
+
+        if(!this.escondido){
+            if(this.posY > ConstantesJuego.POSICION_BOTON_ESCONDIDO){
+                this.posY = posY -10;
+            }
+
+            else {
+                this.escondido = true;
+                this.procesando = false;
+                return true;
+            }
+        }
+
+        else{
+            if(this.posY <= posYOriginal){
+                this.posY = posY +10;
+            }
+
+            else {
+                this.escondido = false;
+                this.procesando = false;
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * Realiza la accion indicada en el boton.
+     * Cualquier boton debe añadir la funcionalidad
+     * en esta funcion ya que se activa cada vez que
+     * el usuario selecciona el boton.
+     * @param entrada tipo de entrada
+     */
+    @Override
+    public abstract void accionEntrada(Entrada entrada);
+
+    /**
+     * Inicia el proceso de ocultacion del boton
+     */
+    public void esconder(){
+        if(!this.escondido){
+            this.procesando = true;
+            ProcesosContinuos.añadirProceso(this);
+        }
+
+    }
+
+    /**
+     * Inicia el proceso de muestreo del boton
+     */
+    public void mostrar() {
+        if(this.escondido) {
+            this.procesando = true;
+            ProcesosContinuos.añadirProceso(this);
+        }
+    }
+
+
+
+
+
+
+    public Entrada obtenerEntrada() {
         return this.entrada;
     }
 
     @Override
     public void accionEntrada(Entrada entrada, float posX, float posY) {
-
-
-
+             // No implementada aun
     }
 
 
-    public void borrar()
-    {
+    public void borrar() {
         GestorGrafico.generarDibujante().eliminarTextura(this.getID());
     }
 
-    @Override
-    public abstract void accionEntrada(Entrada entrada);
+
 
     public int getID(){
         return ID;
@@ -143,49 +206,7 @@ public abstract class Boton implements GestionEntrada,Dibujable,Proceso{
         return (int)this.posY;
     }
 
-    @Override
-    public boolean procesar(){
 
-       if(!this.escondido){
-           if(this.posY > ConstantesJuego.POSICION_BOTON_ESCONDIDO){
-                this.posY = posY -10;
-           }
-
-           else {
-               this.escondido = true;
-               this.procesando = false;
-               return true;
-           }
-       }
-
-       else{
-           if(this.posY <= posYOriginal){
-               this.posY = posY +10;
-           }
-
-           else {
-               this.escondido = false;
-               this.procesando = false;
-               return true;
-           }
-       }
-       return false;
-    }
-
-    public void esconder(){
-        if(!this.escondido){
-            this.procesando = true;
-            ProcesosContinuos.añadirProceso(this);
-        }
-
-    }
-
-    public void mostrar() {
-        if(this.escondido) {
-            this.procesando = true;
-            ProcesosContinuos.añadirProceso(this);
-        }
-    }
 
     public boolean isEscondido() {
         return escondido;

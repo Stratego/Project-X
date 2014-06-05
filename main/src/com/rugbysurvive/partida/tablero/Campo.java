@@ -15,23 +15,22 @@ import com.rugbysurvive.partida.jugadores.Equipo;
 import com.rugbysurvive.partida.jugadores.Posicionamiento;
 
 /**
- * Clase que crea y define el comportamiente del terreno del juego
+ * Clase que crea y define el comportamiente del terreno del juego.
+ * Agrupa el conjunto de casillas y filtra las acciones de entrada
+ * del usuario de manera que se identifique facilmente
+ * donde se ha realizado la accion.
+ * Ademas realiza las mismas funcionalidades que la casilla
+ * añadiendo el factor de posicion .
  * Created by Victor on 24/03/14.
  */
 public class Campo implements GestionEntrada,Dibujable {
 
-    /**
-     * indicara si el elemento esta selecionado
-     */
-    private boolean selecionado;
-
-
+    // permite el uso del campo como singleton
     private static Campo campo;
+
     Casilla [][] casillas= new Casilla [20][30];
-
-
-
     Dibujante dibujante;
+
 
 
     public Campo()  {
@@ -41,132 +40,151 @@ public class Campo implements GestionEntrada,Dibujable {
         campo = this;
     }
 
+    /**
+     * Coloca la pelota en una casilla del tablero
+     * indicada por los ejes de coordenadas
+     * @param posicionX posicion de la casilla en el eje X
+     * @param posicionY posicion de la casilla en el eje Y
+     */
     public void colocarPelota(int posicionX, int posicionY){
         this.casillas[posicionX][posicionY].colocarPelota();
     }
 
-    public void quitarPelota(int posicionX, int posicionY){
+    /**
+     * Quita la pelota en una casilla del tablero
+     *  indicada por los ejes de coordenadas
+     * @param posicionX posicion de la casilla en el eje X
+     * @param posicionY posicion de la casilla en el eje Y
+     */
+     public void quitarPelota(int posicionX, int posicionY){
         this.casillas[posicionX][posicionY].quitarPelota();
     }
 
+    /**
+     * Indica la existencia de una pelota  en una casilla del tablero
+     *  indicada por los ejes de coordenadas
+     * @param posicionX posicion de la casilla en el eje X
+     * @param posicionY posicion de la casilla en el eje Y
+     */
     public void hayPelota(int posicionX, int posicionY){
         this.casillas[posicionX][posicionY].hayPelota();
     }
 
 
-
-     public void seleccionarCasilla(int posicionX,int posicionY)
-     {
+    /**
+     * marca la casilla indicada por los ejes de coordenadas
+     * como seleccionada Solo funciona si hay un jugador
+     * que puede ser seleccionado
+     * @param posicionX posicion de la casilla en el eje X
+     * @param posicionY posicion de la casilla en el eje Y
+     */
+     public void seleccionarCasilla(int posicionX,int posicionY) {
         this.casillas[posicionY][posicionX].seleccionar();
      }
 
-    public void desSeleccionarCasilla(int posicionX,int posicionY)
-    {
+    /**
+     * marca la casilla indicada por los ejes de coordenadas
+     * como deseleccionada
+     * @param posicionX posicion de la casilla en el eje X
+     * @param posicionY posicion de la casilla en el eje Y
+     */
+    public void desSeleccionarCasilla(int posicionX,int posicionY)  {
         this.casillas[posicionY][posicionX].desSeleccionar();
     }
+
+
     /**
-     * Dibujamos el tablero de juego
+     * Filtra la accion recibida por un usuario y la recalcula indicando
+     * cual ha sido la casilla afectada. Ademas realiza un broadcast a todas
+     * las casillas para que reciban la señal del usuario filtrada.
+     * @param entrada tipo de entrada
+     * @param posX eje x donde se ha realizado la accion /entrada
+     * @param posY eje y donde se ha realizado la accion /entrada
      */
-    protected void dibujarTablero(){
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 30; j++) {
-                casillas[i][j]=new Casilla(j,i);
-            }
-
-
-        }
-    }
-
-
     @Override
     public void accionEntrada(Entrada entrada, float posX, float posY) {
 
        double anchura = ConstantesJuego.variables().getAnchoCasilla();
        double altura = ConstantesJuego.variables().getLargoCasilla();
 
-        System.out.println("EN campo llega:"+entrada);
        for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 30; j++) {
-                        //Filtro
-                       // if (casillas[i][j].esSeleccionado((int)(posX/anchura),(int)(posY/altura))){
-                            casillas[i][j].accionEntrada(entrada,(int)(posX/anchura),(int)(posY/altura), casillas);
-                       // }
+
+                casillas[i][j].accionEntrada(entrada,(int)(posX/anchura),(int)(posY/altura), casillas);
 
                 }
             }
 
        }
 
-    /**
-     * Retorna la Instancia del campo
-     * @return instanca del campo
-     */
-    public static Campo getInstanciaCampo(){return campo;}
+
 
     /**
-     *
-     * @param jugador
-     * @param posicionX
-     * @param posicionY
-     * @return
+     *Añade un jugador en la casilla indicada si y solo si no existe
+     * ningun otro elemento .
+     * Si la casilla esta llena devuelve falso .
+     * @param posicionX posicion de la casilla en el eje X
+     * @param posicionY posicion de la casilla en el eje Y
+     * @param jugador jugador que se debe añadir en la casilla
+     * @return indicador de si se ha podido colocar o no
      */
-    public boolean añadirElemento(Jugador jugador, int posicionX,int posicionY)
-    {
-
+    public boolean añadirElemento(Jugador jugador, int posicionX,int posicionY) {
         return this.casillas[posicionX][posicionY].añadirElemento(jugador);
     }
 
     /**
-     *
-     * @param objeto
-     * @param posicionX
-     * @param posicionY
-     * @return
+     *Añade un jugador en la casilla indicada si y solo si no existe
+     * ningun otro elemento .
+     * Si la casilla esta llena devuelve falso .
+     * @param posicionX posicion de la casilla en el eje X
+     * @param posicionY posicion de la casilla en el eje Y
+     * @param objeto que se debe añadir en la casilla
+     * @return indicador de si se ha podido colocar o no
      */
-    public boolean añadirElemento(ObjetoCampo objeto,int posicionX,int posicionY)
-    {
+    public boolean añadirElemento(ObjetoCampo objeto,int posicionX,int posicionY)  {
        return this.casillas[posicionX][posicionY].añadirElemento(objeto);
     }
 
-    public Casilla getCasilla(int X, int Y)
-    {
-        return this.casillas[X][Y];
-    }
     /**
+     *Elimina el elemento existente en la casilla indicada
      *
-     * @param posicionX
-     * @param posicionY
-     */
-   public void eliminarElemento(int posicionX,int posicionY)
-   {
+     * @param posicionX posicion de la casilla en el eje X
+     * @param posicionY posicion de la casilla en el eje Y
+    */
+   public void eliminarElemento(int posicionX,int posicionY) {
        this.casillas[posicionX][posicionY].eliminarElemento();
    }
 
     /**
-     *
-     * @param posicionX
-     * @param posicionY
-     * @return
+     * Obtiene el jugador de la casilla indicaada.
+     * En caso que no exista tal jugador devuelve falso
+     *  @param posicionX posicion de la casilla en el eje X
+     * @param posicionY posicion de la casilla en el eje Y
+     * @return jugador situado en la casilla
      */
-    public Jugador getJugador(int posicionX,int posicionY)
-    {
+    public Jugador getJugador(int posicionX,int posicionY) {
         return this.casillas[posicionX][posicionY].getJugador();
     }
 
     /**
-     *
-     * @param posicionX
-     * @param posicionY
-     * @return
+     * Obtiene el objeto de la casilla indicaada.
+     * En caso que no exista tal jugador devuelve falso
+     * @param posicionX posicion de la casilla en el eje X
+     * @param posicionY posicion de la casilla en el eje Y
+     * @return objeto situado en la casilla
      */
     public ObjetoCampo getObjeto(int posicionX,int posicionY)
     {
         return this.casillas[posicionX][posicionY].getObjeto();
     }
 
-
-    public void dibujarEquipo(Equipo equipo){
-        for (Jugador iter :equipo.getJugadores()){
+    /**
+     * Añade todos los jugadores del equipo
+     * al campo.
+     * @param equipo equipo que se desean añadir los jugadores
+     */
+    public void dibujarEquipo(Equipo equipo) {
+        for (Jugador iter :equipo.getJugadores()) {
             this.añadirElemento(iter, iter.getPosicionX(), iter.getPosicionY());
 
         }
@@ -174,7 +192,7 @@ public class Campo implements GestionEntrada,Dibujable {
 
     /**
      * Elimina todos los jugadores de este equipo en el campo
-     * @param equipo
+     * @param equipo equipo que se desean eliminar los jugadores
      */
     public void borrarEquipo (Equipo equipo){
         for (Jugador iter :equipo.getJugadores()){
@@ -185,19 +203,26 @@ public class Campo implements GestionEntrada,Dibujable {
         }
     }
 
+    /**
+     * Devuelve la casilla donde esta situada la pelota.
+     * tanto si la tiene el jugador como la casilla.
+     * @return casilla donde esta situada la pelota
+     */
     public Casilla posicionPelota(){
         Casilla casilla = null;
 
+        // Se busca en el tablero
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 30; j++) {
 
-                if(casillas[i][j].hayPelota()==true){
+                if(casillas[i][j].hayPelota()){
                     casilla = casillas[i][j];
                 }
 
             }
         }
 
+        // Si no existe en el tablero se busca en los jugadores
         if (casilla==null){
             for (Jugador jugador : ComponentesJuego.getComponentes().getEquipo1().listaJugadoresCampo()){
 
@@ -216,24 +241,34 @@ public class Campo implements GestionEntrada,Dibujable {
         return casilla;
     }
     /**
-     * Eliminamos la pelota del tablero
+     *Se elimina la pelota del tablero
      */
     public void quitarPelotaTablero(){
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 30; j++) {
 
-                if (casillas[i][j].hayPelota()==true){
+                if (casillas[i][j].hayPelota()){
                     casillas[i][j].quitarPelota();
                 }
+            }
+        }
+    }
+
+    /**
+     * Proceso de inicializavion de las casillas
+     * del tablero de juego
+     */
+    private void dibujarTablero(){
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 30; j++) {
+                casillas[i][j]=new Casilla(j,i);
             }
 
 
         }
     }
-    /**
-     * retorna la lista de casillas que forman el tablero, necesario, para la IA
-     * @return
-     */
+
+
     public Casilla [][] getTablero(){
         return casillas;
     }
@@ -258,10 +293,17 @@ public class Campo implements GestionEntrada,Dibujable {
         return 0;
     }
 
-    public void recolocarJugadoresDespuesDelPunto(Jugador jugador)
-    {
+    public void recolocarJugadoresDespuesDelPunto(Jugador jugador) {
         Posicionamiento.generarSaquePredeterminado(jugador);
     }
+    /**
+     *Devuelve la Instancia del campo
+     * @return instanca del campo
+     */
+    public static Campo getInstanciaCampo(){return campo;}
 
+    public Casilla getCasilla(int X, int Y) {
+        return this.casillas[X][Y];
+    }
 
 }

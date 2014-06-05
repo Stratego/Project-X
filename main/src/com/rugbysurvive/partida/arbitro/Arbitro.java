@@ -233,7 +233,7 @@ public class Arbitro implements Dibujable,Proceso{
             }
         }
 
-        // CODIGO PRUEBA
+        // CODIGO PRUEBA DE VISIBILIDAD ABSOLUTA
         /*this.casilla.clear();
         for(int i=0;i<20;i++) {
             for(int j=0;j<30;j++) {

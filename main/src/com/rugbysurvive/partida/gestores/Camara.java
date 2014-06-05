@@ -10,11 +10,10 @@ import com.badlogic.gdx.math.Rectangle;
 import com.rugbysurvive.partida.ConstantesJuego;
 
 /**
- * Process the game's view.
- * The user can move the view using the touch dragged option.
- * The limit of view is because of the board bounds.
- *
- * @author aitor marco castro
+ * Procesa la visualizacion del juego mediante la translacion
+ * y el zoom.
+ * Realiza el renderizado de todas las texturas del juego
+ * incluidas en el gestor grafico.
  *
  */
 public class Camara implements InputProcessor {
@@ -22,13 +21,15 @@ public class Camara implements InputProcessor {
     private static final int MIN_POSITION_X = 200;
     private static final int MIN_POSITION_Y = 200;
 
-
+    // camara de libgdx
     private OrthographicCamera camera;
     private float width;
     private float height;
     private int MAXIMO_ANCHURA = ConstantesJuego.ANCHO_TABLERO_CON_ZOOM- Gdx.graphics.getWidth()/2;
     private int MAXIMO_ALTURA = ConstantesJuego.ALTO_TABLERO_CON_ZOOM - Gdx.graphics.getHeight()/2;
     private int boardHeight;
+
+    // variacion de la camara respecto la posicion original
     private int absoluteVariationY; // Number of pixels the camera have been moved.
     private int absoluteVariationX;
     private Rectangle glViewport;
@@ -45,14 +46,13 @@ public class Camara implements InputProcessor {
         this.camera = new OrthographicCamera(this.width, this.height);
         this.camera.position.set(this.width/2,this.height/2,0);
         this.bloqueada = false;
-//        this.camera.apply(Gdx.graphics.getGL10());
+         this.camera.apply(Gdx.graphics.getGL10());
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
 
-        if(!bloqueada)
-        {
+        if(!bloqueada) {
             if(Gdx.input.isTouched(0) && !Gdx.input.isTouched(1))
              {
                     int variationX = Gdx.input.getDeltaX();
@@ -64,15 +64,17 @@ public class Camara implements InputProcessor {
                          this.absoluteVariationY += variationY;
 
                          this.camera.translate(-variationX,variationY);
-                        // this.camera.update();
-                         // this.camera.apply(Gdx.graphics.getGL20());
-               return true;
-             }
+                         return true;
+                     }
             }
         }
         return false;
     }
 
+    /**
+     * Realiza el calculo de dibujado de las texturas
+     * @param batch pizarra donde se realiza el dibujado
+     */
     public void render(SpriteBatch batch)
     {
         this.camera.update();
@@ -80,11 +82,20 @@ public class Camara implements InputProcessor {
         batch.setProjectionMatrix(this.camera.combined);
     }
 
-    public void variarPosicion(int posicionX,int posicionY)
-    {
+    /**
+     * La camara se mueve a la posicio indicada teniendo en cuenta
+     * el zoom establerido.
+     * Ademas se tiene en cuenta si la camara ya tiene vision en ese punto o no
+     * por lo que en caso de que el punto indicado este ya visualizado
+     * no realizara ningun cambio
+     *
+     * @param posicionX posicion en el eje x de colocacion
+     * @param posicionY posicion  en el eje y de colcacion
+     */
+    public void variarPosicion(int posicionX,int posicionY)  {
 
            posicionX = (int)(posicionX*ConstantesJuego.variables().getMultiplicador());
-        posicionY = (int)(posicionY*ConstantesJuego.variables().getMultiplicador());
+           posicionY = (int)(posicionY*ConstantesJuego.variables().getMultiplicador());
 
 
             if(posicionX>= this.camera.position.x +this.width/2 ||posicionX <= this.camera.position.x -this.width/2
@@ -96,6 +107,14 @@ public class Camara implements InputProcessor {
             }
     }
 
+    /**
+     * La camara se mueve a la posicio indicada teniendo en cuenta
+     * el zoom establerido. El punto central de la camara
+     * se colocara justo en la posicion establecida.
+     *
+     * @param posicionX posicion en el eje x de colocacion
+     * @param posicionY posicion  en el eje y de colcacion
+     */
     public void situarCamara(int posicionX,int posicionY)
     {
 
@@ -108,7 +127,6 @@ public class Camara implements InputProcessor {
        this.camera.position.set(posicionX,posicionY,0);
 
     }
-
 
     private boolean isCameraInsideBoard(int variationX,int variationY)
     {

@@ -7,6 +7,8 @@ import com.rugbysurvive.partida.tablero.Boton;
 
 /**
  * Created by aitor on 30/04/14.
+ * Fuerza la finalizacion de una accion en el simulador
+ * instantaneamente una vez seleccionado el boton.
  */
 public class BotonFinalizarAccion extends Boton {
 
@@ -19,7 +21,7 @@ public class BotonFinalizarAccion extends Boton {
      * @param posX     posicion x en el tablero
      * @param posY     posicion y en el tablero
      * @param entrada  tipo de boton que sera
-     * @param textura
+     * @param textura  textura que identifica al boton
      * @param posicion
      */
     public BotonFinalizarAccion(float posX, float posY, Entrada entrada, String textura, int posicion) {
@@ -29,6 +31,10 @@ public class BotonFinalizarAccion extends Boton {
         this.setEscondido(true);
     }
 
+    /**
+     * Finaliza una accion del simulador automaticamente
+     * @param entrada datos de entrada del usuario
+     */
     @Override
     public void accionEntrada(Entrada entrada) {
         System.out.println("finalizando accion");

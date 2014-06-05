@@ -18,42 +18,36 @@ import javax.security.sasl.SaslServer;
 
 /**
  * Definicion de la casilla, elemento basico del que se compone el tablero de juego
+ * Permite la gestion de los diferentes elementos que participan dentro del campo
+ * como objetos ,el arbitro ,los jugadores o la pelota en si misma.
  * Created by Victor on 24/03/14.
  */
 public class Casilla implements GestionEntrada ,Dibujable{
-    /**
-     * posicion x en el tablero
-     */
-    private float posX;
 
-    /**
-     * posicion y en el tablero
-     */
-    private float posY;
+    private float posX;  // Posicion de la casilla en el tablero
+    private float posY;  // Posicion de la casilla en el tablero
 
-
+    // conjunto de elementos que se pueden añadir a la casilla
     private Jugador jugador ;
     private ObjetoCampo objeto;
     private Arbitro arbitro;
+
+
+    // textura de dibujado del jugador seleccionado y pelota
     private String texturaSeleccionada;
+    private ElementoDibujable pelota;
+    Dibujante dibujante;
 
-    public int getCoste() {
-        return coste;
-    }
-
-    public void setCoste(int coste) {
-        this.coste = coste;
-    }
 
     private int coste=1;
     private int id = -1;
-    /**
-     * indicara si el elemento esta seleccionado
-     */
-    private boolean selecionado;
 
+    // Indicadores para la casilla
+    private boolean selecionado;
     private boolean existePelota;
-    private ElementoDibujable pelota;
+
+
+
 
     public void colocarPelota() {
         this.existePelota = true;
@@ -61,23 +55,15 @@ public class Casilla implements GestionEntrada ,Dibujable{
         this.pelota.dibujar(this.getPosicionX(), this.getPosicionY());
     }
 
+    /**
+     * Si existe una pelota en la casilla la elimina.
+     */
     public void quitarPelota(){
         this.existePelota = false;
         //if (this.pelota !=null){
         this.pelota.borrar();
         //}
     }
-
-    /**
-     *
-     * @return Boolean existe pelota
-     */
-    public boolean hayPelota(){
-        //System.out.println("La posicion de esta casilla es la"+this.getPosicionX()+"-"+this.getPosicionY());
-        return this.existePelota;
-    }
-
-    Dibujante dibujante;
 
     /**
      * Constructor de  casilla
@@ -224,50 +210,6 @@ public class Casilla implements GestionEntrada ,Dibujable{
         return false;
     }
 
-
-    public ObjetoCampo getObjeto(){return this.objeto;}
-
-
-    public void seleccionar(){
-        if(id == -1) {
-            id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.fondo);
-        }
-    }
-    public void desSeleccionar(){
-        if(id!=-1)
-        {
-            GestorGrafico.generarDibujante().eliminarTextura(id);
-             this.id = -1;
-        }
-    }
-
-    public void setJugador(Jugador jugador)
-    {
-        this.jugador = jugador;
-    }
-
-
-    public void accionEntrada(Entrada entrada, float posX, float posY, Casilla [][] casillas) {
-        //System.out.println(entrada + " x: "+ posX + "y: " + posY);
-        if(this.jugador != null)
-        {
-            //System.out.println("jugador "+entrada + "x: "+ posX + "y: " + posY);
-            this.jugador.accionEntrada(entrada, posX, posY, casillas);
-        }
-
-    }
-
-    @Override
-    public void accionEntrada(Entrada entrada, float posX, float posY) {
-
-    }
-
-    @Override
-    public void accionEntrada(Entrada entrada) {
-
-
-    }
-
     /**
      * indicamos que el elemento se ha seleccionado y su posicion en el tablero
      * @param posX eje x donde se ha realizado la accion /entrada
@@ -286,12 +228,71 @@ public class Casilla implements GestionEntrada ,Dibujable{
         return selecionado;
     }
 
+
+
+    /**
+     * Realiza el dibujado de jugador seleccionado
+     */
+    public void seleccionar(){
+        if(id == -1) {
+            id = GestorGrafico.generarDibujante().añadirDibujable(this, TipoDibujo.fondo);
+        }
+    }
+
+    /**
+     * borra la textura  de jugador seleccionado
+     */
+    public void desSeleccionar(){
+        if(id != -1) {
+            GestorGrafico.generarDibujante().eliminarTextura(id);
+            this.id = -1;
+        }
+    }
+
+
+
+    /**
+     * Recibe la accion del usuario junto a la posicion y el tablero
+     * @param entrada tipo de accion recibida por el usuario
+     * @param posX casilla que ha recibido la accion en el eje x
+     * @param posY casilla que ha recibido la accion en el eje y
+     * @param casillas casillas del tablero
+     */
+    public void accionEntrada(Entrada entrada, float posX, float posY, Casilla [][] casillas) {
+        //System.out.println(entrada + " x: "+ posX + "y: " + posY);
+        if(this.jugador != null) {
+            //System.out.println("jugador "+entrada + "x: "+ posX + "y: " + posY);
+            this.jugador.accionEntrada(entrada, posX, posY, casillas);
+        }
+
+    }
+
+
+
+    /**
+     * indica la existencia de una pelota en la casilla
+     * @return Boolean existe pelota
+     */
+    public boolean hayPelota(){
+        //System.out.println("La posicion de esta casilla es la"+this.getPosicionX()+"-"+this.getPosicionY());
+        return this.existePelota;
+    }
+
+    @Override
+    public void accionEntrada(Entrada entrada, float posX, float posY) {
+        // No implementado
+    }
+
+    @Override
+    public void accionEntrada(Entrada entrada) {
+        // NO implementado
+    }
+
+
     public Jugador getJugador()
     {
         return this.jugador;
     }
-
-
 
     public float getPosX() {
         return posX;
@@ -309,6 +310,7 @@ public class Casilla implements GestionEntrada ,Dibujable{
         this.posY = posY;
     }
 
+    public ObjetoCampo getObjeto(){return this.objeto;}
 
     @Override
     public String getTextura() {
@@ -325,5 +327,16 @@ public class Casilla implements GestionEntrada ,Dibujable{
         return (int)this.getPosY();
     }
 
+    public int getCoste() {
+        return coste;
+    }
 
+    public void setCoste(int coste) {
+        this.coste = coste;
+    }
+
+    public void setJugador(Jugador jugador)
+    {
+        this.jugador = jugador;
+    }
 }

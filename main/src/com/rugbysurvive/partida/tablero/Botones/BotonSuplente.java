@@ -13,6 +13,10 @@ import java.util.ArrayList;
 
 /**
  * Created by Victor on 24/04/14.
+ * Cada boton de suplencia representa un jugado que esta
+ * en estado suplente. Una vez seleccionado el jugador
+ * el suplente se intercambiara con el jugador seleccionado.
+ * Ademas tambien muestra sus atributos y su aspecto..
  */
 public class BotonSuplente extends Boton {
 
@@ -39,7 +43,8 @@ public class BotonSuplente extends Boton {
      * @param posX     posicion x en el tablero
      * @param posY     posicion y en el tablero
      * @param entrada  tipo de boton que sera
-     * @param textura
+     * @param textura dibujado de fondo de la seleccion
+     * @param  jugador jugador al que se le destina el boton de seleccion
      */
     public BotonSuplente(float posX, float posY, Entrada entrada, String textura,Jugador jugador) {
 
@@ -60,19 +65,24 @@ public class BotonSuplente extends Boton {
         ComponentesJuego.getComponentes().getEquipo2().intercambioJugadores(this.jugador);
     }
 
+    /**
+     * Dibuja todas las habilidades el jugador dentro del boton
+     * de suplencia.
+     */
     private void mostrarHabilidades(){
 
         this.habilidades = new ArrayList<ElementoDibujable>();
         this.capacidadHabilidades = new ArrayList<ElementoDibujable>();
         this.dibujoJugador = new ArrayList<ElementoDibujable>();
 
+        // Se generan las habilidades
         this.generarIndicadorHabilidad(jugador.getAtaque(),Jugador.MAX_ATAQUE);
         this.generarIndicadorHabilidad(jugador.getDefensa(),Jugador.MAX_DEFENSA);
         this.generarIndicadorHabilidad(jugador.getFuerza(),Jugador.MAX_FUERZA);
         this.generarIndicadorHabilidad(jugador.getResistencia(),Jugador.MAX_RESISTENCIA);
         this.generarIndicadorHabilidad(jugador.getHabilidad(),Jugador.MAX_HABILIDAD);
 
-
+        // Se colocan las diferentes texturas a lo largo del boton ordenadamente
         int posicionX = this.getPosicionX()+ (int)(ConstantesJuego.LARGO_TABLON_SUSITUCION/3);
         int posicionY = this.getPosicionY() + 5;
 
@@ -94,13 +104,13 @@ public class BotonSuplente extends Boton {
         posicionX = this.getPosicionX()+ 50;
         posicionY = this.getPosicionY() + 5;
 
-        /* for(ElementoDibujable elemento : this.habilidades) {
-            elemento.dibujar(posicionX, posicionY);
-            posicionX = posicionX + 100;
-        }*/
 
     }
 
+    /**
+     * Sobreescribe la funcion de borrado del boton añadiendo
+     * la funcionalidad de borrar el conjunto de texturas generadas.
+     */
     @Override
     public void borrar(){
         super.borrar();
@@ -113,7 +123,14 @@ public class BotonSuplente extends Boton {
 
     }
 
+    /**
+     * Genera un indicador de habilidad , como un termometro, segun
+     * la cantidad de habilidad que tiene el jugador.
+     * @param valor valor real de la habilidad del jugador
+     * @param valorMaximo valor maximo de la habilidad del jugador
+     */
     private void generarIndicadorHabilidad(int valor,int valorMaximo){
+
         String textura;
 
         double proporcionHabilidad = (double)valor/( double)valorMaximo;

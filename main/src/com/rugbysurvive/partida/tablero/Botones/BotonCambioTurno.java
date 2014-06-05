@@ -7,6 +7,7 @@ import com.rugbysurvive.partida.tablero.Boton;
 
 /**
  * Created by aitor on 29/04/14.
+ * Una vez activado acciona el proceso de cambio de turno
  */
 public class BotonCambioTurno extends Boton {
 
@@ -17,7 +18,7 @@ public class BotonCambioTurno extends Boton {
      * @param posX     posicion x en el tablero
      * @param posY     posicion y en el tablero
      * @param entrada  tipo de boton que sera
-     * @param textura
+     * @param textura  textura que identifica al boton
      * @param posicion
      */
     public BotonCambioTurno(float posX, float posY, Entrada entrada, String textura, int posicion) {

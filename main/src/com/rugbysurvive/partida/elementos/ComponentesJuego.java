@@ -22,17 +22,24 @@ import java.util.Random;
 
 /**
  * Created by aitor on 15/04/14.
+ * Agrupa todos los elementos del juego mas importantes
+ * Inicia la estructura basica y la conexion con la informacion
+ * recibida de los menus.
+ * Es por lo tanto el nexo de union entre los menus y la partida.
  */
 public class ComponentesJuego {
+
+    // Elementos de juego basicos
     private Campo campo;
     private Equipo equipo1;
     private Equipo equipo2;
     private Marcador marcador;
+
+    // Datos recibidos desde los menus
     private com.models.Equipo equipo1Modelado;
     private com.models.Equipo equipo2Modelado;
 
     private static ComponentesJuego componentesJuego;
-
 
 
 
@@ -56,186 +63,114 @@ public class ComponentesJuego {
     }
     public static ComponentesJuego getComponentes(){return componentesJuego;}
 
-
+    /**
+     * GEnera todos los datos provientes de los menus
+     */
     private void generarEquipos()
     {
 
 
+        // Carga los logos y estandartes del equipo
         this.equipo1.setLogo(this.equipo1Modelado.getEscudo());
         this.equipo1.setEstandarte(this.equipo1Modelado.getEscudo());
 
         if(this.equipo2.getColor() == Color.verde){
             this.equipo2.setLogo("banderas/logos/Logo5E4.png");
              this.equipo2.setEstandarte("banderas/logos/Logo5E4.png");
-         }
-        else if(this.equipo2.getColor() == Color.rojo)
-        {
+        }
+
+        else if(this.equipo2.getColor() == Color.rojo) {
             this.equipo2.setLogo("banderas/logos/Logo3E1.png");
             this.equipo2.setEstandarte("banderas/logos/Logo3E1.png");
 
         }
-        else if(this.equipo2.getColor() == Color.azul)
-        {
+
+        else if(this.equipo2.getColor() == Color.azul) {
             this.equipo2.setLogo("banderas/logos/Logo5E3.png");
             this.equipo2.setEstandarte("banderas/logos/Logo5E3.png");
         }
 
-         else if(this.equipo2.getColor() == Color.amarillo)
-        {
+         else if(this.equipo2.getColor() == Color.amarillo)  {
             this.equipo2.setLogo("banderas/logos/Logo4E2.png");
             this.equipo2.setEstandarte("banderas/logos/Logo4E2.png");
 
         }
 
 
+
+        // Carga todos los jugadores y sus posiciones  de los modelos
             for(com.models.Jugador auxJugador : this.equipo1Modelado.getJugadores()){
-           System.out.println("jugador equipo 1"+auxJugador.getPosX()+","+auxJugador.getPosY());
-            List<Habilidad> hab = auxJugador.getHabilidades();
-          //  System.out.println("jugador" + hab.get(0).getValor() + "'" + hab.get(1).getValor() + "'" + hab.get(2).getValor() + "'" + hab.get(3).getValor() + "'" + hab.get(4).getValor());
-/*            if(auxJugador.getPowerups().size()>0){
-                System.out.print("HAY OBJETOSSSSSSSSSSSSSSSs");
-            }*/
-            //
-            Jugador jugadorReal;
-            if(this.equipo1Modelado.getJugadores().indexOf(auxJugador) == 2 || this.equipo1Modelado.getJugadores().indexOf(auxJugador) == 4)
-            {
-                jugadorReal =  new Jugador(hab.get(0).getValor(),100,hab.get(1).getValor(),hab.get(2).getValor(),40,hab.get(4).getValor(), this.equipo1);
-                PowerUP objeto3 = new PowerUP(1,40,Habilidades.resistencia,50,jugadorReal);
-                ColocadorObjetosCampo objeto4 = new ColocadorObjetosCampo(2,10,"mina.png",jugadorReal,new MinaCampo("mina.png",jugadorReal));
-                ColocadorObjetosCampo objeto2 = new ColocadorObjetosCampo(3,10,"objetos/agujero.png",jugadorReal,new Agujero("objetos/agujero.png",jugadorReal));
-                ColocadorObjetosCampo objeto = new ColocadorObjetosCampo(4,10,"objetos/hielo.png",jugadorReal,new Hielo("objetos/hielo.png",jugadorReal));
-                jugadorReal.añadirObjeto(objeto);
-                jugadorReal.añadirObjeto(objeto2);
-                jugadorReal.añadirObjeto(objeto3);
-                jugadorReal.añadirObjeto(objeto4);
-            }
-            else{
-                int velocidad = hab.get(3).getValor()+30;
-                if (velocidad>100){velocidad = 100;}
-                  jugadorReal =  new Jugador(hab.get(0).getValor(),100,hab.get(1).getValor(),hab.get(2).getValor(),velocidad,hab.get(4).getValor(), this.equipo1);
-            }
 
-          int posY = auxJugador.getPosY();
-          int posX = auxJugador.getPosX();
-            if(posY<14){
+                   List<Habilidad> hab = auxJugador.getHabilidades();
+                    Jugador jugadorReal;
 
-                posX = translacionPosicionX(posX);
-            }
+                    // Para realizar pruebas de objetos
+                    if(this.equipo1Modelado.getJugadores().indexOf(auxJugador) == 2 || this.equipo1Modelado.getJugadores().indexOf(auxJugador) == 4)
+                    {
+                        jugadorReal =  new Jugador(hab.get(0).getValor(),100,hab.get(1).getValor(),hab.get(2).getValor(),40,hab.get(4).getValor(), this.equipo1);
+                         PowerUP objeto3 = new PowerUP(1,40,Habilidades.resistencia,50,jugadorReal);
+                         ColocadorObjetosCampo objeto4 = new ColocadorObjetosCampo(2,10,"mina.png",jugadorReal,new MinaCampo("mina.png",jugadorReal));
+                         ColocadorObjetosCampo objeto2 = new ColocadorObjetosCampo(3,10,"objetos/agujero.png",jugadorReal,new Agujero("objetos/agujero.png",jugadorReal));
+                         ColocadorObjetosCampo objeto = new ColocadorObjetosCampo(4,10,"objetos/hielo.png",jugadorReal,new Hielo("objetos/hielo.png",jugadorReal));
+                         jugadorReal.añadirObjeto(objeto);
+                         jugadorReal.añadirObjeto(objeto2);
+                         jugadorReal.añadirObjeto(objeto3);
+                         jugadorReal.añadirObjeto(objeto4);
+                    }
 
-          if(posY>14){
-              posY = this.translacionPosicion(posY);
-              posY = posY +1;
-          }
-            else{
-              posY = posY-1;
-          }
+                    // carga del jugador con sus habilidades
+                    else{
+                        int velocidad = hab.get(3).getValor()+30;
+                        if (velocidad>100){velocidad = 100;}
+                            jugadorReal =  new Jugador(hab.get(0).getValor(),100,hab.get(1).getValor(),hab.get(2).getValor(),velocidad,hab.get(4).getValor(), this.equipo1);
+                     }
 
-           this.equipo1.añadirJugador(jugadorReal,posX,posY);
+                        // FIltrado de posiciones recibidas para reajustarlas a las necesidades de la partida
+                         int posY = auxJugador.getPosY();
+                         int posX = auxJugador.getPosX();
+                         if(posY<14){
+                             posX = translacionPosicionX(posX);
+                          }
+
+                        if(posY>14){
+                             posY = this.translacionPosicion(posY);
+                             posY = posY +1;
+                         }
+                         else{
+                            posY = posY-1;
+                         }
+
+                        this.equipo1.añadirJugador(jugadorReal,posX,posY);
         }
 
+         // carga la informacion de los menus del equipo 2
         for(com.models.Jugador auxJugador : this.equipo2Modelado.getJugadores()){
-           System.out.println("jugador equipo2"+auxJugador.getPosX()+","+auxJugador.getPosY());
-            List<Habilidad> hab = auxJugador.getHabilidades();
-            //System.out.println("jugador" + hab.get(0).getValor() + "'" + hab.get(1).getValor() + "'" + hab.get(2).getValor() + "'" + hab.get(3).getValor() + "'" + hab.get(4).getValor());
-/*            if(auxJugador.getObjetos().size()>0){
-                System.out.print("HAY OBJETOSSSSSSSSSSSSSSSs");
-            }*/
-            int velocidad = hab.get(3).getValor()+30;
-            if (velocidad>100){velocidad = 100;}
-            Jugador jugadorReal =  new Jugador(hab.get(0).getValor(),100,hab.get(1).getValor(),hab.get(2).getValor(),velocidad,hab.get(4).getValor(), this.equipo2);
-            int posY = auxJugador.getPosY();
-            int posX = auxJugador.getPosX();
-            if(posY<14){
+               System.out.println("jugador equipo2"+auxJugador.getPosX()+","+auxJugador.getPosY());
+                List<Habilidad> hab = auxJugador.getHabilidades();
 
+             int velocidad = hab.get(3).getValor()+30;
+              if (velocidad>100){velocidad = 100;}
+               Jugador jugadorReal =  new Jugador(hab.get(0).getValor(),100,hab.get(1).getValor(),hab.get(2).getValor(),velocidad,hab.get(4).getValor(), this.equipo2);
+              int posY = auxJugador.getPosY();
+              int posX = auxJugador.getPosX();
+              if(posY<14){
                 posX = translacionPosicionX(posX);
-            }
-            if(posY>14){
-                posY = this.translacionPosicion(posY);
-                 posY = posY +1;
-            }
-            else{
-                posY = posY-1;
-            }
-
-            this.equipo2.añadirJugador(jugadorReal,posX,posY);
-
+              }
+              if(posY>14){
+                  posY = this.translacionPosicion(posY);
+                  posY = posY +1;
+              }
+              else{
+                 posY = posY-1;
+             }
+              this.equipo2.añadirJugador(jugadorReal,posX,posY);
         }
-        // falta añadir los objetos a cada jugador
-       /* Jugador jugador = new Jugador(80, 90, 100, 90, 80, 70, equipo1);
-
-        jugador.setDireccion(DireccionJugador.derecha);
-
-        PowerUP objeto3 = new PowerUP(1,10,Habilidades.defensa,50,jugador);
-        ColocadorObjetosCampo objeto4 = new ColocadorObjetosCampo(2,10,"mina.png",jugador,new MinaCampo("mina.png",jugador));
-        ColocadorObjetosCampo objeto2 = new ColocadorObjetosCampo(3,10,"objetos/agujero.png",jugador,new Agujero("objetos/agujero.png",jugador));
-        ColocadorObjetosCampo objeto = new ColocadorObjetosCampo(4,10,"objetos/hielo.png",jugador,new Hielo("objetos/hielo.png",jugador));
-        jugador.añadirObjeto(objeto);
-        jugador.añadirObjeto(objeto2);
-        jugador.añadirObjeto(objeto3);
-        jugador.añadirObjeto(objeto4);
-
-        this.equipo1.añadirJugador(jugador,7,4);
-        //this.equipo1.añadirJugador(jugador,17,22);
-
-        jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo1);
-        jugador.setDireccion(DireccionJugador.izquierda);
-        this.equipo1.añadirJugador(jugador, 6, 6);
-        jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo1);
-        jugador.setDireccion(DireccionJugador.arriba);
-        this.equipo1.añadirJugador(jugador, 7, 7);
-
-        jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo1);
-        jugador.setDireccion(DireccionJugador.abajo);
-        //jugador.setEstado(new ConPelota(jugador));
-        this.equipo1.añadirJugador(jugador,9,4);
-
-
-        this.equipo1.añadirJugador(new Jugador(80, 90, 34, 90, 80, 70, this.equipo1),9,9);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 12, 90, 80, 70, this.equipo1),11,25);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),11,11);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 13, 70, this.equipo1),12,12);
-        this.equipo1.añadirJugador(new Jugador(80, 68, 100, 90, 80, 70, this.equipo1),13,13);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),14,14);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 51, 90, 80, 70, this.equipo1),15,15);
-        this.equipo1.añadirJugador(new Jugador(80, 34, 56, 22, 80, 70, this.equipo1),16,16);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),17,17);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 56, 90, 80, 70, this.equipo1),12,12);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),4,4);
-
-
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),3,12);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),4,13);
-        this.equipo1.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo1),5,14);
-
-
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),12,19);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),13,20);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),14,21);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),15,22);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),16,23);
-        this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),17,24);
-
-        jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo2);
-        //jugador.setEstado(new ConPelota(jugador));
-        this.equipo2.añadirJugador(jugador,5,5);
-
-
-        jugador = new Jugador(80, 90, 100, 90, 80, 70, this.equipo2);
-        PowerUP objeto5 = new PowerUP(0,10,"casilla.png", Habilidades.vida,50,jugador);
-       /* objeto2 = new ColocadorObjetosCampo(1,10,"mina.png",jugador,new MinaCampo("mina.png",jugador));
-
-        jugador.añadirObjeto(objeto);
-        jugador.añadirObjeto(objeto2);
-        jugador.añadirObjeto(objeto);
-        jugador.añadirObjeto(objeto);*/
-
-        //this.equipo2.añadirJugador(jugador,2,3);
-       // this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),19,27);
-        //this.equipo2.añadirJugador(new Jugador(80, 90, 100, 90, 80, 70, this.equipo2),21,21);
-
 
     }
 
+    /**
+     * Genera el saque inicial y da la pelota a un jugador aleatoriamente
+     */
     public void generarSaque(){
 
         Posicionamiento.generarSaqueCampo(this.campo,this.equipo1, Lado.izquierda);
@@ -251,6 +186,13 @@ public class ComponentesJuego {
 
     }
 
+    /**
+     * A partir de la informacion recibida de los menus se define
+     * el color del equipo
+     * @param equipacion referencia a la equipacion del equipo recibida desde los
+     *                   menus
+     * @return colo de la equipacion definida en partida
+     */
     public Color generarColorEquipacion(String equipacion) {
 
         if(equipacion.equals("Jugador3E1.png")){
@@ -266,6 +208,13 @@ public class ComponentesJuego {
             return Color.verde;
         }
     }
+
+
+    /**
+     * Ajustes de posicion para adecuarlas al tablero
+     * @param posicion posicion real
+     * @return posicion ajustada
+     */
     private int translacionPosicion(int posicion){
 
         switch (posicion){
@@ -303,6 +252,11 @@ public class ComponentesJuego {
         return 0;
     }
 
+    /**
+     * Ajusta de posicion en el eje x
+     * @param posicion posicion menus
+     * @return posicion ajustada para partida
+     */
     private int translacionPosicionX(int posicion){
         if(posicion<=9){
             int diferencia = 9-posicion;

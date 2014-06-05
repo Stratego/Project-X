@@ -35,29 +35,30 @@ import java.util.ArrayList;
  */
 public  class Equipo {
 
-
+    // Listas de jugadores
     private ArrayList<Jugador> jugadores ;
     private ArrayList<Jugador> descartados ;
     private ArrayList<PosicionInicial> alineacion;
 
+    //Identificacion mediante estandarte de los jugadores
     private String logo;
     private String estandarte;
 
+    // Caracteristicas extras del equipo
     private Color color;
-
     private Lado lado;
 
+    // estados
     private boolean jugando; // indica si el equipo esta siendo usado
-
-    private static Equipo equipo;
-
     private Jugador jugadorSelecionado;
 
+
+
+    private static Equipo equipo;
     Campo campo = Campo.getInstanciaCampo();
 
-    /**
-     * contructor de la clase
-     */
+
+
     public  Equipo(){
         this.alineacion = new ArrayList<PosicionInicial>();
         this.jugadores =  new ArrayList<Jugador>();

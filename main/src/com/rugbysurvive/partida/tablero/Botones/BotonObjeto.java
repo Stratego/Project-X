@@ -16,6 +16,9 @@ import java.util.ArrayList;
 
 /**
  * Created by Victor on 24/04/14.
+ * Representa un objeto a seleccionar dentro de la lista de objetos.
+ * Una vez apretado activa la funcionalidad del objeto
+ * y se borra de la lista de jugadores.
  */
 public class BotonObjeto extends Boton {
 
@@ -30,7 +33,7 @@ public class BotonObjeto extends Boton {
      * @param posX     posicion x en el tablero
      * @param posY     posicion y en el tablero
      * @param entrada  tipo de boton que sera
-     * @param textura
+     * @param textura identificacion grafica del boton
      * @param posicion
      */
     public BotonObjeto(float posX, float posY, Entrada entrada, String textura, int posicion) {
@@ -45,6 +48,10 @@ public class BotonObjeto extends Boton {
 
     }
 
+    /**
+     * Activa el objeto y lo elimina de la lista de jugadores.
+     * @param entrada entrada de datos del usuario
+     */
     @Override
     public void accionEntrada(Entrada entrada) {
         //obtenemos el elemento de la lista mediante la posicion le dimos al crear el boton
@@ -78,6 +85,11 @@ public class BotonObjeto extends Boton {
 
     }
 
+    /**
+     * Sobreescribre la funcion de borrado
+     * para permitir el borrado de las texturas
+     * extras.
+     */
     @Override
     public void borrar() {
         super.borrar();

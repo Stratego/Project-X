@@ -5,13 +5,13 @@ import com.rugbysurvive.partida.Simulador.Simulador;
 import com.rugbysurvive.partida.gestores.Entrada.Entrada;
 import com.rugbysurvive.partida.tablero.Boton;
 
+
 /**
  * Created by aitor on 30/04/14.
+ * Fuerza la finalizacion de la simulacion instantaneamente
+ * instantaneamente una vez seleccionado el boton.
  */
 public class BotonFinalizarSimulacion extends Boton {
-
-
-
 
     /**
      * Constructor del elemento boton
@@ -19,7 +19,7 @@ public class BotonFinalizarSimulacion extends Boton {
      * @param posX     posicion x en el tablero
      * @param posY     posicion y en el tablero
      * @param entrada  tipo de boton que sera
-     * @param textura
+     * @param textura  textura que identifica al boton
      * @param posicion
      */
     public BotonFinalizarSimulacion(float posX, float posY, Entrada entrada, String textura, int posicion) {

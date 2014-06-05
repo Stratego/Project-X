@@ -36,22 +36,31 @@ public class ConPelota implements Estado, Proceso {
         this.indicarJugadorConPelota.dibujar(this.jugador.getPosicionX(),this.jugador.getPosicionY());
     }
 
+    /**
+     * Genera la accion y la añade la simulador
+     * @param jugador Jugador que contiene el estado
+     * @return indicacion de accion finalizada
+     */
     public boolean generarAccion(Jugador jugador) {
 
         Simulador.getInstance().añadirAccion(jugador.getAccion());
-
         return false;
     }
 
     @Override
     public boolean generarAccion(Jugador jugador, int posX, int posY) {
-
+        // NO implementada
         return false;
     }
 
     /**
+     *Realiza un pase o un chute segun el estado del jugador.
+     * Una vez realizado la accion el jugador pasa a bloqueado
+     * y a estado sin pelota.
      *
-     * @param jugador Jugador que genera la Accion
+     * Un jugador con pelota tambien puede moverse.
+     *
+     * @param jugador Jugador que genera la accion
      * @param posX Posición X del jugador
      * @param posY Posicion Y del jugador
      * @param entrada Tipo de evento que recibe el jugador
@@ -62,8 +71,8 @@ public class ConPelota implements Estado, Proceso {
 
         this.jugador = jugador;
 
-        if(entrada == Entrada.arrastrar)
-        {
+        //inicio del movimiento
+        if(entrada == Entrada.arrastrar) {
             int distancia = jugador.getResistencia()/10;
 
             if(distancia <=2) {
@@ -73,8 +82,11 @@ public class ConPelota implements Estado, Proceso {
             jugador.setEstado(new EnMovimiento(distancia,this));
             return false;
         }
+
+        // Situacion de chute o pase
         else
         {
+            // accion de chute
             if(jugador.getPaseOChute() == Entrada.pase)
             {
                 //Comprovem que fem el pase en una posció en horitzontal o per davant del jugador
@@ -115,6 +127,7 @@ public class ConPelota implements Estado, Proceso {
                 }
             }
 
+            // accion de pase
             else
             {
                 //Comprovem que fem el xut en una posció en horitzontal o per davant del jugador
@@ -153,9 +166,8 @@ public class ConPelota implements Estado, Proceso {
             }
         }
 
-
-        if(jugador.getAccion() != null)
-        {
+        // Indicacion de que casilla se ha realizado el chute o el pase
+        if(jugador.getAccion() != null) {
             Simulador.getInstance().añadirAccion(jugador.getAccion());
             this.indicadorPelota = new ElementoDibujable(TipoDibujo.fondo,"indicadoresMovimiento/pilotaPosessio.png");
             this.indicadorPelota.dibujar(posX,posY);

@@ -69,7 +69,12 @@ public class EnMovimiento implements Estado {
     }
 
     /**
-     * Genera la acción
+     * Genera la acción de movimiento.
+     * Una accion de movimiento transcurre a lo largo del tiempo.
+     * Debe recibir un conjunto de acciones de entrada de arrastre a lo largo
+     * de diferenets casillas finalizado con un longclic en la ultima casilla
+     * Una vez finalizado el jugador pasara a estado bloqueado
+     *
      * @param jugador Jugador que posee el estado
      * @param posX Posición X de la siguiente casilla a mover
      * @param posY Posición y de la siguiente casilla a mover
@@ -81,12 +86,15 @@ public class EnMovimiento implements Estado {
 
         this.jugador = jugador;
 
+        //Se permiten solo acciones de arrastre
         if(entrada == Entrada.arrastrar)
         {
             System.out.println("ENMOVIMIENTO:"+posX+"-"+posY);
             //System.out.println("MOVIMIENTOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            if(((jugador.getPosicionX() == posX) && (jugador.getPosicionY() == posY)) && (this.posicionActual == 0))
-            {
+
+            // se van guardando los movimientos consecutivamente mientras esten dentro del tablero
+            // y no se hayan hecho mas movimientos
+            if(((jugador.getPosicionX() == posX) && (jugador.getPosicionY() == posY)) && (this.posicionActual == 0))  {
                 this.movimientos[this.posicionActual][0] = posX;
                 this.movimientos[this.posicionActual][1] = posY;
                 this.posicionActual += 1;
@@ -120,8 +128,7 @@ public class EnMovimiento implements Estado {
         }
          System.out.println("POSICION ACTUAL:"+this.posicionActual);
 
-        if(this.posicionActual == movimientos.length || this.jugadorFinalizaMovimiento(entrada,posX,posY))
-        {
+        if(this.posicionActual == movimientos.length || this.jugadorFinalizaMovimiento(entrada,posX,posY))  {
 
             int movimientosAux[][] = new int[this.posicionActual][2];
 
@@ -160,7 +167,7 @@ public class EnMovimiento implements Estado {
 
 
     /**
-     * Finalización de movimiento de un jugador
+     * Condicion de finalización de movimiento de un jugador
      * @param entrada Tipo de evento que le llega a un jugador
      * @param posicionX Posición X de la casilla a mover
      * @param posicionY Posición Y de la casilla a mover
@@ -185,18 +192,13 @@ public class EnMovimiento implements Estado {
     /**
      * Elimina el recorrido hecho por un jugador
      */
-    private void eliminarRecorrido()
-    {
-        for(int i=0; i<movimientos.length; i++)
-        {
+    private void eliminarRecorrido() {
+        for(int i=0; i<movimientos.length; i++) {
             ComponentesJuego.getComponentes().getCampo().desSeleccionarCasilla(movimientos[i][0],movimientos[i][1]);
         }
     }
 
-    /**
-     * Obtenemos un jugador
-     * @return
-     */
+
     @Override
     public Jugador getJugador() {
         return this.jugador;
@@ -233,20 +235,14 @@ public class EnMovimiento implements Estado {
 
     }
 
-    /**
-     * Obtenemos estado
-     * @return Estado
-     */
+
     @Override
     public Estado getEstado() {
         this.eliminarRecorrido();
         return this.estadoAnterior;
     }
 
-    /**
-     * Obtenemos estadoAnterior
-     * @return Estado
-     */
+
     @Override
     public Estado getEstadoAnterior() {
         this.eliminarRecorrido();
