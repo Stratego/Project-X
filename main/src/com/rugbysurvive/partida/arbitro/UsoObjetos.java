@@ -46,7 +46,7 @@ public class UsoObjetos extends Regla implements Proceso{
         boolean zonapenalty1 = false;
         boolean zonapenalty2 = false;
 
-
+        //expulsa al jugador y deja caer la pelota al suelo
         if(this.arbitro.esSucesoVisible(this.jugador.getPosicionX(),this.jugador.getPosicionY())){
             this.turno = GestorTurnos.getTurno();
             int posicionX = this.jugador.getPosicionX();

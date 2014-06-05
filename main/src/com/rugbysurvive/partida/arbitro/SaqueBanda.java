@@ -40,7 +40,7 @@ public class SaqueBanda extends Regla{
 
     @Override
     public boolean arbitrar() {
-
+        //prepara el saque de banda en funcion de la posicion
         if(this.arbitro.esSucesoVisible(this.x,this.y)==true){
             if (this.x<=2){
                 this.x=3;

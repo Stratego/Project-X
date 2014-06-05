@@ -115,6 +115,7 @@ public class PowerUP extends Objeto implements Proceso {
         System.out.print("Jugador 2 "+this.jugador);
      switch (habilidad)
         {
+            // en funcion de de la habilidad del power up se incrementa la habilidad del jugador
             case vida:
 
                 jugador.setVida(jugador.getVida()+modificacion);
@@ -156,6 +157,7 @@ public class PowerUP extends Objeto implements Proceso {
     protected void desactivar() {
         switch (habilidad)
         {
+            //cuando se desactiva el objeto la habilidad vuelve al estado anterior
             case vida:
 
                 jugador.setVida(jugador.getVida()-modificacion);

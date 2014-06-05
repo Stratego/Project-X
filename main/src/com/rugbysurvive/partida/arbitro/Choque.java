@@ -36,6 +36,7 @@ public class Choque extends Regla{
     @Override
     public boolean arbitrar() {
 
+        //si esta en la zona de meele la hace en funcion de los lados de los equipos
         if(this.arbitro.esSucesoVisible(this.jugadorDefensor.getPosicionX(),this.jugadorDefensor.getPosicionY())==true){
             Simulador.getInstance().reiniciar();
             if ((jugadorDefensor.getMiEquipo().getLado()== Lado.derecha && this.jugadorDefensor.getPosicionX()<=7)||

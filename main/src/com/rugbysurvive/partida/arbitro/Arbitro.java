@@ -20,7 +20,7 @@ import java.util.Random;
  * Personaje encargado de hacer cumplir la reglas del juego.
  * Sin enbargo solo hara cumplir la reglas cuando se infrinjan dentro de su rango de vision.
  * En caso contrario los jugadores pueden hacer lo que quieran.
- * el arbitro se mueve aleatoriamente por el campo, y en cada MOVIMIENTO mira a una direccion diferente.
+ * El arbitro se mueve aleatoriamente por el campo, y en cada movimiento mira a una direccion diferente.
  */
 public class Arbitro implements Dibujable,Proceso{
 
@@ -108,7 +108,7 @@ public class Arbitro implements Dibujable,Proceso{
             System.out.println("Creacion en mover");
         }
         else {
-
+            // el rango x sera aleatorio y lo que sobre sera el rango y
             int rangoAleatorio = new Random().nextInt(MOVIMIENTO);
             if (new Random().nextInt()%2 != 0){
                 rangoAleatorio*=-1;
@@ -121,7 +121,7 @@ public class Arbitro implements Dibujable,Proceso{
             }else{
                 rangoY = posicionY +(MOVIMIENTO -rangoAleatorio);
             }
-
+            // si la posicion no es correcta se volvera a repetir el proceso
             if (controlPosicion(rangoX,rangoY,true)==true){
                 ComponentesJuego.getComponentes().getCampo().getCasilla(this.posicionY,this.posicionX).eliminarElemento();
                 this.quitar();
@@ -168,7 +168,7 @@ public class Arbitro implements Dibujable,Proceso{
         int posicionYAux=0;
 
         System.out.println("angulo vision");
-
+        // la direccion de vision va acorde a la direccion de vision del arbitro
         switch (this.direccion)
         {
             case derecha:
@@ -208,6 +208,7 @@ public class Arbitro implements Dibujable,Proceso{
                 }
 
             }
+            // se adapta el ancho del cono en funcion distancia y direccion del arbitro
             ancho+=2;
             switch (this.direccion)
             {
